@@ -1,11 +1,12 @@
+
 package com.hca.cdm.hl7.filter
 
-import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
-import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
-
-import scala.collection.mutable
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
+import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
+
 import scala.annotation.tailrec
+import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
@@ -23,7 +24,7 @@ class FilterUtility {
       case out => if (out.nonEmpty) {
         observationValue.addString(out)
         out ++= delimiter
-        if (timeStampReq) includeEle(out, delimiter, timeStamp)
+        if (timeStampReq) out ++= timeStamp
         Some(out.result)
       }
       else None
@@ -75,3 +76,4 @@ class FilterUtility {
     false
   }
 }
+

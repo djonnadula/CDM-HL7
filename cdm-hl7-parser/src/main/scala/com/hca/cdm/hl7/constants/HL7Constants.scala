@@ -1,5 +1,7 @@
 package com.hca.cdm.hl7.constants
 
+import scala.collection.mutable
+
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
   */
@@ -31,7 +33,11 @@ object HL7Constants {
   lazy val Message_Control_Id = "001.message_code"
   lazy val Msg_Type_Hier = Seq(MSH_Segment, Message_Type_Segment, Message_Control_Id)
   lazy val Observation_Col = "005.obx_observation_value"
-  lazy val PIPE = "\\|".r
+  lazy val PIPER = "\\|".r
+  lazy val COMMAR = ",".r
+  lazy val PIPE_NES = "|"
+  type mapType = mutable.LinkedHashMap[String, Any]
+  type listType = mutable.ListBuffer[mutable.LinkedHashMap[String, Any]]
 
 
 }

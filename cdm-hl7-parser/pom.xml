@@ -17,7 +17,6 @@
             <groupId>com.hca</groupId>
             <artifactId>cdm-common</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>

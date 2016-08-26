@@ -5,7 +5,7 @@ import org.apache.log4j.Logger
 /**
   * Created by Devaraj Jonnadula on 8/11/2016.
   */
-trait Logger {
+trait Logg {
 
   protected val loggerName = this.getClass.getName
   protected lazy val logger = Logger.getLogger(loggerName)

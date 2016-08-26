@@ -1,23 +1,25 @@
 package com.hca.cdm.utils
 
 import java.text.SimpleDateFormat
-import java.time.{LocalDate, LocalTime, YearMonth}
 import java.time.format.DateTimeFormatter
+import java.time.{LocalDate, LocalTime, YearMonth}
 import java.util.Date
-import scala.collection.mutable.HashMap
+
+import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateConstants._
-import com.hca.cdm.log.Logger
+
+import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/15/2016.
   */
-object DateUtil extends Logger {
+object DateUtil extends Logg {
 
 
   private lazy val formatter = new SimpleDateFormat(HL7_DEFAULT)
-  private lazy val FORMATTERS = new HashMap[String, DateTimeFormatter]
+  private lazy val FORMATTERS = new mutable.HashMap[String, DateTimeFormatter]
 
-  def currentTimeStamp = formatter.format(new Date())
+  def currentTimeStamp: String = formatter.format(new Date())
 
   def yearMonthFromString(date: String, pattern: String): YearMonth = {
     try return YearMonth.parse(date, getFormatter(pattern))

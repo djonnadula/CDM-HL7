@@ -2,32 +2,73 @@ package com.hca.cdm.hl7.parser
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import com.hca.cdm.log.Logger
-import org.apache.commons.lang.StringUtils
+import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.{FileMappings => files}
-import scala.collection.mutable
-import scala.util.{Failure, Success, Try}
-import scala.util.control.Breaks._
+import com.hca.cdm.hl7.model._
+import com.hca.cdm.log.Logg
+import org.apache.commons.lang.StringUtils
 
-class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]]) extends Logger {
+import scala.collection.mutable
+import scala.util.control.Breaks._
+import scala.util.{Failure, Success, Try}
+
+class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]]) extends Logg {
 
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
-  private val EMPTYSTR = ""
   private lazy val EMPTY = Array.empty[String]
   private lazy val MAP = Map.empty[String, Array[String]]
 
-  def transformHL7(hl7Message: String, pre_num_len: Int = 4, segment_code_len: Int = 3, index_num_len: Int = 3): Option[String] = {
+
+  outStream.println(
+    """Template Registered For Parsing ::
+      ____
+    HL / /    DATA
+      / /
+     / /
+    /_/
+    """)
+
+
+  def transformHL7(hl7Message: String, pre_num_len: Int = 4, segment_code_len: Int = 3, index_num_len: Int = 3): HL7TransRec = {
     require(hl7Message != null && !hl7Message.isEmpty, "Error Nothing to parse " + hl7Message)
     assume(isHL7(hl7Message), "Not a Valid HL7. Check with Facility :: " + hl7Message)
     Try(transform(hl7Message.split("\r\n"), pre_num_len, segment_code_len, index_num_len)) match {
-      case Success(map) => Try(toJson(map)) match {
-        case Success(json) => Some(json)
-        case Failure(t) => error("Json Parsing Failed for HL7 ", t)
-          None
-      }
+      case Success(map) => handleCommonSegments(map)
+        Try(toJson(map)) match {
+          case Success(json) => HL7TransRec(Left((json, map)))
+          case Failure(t) => error("Json Parsing Failed for HL7 ", t)
+            HL7TransRec(Right(t))
+        }
       case Failure(t) => error("Cannot Deal with HL7 ", t)
-        None
+        HL7TransRec(Right(t))
+    }
+  }
+
+  private def handleCommonSegments(data: mapType) = {
+    val commonNode = data(commonNodeStr).asInstanceOf[mapType]
+    if (data.get(MSH_INDEX) isDefined) handleIndexes(MSH_INDEX, data, commonNode)
+    if (data.get(PID_INDEX) isDefined) handleIndexes(PID_INDEX, data, commonNode)
+
+  }
+
+  private def handleIndexes(segIndex: String, data: mapType, commonNode: mapType) = {
+    data.get(segIndex) match {
+      case Some(node) => commonNode.foreach(ele => {
+        node match {
+          case map: mapType => map.get(ele._1) match {
+            case Some(v: String) => commonNode update(ele._1, v)
+            case Some(m: mapType) => m.get(ele._1) match {
+              case Some(mv: String) => commonNode update(ele._1, mv)
+              case _ =>
+            }
+            case _ =>
+          }
+          case _ =>
+        }
+
+      })
+      case _ =>
     }
 
   }
@@ -41,7 +82,8 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
 
   private def transform(rawMessage: Array[String], preNumLen: Int, segCodeLen: Int, indexNumLen: Int) = {
     val mapSegment = new mutable.LinkedHashMap[String, Any]
-    val msg_delims = new mutable.LinkedHashMap[String, String]()
+    mapSegment += commonNodeStr -> commonNode.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
+    val msg_delims = new mutable.HashMap[String, String]()
     msg_delims.put(FIELD_DELIM, if (rawMessage(0).charAt(3) + EMPTYSTR == "|") "|" else (rawMessage(0).charAt(3) + EMPTYSTR).trim)
     msg_delims.put(CMPNT_DELIM, if (rawMessage(0).charAt(4) + EMPTYSTR == "^") "^" else (rawMessage(0).charAt(4) + EMPTYSTR).trim)
     msg_delims.put(REPTN_DELIM, (rawMessage(0).charAt(5) + EMPTYSTR).trim)
@@ -77,9 +119,9 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
               val strComponentEleData = segments.strComponentEleData
               !(segment_type == MSH && j == 2) match {
                 case true => val field_repeat_list = field.split("\\" + msg_delims(REPTN_DELIM))
-                  val mapComponentList = new mutable.MutableList[Any]
+                  val mapComponentList = new mutable.ListBuffer[Any]
                   breakable {
-                    for (fieldRepeatItem <- field_repeat_list) {
+                    field_repeat_list.foreach(fieldRepeatItem => {
                       val subComponent = fieldRepeatItem.split("\\" + msg_delims(CMPNT_DELIM), -1)
                       if (subComponent.length > 1) {
                         val mapSubComponent = new mutable.LinkedHashMap[String, Any]()
@@ -128,7 +170,7 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
                         }
                       }
                       else mapComponent += strComponentEleData -> field
-                    }
+                    })
                   }
                   if (field_repeat_list.length > 1) mapComponent += strComponentEleData -> mapComponentList
                 case _ => mapComponent += segmentsMapping(component_index, segCodeLen, indexNumLen).strComponentEleData -> field
@@ -143,6 +185,7 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
       case t: Throwable => throw t
     }
   }
+
 
   private def inc(v: Int, step: Int = 1) = v + step
 

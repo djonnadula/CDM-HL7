@@ -6,10 +6,12 @@ package com.hca.cdm.exception
   * Generic CDM  exception thrown at Runtime
   */
 
-class CmdException(message: String, t: Throwable) extends RuntimeException(message, t) {
+class CdmException(message: String, t: Throwable) extends RuntimeException(message, t) {
 
   def this(message: String) = this(message, null)
 
   def this(t: Throwable) = this("", t)
+
+
 
 }
