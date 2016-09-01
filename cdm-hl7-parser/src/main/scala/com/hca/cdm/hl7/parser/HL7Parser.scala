@@ -33,7 +33,8 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
   def transformHL7(hl7Message: String, pre_num_len: Int = 4, segment_code_len: Int = 3, index_num_len: Int = 3): HL7TransRec = {
     require(hl7Message != null && !hl7Message.isEmpty, "Error Nothing to parse " + hl7Message)
     assume(isHL7(hl7Message), "Not a Valid HL7. Check with Facility :: " + hl7Message)
-    Try(transform(hl7Message.split("\r\n"), pre_num_len, segment_code_len, index_num_len)) match {
+    val delim = if(hl7Message contains "\r\n") "\r\n" else "\n"
+    Try(transform(hl7Message split delim, pre_num_len, segment_code_len, index_num_len)) match {
       case Success(map) => handleCommonSegments(map)
         Try(toJson(map)) match {
           case Success(json) => HL7TransRec(Left((json, map)))
@@ -47,26 +48,21 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
 
   private def handleCommonSegments(data: mapType) = {
     val commonNode = data(commonNodeStr).asInstanceOf[mapType]
-    if (data.get(MSH_INDEX) isDefined) handleIndexes(MSH_INDEX, data, commonNode)
-    if (data.get(PID_INDEX) isDefined) handleIndexes(PID_INDEX, data, commonNode)
+    handleIndexes(MSH_INDEX, data, commonNode)
+    handleIndexes(PID_INDEX, data, commonNode)
 
   }
 
-  private def handleIndexes(segIndex: String, data: mapType, commonNode: mapType) = {
-    data.get(segIndex) match {
-      case Some(node) => commonNode.foreach(ele => {
-        node match {
+  private def handleIndexes(segIndex: String, map: mapType, commonNode: mapType) = {
+    map.get(segIndex) match {
+      case Some(msh) => commonNode.foreach(ele => {
+        msh match {
           case map: mapType => map.get(ele._1) match {
             case Some(v: String) => commonNode update(ele._1, v)
-            case Some(m: mapType) => m.get(ele._1) match {
-              case Some(mv: String) => commonNode update(ele._1, mv)
-              case _ =>
-            }
             case _ =>
           }
           case _ =>
         }
-
       })
       case _ =>
     }

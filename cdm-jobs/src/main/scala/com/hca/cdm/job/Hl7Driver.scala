@@ -78,7 +78,9 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.driver.maxResultSize", hl7_spark_driver_maxResultSize)
     .setConf("spark.driver.maxResultSize", hl7_spark_driver_maxResultSize)
     .setMainClass(loopUpProp("hl7.class"))
-    .setAppResource(loopUpProp("hl7.artifact")).setJavaHome("/usr/bin/java")
+    .setAppResource(loopUpProp("hl7.artifact")).setJavaHome("/usr")
+    .setConf("spark.executors.cores", "20")
+    .setPropertiesFile(loopUpProp("hl7.properties.file"))
     .setSparkHome(loopUpProp("spark.home")).startApplication()
   private val jobTracker = newDaemonScheduler(getClass.getName)
 
@@ -89,7 +91,7 @@ object Hl7Driver extends App with Logg {
     info(currThread.getName + " Shutdown Completed for Driver")
   })))
 
-  jobTracker.scheduleAtFixedRate(Tracker, 5, 5, TimeUnit.MILLISECONDS)
+  jobTracker.scheduleAtFixedRate(Tracker, 5, 2, TimeUnit.MINUTES)
   var state = true
   while (state) {
     // info(" Job State   :: "+job.getState )

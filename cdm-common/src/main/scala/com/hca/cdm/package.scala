@@ -39,6 +39,13 @@ package object cdm extends Logg {
 
   def currThread = Thread.currentThread()
 
+  def sleep(howLong: Long) = {
+    try Thread.sleep(howLong)
+    catch {
+      case in: InterruptedException => error("Sleep Interrupted :: " + in.getMessage)
+    }
+  }
+
   def dateRange(from: LocalDate, until: LocalDate, step: Period = Period.ofDays(1)): Iterator[String] = {
     Iterator.iterate(from)(_.plus(step)).takeWhile(!_.isAfter(until)).map(date => {
       var req = date.getYear + "-0" + date.getMonthValue
@@ -81,7 +88,7 @@ package object cdm extends Logg {
     outStream.println("******************************************************************************************")
     outStream.println("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
     outStream.println("*****************          Config For HL7 Processing *************************************")
-    prop.foreach({ case (k, v) => outStream.println("********* " + k + " :: " + v + "********") })
+    prop.foreach({ case (k, v) => outStream.println("********* " + k + " :: " + v) })
     outStream.println("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
     outStream.println("******************************************************************************************")
     outStream.println("*****************           Job Initialization Started           **************************")
@@ -108,7 +115,7 @@ package object cdm extends Logg {
     val thread = new Thread(runnable, name)
     thread.setDaemon(daemon)
     thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler {
-      override def uncaughtException(t: Thread, e: Throwable): Unit = error("Uncaught exception in thread '" + t.getName, e)
+      override def uncaughtException(t: Thread, e: Throwable): Unit = error("Unexpected exception in thread '" + t.getName, e)
     })
     thread
   }
@@ -120,6 +127,28 @@ package object cdm extends Logg {
 
   def newDaemonScheduler(id: String): ScheduledExecutorService = {
     Executors.newSingleThreadScheduledExecutor(new Factory(id))
+  }
+
+  def tryAndLogErrorThr(fun: => Unit, reporter: (Throwable) => Unit): Boolean = {
+    try {
+      fun
+      return true
+    }
+    catch {
+      case t: Throwable => reporter(t)
+    }
+    false
+  }
+
+  def tryAndLogErrorMes(fun: => Unit, reporter: (String) => Unit): Boolean = {
+    try {
+      fun
+      return true
+    }
+    catch {
+      case t: Throwable => reporter(t.getMessage)
+    }
+    false
   }
 
   private class Factory(id: String) extends ThreadFactory {

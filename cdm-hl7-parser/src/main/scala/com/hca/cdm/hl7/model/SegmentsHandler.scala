@@ -16,6 +16,8 @@ trait SegmentsHandler {
 
   def resetMetrics: Boolean
 
-  def shutDown : Unit
+  def shutDown() : Unit
+
+  def printStats() : Unit
 
 }

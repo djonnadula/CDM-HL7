@@ -17,7 +17,8 @@ package object model {
   lazy val notValidStr = "Not Valid Input"
   lazy val skippedStr = "SKIPPED"
   lazy val commonNodeStr = "0000.COMN"
-  lazy val commonNode = synchronized {
+  lazy val repeat = ";"
+  val commonNode = synchronized {
     val temp = new mutable.LinkedHashMap[String, String]
     val nodeEle = loopUpProp("common.elements") match {
       case EMPTYSTR => throw new CdmException("No Common Elements found. ")
@@ -60,14 +61,18 @@ package object model {
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\^", modelFieldDelim: String = "|") extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = segFilter(segStr, delimitedBy, modelFieldDelim)
 
+    lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
+
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(reqSeg, segStr, delimitedBy, modelFieldDelim)
 
-    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
+    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone
+
+
   }
 
 
   private[model] sealed trait modelLayout {
-    protected val cachedLayout = getLayout
+    protected lazy val cachedLayout = getLayout
 
     def getLayout: mutable.LinkedHashMap[String, String]
 
@@ -80,7 +85,7 @@ package object model {
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
       valid(splits, 3) match {
-        case true => (splits(2), splits(3))
+        case true => (splits(1), splits(2))
         case _ => (EMPTYSTR, EMPTYSTR)
       }
     }).takeWhile(_._1 ne EMPTYSTR)
@@ -110,7 +115,6 @@ package object model {
 
   private def segFilter(segmentData: String, delimitedBy: String, modelFieldDelim: String): Map[String, mutable.Set[String]] = synchronized {
     val temp = new mutable.HashMap[String, mutable.Set[String]] with mutable.MultiMap[String, String]
-    commonNode.foreach({ case (k, v) => temp addBinding(k, EMPTYSTR) })
     (segmentData split(delimitedBy, -1)).filter(_ != EMPTYSTR) foreach (ele => {
       if (ele contains modelFieldDelim) {
         val repeats = ele split ("\\" + modelFieldDelim)
@@ -126,7 +130,7 @@ package object model {
   }
 
 
-  private def modelLayout(whichSeg: String, segmentData: String, delimitedBy: String, modelFieldDelim: String): mutable.LinkedHashMap[String, String] = {
+  private def modelLayout(whichSeg: String, segmentData: String, delimitedBy: String, modelFieldDelim: String): mutable.LinkedHashMap[String, String] = synchronized {
     val layout = new mutable.LinkedHashMap[String, String]
     layout += segmentkey -> whichSeg
     commonNode.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v) foreach (ele => layout += ele)
