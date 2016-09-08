@@ -22,7 +22,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
     if (modelFilter.isEmpty | !isRequiredType(data, reqMsgType)) return notValid
     var layout = model.EMPTY
-    val dataHandler = includeEle(layout, _: String, _: String, _: String)(outDelim)
+    val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.reqSeg match {
       case OBX_SEG => layout = model.layoutCopy
         var dataExist = false
@@ -103,7 +103,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   }
 
-  private def includeEle(underlying: mutable.LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR)(delimiter: String): Unit = {
+  private def includeEle(underlying: mutable.LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR): Unit = {
     if (req == EMPTYSTR & repeat == EMPTYSTR) return
     underlying get key match {
       case Some(x) => x match {
