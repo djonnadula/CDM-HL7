@@ -17,7 +17,7 @@ package object model {
   lazy val notValidStr = "Not Valid Input"
   lazy val skippedStr = "SKIPPED"
   lazy val commonNodeStr = "0000.COMN"
-  lazy val repeat = ";"
+  lazy val repeat = "^"
   val commonNode = synchronized {
     val temp = new mutable.LinkedHashMap[String, String]
     val nodeEle = loopUpProp("common.elements") match {
@@ -56,16 +56,15 @@ package object model {
 
   case class HL7TransRec(rec: Either[(String, mutable.LinkedHashMap[String, Any]), Throwable])
 
-  case class Hl7SegmentTrans(seg: Either[(String), (Option[Any], Throwable)])
+  case class Hl7SegmentTrans(seg: Either[Traversable[(String, Throwable)], String])
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\^", modelFieldDelim: String = "|") extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = segFilter(segStr, delimitedBy, modelFieldDelim)
-
     lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
 
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(reqSeg, segStr, delimitedBy, modelFieldDelim)
 
-    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone
+    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if ((k ne segmentkey) & (v ne EMPTYSTR)) EMPTYSTR else v)
 
 
   }
@@ -75,6 +74,7 @@ package object model {
     protected lazy val cachedLayout = getLayout
 
     def getLayout: mutable.LinkedHashMap[String, String]
+
 
   }
 

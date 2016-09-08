@@ -14,35 +14,63 @@ import scala.collection.mutable
 private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = "|")
   extends Logg {
   logIdent = "for HL7 Type :: " + reqMsgType.toString
-  private lazy val skipped = Right(Some(skippedStr), null)
-  private lazy val notValid = List(Hl7SegmentTrans(Right(Some(notValidStr), null)))
+  private lazy val skipped = Hl7SegmentTrans(Right(skippedStr))
+  private lazy val notValid = Hl7SegmentTrans(Right(notValidStr))
+  private lazy val NONE = new mutable.LinkedHashMap[String, Throwable] += (EMPTYSTR -> null)
 
-
-  def applyModel(whichSeg: String, model: Model)(data: mapType): Traversable[Hl7SegmentTrans] = {
+  def applyModel(whichSeg: String, model: Model)(data: mapType): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
     if (modelFilter.isEmpty | !isRequiredType(data, reqMsgType)) return notValid
-    var layout: mutable.LinkedHashMap[String, String] = model.EMPTY
-    val appendData = includeEle(layout, _: String, _: String, _: String)(outDelim)
-    data.map(node => {
-      try {
-        node._1.substring(node._1.indexOf(".") + 1) == model.reqSeg match {
-          case true => layout = model.layoutCopy
-            modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(appendData) match {
-              case true =>
-                handleCommonSegments(data, layout)
-                val builder = new StringBuilder(layout.size * 40)
-                layout.foreach({ case (k, v) => builder append (v + outDelim) })
-                if (timeStampReq) builder append timeStamp
-                Left(builder.toString())
-              case _ => skipped
+    var layout = model.EMPTY
+    val dataHandler = includeEle(layout, _: String, _: String, _: String)(outDelim)
+    val temp = model.reqSeg match {
+      case OBX_SEG => layout = model.layoutCopy
+        var dataExist = false
+        data.foreach(node => {
+          try {
+            node._1.substring(node._1.indexOf(".") + 1) == OBX_SEG match {
+              case true => if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
+              case _ =>
             }
-          case _ => skipped
+          }
+          catch {
+            case t: Throwable => error(t)
+          }
+        })
+        if (dataExist) {
+          handleCommonSegments(data, layout)
+          new mutable.LinkedHashMap[String, Throwable] += (makeFinal(layout) -> null)
+        } else NONE
+
+      case _ => data.map(node => {
+        try {
+          node._1.substring(node._1.indexOf(".") + 1) == model.reqSeg match {
+            case true => layout = model.layoutCopy
+              modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler) match {
+                case true => handleCommonSegments(data, layout)
+                  (makeFinal(layout), null)
+                case _ => (EMPTYSTR, null)
+              }
+            case _ => (EMPTYSTR, null)
+          }
         }
-      }
-      catch {
-        case t: Throwable => Right(None, t)
-      }
-    }) map (Hl7SegmentTrans(_))
+        catch {
+          case t: Throwable => (null, t)
+        }
+      })
+    }
+    temp filter (_._1 != EMPTYSTR) match {
+      case out => if (valid(out))
+        Hl7SegmentTrans(Left(out))
+      else skipped
+    }
+  }
+
+  private def makeFinal(layout: mutable.LinkedHashMap[String, String]): String = {
+    val builder = new StringBuilder(layout.size * 40)
+    layout.foreach({ case (k, v) => builder append (v + outDelim) })
+    if (timeStampReq) builder append timeStamp
+    builder.toString
   }
 
   private def handleCommonSegments(data: mapType, layout: mutable.LinkedHashMap[String, String]) = {
@@ -68,10 +96,9 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
             case _ =>
           }
-          case _ =>
         }
-
       })
+      case _ =>
     }
 
   }
@@ -81,26 +108,27 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     underlying get key match {
       case Some(x) => x match {
         case EMPTYSTR => underlying update(key, req)
-        case exists => if (repeat == EMPTYSTR) underlying update(key, exists ++ req)
-        else underlying update(key, exists ++ repeat ++ req)
+        case exists => if (repeat == EMPTYSTR) underlying update(key, exists + req)
+        else underlying update(key, exists + repeat + req)
       }
       case k => throw new DataModelException(key + " Key Not Found while Applying Model to Data :: " + k)
     }
 
   }
 
-  private def modelData(underlying: mutable.LinkedHashMap[String, String], model: Model)(filterKeys: Map[String, mutable.Set[String]], data: mapType)
-                       (appendData: (String, String, String) => Unit): Boolean = {
+  private def modelData(underlying: mutable.LinkedHashMap[String, String], model: Model)(filterKeys: Map[String, mutable.Set[String]], data: mapType)(dataHandler: (String, String, String) => Unit,
+                                                                                                                                                      appendSegment: Boolean = false): Boolean = {
     var dataExist = false
     data.foreach(node => {
       node._1 != null & node._1 != EMPTYSTR & (filterKeys isDefinedAt node._1) match {
         case true => node._2 match {
           case str: String => if (underlying isDefinedAt node._1) {
-            appendData(node._1, str, EMPTYSTR)
+            if (!appendSegment) dataHandler(node._1, str, EMPTYSTR)
+            else dataHandler(node._1, str, repeat)
             dataExist = true
           }
-          case map: mapType => handelMap(map, node._1, model)(filterKeys)(underlying, appendData)
-          case list: listType => handleList(list, node._1, model)(filterKeys)(underlying, appendData)
+          case map: mapType => handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
+          case list: listType => handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
           case any: Any => throw new DataModelException("Got an Unhandled Type into Filter Util ::  " + any.getClass + " ?? Not Yet Implemented")
         }
         case _ =>
@@ -111,28 +139,34 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
 
   private def handelMap(data: mapType, node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
-                       (underlying: mutable.LinkedHashMap[String, String], appendData: (String, String, String) => Unit): Unit = {
+                       (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Unit = {
     data.foreach({
       case (k, v) =>
         v match {
           case str: String =>
-            if (underlying isDefinedAt (node + model.modelFieldDelim + k)) appendData(node + model.modelFieldDelim + k, str, EMPTYSTR)
-            else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) appendData(node, str, EMPTYSTR)
-          case listType: listType => handleList(listType, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, appendData)
-          case map: mapType => handelMap(map, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, appendData)
+            if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
+              if (!appendSegment) dataHandler(node + model.modelFieldDelim + k, str, EMPTYSTR)
+              else dataHandler(node + model.modelFieldDelim + k, str, repeat)
+            }
+            else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
+              if (!appendSegment) dataHandler(node, str, EMPTYSTR)
+              else dataHandler(node, str, repeat)
+            }
+          case listType: listType => handleList(listType, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
+          case map: mapType => handelMap(map, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
         }
     })
   }
 
   private def handleList(data: listType, node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
-                        (underlying: mutable.LinkedHashMap[String, String], appendData: (String, String, String) => Unit): Unit = {
+                        (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Unit = {
     data.foreach(map => map.foreach({ case (k, v) =>
       v match {
         case str: String =>
-          if (underlying isDefinedAt (node + model.modelFieldDelim + k)) appendData(node + model.modelFieldDelim + k, str, repeat)
-          else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) appendData(node, str, repeat)
-        case list: listType => handleList(list, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, appendData)
-        case map: mapType => handelMap(map, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, appendData)
+          if (underlying isDefinedAt (node + model.modelFieldDelim + k)) dataHandler(node + model.modelFieldDelim + k, str, repeat)
+          else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) dataHandler(node, str, repeat)
+        case list: listType => handleList(list, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
+        case map: mapType => handelMap(map, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
       }
     }))
   }

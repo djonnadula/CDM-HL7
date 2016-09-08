@@ -7,6 +7,7 @@ import java.net.InetAddress
 import java.nio.charset.StandardCharsets
 import java.time.{LocalDate, Period}
 import java.util.Properties
+import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.{Executors, ScheduledExecutorService, ThreadFactory, ThreadPoolExecutor}
 
 import com.hca.cdm.exception.CdmException
@@ -32,6 +33,7 @@ package object cdm extends Logg {
   lazy val outStream = System.out
   lazy val MSH_INDEX = "0001.MSH"
   lazy val PID_INDEX = "0003.PID"
+  lazy val OBX_SEG = "OBX"
 
   def host = InetAddress.getLocalHost.getHostName
 
@@ -152,8 +154,9 @@ package object cdm extends Logg {
   }
 
   private class Factory(id: String) extends ThreadFactory {
+    private val cnt = new AtomicInteger(0)
     override def newThread(r: Runnable): Thread = {
-      val t = new Thread(r, id + "-" + host + "-" + currMillis)
+      val t = new Thread(r, id + "-" + host + "-" + cnt.incrementAndGet())
       t.setDaemon(true)
       t
     }
