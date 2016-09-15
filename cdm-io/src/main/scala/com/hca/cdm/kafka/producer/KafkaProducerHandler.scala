@@ -73,7 +73,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
   private def handleData(data: Any, header: Any, topic: String): Unit = {
     if (valid(data) & valid(topic)) {
       valid(header) match {
-        case true => (data, header) match {
+        case true => (header, data) match {
           case (k: String, v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k.getBytes(UTF8), v.getBytes(UTF8)))
           case (k: Array[Byte], v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v))
           case (k: Array[Byte], v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v.getBytes(UTF8)))
