@@ -12,11 +12,9 @@ import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.outStream.{println => console}
 import com.hca.cdm.spark.config.{Hl7SparkUtil => sp}
-import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import org.apache.spark.launcher.SparkLauncher
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.language.postfixOps
@@ -60,7 +58,7 @@ object HL7Job extends Logg with App {
   private val hl7MsgMeta = loopUpProp("hl7.messages.type").split(",").toList.map(mtyp => getMsgTypeMeta(hl7(mtyp)))
   private val templatesMapping = hl7MsgMeta.map(msgType => msgType.msgType -> loadTemplate(msgType)).toMap
   private val modelsForHl7 = hl7MsgMeta.map(msgType => msgType.msgType -> segmentsForHl7Type(msgType.msgType, loadSegments(msgType))).toMap
-  private val jsonAuditor = hl7MsgMeta.map(msgType => msgType.msgType -> (auditMsg(msgType.msgType.toString, jsonStage)(_: String, _: MSGMeta))).toMap
+  private val jsonAuditor = hl7MsgMeta.map(msgType => msgType.msgType -> (auditMsg(msgType.msgType.toString, jsonStage)(EMPTYSTR, _: MSGMeta))).toMap
   private val segmentsAuditor = hl7MsgMeta.map(msgType => msgType.msgType -> (auditMsg(msgType.msgType.toString, segmentStage)(_: String, _: MSGMeta))).toMap
   private val allSegmentsInHl7Auditor = hl7MsgMeta.map(msgType => msgType.msgType -> (auditMsg(msgType.msgType.toString, segmentsInHL7)(_: String, _: MSGMeta))).toMap
   private val adhocAuditor = hl7MsgMeta.map(msgType => msgType.msgType -> (auditMsg(msgType.msgType.toString, adhocStage)(_: String, _: MSGMeta))).toMap
@@ -141,7 +139,10 @@ object HL7Job extends Logg with App {
                 case Success(data) => data match {
                   case Left(out) =>
                     val meta = msgMeta(out._2)
-                    if (tryAndLogErrorMes(hl7JsonIO(out._1, hl7Str), error(_: String))) segmentsModeler(hl7Meta.msgType).handleSegments(out._2, meta)
+                    if (tryAndLogErrorMes(hl7JsonIO(out._1, hl7Str), error(_: String))) {
+                      auditIO(jsonAuditor(hl7Meta.msgType)(meta), hl7Str)
+                      segmentsModeler(hl7Meta.msgType).handleSegments(out._2, meta)
+                    }
                     else {
                       val msg = rejectMsg(hl7Str, jsonStage, meta, " Writing Data to OUT Failed ", out._2)
                       hl7RejIO(msg, hl7 + COLON + hl7Str)
