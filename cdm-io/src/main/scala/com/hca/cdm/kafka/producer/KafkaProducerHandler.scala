@@ -32,8 +32,8 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
   private var partitionForTopic: util.List[PartitionInfo] = _
   private var lastFlush = 0L
   private var sHook: Thread = _
-  private var topicsToProduce = new TrieMap[String, Boolean]()
-  private var messagesProduced = new TrieMap[String, Long]()
+  private val topicsToProduce = new TrieMap[String, Boolean]()
+  private val messagesProduced = new TrieMap[String, Long]()
   initialise()
 
   private def validate(topicToProduce: String, publishToMultiTopic: Boolean): (Boolean, String) = {

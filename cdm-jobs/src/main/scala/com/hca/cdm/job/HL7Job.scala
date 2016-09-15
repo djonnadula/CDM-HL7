@@ -2,22 +2,25 @@ package com.hca.cdm.job
 
 import com.hca.cdm._
 import com.hca.cdm.hl7.audit.AuditConstants._
-import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, withName => hl7}
-import com.hca.cdm.hl7.model.{DataModelHandler, _}
+import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
 import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => conf}
 import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
 import com.hca.cdm.log.Logg
-import com.hca.cdm.outStream.{println => console}
 import com.hca.cdm.spark.config.{Hl7SparkUtil => sp}
 import org.apache.spark.launcher.SparkLauncher
-import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.launcher.SparkLauncher._
+
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.language.postfixOps
+import com.hca.cdm.hl7.audit._
+import outStream.{println => console}
+import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
+
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -115,7 +118,7 @@ object HL7Job extends Logg with App {
   private val sHook: Thread = newThread(app + consumerGroup + "SparkCtx SHook", runnable({
     sparkStrCtx.stop(stopSparkContext = true, stopGracefully = true)
     segmentsModeler.values foreach (_.shutDown())
-    sleep(2000)
+    sleep(5000)
     closeResource(kafkaOut)
     job stop()
     info(currThread.getName + " Shutdown HOOK Completed")
@@ -140,7 +143,7 @@ object HL7Job extends Logg with App {
                   case Left(out) =>
                     val meta = msgMeta(out._2)
                     if (tryAndLogErrorMes(hl7JsonIO(out._1, hl7Str), error(_: String))) {
-                      auditIO(jsonAuditor(hl7Meta.msgType)(meta), hl7Str)
+                      auditIO(jsonAuditor(hl7Meta.msgType)(meta), hl7Str + COLON + jsonStage)
                       segmentsModeler(hl7Meta.msgType).handleSegments(out._2, meta)
                     }
                     else {
@@ -176,7 +179,7 @@ object HL7Job extends Logg with App {
       info("Shutdown Completed")
       segmentsModeler.values.foreach(_.printStats())
       segmentsModeler.values.foreach(_.shutDown())
-      sleep(2000)
+      sleep(5000)
       closeResource(kafkaOut)
       job.stop()
     }
