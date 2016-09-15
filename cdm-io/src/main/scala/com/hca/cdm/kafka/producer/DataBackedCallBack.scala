@@ -1,6 +1,7 @@
 package com.hca.cdm.kafka.producer
 
 
+import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.RetryHandler
@@ -39,5 +40,6 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
 
   private def giveUp(): Unit = {
     fatal("Failed to Send Record : " + data.value() + " for topic " + data.topic() + " After tries" + defaultRetries + " Giving UP ")
+    throw new CDMKafkaException("Failed to Send Record : " + data.value() + " for topic " + data.topic() + " After tries" + defaultRetries + " Giving UP ")
   }
 }
