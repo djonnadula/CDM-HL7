@@ -3,20 +3,34 @@ package com.hca.cdm.hl7.model
 import java.util.concurrent.{RejectedExecutionHandler, ThreadPoolExecutor, TimeUnit}
 
 import com.hca.cdm._
+import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
-import com.hca.cdm.hl7.model.SegmentsState.SegState
+import com.hca.cdm.hl7.model.SegmentsState._
 import com.hca.cdm.log.Logg
 
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContext, Future => async}
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Success}
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-class DataModelHandler(hl7Segments: Hl7Segments, io: (String, String) => Unit, rejectIO: (String, String) => Unit)
+class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String], segmentsAuditor: (String, MSGMeta) => String, segmentsInHl7Auditor: (String, MSGMeta) => String,
+                       adhocAuditor: (String, MSGMeta) => String)
+                      (io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit, adhocIO: (String, String, String) => Unit)
   extends Logg with SegmentsHandler {
-  logIdent = hl7Segments.msgType.toString + " Model Handle "
+
+  private val hl7 = hl7Segments.msgType.toString
+  outStream.println(
+    hl7 + " " +
+      """ Handler Registered For Modeling ::
+      ____
+    HL / /    DATA
+      / /
+     / /
+    /_/
+      """)
+  logIdent = hl7 + " Model Handler "
   private val pool = {
     val t = newDaemonCachedThreadPool(logIdent)
     t.setMaximumPoolSize(60)
@@ -25,14 +39,17 @@ class DataModelHandler(hl7Segments: Hl7Segments, io: (String, String) => Unit, r
   }
   private implicit val ec = ExecutionContext.fromExecutor(pool, logEx)
 
+  private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: String = EMPTYSTR, auditKey: String)
+
   private lazy val metrics = new mutable.HashMap[String, mutable.HashMap[SegState, Long]]
   private lazy val dataModeler = DataModeler(hl7Segments.msgType)
   private lazy val segRef = {
-    val temp = new mutable.ArrayBuffer[(String, (mapType) => Traversable[Hl7SegmentTrans])]()
+    val temp = new mutable.ArrayBuffer[Segment]
     hl7Segments.models.foreach({ case (seg, models) =>
-      metrics += seg -> initSegStateWithZero
+      metrics += hl7 + COLON + seg -> initSegStateWithZero
       models.foreach(model => {
-        temp += (seg, dataModeler.applyModel(seg, model)(_: mapType))
+        temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType), model.adhoc.isDefined, if (model.adhoc.isDefined) model.adhoc.get.dest else EMPTYSTR,
+          if (model.adhoc.isDefined) seg substring ((seg indexOf COLON) + 1) else EMPTYSTR)
       })
     })
     temp
@@ -40,51 +57,80 @@ class DataModelHandler(hl7Segments: Hl7Segments, io: (String, String) => Unit, r
 
   private def logEx(t: Throwable): Unit = error("Unable to Execute Task ", t)
 
-  private def runModel(data: mapType): Unit = {
-    segRef.foreach(seg => {
-      run(seg, data) onComplete {
-        case Success(trans) => trans.foreach(tOut => {
-          tOut.seg match {
-            case Left(out) =>
-              if (tryAndLogErrorMes(io(out, hl7Segments.msgType.toString + ":" + seg._1), error(_: String))) updateMetrics(seg._1, SegmentsState.PROCESSED)
-            case Right(det) => det._1 match {
-              case Some(notValid) =>
-                notValid match {
-                  case x: String => if (x == skippedStr) updateMetrics(seg._1, SegmentsState.SKIPPED)
-                  else if (x == notValidStr) updateMetrics(seg._1, SegmentsState.INVALID)
+  private def runModel(data: mapType, meta: MSGMeta): Unit = {
+    segRef.foreach(segment => {
+      run(segment, data) onComplete {
+        case Success(transaction) => transaction.trans match {
+          case Left(out) =>
+            out foreach { case (rec, t) => rec ne null match {
+              case true =>
+                rec match {
+                  case `skippedStr` =>
+                    updateMetrics(segment.seg, SKIPPED)
+                    val msg = rejectMsg(hl7, segment.seg, meta, skippedStr, data)
+                    rejectIO(msg, hl7 + COLON + segment.seg)
+                    error("Segment Skipped :: " + msg)
                   case _ =>
+                    segment.adhoc match {
+                      case true => if (tryAndLogErrorMes(adhocIO(rec, hl7 + COLON + segment.seg, segment.dest), error(_: String))) {
+                        auditIO(adhocAuditor(segment.auditKey, meta), hl7 + COLON + segment.seg)
+                        updateMetrics(segment.seg, PROCESSED)
+                      } else {
+                        rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Data to OUT Failed ", data), hl7 + COLON + segment.seg)
+                        updateMetrics(segment.seg, FAILED)
+                      }
+                      case _ =>
+                        if (tryAndLogErrorMes(io(rec, hl7 + COLON + segment.seg), error(_: String))) {
+                          auditIO(segmentsAuditor(segment.seg, meta), hl7 + COLON + segment.seg)
+                          updateMetrics(segment.seg, PROCESSED)
+                        } else {
+                          rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Data to OUT Failed ", data), hl7 + COLON + segment.seg)
+                          updateMetrics(segment.seg, FAILED)
+                        }
+                    }
                 }
-              case None => updateMetrics(seg._1, SegmentsState.FAILED)
-                error(" Data Segmentation Failed for segment :: " + seg._1, det._2)
-
+              case _ =>
+                updateMetrics(segment.seg, FAILED)
+                val msg = rejectMsg(hl7, segment.seg, meta, " FAILED ", data, t)
+                rejectIO(msg, hl7 + COLON + segment.seg)
+                error(" Data Segmentation Failed  :: " + msg, t)
             }
-          }
-        })
-
+            }
+          case Right(det) =>
+            det match {
+              case `notValidStr` => updateMetrics(segment.seg, INVALID)
+                val msg = rejectMsg(hl7, segment.seg, meta, " Invalid Input or Meta Data Required to process Doesn't Exist", data)
+                rejectIO(msg, hl7 + COLON + segment.seg)
+                error("Invalid Input Came :: " + msg)
+              case `NA` => updateMetrics(segment.seg, NOTAPPLICABLE)
+              case _ =>
+            }
+        }
         case Failure(t) =>
-          rejectIO(seg._1, t.getStackTrace.mkString(","))
-          t.printStackTrace()
-          error("Running Task for  Data Segmentation Failed for segment :: " + seg._2, t)
+          updateMetrics(segment.seg, FAILED)
+          val msg = rejectMsg(hl7, segment.seg, meta, " Running Task FAILED ", data, t)
+          rejectIO(msg, hl7 + COLON + segment.seg)
+          error("Running Task FAILED :: " + msg, t)
       }
     })
-
+    if (segRef.nonEmpty) auditIO(segmentsInHl7Auditor(segmentsInMsg(allSegmentsForHl7, data), meta), hl7)
   }
 
-  private def run(in: (String, (mapType) => Traversable[Hl7SegmentTrans]), data: mapType) =
+  private def run(segment: Segment, data: mapType) =
     async {
-      in._2(data)
+      segment apply data
     }(ec)
 
 
   private def updateMetrics(seg: String, state: SegState) = {
-    metrics.get(seg) match {
+    metrics.get(hl7 + COLON + seg) match {
       case Some(stat) => stat update(state, inc(stat(state)))
-      case _ =>
+      case _ => throw new DataModelException("Cannot Update Metrics Key not Found. This should not Happen :: " + seg)
     }
   }
 
 
-  override def handleSegments(data: mapType): Unit = runModel(data)
+  override def handleSegments(data: mapType, meta: MSGMeta): Unit = runModel(data, meta)
 
   override def metricsRegistry: mutable.HashMap[String, mutable.HashMap[SegState, Long]] = this.metrics
 
@@ -99,7 +145,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, io: (String, String) => Unit, r
 
   override def shutDown(): Unit = {
     pool.shutdown()
-    pool.awaitTermination(5, TimeUnit.MINUTES)
+    pool.awaitTermination(10, TimeUnit.MINUTES)
     info(" Shutdown Completed Gracefully for " + logIdent)
   }
 
@@ -110,12 +156,35 @@ class DataModelHandler(hl7Segments: Hl7Segments, io: (String, String) => Unit, r
   }
 
   private class PoolFullHandler extends RejectedExecutionHandler {
+
+    private val failureTracker = new mutable.HashMap[Runnable, Int]()
+
     override def rejectedExecution(r: Runnable, executor: ThreadPoolExecutor): Unit = {
       debug(" Task Cannot Execute and Trying to Run again from Pool :: " + executor)
       executor.purge()
-      sleep(300)
-      executor.submit(r)
+      if (!failureTracker.isDefinedAt(r)) failureTracker += r -> 1
+      else failureTracker(r) match {
+        case x => if (x < 10) {
+          failureTracker update(r, x + 1)
+          sleep(500)
+          executor.submit(r)
+        }
+        else if (x > 20) failureTracker remove r
+        else {
+          sleep(1500)
+          executor.submit(r)
+          failureTracker update(r, x + 1)
+        }
+      }
+
     }
   }
 
+  override def tasksPending: Boolean = pool.synchronized {
+    pool.getActiveCount == 0 & pool.getTaskCount == 0
+  }
+
+  override def canExecuteMore: Boolean = pool.synchronized {
+    !pool.isShutdown
+  }
 }

@@ -8,7 +8,9 @@ trait DataWriter {
 
   def writeData(data: Any, header: Any, topic: String)
 
-  def getTotalWritten: Long
+  def getTotalWritten(topic :String) : Long
+
+  def getTotalWritten : Map[String,Long]
 
   def close()
 }

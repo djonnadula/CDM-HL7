@@ -1,8 +1,8 @@
 
 package com.hca.cdm.hl7.filter
 
-import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
+import com.hca.cdm.hl7.model._
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 
 import scala.annotation.tailrec

@@ -1,5 +1,6 @@
 package com.hca.cdm.hl7.model
 
+import com.hca.cdm.hl7.audit.MSGMeta
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 
 import scala.collection.mutable
@@ -10,14 +11,18 @@ import scala.collection.mutable
 trait SegmentsHandler {
 
 
-  def handleSegments(data: mutable.LinkedHashMap[String, Any]): Unit
+  def handleSegments(data: mutable.LinkedHashMap[String, Any], meta: MSGMeta): Unit
 
   def metricsRegistry: mutable.HashMap[String, mutable.HashMap[SegState, Long]]
 
   def resetMetrics: Boolean
 
-  def shutDown() : Unit
+  def shutDown(): Unit
 
-  def printStats() : Unit
+  def printStats(): Unit
+
+  def tasksPending: Boolean
+
+  def canExecuteMore: Boolean
 
 }

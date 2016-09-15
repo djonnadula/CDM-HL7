@@ -11,8 +11,9 @@ import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerRecor
   */
 class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val kafkaProducer: KafkaProducer[Array[Byte], Array[Byte]], val shouldRetry: Boolean) extends Logg with Callback {
 
-  private val defaultRetries: Int = defaultRetries
+  private val defaultRetries: Int = DEFAULT_RETRIES
   private val waitBetweenTries = defaultWaitBetweenRetriesMS
+  private var retryHandler: RetryHandler = _
 
   override def onCompletion(metadata: RecordMetadata, exception: Exception): Unit = {
     if (metadata == null) {
@@ -20,15 +21,16 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
         error("Failed to Send Record : " + data.value() + " to topic " + data.topic() + " Trying to Sending again .. ", exception)
         kafkaProducer.send(data).get()
       } else {
-        retrySend(exception,RetryHandler(defaultRetries, waitBetweenTries))
+        this.retryHandler = RetryHandler(defaultRetries, waitBetweenTries)
+        retrySend(exception)
       }
     }
   }
 
 
-  private def retrySend(exception: Exception, retryHandler: RetryHandler): Unit = {
+  private def retrySend(exception: Exception): Unit = {
     while (retryHandler.tryAgain()) {
-      error("Failed to Send Record : " + data.value() + " for topic " + data.topic() + " Trying to send again .. ", exception)
+      error("Failed to Send Record : " + data.value() + " for topic " + data.topic() + " Trying to send again with Retry Policy .. ", exception)
       if (kafkaProducer.send(data).get() != null) return
     }
     giveUp()

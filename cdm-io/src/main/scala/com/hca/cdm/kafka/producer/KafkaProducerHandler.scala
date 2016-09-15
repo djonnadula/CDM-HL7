@@ -2,7 +2,6 @@ package com.hca.cdm.kafka.producer
 
 import java.util
 import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicBoolean
 
 import com.hca.cdm.io.DataWriter
 import com.hca.cdm.io.IOConstants._
@@ -17,10 +16,12 @@ import org.apache.kafka.clients.producer.ProducerConfig._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.apache.kafka.common.PartitionInfo
 
+import scala.collection.concurrent.TrieMap
+
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-class KafkaProducerHandler private(private val topicToProduce: String = "",private val publishToMultiTopic: Boolean = false)
+class KafkaProducerHandler private(private val topicToProduce: String = "", private val publishToMultiTopic: Boolean = false)
   extends Logg with AutoCloseable with DataWriter {
 
   private val check: (Boolean, String) = validate(topicToProduce, publishToMultiTopic)
@@ -29,10 +30,10 @@ class KafkaProducerHandler private(private val topicToProduce: String = "",priva
   private var producer: KafkaProducer[Array[Byte], Array[Byte]] = _
   private var producerStarted: Boolean = false
   private var partitionForTopic: util.List[PartitionInfo] = _
-  @volatile private var messagesProduced: Long = 0L
   private var lastFlush = 0L
   private var sHook: Thread = _
-  private val validationDone = new AtomicBoolean(false)
+  private var topicsToProduce = new TrieMap[String, Boolean]()
+  private var messagesProduced = new TrieMap[String, Long]()
   initialise()
 
   private def validate(topicToProduce: String, publishToMultiTopic: Boolean): (Boolean, String) = {
@@ -50,19 +51,26 @@ class KafkaProducerHandler private(private val topicToProduce: String = "",priva
     }
   }
 
-  def writeData(data: Any, header: Any, topic: String): Unit = {
-    validationDone.get() match {
-      case true => handleData(data, header, topicToProduce)
-      case _ => validationDone.set(topicUtil.createTopicIfNotExist(topicToProduce))
-        handleData(data, header, topicToProduce)
+  def writeData(data: Any, header: Any, topic: String = topicToProduce): Unit = {
+    topicsToProduce.get(topic) match {
+      case Some(t) => handleData(data, header, topic)
+      case _ => topicsToProduce += topic -> topicUtil.createTopicIfNotExist(topic)
+        handleData(data, header, topic)
     }
 
   }
 
-  def getTotalWritten: Long = this.messagesProduced
+  def getTotalWritten(topic: String): Long = {
+    messagesProduced get topic match {
+      case Some(l) => l
+      case _ => -1
+    }
+  }
+
+  def getTotalWritten: Map[String, Long] = messagesProduced.toMap
 
 
-  private def handleData(data: Any, header: Any, topic: String = topicToProduce): Unit = {
+  private def handleData(data: Any, header: Any, topic: String): Unit = {
     if (valid(data) & valid(topic)) {
       valid(header) match {
         case true => (data, header) match {
@@ -86,7 +94,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "",priva
   private def produceData(record: ProducerRecord[Array[Byte], Array[Byte]]): Unit = {
     if (this.producer != null && this.producerStarted) {
       this.producer.send(record, new DataBackedCallBack(record, this.producer, true))
-      this.messagesProduced = inc(this.messagesProduced)
+      messagesProduced update(record.topic(), inc(messagesProduced getOrElse(record.topic(), 0L)))
     }
   }
 
@@ -97,9 +105,8 @@ class KafkaProducerHandler private(private val topicToProduce: String = "",priva
     }
   }
 
-  def reset(): Unit = synchronized {
-    this.messagesProduced = 0L
-  }
+  def reset(): Unit = messagesProduced.transform((k, v) => 0L)
+
 
   private def updateFlushTime() = this.lastFlush = SystemTime.milliseconds
 
@@ -107,7 +114,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "",priva
   @throws(classOf[CDMKafkaException])
   private def initialise(): Unit = {
     if (!publishToMultiTopic & topicUtil.createTopicIfNotExist(topicToProduce)) {
-      validationDone.set(true)
+      topicsToProduce += topicToProduce -> true
       handleProducer()
       if (this.producer != null && this.producerStarted) {
         findPartitionsForTopic
@@ -172,7 +179,6 @@ class KafkaProducerHandler private(private val topicToProduce: String = "",priva
       unregister(sHook)
     }
   }
-
 
 
 }

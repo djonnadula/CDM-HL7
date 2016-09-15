@@ -3,6 +3,7 @@ package com.hca.cdm.hl7.parser
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm._
+import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.{FileMappings => files}
 import com.hca.cdm.hl7.model._
@@ -19,7 +20,6 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
   private lazy val EMPTY = Array.empty[String]
   private lazy val MAP = Map.empty[String, Array[String]]
 
-
   outStream.println(
     """Template Registered For Parsing ::
       ____
@@ -29,7 +29,9 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
     /_/
     """)
 
-
+  @throws(classOf[IllegalArgumentException])
+  @throws(classOf[AssertionError])
+  @throws(classOf[CdmException])
   def transformHL7(hl7Message: String, pre_num_len: Int = 4, segment_code_len: Int = 3, index_num_len: Int = 3): HL7TransRec = {
     require(hl7Message != null && !hl7Message.isEmpty, "Error Nothing to parse " + hl7Message)
     assume(isHL7(hl7Message), "Not a Valid HL7. Check with Facility :: " + hl7Message)
@@ -178,7 +180,7 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
       })
       mapSegment
     } catch {
-      case t: Throwable => throw t
+      case t: Throwable => throw new CdmException(t)
     }
   }
 

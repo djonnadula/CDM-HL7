@@ -31,9 +31,7 @@ package object cdm extends Logg {
   lazy val emptyArray = Array.empty[Any]
   lazy val FS = File.separator
   lazy val outStream = System.out
-  lazy val MSH_INDEX = "0001.MSH"
-  lazy val PID_INDEX = "0003.PID"
-  lazy val OBX_SEG = "OBX"
+
 
   def host = InetAddress.getLocalHost.getHostName
 
@@ -155,6 +153,7 @@ package object cdm extends Logg {
 
   private class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
+
     override def newThread(r: Runnable): Thread = {
       val t = new Thread(r, id + "-" + host + "-" + cnt.incrementAndGet())
       t.setDaemon(true)
