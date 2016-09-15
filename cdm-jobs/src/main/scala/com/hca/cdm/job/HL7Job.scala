@@ -142,7 +142,7 @@ object HL7Job extends Logg with App {
                 case Success(data) => data match {
                   case Left(out) =>
                     val meta = msgMeta(out._2)
-                    if (tryAndLogErrorMes(hl7JsonIO(out._1, hl7Str), error(_: String))) {
+                    if (tryAndLogErrorMes(hl7JsonIO(out._1,  hl7Str + COLON + jsonStage), error(_: String))) {
                       auditIO(jsonAuditor(hl7Meta.msgType)(meta), hl7Str + COLON + jsonStage)
                       segmentsModeler(hl7Meta.msgType).handleSegments(out._2, meta)
                     }
