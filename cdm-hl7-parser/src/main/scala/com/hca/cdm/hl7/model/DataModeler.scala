@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
+import com.hca.cdm.hl7.filter.FilterUtility.{filterTransaction => filterRec}
 import com.hca.cdm.hl7.model.OutFormats._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
@@ -14,12 +15,12 @@ import scala.collection.mutable
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = "|") extends Logg {
+private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = "|")
+  extends Logg with Serializable {
   logIdent = "for HL7 Type :: " + reqMsgType.toString
-  private lazy val skipped = Hl7SegmentTrans(Right(skippedStr))
   private lazy val notValid = Hl7SegmentTrans(Right(notValidStr))
   private lazy val segmentDoesntExist = Hl7SegmentTrans(Right(NA))
-  private lazy val NONE = new mutable.LinkedHashMap[String, Throwable] += (EMPTYSTR -> null)
+  private lazy val filtered = new mutable.LinkedHashMap[String, Throwable] += (filteredStr -> null)
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
 
   def applyModel(whichSeg: String, model: Model)(data: mapType): Hl7SegmentTrans = {
@@ -28,19 +29,25 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
-      case Some(adhoc) => layout = model.layoutCopy
-        nodesTraversal(data, model, layout, modelFilter, dataHandler) match {
-          case out => if (out._1) {
-            adhoc.outFormat match {
-              case JSON => out._2 += (toJson(model.adhocLayout(layout, adhoc.outKeyNames)) -> null)
-              case DELIMITED => handleCommonSegments(data, layout)
-                out._2 += (makeFinal(layout) -> null)
+      case Some(adhoc) =>
+        filterRec(model.filters.get)(data) match {
+          case true =>
+            layout = model.layoutCopy
+            nodesTraversal(data, model, layout, modelFilter, dataHandler) match {
+              case out => if (out._1) {
+                adhoc.outFormat match {
+                  case JSON => out._2 += (toJson(model.adhocLayout(layout, adhoc.outKeyNames)) -> null)
+                  case DELIMITED => handleCommonSegments(data, layout)
+                    out._2 += (makeFinal(layout) -> null)
+                }
+              }
+                out._2
             }
-          }
-            out._2
+          case _ => filtered
         }
       case None => model.reqSeg match {
-        case OBX_SEG => layout = model.layoutCopy
+        case OBX_SEG =>
+          layout = model.layoutCopy
           nodesTraversal(data, model, layout, modelFilter, dataHandler, allNodes = false, OBX_SEG) match {
             case out => if (out._1) {
               handleCommonSegments(data, layout)
@@ -51,9 +58,11 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
         case _ => data.map(node => {
           try {
             node._1.substring(node._1.indexOf(".") + 1) == model.reqSeg match {
-              case true => layout = model.layoutCopy
+              case true =>
+                layout = model.layoutCopy
                 modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler) match {
-                  case true => handleCommonSegments(data, layout)
+                  case true =>
+                    handleCommonSegments(data, layout)
                     (makeFinal(layout), null)
                   case _ => (skippedStr, null)
                 }
@@ -107,32 +116,10 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   }
 
   private def handleCommonSegments(data: mapType, layout: mutable.LinkedHashMap[String, String]) = {
-    if (data.get(MSH_INDEX) isDefined) handleIndexes(MSH_INDEX, data, layout)
-    if (data.get(PID_INDEX) isDefined) handleIndexes(PID_INDEX, data, layout)
-
-  }
-
-  private def handleIndexes(segIndex: String, data: mapType, layout: mutable.LinkedHashMap[String, String]) = {
-    data.get(segIndex) match {
-      case Some(node) => commonNode foreach (ele => {
-        node match {
-          case map: mapType => map.get(ele._1) match {
-            case Some(v: String) => layout update(ele._1, v)
-            case Some(m: mapType) => m foreach { case (mk, mv) =>
-              if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
-                mv match {
-                  case str: String => layout update(ele._1, str)
-                  case _ =>
-                }
-              }
-            }
-
-            case _ =>
-          }
-        }
-      })
-      case _ =>
-    }
+    if (data get commonNodeStr isDefined) data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]].foreach({
+      case (k, v) =>
+        if (layout isDefinedAt k) layout update(k, v)
+    })
 
   }
 
@@ -144,7 +131,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
         case exists => if (repeat == EMPTYSTR) underlying update(key, exists + req)
         else underlying update(key, exists + repeat + req)
       }
-      case k => throw new DataModelException(key + " Key Not Found while Applying Model to Data :: " + k)
+      case k => throw new DataModelException(key + " Key Not Found while Applying Model to Data" + logIdent + " :: " + k)
     }
 
   }
@@ -162,7 +149,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
           }
           case map: mapType => handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
           case list: listType => handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
-          case any: Any => throw new DataModelException("Got an Unhandled Type into Filter Util ::  " + any.getClass + " ?? Not Yet Implemented")
+          case any: Any => throw new DataModelException("Got an Unhandled Type into Data Modeler " + logIdent + " :: " + any.getClass + " ?? Not Yet Implemented")
         }
         case _ =>
       }

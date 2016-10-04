@@ -2,6 +2,7 @@ package com.hca.cdm.kafka.util
 
 import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.io.IOConstants._
+import com.hca.cdm.log.Logg
 import kafka.admin.{AdminUtils => admin}
 import kafka.utils.{ZkUtils => zk}
 import org.I0Itec.zkclient.{ZkClient => zkClient}
@@ -9,10 +10,12 @@ import org.I0Itec.zkclient.{ZkClient => zkClient}
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
   */
-object TopicUtil {
+object TopicUtil extends Logg{
 
 
-  def createTopicIfNotExist(topic: String, segmentPartitions: Boolean = false): Boolean = {
+  def createTopicIfNotExist(topic: String, segmentPartitions: Boolean = true): Boolean = synchronized {
+    info("Creating Topic :: " + topic +" with Partitions Config :: "
+      + (if(segmentPartitions) defaultSegmentPartitions else defaultHL7Partitions))
     var success: Boolean = false
     val zkUtils = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
     try {
@@ -30,7 +33,7 @@ object TopicUtil {
 
   }
 
-  def changePartitions(topic: String, newPartitions: Int): Int = {
+  def changePartitions(topic: String, newPartitions: Int): Int = synchronized {
     val zkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
     try {
       checkTopicExists(zkUtil, topic) match {
@@ -45,7 +48,7 @@ object TopicUtil {
     -1
   }
 
-  def deleteTopic(topic: String): Boolean = {
+  def deleteTopic(topic: String): Boolean = synchronized {
     var success: Boolean = false
     val zkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
     try {
@@ -65,7 +68,7 @@ object TopicUtil {
   private def checkTopicExists(zkUtil: zk, topic: String): Boolean = admin.topicExists(zkUtil, topic)
 
 
-  def topicExists(topic: String): Boolean = {
+  def topicExists(topic: String): Boolean = synchronized {
     val zkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
     var topicExists = false
     try {
@@ -76,6 +79,8 @@ object TopicUtil {
     topicExists
   }
 
-  def createZkClient(zkUrl: String, sessionTimeout: Int, connectionTimeout: Int): zkClient = zk.createZkClient(zkUrl, sessionTimeout, connectionTimeout)
+  def createZkClient(zkUrl: String, sessionTimeout: Int, connectionTimeout: Int): zkClient = synchronized {
+    zk.createZkClient(zkUrl, sessionTimeout, connectionTimeout)
+  }
 
 }

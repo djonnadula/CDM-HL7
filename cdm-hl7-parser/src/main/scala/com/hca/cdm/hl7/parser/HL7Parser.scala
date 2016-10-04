@@ -2,32 +2,42 @@ package com.hca.cdm.hl7.parser
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.hca.cdm
 import com.hca.cdm._
 import com.hca.cdm.exception.CdmException
+import com.hca.cdm.hl7.audit.AuditConstants._
+import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.hl7.constants.HL7Types.HL7
 import com.hca.cdm.hl7.constants.{FileMappings => files}
-import com.hca.cdm.hl7.model._
+import com.hca.cdm.hl7.model.HL7State._
+import com.hca.cdm.hl7.model.{HL7TransRec, _}
+import com.hca.cdm.hl7.validation.NotValidHl7Exception
+import com.hca.cdm.hl7.validation.ValidationUtil.{isValidMsg => metRequirement}
 import com.hca.cdm.log.Logg
 import org.apache.commons.lang.StringUtils
-
+import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.util.control.Breaks._
 import scala.util.{Failure, Success, Try}
 
-class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]]) extends Logg {
+class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]]) extends Logg with Serializable {
 
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val EMPTY = Array.empty[String]
   private lazy val MAP = Map.empty[String, Array[String]]
-
+  private val metrics = new TrieMap[String, Long]
+  private val hl7 = msgType.toString
+  HL7State.values.foreach(state => metrics += hl7 + COLON + state.toString -> 0L)
   outStream.println(
-    """Template Registered For Parsing ::
+    hl7 + " " +
+      """Template Registered For Parsing ::
       ____
     HL / /    DATA
       / /
      / /
     /_/
-    """)
+      """)
 
   @throws(classOf[IllegalArgumentException])
   @throws(classOf[AssertionError])
@@ -35,16 +45,46 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
   def transformHL7(hl7Message: String, pre_num_len: Int = 4, segment_code_len: Int = 3, index_num_len: Int = 3): HL7TransRec = {
     require(hl7Message != null && !hl7Message.isEmpty, "Error Nothing to parse " + hl7Message)
     assume(isHL7(hl7Message), "Not a Valid HL7. Check with Facility :: " + hl7Message)
-    val delim = if(hl7Message contains "\r\n") "\r\n" else "\n"
+    val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
     Try(transform(hl7Message split delim, pre_num_len, segment_code_len, index_num_len)) match {
-      case Success(map) => handleCommonSegments(map)
-        Try(toJson(map)) match {
-          case Success(json) => HL7TransRec(Left((json, map)))
-          case Failure(t) => error("Json Parsing Failed for HL7 ", t)
-            HL7TransRec(Right(t))
+      case Success(map) =>
+        handleCommonSegments(map)
+        val meta = msgMeta(map)
+        metRequirement(meta) match {
+          case true => Try(toJson(map)) match {
+            case Success(json) =>
+              updateMetrics(PROCESSED)
+              HL7TransRec(Left((json, map, meta)))
+            case Failure(t) =>
+              error("Transforming to Json Failed for HL7 " + t.getMessage, t)
+              updateMetrics(FAILED)
+              HL7TransRec(Right(t))
+          }
+          case _ =>
+            updateMetrics(REJECTED)
+            throw new NotValidHl7Exception(invalidHl7)
         }
-      case Failure(t) => error("Cannot Deal with HL7 ", t)
+      case Failure(t) =>
+        error(t.getMessage, t)
+        updateMetrics(FAILED)
         HL7TransRec(Right(t))
+    }
+  }
+
+  def metricsRegistry: TrieMap[String, Long] = metrics
+
+  def resetMetrics: Boolean = {
+    this.metrics.synchronized {
+      metrics.transform((k, v) => if (v != 0L) 0L else v)
+    }
+    true
+  }
+
+  private def updateMetrics(state: hl7State) = {
+    val key = hl7 + COLON + state
+    metrics get key match {
+      case Some(stat) => metrics update(key, cdm.inc(stat))
+      case _ => throw new DataModelException("Cannot Update Metrics Key not Found." + logIdent + " This should not Happen :: " + state)
     }
   }
 
@@ -57,10 +97,33 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
 
   private def handleIndexes(segIndex: String, map: mapType, commonNode: mapType) = {
     map.get(segIndex) match {
-      case Some(msh) => commonNode.foreach(ele => {
-        msh match {
+      case Some(node) => commonNode.foreach(ele => {
+        node match {
           case map: mapType => map.get(ele._1) match {
             case Some(v: String) => commonNode update(ele._1, v)
+            case Some(m: mapType) =>
+              m foreach { case (mk, mv) =>
+                if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                  mv match {
+                    case str: String =>
+                      if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                      else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                    case _ =>
+                  }
+                }
+              }
+            case Some(list: listType) => list.foreach(map => {
+              map foreach { case (mk, mv) =>
+                if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                  mv match {
+                    case str: String =>
+                      if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                      else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                    case _ =>
+                  }
+                }
+              }
+            })
             case _ =>
           }
           case _ =>
@@ -90,6 +153,7 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
     msg_delims.put(TRUNC_DELIM, if (rawMessage(0).charAt(8) + EMPTYSTR != "|") (rawMessage(0).charAt(8) + EMPTYSTR).trim else "//")
     var realignColStatus = false
     var segments: Segments = null
+    var realignVal = EMPTYSTR
     var versionData: VersionData = null
     val segmentsMapping = mapSegments(_: String, _: Int, _: Int, versionData.control_id, versionData.hl7_version, versionData.mapped_index,
       versionData.standard_mapped_index, versionData.realign_index, versionData.final_mapped_index)
@@ -131,9 +195,12 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
                           segments = segmentsMapping(subcomponent_index, segCodeLen, indexNumLen)
                           strSubComponentEleData = segments.strComponentEleData
                           var subSubComponent: Array[String] = EMPTY
+                          realignColStatus = segments.realignColStatus
                           realignColStatus match {
                             case true => segments.realignColOption match {
-                              case `MERGE` => segments.realignColValue = segments.realignColValue + msgSubComp
+                              case `MERGE` =>
+                                if (realignVal == EMPTYSTR) realignVal = msgSubComp
+                                else realignVal = realignVal + msgSubComp
                               case `MOVE` => val msgSubCompRep = fieldRepeatItem.replace(msg_delims(CMPNT_DELIM), msg_delims(SUBCMPNT_DELIM))
                                 strSubComponentEleData = generateMapIndex(subcomponent_index, indexNumLen) + "." + segments.realignCompName
                                 subSubComponent = msgSubCompRep.split("\\" + msg_delims(SUBCMPNT_DELIM), -1)
@@ -160,9 +227,10 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
                         })
                         realignColStatus match {
                           case true =>
-                            mapComponent += strComponentEleData -> segments.realignColValue
+                            mapComponent += strComponentEleData -> realignVal
                             segments.realignColValue = EMPTYSTR
                             realignColStatus = false
+                            realignVal = EMPTYSTR
                           case _ => if (field_repeat_list.length > 1) mapComponentList += mapSubComponent
                           else mapComponent += strComponentEleData -> mapSubComponent
                         }
@@ -293,10 +361,11 @@ class HL7Parser(private val templateData: Map[String, Map[String, Array[String]]
     segindex
   }
 
+  override def toString = s"HL7Parser($hl7, $templateData, $metrics, )"
 }
 
 object HL7Parser {
 
-  def apply(templateMappings: Map[String, Map[String, Array[String]]]): HL7Parser = new HL7Parser(templateMappings)
+  def apply(msgType: HL7, templateMappings: Map[String, Map[String, Array[String]]]): HL7Parser = new HL7Parser(msgType, templateMappings)
 
 }

@@ -1,8 +1,8 @@
 package com.hca.cdm.kafka.producer
 
 import java.util
+import java.util.Properties
 import java.util.concurrent.TimeUnit
-
 import com.hca.cdm.io.DataWriter
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm.log.Logg
@@ -15,13 +15,12 @@ import com.hca.cdm.utils.RetryHandler
 import org.apache.kafka.clients.producer.ProducerConfig._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.apache.kafka.common.PartitionInfo
-
 import scala.collection.concurrent.TrieMap
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-class KafkaProducerHandler private(private val topicToProduce: String = "", private val publishToMultiTopic: Boolean = false)
+class KafkaProducerHandler private(private val topicToProduce: String = "", private val publishToMultiTopic: Boolean = false)(implicit val props: Properties)
   extends Logg with AutoCloseable with DataWriter {
 
   private val check: (Boolean, String) = validate(topicToProduce, publishToMultiTopic)
@@ -51,13 +50,8 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
     }
   }
 
-  def writeData(data: Any, header: Any, topic: String = topicToProduce): Unit = {
-    topicsToProduce.get(topic) match {
-      case Some(t) => handleData(data, header, topic)
-      case _ => topicsToProduce += topic -> topicUtil.createTopicIfNotExist(topic)
-        handleData(data, header, topic)
-    }
-
+  def writeData(data: AnyRef, header: AnyRef, topic: String = topicToProduce)(sizeThreshold: Int = 4194304, overSizeHandler: (AnyRef) => Unit): Unit = {
+    handleData(data, header, topic)(sizeThreshold, overSizeHandler)
   }
 
   def getTotalWritten(topic: String): Long = {
@@ -70,24 +64,31 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
   def getTotalWritten: Map[String, Long] = messagesProduced.toMap
 
 
-  private def handleData(data: Any, header: Any, topic: String): Unit = {
-    if (valid(data) & valid(topic)) {
+  private def handleData(data: AnyRef, header: Any, topic: String)(sizeThreshold: Int, overSizeHandler: (AnyRef) => Unit): Unit = {
+    if (valid(data) & valid(topic) & !topic.trim.isEmpty) {
+      if (!IOCanHandle(data, sizeThreshold) & overSizeHandler != null) {
+        info("Record cannot be deal with this handler :: " + getClass + " So Delivering to OversizeHandler :: " + overSizeHandler)
+        overSizeHandler(data)
+        return
+      }
       valid(header) match {
         case true => (header, data) match {
           case (k: String, v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k.getBytes(UTF8), v.getBytes(UTF8)))
           case (k: Array[Byte], v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v))
           case (k: Array[Byte], v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v.getBytes(UTF8)))
           case (k: String, v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k.getBytes(UTF8), v))
+          case _ => new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
         }
         case _ => data match {
           case v: String => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, v.getBytes(UTF8)))
           case v: Array[Byte] => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, v))
+          case _ => new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
 
         }
 
       }
     }
-    else fatal("Cannot Send Invalid Data to Kafka ::  " + data)
+    else throw new CDMKafkaException("Cannot Send Invalid Data to Kafka ::  " + data + " with Header :: " + header + " to Topic :: " + topic)
   }
 
 
@@ -99,25 +100,28 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
   }
 
   private def flushEverything(producer: KafkaProducer[Array[Byte], Array[Byte]]) = {
-    try producer.flush()
+    try producer flush()
     catch {
       case ie: InterruptedException => error("Flushing failed ", ie)
     }
   }
 
-  def reset(): Unit = messagesProduced.transform((k, v) => 0L)
-
+  def reset(): Unit = messagesProduced transform ((k, v) => 0L)
 
   private def updateFlushTime() = this.lastFlush = SystemTime.milliseconds
 
-
   @throws(classOf[CDMKafkaException])
   private def initialise(): Unit = {
-    if (!publishToMultiTopic & topicUtil.createTopicIfNotExist(topicToProduce)) {
-      topicsToProduce += topicToProduce -> true
+    if (publishToMultiTopic match {
+      case true => true
+      case _ => if (!topicToProduce.trim.isEmpty) {
+        topicUtil.createTopicIfNotExist(topicToProduce)
+        topicsToProduce += topicToProduce -> true
+      }
+        true
+    }) {
       handleProducer()
       if (this.producer != null && this.producerStarted) {
-        findPartitionsForTopic
         sHook = newThread(defaultClientId + " SHook", runnable({
           flushEverything(producer)
           producer.close(1, TimeUnit.HOURS)
@@ -133,7 +137,6 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
 
   private def handleProducer(): Unit = {
-    val props = conf(topicToProduce)
     id = props.getProperty(CLIENT_ID_CONFIG, defaultClientId)
     try {
       info("Starting Kafka Producer")
@@ -175,7 +178,6 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
     if (this.producer != null) {
       flushEverything(producer)
       this.producer.close(1, TimeUnit.HOURS)
-      this.producer.close()
       unregister(sHook)
     }
   }
@@ -184,7 +186,9 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 }
 
 object KafkaProducerHandler {
-  def apply(topicToProduce: String): KafkaProducerHandler = new KafkaProducerHandler(topicToProduce, false)
+  def apply(implicit props: Properties): KafkaProducerHandler = new KafkaProducerHandler(EMPTYSTR, true)(props)
 
-  def apply(multiDest: Boolean): KafkaProducerHandler = new KafkaProducerHandler("", true)
+  def apply(topicToProduce: String)(implicit props: Properties): KafkaProducerHandler = new KafkaProducerHandler(topicToProduce, false)(props)
+
+  def apply(multiDest: Boolean = true)(implicit props: Properties): KafkaProducerHandler = new KafkaProducerHandler("", true)(props)
 }

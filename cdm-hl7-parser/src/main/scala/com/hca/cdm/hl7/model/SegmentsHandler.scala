@@ -1,28 +1,25 @@
 package com.hca.cdm.hl7.model
 
 import com.hca.cdm.hl7.audit.MSGMeta
-import com.hca.cdm.hl7.model.SegmentsState.SegState
 
+import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-trait SegmentsHandler {
+trait SegmentsHandler extends Serializable {
 
 
-  def handleSegments(data: mutable.LinkedHashMap[String, Any], meta: MSGMeta): Unit
+  def handleSegments(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
+                     adhocIO: (String, String, String) => Unit)(data: mutable.LinkedHashMap[String, Any], meta: MSGMeta): Unit
 
-  def metricsRegistry: mutable.HashMap[String, mutable.HashMap[SegState, Long]]
+
+  def metricsRegistry: TrieMap[String, Long]
 
   def resetMetrics: Boolean
 
-  def shutDown(): Unit
+  // def collectMetrics(driverMetrics: TrieMap[String, mutable.HashMap[SegState, Long]]): TrieMap[String, mutable.HashMap[SegState, Long]]
 
-  def printStats(): Unit
-
-  def tasksPending: Boolean
-
-  def canExecuteMore: Boolean
 
 }

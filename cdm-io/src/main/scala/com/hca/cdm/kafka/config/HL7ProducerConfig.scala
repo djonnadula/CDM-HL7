@@ -13,11 +13,9 @@ object HL7ProducerConfig {
 
   def createConfig(topicToProduce: String = ""): prop = {
     val prop = new prop
-    prop.put(CLIENT_ID_CONFIG, topicToProduce + "-" + "-" + defaultClientId)
     prop.put(BUFFER_MEMORY_CONFIG, producerBufferMemory)
     prop.put(COMPRESSION_TYPE_CONFIG, defaultCompression)
     prop.put(LINGER_MS_CONFIG, defaultProducerLinger)
-   // prop.put(BLOCK_ON_BUFFER_FULL_CONFIG,"true")
     prop.put(MAX_BLOCK_MS_CONFIG, blockOnbufferFull)
     prop.put(REQUEST_TIMEOUT_MS_CONFIG, defaultRequestTimeOut)
     prop.put(ACKS_CONFIG, producerAck)
@@ -29,7 +27,7 @@ object HL7ProducerConfig {
     prop.put(SEND_BUFFER_CONFIG, sendBuffer)
     prop.put(RECEIVE_BUFFER_CONFIG, receiveBuffer)
     prop.put(PARTITIONER_CLASS_CONFIG, defaultPartitioner)
+    prop.put(MAX_REQUEST_SIZE_CONFIG, requestMaxSize)
     prop
   }
-
 }

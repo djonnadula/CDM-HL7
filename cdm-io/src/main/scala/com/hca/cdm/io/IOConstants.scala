@@ -13,8 +13,8 @@ object IOConstants {
 
 
   private val random = new Random
-  val zkHosts: String = loopUpProp("hl7.zkHosts")
-  val kafkaHosts: String = loopUpProp("hl7.kafka.brokers")
+  val zkHosts: String = lookUpProp("hl7.zkHosts")
+  val kafkaHosts: String = lookUpProp("hl7.kafka.brokers")
   val DEFAULT_RETRIES: Int = 30
   val defaultSegmentPartitions: Int = 6
   val defaultHL7Partitions: Int = 11
@@ -28,9 +28,9 @@ object IOConstants {
   val defaultPartitioner: String = "org.apache.kafka.clients.producer.internals.DefaultPartitioner"
   val defaultCompression: String = "none"
   val lz4Compression: String = "lz4"
-  val defaultProducerLinger: String = "1000"
+  val defaultProducerLinger: String = "200"
   val blockOnbufferFull = Int.MaxValue.toString
-  val metadataFetchTimeout :String = "3000"
+  val metadataFetchTimeout: String = "3000"
   val defaultSendRetries: Int = 10
   val defaultHeartBeat: String = "20000"
   val defaultRequestTimeOut: String = "40000"
@@ -45,12 +45,14 @@ object IOConstants {
   val defaultProducerRetries: String = "30"
   val defaultConsumerSessionTimeOut = "30000"
   val defaultConsumerAutoCommit = "false"
-  val defaultOffsetReset = "smallest"
+  val defaultOffsetReset = lookUpProp("hl7.topicReset")
   val fetchBytes: String = (65 * 1024 * 1024).toString
   val fetchMinBytes: String = "100"
   val fetchMinWait: String = "3000"
+  val maxRecSize = "10485760"
+  val requestMaxSize: String = Int.MaxValue.toString
 
-  def defaultClientId: String = "CDM-HL7-" + InetAddress.getLocalHost.getHostName + random.nextLong + System.nanoTime / 1000
+  def defaultClientId: String = "CDM-HL7-" + InetAddress.getLocalHost.getHostName + "-" + random.nextLong
 
 
 }

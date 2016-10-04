@@ -14,18 +14,18 @@ import scala.collection.mutable
 package object audit {
 
 
-  case class MSGMeta(controlId: String, msgCreateTime: String, medical_record_num: String, medical_record_urn: String, account_num: String)
+  case class MSGMeta(controlId: String, msgCreateTime: String, medical_record_num: String, medical_record_urn: String, account_num: String, facility: String = EMPTYSTR)
 
-  private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR)
+  private lazy val NONE = MSGMeta(EMPTYSTR, EMPTYSTR, EMPTYSTR, EMPTYSTR, EMPTYSTR)
 
   def msgMeta(data: mutable.LinkedHashMap[String, Any]): MSGMeta = {
     (data.get(MSH_INDEX), data.get(commonNodeStr)) match {
       case (Some(msh), Some(common)) =>
         (msh, common) match {
           case (mshMap: mapType, cmnMap: mapType) => (mshMap get msg_control_id, mshMap get msg_create_time,
-            cmnMap get medical_record_num, cmnMap get medical_record_urn, cmnMap get account_num) match {
-            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accnum: String)) =>
-              return MSGMeta(control, createTime, rnum, urn, accnum)
+            cmnMap get medical_record_num, cmnMap get medical_record_urn, cmnMap get account_num, mshMap get sending_facility) match {
+            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accnum: String), Some(facility: AnyRef)) =>
+              return MSGMeta(control, createTime, rnum, urn, accnum, handleAnyRef(facility))
             case _ =>
           }
           case _ =>
@@ -46,13 +46,12 @@ package object audit {
 
   def auditMsg(hl7Str: String, stage: String)(segments: String = EMPTYSTR, meta: MSGMeta): String = {
     segments match {
-      case EMPTYSTR => hl7Str + "-" + stage + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num + PIPE_DELIMITED
+      case EMPTYSTR => hl7Str + "-" + stage + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num + PIPE_DELIMITED +
         meta.medical_record_urn + PIPE_DELIMITED + meta.account_num + PIPE_DELIMITED + timeStamp
       case _ => hl7Str + "-" + stage + COLON + segments + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num +
         PIPE_DELIMITED + meta.medical_record_urn + PIPE_DELIMITED + meta.account_num + PIPE_DELIMITED + timeStamp
     }
   }
-
 
 
 }

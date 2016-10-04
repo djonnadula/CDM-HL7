@@ -35,6 +35,8 @@ object HL7Constants {
   lazy val COLON = ":"
   type mapType = mutable.LinkedHashMap[String, Any]
   type listType = mutable.ListBuffer[mutable.LinkedHashMap[String, Any]]
+  lazy val hl7JsonIOFun ="hl7JsonIO"
+  lazy val hl7JsonAuditIOFun = "hl7JsonAuditIO"
 
 
 }

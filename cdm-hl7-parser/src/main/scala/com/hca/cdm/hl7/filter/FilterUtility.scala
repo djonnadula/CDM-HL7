@@ -1,79 +1,118 @@
-
 package com.hca.cdm.hl7.filter
 
-import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
-import com.hca.cdm.hl7.model._
-import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
+import com.hca.cdm.EMPTYSTR
+import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.utils.Filters.Conditions._
+import com.hca.cdm.utils.Filters.Expressions._
+import com.hca.cdm.utils.Filters.FILTER
 
-import scala.annotation.tailrec
-import scala.collection.mutable
+import scala.util.control.Breaks.{break, breakable}
+import scala.util.{Success, Try}
 
 /**
-  * Created by Devaraj Jonnadula on 8/10/2016.
+  * Created by Devaraj Jonnadula on 9/28/2016.
   */
-class FilterUtility {
+object FilterUtility {
+  private val NOFILTER = FILTER(EMPTYSTR, (EMPTYSTR, EMPTYSTR), (EQUAL, NONE))
 
-  private lazy val EMPTYSTR = ""
-  private type defaultType = mutable.LinkedHashMap[String, Any]
-  private type listType = mutable.MutableList[mutable.LinkedHashMap[String, Any]]
-
-  def transformToDelim(reqMsgType: HL7, delimiter: String, timeStampReq: Boolean = true)(filterKeys: Map[String, String], data: defaultType): Option[String] = {
-    if (filterKeys.isEmpty | !isRequiredType(data, reqMsgType)) return None
-    val observationValue = new mutable.MutableList[String]
-    data.foldLeft(new StringBuilder(filterKeys.size * 30, EMPTYSTR))((builder, node) => filterData(builder, delimiter, observationValue)(filterKeys, node._2.asInstanceOf[defaultType])) match {
-      case out => if (out.nonEmpty) {
-        observationValue.addString(out)
-        out ++= delimiter
-        if (timeStampReq) out ++= timeStamp
-        Some(out.result)
-      }
-      else None
-      case _ => None
-    }
-  }
-
-  @tailrec private def filterData(underlying: StringBuilder, delimiter: String, observationCol: mutable.MutableList[String])(filterKeys: Map[String, String], data: defaultType): StringBuilder = {
-    data.headOption match {
-      case Some(node) =>
-        node._1 != null & node._1 != EMPTYSTR & (filterKeys contains node._1) match {
-          case true => node._2 match {
-            case str: String =>
-              if (node._1 == Observation_Col) observationCol += str
-              else includeEle(underlying, delimiter, node._2.asInstanceOf[String])
-              filterData(underlying, delimiter, observationCol)(filterKeys, data.tail)
-            case mapType: defaultType => filterData(underlying, delimiter, observationCol)(filterKeys, mapType)
-            case listType: listType =>
-              val tempData = new mutable.LinkedHashMap[String, Any]()
-              listType.foreach(map => map.foreach(e => tempData += e))
-              tempData ++= data.tail
-              filterData(underlying, delimiter, observationCol)(filterKeys, tempData)
-            case any: Any => throw new RuntimeException("Got an Unhandled Type into Filter Util ::  " + any.getClass + " ?? Not Yet Implemented")
+  def filterTransaction(filters: Array[FILTER])(data: mapType): Boolean = {
+    if (filters isEmpty) return true
+    var expression = false
+    filters length match {
+      case x if x >= 2 =>
+        for (index <- filters.indices by 2) {
+          val left: FILTER = Try(filters(index)) match {
+            case Success(x) => x
+            case _ => NOFILTER
           }
-          case _ => filterData(underlying, delimiter, observationCol)(filterKeys, data.tail)
+          val right = Try(filters(index + 1)) match {
+            case Success(x) => x
+            case _ => NOFILTER
+          }
+          left != NOFILTER match {
+            case true =>
+              if (right != NOFILTER) {
+                left.filter._2 match {
+                  case AND =>
+                    expression = matchCriteria(data(findReqSegment(data, left.segment)),
+                      left.filter._1, left.path._2, left.matchPath) && matchCriteria(data(findReqSegment(data, right.segment)), right.filter._1, right.path._2, right.matchPath)
+                  case OR =>
+                    expression = matchCriteria(data(findReqSegment(data, left.segment)),
+                      left.filter._1, left.path._2, left.matchPath) || matchCriteria(data(findReqSegment(data, right.segment)), right.filter._1, right.path._2, right.matchPath)
+                  case NONE => expression = matchCriteria(data(findReqSegment(data, right.segment)), right.filter._1, right.path._2, right.matchPath)
+                }
+              } else {
+                val leftCond = matchCriteria(data(findReqSegment(data, left.segment)), left.filter._1, left.path._2, left.matchPath)
+                val temp = expression
+                filters(index - 1).filter._2 match {
+                  case AND => expression = temp && leftCond
+                  case OR => expression = temp || leftCond
+                  case NONE => expression = temp
+                }
+              }
+            case _ =>
+          }
         }
-
-      case _ => underlying
-
+      case 1 =>
+        val fil = filters(0)
+        expression = matchCriteria(data(findReqSegment(data, fil.segment)), fil.filter._1, fil.path._2, fil.matchPath)
     }
+    expression
   }
 
-  private def includeEle(underlying: mutable.StringBuilder, delim: String, key: String) = {
-    underlying ++= key
-    underlying ++= delim
-  }
-
-  private def isRequiredType(data: defaultType, reqMsgType: HL7): Boolean = {
-    data.get(MSH_Segment) match {
-      case Some(nextSeg) => nextSeg.asInstanceOf[defaultType].get(Message_Type_Segment) match {
-        case Some(seg) => seg.asInstanceOf[defaultType].get(Message_Control_Id) match {
-          case Some(typ) => if (typ == classOf[String]) return hl7(typ.asInstanceOf[String]) == reqMsgType
-          case _ =>
+  private def findReqSegment(data: mapType, reqSeg: String): String = {
+    var segment = EMPTYSTR
+    breakable {
+      data.foreach(node => {
+        if (node._1.substring(node._1.indexOf(".") + 1) == reqSeg) {
+          segment = node._1
+          break
         }
+      })
+    }
+    segment
+  }
 
+
+  private def matchCriteria(data: Any, condition: Condition, toMatch: String, path: Array[String]): Boolean = {
+    data match {
+      case map: mapType =>
+        path headOption match {
+          case Some(x) => if (map.isDefinedAt(x)) matchCriteria(map(x), condition, toMatch, path tail)
+          else false
+          case _ => false
+        }
+      case list: listType =>
+        path headOption match {
+          case Some(x) =>
+            val flatMap = list.flatten.toMap
+            if (flatMap isDefinedAt x) matchCriteria(flatMap(x), condition, toMatch, path tail)
+            else false
+          case _ => false
+        }
+      case str: String => matchCondition(condition, toMatch, str)
+      case immMap: Map[String, Any] => path headOption match {
+        case Some(x) => if (immMap.isDefinedAt(x)) matchCriteria(immMap(x), condition, toMatch, path tail)
+        else false
+        case _ => false
       }
-      case _ =>
+      case _ => false
     }
-    false
   }
-}
 
+
+  private def matchCondition(condition: Condition, toMatch: String, matchWith: String) = {
+    condition match {
+      case EQUAL => toMatch == matchWith
+      case NOTEQUAL => toMatch != matchWith
+      case GT => toMatch.compareTo(matchWith) > 0
+      case LT => toMatch.compareTo(matchWith) < 0
+      case GTE => toMatch.compareTo(matchWith) >= 0
+      case LTE => toMatch.compareTo(matchWith) <= 0
+      case _ => false
+
+    }
+  }
+
+
+}

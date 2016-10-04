@@ -15,6 +15,7 @@ object HL7Types extends Enumeration {
   val RDE = Value("RDE")
   val SIU = Value("SIU")
   val VXU = Value("VXU")
+  val UNKNOWN = Value("UNKNOWN")
 
 
 }
