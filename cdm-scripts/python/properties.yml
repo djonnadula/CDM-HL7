@@ -1,0 +1,161 @@
+chosen_segments: !!set
+    ? 'ACC'
+    ? 'AL1'
+    ? 'CTI'
+    ? 'DG1'
+    ? 'DSC'
+    ? 'EVN'
+    ? 'GT1'
+    ? 'IN1'
+    ? 'MRG'
+    ? 'MSH'
+    ? 'NK1'
+    ? 'NTE'
+    ? 'OBR'
+    ? 'OBX'
+    ? 'ORC'
+    ? 'PD1'
+    ? 'PID'
+    ? 'PR1'
+    ? 'PV1'
+    ? 'PV2'
+    ? 'SFT'
+    ? 'SPM'
+    ? 'TQ1'
+    ? 'TXA'
+    ? 'ZCD'
+    ? 'ZCL'
+    ? 'ZCN'
+    ? 'ZCS'
+    ? 'ZDS'
+    ? 'ZDT'
+    ? 'ZDU'
+    ? 'ZER'
+    ? 'ZEX'
+    ? 'ZG1'
+    ? 'ZID'
+    ? 'ZIF'
+    ? 'ZIN'
+    ? 'ZIN'
+    ? 'ZM1'
+    ? 'ZMP'
+    ? 'ZMR'
+    ? 'ZPD'
+    ? 'ZPE'
+    ? 'ZPV'
+    ? 'ZRQ'
+    ? 'ZSI'
+    ? 'ZSU'
+    ? 'ZUR'
+    ? 'ZVN'
+
+message_type_segments:
+    'ACC':
+        - 'ADT'
+    'AL1':
+        - 'ADT'
+    'CTI':
+        - 'ORU'
+    'DG1':
+        - 'ADT'
+    'DSC':
+        - 'ORU'
+    'EVN':
+        - 'ADT'
+        - 'MDM'
+    'GT1':
+        - 'ADT'
+    'IN1':
+        - 'ADT'
+    'MRG':
+        - 'ADT'
+    'MSH':
+        - 'ADT'
+        - 'MDM'
+        - 'ORU'
+    'NK1':
+        - 'ADT'
+        - 'ORU'
+    'NTE':
+        - 'ORU'
+    'ORC':
+        - 'ORU'
+    'OBR':
+        - 'ORU'
+    'OBX':
+        - 'ADT'
+        - 'MDM'
+        - 'ORU'
+    'PD1':
+        - 'ADT'
+        - 'ORU'
+    'PID':
+        - 'ADT'
+        - 'MDM'
+        - 'ORU'
+    'PR1':
+        - 'ADT'
+    'PV1':
+        - 'ADT'
+        - 'MDM'
+        - 'ORU'
+    'PV2':
+        - 'ADT'
+        - 'ORU'
+    'SFT':
+        - 'ORU'
+    'SPM':
+        - 'ORU'
+    'TQ1':
+        - 'ORU'
+    'TXA':
+        - 'MDM'
+    'ZCL':
+        - 'ORU'
+    'ZER':
+        - 'ORU'
+    'ZSI':
+        - 'ORU'
+    'ZDS':
+        - 'ORU'
+    'ZCD':
+        - 'ADT'
+    'ZCN':
+        - 'ADT'
+    'ZCS':
+        - 'ADT'
+    'ZEX':
+        - 'ADT'
+    'ZIN':
+        - 'ADT'
+    'ZM1':
+        - 'ADT'
+    'ZMR':
+        - 'ADT'
+    'ZSU':
+        - 'ADT'
+    'ZUR':
+        - 'ADT'
+        - 'MDM'
+    'ZRQ':
+        - 'ADT'
+    'ZID':
+        - 'ADT'
+    'ZPE':
+        - 'ADT'
+    'ZG1':
+        - 'ADT'
+    'ZMP':
+        - 'ADT'
+    'ZDT':
+        - 'ADT'
+    'ZIF':
+        - 'ADT'
+    'ZPV':
+        - 'ADT'
+    'ZDU':
+        - 'ADT'
+    'ZPD':
+        - 'ADT'
+    'ZVN':
+        - 'ADT'
