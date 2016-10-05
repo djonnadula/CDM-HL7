@@ -101,14 +101,15 @@ object FilterUtility {
   }
 
 
-  private def matchCondition(condition: Condition, toMatch: String, matchWith: String) = {
+  private def matchCondition(condition: Condition, toMatch: String, in: String) = {
     condition match {
-      case EQUAL => toMatch == matchWith
-      case NOTEQUAL => toMatch != matchWith
-      case GT => toMatch.compareTo(matchWith) > 0
-      case LT => toMatch.compareTo(matchWith) < 0
-      case GTE => toMatch.compareTo(matchWith) >= 0
-      case LTE => toMatch.compareTo(matchWith) <= 0
+      case CONTAINS => in contains toMatch
+      case EQUAL => toMatch == in
+      case NOTEQUAL => toMatch != in
+      case GT => toMatch.compareTo(in) > 0
+      case LT => toMatch.compareTo(in) < 0
+      case GTE => toMatch.compareTo(in) >= 0
+      case LTE => toMatch.compareTo(in) <= 0
       case _ => false
 
     }

@@ -7,12 +7,13 @@ object Filters {
 
   object Conditions extends Enumeration {
     type Condition = Value
-    val EQUAL = Value("=")
-    val NOTEQUAL = Value("!=")
-    val GT = Value(">")
-    val LT = Value("<")
-    val GTE = Value(">=")
-    val LTE = Value("<=")
+    val EQUAL = Value("EQUAL")
+    val NOTEQUAL = Value("NOTEQUAL")
+    val GT = Value("GT")
+    val LT = Value("LT")
+    val GTE = Value("GTE")
+    val LTE = Value("LTE")
+    val CONTAINS = Value("CONTAINS")
   }
 
   object Expressions extends Enumeration {

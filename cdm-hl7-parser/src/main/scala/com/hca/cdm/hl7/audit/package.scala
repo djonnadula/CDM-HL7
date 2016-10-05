@@ -5,7 +5,6 @@ import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
-
 import scala.collection.mutable
 
 /**
