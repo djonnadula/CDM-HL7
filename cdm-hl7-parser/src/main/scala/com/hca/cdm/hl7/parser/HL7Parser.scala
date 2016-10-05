@@ -88,51 +88,83 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
   }
 
+  private def findReqSegment(data: mapType, reqSeg: String): String = {
+    var segment = EMPTYSTR
+    breakable {
+      data.foreach(node => {
+        if (node._1.substring(node._1.indexOf(".") + 1) == reqSeg) {
+          segment = node._1
+          break
+        }
+      })
+    }
+    segment
+  }
+
   private def handleCommonSegments(data: mapType) = {
     val commonNode = data(commonNodeStr).asInstanceOf[mapType]
-    handleIndexes(MSH_INDEX, data, commonNode)
-    handleIndexes(PID_INDEX, data, commonNode)
-
+    handleIndexes(findReqSegment(data,MSH), data, commonNode)
+    handleIndexes(findReqSegment(data,PID), data, commonNode)
   }
 
   private def handleIndexes(segIndex: String, map: mapType, commonNode: mapType) = {
     map.get(segIndex) match {
-      case Some(node) => commonNode.foreach(ele => {
-        node match {
-          case map: mapType => map.get(ele._1) match {
-            case Some(v: String) => commonNode update(ele._1, v)
-            case Some(m: mapType) =>
-              m foreach { case (mk, mv) =>
-                if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
-                  mv match {
-                    case str: String =>
-                      if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
-                      else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
-                    case _ =>
+      case Some(node) =>
+        val temp = node.asInstanceOf[mapType]
+        commonNode.foreach(ele => {
+          if (temp isDefinedAt ele._1) {
+            temp.get(ele._1) match {
+              case Some(str: String) => if (str != EMPTYSTR) commonNode update(ele._1, str)
+              case Some(map: mapType) => map.get(ele._1) match {
+                case Some(v: String) =>
+                  commonNode update(ele._1, v)
+                case Some(m: mapType) =>
+                  m foreach { case (mk, mv) =>
+                    if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                      mv match {
+                        case str: String => if (str != EMPTYSTR) {
+                          if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                          else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                        }
+                        case _ =>
+                      }
+                    }
+                  }
+                case Some(list: listType) => list.foreach(map => {
+                  map foreach { case (mk, mv) =>
+                    if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                      mv match {
+                        case str: String => if (str != EMPTYSTR) {
+                          if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                          else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                        }
+                        case _ =>
+                      }
+                    }
+                  }
+                })
+                case _ =>
+              }
+              case Some(list: listType) => list.foreach(map => {
+                map foreach { case (mk, mv) =>
+                  if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                    mv match {
+                      case str: String => if (str != EMPTYSTR) {
+                        if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                        else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                      }
+                    }
                   }
                 }
-              }
-            case Some(list: listType) => list.foreach(map => {
-              map foreach { case (mk, mv) =>
-                if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
-                  mv match {
-                    case str: String =>
-                      if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
-                      else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
-                    case _ =>
-                  }
-                }
-              }
-            })
-            case _ =>
+              })
+            }
           }
-          case _ =>
-        }
-      })
+        })
       case _ =>
     }
 
   }
+
 
   private case class Segments(var strComponentEleData: String = EMPTYSTR, var realignColStatus: Boolean = false, var realignColValue: String = EMPTYSTR,
                               var realignFieldName: String = EMPTYSTR, var realignCompName: String = EMPTYSTR, var realignSubCompName: String = EMPTYSTR, var realignColOption: String = EMPTYSTR)

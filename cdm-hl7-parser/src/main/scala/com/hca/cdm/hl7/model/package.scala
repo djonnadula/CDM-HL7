@@ -13,7 +13,6 @@ import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
 import com.hca.cdm.utils.Filters.FILTER
-
 import scala.collection.mutable
 import scala.io.Source
 import scala.language.postfixOps
@@ -31,7 +30,6 @@ package object model {
   lazy val Msg_Type_Hier = Seq(MSH_Segment, Message_Type_Segment, Message_Control_Id)
   lazy val Observation_Col = "005.obx_observation_value"
   lazy val MSH_INDEX = "0001.MSH"
-  lazy val PID_INDEX = "0003.PID"
   lazy val commonNodeStr = "0000.COMN"
   lazy val OBX_SEG = "OBX"
   lazy val commonSegkey = "seg"
@@ -131,8 +129,8 @@ package object model {
               index += 1
               val outFormSplit = outFormat split "&"
               outFormat contains JSON.toString match {
-                case true => (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0)),loadFileters(filterFile))
-                case _ => (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty), loadFileters(filterFile))
+                case true => (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0)), loadFilters(filterFile))
+                case _ => (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty), loadFilters(filterFile))
               }
             }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
           } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -183,12 +181,13 @@ package object model {
     temp
   }
 
-  def loadFileters(file: String, delimitedBy: String = ",", keyIndex: Int = 0): Array[FILTER] = {
+  def loadFilters(file: String, delimitedBy: String = ","): Array[FILTER] = {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
-      case _ => Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
-        case x@ele if ele.nonEmpty => FILTER(ele(keyIndex), (ele(1), ele(2)), (matchCriteria(ele(3)), relationWithNextFilter(ele(4))))
-      } toArray
+      case _ =>
+        Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter  (valid(_,5)) map {
+          case x@ele  => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
+        } toArray
     }
 
   }
