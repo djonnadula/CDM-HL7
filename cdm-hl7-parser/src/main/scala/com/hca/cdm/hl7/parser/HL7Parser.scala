@@ -103,8 +103,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   private def handleCommonSegments(data: mapType) = {
     val commonNode = data(commonNodeStr).asInstanceOf[mapType]
-    handleIndexes(findReqSegment(data,MSH), data, commonNode)
-    handleIndexes(findReqSegment(data,PID), data, commonNode)
+    handleIndexes(findReqSegment(data, MSH), data, commonNode)
+    handleIndexes(findReqSegment(data, PID), data, commonNode)
   }
 
   private def handleIndexes(segIndex: String, map: mapType, commonNode: mapType) = {
@@ -114,38 +114,50 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         commonNode.foreach(ele => {
           if (temp isDefinedAt ele._1) {
             temp.get(ele._1) match {
-              case Some(str: String) => if (str != EMPTYSTR) commonNode update(ele._1, str)
-              case Some(map: mapType) => map.get(ele._1) match {
-                case Some(v: String) =>
-                  commonNode update(ele._1, v)
-                case Some(m: mapType) =>
-                  m foreach { case (mk, mv) =>
-                    if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
-                      mv match {
-                        case str: String => if (str != EMPTYSTR) {
-                          if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
-                          else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
-                        }
-                        case _ =>
-                      }
-                    }
+              case Some(str: String) => commonNode update(ele._1, str)
+              case Some(map: mutable.LinkedHashMap[String,String]) =>
+                map.foreach({ case (k, v) =>
+                  if (k.substring(k.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                    if (v != EMPTYSTR) commonNode update(ele._1, v)
                   }
-                case Some(list: listType) => list.foreach(map => {
-                  map foreach { case (mk, mv) =>
-                    if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
-                      mv match {
-                        case str: String => if (str != EMPTYSTR) {
-                          if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
-                          else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                })
+              case Some(map: mapType) =>
+                map.foreach({ case (k, v) =>
+                  if (k.substring(k.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                    v match {
+                      case Some(v: String) =>
+                        if (v != EMPTYSTR) commonNode update(ele._1, v)
+                      case Some(m: mapType) =>
+                        m foreach { case (mk, mv) =>
+                          if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                            mv match {
+                              case str: String => if (str != EMPTYSTR) {
+                                if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                                else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                              }
+                              case _ =>
+                            }
+                          }
                         }
-                        case _ =>
-                      }
+                      case Some(list: listType) => list.foreach(map => {
+                        map foreach { case (mk, mv) =>
+                          if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
+                            mv match {
+                              case str: String => if (str != EMPTYSTR) {
+                                if (commonNode(ele._1) == EMPTYSTR) commonNode update(ele._1, str)
+                                else commonNode update(ele._1, commonNode(ele._1) + repeat + str)
+                              }
+                              case _ =>
+                            }
+                          }
+                        }
+                      })
+                      case _ =>
                     }
                   }
                 })
-                case _ =>
-              }
-              case Some(list: listType) => list.foreach(map => {
+              case Some(list: listType) =>
+                list.foreach(map => {
                 map foreach { case (mk, mv) =>
                   if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
                     mv match {

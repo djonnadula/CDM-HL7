@@ -21,12 +21,12 @@ object FilterUtility {
     filters length match {
       case x if x >= 2 =>
         for (index <- filters.indices by 2) {
-          val left: FILTER = Try(filters(index)) match {
-            case Success(x) => x
+          val left = Try(filters(index)) match {
+            case Success(filter) => filter
             case _ => NOFILTER
           }
           val right = Try(filters(index + 1)) match {
-            case Success(x) => x
+            case Success(filter) => filter
             case _ => NOFILTER
           }
           left != NOFILTER match {
@@ -78,7 +78,12 @@ object FilterUtility {
     data match {
       case map: mapType =>
         path headOption match {
-          case Some(x) => if (map.isDefinedAt(x)) matchCriteria(map(x), condition, toMatch, path tail)
+          case Some(x) => if (map.isDefinedAt(x)) {
+            map(x) match {
+              case str: String => matchCondition(condition, toMatch, str)
+              case _ => matchCriteria(map(x), condition, toMatch, path tail)
+            }
+          }
           else false
           case _ => false
         }
@@ -86,16 +91,26 @@ object FilterUtility {
         path headOption match {
           case Some(x) =>
             val flatMap = list.flatten.toMap
-            if (flatMap isDefinedAt x) matchCriteria(flatMap(x), condition, toMatch, path tail)
+            if (flatMap isDefinedAt x) {
+              flatMap(x) match {
+                case str: String => matchCondition(condition, toMatch, str)
+                case _ => matchCriteria(flatMap(x), condition, toMatch, path tail)
+              }
+            }
             else false
           case _ => false
         }
       case str: String => matchCondition(condition, toMatch, str)
-      case immMap: Map[String, Any] => path headOption match {
-        case Some(x) => if (immMap.isDefinedAt(x)) matchCriteria(immMap(x), condition, toMatch, path tail)
+      /*case immMap: Map[String, Any] => path headOption match {
+        case Some(x) => if (immMap.isDefinedAt(x)) {
+          immMap(x) match {
+            case str: String => matchCondition(condition, toMatch, str)
+            case _ => matchCriteria(immMap(x), condition, toMatch, path tail)
+          }
+        }
         else false
         case _ => false
-      }
+      }*/
       case _ => false
     }
   }

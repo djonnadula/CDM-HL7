@@ -28,7 +28,13 @@ object Filters {
 
   case class FILTER(segment: String, path: (String, String), filter: (Condition, Expression)) {
     lazy val matchPath = synchronized {
-      path._1 split "|"
+      path._1 contains "|" match {
+        case true => path._1 split("\\|",-1)
+        case _ => val temp = new Array[String](1)
+          temp(0)= path._1
+          temp
+      }
+
     }
 
   }
