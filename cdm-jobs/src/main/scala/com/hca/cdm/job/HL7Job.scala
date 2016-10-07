@@ -191,7 +191,7 @@ object HL7Job extends Logg with App {
                       error("Parsing Raw HL7 Failed :: " + msg)
                   }
                   case Failure(t) =>
-                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, " Parsing HL7 Task FAILED :: " + t.getMessage, t)
+                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t)
                     tryAndLogThr(hl7RejIO(msg, hl7Str + COLON + jsonStage), hl7Str + COLON + "rejectRawMsg-" + t.getMessage, error(_: Throwable))
                     error("Parsing Raw HL7 Failed :: " + msg)
                 }
