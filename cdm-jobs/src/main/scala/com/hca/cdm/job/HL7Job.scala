@@ -56,8 +56,8 @@ object HL7Job extends Logg with App {
   private val sparkConf = sparkUtil getConf(lookUpProp("hl7.app"), defaultPar)
   private val sparkStrCtx: StreamingContext = sparkUtil getStreamingContext(batchCycle, sparkConf)
   private val context: SparkContext = sparkStrCtx.sparkContext
-  context.setLogLevel("INFO")
-  context.setJobDescription(lookUpProp("job.desc"))
+  context setLogLevel "INFO"
+  context setJobDescription lookUpProp("job.desc")
   // ******************************************************** Job Part ***********************************************
   private var sHook: Thread = _
   private val app = lookUpProp("hl7.app")
@@ -92,7 +92,8 @@ object HL7Job extends Logg with App {
   private def initialise(): Unit = {
     info("Job Initialisation Started on :: " + DateUtil.currentTimeStamp)
     context setCheckpointDir lookUpProp("hl7.checkpoint")
-    sparkStrCtx checkpoint lookUpProp("hl7.checkpoint")
+    //sparkStrCtx checkpoint lookUpProp("hl7.checkpoint")
+    info("Checkpoint Created :: " + context.getCheckpointDir)
     sparkStrCtx remember rddLifeTime
     sparkStrCtx.sparkContext addSparkListener new MetricsListener
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
@@ -107,7 +108,7 @@ object HL7Job extends Logg with App {
       info(currThread.getName + " Shutdown HOOK Completed for " + app)
     }))
     registerHook(sHook)
-    info(" Initialisation Done. Opening Stream from Kafka")
+    info(" Initialisation Done. Opening Streams from Kafka")
     runJob()
   }
 
@@ -116,6 +117,7 @@ object HL7Job extends Logg with App {
     info("Kafka Stream Was Opened Successfully with ID :: " + streamLine.id)
     streamLine checkpoint rddCheckPointInterval foreachRDD (rdd => {
       rdd checkpoint()
+      info("RDD Checkpoint Succeeded :: " + rdd.id + " :: " + rdd.isCheckpointed)
       //  rdd  persist storage
       rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => info("Got an RDD from Topic :: "
         + range.topic + " , partition :: " + range.partition + " Offsets From :: " + range.fromOffset + " To :: " + range.untilOffset))
@@ -148,7 +150,8 @@ object HL7Job extends Logg with App {
             dataItr foreach (hl7 => {
               var msgType: HL7 = UNKNOWN
               try {
-                hl7TypesMappings get (hl7._1 substring(0, hl7._1 indexOf COLON)) match {
+                val header = if (hl7._1 != null & hl7._1!= EMPTYSTR) hl7TypesMappings get (hl7._1 substring(0, hl7._1 indexOf COLON)) else None
+                header match {
                   case Some(msgTyp) => msgType = msgTyp
                   case None => trace("Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
                     val delim = if (hl7._2 contains "\r\n") "\r\n" else "\n"

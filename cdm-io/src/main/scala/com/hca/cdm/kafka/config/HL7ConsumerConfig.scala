@@ -29,7 +29,6 @@ object HL7ConsumerConfig {
     prop.put(SEND_BUFFER_CONFIG, sendBuffer)
     prop.put(FETCH_MIN_BYTES_CONFIG, fetchMinBytes)
     prop.put(FETCH_MAX_WAIT_MS_CONFIG, fetchMinWait)
-    prop.put(MAX_PARTITION_FETCH_BYTES_CONFIG, maxRecSize)
     prop.put(CLIENT_ID_CONFIG, defaultClientId + jobConsumer)
     prop
   }

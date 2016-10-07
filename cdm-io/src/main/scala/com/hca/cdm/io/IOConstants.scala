@@ -46,10 +46,10 @@ object IOConstants {
   val defaultConsumerSessionTimeOut = "30000"
   val defaultConsumerAutoCommit = "false"
   val defaultOffsetReset = lookUpProp("hl7.topicReset")
-  val fetchBytes: String = (65 * 1024 * 1024).toString
+  val fetchBytes: String = (5 * 1024 * 1024).toString
   val fetchMinBytes: String = "100"
   val fetchMinWait: String = "3000"
-  val maxRecSize = "10485760"
+  val maxRecSize = "5242880"
   val requestMaxSize: String = Int.MaxValue.toString
 
   def defaultClientId: String = "CDM-HL7-" + InetAddress.getLocalHost.getHostName + "-" + random.nextLong

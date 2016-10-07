@@ -30,8 +30,7 @@ object Hl7SparkUtil {
     .set("spark.streaming.unpersist", "true")
     .set("spark.streaming.kafka.maxRatePerPartition", "200")
 
-  def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext =
-    new StreamingContext(getSparkCtx(conf), Seconds(batchCycle))
+  def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
 
 
   def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)

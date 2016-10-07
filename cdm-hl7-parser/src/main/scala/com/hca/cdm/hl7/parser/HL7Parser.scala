@@ -113,21 +113,15 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         val temp = node.asInstanceOf[mapType]
         commonNode.foreach(ele => {
           if (temp isDefinedAt ele._1) {
-            temp.get(ele._1) match {
-              case Some(str: String) => commonNode update(ele._1, str)
-              case Some(map: mutable.LinkedHashMap[String,String]) =>
-                map.foreach({ case (k, v) =>
-                  if (k.substring(k.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
-                    if (v != EMPTYSTR) commonNode update(ele._1, v)
-                  }
-                })
-              case Some(map: mapType) =>
+            temp(ele._1) match {
+              case str: String => commonNode update(ele._1, str)
+              case map: mapType =>
                 map.foreach({ case (k, v) =>
                   if (k.substring(k.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
                     v match {
-                      case Some(v: String) =>
+                      case v: String =>
                         if (v != EMPTYSTR) commonNode update(ele._1, v)
-                      case Some(m: mapType) =>
+                      case m: mapType =>
                         m foreach { case (mk, mv) =>
                           if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
                             mv match {
@@ -139,7 +133,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                             }
                           }
                         }
-                      case Some(list: listType) => list.foreach(map => {
+                      case list: listType => list.foreach(map => {
                         map foreach { case (mk, mv) =>
                           if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {
                             mv match {
@@ -156,7 +150,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                     }
                   }
                 })
-              case Some(list: listType) =>
+              case list: listType =>
                 list.foreach(map => {
                 map foreach { case (mk, mv) =>
                   if (mk.substring(mk.indexOf(".") + 1) == ele._1.substring(ele._1.indexOf(".") + 1)) {

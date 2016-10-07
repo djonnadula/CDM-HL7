@@ -147,12 +147,32 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
             else dataHandler(node._1, str, repeat)
             dataExist = true
           }
+          //case gen: mutable.LinkedHashMap[String, String] => dataExist = handleGen(gen, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
           case map: mapType => handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
           case list: listType => handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
           case any: Any => throw new DataModelException("Got an Unhandled Type into Data Modeler " + logIdent + " :: " + any.getClass + " ?? Not Yet Implemented")
         }
         case _ =>
       }
+    })
+    dataExist
+  }
+
+  private def handleGen(data: mutable.LinkedHashMap[String, String], node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
+                       (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
+    var dataExist = false
+    data.foreach({
+      case (k, str) =>
+        if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
+          if (!appendSegment) dataHandler(node + model.modelFieldDelim + k, str, EMPTYSTR)
+          else dataHandler(node + model.modelFieldDelim + k, str, repeat)
+          dataExist =true
+        }
+        else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
+          if (!appendSegment) dataHandler(node, str, EMPTYSTR)
+          else dataHandler(node, str, repeat)
+          dataExist = true
+        }
     })
     dataExist
   }
