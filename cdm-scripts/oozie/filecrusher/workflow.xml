@@ -27,7 +27,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <arg>--output-format=sequence</arg>
             <arg>--clone</arg>
         </java>
-        <ok to="fs-3267"/>
+        <ok to="fs-630f"/>
         <error to="Kill"/>
     </action>
     <action name="java-7d02">
@@ -37,12 +37,12 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <main-class>com.m6d.filecrush.crush.Crush</main-class>
             <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/crush</arg>
             <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/clone</arg>
-            <arg>0</arg>
+            <arg>${coord:formatTime(coord:dateOffset(coord:nominalTime(), -1, &#39;DAY&#39;), &#39;yyyyMMdd&#39;)}</arg>
             <arg>--input-format=sequence</arg>
             <arg>--output-format=sequence</arg>
             <arg>--clone</arg>
         </java>
-        <ok to="End"/>
+        <ok to="fs-787f"/>
         <error to="Kill"/>
     </action>
     <action name="java-e30f">
@@ -57,7 +57,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <arg>--output-format=sequence</arg>
             <arg>--clone</arg>
         </java>
-        <ok to="fs-1ae8"/>
+        <ok to="fs-bc26"/>
         <error to="Kill"/>
     </action>
     <action name="java-3b2d">
@@ -65,6 +65,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
             <main-class>com.m6d.filecrush.crush.Crush</main-class>
+            <java-opts></java-opts>
             <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/crush</arg>
             <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/clone</arg>
             <arg>0</arg>
@@ -72,7 +73,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <arg>--output-format=sequence</arg>
             <arg>--clone</arg>
         </java>
-        <ok to="fs-1540"/>
+        <ok to="fs-9463"/>
         <error to="Kill"/>
     </action>
     <action name="fs-a00d">
@@ -109,6 +110,34 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
               <move source='hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data/*.snappy' target='hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data/crush'/>
         </fs>
         <ok to="java-c180"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-9463">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/crush/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/'/>
+        </fs>
+        <ok to="fs-1540"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-bc26">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_audit_data/crush/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_audit_data/'/>
+        </fs>
+        <ok to="fs-1ae8"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-630f">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data/crush/*' target='hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data/'/>
+        </fs>
+        <ok to="fs-3267"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-787f">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/crush/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/'/>
+        </fs>
+        <ok to="End"/>
         <error to="Kill"/>
     </action>
     <end name="End"/>
