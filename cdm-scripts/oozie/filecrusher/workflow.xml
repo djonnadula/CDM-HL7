@@ -37,7 +37,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <main-class>com.m6d.filecrush.crush.Crush</main-class>
             <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/crush</arg>
             <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/clone</arg>
-            <arg>${coord:formatTime(coord:dateOffset(coord:nominalTime(), -1, &#39;DAY&#39;), &#39;yyyyMMdd&#39;)}</arg>
+            <arg>0</arg>
             <arg>--input-format=sequence</arg>
             <arg>--output-format=sequence</arg>
             <arg>--clone</arg>
@@ -136,6 +136,130 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
     <action name="fs-787f">
         <fs>
               <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/crush/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/'/>
+        </fs>
+        <ok to="fs-cba5"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-cba5">
+        <fs>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/crush'/>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/clone'/>
+              <move source='${ADT_TODAY_DIR}/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/crush'/>
+        </fs>
+        <ok to="java-6c39"/>
+        <error to="Kill"/>
+    </action>
+    <action name="java-6c39">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <main-class>com.m6d.filecrush.crush.Crush</main-class>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/crush</arg>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/clone</arg>
+            <arg>0</arg>
+            <arg>--input-format=sequence</arg>
+            <arg>--output-format=sequence</arg>
+            <arg>--clone</arg>
+        </java>
+        <ok to="fs-318d"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-318d">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/crush/*' target='${ADT_TODAY_DIR}'/>
+        </fs>
+        <ok to="fs-237d"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-237d">
+        <fs>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/crush'/>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/clone'/>
+              <move source='${MDM_TODAY_DIR}/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/crush'/>
+        </fs>
+        <ok to="java-1852"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-6cc8">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/crush/*' target='${MDM_TODAY_DIR}/'/>
+        </fs>
+        <ok to="fs-be05"/>
+        <error to="Kill"/>
+    </action>
+    <action name="java-1852">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <main-class>com.m6d.filecrush.crush.Crush</main-class>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/crush</arg>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/clone</arg>
+            <arg>0</arg>
+            <arg>--input-format=sequence</arg>
+            <arg>--output-format=sequence</arg>
+            <arg>--clone</arg>
+        </java>
+        <ok to="fs-6cc8"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-be05">
+        <fs>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/crush'/>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/clone'/>
+              <move source='${ORU_TODAY_DIR}/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/crush'/>
+        </fs>
+        <ok to="java-2e3c"/>
+        <error to="Kill"/>
+    </action>
+    <action name="java-2e3c">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <main-class>com.m6d.filecrush.crush.Crush</main-class>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/crush</arg>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/clone</arg>
+            <arg>0</arg>
+            <arg>--input-format=sequence</arg>
+            <arg>--output-format=sequence</arg>
+            <arg>--clone</arg>
+        </java>
+        <ok to="fs-43c8"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-43c8">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/crush/*' target='${ORU_TODAY_DIR}/'/>
+        </fs>
+        <ok to="fs-d8f3"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-d8f3">
+        <fs>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/crush'/>
+              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/clone'/>
+              <move source='${ALL_PROC_REJ_TODAY_DIR}/*' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/crush'/>
+        </fs>
+        <ok to="java-c827"/>
+        <error to="Kill"/>
+    </action>
+    <action name="java-c827">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <main-class>com.m6d.filecrush.crush.Crush</main-class>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/crush</arg>
+            <arg>hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/clone</arg>
+            <arg>0</arg>
+            <arg>--input-format=sequence</arg>
+            <arg>--output-format=sequence</arg>
+            <arg>--clone</arg>
+        </java>
+        <ok to="fs-ad39"/>
+        <error to="Kill"/>
+    </action>
+    <action name="fs-ad39">
+        <fs>
+              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/crush/*' target='${ALL_PROC_REJ_TODAY_DIR}/'/>
         </fs>
         <ok to="End"/>
         <error to="Kill"/>

@@ -21,6 +21,10 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
               <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_audit_data/clone'/>
               <delete path='hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data/clone'/>
               <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/clone'/>
+              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/clone'/>
+              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/clone'/>
+              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/clone'/>
+              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/clone'/>
         </fs>
         <ok to="End"/>
         <error to="Kill"/>
