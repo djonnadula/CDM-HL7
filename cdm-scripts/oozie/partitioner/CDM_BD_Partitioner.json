@@ -1,0 +1,87 @@
+[
+{
+  "pk": 276, 
+  "model": "desktop.document2", 
+  "fields": {
+    "uuid": "828b59ca-b4cc-9f73-8f8f-274bf60a6d08", 
+    "extra": "", 
+    "type": "oozie-workflow2", 
+    "description": "Adds partitions to the hl7_raw_data table", 
+    "is_history": false, 
+    "parent_directory": [
+      "fa39ab98-5ba5-4147-bd7c-64b73f5832b8", 
+      1, 
+      false
+    ], 
+    "last_modified": "2016-10-11T13:20:02", 
+    "version": 1, 
+    "owner": [
+      "dof7475"
+    ], 
+    "dependencies": [
+      [
+        "ec42ca62-7025-f5d3-f32b-60cab1cf4b46", 
+        1, 
+        false
+      ], 
+      [
+        "9ddcf2bc-c59f-44dc-a0b9-3013bc5687c9", 
+        1, 
+        false
+      ], 
+      [
+        "b120aeea-0b56-7c9f-b33c-68f1a85db18f", 
+        1, 
+        false
+      ], 
+      [
+        "f6656c4e-6b3e-4f54-b3f5-e64c81aa3796", 
+        1, 
+        true
+      ], 
+      [
+        "1acd05d7-b5a0-4ceb-963e-68981222abf2", 
+        1, 
+        true
+      ], 
+      [
+        "b26cb936-35a8-4229-b280-e6324f5e0d5b", 
+        1, 
+        true
+      ], 
+      [
+        "ceef65e8-553d-4d9e-ab51-bb777fc166ab", 
+        1, 
+        true
+      ], 
+      [
+        "4eb5cb35-2640-456f-8183-5e8c72f7a593", 
+        1, 
+        true
+      ], 
+      [
+        "35f76390-c947-41ae-8c83-46595d9fead2", 
+        1, 
+        true
+      ], 
+      [
+        "e7bc6175-2f23-4023-bee8-9e98dd8df7b4", 
+        1, 
+        true
+      ], 
+      [
+        "c8cd2b2b-e957-4919-91b7-9ce74f3d9475", 
+        1, 
+        true
+      ], 
+      [
+        "b5232406-9a86-4073-ad62-3b944e10cb05", 
+        1, 
+        true
+      ]
+    ], 
+    "data": "{\"layout\": [{\"oozieRows\": [{\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"Hive Script\", \"widgetType\": \"hive-widget\", \"oozieMovable\": true, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\", \"size\": 12}], \"id\": \"e4c61f39-7626-bfe5-b8fc-3939e203a84b\", \"columns\": []}], \"rows\": [{\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"Start\", \"widgetType\": \"start-widget\", \"oozieMovable\": false, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"3f107997-04cc-8733-60a9-a4bb62cebffc\", \"size\": 12}], \"id\": \"220ce180-73d8-ef34-c006-32648efaa12e\", \"columns\": []}, {\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"Hive Script\", \"widgetType\": \"hive-widget\", \"oozieMovable\": true, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\", \"size\": 12}], \"id\": \"e4c61f39-7626-bfe5-b8fc-3939e203a84b\", \"columns\": []}, {\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"End\", \"widgetType\": \"end-widget\", \"oozieMovable\": false, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\", \"size\": 12}], \"id\": \"748dcaae-6fd4-ae79-b0a4-fe5cb84d56bc\", \"columns\": []}, {\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"Kill\", \"widgetType\": \"kill-widget\", \"oozieMovable\": true, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"17c9c895-5a16-7443-bb81-f34b30b21548\", \"size\": 12}], \"id\": \"c91f0d7c-1cf3-677e-503e-7596fb18ee60\", \"columns\": []}], \"oozieEndRow\": {\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"End\", \"widgetType\": \"end-widget\", \"oozieMovable\": false, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\", \"size\": 12}], \"id\": \"748dcaae-6fd4-ae79-b0a4-fe5cb84d56bc\", \"columns\": []}, \"oozieKillRow\": {\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"Kill\", \"widgetType\": \"kill-widget\", \"oozieMovable\": true, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"17c9c895-5a16-7443-bb81-f34b30b21548\", \"size\": 12}], \"id\": \"c91f0d7c-1cf3-677e-503e-7596fb18ee60\", \"columns\": []}, \"enableOozieDropOnAfter\": true, \"oozieStartRow\": {\"enableOozieDropOnBefore\": true, \"enableOozieDropOnSide\": true, \"enableOozieDrop\": false, \"widgets\": [{\"status\": \"\", \"logsURL\": \"\", \"name\": \"Start\", \"widgetType\": \"start-widget\", \"oozieMovable\": false, \"ooziePropertiesExpanded\": false, \"externalIdUrl\": \"\", \"properties\": {}, \"isLoading\": true, \"offset\": 0, \"actionURL\": \"\", \"progress\": 0, \"klass\": \"card card-widget span12\", \"oozieExpanded\": false, \"id\": \"3f107997-04cc-8733-60a9-a4bb62cebffc\", \"size\": 12}], \"id\": \"220ce180-73d8-ef34-c006-32648efaa12e\", \"columns\": []}, \"klass\": \"card card-home card-column span12\", \"enableOozieDropOnBefore\": true, \"drops\": [\"temp\"], \"id\": \"23bef908-6037-c155-d5b7-45a37744ba1d\", \"size\": 12}], \"workflow\": {\"properties\": {\"job_xml\": \"\", \"description\": \"Adds partitions to the hl7_raw_data table\", \"wf1_id\": null, \"sla_enabled\": false, \"deployment_dir\": \"/user/hue/oozie/workspaces/hue-oozie-1476132987.16\", \"schema_version\": \"uri:oozie:workflow:0.5\", \"sla\": [{\"key\": \"enabled\", \"value\": false}, {\"key\": \"nominal-time\", \"value\": \"${nominal_time}\"}, {\"key\": \"should-start\", \"value\": \"\"}, {\"key\": \"should-end\", \"value\": \"${30 * MINUTES}\"}, {\"key\": \"max-duration\", \"value\": \"\"}, {\"key\": \"alert-events\", \"value\": \"\"}, {\"key\": \"alert-contact\", \"value\": \"\"}, {\"key\": \"notification-msg\", \"value\": \"\"}, {\"key\": \"upstream-apps\", \"value\": \"\"}], \"show_arrows\": true, \"parameters\": [{\"name\": \"oozie.use.system.libpath\", \"value\": true}], \"properties\": []}, \"name\": \"CMD BD Partitioner\", \"versions\": [\"uri:oozie:workflow:0.4\", \"uri:oozie:workflow:0.4.5\", \"uri:oozie:workflow:0.5\"], \"isDirty\": true, \"movedNode\": null, \"linkMapping\": {\"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\": [\"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\"], \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\": [], \"3f107997-04cc-8733-60a9-a4bb62cebffc\": [\"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\"], \"17c9c895-5a16-7443-bb81-f34b30b21548\": []}, \"nodeIds\": [\"3f107997-04cc-8733-60a9-a4bb62cebffc\", \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\", \"17c9c895-5a16-7443-bb81-f34b30b21548\", \"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\"], \"nodes\": [{\"properties\": {}, \"name\": \"Start\", \"children\": [{\"to\": \"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\"}], \"actionParametersFetched\": false, \"type\": \"start-widget\", \"id\": \"3f107997-04cc-8733-60a9-a4bb62cebffc\", \"actionParameters\": []}, {\"properties\": {}, \"name\": \"End\", \"children\": [], \"actionParametersFetched\": false, \"type\": \"end-widget\", \"id\": \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\", \"actionParameters\": []}, {\"properties\": {\"body\": \"The ${wf:name()} Oozie job has failed.\\nJobId: ${wf:id()}\\nJobPath: ${wf:appPath()}\\nErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}\", \"cc\": \"\", \"to\": \"CorpISDLCDM-EDW@HCAHealthcare.com\", \"enableMail\": true, \"message\": \"Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]\", \"subject\": \"${wf:name()} Job Failure\"}, \"name\": \"Kill\", \"children\": [], \"actionParametersFetched\": false, \"type\": \"kill-widget\", \"id\": \"17c9c895-5a16-7443-bb81-f34b30b21548\", \"actionParameters\": []}, {\"name\": \"hive-e641\", \"actionParametersUI\": [], \"children\": [{\"to\": \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\"}, {\"error\": \"17c9c895-5a16-7443-bb81-f34b30b21548\"}], \"properties\": {\"files\": [], \"parameters\": [{\"value\": \"MESSAGE_TYPE=${MESSAGE_TYPE}\"}, {\"value\": \"MESSAGE_DATE=${MESSAGE_DATE}\"}], \"retry_max\": [], \"retry_interval\": [], \"job_properties\": [], \"hive_xml\": \"lib/hive-config.xml\", \"archives\": [], \"prepares\": [], \"credentials\": [\"hcat\"], \"script_path\": \"lib/hive_raw_data_partitioner.hql\", \"sla\": [{\"key\": \"enabled\", \"value\": false}, {\"key\": \"nominal-time\", \"value\": \"${nominal_time}\"}, {\"key\": \"should-start\", \"value\": \"\"}, {\"key\": \"should-end\", \"value\": \"${30 * MINUTES}\"}, {\"key\": \"max-duration\", \"value\": \"\"}, {\"key\": \"alert-events\", \"value\": \"\"}, {\"key\": \"alert-contact\", \"value\": \"\"}, {\"key\": \"notification-msg\", \"value\": \"\"}, {\"key\": \"upstream-apps\", \"value\": \"\"}]}, \"actionParametersFetched\": false, \"type\": \"hive-widget\", \"id\": \"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\", \"actionParameters\": []}], \"id\": 276, \"nodeNamesMapping\": {\"e641001f-bfae-3f7b-8bd2-a5eaa9be61ff\": \"hive-e641\", \"33430f0f-ebfa-c3ec-f237-3e77efa03d0a\": \"End\", \"3f107997-04cc-8733-60a9-a4bb62cebffc\": \"Start\", \"17c9c895-5a16-7443-bb81-f34b30b21548\": \"Kill\"}, \"uuid\": \"828b59ca-b4cc-9f73-8f8f-274bf60a6d08\"}}", 
+    "name": "CMD BD Partitioner"
+  }
+}
+]

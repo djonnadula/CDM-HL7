@@ -1,0 +1,32 @@
+[
+{
+  "pk": 264, 
+  "model": "desktop.document2", 
+  "fields": {
+    "uuid": "90778f6e-90d9-3b13-cf1b-2f3418380ba8", 
+    "extra": "", 
+    "type": "oozie-coordinator2", 
+    "description": "This job runs everyday at 5 AM to crush the CDM BD files.", 
+    "is_history": false, 
+    "parent_directory": [
+      "fa39ab98-5ba5-4147-bd7c-64b73f5832b8", 
+      1, 
+      false
+    ], 
+    "last_modified": "2016-10-11T11:30:54", 
+    "version": 1, 
+    "owner": [
+      "dof7475"
+    ], 
+    "dependencies": [
+      [
+        "2be86fee-012d-68f0-5758-d0ec7d30b700", 
+        1, 
+        false
+      ]
+    ], 
+    "data": "{\"end_date\": {\"name\": \"end_date\", \"value\": \"2016-10-14T15:25\"}, \"variables\": [], \"isDirty\": false, \"showAdvancedFrequencyUI\": true, \"variablesUI\": [\"parameter\", \"input_path\", \"output_path\"], \"workflowParameters\": [], \"properties\": {\"job_xml\": \"\", \"execution\": \"FIFO\", \"end\": \"${end_date}\", \"description\": \"This job runs everyday at 5 AM to crush the CDM BD files.\", \"frequency_number\": 1, \"workflow\": \"2be86fee-012d-68f0-5758-d0ec7d30b700\", \"deployment_dir\": \"/user/hue/oozie/workspaces/hue-oozie-1475871953.99\", \"cron_frequency\": \"0 5 * * *\", \"frequency_unit\": \"days\", \"schema_version\": \"uri:oozie:coordinator:0.2\", \"cron_advanced\": false, \"start\": \"${start_date}\", \"timeout\": null, \"timezone\": \"America/Chicago\", \"credentials\": [], \"parameters\": [{\"name\": \"oozie.use.system.libpath\", \"value\": true}, {\"name\": \"start_date\", \"value\": \"2016-10-10T15:25\"}, {\"name\": \"end_date\", \"value\": \"2016-10-14T15:25\"}], \"sla\": [{\"key\": \"enabled\", \"value\": false}, {\"key\": \"nominal-time\", \"value\": \"${nominal_time}\"}, {\"key\": \"should-start\", \"value\": \"\"}, {\"key\": \"should-end\", \"value\": \"${30 * MINUTES}\"}, {\"key\": \"max-duration\", \"value\": \"\"}, {\"key\": \"alert-events\", \"value\": \"\"}, {\"key\": \"alert-contact\", \"value\": \"\"}, {\"key\": \"notification-msg\", \"value\": \"\"}, {\"key\": \"upstream-apps\", \"value\": \"\"}]}, \"uuid\": \"90778f6e-90d9-3b13-cf1b-2f3418380ba8\", \"name\": \"CDM File Crusher Coordinator\", \"id\": 264, \"start_date\": {\"name\": \"start_date\", \"value\": \"2016-10-10T15:25\"}}", 
+    "name": "CDM File Crusher Coordinator"
+  }
+}
+]
