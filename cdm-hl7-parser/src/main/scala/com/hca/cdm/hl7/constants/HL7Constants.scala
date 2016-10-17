@@ -4,6 +4,8 @@ import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
+  *
+  * Most Commonly Used Constants for HL7
   */
 object HL7Constants {
 
@@ -36,8 +38,6 @@ object HL7Constants {
   lazy val COLON = ":"
   type mapType = mutable.LinkedHashMap[String, Any]
   type listType = mutable.ListBuffer[mutable.LinkedHashMap[String, Any]]
-  lazy val hl7JsonIOFun ="hl7JsonIO"
-  lazy val hl7JsonAuditIOFun = "hl7JsonAuditIO"
 
 
 }

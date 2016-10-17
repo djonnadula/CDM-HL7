@@ -11,6 +11,8 @@ import scala.util.{Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 9/28/2016.
+  *
+  * Utility Filters Data based on Req
   */
 object FilterUtility {
   private val NOFILTER = FILTER(EMPTYSTR, (EMPTYSTR, EMPTYSTR), (EQUAL, NONE))
@@ -32,17 +34,26 @@ object FilterUtility {
           left != NOFILTER match {
             case true =>
               if (right != NOFILTER) {
+                val leftExp = findReqSegment(data, left.segment) match {
+                  case EMPTYSTR => false
+                  case seg => matchCriteria(data(seg), left.filter._1, left.path._2, left.matchPath)
+                }
+                val rightExp = findReqSegment(data, right.segment) match {
+                  case EMPTYSTR => false
+                  case seg => matchCriteria(data(seg), right.filter._1, right.path._2, right.matchPath)
+                }
                 left.filter._2 match {
                   case AND =>
-                    expression = matchCriteria(data(findReqSegment(data, left.segment)),
-                      left.filter._1, left.path._2, left.matchPath) && matchCriteria(data(findReqSegment(data, right.segment)), right.filter._1, right.path._2, right.matchPath)
+                    expression = leftExp && rightExp
                   case OR =>
-                    expression = matchCriteria(data(findReqSegment(data, left.segment)),
-                      left.filter._1, left.path._2, left.matchPath) || matchCriteria(data(findReqSegment(data, right.segment)), right.filter._1, right.path._2, right.matchPath)
-                  case NONE => expression = matchCriteria(data(findReqSegment(data, right.segment)), right.filter._1, right.path._2, right.matchPath)
+                    expression = leftExp || rightExp
+                  case NONE => expression = rightExp
                 }
               } else {
-                val leftCond = matchCriteria(data(findReqSegment(data, left.segment)), left.filter._1, left.path._2, left.matchPath)
+                val leftCond = findReqSegment(data, left.segment) match {
+                  case EMPTYSTR => false
+                  case seg => matchCriteria(data(seg), left.filter._1, left.path._2, left.matchPath)
+                }
                 val temp = expression
                 filters(index - 1).filter._2 match {
                   case AND => expression = temp && leftCond
@@ -55,7 +66,11 @@ object FilterUtility {
         }
       case 1 =>
         val fil = filters(0)
-        expression = matchCriteria(data(findReqSegment(data, fil.segment)), fil.filter._1, fil.path._2, fil.matchPath)
+        findReqSegment(data, fil.segment) match {
+          case EMPTYSTR =>
+          case x => expression = matchCriteria(data(x), fil.filter._1, fil.path._2, fil.matchPath)
+        }
+
     }
     expression
   }
@@ -78,13 +93,14 @@ object FilterUtility {
     data match {
       case map: mapType =>
         path headOption match {
-          case Some(x) => if (map.isDefinedAt(x)) {
-            map(x) match {
-              case str: String => matchCondition(condition, toMatch, str)
-              case _ => matchCriteria(map(x), condition, toMatch, path tail)
+          case Some(x) =>
+            if (map.isDefinedAt(x)) {
+              map(x) match {
+                case str: String => matchCondition(condition, toMatch, str)
+                case _ => matchCriteria(map(x), condition, toMatch, path tail)
+              }
             }
-          }
-          else false
+            else false
           case _ => false
         }
       case list: listType =>
@@ -100,17 +116,8 @@ object FilterUtility {
             else false
           case _ => false
         }
-      case str: String => matchCondition(condition, toMatch, str)
-      /*case immMap: Map[String, Any] => path headOption match {
-        case Some(x) => if (immMap.isDefinedAt(x)) {
-          immMap(x) match {
-            case str: String => matchCondition(condition, toMatch, str)
-            case _ => matchCriteria(immMap(x), condition, toMatch, path tail)
-          }
-        }
-        else false
-        case _ => false
-      }*/
+      case str: String =>
+        matchCondition(condition, toMatch, str)
       case _ => false
     }
   }

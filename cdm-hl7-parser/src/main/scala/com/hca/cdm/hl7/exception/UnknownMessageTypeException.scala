@@ -1,4 +1,4 @@
-package com.hca.cdm.job.exception
+package com.hca.cdm.hl7.exception
 
 /**
   * Created by Devaraj Jonnadula on 9/26/2016.

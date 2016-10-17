@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.time.{LocalDate, LocalTime, YearMonth}
 import java.util.Date
-
+import java.time.LocalDate.now
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateConstants._
 

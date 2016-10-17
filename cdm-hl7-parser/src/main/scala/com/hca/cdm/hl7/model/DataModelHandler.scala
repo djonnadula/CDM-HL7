@@ -6,7 +6,6 @@ import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.model.SegmentsState._
 import com.hca.cdm.log.Logg
-
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
@@ -16,6 +15,8 @@ import scala.util.{Failure, Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Handler executes Registered Segments Asynchronously
   */
 class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                        segmentsAuditor: (String, MSGMeta) => String, segmentsInHl7Auditor: (String, MSGMeta) => String,
@@ -33,6 +34,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
     /_/
       " Segments Registered with Handler :: """ + hl7Segments.models.keys.mkString(repeat))
   logIdent = hl7 + " Model Handler "
+  private val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
 
   private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: String = EMPTYSTR, auditKey: String)
 
@@ -57,63 +59,74 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   private def runModel(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
                        adhocIO: (String, String, String) => Unit)(data: mapType, meta: MSGMeta): Unit = {
     segRef map (seg => seg -> run(seg, data)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
-      case Success(tranCompleted) => tranCompleted.trans match {
-        case Left(out) =>
-          out foreach { case (rec, t) => rec ne null match {
-            case true =>
-              rec match {
-                case `skippedStr` =>
-                  updateMetrics(segment.seg, SKIPPED)
-                  val msg = rejectMsg(hl7, segment.seg, meta, skippedStr, data)
-                  tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-skippedSegment", error(_: Throwable))
-                  debug("Segment Skipped :: " + msg)
-                case `filteredStr` =>
-                  updateMetrics(segment.seg, FILTERED)
-                  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, data)
-                  tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-filteredSegment", error(_: Throwable))
-                  debug("Segment Filtered :: " + msg)
-                case _ =>
-                  segment.adhoc match {
-                    case true => if (tryAndLogThr(adhocIO(rec, hl7 + COLON + segment.seg, segment.dest), hl7 + COLON + segment.seg + "-adhocIO", error(_: Throwable))) {
-                      if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), hl7 + COLON + segment.seg),
-                        hl7 + COLON + segment.seg + "-auditIO-adhocAuditor", error(_: Throwable))) {
-                        updateMetrics(segment.seg, PROCESSED)
-                      }
-                    } else {
-                      tryAndLogThr(rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Adhoc request Data to OUT Failed ", data), hl7 + COLON + segment.seg), segment.seg + "-adhocIO-rejectIO",
-                        error(_: Throwable))
-                      updateMetrics(segment.seg, FAILED)
+      case Success(tranCompleted) =>
+        tranCompleted.trans match {
+          case Left(out) =>
+            out foreach { case (rec, t) => rec ne null match {
+              case true =>
+                rec match {
+                  case `skippedStr` =>
+                    updateMetrics(segment.seg, SKIPPED)
+                    val msg = rejectMsg(hl7, segment.seg, meta, skippedStr, data)
+                    sizeCheck(msg, segment.seg)
+                    tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-skippedSegment", error(_: Throwable))
+                    debug("Segment Skipped :: " + msg)
+                  case `filteredStr` =>
+                    updateMetrics(segment.seg, FILTERED)
+                    val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, data)
+                    sizeCheck(msg, segment.seg)
+                    tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-filteredSegment", error(_: Throwable))
+                    debug("Segment Filtered :: " + msg)
+                  case _ =>
+                    sizeCheck(rec, segment.seg)
+                    segment.adhoc match {
+                      case true =>
+                        if (tryAndLogThr(adhocIO(rec, hl7 + COLON + segment.seg, segment.dest), hl7 + COLON + segment.seg + "-adhocIO", error(_: Throwable))) {
+                          if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), hl7 + COLON + segment.seg),
+                            hl7 + COLON + segment.seg + "-auditIO-adhocAuditor", error(_: Throwable))) {
+                            updateMetrics(segment.seg, PROCESSED)
+                          }
+                        } else {
+                          tryAndLogThr(rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Adhoc request Data to OUT Failed ", data), hl7 + COLON + segment.seg), segment.seg + "-adhocIO-rejectIO",
+                            error(_: Throwable))
+                          updateMetrics(segment.seg, FAILED)
+                        }
+                      case _ =>
+                        if (tryAndLogThr(io(rec, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-segmentsIO", error(_: Throwable))) {
+                          if (tryAndLogThr(auditIO(segmentsAuditor(segment.seg, meta), hl7 + COLON + segment.seg),
+                            hl7 + COLON + segment.seg + "-auditIO-segmentsAuditor", error(_: Throwable))) {
+                            updateMetrics(segment.seg, PROCESSED)
+                          }
+                        } else {
+                          tryAndLogThr(rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Data to OUT Failed ", data), hl7 + COLON + segment.seg),
+                            hl7 + COLON + segment.seg + "-segmentsIO-rejectIO", error(_: Throwable))
+                          updateMetrics(segment.seg, FAILED)
+                        }
                     }
-                    case _ => if (tryAndLogThr(io(rec, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-segmentsIO", error(_: Throwable))) {
-                      if (tryAndLogThr(auditIO(segmentsAuditor(segment.seg, meta), hl7 + COLON + segment.seg),
-                        hl7 + COLON + segment.seg + "-auditIO-segmentsAuditor", error(_: Throwable))) {
-                        updateMetrics(segment.seg, PROCESSED)
-                      }
-                    } else {
-                      tryAndLogThr(rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Data to OUT Failed ", data), hl7 + COLON + segment.seg),
-                        hl7 + COLON + segment.seg + "-segmentsIO-rejectIO", error(_: Throwable))
-                      updateMetrics(segment.seg, FAILED)
-                    }
-                  }
-              }
-            case _ => updateMetrics(segment.seg, FAILED)
-              val msg = rejectMsg(hl7, segment.seg, meta, t.getMessage, data, t)
-              tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-FAILED", error(_: Throwable))
-              error(t.getMessage + " :: " + msg, t)
-          }
-          }
-        case Right(det) => det match {
-          case `notValidStr` => updateMetrics(segment.seg, INVALID)
-            val msg = rejectMsg(hl7, segment.seg, meta, " Invalid Input or Meta Data Required to process Doesn't Exist", data)
-            tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-" + notValidStr, error(_: Throwable))
-            error("Invalid Input Came :: " + msg)
-          case `NA` => updateMetrics(segment.seg, NOTAPPLICABLE)
-          case _ =>
+                }
+              case _ =>
+                updateMetrics(segment.seg, FAILED)
+                val msg = rejectMsg(hl7, segment.seg, meta, t.getMessage, data, t)
+                sizeCheck(msg, segment.seg)
+                tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-FAILED", error(_: Throwable))
+                error(t.getMessage + " :: " + msg, t)
+            }
+            }
+          case Right(det) =>
+            det match {
+              case `notValidStr` => updateMetrics(segment.seg, INVALID)
+                val msg = rejectMsg(hl7, segment.seg, meta, " Invalid Input or Meta Data Required to process Doesn't Exist", data)
+                sizeCheck(msg, segment.seg)
+                tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-" + notValidStr, error(_: Throwable))
+                error("Invalid Input Came :: " + msg)
+              case `NA` => updateMetrics(segment.seg, NOTAPPLICABLE)
+              case _ =>
+            }
         }
-      }
       case Failure(t) =>
         updateMetrics(segment.seg, FAILED)
         val msg = rejectMsg(hl7, segment.seg, meta, t.getMessage, data, t)
+        sizeCheck(msg, segment.seg)
         tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-" + t.getMessage, error(_: Throwable))
         error(t.getMessage + " :: " + msg, t)
     }
@@ -141,7 +154,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   override def handleSegments(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
                               adhocIO: (String, String, String) => Unit)(data: mapType, meta: MSGMeta): Unit =
-    runModel(io, rejectIO, auditIO, adhocIO)(data, meta) : Unit
+    runModel(io, rejectIO, auditIO, adhocIO)(data, meta): Unit
 
 
   override def metricsRegistry: TrieMap[String, Long] = metrics
@@ -155,5 +168,10 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   }
 
 
-  override def toString = s"DataModelHandler($hl7, $metrics, $dataModeler)"
+  override def toString: String = s"DataModelHandler($hl7, $metrics, $dataModeler)"
+
+  private def overSizeMsgFound(seg: String): Unit = updateMetrics(seg, OVERSIZED)
+
+  private def checkSize(threshold: Int)(data: AnyRef, seg: String) = if (!IOCanHandle(data, threshold)) overSizeMsgFound(seg)
+
 }

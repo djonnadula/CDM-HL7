@@ -1,33 +1,38 @@
 package com.hca.cdm.job
 
 import java.lang.System.{getenv => fromEnv}
-
+import java.time.temporal.ChronoUnit
+import java.time.{LocalDate, LocalDateTime}
+import java.util.concurrent.TimeUnit
+import java.util.Date
 import com.hca.cdm._
+import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN, withName => hl7}
+import com.hca.cdm.hl7.exception.UnknownMessageTypeException
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
-import com.hca.cdm.job.exception.UnknownMessageTypeException
+import com.hca.cdm.job.report.StatsReporter
 import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
 import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
 import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
+import com.hca.cdm.notification.TaskState._
+import com.hca.cdm.notification._
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.utils.DateUtil
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.AccumulatorParam.LongAccumulatorParam
 import org.apache.spark.scheduler._
-import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.scheduler.StreamingListener
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{Accumulator, SparkContext}
-
 import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
 import scala.language.postfixOps
@@ -35,6 +40,9 @@ import scala.util.{Failure, Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
+  *
+  * Job which Assembles Functions to run on Spark Container for Transforming Raw HL7 to Output Formats Json...
+  * and Breaks Data Into Segments level and Special Cases.
   */
 object HL7Job extends Logg with App {
 
@@ -52,11 +60,9 @@ object HL7Job extends Logg with App {
   // ******************************************************** Spark Part ***********************************************
   private val rddLifeTime = Seconds(batchCycle + (batchCycle / 2))
   private val rddCheckPointInterval = Seconds(batchCycle)
-  private val storage = StorageLevel.MEMORY_AND_DISK_SER_2
   private val sparkConf = sparkUtil getConf(lookUpProp("hl7.app"), defaultPar)
   private val sparkStrCtx: StreamingContext = sparkUtil getStreamingContext(batchCycle, sparkConf)
   private val context: SparkContext = sparkStrCtx.sparkContext
-  context setLogLevel "INFO"
   context setJobDescription lookUpProp("job.desc")
   // ******************************************************** Job Part ***********************************************
   private var sHook: Thread = _
@@ -67,6 +73,7 @@ object HL7Job extends Logg with App {
   private val hl7JsonTopic = lookUpProp("hl7.json")
   private val segTopic = lookUpProp("hl7.segment")
   private val auditTopic = lookUpProp("hl7.audit")
+  private val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private val kafkaProducerConf = producerConf(hl7JsonTopic)
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => hl7(mtyp) -> getMsgTypeMeta(hl7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap
@@ -87,12 +94,13 @@ object HL7Job extends Logg with App {
   private val segmentsDriverMetrics = driverSegmentsMetric()
   private var parserAccumulators: TrieMap[String, Accumulator[Long]] = registerParserMetric()
   private val parserDriverMetrics = driverParserMetric()
+  private val monitorHandler = newDaemonScheduler(app + " Monitor-Pool")
   initialise()
 
   private def initialise(): Unit = {
-    info("Job Initialisation Started on :: " + DateUtil.currentTimeStamp)
+    info("Job Initialisation Started on :: " + new Date())
     context setCheckpointDir lookUpProp("hl7.checkpoint")
-    //sparkStrCtx checkpoint lookUpProp("hl7.checkpoint")
+    sparkStrCtx checkpoint lookUpProp("hl7.checkpoint")
     info("Checkpoint Created :: " + context.getCheckpointDir)
     sparkStrCtx remember rddLifeTime
     sparkStrCtx.sparkContext addSparkListener new MetricsListener
@@ -103,6 +111,7 @@ object HL7Job extends Logg with App {
     createTopic(segTopic, segmentPartitions = false)
     createTopic(auditTopic, segmentPartitions = false)
     createTopic(rejectedTopic, segmentPartitions = false)
+    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
     sHook = newThread(app + " " + consumerGroup + "SparkCtx SHook", runnable({
       close()
       info(currThread.getName + " Shutdown HOOK Completed for " + app)
@@ -118,9 +127,9 @@ object HL7Job extends Logg with App {
     streamLine checkpoint rddCheckPointInterval foreachRDD (rdd => {
       rdd checkpoint()
       info("RDD Checkpoint Succeeded :: " + rdd.id + " :: " + rdd.isCheckpointed)
-      //  rdd  persist storage
       rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => info("Got an RDD from Topic :: "
-        + range.topic + " , partition :: " + range.partition + " Offsets From :: " + range.fromOffset + " To :: " + range.untilOffset))
+        + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
+        + range.fromOffset + " To :: " + range.untilOffset))
       info("Got RDD with Partitions :: " + rdd.partitions.length + " Executing Asynchronously Each of Them.")
       val parserS = hl7Parsers
       val segHandlers = segmentsHandler
@@ -133,43 +142,48 @@ object HL7Job extends Logg with App {
       val hl7TypesMappings = hl7TypesMapping
       val segmentsAccumulators = this.segmentsAccumulators
       val parserAccumulators = this.parserAccumulators
-      val maxMessageSize = lookUpProp("hl7.message.max") toInt
-      val jsonOverSized = lookUpProp("hl7.direct.json")
-      val segOverSized = lookUpProp("hl7.direct.segment")
-      val rejectOverSized = lookUpProp("hl7.direct.reject")
-      val adhocOverSized = lookUpProp("hl7.direct.adhoc")
+      val maxMessageSize = this.maxMessageSize
+      val jsonOverSized = OverSizeHandler(jsonStage, lookUpProp("hl7.direct.json"))
+      val segOverSized = OverSizeHandler(segmentStage, lookUpProp("hl7.direct.segment"))
+      val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
+      val adhocOverSized = OverSizeHandler(adhocStage, lookUpProp("hl7.direct.adhoc"))
+      val sizeCheck = checkSize(maxMessageSize)(_, _)
       rdd foreachPartitionAsync (dataItr => {
         dataItr nonEmpty match {
           case true =>
             val kafkaOut = KProducer(multiDest = true)(prodConf)
-            val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, overSizedHandle(jsonStage, rdd.context, jsonOverSized)(_: AnyRef))
-            val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, overSizedHandle(rejectStage, rdd.context, rejectOverSized)(_: AnyRef))
-            val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, overSizedHandle(segmentStage, rdd.context, segOverSized)(_: AnyRef))
-            val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize, null)
-            val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, overSizedHandle(adhocStage, rdd.context, adhocOverSized)(_: AnyRef))
+            val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
+            val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+            val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
+            val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
+            val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
             dataItr foreach (hl7 => {
               var msgType: HL7 = UNKNOWN
               try {
-                val header = if (hl7._1 != null & hl7._1!= EMPTYSTR) hl7TypesMappings get (hl7._1 substring(0, hl7._1 indexOf COLON)) else None
-                header match {
-                  case Some(msgTyp) => msgType = msgTyp
-                  case None => trace("Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
+                msgType = if (hl7._1 != null && hl7._1 != EMPTYSTR) hl7TypesMappings getOrElse(hl7._1 substring(0, hl7._1 indexOf COLON), UNKNOWN) else UNKNOWN
+                msgType != UNKNOWN match {
+                  case true =>
+                  case _ => info("Message Type Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
                     val delim = if (hl7._2 contains "\r\n") "\r\n" else "\n"
                     val rawSplit = hl7._2 split delim
                     val reqMsgType = valid(rawSplit) match {
                       case true => val temp = PIPER split rawSplit(0)
                         valid(temp, 8) match {
-                          case true => val hl7Type = temp(8) split("\\" + repeat, -1)
-                            if (valid(hl7Type)) hl7Type(0)
+                          case true =>
+                            val hl7Type = temp(8) contains repeat match {
+                              case true => (temp(8) split("\\" + repeat, -1)) (0)
+                              case _ => temp(8)
+                            }
+                            if (valid(hl7Type)) hl7Type
                             else EMPTYSTR
                           case _ => EMPTYSTR
                         }
                       case _ => EMPTYSTR
                     }
-                    if (reqMsgType != EMPTYSTR) msgType = if (hl7TypesMappings isDefinedAt reqMsgType) hl7TypesMappings(reqMsgType) else UNKNOWN
-                    else hl7TypesMappings foreach (x => if (hl7._2 contains x._1) msgType = x._2)
-                    trace("Able To Find Which Type of HL7 From Message :: " + msgType)
-                    if (msgType == UNKNOWN) throw new UnknownMessageTypeException(hl7TypesMappings.keySet.mkString + " Registered Handlers Cannot Deal With Message Came Into Process :: " + msgType)
+                    if (reqMsgType != EMPTYSTR) msgType = hl7TypesMappings getOrElse(reqMsgType, UNKNOWN)
+                    if (msgType == UNKNOWN) throw new UnknownMessageTypeException(hl7TypesMappings.keySet.mkString(repeat) +
+                      " Registered Handlers Cannot Deal With Message Came Into Process :: " + reqMsgType + " for " + hl7._2)
+                    else info("Able To Find Which Type of HL7 From Message :: " + msgType)
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO)(_, _)
@@ -177,6 +191,7 @@ object HL7Job extends Logg with App {
                   case Success(data) => data match {
                     case Left(out) =>
                       segHandlerIO(out._2, out._3)
+                      sizeCheck(out._1, parserS(msgType))
                       if (tryAndLogThr(hl7JsonIO(out._1, hl7Str + COLON + jsonStage), hl7Str + COLON + hl7JsonIOFun, error(_: Throwable))) {
                         tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), hl7Str + COLON + jsonStage), hl7Str + COLON + hl7JsonAuditIOFun, error(_: Throwable))
                       }
@@ -186,18 +201,21 @@ object HL7Job extends Logg with App {
                         error("Sending JSON to Kafka Failed :: " + msg)
                       }
                     case Right(t) =>
-                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, " Running Task FAILED :: " + t.getMessage, t)
+                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t)
+                      if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                       tryAndLogThr(hl7RejIO(msg, hl7Str + COLON + jsonStage), hl7Str + COLON + "hl7RejIO-rejectRawMsg" + t.getMessage, error(_: Throwable))
                       error("Parsing Raw HL7 Failed :: " + msg)
                   }
                   case Failure(t) =>
                     val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t)
+                    if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                     tryAndLogThr(hl7RejIO(msg, hl7Str + COLON + jsonStage), hl7Str + COLON + "rejectRawMsg-" + t.getMessage, error(_: Throwable))
                     error("Parsing Raw HL7 Failed :: " + msg)
                 }
               } catch {
                 case t: Throwable => error(" Processing HL7 failed for Message  :: ", t)
-                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, " Handlers Cannot Deal With Message Came Into Process  :: " + t.getMessage, t)
+                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, t.getMessage, t)
+                  if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                   tryAndLogThr(hl7RejIO(msg, msgType.toString + COLON + jsonStage), msgType.toString + COLON + "rejectRawMsg-" + t.getMessage, error(_: Throwable))
               }
             })
@@ -210,9 +228,13 @@ object HL7Job extends Logg with App {
         }
       })
     })
+    startStreams()
+  }
+
+  private def startStreams() = {
     try {
       sparkStrCtx start()
-      info("Started Spark Context Execution :: " + DateUtil.currentTimeStamp)
+      info("Started Spark Streaming Context Execution :: " + DateUtil.currentTimeStamp)
       sparkStrCtx awaitTermination()
     } catch {
       case t: Throwable => error("Spark Context Starting Failed ", t)
@@ -229,20 +251,54 @@ object HL7Job extends Logg with App {
     info("Metrics For Segments Data Modeling :: ")
     segmentsDriverMetrics foreach (x => info(x._1 + " : " + x._2))
     println("*******************************************************************************************************")
-    info("Metrics For Segments Data Modeling :: ")
-    segmentsDriverMetrics foreach (x => info(x._1 + " : " + x._2))
+    info("Metrics For Hl7 Messages :: ")
+    parserDriverMetrics foreach (x => info(x._1 + " : " + x._2))
     println("*******************************************************************************************************")
+    monitorHandler shutdown()
+    monitorHandler awaitTermination(1, TimeUnit.HOURS)
     fileSystem close()
     info("Shutdown Completed for System " + app)
     println("*****************************************END***********************************************************")
     unregister(sHook)
   }
 
+  private def initDelay = LocalDateTime.now().until(LocalDate.now().plusDays(1).atStartOfDay(), ChronoUnit.SECONDS)
+
+  private def checkSize(threshold: Int)(data: AnyRef, parser: HL7Parser) = if (!IOCanHandle(data, threshold)) parser.overSizeMsgFound()
 
   private def registerSegmentsMetric() = {
     val temp = new TrieMap[String, Accumulator[Long]]
     segmentsHandler.foreach(handler => handler._2.metricsRegistry.foreach({ case (k, v) => temp += k -> sparkStrCtx.sparkContext.accumulator(v, k)(LongAccumulatorParam) }))
     temp
+  }
+
+  def resetMetrics: Unit = {
+    parserDriverMetrics.synchronized {
+      parserDriverMetrics.transform((k, v) => if (v > 0L) 0L else v)
+    }
+    segmentsDriverMetrics.synchronized {
+      segmentsDriverMetrics.transform((k, v) => if (v > 0L) 0L else v)
+    }
+    parserAccumulators.synchronized {
+      parserAccumulators.transform((k, v) => if (v.value > 0L) {
+        v.value_=(0L)
+        v
+      } else v)
+    }
+    segmentsAccumulators.synchronized {
+      segmentsAccumulators.transform((k, v) => if (v.value > 0L) {
+        v.value_=(0L)
+        v
+      } else v)
+    }
+  }
+
+  def parserMetrics: Map[String, Long] = parserDriverMetrics.synchronized {
+    parserDriverMetrics toMap
+  }
+
+  def segmentMetrics: Map[String, Long] = segmentsDriverMetrics.synchronized {
+    segmentsDriverMetrics toMap
   }
 
   private def registerParserMetric() = {
@@ -265,7 +321,9 @@ object HL7Job extends Logg with App {
 
 
   private def collectSegmentMetrics(taskMetrics: TrieMap[String, Long]) = segmentsAccumulators.synchronized {
-    taskMetrics.foreach({ case (k, metric) => if (metric > 0L) segmentsAccumulators(k) += metric })
+    taskMetrics.foreach({ case (k, metric) =>
+      if (metric > 0L) segmentsAccumulators(k) += metric
+    })
   }
 
   private def collectParserMetrics(taskMetrics: TrieMap[String, Long]) = parserAccumulators.synchronized {
@@ -290,7 +348,14 @@ object HL7Job extends Logg with App {
       }
     }
 
+    override def onApplicationEnd(applicationEnd: SparkListenerApplicationEnd): Unit = {
+      super.onApplicationEnd(applicationEnd)
+      mail("{encrypt} " + app + " with Job ID " + context.applicationId + "Ended",
+        app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check Immediately What was happening with Job ID :: " + context.applicationId + " \n\n" + EVENT_TIME
+        , CRITICAL)
+    }
   }
 
 
 }
+

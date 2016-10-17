@@ -21,10 +21,10 @@ package object audit {
     (data.get(MSH_INDEX), data.get(commonNodeStr)) match {
       case (Some(msh), Some(common)) =>
         (msh, common) match {
-          case (mshMap: mapType, cmnMap: mapType) => (mshMap get msg_control_id, mshMap get msg_create_time,
-            cmnMap get medical_record_num, cmnMap get medical_record_urn, cmnMap get account_num, mshMap get sending_facility) match {
-            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accnum: String), Some(facility: AnyRef)) =>
-              return MSGMeta(control, createTime, rnum, urn, accnum, handleAnyRef(facility))
+          case (mshMap: mapType, cmnMap: mapType) => (cmnMap get msg_control_id, mshMap get msg_create_time,
+            cmnMap get medical_record_num, cmnMap get medical_record_urn, cmnMap get account_num, cmnMap get sending_facility) match {
+            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accnum: String), Some(facility: String)) =>
+              return MSGMeta(control, createTime, rnum, urn, accnum, facility)
             case _ =>
           }
           case _ =>

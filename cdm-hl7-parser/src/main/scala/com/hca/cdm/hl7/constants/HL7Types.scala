@@ -2,6 +2,8 @@ package com.hca.cdm.hl7.constants
 
 /**
   * Created by Devaraj Jonnadula on 8/12/2016.
+  *
+  * HL7 Message Types
   */
 object HL7Types extends Enumeration {
 

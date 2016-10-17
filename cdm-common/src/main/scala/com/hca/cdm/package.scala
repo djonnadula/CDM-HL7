@@ -14,13 +14,15 @@ import com.hca.cdm.exception.CdmException
 import com.hca.cdm.log.Logg
 import com.hca.cdm.notification.TaskState._
 import org.apache.commons.lang.SerializationException
-import org.apache.commons.lang.SerializationUtils.{deserialize => des, serialize => ser}
+import org.apache.commons.lang3.SerializationUtils.{deserialize => des, serialize => ser}
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
+  *
+  * Commonly Used Utilities
   */
 package object cdm extends Logg {
 
@@ -30,8 +32,8 @@ package object cdm extends Logg {
   lazy val propFile = "CDMHL7.properties"
   lazy val EMPTYSTR = ""
   lazy val emptyArray = Array.empty[Any]
-  lazy val FS = File.separator
-  lazy val outStream = System.out
+  lazy val FS = File separator
+  lazy val outStream = System out
 
   def defaultSleep(): Unit = sleep(8000)
 
@@ -71,9 +73,9 @@ package object cdm extends Logg {
 
   }
 
-  def IOCanHandle(data: Any, threshold: Int): Boolean = {
+  def IOCanHandle(data: AnyRef, threshold: Int): Boolean = {
     data match {
-      case x: Array[Any] => x.length <= threshold
+      case x: Array[AnyRef] => x.length <= threshold
       case x: String => x.length <= threshold
       case _ => false
     }

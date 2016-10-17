@@ -9,11 +9,12 @@ import com.hca.cdm.hl7.filter.FilterUtility.{filterTransaction => filterRec}
 import com.hca.cdm.hl7.model.OutFormats._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
-
 import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Breaks HL7 Data at Segment level and applies Schema for each Registered Segments and Special Cases for SCRI, CDI projects...
   */
 private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = "|")
   extends Logg with Serializable {
@@ -34,46 +35,55 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
           case true =>
             layout = model.layoutCopy
             nodesTraversal(data, model, layout, modelFilter, dataHandler) match {
-              case out => if (out._1) {
-                adhoc.outFormat match {
-                  case JSON => out._2 += (toJson(model.adhocLayout(layout, adhoc.outKeyNames)) -> null)
-                  case DELIMITED => handleCommonSegments(data, layout)
-                    out._2 += (makeFinal(layout) -> null)
+              case out =>
+                if (out._1) {
+                  adhoc.outFormat match {
+                    case JSON =>
+                      handleCommonSegments(data, layout)
+                      val temp = model.adhocLayout(layout, adhoc.outKeyNames)
+                      if (timeStampReq) temp += timeStampKey -> timeStamp
+                      out._2 += (toJson(temp) -> null)
+                    case DELIMITED =>
+                      handleCommonSegments(data, layout)
+                      out._2 += (makeFinal(layout) -> null)
+                  }
                 }
-              }
                 out._2
             }
           case _ => filtered
         }
-      case None => model.reqSeg match {
-        case OBX_SEG =>
-          layout = model.layoutCopy
-          nodesTraversal(data, model, layout, modelFilter, dataHandler, allNodes = false, OBX_SEG) match {
-            case out => if (out._1) {
-              handleCommonSegments(data, layout)
-              out._2 += (makeFinal(layout) -> null)
-            }
-              out._2
-          }
-        case _ => data.map(node => {
-          try {
-            node._1.substring(node._1.indexOf(".") + 1) == model.reqSeg match {
-              case true =>
-                layout = model.layoutCopy
-                modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler) match {
+      case None =>
+        model.reqSeg match {
+          // Case to Handle Segments into one Row
+          /* case OBX_SEG =>
+            layout = model.layoutCopy
+            nodesTraversal(data, model, layout, modelFilter, dataHandler, allNodes = false, OBX_SEG) match {
+              case out => if (out._1) {
+                handleCommonSegments(data, layout)
+                out._2 += (makeFinal(layout) -> null)
+              }
+                out._2
+            } */
+          case _ =>
+            data.map(node => {
+              try {
+                node._1.substring(node._1.indexOf(".") + 1) == model.reqSeg match {
                   case true =>
-                    handleCommonSegments(data, layout)
-                    (makeFinal(layout), null)
-                  case _ => (skippedStr, null)
+                    layout = model.layoutCopy
+                    modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true) match {
+                      case true =>
+                        handleCommonSegments(data, layout)
+                        (makeFinal(layout), null)
+                      case _ => (skippedStr, null)
+                    }
+                  case _ => (EMPTYSTR, null)
                 }
-              case _ => (EMPTYSTR, null)
-            }
-          }
-          catch {
-            case t: Throwable => (null, t)
-          }
-        })
-      }
+              }
+              catch {
+                case t: Throwable => (null, t)
+              }
+            })
+        }
     }
     temp filter (_._1 != EMPTYSTR) match {
       case out => if (valid(out)) Hl7SegmentTrans(Left(out))
@@ -87,15 +97,17 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     val temp = data.map(node => {
       try {
         allNodes match {
-          case true => if (node._1 != commonNodeStr) if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
+          case true =>
+            if (node._1 != commonNodeStr) if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
             (EMPTYSTR, null)
-          case _ => node._1.substring(node._1.indexOf(".") + 1) == whichSeg match {
-            case true => if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
-              dataExist = true
-              (EMPTYSTR, null)
-            } else (skippedStr, null)
-            case _ => (EMPTYSTR, null)
-          }
+          case _ =>
+            node._1.substring(node._1.indexOf(".") + 1) == whichSeg match {
+              case true => if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
+                dataExist = true
+                (EMPTYSTR, null)
+              } else (skippedStr, null)
+              case _ => (EMPTYSTR, null)
+            }
 
         }
       }
@@ -116,11 +128,10 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   }
 
   private def handleCommonSegments(data: mapType, layout: mutable.LinkedHashMap[String, String]) = {
-    if (data get commonNodeStr isDefined) data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]].foreach({
+    if (data isDefinedAt commonNodeStr) data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]].foreach({
       case (k, v) =>
         if (layout isDefinedAt k) layout update(k, v)
     })
-
   }
 
   private def includeEle(underlying: mutable.LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR): Unit = {
@@ -147,8 +158,10 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
             else dataHandler(node._1, str, repeat)
             dataExist = true
           }
-          case map: mapType => dataExist = handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
-          case list: listType => dataExist = handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)
+          case map: mapType =>
+            if (handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
+          case list: listType =>
+            if (handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
           case any: Any => throw new DataModelException("Got an Unhandled Type into Data Modeler " + logIdent + " :: " + any.getClass + " ?? Not Yet Implemented")
         }
         case _ =>

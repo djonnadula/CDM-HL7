@@ -2,6 +2,8 @@ package com.hca.cdm.hl7.constants
 
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
+  *
+  * Constants for Templates Mappings
   */
 object FileMappings {
 

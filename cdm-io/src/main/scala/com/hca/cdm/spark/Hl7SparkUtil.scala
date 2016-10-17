@@ -28,19 +28,20 @@ object Hl7SparkUtil {
     .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
     .set("spark.streaming.receiver.writeAheadLog.enable", "true")
     .set("spark.streaming.unpersist", "true")
-    .set("spark.streaming.kafka.maxRatePerPartition", "200")
+    .set("spark.streaming.backpressure.enabled", "true")
+    .set("spark.streaming.backpressure.pid.minRate", "1000")
+    .set("spark.streaming.backpressure.pid.derived", "1")
+    .set("spark.streaming.kafka.maxRatePerPartition", "2000")
 
   def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
 
-
   def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
-
 
   def stream(sparkStrCtx: StreamingContext, kafkaConsumerProp: Map[String, String], topics: Set[String]): InputDStream[(String, String)] =
     KConsumer.createDirectStream[String, String, StringDecoder, StringDecoder](sparkStrCtx, kafkaConsumerProp, topics)
-
 
   def shutdown(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
 
 
 }
+

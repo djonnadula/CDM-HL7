@@ -2,7 +2,6 @@ package com.hca.cdm.job
 
 import java.io.File
 import java.util.Date
-
 import com.hca.cdm._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.notification.TaskState._
@@ -12,11 +11,12 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-
 import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2016.
+  *
+  * Driver Submits Job to the Spark and Monitors in case of State Changes
   */
 object Hl7Driver extends App with Logg {
 
@@ -64,8 +64,6 @@ object Hl7Driver extends App with Logg {
   private val hl7_spark_master = lookUpProp("hl7.spark.master")
   private val hl7_spark_num_executors = lookUpProp("hl7.spark.num-executors")
   private val hl7_spark_driver_memory = lookUpProp("hl7.spark.driver-memory")
-
-
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
     .setMaster(hl7_spark_master)
@@ -117,6 +115,7 @@ object Hl7Driver extends App with Logg {
         mail(app + " Job ID " + job.getAppId + " Current State " + job.getState,
           app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What was happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
           , CRITICAL)
+        abend(1)
     }
     if ((currMillis - watchTime) >= maxWait) {
       mail(app + " Job ID " + job.getAppId + " Current State " + job.getState,
@@ -131,6 +130,7 @@ object Hl7Driver extends App with Logg {
   watchTime = currMillis
   job addListener Tracker
   while (check) {
+    sleep(600000)
     trace(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
   }
 
@@ -157,6 +157,7 @@ object Hl7Driver extends App with Logg {
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What was happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
             , CRITICAL)
+          abend(1)
       }
     }
   }

@@ -20,6 +20,8 @@ import scala.util.{Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/22/2016.
+  *
+  * Package with Utilities for Loading Templates, Segments ...
   */
 package object model {
 
@@ -36,6 +38,7 @@ package object model {
   lazy val notValidStr = "Not Valid Input"
   lazy val skippedStr = "SKIPPED"
   lazy val filteredStr = "FILTERED"
+  lazy val timeStampKey = "etl_firstinsert_datetime"
   lazy val NA = "Not Applicable"
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
@@ -50,6 +53,33 @@ package object model {
     temp
   }
 
+  val MSHMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
+  val PIDMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
+
+  private def commonSegmentMappings(mappingData: String) = {
+    val temp = new mutable.HashMap[String, Array[(String, String, String, String)]]
+    val nodeEle = mappingData match {
+      case EMPTYSTR => throw new CdmException("No Common Elements Sub Components Mappings found. ")
+      case valid => valid split("\\^", -1)
+    }
+    nodeEle.foreach(ele => {
+      val subComp = ele.split(",", -1)
+      temp += subComp.head -> subComp.map(x => {
+        if (x contains PIPE_DELIMITED) {
+          val split = x split("\\" + PIPE_DELIMITED, -1)
+          val temp = split(1)
+          if (temp contains "&") {
+            val subCompSplit = temp split("\\" + "&", -1)
+            val kv = subCompSplit(1) split("\\" + "=", -1)
+            (split(0), subCompSplit(0), kv(0), kv(1))
+          } else (split(0), temp, EMPTYSTR, EMPTYSTR)
+        } else (x, EMPTYSTR, EMPTYSTR, EMPTYSTR)
+      })
+
+    })
+    temp
+
+  }
 
   object HL7State extends Enumeration {
     type hl7State = Value
@@ -129,8 +159,10 @@ package object model {
               index += 1
               val outFormSplit = outFormat split "&"
               outFormat contains JSON.toString match {
-                case true => (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0)), loadFilters(filterFile))
-                case _ => (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty), loadFilters(filterFile))
+                case true =>
+                  (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0)), loadFilters(filterFile))
+                case _ =>
+                  (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty), loadFilters(filterFile))
               }
             }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
           } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -185,8 +217,8 @@ package object model {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
-        Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter  (valid(_,5)) map {
-          case x@ele  => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
+        Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
+          case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
         } toArray
     }
 
@@ -211,7 +243,7 @@ package object model {
 
   def getMsgTypeMeta(msgType: HL7, sourceIn: String): MsgTypeMeta = MsgTypeMeta(msgType, sourceIn)
 
-  def handleAnyRef(data: AnyRef) = {
+  def handleAnyRef(data: AnyRef): String = {
     data match {
       case map: mapType => map.values mkString
       case list: listType => list map (map => map.values mkString) mkString

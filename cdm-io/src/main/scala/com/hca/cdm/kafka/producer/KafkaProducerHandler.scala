@@ -9,6 +9,7 @@ import com.hca.cdm.log.Logg
 import kafka.utils.SystemTime
 import com.hca.cdm._
 import com.hca.cdm.exception.CDMKafkaException
+import com.hca.cdm.hadoop.OverSizeHandler
 import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => conf}
 import com.hca.cdm.kafka.util.{TopicUtil => topicUtil}
 import com.hca.cdm.utils.RetryHandler
@@ -19,6 +20,8 @@ import scala.collection.concurrent.TrieMap
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Handler For Producing Data to Kafka
   */
 class KafkaProducerHandler private(private val topicToProduce: String = "", private val publishToMultiTopic: Boolean = false)(implicit val props: Properties)
   extends Logg with AutoCloseable with DataWriter {
@@ -50,8 +53,14 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
     }
   }
 
-  def writeData(data: AnyRef, header: AnyRef, topic: String = topicToProduce)(sizeThreshold: Int = 4194304, overSizeHandler: (AnyRef) => Unit): Unit = {
-    handleData(data, header, topic)(sizeThreshold, overSizeHandler)
+  def writeData(data: AnyRef, header: AnyRef, topic: String = topicToProduce)(sizeThreshold: Int = 4194304,
+                                                                              overSizeHandler: OverSizeHandler = null): Unit = {
+    /* topicsToProduce get topic match {
+      case Some(t) => handleData(data, header, topic)
+      case _ => topicsToProduce += topic -> topicUtil.createTopicIfNotExist(topic)
+        handleData(data, header, topic)
+    } */
+    handleData(data, header, topic, sizeThreshold, overSizeHandler)
   }
 
   def getTotalWritten(topic: String): Long = {
@@ -64,11 +73,11 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
   def getTotalWritten: Map[String, Long] = messagesProduced.toMap
 
 
-  private def handleData(data: AnyRef, header: Any, topic: String)(sizeThreshold: Int, overSizeHandler: (AnyRef) => Unit): Unit = {
+  private def handleData(data: AnyRef, header: Any, topic: String, sizeThreshold: Int, overSizeHandler: OverSizeHandler): Unit = {
     if (valid(data) & valid(topic) & !topic.trim.isEmpty) {
       if (!IOCanHandle(data, sizeThreshold) & overSizeHandler != null) {
-        info("Record cannot be deal with this handler :: " + getClass + " So Delivering to OversizeHandler :: " + overSizeHandler)
-        overSizeHandler(data)
+        info("Record cannot be deal with this handler :: " + getClass + "  So Delivering to OversizeHandler :: " + overSizeHandler)
+        overSizeHandler handle data
         return
       }
       valid(header) match {

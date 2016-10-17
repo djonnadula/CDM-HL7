@@ -1,5 +1,6 @@
 package com.hca.cdm.kafka.producer
 
+import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.RetryHandler
@@ -23,7 +24,7 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
         this.retryHandler = RetryHandler(defaultRetries, waitBetweenTries)
         retrySend(exception)
       }
-    }else trace("Record Has been sent to Topic : " + metadata.topic() + " at Offset " + metadata.offset())
+    } else debug("Record Has been sent to Topic : " + metadata.topic() + " at Offset " + metadata.offset())
 
   }
 
@@ -39,6 +40,7 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
 
   private def giveUp(): Unit = {
     fatal("Failed to Send Record : " + data.value() + " for topic " + data.topic() + " After tries" + defaultRetries + " Giving UP ")
-
+    throw new CDMKafkaException("Sending Data to Kafka Failed ::  " + data.value() + " with Header :: " + data.key() +
+      " to Topic :: " + data.topic())
   }
 }

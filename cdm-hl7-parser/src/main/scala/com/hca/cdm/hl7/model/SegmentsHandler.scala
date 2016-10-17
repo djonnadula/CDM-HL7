@@ -1,7 +1,6 @@
 package com.hca.cdm.hl7.model
 
 import com.hca.cdm.hl7.audit.MSGMeta
-
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 
