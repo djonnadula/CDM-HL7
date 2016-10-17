@@ -6,9 +6,7 @@
 009.msh_msg_type|002.trigger_event,message_event_type
 018.pid_pat_account_num,patient_account_number
 003.pid_medical_record_num,patient_mrn
-003.pid_pat_id_list,patient_mrn
 004.pid_medical_record_urn,patient_urn
-004.pid_alt_pat_id,patient_urn
 007.pid_birth_date_time,patient_dob
 005.pid_pat_name|001.last_name,patient_last_name
 005.pid_pat_name|002.first_name,patient_first_name
