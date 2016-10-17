@@ -32,9 +32,10 @@ import org.apache.spark.scheduler._
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.scheduler.StreamingListener
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-import org.apache.spark.{Accumulator, SparkContext}
+import org.apache.spark.{Accumulator, FutureAction, SparkContext}
 import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
+import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 
@@ -127,9 +128,13 @@ object HL7Job extends Logg with App {
     streamLine checkpoint rddCheckPointInterval foreachRDD (rdd => {
       rdd checkpoint()
       info("RDD Checkpoint Succeeded :: " + rdd.id + " :: " + rdd.isCheckpointed)
-      rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => info("Got an RDD from Topic :: "
-        + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
-        + range.fromOffset + " To :: " + range.untilOffset))
+      var messagesInRDD = 0L
+      rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
+        info("Got an RDD from Topic :: "
+          + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
+          + range.fromOffset + " To :: " + range.untilOffset)
+        messagesInRDD = inc(messagesInRDD, range.count())
+      })
       info("Got RDD with Partitions :: " + rdd.partitions.length + " Executing Asynchronously Each of Them.")
       val parserS = hl7Parsers
       val segHandlers = segmentsHandler
@@ -148,7 +153,8 @@ object HL7Job extends Logg with App {
       val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
       val adhocOverSized = OverSizeHandler(adhocStage, lookUpProp("hl7.direct.adhoc"))
       val sizeCheck = checkSize(maxMessageSize)(_, _)
-      rdd foreachPartitionAsync (dataItr => {
+      val tracker = new ListBuffer[FutureAction[Unit]]
+      tracker += rdd foreachPartitionAsync (dataItr => {
         dataItr nonEmpty match {
           case true =>
             val kafkaOut = KProducer(multiDest = true)(prodConf)
@@ -227,6 +233,8 @@ object HL7Job extends Logg with App {
           case _ => info("Partition was Empty For RDD So skipping :: " + dataItr)
         }
       })
+      tracker.foreach(_.get())
+      info("Processing Completed for RDD :: " + rdd.id + " Messages Count :: " + messagesInRDD)
     })
     startStreams()
   }
@@ -272,7 +280,7 @@ object HL7Job extends Logg with App {
     temp
   }
 
-  def resetMetrics: Unit = {
+  def resetMetrics(): Unit = {
     parserDriverMetrics.synchronized {
       parserDriverMetrics.transform((k, v) => if (v > 0L) 0L else v)
     }
