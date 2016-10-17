@@ -13,25 +13,28 @@ import com.hca.cdm._
   */
 object Hl7SparkUtil {
 
-  def getConf(app: String, parHint: String): SparkConf = new SparkConf()
-    .setAppName(app)
-    .set("spark.default.parallelism", parHint)
-    .setMaster(lookUpProp("hl7.spark.master"))
-    .set(EXECUTOR_MEMORY, lookUpProp("hl7.spark.executor-memory"))
-    .set(EXECUTOR_CORES, parHint)
-    .set("spark.driver-memory", lookUpProp("hl7.spark.driver-memory"))
-    .set("spark.dynamicAllocation.initialExecutors", lookUpProp("hl7.spark.num-executors"))
-    .set("spark.queue", lookUpProp("hl7.spark.queue"))
-    .set("spark.dynamicAllocation.enabled", lookUpProp("hl7.spark.dynamicAllocation.enabled"))
-    .set("spark.dynamicAllocation.maxExecutors", lookUpProp("hl7.spark.dynamicAllocation.maxExecutors"))
-    .set("spark.dynamicAllocation.minExecutors", lookUpProp("hl7.spark.dynamicAllocation.minExecutors"))
-    .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
-    .set("spark.streaming.receiver.writeAheadLog.enable", "true")
-    .set("spark.streaming.unpersist", "true")
-    .set("spark.streaming.backpressure.enabled", "true")
-    .set("spark.streaming.backpressure.pid.minRate", "1000")
-    .set("spark.streaming.backpressure.pid.derived", "1")
-    .set("spark.streaming.kafka.maxRatePerPartition", "2000")
+  def getConf(app: String, parHint: String): SparkConf = {
+    val rate = lookUpProp("hl7.batch.rate").toInt
+    new SparkConf()
+      .setAppName(app)
+      .set("spark.default.parallelism", parHint)
+      .setMaster(lookUpProp("hl7.spark.master"))
+      .set(EXECUTOR_MEMORY, lookUpProp("hl7.spark.executor-memory"))
+      .set(EXECUTOR_CORES, parHint)
+      .set("spark.driver-memory", lookUpProp("hl7.spark.driver-memory"))
+      .set("spark.dynamicAllocation.initialExecutors", lookUpProp("hl7.spark.num-executors"))
+      .set("spark.queue", lookUpProp("hl7.spark.queue"))
+      .set("spark.dynamicAllocation.enabled", lookUpProp("hl7.spark.dynamicAllocation.enabled"))
+      .set("spark.dynamicAllocation.maxExecutors", lookUpProp("hl7.spark.dynamicAllocation.maxExecutors"))
+      .set("spark.dynamicAllocation.minExecutors", lookUpProp("hl7.spark.dynamicAllocation.minExecutors"))
+      .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
+      .set("spark.streaming.receiver.writeAheadLog.enable", "true")
+      .set("spark.streaming.unpersist", "true")
+      .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
+      .set("spark.streaming.backpressure.pid.minRate", rate.toString)
+      .set("spark.streaming.backpressure.pid.derived", "0.2")
+      .set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+  }
 
   def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
 
