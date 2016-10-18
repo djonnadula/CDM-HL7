@@ -9,13 +9,15 @@ import org.I0Itec.zkclient.{ZkClient => zkClient}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
+  *
+  * Utility for dealing with Kafka Topics
   */
-object TopicUtil extends Logg{
+object TopicUtil extends Logg {
 
 
   def createTopicIfNotExist(topic: String, segmentPartitions: Boolean = true): Boolean = synchronized {
-    info("Creating Topic :: " + topic +" with Partitions Config :: "
-      + (if(segmentPartitions) defaultSegmentPartitions else defaultHL7Partitions))
+    info("Creating Topic :: " + topic + " with Partitions Config :: "
+      + (if (segmentPartitions) defaultSegmentPartitions else defaultHL7Partitions))
     var success: Boolean = false
     val zkUtils = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
     try {

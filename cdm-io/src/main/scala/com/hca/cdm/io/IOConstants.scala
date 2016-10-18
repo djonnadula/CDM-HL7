@@ -8,6 +8,7 @@ import scala.util.Random
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
+  * Constants for Kafka
   */
 object IOConstants {
 

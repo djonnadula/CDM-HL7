@@ -122,6 +122,11 @@ object HL7Job extends Logg with App {
     runJob()
   }
 
+  /**
+    * Main Job Execution
+    *
+    * Executes Each RDD Partitions Asynchronously.
+    */
   private def runJob(): Unit = {
     val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     info("Kafka Stream Was Opened Successfully with ID :: " + streamLine.id)
@@ -239,6 +244,9 @@ object HL7Job extends Logg with App {
     startStreams()
   }
 
+  /**
+    * Starts Spark Streaming
+    */
   private def startStreams() = {
     try {
       sparkStrCtx start()
@@ -251,6 +259,9 @@ object HL7Job extends Logg with App {
     }
   }
 
+  /**
+    * Close All Resources
+    */
   private def close() = {
     sparkUtil shutdown sparkStrCtx
     info("sparkStrCtx Shutdown Completed for " + app)
@@ -270,16 +281,25 @@ object HL7Job extends Logg with App {
     unregister(sHook)
   }
 
+  /**
+    * Seconds from currents point to next Day starting
+    */
   private def initDelay = LocalDateTime.now().until(LocalDate.now().plusDays(1).atStartOfDay(), ChronoUnit.SECONDS)
 
   private def checkSize(threshold: Int)(data: AnyRef, parser: HL7Parser) = if (!IOCanHandle(data, threshold)) parser.overSizeMsgFound()
 
+  /**
+    * Creates Accumulator for HL7 Segments Tasks
+    */
   private def registerSegmentsMetric() = {
     val temp = new TrieMap[String, Accumulator[Long]]
     segmentsHandler.foreach(handler => handler._2.metricsRegistry.foreach({ case (k, v) => temp += k -> sparkStrCtx.sparkContext.accumulator(v, k)(LongAccumulatorParam) }))
     temp
   }
 
+  /**
+    * Reset Metrics for Past Day when report is Generated at EOD
+    */
   def resetMetrics(): Unit = {
     parserDriverMetrics.synchronized {
       parserDriverMetrics.transform((k, v) => if (v > 0L) 0L else v)
@@ -301,19 +321,32 @@ object HL7Job extends Logg with App {
     }
   }
 
+  /**
+    * Parsing Metrics Collected from all Jobs
+    */
   def parserMetrics: Map[String, Long] = parserDriverMetrics.synchronized {
     parserDriverMetrics toMap
   }
 
+  /**
+    * Segments Metrics Collected from all Jobs
+    */
   def segmentMetrics: Map[String, Long] = segmentsDriverMetrics.synchronized {
     segmentsDriverMetrics toMap
   }
 
+  /**
+    * Creates Accumulator for Parsing Tasks
+    */
   private def registerParserMetric() = {
     val temp = new TrieMap[String, Accumulator[Long]]
     hl7Parsers.foreach(parser => parser._2.metricsRegistry.foreach({ case (k, v) => temp += k -> sparkStrCtx.sparkContext.accumulator(v, k)(LongAccumulatorParam) }))
     temp
   }
+
+  /**
+    * Creates Metrics Registry for Segments Jobs that can be Collected at Driver
+    */
 
   private def driverSegmentsMetric() = {
     val temp = new TrieMap[String, Long]
@@ -321,24 +354,36 @@ object HL7Job extends Logg with App {
     temp
   }
 
+  /**
+    * Creates Metrics Registry for Parsing Jobs that can be Collected at Driver
+    */
   private def driverParserMetric() = {
     val temp = new TrieMap[String, Long]
     hl7Parsers.foreach(handler => temp ++= handler._2.metricsRegistry)
     temp
   }
 
-
+  /**
+    * Collects Segments Metrics from Tasks Completed in Driver
+    */
   private def collectSegmentMetrics(taskMetrics: TrieMap[String, Long]) = segmentsAccumulators.synchronized {
     taskMetrics.foreach({ case (k, metric) =>
       if (metric > 0L) segmentsAccumulators(k) += metric
     })
   }
 
+  /**
+    * Collects Parser Metrics from Tasks Completed in Driver
+    */
   private def collectParserMetrics(taskMetrics: TrieMap[String, Long]) = parserAccumulators.synchronized {
     taskMetrics.foreach({ case (k, metric) => if (metric > 0L) parserAccumulators(k) += metric })
   }
 
-  class MetricsListener extends SparkListener with StreamingListener with Logg {
+  /**
+    * Listener For Spark Events
+    *
+    */
+  private class MetricsListener extends SparkListener with StreamingListener with Logg {
     override def onStageCompleted(stageCompleted: SparkListenerStageCompleted): Unit = {
       super.onStageCompleted(stageCompleted)
       stageCompleted.stageInfo.failureReason match {
@@ -358,7 +403,7 @@ object HL7Job extends Logg with App {
 
     override def onApplicationEnd(applicationEnd: SparkListenerApplicationEnd): Unit = {
       super.onApplicationEnd(applicationEnd)
-      mail("{encrypt} " + app + " with Job ID " + context.applicationId + "Ended",
+      mail("{encrypt} " + app + " with Job ID " + context.applicationId + " Ended",
         app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check Immediately What was happening with Job ID :: " + context.applicationId + " \n\n" + EVENT_TIME
         , CRITICAL)
     }

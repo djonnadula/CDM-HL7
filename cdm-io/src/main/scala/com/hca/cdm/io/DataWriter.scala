@@ -4,6 +4,8 @@ import com.hca.cdm.hadoop.OverSizeHandler
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Common Functions IO should Implement
   */
 trait DataWriter {
 

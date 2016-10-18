@@ -7,6 +7,8 @@ import org.apache.kafka.clients.consumer.ConsumerConfig._
 
 /**
   * Created by Devaraj Jonnadula on 8/17/2016.
+  *
+  * Config for Kafka Consumer
   */
 object HL7ConsumerConfig {
 

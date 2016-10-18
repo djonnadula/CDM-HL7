@@ -10,6 +10,8 @@ import scala.concurrent.ExecutionContext
 
 /**
   * Created by Devaraj Jonnadula on 9/23/2016.
+  *
+  * Impl for Pool to tie up with Segements Handle for Tasks to execute in it's own pool
   */
 class ExecutionPool extends Logg with PoolExecutor {
 
@@ -21,6 +23,7 @@ class ExecutionPool extends Logg with PoolExecutor {
     t.setRejectedExecutionHandler(new PoolFullHandler)
     t
   }
+
   def getExecutionPool: ThreadPoolExecutor = pool
 
   private def logEx(t: Throwable): Unit = error("Unable to Execute Task " + currThread.getName, t)

@@ -6,6 +6,8 @@ import com.hca.cdm.log.Logg
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Impl for Constant Retry Policy
   */
 class RetryHandler(val defaultRetries: Int = 30, private val waitBetweenTries: Long = 1000) extends Logg {
   private val valid = validate

@@ -9,6 +9,8 @@ import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 9/8/2016.
+  *
+  * Audit Message Utils
   */
 package object audit {
 
