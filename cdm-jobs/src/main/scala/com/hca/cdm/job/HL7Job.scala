@@ -103,7 +103,7 @@ object HL7Job extends Logg with App {
     context setCheckpointDir lookUpProp("hl7.checkpoint")
     sparkStrCtx checkpoint lookUpProp("hl7.checkpoint")
     info("Checkpoint Created :: " + context.getCheckpointDir)
-    sparkStrCtx remember rddLifeTime
+    //sparkStrCtx remember rddLifeTime
     sparkStrCtx.sparkContext addSparkListener new MetricsListener
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
       if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
@@ -384,11 +384,22 @@ object HL7Job extends Logg with App {
     *
     */
   private class MetricsListener extends SparkListener with StreamingListener with Logg {
+    val stageTracker = new TrieMap[Int,StageInfo]()
+    override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
+      super.onStageSubmitted(stageSubmitted)
+      stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
+      if(stageTracker.size > 20) {
+        if(context.requestExecutors(2)) stageTracker.clear()
+      }
+
+    }
+
     override def onStageCompleted(stageCompleted: SparkListenerStageCompleted): Unit = {
       super.onStageCompleted(stageCompleted)
       stageCompleted.stageInfo.failureReason match {
         case Some(x) => error(app + " Stage failed Due to  " + x)
         case _ =>
+          stageTracker.remove(stageCompleted.stageInfo.stageId)
           stageCompleted.stageInfo.accumulables.foreach(acc => {
             val key = acc._2.name
             val reporter = (segmentsDriverMetrics isDefinedAt key, parserDriverMetrics isDefinedAt key) match {
@@ -396,7 +407,7 @@ object HL7Job extends Logg with App {
               case (_, true) => parserDriverMetrics
               case _ => throw new RuntimeException("Accumulator Metric Should Exist :: " + key)
             }
-            reporter update(key, inc(reporter(key), acc._2.value toLong))
+            reporter update(key, acc._2.value toLong)
           })
       }
     }
