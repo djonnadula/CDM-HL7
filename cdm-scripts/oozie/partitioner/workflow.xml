@@ -1,4 +1,4 @@
-<workflow-app name="Partitioner" xmlns="uri:oozie:workflow:0.5">
+<workflow-app name="${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
     <start to="addPartition"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
@@ -20,10 +20,10 @@
         <hive xmlns="uri:oozie:hive-action:0.2">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
-                <job-xml>${nameNode}/user/dof7475/partitioner/lib/hive-config.xml</job-xml>
+            <job-xml>${nameNode}/user/dof7475/partitioner/lib/hive-config.xml</job-xml>
             <script>${SCRIPT_PATH}</script>
-              <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
-              <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
+            <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
+            <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
         </hive>
         <ok to="End"/>
         <error to="Kill"/>
