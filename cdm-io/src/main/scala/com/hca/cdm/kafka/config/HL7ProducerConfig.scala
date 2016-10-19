@@ -7,6 +7,8 @@ import org.apache.kafka.clients.producer.ProducerConfig._
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Config for Kafka Producer
   */
 object HL7ProducerConfig {
 

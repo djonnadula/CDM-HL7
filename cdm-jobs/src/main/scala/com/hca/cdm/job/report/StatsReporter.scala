@@ -44,7 +44,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
   override def run(): Unit = {
     this.parserMetrics = HL7Job.parserMetrics
     this.segmentMetrics = HL7Job.segmentMetrics
-    HL7Job.resetMetrics
+    HL7Job.resetMetrics()
     val parserGrp = parserMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
     val segmentsGrp = segmentMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
     val date = dateToString(now.minusDays(1), DATE_PATTERN_YYYY_MM_DD)

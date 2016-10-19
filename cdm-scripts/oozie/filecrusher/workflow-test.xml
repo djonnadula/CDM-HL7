@@ -1,0 +1,51 @@
+<workflow-app name="CDM_BD_File_Crusher" xmlns="uri:oozie:workflow:0.5">
+    <start to="hdfs-ops"/>
+    <action name="Kill">
+        <email xmlns="uri:oozie:email-action:0.2">
+            <to>CorpISDLCDM-EDW@HCAHealthcare.com</to>
+            <subject>${wf:name()} Job Failure</subject>
+            <body>The ${wf:name()} Oozie job has failed.
+                    JobId: ${wf:id()}
+                    JobPath: ${wf:appPath()}
+                    ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
+        </email>
+        <ok to="Kill-kill"/>
+        <error to="Kill-kill"/>
+    </action>
+    <kill name="Kill-kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <action name="hdfs-ops">
+        <fs>
+            <mkdir path='${CRUSH_PATH}'/>
+            <mkdir path='${CLONE_PATH}'/>
+            <move source='${CRUSH_FILES_PATH}' target='${CRUSH_PATH}'/>
+        </fs>
+        <ok to="filecrusher"/>
+        <error to="Kill"/>
+    </action>
+    <action name="filecrusher">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <main-class>${MAIN_CLASS}</main-class>
+            <java-opts></java-opts>
+            <arg>${CRUSH_PATH}</arg>
+            <arg>${CLONE_PATH}</arg>
+            <arg>${NUM_DAYS_BEFORE}</arg>
+            <arg>--input-format=sequence</arg>
+            <arg>--output-format=sequence</arg>
+            <arg>--clone</arg>
+        </java>
+        <ok to="hdfs-move"/>
+        <error to="Kill"/>
+    </action>
+    <action name="hdfs-move">
+        <fs>
+            <move source='${CRUSH_PATH}/*' target='${SOURCE_PATH}'/>
+        </fs>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+    <end name="End"/>
+</workflow-app>

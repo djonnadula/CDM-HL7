@@ -91,6 +91,19 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     }
   }
 
+  /**
+    *
+    * Traverses all nodes in data set and pulls Data Required as per Schema
+    *
+    * @param data
+    * @param model
+    * @param layout
+    * @param modelFilter
+    * @param dataHandler
+    * @param allNodes
+    * @param whichSeg
+    * @return
+    */
   private def nodesTraversal(data: mapType, model: Model, layout: mutable.LinkedHashMap[String, String], modelFilter: Map[String, mutable.Set[String]],
                              dataHandler: (String, String, String) => Unit, allNodes: Boolean = true, whichSeg: String = EMPTYSTR) = {
     var dataExist = false
@@ -119,7 +132,12 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     (dataExist, temp)
   }
 
-
+  /**
+    * Final Output Format of Trasaction
+    *
+    * @param layout
+    * @return
+    */
   private def makeFinal(layout: mutable.LinkedHashMap[String, String]): String = {
     val builder = new StringBuilder(layout.size * 40)
     layout.foreach({ case (k, v) => builder append (v + outDelim) })
@@ -147,6 +165,16 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   }
 
+  /** Traverses Respective Node in data set and pulls Data Required as per Schema
+    *
+    * @param underlying
+    * @param model
+    * @param filterKeys
+    * @param data
+    * @param dataHandler
+    * @param appendSegment
+    * @return
+    */
   private def modelData(underlying: mutable.LinkedHashMap[String, String], model: Model)(filterKeys: Map[String, mutable.Set[String]], data: mapType)
                        (dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false

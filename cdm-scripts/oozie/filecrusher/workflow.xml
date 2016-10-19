@@ -1,13 +1,13 @@
 <workflow-app name="CDM_BD_File_Crusher" xmlns="uri:oozie:workflow:0.5">
-    <start to="fs-a00d"/>
+    <start to="hdfs-hl7_all_segment_data"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
             <to>CorpISDLCDM-EDW@HCAHealthcare.com</to>
             <subject>${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
-JobId: ${wf:id()}
-JobPath: ${wf:appPath()}
-ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
+                    JobId: ${wf:id()}
+                    JobPath: ${wf:appPath()}
+                    ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
         </email>
         <ok to="Kill-kill"/>
         <error to="Kill-kill"/>
@@ -15,6 +15,15 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
     <kill name="Kill-kill">
         <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
     </kill>
+    <action name="hdfs-hl7_all_segment_data">
+        <fs>
+            <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/crush'/>
+            <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/clone'/>
+            <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/*.snappy' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/crush'/>
+        </fs>
+        <ok to="java-3b2d"/>
+        <error to="Kill"/>
+    </action>
     <action name="java-c180">
         <java>
             <job-tracker>${jobTracker}</job-tracker>
@@ -74,15 +83,6 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
             <arg>--clone</arg>
         </java>
         <ok to="fs-9463"/>
-        <error to="Kill"/>
-    </action>
-    <action name="fs-a00d">
-        <fs>
-              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/crush'/>
-              <mkdir path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/clone'/>
-              <move source='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/*.snappy' target='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/crush'/>
-        </fs>
-        <ok to="java-3b2d"/>
         <error to="Kill"/>
     </action>
     <action name="fs-1540">

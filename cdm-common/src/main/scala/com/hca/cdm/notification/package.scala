@@ -6,6 +6,8 @@ import org.apache.commons.mail.{EmailException, HtmlEmail, SimpleEmail}
 
 /**
   * Created by Devaraj Jonnadula on 9/19/2016.
+  *
+  * Sends Emails as per Config
   */
 package object notification {
 

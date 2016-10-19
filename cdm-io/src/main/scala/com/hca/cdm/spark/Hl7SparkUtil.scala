@@ -13,6 +13,9 @@ import com.hca.cdm._
   */
 object Hl7SparkUtil {
 
+  /**
+    * Creates Spark Configuration from Config File Provided
+    */
   def getConf(app: String, parHint: String): SparkConf = {
     val rate = lookUpProp("hl7.batch.rate").toInt
     new SparkConf()
@@ -32,17 +35,31 @@ object Hl7SparkUtil {
       .set("spark.streaming.unpersist", "true")
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
-      .set("spark.streaming.backpressure.pid.derived", "0.2")
+      .set("spark.streaming.backpressure.pid.derived", "0.1")
       .set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
   }
 
+  /**
+    * Creates Spark Streaming Context
+    */
   def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
 
+  /**
+    * Creates Spark Context
+    */
   def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
 
-  def stream(sparkStrCtx: StreamingContext, kafkaConsumerProp: Map[String, String], topics: Set[String]): InputDStream[(String, String)] =
-    KConsumer.createDirectStream[String, String, StringDecoder, StringDecoder](sparkStrCtx, kafkaConsumerProp, topics)
 
+  /**
+    * Creates Streams by polling Data from Kafka
+    */
+  def stream(sparkStrCtx: StreamingContext, kafkaConsumerProp: Map[String, String], topics: Set[String]): InputDStream[(String, String)] =
+  KConsumer.createDirectStream[String, String, StringDecoder, StringDecoder](sparkStrCtx, kafkaConsumerProp, topics)
+
+
+  /**
+    * Shutdowns Spark context and Streaming Context Gracefully allowing already Executing taks to be Completed
+    */
   def shutdown(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
 
 

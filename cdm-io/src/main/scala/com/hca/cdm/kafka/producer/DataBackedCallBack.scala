@@ -8,6 +8,8 @@ import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerRecor
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
+  *
+  * Call back Impl holding Ref to data and will retry to Send as per Config
   */
 class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val kafkaProducer: KafkaProducer[Array[Byte], Array[Byte]], val shouldRetry: Boolean) extends Logg with Callback {
 
