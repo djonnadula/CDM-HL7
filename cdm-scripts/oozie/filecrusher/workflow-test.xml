@@ -1,4 +1,4 @@
-<workflow-app name="CDM_BD_File_Crusher" xmlns="uri:oozie:workflow:0.5">
+<workflow-app name="${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
     <start to="hdfs-ops"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
