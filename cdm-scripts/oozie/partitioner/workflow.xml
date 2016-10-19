@@ -2,7 +2,7 @@
     <start to="addPartition"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
-            <to>CorpISDLCDM-EDW@HCAHealthcare.com</to>
+            <to>${EMAIL}</to>
             <subject>${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
                     JobId: ${wf:id()}
