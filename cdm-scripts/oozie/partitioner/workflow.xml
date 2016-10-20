@@ -1,4 +1,16 @@
 <workflow-app name="${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
+    <credentials>
+        <credential name="hcat" type="hcat">
+            <property>
+                <name>hcat.metastore.uri</name>
+                <value>thrift://xrdcldbdm010001.unix.medcity.net:9083</value>
+            </property>
+            <property>
+                <name>hcat.metastore.principal</name>
+                <value>hive/xrdcldbdm010001.unix.medcity.net@HCA.CORPAD.NET</value>
+            </property>
+        </credential>
+    </credentials>
     <start to="addPartition"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
@@ -16,7 +28,7 @@
     <kill name="Kill-kill">
         <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
     </kill>
-    <action name="addPartition">
+    <action name="addPartition" cred="hcat">
         <hive xmlns="uri:oozie:hive-action:0.2">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
