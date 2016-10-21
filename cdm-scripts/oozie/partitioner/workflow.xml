@@ -11,15 +11,15 @@
             </property>
         </credential>
     </credentials>
-    <start to="addPartition"/>
+    <start to="check-for-files"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
             <to>${EMAIL}</to>
             <subject>${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
-                    JobId: ${wf:id()}
-                    JobPath: ${wf:appPath()}
-                    ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
+JobId: ${wf:id()}
+JobPath: ${wf:appPath()}
+ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
             </body>
         </email>
         <ok to="Kill-kill"/>
@@ -37,6 +37,26 @@
             <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
             <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
         </hive>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+    <decision name="check-for-files">
+        <switch>
+            <case to="addPartition">
+                ${fs:exists(FILE_CHECK_PATH)=='true'}
+            </case>
+            <default to="no-files-available-email"/>
+        </switch>
+    </decision>
+    <action name="no-files-available-email">
+        <email xmlns="uri:oozie:email-action:0.2">
+            <to>${EMAIL}</to>
+            <subject>${wf:name()} Partition Available</subject>
+            <body>${wf:name()}: No partition to add at this path: '${FILE_CHECK_PATH}'
+                JobId: ${wf:id()}
+                JobPath: ${wf:appPath()}
+            </body>
+        </email>
         <ok to="End"/>
         <error to="Kill"/>
     </action>

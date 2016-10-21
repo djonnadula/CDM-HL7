@@ -1,5 +1,5 @@
 <workflow-app name="${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
-    <start to="hdfs-ops"/>
+    <start to="check-for-files"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
             <to>${EMAIL}</to>
@@ -44,6 +44,26 @@
         <fs>
             <move source='${CRUSH_PATH}/*' target='${SOURCE_PATH}'/>
         </fs>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+    <decision name="check-for-files">
+        <switch>
+            <case to="hdfs-ops">
+                ${fs:exists(FILE_CHECK_PATH)=='true'}
+            </case>
+            <default to="no-files-available-email"/>
+        </switch>
+    </decision>
+    <action name="no-files-available-email">
+        <email xmlns="uri:oozie:email-action:0.2">
+            <to>${EMAIL}</to>
+            <subject>${wf:name()} No Files Available</subject>
+            <body>${wf:name()}: No files to process at this path: '${FILE_CHECK_PATH}'
+JobId: ${wf:id()}
+JobPath: ${wf:appPath()}
+            </body>
+        </email>
         <ok to="End"/>
         <error to="Kill"/>
     </action>
