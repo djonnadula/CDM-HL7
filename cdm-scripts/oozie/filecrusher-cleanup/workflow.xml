@@ -18,14 +18,14 @@
     </kill>
     <action name="delete-clone-dirs">
         <fs>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_segment_data/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_audit_data/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_json_data/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=adt/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=mdm/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/raw/message_type=oru/clone'/>
-              <delete path='hdfs://nameservice1/user/hive/warehouse/hl7.db/hl7_all_proc_rejected/clone'/>
+              <delete path='${hl7_all_segment_data_clone_path}'/>
+              <delete path='${hl7_audit_data_clone_path}'/>
+              <delete path='${nlp_patient_id_data_path_clone}'/>
+              <delete path='${hl7_json_data_clone_path}'/>
+              <delete path='${raw_adt_clone_path}'/>
+              <delete path='${raw_mdm_clone_path}'/>
+              <delete path='${raw_oru_clone_path}'/>
+              <delete path='${hl7_all_proc_rejected_clone_path}'/>
         </fs>
         <ok to="End"/>
         <error to="Kill"/>
