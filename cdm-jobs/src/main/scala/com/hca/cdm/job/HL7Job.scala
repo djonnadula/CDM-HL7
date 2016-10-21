@@ -104,7 +104,7 @@ object HL7Job extends Logg with App {
     context setCheckpointDir lookUpProp("hl7.checkpoint")
     sparkStrCtx checkpoint lookUpProp("hl7.checkpoint")
     info("Checkpoint Created :: " + context.getCheckpointDir)
-    //sparkStrCtx remember rddLifeTime
+    // sparkStrCtx remember rddLifeTime
     sparkStrCtx.sparkContext addSparkListener new MetricsListener
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
       if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
