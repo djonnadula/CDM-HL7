@@ -33,6 +33,7 @@ object Hl7SparkUtil {
       .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
       .set("spark.streaming.receiver.writeAheadLog.enable", "true")
       .set("spark.streaming.unpersist", "true")
+      .set("spark.streaming.kafka.maxRetries", lookUpProp("h7.spark.kafka.retries"))
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
       .set("spark.streaming.backpressure.pid.derived", "0.1")

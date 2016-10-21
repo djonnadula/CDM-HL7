@@ -1,3 +1,4 @@
+/*
 package com.hca.cdm.mq
 
 import java.util.Properties
@@ -53,3 +54,4 @@ class MQWriterHandler(implicit val props: Properties) extends Logg with AutoClos
     if (connection != null) connection close()
   }
 }
+*/

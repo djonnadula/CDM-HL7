@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # /etc/init.d/hl7process
 # version 1.0.0 2016-08-22 (YYYY-MM-DD)
 #
@@ -23,32 +23,39 @@
 #
 
 # Process name ( For display )
-NAME='hl7process'
+NAME='hl7Process'
 # Daemon name, where is the actual executable
-SERVICEDIR='/home/hadoop/cdm/hl7/prod'
+SERVICEDIR='/hadoop/cdm/lib'
 
 SERVICE='hl7process.jar'
 
 # Java settings
-MINHEAP=5120
-MAXHEAP=8192
+MINHEAP=512
+MAXHEAP=512
 JMXPORT=50000
-OPTIONS='CDMHL7.properties'
-INVOCATION="java  \
--cp hl7process.jar com.hca.cdm.job.HL7Job ${OPTIONS} \
+OPTIONS='/hadoop/cdm/cfg/CDMHL7.properties'
+INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
+-cp hl7process.jar com.hca.cdm.job.Hl7Driver ${OPTIONS} \
 "
 
 # pid file for the daemon
-PIDFILE=${SERVICEDIR}/var/run/$NAME.pid
-LOCKFILE=${SERVICEDIR}/var/lock/subsys/$NAME
+PIDFILE=/var/log/cdm/cdm-hl7/run/$NAME.pid
+LOCKFILE=/var/log/cdm/cdm-hl7/lock/subsys/$NAME
 
 # Exit if the package is not installed
 if [ ! -e "$SERVICEDIR/$SERVICE" ]; then
-{
   echo "Couldn't find $NAME"
-  exit 99
-}
+  exit 1;
 fi
+
+# Generate Ticket
+TICKET="kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@HCA.CORPAD.NET"
+$TICKET
+VALIDTICKET=$?
+if [[ ${VALIDTICKET} > 0 ]]; then
+  echo "Generating Kerberos Ticket Failed, exiting .. $NAME"
+    exit 1;
+   	fi
 
 RETVAL=0
 
@@ -59,16 +66,11 @@ start() {
                 echo "check $PIDFILE, and remove $LOCKFILE to start again."
                 return -1;
     fi
-
     echo -n $"Starting $NAME: "
-
     set +e
     cd ${SERVICEDIR} && \
-    nohup $INVOCATION >>"logfile" 2>"errorlog" &
-
+    nohup $INVOCATION >>"/var/log/cdm/cdm-hl7/logs/logfile" 2>"/var/log/cdm/cdm-hl7/logs/errorlog" &
     pgrep -f $SERVICE > $PIDFILE
-
-
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && touch ${LOCKFILE}
@@ -83,49 +85,6 @@ stop() {
     [ $RETVAL = 0 ] && rm -f ${LOCKFILE} ${PIDFILE}
 }
 
-reload() {
-    echo -n $"Reloading $NAME: "
-    killproc -p ${PIDFILE} ${NAME} -HUP
-    RETVAL=$?
-    echo
-}
-
-upgrade() {
-    oldbinpidfile=${PIDFILE}.oldbin
-
-    configtest -q || return 6
-    echo -n $"Staring new master $NAME: "
-    killproc -p ${PIDFILE} ${NAME} -USR2
-    RETVAL=$?
-    echo
-    /bin/usleep $SLEEPMSEC
-    if [ -f ${oldbinpidfile} -a -f ${PIDFILE} ]; then
-        echo -n $"Graceful shutdown of old $NAME: "
-        killproc -p ${oldbinpidfile} ${NAME} -QUIT
-        RETVAL=$?
-        echo
-    else
-        echo $"Upgrade failed!"
-        return 1
-    fi
-}
-
-configtest() {
-    if [ "$#" -ne 0 ] ; then
-        case "$1" in
-            -q)
-                FLAG=$1
-                ;;
-            *)
-                ;;
-        esac
-        shift
-    fi
-    ${INVOCATION} -t -c ${conffile} $FLAG
-    RETVAL=$?
-    return $RETVAL
-}
-
 rh_status() {
     status -p ${PIDFILE} ${INVOCATION}
 }
@@ -133,7 +92,7 @@ rh_status() {
 # See how we were called.
 case "$1" in
     start)
-        rh_status >/dev/null 2>&1 && exit 0
+        rh_status >/dev/null 2>&1 && exit 0;
         start
         ;;
     stop)
@@ -143,29 +102,9 @@ case "$1" in
         rh_status
         RETVAL=$?
         ;;
-    restart)
-        configtest -q || exit $RETVAL
-        stop
-        start
-        ;;
-    upgrade)
-        upgrade
-        ;;
-    condrestart|try-restart)
-        if rh_status >/dev/null 2>&1; then
-            stop
-            start
-        fi
-        ;;
-    force-reload|reload)
-        reload
-        ;;
-    configtest)
-        configtest
-        ;;
     *)
-        echo $"Usage: $NAME {start|stop|restart|condrestart|try-restart|force-reload|upgrade|reload|status|help|configtest}"
-        RETVAL=2
+        echo $"Usage: $NAME start|stop|status"
+        RETVAL=1
 esac
 
-exit $RETVAL
+exit $RETVAL;

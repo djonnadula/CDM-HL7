@@ -151,6 +151,10 @@ package object model {
               case Success(x) => x
               case _ => EMPTYSTR
             }
+            val fieldWithNoAppends = Try(adhoc(5)) match {
+              case Success(x) => x.split("\\&", -1)
+              case _ => Array.empty[String]
+            }
             val segStruc = adhoc take 2 mkString COLON
             val outFormats = adhoc(2) split "\\^"
             val outDest = adhoc(3) split "\\^"
@@ -160,9 +164,9 @@ package object model {
               val outFormSplit = outFormat split "&"
               outFormat contains JSON.toString match {
                 case true =>
-                  (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0)), loadFilters(filterFile))
+                  (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0), fieldWithNoAppends), loadFilters(filterFile))
                 case _ =>
-                  (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty), loadFilters(filterFile))
+                  (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends), loadFilters(filterFile))
               }
             }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
           } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -177,7 +181,7 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String])
+  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String], reqNoAppends: Array[String] = Array.empty[String])
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\^", modelFieldDelim: String = "|", adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))

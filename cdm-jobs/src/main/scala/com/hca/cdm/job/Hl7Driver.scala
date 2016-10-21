@@ -85,8 +85,9 @@ object Hl7Driver extends App with Logg {
     .setJavaHome("/usr/bin/java")
     .setSparkHome(lookUpProp("spark.home"))
     .setConf("spark.yarn.preserve.staging.files", "true")
-  sparkLauncher addAppArgs args(0)
-  sparkLauncher addFile args(0)
+  val configFile = new File(args(0))
+  sparkLauncher addAppArgs configFile.getName
+  sparkLauncher addFile configFile.getPath
   configFiles foreach (file => sparkLauncher addFile (file getPath))
   private val startTime = currMillis
   private var watchTime = currMillis
