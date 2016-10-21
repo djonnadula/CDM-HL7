@@ -1,25 +1,26 @@
-<workflow-app name="Partition_Test" xmlns="uri:oozie:workflow:0.5">
-  <credentials>
-    <credential name="hcat" type="hcat">
-      <property>
-        <name>hcat.metastore.uri</name>
-        <value>thrift://xrdcldbdm010001.unix.medcity.net:9083</value>
-      </property>
-      <property>
-        <name>hcat.metastore.principal</name>
-        <value>hive/xrdcldbdm010001.unix.medcity.net@HCA.CORPAD.NET</value>
-      </property>
-    </credential>
-  </credentials>
-    <start to="hive-e641"/>
+<workflow-app name="${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
+    <credentials>
+        <credential name="hcat" type="hcat">
+            <property>
+                <name>hcat.metastore.uri</name>
+                <value>thrift://xrdcldbdm010001.unix.medcity.net:9083</value>
+            </property>
+            <property>
+                <name>hcat.metastore.principal</name>
+                <value>hive/xrdcldbdm010001.unix.medcity.net@HCA.CORPAD.NET</value>
+            </property>
+        </credential>
+    </credentials>
+    <start to="addPartition"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
-            <to>CorpISDLCDM-EDW@HCAHealthcare.com</to>
+            <to>${EMAIL}</to>
             <subject>${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
-JobId: ${wf:id()}
-JobPath: ${wf:appPath()}
-ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
+                    JobId: ${wf:id()}
+                    JobPath: ${wf:appPath()}
+                    ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
+            </body>
         </email>
         <ok to="Kill-kill"/>
         <error to="Kill-kill"/>
@@ -27,14 +28,14 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
     <kill name="Kill-kill">
         <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
     </kill>
-    <action name="hive-e641" cred="hcat">
+    <action name="addPartition" cred="hcat">
         <hive xmlns="uri:oozie:hive-action:0.2">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
-              <job-xml>lib/hive-config.xml</job-xml>
-            <script>/user/hue/oozie/workspaces/hue-oozie-1476132987.16/lib/hive_hl7_raw_data_test.hql</script>
-              <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
-              <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
+            <job-xml>${nameNode}/user/dof7475/partitioner/lib/hive-config.xml</job-xml>
+            <script>${SCRIPT_PATH}</script>
+            <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
+            <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
         </hive>
         <ok to="End"/>
         <error to="Kill"/>

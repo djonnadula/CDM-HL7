@@ -1,0 +1,13 @@
+<coordinator-app end="${endTime}" frequency="${coord:days(1)}" name="${COORD_NAME}" start="${startTime}" timezone="America/Chicago" xmlns="uri:oozie:coordinator:0.1">
+   <action>
+      <workflow>
+         <app-path>${workflowPath}</app-path>
+         <configuration>
+         	<property>
+         		<name>MESSAGE_DATE</name>
+         		<value>${coord:formatTime(coord:dateOffset(coord:nominalTime(), -1, 'DAY'), 'yyyy-MM-dd')}</value>
+         	</property>
+         </configuration>
+      </workflow>
+   </action>
+</coordinator-app>

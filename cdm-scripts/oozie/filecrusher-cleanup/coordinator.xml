@@ -1,0 +1,7 @@
+<coordinator-app end="${endTime}" frequency="${coord:days(7)}" name="FileCrusherCleaupCoordinator" start="${startTime}" timezone="America/Chicago" xmlns="uri:oozie:coordinator:0.1">
+   <action>
+      <workflow>
+         <app-path>${workflowPath}</app-path>
+      </workflow>
+   </action>
+</coordinator-app>
