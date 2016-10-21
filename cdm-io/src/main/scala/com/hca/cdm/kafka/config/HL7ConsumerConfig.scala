@@ -32,6 +32,7 @@ object HL7ConsumerConfig {
     prop.put(FETCH_MIN_BYTES_CONFIG, fetchMinBytes)
     prop.put(FETCH_MAX_WAIT_MS_CONFIG, fetchMinWait)
     prop.put(CLIENT_ID_CONFIG, defaultClientId + jobConsumer)
+    prop.put("fetch.message.max.bytes",fetchBytes)
     prop
   }
 }

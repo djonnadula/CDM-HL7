@@ -96,6 +96,7 @@ object HL7Job extends Logg with App {
   private var parserAccumulators: TrieMap[String, Accumulator[Long]] = registerParserMetric()
   private val parserDriverMetrics = driverParserMetric()
   private val monitorHandler = newDaemonScheduler(app + " Monitor-Pool")
+  private var messageFreq = 0L
   initialise()
 
   private def initialise(): Unit = {
@@ -113,6 +114,7 @@ object HL7Job extends Logg with App {
     createTopic(auditTopic, segmentPartitions = false)
     createTopic(rejectedTopic, segmentPartitions = false)
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(10), 610, 600, TimeUnit.SECONDS)
     sHook = newThread(app + " " + consumerGroup + "SparkCtx SHook", runnable({
       close()
       info(currThread.getName + " Shutdown HOOK Completed for " + app)
@@ -139,6 +141,7 @@ object HL7Job extends Logg with App {
           + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
           + range.fromOffset + " To :: " + range.untilOffset)
         messagesInRDD = inc(messagesInRDD, range.count())
+        this.messageFreq = inc(messageFreq, messagesInRDD)
       })
       info("Got RDD with Partitions :: " + rdd.partitions.length + " Executing Asynchronously Each of Them.")
       val parserS = hl7Parsers
@@ -384,12 +387,13 @@ object HL7Job extends Logg with App {
     *
     */
   private class MetricsListener extends SparkListener with StreamingListener with Logg {
-    val stageTracker = new TrieMap[Int,StageInfo]()
+    val stageTracker = new TrieMap[Int, StageInfo]()
+
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
-      if(stageTracker.size > 20) {
-        if(context.requestExecutors(2)) stageTracker.clear()
+      if (stageTracker.size > 20) {
+        if (context.requestExecutors(2)) stageTracker.clear()
       }
 
     }
@@ -417,6 +421,18 @@ object HL7Job extends Logg with App {
       mail("{encrypt} " + app + " with Job ID " + context.applicationId + " Ended",
         app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check Immediately What was happening with Job ID :: " + context.applicationId + " \n\n" + EVENT_TIME
         , CRITICAL)
+    }
+  }
+
+  private class DataFlowMonitor(timeInterval: Int) extends Runnable {
+    override def run(): Unit = {
+      messageFreq <= 0 match {
+        case true => mail("{encrypt} " + app + " with Job ID " + context.applicationId + " Not Receiving Data ",
+          app + " Job has not Received any Data in last " + timeInterval + " minutes. Some one has to Check Immediately What was happening with Receiver Jobs for HL7 Message Types "
+            + messageTypes.mkString(";") + "\n\n" + EVENT_TIME
+          , CRITICAL)
+        case _ => messageFreq = 0L
+      }
     }
   }
 

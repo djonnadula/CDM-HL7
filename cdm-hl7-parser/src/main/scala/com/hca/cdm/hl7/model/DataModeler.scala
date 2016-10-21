@@ -37,6 +37,9 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
             nodesTraversal(data, model, layout, modelFilter, dataHandler) match {
               case out =>
                 if (out._1) {
+                  // Case to Strip Out Fields which require Only One Occurrence
+                  adhoc.reqNoAppends.foreach(field =>
+                    if (layout.isDefinedAt(field) && layout(field).contains(repeat)) layout update(field, layout(field).substring(0, layout(field).indexOf(repeat))))
                   adhoc.outFormat match {
                     case JSON =>
                       handleCommonSegments(data, layout)

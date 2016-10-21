@@ -42,6 +42,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
   defNotes append ("<p>" + HL7State.REJECTED + " : Hl7 Doesn't meet the Requirement to Process. So it was Rejected as per Criteria and this log can be found in Rejects Topic</p>")
 
   override def run(): Unit = {
+    this.builder.clear()
     this.parserMetrics = HL7Job.parserMetrics
     this.segmentMetrics = HL7Job.segmentMetrics
     HL7Job.resetMetrics()
@@ -87,7 +88,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     append("</div>")
     append("</div> </div>")
     append(EVENT_TIME)
-    mail(app + "  Statistics for " + date, builder.toString(), WARNING, statsReport = true)
+    mail(app + "  Statistics for " + date, builder.result(), WARNING, statsReport = true)
   }
 
   private def tableData(store: Map[String, Map[String, Long]], segments: Boolean = false) = {
