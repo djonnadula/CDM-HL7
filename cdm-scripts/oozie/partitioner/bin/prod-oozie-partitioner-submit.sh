@@ -5,6 +5,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
 echo $(pwd)
+
+$(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.PARTITIONER.APP.PATH})
+
 echo "Deploying jobs to prod"
 
 $(oozie job -config adt/prod-adt-partitioner-coordinator.properties -submit)

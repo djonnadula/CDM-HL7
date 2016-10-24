@@ -20,13 +20,14 @@
         <OOZIE.LIB.PATH>/user/oozie/share/lib</OOZIE.LIB.PATH>
         <ALERT.EMAIL>CorpISDLCDM-EDW@HCAHealthcare.com</ALERT.EMAIL>
         <PROD.HIVE.HL7.DB.PATH>${NAMENODE}/user/hive/warehouse/hl7</PROD.HIVE.HL7.DB.PATH>
-        <PROD.HIVE.SCRI.DB.PATH>${NAMENODE}/user/hive/warehouse/scri</PROD.HIVE.SCRI.DB.PATH>
+        <PROD.HIVE.SCRI.DB.PATH>${NAMENODE}/user/hive/warehouse/cdm_scri</PROD.HIVE.SCRI.DB.PATH>
         <QA.HIVE.HL7.DB.PATH>${NAMENODE}/user/hive/warehouse/hl7.db</QA.HIVE.HL7.DB.PATH>
         <QA.HIVE.SCRI.DB.PATH>${NAMENODE}/user/hive/warehouse/cdm_scri</QA.HIVE.SCRI.DB.PATH>
+        <PROD.WORKFLOW.ROOT>user/corpsrvcdmbtch/cdm/oozie_jobs</PROD.WORKFLOW.ROOT>
 
         <!-- file crusher properties -->
         <!-- PROD -->
-        <PROD.FC.APP.PATH></PROD.FC.APP.PATH>
+        <PROD.FC.APP.PATH>${NAMENODE}/${PROD.WORKFLOW.ROOT}/filecrusher</PROD.FC.APP.PATH>
         <PROD.FC.START.TIME>2016-10-25T10:00Z</PROD.FC.START.TIME>
         <PROD.FC.END.TIME>2017-10-25T10:00Z</PROD.FC.END.TIME>
         <!-- QA -->
@@ -36,7 +37,7 @@
 
         <!-- file crusher cleanup properties -->
         <!-- PROD -->
-        <PROD.FCC.APP.PATH></PROD.FCC.APP.PATH>
+        <PROD.FCC.APP.PATH>${NAMENODE}/${PROD.WORKFLOW.ROOT}/filecrushercleanup</PROD.FCC.APP.PATH>
         <PROD.FCC.START.TIME>2016-11-01T10:00Z</PROD.FCC.START.TIME>
         <PROD.FCC.END.TIME>2017-11-01T10:00Z</PROD.FCC.END.TIME>
         <!-- QA -->
@@ -46,7 +47,7 @@
 
         <!-- partitioner properties -->
         <!-- PROD -->
-        <PROD.PARTITIONER.APP.PATH></PROD.PARTITIONER.APP.PATH>
+        <PROD.PARTITIONER.APP.PATH>${NAMENODE}/${PROD.WORKFLOW.ROOT}/partitioner</PROD.PARTITIONER.APP.PATH>
         <PROD.PARTITIONER.START.TIME>2016-10-25T10:00Z</PROD.PARTITIONER.START.TIME>
         <PROD.PARTITIONER.END.TIME>2017-10-25T10:00Z</PROD.PARTITIONER.END.TIME>
         <!-- QA -->
