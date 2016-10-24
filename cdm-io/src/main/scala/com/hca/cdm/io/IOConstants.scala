@@ -18,7 +18,7 @@ object IOConstants {
   val kafkaHosts: String = lookUpProp("hl7.kafka.brokers")
   val DEFAULT_RETRIES: Int = 30
   val defaultSegmentPartitions: Int = 6
-  val defaultHL7Partitions: Int = 8
+  val defaultHL7Partitions: Int = 6
   val zkSessionTimeout: Int = 6000
   val zkConnectionTimeout: Int = 10000
   val defaultReplication: Int = 2
