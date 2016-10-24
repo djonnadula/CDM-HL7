@@ -42,7 +42,7 @@
         <!-- QA -->
         <QA.FCC.APP.PATH>${NAMENODE}/user/dof7475/filecrushercleanup</QA.FCC.APP.PATH>
         <QA.FCC.START.TIME>2016-10-27T10:00Z</QA.FCC.START.TIME>
-        <QA.FCC.END.TIME>2016-10-27T10:00Z</QA.FCC.END.TIME>
+        <QA.FCC.END.TIME>2017-10-27T10:00Z</QA.FCC.END.TIME>
 
         <!-- partitioner properties -->
         <!-- PROD -->
