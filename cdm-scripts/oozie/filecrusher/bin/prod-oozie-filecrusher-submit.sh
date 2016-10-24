@@ -4,6 +4,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
+echo $(pwd)
 echo "Deploying jobs to prod"
 
 $(oozie job -config hl7_all_proc_rejected/prod-hl7_all_proc_rejected-coordinator.properties -submit)

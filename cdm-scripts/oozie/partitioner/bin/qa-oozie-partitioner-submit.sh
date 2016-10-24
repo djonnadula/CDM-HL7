@@ -4,6 +4,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
+echo $(pwd)
 echo "Deploying jobs to qa"
 
 $(oozie job -config adt/qa-adt-partitioner-coordinator.properties -submit)

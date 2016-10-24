@@ -5,4 +5,4 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
 echo $(pwd)
-$(oozie job -config prod-filecrusher-cleanup-coordinator.properties -submit)
+$(oozie job -config qa-filecrusher-cleanup-coordinator.properties -submit)
