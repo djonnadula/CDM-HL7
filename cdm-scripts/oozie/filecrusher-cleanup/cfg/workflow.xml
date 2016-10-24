@@ -2,8 +2,8 @@
     <start to="delete-clone-dirs"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
-            <to>CorpISDLCDM-EDW@HCAHealthcare.com</to>
-            <subject>${wf:name()} Job Failure</subject>
+            <to>${EMAIL}</to>
+            <subject>${ENVIRONMENT}: ${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
 JobId: ${wf:id()}
 JobPath: ${wf:appPath()}

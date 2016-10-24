@@ -3,7 +3,7 @@
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">
             <to>${EMAIL}</to>
-            <subject>${wf:name()} Job Failure</subject>
+            <subject>${ENVIRONMENT}: ${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
                     JobId: ${wf:id()}
                     JobPath: ${wf:appPath()}
@@ -58,7 +58,7 @@
     <action name="no-files-available-email">
         <email xmlns="uri:oozie:email-action:0.2">
             <to>${EMAIL}</to>
-            <subject>${wf:name()} No Files Available</subject>
+            <subject>${ENVIRONMENT}: ${wf:name()} No Files Available</subject>
             <body>${wf:name()}: No files to process at this path: '${FILE_CHECK_PATH}'
 JobId: ${wf:id()}
 JobPath: ${wf:appPath()}
