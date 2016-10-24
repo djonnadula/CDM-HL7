@@ -5,9 +5,9 @@
             <to>CorpISDLCDM-EDW@HCAHealthcare.com</to>
             <subject>${wf:name()} Job Failure</subject>
             <body>The ${wf:name()} Oozie job has failed.
-                    JobId: ${wf:id()}
-                    JobPath: ${wf:appPath()}
-                    ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
+JobId: ${wf:id()}
+JobPath: ${wf:appPath()}
+ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
             </body>
         </email>
         <ok to="Kill-kill"/>
