@@ -1,2 +1,3 @@
-TXA,002.txa_document_type|001.primary_id,PATH,CONTAINS,NONE
- 
+TXA,002.txa_document_type|001.primary_id,PATH,CONTAINS,OR
+TXA,015.txa_filler_order_num,PATH,CONTAINS,OR
+TXA,015.txa_filler_order_num|001.entity_id,PATH,CONTAINS,NONE
