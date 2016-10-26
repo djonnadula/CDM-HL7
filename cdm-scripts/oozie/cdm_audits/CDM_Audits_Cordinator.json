@@ -1,0 +1,32 @@
+[
+{
+  "pk": 399, 
+  "model": "desktop.document2", 
+  "fields": {
+    "uuid": "86713472-1898-7b4a-b92b-735057a62660", 
+    "extra": "", 
+    "type": "oozie-coordinator2", 
+    "description": "", 
+    "is_history": false, 
+    "parent_directory": [
+      "975680b0-84f8-40fc-bc61-405af17293a2", 
+      1, 
+      false
+    ], 
+    "last_modified": "2016-10-25T10:58:30", 
+    "version": 1, 
+    "owner": [
+      "ept8513"
+    ], 
+    "dependencies": [
+      [
+        "ee92c18d-9f68-9388-b63c-0098fdc5ea36", 
+        1, 
+        false
+      ]
+    ], 
+    "data": "{\"end_date\": {\"name\": \"end_date\", \"value\": \"2018-12-01T04:00\"}, \"variables\": [], \"isDirty\": true, \"showAdvancedFrequencyUI\": true, \"variablesUI\": [\"parameter\", \"input_path\", \"output_path\"], \"workflowParameters\": [], \"properties\": {\"job_xml\": \"\", \"execution\": \"FIFO\", \"end\": \"${end_date}\", \"description\": \"\", \"frequency_number\": 1, \"workflow\": \"ee92c18d-9f68-9388-b63c-0098fdc5ea36\", \"deployment_dir\": \"/user/hue/oozie/workspaces/hue-oozie-1477410985.72\", \"cron_frequency\": \"0 4 * * *\", \"frequency_unit\": \"days\", \"schema_version\": \"uri:oozie:coordinator:0.2\", \"cron_advanced\": false, \"start\": \"${start_date}\", \"timeout\": null, \"timezone\": \"America/Chicago\", \"credentials\": [], \"parameters\": [{\"name\": \"oozie.use.system.libpath\", \"value\": true}, {\"name\": \"start_date\", \"value\": \"2016-10-25T04:00\"}, {\"name\": \"end_date\", \"value\": \"2018-12-01T04:00\"}], \"sla\": [{\"key\": \"enabled\", \"value\": false}, {\"key\": \"nominal-time\", \"value\": \"${nominal_time}\"}, {\"key\": \"should-start\", \"value\": \"\"}, {\"key\": \"should-end\", \"value\": \"${30 * MINUTES}\"}, {\"key\": \"max-duration\", \"value\": \"\"}, {\"key\": \"alert-events\", \"value\": \"\"}, {\"key\": \"alert-contact\", \"value\": \"\"}, {\"key\": \"notification-msg\", \"value\": \"\"}, {\"key\": \"upstream-apps\", \"value\": \"\"}]}, \"uuid\": \"86713472-1898-7b4a-b92b-735057a62660\", \"name\": \"CDM Audits\", \"id\": 399, \"start_date\": {\"name\": \"start_date\", \"value\": \"2016-10-25T04:00\"}}", 
+    "name": "CDM Audits"
+  }
+}
+]

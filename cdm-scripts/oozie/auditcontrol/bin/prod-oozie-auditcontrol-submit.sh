@@ -7,11 +7,11 @@ cd $DIR/../cfg/
 
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${PROD.FCC.APP.PATH}/filecrushercleanup)
-$(hdfs dfs -put workflow.xml coordinator.xml ${PROD.FCC.APP.PATH})
+$(hdfs dfs -mkdir ${PROD.AUDITCONTROL.APP.PATH})
+$(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.AUDITCONTROL.APP.PATH})
 
 echo "Deploying jobs to prod"
 
-$(oozie job -config prod-filecrusher-cleanup-coordinator.properties -submit)
+$(oozie job -config prod-audit-control-coordinator.properties -submit)
 
 echo "Deploy done"
