@@ -8,6 +8,9 @@ cd $DIR/../cfg/
 echo $(pwd)
 
 $(hdfs dfs -mkdir ${PROD.PARTITIONER.APP.PATH})
+$(hdfs dfs -rm  ${PROD.PARTITIONER.APP.PATH}/workflow.xml)
+$(hdfs dfs -rm  ${PROD.PARTITIONER.APP.PATH}/coordinator.xml)
+$(hdfs dfs -rm -f  ${PROD.PARTITIONER.APP.PATH}/lib/)
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.PARTITIONER.APP.PATH})
 
 echo "Deploying jobs to prod"

@@ -8,6 +8,9 @@ cd $DIR/../cfg/
 echo $(pwd)
 
 $(hdfs dfs -mkdir ${QA.PARTITIONER.APP.PATH})
+$(hdfs dfs -rm  ${QA.PARTITIONER.APP.PATH}/workflow.xml)
+$(hdfs dfs -rm  ${QA.PARTITIONER.APP.PATH}/coordinator.xml)
+$(hdfs dfs -rm -f  ${QA.PARTITIONER.APP.PATH}/lib/)
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.PARTITIONER.APP.PATH})
 
 echo "Deploying jobs to qa"
