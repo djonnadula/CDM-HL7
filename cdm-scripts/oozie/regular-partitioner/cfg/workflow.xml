@@ -32,10 +32,10 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
         <hive xmlns="uri:oozie:hive-action:0.2">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
-            <job-xml>${nameNode}/user/dof7475/partitioner/lib/hive-config.xml</job-xml>
+            <job-xml>${workflowPath}/lib/hive-config.xml</job-xml>
             <script>${SCRIPT_PATH}</script>
-            <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
             <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
+            <param>FILE_CHECK_PATH=${FILE_CHECK_PATH}</param>
         </hive>
         <ok to="End"/>
         <error to="Kill"/>
@@ -53,8 +53,8 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
             <to>${EMAIL}</to>
             <subject>${ENVIRONMENT}: ${wf:name()} Partition Available</subject>
             <body>${wf:name()}: No partition to add at this path: '${FILE_CHECK_PATH}'
-                JobId: ${wf:id()}
-                JobPath: ${wf:appPath()}
+JobId: ${wf:id()}
+JobPath: ${wf:appPath()}
             </body>
         </email>
         <ok to="End"/>

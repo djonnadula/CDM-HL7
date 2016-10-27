@@ -7,7 +7,7 @@ cd $DIR/../cfg/
 
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${PROD.FC.APP.PATH}/filecrusher)
+$(hdfs dfs -mkdir ${PROD.FC.APP.PATH})
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.FC.APP.PATH})
 
 echo "Deploying jobs to prod"

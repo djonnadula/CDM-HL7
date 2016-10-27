@@ -1,0 +1,1 @@
+ALTER TABLE hl7.hl7_raw_data ADD PARTITION (message_type='${MESSAGE_TYPE}', message_date='${MESSAGE_DATE}') LOCATION '${FILE_CHECK_PATH}';
