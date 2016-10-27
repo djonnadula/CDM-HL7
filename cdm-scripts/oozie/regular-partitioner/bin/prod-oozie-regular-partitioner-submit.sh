@@ -7,11 +7,12 @@ cd $DIR/../cfg/
 
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${PROD.FCC.APP.PATH})
-$(hdfs dfs -put workflow.xml coordinator.xml ${PROD.FCC.APP.PATH})
+$(hdfs dfs -mkdir ${PROD.REGULAR.PARTITIONER.APP.PATH})
+$(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.REGULAR.PARTITIONER.APP.PATH})
 
 echo "Deploying jobs to prod"
 
-$(oozie job -config prod-filecrusher-cleanup-coordinator.properties -submit)
+$(oozie job -config hl7_all_proc_rejected/prod-hl7_all_proc_rejected-partitioner-coordinator.properties -submit)
+
 
 echo "Deploy done"

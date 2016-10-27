@@ -7,11 +7,11 @@ cd $DIR/../cfg/
 
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${QA.AUDITCONTROL.APP.PATH})
-$(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.AUDITCONTROL.APP.PATH})
+$(hdfs dfs -mkdir ${QA.REGULAR.PARTITIONER.APP.PATH})
+$(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.REGULAR.PARTITIONER.APP.PATH})
 
 echo "Deploying jobs to qa"
 
-$(oozie job -config qa-audit-control-coordinator.properties -submit)
+$(oozie job -config hl7_all_proc_rejected/qa-hl7_all_proc_rejected-partitioner-coordinator.properties -submit)
 
 echo "Deploy done"

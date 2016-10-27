@@ -7,7 +7,7 @@ cd $DIR/../cfg/
 
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${QA.FCC.APP.PATH}/filecrushercleanup)
+$(hdfs dfs -mkdir ${QA.FCC.APP.PATH})
 $(hdfs dfs -put workflow.xml coordinator.xml ${QA.FCC.APP.PATH})
 
 echo "Deploying jobs to qa"
