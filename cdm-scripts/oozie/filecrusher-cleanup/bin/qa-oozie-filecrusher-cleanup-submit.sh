@@ -8,6 +8,8 @@ cd $DIR/../cfg/
 echo $(pwd)
 
 $(hdfs dfs -mkdir ${QA.FCC.APP.PATH})
+$(hdfs dfs -rm  ${QA.FCC.APP.PATH}/workflow.xml)
+$(hdfs dfs -rm  ${QA.FCC.APP.PATH}/coordinator.xml)
 $(hdfs dfs -put workflow.xml coordinator.xml ${QA.FCC.APP.PATH})
 
 echo "Deploying jobs to qa"
