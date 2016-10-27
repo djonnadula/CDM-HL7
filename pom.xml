@@ -47,7 +47,7 @@
         <scala.version>2.10.5</scala.version>
         <scala.binary.version>2.10</scala.binary.version>
         <spark.version>1.6.0</spark.version>
-        <cdh.version>cdh5.7.2</cdh.version>
+        <cdh.version>cdh5.7.3</cdh.version>
         <kafka.version>0.9.0-kafka-2.0.2</kafka.version>
     </properties>
     <dependencies>
