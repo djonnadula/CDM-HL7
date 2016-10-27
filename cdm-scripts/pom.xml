@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>Scrips Repo</name>
+    <name>Scripts Repo</name>
     <artifactId>cdm-scripts</artifactId>
     <version>${project.version}</version>
 
@@ -78,13 +78,15 @@
         <QA.AUDITCONTROL.END.TIME>2017-10-26T10:00Z</QA.AUDITCONTROL.END.TIME>
     </properties>
 
-
     <build>
         <outputDirectory>target/cdm-scripts</outputDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -98,7 +100,6 @@
                             <resources>
                                 <resource>
                                     <directory>oozie</directory>
-                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
@@ -108,5 +109,13 @@
         </plugins>
     </build>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.m6d</groupId>
+            <artifactId>filecrush</artifactId>
+            <version>2.2.2-SNAPSHOT</version>
+            <systemPath>${project.basedir}/oozie/filecrusher/lib/filecrush-2.2.2-SNAPSHOT.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+    </dependencies>
 </project>
