@@ -98,6 +98,7 @@
                         <configuration>
                             <nonFilteredFileExtensions>
                                 <nonFilteredFileExtension>jar</nonFilteredFileExtension>
+                                <nonFilteredFileExtension>keytab</nonFilteredFileExtension>
                             </nonFilteredFileExtensions>
                             <outputDirectory>${basedir}/target/cdm-scripts/oozie</outputDirectory>
                             <resources>
