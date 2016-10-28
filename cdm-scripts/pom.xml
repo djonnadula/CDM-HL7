@@ -96,10 +96,14 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <nonFilteredFileExtensions>
+                                <nonFilteredFileExtension>jar</nonFilteredFileExtension>
+                            </nonFilteredFileExtensions>
                             <outputDirectory>${basedir}/target/cdm-scripts/oozie</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>oozie</directory>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
