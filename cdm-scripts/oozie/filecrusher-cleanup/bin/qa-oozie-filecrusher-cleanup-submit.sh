@@ -5,6 +5,8 @@ export OOZIE_URL=https://xrdcldbdu010001.unix.medcity.net:11443/oozie
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
+echo "Deploying filecrusher cleanup jobs"
+
 echo $(pwd)
 
 $(hdfs dfs -mkdir ${QA.FCC.APP.PATH})

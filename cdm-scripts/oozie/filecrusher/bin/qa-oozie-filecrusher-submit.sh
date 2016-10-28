@@ -5,12 +5,14 @@ export OOZIE_URL=https://xrdcldbdm010001.unix.medcity.net:11443/oozie
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
+echo "Deploying filecrusher jobs"
+
 echo $(pwd)
 
 $(hdfs dfs -mkdir ${QA.FC.APP.PATH})
 $(hdfs dfs -rm  ${QA.FC.APP.PATH}/workflow.xml)
 $(hdfs dfs -rm  ${QA.FC.APP.PATH}/coordinator.xml)
-$(hdfs dfs -rm -f  ${QA.FC.APP.PATH}/lib/)
+$(hdfs dfs -rm -r -f ${QA.FC.APP.PATH}/lib/)
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.FC.APP.PATH})
 
 echo "Deploying jobs to qa"
