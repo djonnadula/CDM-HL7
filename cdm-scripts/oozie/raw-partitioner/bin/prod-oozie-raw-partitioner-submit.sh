@@ -5,9 +5,14 @@ export OOZIE_URL=https://xrdclpbdu010001.unix.medcity.net:11443/oozie
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
+echo "Deploying raw partitioner jobs"
+
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${PROD.PARTITIONER.APP.PATH}/partitioner)
+$(hdfs dfs -mkdir ${PROD.PARTITIONER.APP.PATH})
+$(hdfs dfs -rm  ${PROD.PARTITIONER.APP.PATH}/workflow.xml)
+$(hdfs dfs -rm  ${PROD.PARTITIONER.APP.PATH}/coordinator.xml)
+$(hdfs dfs -rm -r -f ${PROD.PARTITIONER.APP.PATH}/lib/)
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.PARTITIONER.APP.PATH})
 
 echo "Deploying jobs to prod"

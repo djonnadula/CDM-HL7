@@ -1,0 +1,1 @@
+ALTER TABLE hl7.hl7_all_proc_rejected ADD PARTITION (message_date='${MESSAGE_DATE}') LOCATION '${FILE_CHECK_PATH}';

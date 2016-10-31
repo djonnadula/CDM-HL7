@@ -1,1 +1,0 @@
-ALTER TABLE hl7.hl7_raw_data ADD PARTITION (message_type='${MESSAGE_TYPE}', message_date='${MESSAGE_DATE}') LOCATION '/user/hive/warehouse/hl7.db/raw/message_type=${MESSAGE_TYPE}/message_date=${MESSAGE_DATE}';

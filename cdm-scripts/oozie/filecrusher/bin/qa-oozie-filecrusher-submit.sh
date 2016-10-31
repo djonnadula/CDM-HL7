@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
-export OOZIE_URL=https://xrdcldbdu010001.unix.medcity.net:11443/oozie
+export OOZIE_URL=https://xrdcldbdm010001.unix.medcity.net:11443/oozie
 #http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../cfg/
 
+echo "Deploying filecrusher jobs"
+
 echo $(pwd)
 
-$(hdfs dfs -mkdir ${QA.FC.APP.PATH}/filecrusher)
+$(hdfs dfs -mkdir ${QA.FC.APP.PATH})
+$(hdfs dfs -rm  ${QA.FC.APP.PATH}/workflow.xml)
+$(hdfs dfs -rm  ${QA.FC.APP.PATH}/coordinator.xml)
+$(hdfs dfs -rm -r -f ${QA.FC.APP.PATH}/lib/)
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.FC.APP.PATH})
 
 echo "Deploying jobs to qa"
