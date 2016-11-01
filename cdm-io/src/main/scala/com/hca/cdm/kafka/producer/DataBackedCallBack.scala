@@ -13,8 +13,6 @@ import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerRecor
   */
 class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val kafkaProducer: KafkaProducer[Array[Byte], Array[Byte]], val shouldRetry: Boolean) extends Logg with Callback {
 
-  private val defaultRetries: Int = DEFAULT_RETRIES
-  private val waitBetweenTries = defaultWaitBetweenRetriesMS
   private var retryHandler: RetryHandler = _
 
   override def onCompletion(metadata: RecordMetadata, exception: Exception): Unit = {
@@ -23,7 +21,7 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
         error("Failed to Send Record : " + data.value() + " to topic " + data.topic() + " Trying to Sending again .. ", exception)
         kafkaProducer.send(data).get()
       } else {
-        this.retryHandler = RetryHandler(defaultRetries, waitBetweenTries)
+        this.retryHandler = RetryHandler()
         retrySend(exception)
       }
     } else debug("Record Has been sent to Topic : " + metadata.topic() + " at Offset " + metadata.offset())
