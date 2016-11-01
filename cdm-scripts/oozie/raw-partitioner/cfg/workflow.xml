@@ -36,6 +36,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}
             <script>${SCRIPT_PATH}</script>
             <param>MESSAGE_TYPE=${MESSAGE_TYPE}</param>
             <param>MESSAGE_DATE=${MESSAGE_DATE}</param>
+            <param>FILE_CHECK_PATH=${FILE_CHECK_PATH}</param>
         </hive>
         <ok to="End"/>
         <error to="Kill"/>
