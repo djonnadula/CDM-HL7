@@ -24,7 +24,7 @@ package object notification {
 
   }
 
-  def EVENT_TIME: String = " Event Triggered time :: " + new Date().toString
+  def EVENT_TIME: String = "Event Triggered time :: " + new Date().toString
 
   import TaskState._
 

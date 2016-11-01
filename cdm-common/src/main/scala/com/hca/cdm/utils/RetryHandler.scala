@@ -43,5 +43,7 @@ object RetryHandler {
 
   def apply(defaultRetries: Int, waitBetweenTries: Long): RetryHandler = new RetryHandler(defaultRetries, waitBetweenTries)
 
+  def apply(): RetryHandler = new RetryHandler()
+
 
 }
