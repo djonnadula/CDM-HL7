@@ -107,6 +107,6 @@ chmod -R 0774 $SERVICEDIR
 cd -P ..
 clean_up
 echo "Build Successful. Configs, Executables are Deployed.
- To Start Service goto /hadoop/cdm/bin and execute hl7Process.sh"
+ To Start Service goto /hadoop/cdm/bin and execute hl7Process.sh start"
 
 

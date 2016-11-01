@@ -1,7 +1,7 @@
 package com.hca.cdm.hl7.constants
 
 import scala.collection.mutable
-
+import com.hca.cdm.hl7.constants.HL7Constants._
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
   *

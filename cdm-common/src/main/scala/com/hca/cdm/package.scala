@@ -8,7 +8,8 @@ import java.nio.charset.StandardCharsets
 import java.time.{LocalDate, Period}
 import java.util.Properties
 import java.util.concurrent.atomic.AtomicInteger
-import java.util.concurrent.{Executors, ScheduledExecutorService, ThreadFactory, ThreadPoolExecutor}
+import java.util.concurrent.{ScheduledExecutorService, ThreadFactory, ThreadPoolExecutor}
+import java.util.concurrent.Executors._
 import com.hca.cdm.notification.{sendMail => mail, EVENT_TIME}
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.log.Logg
@@ -28,7 +29,7 @@ package object cdm extends Logg {
 
   lazy val UTF8 = StandardCharsets.UTF_8
   lazy val ASCII = StandardCharsets.US_ASCII
-  var prop: scala.collection.mutable.Map[String, String] = _
+  private var prop: scala.collection.mutable.Map[String, String] = _
   lazy val propFile = "CDMHL7.properties"
   lazy val EMPTYSTR = ""
   lazy val emptyArray = Array.empty[Any]
@@ -144,11 +145,11 @@ package object cdm extends Logg {
 
 
   def newDaemonCachedThreadPool(id: String): ThreadPoolExecutor = {
-    Executors.newCachedThreadPool(new Factory(id)).asInstanceOf[ThreadPoolExecutor]
+    newCachedThreadPool(new Factory(id)).asInstanceOf[ThreadPoolExecutor]
   }
 
   def newDaemonScheduler(id: String): ScheduledExecutorService = {
-    Executors.newSingleThreadScheduledExecutor(new Factory(id))
+    newSingleThreadScheduledExecutor(new Factory(id))
   }
 
   def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = true, state: taskState = CRITICAL): Boolean = {
