@@ -2,6 +2,12 @@
    <action>
       <workflow>
          <app-path>${workflowPath}</app-path>
+         <configuration>
+            <property>
+               <name>AuditStartDate</name>
+               <value>${coord:nominalTime()}</value>
+            </property>
+         </configuration>
       </workflow>
    </action>
 </coordinator-app>
