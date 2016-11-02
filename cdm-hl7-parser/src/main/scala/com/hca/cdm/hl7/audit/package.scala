@@ -46,9 +46,13 @@ package object audit {
   def auditMsg(hl7Str: String, stage: String)(segments: String = EMPTYSTR, meta: MSGMeta): String = {
     segments match {
       case EMPTYSTR =>
-        s"$hl7Str-$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp"
+        s"$hl7Str-$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}" +
+            s"$PIPE_DELIMITED${meta.medical_record_num}$PIPE_DELIMITED${meta.medical_record_urn}" +
+            s"$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp"
       case _ =>
-        s"$hl7Str-$stage$COLON$segments$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp"
+        s"$hl7Str-$stage$COLON$segments$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}" +
+            s"$PIPE_DELIMITED${meta.medical_record_num}$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED" +
+            s"${meta.account_num}$PIPE_DELIMITED$timeStamp"
     }
   }
 
