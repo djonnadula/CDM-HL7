@@ -5,8 +5,10 @@ import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
+import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -40,15 +42,22 @@ object Hl7SparkUtil {
       .set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
   }
 
+
+  def createStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
+
   /**
     * Creates Spark Streaming Context
     */
-  def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
+  def streaminContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
+    val ctx = getOrCreate(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
+    ctx checkpoint checkpointPath
+    ctx
+  }
 
   /**
     * Creates Spark Context
     */
-  def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
+  private def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
 
 
   /**
