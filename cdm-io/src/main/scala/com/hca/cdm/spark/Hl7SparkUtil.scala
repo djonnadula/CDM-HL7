@@ -5,7 +5,7 @@ import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-import org.apache.spark.streaming.StreamingContext._
+import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
@@ -50,7 +50,7 @@ object Hl7SparkUtil {
     * Creates Spark Streaming Context
     */
   def streamingContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
-    val ctx = getOrCreate(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
+    val ctx = create(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
     ctx checkpoint checkpointPath
     ctx
   }
