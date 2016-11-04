@@ -10,7 +10,7 @@ import com.hca.cdm.utils.DateUtil._
 import java.time.LocalDate.now
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.model.SegmentsState._
-import com.hca.cdm.job.HL7Job
+import com.hca.cdm.job.{HL7Job => job}
 
 
 /**
@@ -19,7 +19,6 @@ import com.hca.cdm.job.HL7Job
   * Report Generator for Metrics for This System
   */
 class StatsReporter(private val app: String) extends Logg with Runnable {
-  private var parserMetrics: Map[String, Long] = _
   private var segmentMetrics: Map[String, Long] = _
   private val builder = new StringBuilder
   private val append = builder append (_: Any)
@@ -43,9 +42,9 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
 
   override def run(): Unit = {
     this.builder.clear()
-    this.parserMetrics = HL7Job.parserMetrics
-    this.segmentMetrics = HL7Job.segmentMetrics
-    HL7Job.resetMetrics()
+    val parserMetrics = job.parserMetrics
+    val segmentMetrics = job.segmentMetrics
+    job.resetMetrics()
     val parserGrp = parserMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
     val segmentsGrp = segmentMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
     val date = dateToString(now.minusDays(1), DATE_PATTERN_YYYY_MM_DD)

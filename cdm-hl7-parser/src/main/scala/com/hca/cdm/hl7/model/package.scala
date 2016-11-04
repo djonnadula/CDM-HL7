@@ -43,10 +43,6 @@ package object model {
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
   lazy val repeat = "^"
-  lazy val DOT = "."
-  lazy val AMPERSAND = "&"
-  lazy val EQUAL = "="
-  lazy val segmentSequence = "segment_sequence"
   val commonNode = synchronized {
     val temp = new mutable.LinkedHashMap[String, String]
     val nodeEle = lookUpProp("common.elements") match {
@@ -72,9 +68,9 @@ package object model {
         if (x contains PIPE_DELIMITED) {
           val split = x split("\\" + PIPE_DELIMITED, -1)
           val temp = split(1)
-          if (temp contains AMPERSAND) {
-            val subCompSplit = temp split("\\" + AMPERSAND, -1)
-            val kv = subCompSplit(1) split("\\" + EQUAL, -1)
+          if (temp contains "&") {
+            val subCompSplit = temp split("\\" + "&", -1)
+            val kv = subCompSplit(1) split("\\" + "=", -1)
             (split(0), subCompSplit(0), kv(0), kv(1))
           } else (split(0), temp, EMPTYSTR, EMPTYSTR)
         } else (x, EMPTYSTR, EMPTYSTR, EMPTYSTR)
@@ -116,29 +112,26 @@ package object model {
 
 
   def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = EMPTYSTR): String = {
-   s"$hl7$COLON$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}"+
-      s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp$PIPE_DELIMITED"+
+    hl7 + COLON + stage + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num +
+      PIPE_DELIMITED + meta.medical_record_urn + PIPE_DELIMITED + meta.account_num + PIPE_DELIMITED + timeStamp + PIPE_DELIMITED +
       (if (t != null) reason + (t.getStackTrace mkString repeat) else reason) + PIPE_DELIMITED + (if (raw ne EMPTYSTR) raw else toJson(data))
   }
 
   def rejectRawMsg(hl7: String, stage: String = EMPTYSTR, raw: String, reason: String, t: Throwable): String = {
-    rejectMsg(hl7, stage, metaFromRaw(raw), reason, null, t, raw)
-  }
-
-  def metaFromRaw(raw: String): MSGMeta = {
+    var meta = NONE
     val delim = if (raw contains "\r\n") "\r\n" else "\n"
     val rawSplit = raw split delim
     valid(rawSplit, 1) match {
       case true => val msh = rawSplit(0)
         val temp = PIPER split msh
-        Try(MSGMeta(temp(9), temp(6), EMPTYSTR, EMPTYSTR, EMPTYSTR, temp(3))) match {
+        meta = Try(MSGMeta(temp(9), temp(6), EMPTYSTR, EMPTYSTR, EMPTYSTR, temp(3))) match {
           case Success(me) => me
           case _ => NONE
         }
       case _ => NONE
     }
+    rejectMsg(hl7, stage, meta, reason, null, t, raw)
   }
-
 
   def initSegStateWithZero: mutable.HashMap[SegState, Long] = {
     val temp = new mutable.HashMap[SegState, Long]()
@@ -168,7 +161,7 @@ package object model {
             var index = -1
             outFormats.map(outFormat => {
               index += 1
-              val outFormSplit = outFormat split AMPERSAND
+              val outFormSplit = outFormat split "&"
               outFormat contains JSON.toString match {
                 case true =>
                   (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0), fieldWithNoAppends), loadFilters(filterFile))
@@ -177,21 +170,10 @@ package object model {
               }
             }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
           } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
-        case _ =>
-          seg._1 contains COLON match {
-            case true =>
-              val c = (seg._1 split COLON).map(_.split("\\" + AMPERSAND, -1))
-
-
-              List(Model(seg._1, seg._2, delimitedBy, modelFieldDelim, None, None, Some(seg._1 split COLON)))
-            case _ =>
-              List(Model(seg._1, seg._2, delimitedBy, modelFieldDelim))
-          }
-
+        case _ => List(Model(seg._1, seg._2, delimitedBy, modelFieldDelim))
       }
     }) groupBy (_.reqSeg))
   }
-  case class SegmentsMapping(seg : String, mapping : Array[String])
 
   case class Hl7Segments(msgType: HL7, models: Map[String, List[Model]])
 
@@ -201,8 +183,7 @@ package object model {
 
   case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String], reqNoAppends: Array[String] = Array.empty[String])
 
-  case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\"+repeat, modelFieldDelim: String = PIPE_DELIMITED,
-                   adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None, seqRelationMapping: Option[Array[String]] = None) extends modelLayout {
+  case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\^", modelFieldDelim: String = "|", adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
     lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
 
@@ -247,7 +228,7 @@ package object model {
 
   }
 
-  def loadFile(file: String, delimitedBy: String = EQUAL, keyIndex: Int = 0): Map[String, String] = {
+  def loadFile(file: String, delimitedBy: String = "=", keyIndex: Int = 0): Map[String, String] = {
     Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
       case x@ele if ele.nonEmpty => ele(keyIndex) -> x(keyIndex + 1)
     } toMap
