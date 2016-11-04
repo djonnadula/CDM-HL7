@@ -7,13 +7,8 @@ A weekly Oozie job that removes the `/clone` directories created by the filecrus
 3. Sends an email in case of failure.
 
 ##### Deployment
-1. Put the `coordinator.xml`, `workflow.xml` into an HDFS directory
-2. Update the `oozie.coord.application.path=${nameNode}/` property in each prod*.properties files to point to this directory
-3. Update the `workflowPath=${nameNode}/` property in each prod*.properties files to point to this directory
-4. Update all `/clone` paths to match what has been set in the filecrusher
-5. Run `oozie job -config prod-filecrusher-cleanup-coordinator.properties -submit` 
-6. Check the Hue Oozie coordinator UI to see that 1 job has been submitted
-7. Success, the job have been scheduled and submitted.
+1. Run bin/prod-oozie-filecrusher-cleanup-submit.sh or bin/qa-oozie-filecrusher-cleanup-submit.sh depending on environment
+
 
 ##### Notes
 

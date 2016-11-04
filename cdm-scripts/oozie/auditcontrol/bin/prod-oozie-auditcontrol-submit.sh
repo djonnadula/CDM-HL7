@@ -14,6 +14,7 @@ $(hdfs dfs -rm  ${PROD.AUDITCONTROL.APP.PATH}/workflow.xml)
 $(hdfs dfs -rm  ${PROD.AUDITCONTROL.APP.PATH}/coordinator.xml)
 $(hdfs dfs -rm -r -f ${PROD.AUDITCONTROL.APP.PATH}/lib/)
 $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.AUDITCONTROL.APP.PATH})
+$(hdfs dfs -put /home/corpsrvcdmbtch/corpsrvcdmbtch.keytab ${PROD.AUDITCONTROL.APP.PATH}/lib/)
 
 echo "Deploying jobs to prod"
 

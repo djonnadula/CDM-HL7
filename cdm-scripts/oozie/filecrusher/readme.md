@@ -20,13 +20,7 @@ directory to mitigate risk of losing data if a failure occurs.
 7. Sends an email in case of failure.
 
 ##### Deployment
-1. Put the `lib`, `coordinator.xml`, `workflow.xml` into an HDFS directory
-2. Update the `oozie.coord.application.path=${nameNode}/` property in each prod*.properties files to point to this directory
-3. Update the `workflowPath=${nameNode}/` property in each prod*.properties files to point to this directory
-4. Make sure that the executing user can write to all `/clone`, `/crush` directories
-5. Run the `prod-oozie-filecrusher-submit.sh` script. 
-6. Check the Hue Oozie coordinator UI to see that 8 jobs have been submitted
-7. Success, the jobs have been scheduled and submitted.
+1. Run bin/prod-oozie-filecrusher-submit.sh or bin/qa-oozie-filecrusher-submit.sh depending on environment
 
 ##### Notes
 * This job only moves and crushes *.snappy files. In a future iteration the logic will be based on file size, not name.
