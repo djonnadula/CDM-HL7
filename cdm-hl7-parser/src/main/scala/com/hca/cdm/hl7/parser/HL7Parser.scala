@@ -14,11 +14,12 @@ import com.hca.cdm.hl7.exception.{InvalidHl7FormatException, TemplateInfoExcepti
 import com.hca.cdm.hl7.model.HL7State._
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
-import com.hca.cdm.hl7.validation.ValidationUtil.{isValidMsg => metRequirement, hasMultiMSH => msgHasmultiMSH}
+import com.hca.cdm.hl7.validation.ValidationUtil.{hasMultiMSH => msgHasmultiMSH, isValidMsg => metRequirement}
 import com.hca.cdm.log.Logg
 import org.apache.commons.lang3.{StringUtils => sutil}
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
+import scala.language.postfixOps
 import scala.util.control.Breaks._
 import scala.util.{Failure, Success, Try}
 

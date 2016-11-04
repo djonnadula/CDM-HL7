@@ -5,8 +5,10 @@ import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
+import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -26,11 +28,12 @@ object Hl7SparkUtil {
       .set(EXECUTOR_CORES, parHint)
       .set("spark.driver-memory", lookUpProp("hl7.spark.driver-memory"))
       .set("spark.dynamicAllocation.initialExecutors", lookUpProp("hl7.spark.num-executors"))
-      .set("spark.queue", lookUpProp("hl7.spark.queue"))
+      .set("spark.yarn.queue", lookUpProp("hl7.spark.queue"))
       .set("spark.dynamicAllocation.enabled", lookUpProp("hl7.spark.dynamicAllocation.enabled"))
       .set("spark.dynamicAllocation.maxExecutors", lookUpProp("hl7.spark.dynamicAllocation.maxExecutors"))
       .set("spark.dynamicAllocation.minExecutors", lookUpProp("hl7.spark.dynamicAllocation.minExecutors"))
       .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
+      .set("spark.yarn.executor.memoryOverhead", lookUpProp("hl7.spark.yarn.executor.memoryOverhead"))
       .set("spark.streaming.receiver.writeAheadLog.enable", "true")
       .set("spark.streaming.unpersist", "true")
       .set("spark.streaming.kafka.maxRetries", lookUpProp("h7.spark.kafka.retries"))
@@ -40,15 +43,22 @@ object Hl7SparkUtil {
       .set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
   }
 
+
+  def createStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
+
   /**
     * Creates Spark Streaming Context
     */
-  def getStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
+  def streaminContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
+    val ctx = getOrCreate(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
+    ctx checkpoint checkpointPath
+    ctx
+  }
 
   /**
     * Creates Spark Context
     */
-  def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
+  private def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
 
 
   /**
