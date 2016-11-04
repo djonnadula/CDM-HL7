@@ -414,7 +414,7 @@ object HL7Job extends Logg with App {
     taskMetrics.foreach({ case (k, metric) => if (metric > 0L) this.parserAccumulators(k) += metric })
   }
 
-  private def ckeckForStageToComplete(): Boolean = {
+  private def checkForStageToComplete(): Boolean = {
     ensureStageCompleted.get() match {
       case true =>
         true
@@ -477,7 +477,7 @@ object HL7Job extends Logg with App {
     val timeCheck = timeInterval * 60000L
 
     override def run(): Unit = {
-      ckeckForStageToComplete()
+      checkForStageToComplete()
       if (!(runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
         msgTypeFreq.transform({ case (k, v) =>
           v._2 <= 0 match {
