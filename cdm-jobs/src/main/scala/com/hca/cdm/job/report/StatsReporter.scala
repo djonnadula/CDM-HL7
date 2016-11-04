@@ -35,8 +35,8 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
       "when HL7 comes in and we are trying to pull EVN and this message don't have EVN defined </p>")
     case OVERSIZED => defNotes append ("<p>" + OVERSIZED + " : Record Cannot be handle by Kafka. So in this case data will be routed to appropriate HDFS location. Check for " +
       "Job config for more Details.</p>")
-    case FILTERED => defNotes append ("<p>" + FILTERED + " : Special Requests like CDI, SCRI .. requires filtering and what ever criteria defined for then doesn't meet " +
-      "for this HL7 and it was Filtered for them.</p>")
+    case FILTERED => defNotes append ("<p>" + FILTERED + " : Special Requests like CDI, SCRI .. requires filtering and what ever criteria defined for them doesn't meet " +
+      "for this HL7 and it was Filtered.</p>")
   }
   defNotes append ("<p>" + HL7State.REJECTED + " : Hl7 Doesn't meet the Requirement to Process. So it was Rejected as per Criteria and this log can be found in Rejects Topic</p>")
 
