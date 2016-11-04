@@ -1,7 +1,7 @@
 refresh hl7.hl7_audit_data; invalidate metadata hl7.hl7_audit_data;
 refresh cdm_scri.nlp_patient_id_data; invalidate metadata cdm_scri.nlp_patient_id_data;
 
-select 
+select
 a.process_name as RAW_MSG, 
 b.process_name as JSON_MSG,  
 upper(Substring(c.process_name,1, Instr(c.process_name,':')-1)) as SEG_MSG, 
@@ -9,6 +9,7 @@ substring(a.msg_create_date_time,1,8) as MSG_Create_Date,
 substring(a.etl_firstinsert_datetime,1,8) as Raw_ETL_Insert_Date, 
 substring(b.etl_firstinsert_datetime,1,8) as JSON_ETL_Insert_Date, 
 substring(c.etl_firstinsert_datetime,1,8) as SEGMENTS_ETL_Insert_Date,
+now() as Current_Date_Time,
 count(*) as RowCount
 
 from hl7.hl7_audit_data a

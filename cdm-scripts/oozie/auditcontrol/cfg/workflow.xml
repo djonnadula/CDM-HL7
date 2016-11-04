@@ -49,7 +49,10 @@
         <email xmlns="uri:oozie:email-action:0.2">
             <to>${EMAIL}</to>
             <subject>${ENVIRONMENT}: CDM_BD_Audit Results</subject>
-            <body>Results: Please find attached.</body>
+            <body>Results: Please find attached.
+Job start time: ${AuditStartDate}
+Job end time:   ${timestamp()}
+            </body>
             <content_type>text/plain</content_type>
             <attachment>result1.txt</attachment>
         </email>
