@@ -70,12 +70,13 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
           case _ =>
             data.map(node => {
               try {
-                node._1.substring(node._1.indexOf(".") + 1) == model.reqSeg match {
+                node._1.substring(node._1.indexOf(DOT) + 1) == model.reqSeg match {
                   case true =>
                     layout = model.layoutCopy
                     modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true) match {
                       case true =>
                         handleCommonSegments(data, layout)
+                        layout += segmentSequence -> s"${node._1.substring(0,node._1.indexOf(DOT)).toInt}$EMPTYSTR"
                         (makeFinal(layout), null)
                       case _ => (skippedStr, null)
                     }
@@ -117,7 +118,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
             if (node._1 != commonNodeStr) if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
             (EMPTYSTR, null)
           case _ =>
-            node._1.substring(node._1.indexOf(".") + 1) == whichSeg match {
+            node._1.substring(node._1.indexOf(DOT) + 1) == whichSeg match {
               case true => if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                 dataExist = true
                 (EMPTYSTR, null)
@@ -136,7 +137,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   }
 
   /**
-    * Final Output Format of Trasaction
+    * Final Output Format of Transaction
     *
     * @param layout
     * @return

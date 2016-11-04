@@ -191,7 +191,7 @@ package object model {
   case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String], reqNoAppends: Array[String] = Array.empty[String])
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\"+repeat, modelFieldDelim: String = PIPE_DELIMITED,
-                   adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None, seqRelationMapping: Option[Array[String]] = None) extends modelLayout {
+                   adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
     lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
 
