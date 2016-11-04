@@ -23,6 +23,11 @@
             <artifactId>cdm-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.flume</groupId>
+            <artifactId>flume-ng-core</artifactId>
+            <version>${flume.version}-${cdh.version}</version>
+        </dependency>
        <!-- <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
