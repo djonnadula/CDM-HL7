@@ -33,8 +33,8 @@ object Hl7SparkUtil {
       .set("spark.dynamicAllocation.maxExecutors", lookUpProp("hl7.spark.dynamicAllocation.maxExecutors"))
       .set("spark.dynamicAllocation.minExecutors", lookUpProp("hl7.spark.dynamicAllocation.minExecutors"))
       .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
-      .set("spark.yarn.executor.memoryOverhead", lookUpProp("hl7.spark.yarn.executor.memoryOverhead"))
       .set("spark.streaming.receiver.writeAheadLog.enable", "true")
+      .set("spark.streaming.stopGracefullyOnShutdown", "true")
       .set("spark.streaming.unpersist", "true")
       .set("spark.streaming.kafka.maxRetries", lookUpProp("h7.spark.kafka.retries"))
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
@@ -49,7 +49,7 @@ object Hl7SparkUtil {
   /**
     * Creates Spark Streaming Context
     */
-  def streaminContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
+  def streamingContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
     val ctx = getOrCreate(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
     ctx checkpoint checkpointPath
     ctx

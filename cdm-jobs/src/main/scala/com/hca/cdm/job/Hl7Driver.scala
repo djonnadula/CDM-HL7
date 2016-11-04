@@ -80,7 +80,6 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.dynamicAllocation.maxExecutors", hl7_spark_dynamicAllocation_maxExecutors)
     .setConf("spark.dynamicAllocation.minExecutors", hl7_spark_dynamicAllocation_minExecutors)
     .setConf("spark.driver.maxResultSize", hl7_spark_driver_maxResultSize)
-    .setConf("spark.yarn.executor.memoryOverhead", lookUpProp("hl7.spark.yarn.executor.memoryOverhead"))
     .setMainClass(lookUpProp("hl7.class"))
     .setAppResource(lookUpProp("hl7.artifact"))
     .setJavaHome("/usr/bin/java")

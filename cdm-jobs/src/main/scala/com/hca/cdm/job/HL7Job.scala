@@ -101,7 +101,7 @@ object HL7Job extends Logg with App {
       ctx
     }
   }
-  private val sparkStrCtx: StreamingContext = sparkUtil streaminContext(checkPoint, batchCycle, sparkConf, newCtxIfNotExist)
+  private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, batchCycle, sparkConf, newCtxIfNotExist)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   private var segmentsAccumulators: TrieMap[String, Accumulator[Long]] = _
   private var segmentsDriverMetrics: TrieMap[String, Long] = _
