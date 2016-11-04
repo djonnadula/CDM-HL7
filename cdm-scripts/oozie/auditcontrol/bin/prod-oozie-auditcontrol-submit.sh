@@ -17,6 +17,6 @@ $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.AUDITCONTROL.APP.PAT
 
 echo "Deploying jobs to prod"
 
-$(oozie job -config prod-audit-control-coordinator.properties -submit)
+oozie job -config prod-audit-control-coordinator.properties -submit
 
 echo "Deploy done"

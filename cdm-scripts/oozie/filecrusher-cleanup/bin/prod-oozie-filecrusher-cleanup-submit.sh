@@ -17,6 +17,6 @@ $(hdfs dfs -put workflow.xml coordinator.xml ${PROD.FCC.APP.PATH})
 
 echo "Deploying jobs to prod"
 
-$(oozie job -config prod-filecrusher-cleanup-coordinator.properties -submit)
+oozie job -config prod-filecrusher-cleanup-coordinator.properties -submit
 
 echo "Deploy done"

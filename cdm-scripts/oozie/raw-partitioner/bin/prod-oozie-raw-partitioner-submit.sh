@@ -17,8 +17,8 @@ $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.PARTITIONER.APP.PATH
 
 echo "Deploying jobs to prod"
 
-$(oozie job -config adt/prod-adt-partitioner-coordinator.properties -submit)
-$(oozie job -config mdm/prod-mdm-partitioner-coordinator.properties -submit)
-$(oozie job -config oru/prod-oru-partitioner-coordinator.properties -submit)
+oozie job -config adt/prod-adt-partitioner-coordinator.properties -submit
+oozie job -config mdm/prod-mdm-partitioner-coordinator.properties -submit
+oozie job -config oru/prod-oru-partitioner-coordinator.properties -submit
 
 echo "Deploy done"

@@ -16,6 +16,6 @@ $(hdfs dfs -put workflow.xml coordinator.xml ${QA.FCC.APP.PATH})
 
 echo "Deploying jobs to qa"
 
-$(oozie job -config qa-filecrusher-cleanup-coordinator.properties -submit)
+oozie job -config qa-filecrusher-cleanup-coordinator.properties -submit
 
 echo "Deploy done"
