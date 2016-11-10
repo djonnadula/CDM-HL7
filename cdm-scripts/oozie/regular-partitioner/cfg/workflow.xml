@@ -3,11 +3,11 @@
         <credential name="hcat" type="hcat">
             <property>
                 <name>hcat.metastore.uri</name>
-                <value>thrift://xrdcldbdm010001.unix.medcity.net:9083</value>
+                <value>${HCAT.METASTORE.URI}</value>
             </property>
             <property>
                 <name>hcat.metastore.principal</name>
-                <value>hive/xrdcldbdm010001.unix.medcity.net@HCA.CORPAD.NET</value>
+                <value>${HCAT.METASTORE.PRINCIPAL}</value>
             </property>
         </credential>
     </credentials>
