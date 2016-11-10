@@ -3,11 +3,11 @@
         <credential name="hcat" type="hcat">
             <property>
                 <name>hcat.metastore.uri</name>
-                <value>${HCAT.METASTORE.URI}</value>
+                <value>${HCAT_METASTORE_URI}</value>
             </property>
             <property>
                 <name>hcat.metastore.principal</name>
-                <value>${HCAT.METASTORE.PRINCIPAL}</value>
+                <value>${HCAT_METASTORE_PRINCIPAL}</value>
             </property>
         </credential>
     </credentials>
