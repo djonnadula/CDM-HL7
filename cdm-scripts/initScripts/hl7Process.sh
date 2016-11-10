@@ -69,7 +69,7 @@ start() {
     echo -n $"Starting $NAME: "
     set +e
     cd ${SERVICEDIR} && \
-    nohup $INVOCATION >>"/var/log/cdm/cdm-hl7/logs/logfile" 2>"/var/log/cdm/cdm-hl7/logs/errorlog" &
+    nohup $INVOCATION >>"/var/log/cdm/cdm-hl7/logs/logfile" 2>>"/var/log/cdm/cdm-hl7/logs/errorlog" &
     pgrep -f $SERVICE > $PIDFILE
     RETVAL=$?
     echo
