@@ -25,6 +25,10 @@
         <QA.HIVE.SCRI.DB.PATH>${NAMENODE}/user/hive/warehouse/cdm_scri</QA.HIVE.SCRI.DB.PATH>
         <PROD.WORKFLOW.ROOT>${NAMENODE}/user/corpsrvcdmbtch/cdm/oozie_jobs</PROD.WORKFLOW.ROOT>
         <QA.WORKFLOW.ROOT>${NAMENODE}/user/dof7475</QA.WORKFLOW.ROOT>
+        <PROD.HCAT.METASTORE.URI>thrift://xrdclpbdm010001.unix.medcity.net:9083</PROD.HCAT.METASTORE.URI>
+        <QA.HCAT.METASTORE.URI>thrift://xrdcldbdm010001.unix.medcity.net:9083</QA.HCAT.METASTORE.URI>
+        <PROD.HCAT.METASTORE.PRINCIPAL>hive/xrdclpbdm010001.unix.medcity.net@HCA.CORPAD.NET</PROD.HCAT.METASTORE.PRINCIPAL>
+        <QA.HCAT.METASTORE.PRINCIPAL>hive/xrdcldbdm010001.unix.medcity.net@HCA.CORPAD.NET</QA.HCAT.METASTORE.PRINCIPAL>
 
         <!-- file crusher properties -->
         <!-- PROD -->
