@@ -25,6 +25,7 @@
         <QA.HIVE.SCRI.DB.PATH>${NAMENODE}/user/hive/warehouse/cdm_scri</QA.HIVE.SCRI.DB.PATH>
         <PROD.WORKFLOW.ROOT>${NAMENODE}/user/corpsrvcdmbtch/cdm/oozie_jobs</PROD.WORKFLOW.ROOT>
         <QA.WORKFLOW.ROOT>${NAMENODE}/user/dof7475</QA.WORKFLOW.ROOT>
+        <HIVE.ROOT>${NAMENODE}/user/hive</HIVE.ROOT>
         <PROD.HCAT.METASTORE.URI>thrift://xrdclpbdm010001.unix.medcity.net:9083</PROD.HCAT.METASTORE.URI>
         <QA.HCAT.METASTORE.URI>thrift://xrdcldbdm010001.unix.medcity.net:9083</QA.HCAT.METASTORE.URI>
         <PROD.HCAT.METASTORE.PRINCIPAL>hive/xrdclpbdm010001.unix.medcity.net@HCA.CORPAD.NET</PROD.HCAT.METASTORE.PRINCIPAL>
@@ -37,7 +38,7 @@
         <PROD.FC.END.TIME>2017-11-01T10:00Z</PROD.FC.END.TIME>
         <!-- QA -->
         <QA.FC.APP.PATH>${QA.WORKFLOW.ROOT}/filecrusher</QA.FC.APP.PATH>
-        <QA.FC.START.TIME>2016-11-01T10:00Z</QA.FC.START.TIME>
+        <QA.FC.START.TIME>2016-11-11T10:00Z</QA.FC.START.TIME>
         <QA.FC.END.TIME>2017-10-25T10:00Z</QA.FC.END.TIME>
 
         <!-- file crusher cleanup properties -->
