@@ -26,7 +26,7 @@ ErrorMessage: ${wf:errorMessage(wf:lastErrorNode())}</body>
     <action name="copy-precrushed-files">
         <distcp xmlns="uri:oozie:distcp-action:0.2">
             <job-tracker>${jobTracker}</job-tracker>
-            <name-node>${NAMENODE}</name-node>
+            <name-node>${nameNode}</name-node>
             <arg>-update</arg>
             <arg>-skipcrccheck</arg>
             <arg>${SOURCE_PATH}/*.snappy</arg>
