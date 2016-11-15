@@ -49,7 +49,7 @@ if [ ! -e "$SERVICEDIR/$SERVICE" ]; then
 fi
 
 # Generate Ticket
-TICKET="kinit -k -t/home/corpsrvcdmbtch/corpsrvcdmbtch.keytab corpsrvcdmbtch@HCA.CORPAD.NET"
+TICKET="kinit -k -t /home/corpsrvcdmbtch/corpsrvcdmbtch.keytab corpsrvcdmbtch@HCA.CORPAD.NET"
 $TICKET
 VALIDTICKET=$?
 if [[ ${VALIDTICKET} > 0 ]]; then
