@@ -90,10 +90,10 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab"))
     .setConf("spark.yarn.principal", lookUpProp("hl7.spark.yarn.principal"))
   // For Testing Only
-  /*.setConf("spark.yarn.token.renewal.interval", "1")
+  /* .setConf("spark.yarn.token.renewal.interval", "1")
   .setConf("spark.yarn.credentials.renewalTime", "5000")
   .setConf("spark.yarn.credentials.updateTime", "5000")
-  .setConf("spark.yarn.credentials.file.retention.count", "1")*/
+  .setConf("spark.yarn.credentials.file.retention.count", "1") */
 
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
