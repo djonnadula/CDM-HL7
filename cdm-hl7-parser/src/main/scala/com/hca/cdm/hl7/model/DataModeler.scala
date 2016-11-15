@@ -76,8 +76,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                     modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true) match {
                       case true =>
                         handleCommonSegments(data, layout)
-                        layout += segmentSequence -> s"${node._1.substring(0,node._1.indexOf(DOT)).toInt}$EMPTYSTR"
-                        (makeFinal(layout), null)
+                        val out = s"${makeFinal(layout)}$PIPE_DELIMITED${node._1.substring(0,node._1.indexOf(DOT)).toInt}"
+                        (out, null)
                       case _ => (skippedStr, null)
                     }
                   case _ => (EMPTYSTR, null)
