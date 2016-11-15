@@ -17,6 +17,6 @@ $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${PROD.REGULAR.PARTITIONER.
 
 echo "Deploying jobs to prod"
 
-oozie job -config hl7_all_proc_rejected/prod-hl7_all_proc_rejected-partitioner-coordinator.properties -submit
+$(oozie job -config hl7_all_proc_rejected/prod-hl7_all_proc_rejected-partitioner-coordinator.properties -submit)
 
 echo "Deploy done"

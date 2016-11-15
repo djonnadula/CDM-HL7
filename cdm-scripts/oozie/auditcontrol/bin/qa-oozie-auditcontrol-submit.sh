@@ -17,6 +17,6 @@ $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.AUDITCONTROL.APP.PATH}
 
 echo "Deploying jobs to qa"
 
-oozie job -config qa-audit-control-coordinator.properties -submit
+$(oozie job -config qa-audit-control-coordinator.properties -submit)
 
 echo "Deploy done"

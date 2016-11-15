@@ -19,6 +19,7 @@ object AuditConstants {
   lazy val segmentsInHL7 = "SEGMENTS"
   lazy val adhocStage = "ADHOC"
   lazy val rejectStage = "REJECT"
+  lazy val auditHeader ="AUDIT"
   lazy val invalidHl7 = "Not a Valid HL7. Req Info Not Found. Check Message for Requirement "
   lazy val hl7JsonIOFun ="hl7JsonIO"
   lazy val hl7JsonAuditIOFun = "hl7JsonAuditIO"
