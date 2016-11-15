@@ -10,6 +10,7 @@ object DateConstants {
   lazy val DATE_PATTERN_YYYYMMDD= "yyyyMMdd"
   lazy val TIME_SIX_DIGITS_PRECISION = "HH:mm:ss.SSS"
   lazy val DATE_YEAR_TO_NANO: String = "yyyy-MM-dd-HH.mm.ss.SSSSSS"
+  lazy val DATE_WITH_TIMESTAMP: String = "yyyy-MM-dd HH.mm.ss"
   lazy val DATE_PATTERN_MMDDYYYY: String = "MMddyyyy"
   lazy val HL7_DEFAULT ="yyyyMMddHHmmss"
  }
