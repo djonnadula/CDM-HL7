@@ -21,6 +21,7 @@ package object notification {
     type taskState = Value
     val CRITICAL = Value("CRITICAL")
     val WARNING = Value("WARNING")
+    val NORMAL = Value("NORMAL")
 
   }
 
@@ -39,6 +40,7 @@ package object notification {
       state match {
         case CRITICAL => mail.addHeader("X-Priority", "1")
         case WARNING => mail.addHeader("X-Priority", "3")
+        case _ =>
       }
       mail setSentDate new Date()
       mail setHostName SMTP_HOST
