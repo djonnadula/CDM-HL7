@@ -128,6 +128,8 @@ package object cdm extends Logg {
     }
   }
 
+  def runTime: Runtime = rt
+
   def runnable(action: => Unit): Runnable =
     new Runnable {
       def run() = action
