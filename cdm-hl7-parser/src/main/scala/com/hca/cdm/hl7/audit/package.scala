@@ -45,11 +45,19 @@ package object audit {
 
   def auditMsg(hl7Str: String, stage: String)(segments: String = EMPTYSTR, meta: MSGMeta): String = {
     segments match {
-      case EMPTYSTR => hl7Str + "-" + stage + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num + PIPE_DELIMITED +
-        meta.medical_record_urn + PIPE_DELIMITED + meta.account_num + PIPE_DELIMITED + timeStamp
-      case _ => hl7Str + "-" + stage + COLON + segments + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num +
-        PIPE_DELIMITED + meta.medical_record_urn + PIPE_DELIMITED + meta.account_num + PIPE_DELIMITED + timeStamp
+      case EMPTYSTR =>
+        s"$hl7Str-$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp"
+      case _ =>
+        s"$hl7Str-$stage$COLON$segments$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp"
     }
+  }
+
+  def header(hl7Str: String, stage: String, meta: Either[MSGMeta, String]): String = {
+    meta match {
+      case Left(x) => s"$hl7Str$COLON$stage$COLON${x.msgCreateTime}"
+      case Right(y) => s"$hl7Str$COLON$stage$COLON${metaFromRaw(y).msgCreateTime}"
+    }
+
   }
 
 

@@ -239,31 +239,31 @@ object HL7Job extends Logg with App {
                       case Left(out) =>
                         segHandlerIO(out._2, out._3)
                         sizeCheck(out._1, parserS(msgType))
-                        if (tryAndLogThr(hl7JsonIO(out._1, hl7Str + COLON + jsonStage), hl7Str + COLON + hl7JsonIOFun, error(_: Throwable))) {
-                          tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), hl7Str + COLON + jsonStage), hl7Str + COLON + hl7JsonAuditIOFun, error(_: Throwable))
+                        if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
+                          tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON hl7JsonAuditIOFun", error(_: Throwable))
                         }
                         else {
                           val msg = rejectMsg(hl7Str, jsonStage, out._3, " Writing Data to OUT Failed ", out._2)
-                          tryAndLogThr(hl7RejIO(msg, hl7Str + COLON + jsonStage), hl7Str + COLON + "hl7RejIO-rejectMsg", error(_: Throwable))
+                          tryAndLogThr(hl7RejIO(msg, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON hl7RejIO-rejectMsg", error(_: Throwable))
                           error("Sending JSON to Kafka Failed :: " + msg)
-                        }
+                        };
                       case Right(t) =>
                         val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t)
                         if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                        tryAndLogThr(hl7RejIO(msg, hl7Str + COLON + jsonStage), hl7Str + COLON + "hl7RejIO-rejectRawMsg" + t.getMessage, error(_: Throwable))
+                        tryAndLogThr(hl7RejIO(msg, header(hl7Str, jsonStage, Right(hl7._2))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
                         error("Parsing Raw HL7 Failed :: " + msg)
                     }
                     case Failure(t) =>
                       val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t)
                       if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                      tryAndLogThr(hl7RejIO(msg, hl7Str + COLON + jsonStage), hl7Str + COLON + "rejectRawMsg-" + t.getMessage, error(_: Throwable))
+                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, jsonStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
                       error("Parsing Raw HL7 Failed :: " + msg)
                   }
                 } catch {
                   case t: Throwable => error(" Processing HL7 failed for Message  :: ", t)
                     val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, t.getMessage, t)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                    tryAndLogThr(hl7RejIO(msg, msgType.toString + COLON + jsonStage), msgType.toString + COLON + "rejectRawMsg-" + t.getMessage, error(_: Throwable))
+                    tryAndLogThr(hl7RejIO(msg, header(msgType.toString, jsonStage, Right(hl7._2))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
                 }
               })
               this.segmentsAccumulators = segmentsAccumulators
@@ -414,7 +414,7 @@ object HL7Job extends Logg with App {
     taskMetrics.foreach({ case (k, metric) => if (metric > 0L) this.parserAccumulators(k) += metric })
   }
 
-  private def ckeckForStageToComplete(): Boolean = {
+  private def checkForStageToComplete(): Boolean = {
     ensureStageCompleted.get() match {
       case true =>
         true
@@ -477,7 +477,7 @@ object HL7Job extends Logg with App {
     val timeCheck = timeInterval * 60000L
 
     override def run(): Unit = {
-      ckeckForStageToComplete()
+      checkForStageToComplete()
       if (!(runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
         msgTypeFreq.transform({ case (k, v) =>
           v._2 <= 0 match {
