@@ -13,6 +13,7 @@ import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
+import System.{err => errStream}
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2016.
@@ -82,6 +83,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.dynamicAllocation.minExecutors", hl7_spark_dynamicAllocation_minExecutors)
     .setConf("spark.driver.maxResultSize", hl7_spark_driver_maxResultSize)
     .setConf("spark.streaming.stopGracefullyOnShutdown", "true")
+    .setConf("spark.yarn.max.executor.failures", "10")
     .setMainClass(lookUpProp("hl7.class"))
     .setAppResource(lookUpProp("hl7.artifact"))
     .setJavaHome("/usr/bin/java")
@@ -90,10 +92,10 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab"))
     .setConf("spark.yarn.principal", lookUpProp("hl7.spark.yarn.principal"))
   // For Testing Only
-  /* .setConf("spark.yarn.token.renewal.interval", "1")
+  /*.setConf("spark.yarn.token.renewal.interval", "1")
   .setConf("spark.yarn.credentials.renewalTime", "5000")
   .setConf("spark.yarn.credentials.updateTime", "5000")
-  .setConf("spark.yarn.credentials.file.retention.count", "1") */
+  .setConf("spark.yarn.credentials.file.retention.count", "1")*/
 
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
@@ -111,10 +113,12 @@ object Hl7Driver extends App with Logg {
       case Success(x) =>
         if (x.waitFor() != 0) {
           error(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
+          errStream.println(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
           abend(1)
         }
       case Failure(t) =>
         error(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
+        errStream.println(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
         abend(1)
     }
     info(app + " Driver Shutdown Completed ")
