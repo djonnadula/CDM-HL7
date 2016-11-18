@@ -5,4 +5,4 @@ export OOZIE_URL=https://xrdclpbdu010001.unix.medcity.net:11443/oozie
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../../regular-partitioner/cfg/
 
-oozie job -config hl7_all_segment_data/qa-hl7_all_segment_data-partitioner-coordinator.properties -submit
+oozie job -config hl7_all_segment_data/prod-hl7_all_segment_data-partitioner-coordinator.properties -submit
