@@ -17,6 +17,7 @@ $(hdfs dfs -put workflow.xml coordinator.xml ../lib/ ${QA.REGULAR.PARTITIONER.AP
 
 echo "Deploying jobs to qa"
 
-$(oozie job -config hl7_all_proc_rejected/qa-hl7_all_proc_rejected-partitioner-coordinator.properties -submit)
+oozie job -config hl7_all_proc_rejected/qa-hl7_all_proc_rejected-partitioner-coordinator.properties -submit
+oozie job -config hl7_all_segment_data/qa-hl7_all_segment_data-partitioner-coordinator.properties -submit
 
 echo "Deploy done"
