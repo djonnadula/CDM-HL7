@@ -1,4 +1,4 @@
-<workflow-app name="${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
+<workflow-app name="cdm-bd-${WF_NAME}" xmlns="uri:oozie:workflow:0.5">
     <start to="check-for-files"/>
     <action name="Kill">
         <email xmlns="uri:oozie:email-action:0.2">

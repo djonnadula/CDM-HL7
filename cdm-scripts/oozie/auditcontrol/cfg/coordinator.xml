@@ -1,4 +1,4 @@
-<coordinator-app end="${endTime}" frequency="${coord:hours(4)}" name="${COORD_NAME}" start="${startTime}" timezone="America/Chicago" xmlns="uri:oozie:coordinator:0.1">
+<coordinator-app end="${endTime}" frequency="${coord:hours(4)}" name="cmd-bd-${COORD_NAME}" start="${startTime}" timezone="America/Chicago" xmlns="uri:oozie:coordinator:0.1">
    <action>
       <workflow>
          <app-path>${workflowPath}</app-path>
