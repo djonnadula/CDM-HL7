@@ -34,7 +34,7 @@
         <!-- file crusher properties -->
         <!-- PROD -->
         <PROD.FC.APP.PATH>${PROD.WORKFLOW.ROOT}/filecrusher</PROD.FC.APP.PATH>
-        <PROD.FC.START.TIME>2016-11-18T10:00Z</PROD.FC.START.TIME>
+        <PROD.FC.START.TIME>2016-11-19T10:00Z</PROD.FC.START.TIME>
         <PROD.FC.END.TIME>2017-11-01T10:00Z</PROD.FC.END.TIME>
         <PROD.CRUSH.PATH>${HIVE.ROOT}/temp/${JOB_NAME}/crush</PROD.CRUSH.PATH>
 
