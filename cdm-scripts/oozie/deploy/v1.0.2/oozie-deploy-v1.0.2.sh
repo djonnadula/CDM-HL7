@@ -12,3 +12,4 @@ oozie job -config hl7_all_segment_data/prod-hl7_all_segment_data-partitioner-coo
 cd $DIR/../../filecrusher/cfg/
 oozie job -kill 0000121-161025102156844-oozie-oozi-C
 oozie job -config hl7_all_segment_data/prod-hl7_all_segment_data-coordinator.properties -submit
+oozie job -config scri_pat_id_json_history/prod-scri_pat_id_json_history-coordinator.properties -submit
