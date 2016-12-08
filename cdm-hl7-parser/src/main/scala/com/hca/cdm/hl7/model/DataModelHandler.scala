@@ -80,7 +80,6 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                     /* sizeCheck(msg, segment.seg)
                     tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-filteredSegment", error(_: Throwable)) */
                     debug("Segment Filtered :: " + msg)
-
                   case _ =>
                     sizeCheck(rec, segment.seg)
                     segment.adhoc match {
