@@ -10,7 +10,6 @@ MT_2.5_ACC.1.1,2.1,,ACC.1.1,acc_accident_date_time,acc_accident_date,,ACC.1,acc_
 MT_2.5_ACC.1.2,2.1,,ACC.1.2,acc_accident_date_time,acc_accident_time,,ACC.1,acc_accident_date_time,,,merge
 MT_2.5.1_ACC.1.1,2.1,,ACC.1.1,acc_accident_date_time,acc_accident_date,,ACC.1,acc_accident_date_time,,,merge
 MT_2.5.1_ACC.1.2,2.1,,ACC.1.2,acc_accident_date_time,acc_accident_time,,ACC.1,acc_accident_date_time,,,merge
-MT_2.1_ZCD.2.1,2.1,2:00,ZCD.2.1,zcd_query_data,query_code,,ZCD.2.3,zcd_query_data,query_response,,
 MT6_2.4_OBR.34.1,2.4,,OBR.34.1,obr_technician,person_id,,OBR.34.1.1,obr_technician,name,person_id,move
 MT6_2.4_OBR.34.2,2.4,,OBR.34.2,obr_technician,last_name,,OBR.34.1.2,obr_technician,name,last_name,move
 MT6_2.4_OBR.34.3,2.4,,OBR.34.3,obr_technician,first_name,,OBR.34.1.3,obr_technician,name,first_name,move
