@@ -1,0 +1,13 @@
+MT,2.1,GT1,017.gt1_guarantor_employer_phone_num,018.gt1_guarantor_employer_phone_num
+MT,2.1,GT1,016.gt1_guarantor_employer_address|001.street_address1,017.gt1_guarantor_employer_address|001.street_address1
+MT,2.1,GT1,016.gt1_guarantor_employer_address|002.street_address2,017.gt1_guarantor_employer_address|002.street_address2
+MT,2.1,GT1,016.gt1_guarantor_employer_address|003.city,017.gt1_guarantor_employer_address|003.city
+MT,2.1,GT1,016.gt1_guarantor_employer_address|004.state_province,017.gt1_guarantor_employer_address|004.state_province
+MT,2.1,GT1,016.gt1_guarantor_employer_address|005.zip_postal_code,017.gt1_guarantor_employer_address|005.zip_postal_code
+MT,2.1,GT1,016.gt1_guarantor_employer_address|006.county,017.gt1_guarantor_employer_address|006.county
+MT,2.1,GT1,015.gt1_guarantor_employer_name|001.last_name,016.gt1_guarantor_employer_name|001.last_name
+MT,2.1,GT1,015.gt1_guarantor_employer_name|002.first_name,016.gt1_guarantor_employer_name|002.first_name
+MT,2.1,GT1,015.gt1_guarantor_employer_name|003.middle_name,016.gt1_guarantor_employer_name|003.middle_name
+MT,2.1,GT1,015.gt1_guarantor_employer_name|004.suffix,016.gt1_guarantor_employer_name|004.suffix
+MT,2.1,GT1,015.gt1_guarantor_employer_name|005.person_prefix,016.gt1_guarantor_employer_name|005.person_prefix
+MT,2.1,GT1,015.gt1_guarantor_employer_name|006.degree,016.gt1_guarantor_employer_name|006.degree
