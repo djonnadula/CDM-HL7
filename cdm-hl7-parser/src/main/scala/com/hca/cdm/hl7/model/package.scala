@@ -28,6 +28,8 @@ package object model {
   lazy val MSH_Segment = "0001.MSH"
   lazy val Message_Type_Segment = "009.msh_msg_type"
   lazy val Message_Control_Id = "001.message_code"
+  lazy val Message_Version = "012.msh_version_id"
+  lazy val Control_Id_key = "010.msh_msg_control_id"
   lazy val sending_Facility = "004.msh_sending_facility"
   lazy val Msg_Type_Hier = Seq(MSH_Segment, Message_Type_Segment, Message_Control_Id)
   lazy val Observation_Col = "005.obx_observation_value"
@@ -44,7 +46,6 @@ package object model {
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
   lazy val repeat = "^"
   lazy val DOT = "."
-  lazy val AMPERSAND = "&"
   lazy val EQUAL = "="
   lazy val segmentSequence = "segment_sequence"
   val commonNode = synchronized {
@@ -116,8 +117,8 @@ package object model {
 
 
   def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = EMPTYSTR): String = {
-   s"$hl7$COLON$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}"+
-      s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp$PIPE_DELIMITED"+
+    s"$hl7$COLON$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}" +
+      s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp$PIPE_DELIMITED" +
       (if (t != null) reason + (t.getStackTrace mkString repeat) else reason) + PIPE_DELIMITED + (if (raw ne EMPTYSTR) raw else toJson(data))
   }
 
@@ -190,7 +191,7 @@ package object model {
 
   case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String], reqNoAppends: Array[String] = Array.empty[String])
 
-  case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\"+repeat, modelFieldDelim: String = PIPE_DELIMITED,
+  case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\" + repeat, modelFieldDelim: String = PIPE_DELIMITED,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
     lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
@@ -229,11 +230,54 @@ package object model {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
-        Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
+        Source.fromFile("C:\\Users\\pzi7542\\Desktop\\hl7\\prod\\config\\" + file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
           case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
         } toArray
     }
 
+  }
+
+  case class Reassignment(sourceSystem: String, msgVersion: String, segment: String, path: ReassignmentPath)
+
+  case class ReassignmentPath(var _1: String = null, var _2: String = null, var _3: String = null, var _4: String = null, var _5: String = null, var _6: String = null)
+
+  def loadReassignments(file: String, delimitedBy: String = COMMA): Array[Reassignment] = {
+    Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(delimitedBy, -1)) takeWhile (valid(_)) map {
+      case data@ele if data.nonEmpty =>
+        val path = data.takeRight(data.length - 3)
+        val reassign = new ReassignmentPath
+        path.indices.foreach {
+          case index@0 =>
+            if (path(index) contains PIPE_DELIMITED) {
+              val temp = PIPER split path(index)
+              temp.length match {
+                case 2 =>
+                  reassign._1 = temp(0)
+                  reassign._2 = temp(1)
+                case 3 =>
+                  reassign._1 = temp(0)
+                  reassign._2 = temp(1)
+                  reassign._3 = temp(2)
+              }
+            }
+            else reassign._1 = path(0)
+          case index@1 =>
+            if (path(index) contains PIPE_DELIMITED) {
+              val temp = PIPER split path(index)
+              temp.length match {
+                case 2 =>
+                  reassign._4 = temp(0)
+                  reassign._5 = temp(1)
+                case 3 =>
+                  reassign._4 = temp(0)
+                  reassign._5 = temp(1)
+                  reassign._6 = temp(2)
+              }
+            }
+            else reassign._4 = path(1)
+        }
+        Reassignment(data(0), data(1), data(2), reassign)
+    } toArray
   }
 
   def loadFile(file: String, delimitedBy: String = EQUAL, keyIndex: Int = 0): Map[String, String] = {
@@ -244,7 +288,7 @@ package object model {
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = ","): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
-      val reader = Source.fromFile(file._2).bufferedReader()
+      val reader = Source.fromFile("C:\\Users\\pzi7542\\Desktop\\hl7\\prod\\config\\" + file._2).bufferedReader()
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
       })

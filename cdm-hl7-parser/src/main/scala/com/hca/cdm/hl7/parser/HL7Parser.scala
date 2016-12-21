@@ -29,7 +29,8 @@ import scala.util.{Failure, Success, Try}
   *
   * Transforms Raw HL7 Message into Required Output formats as Per Templates Provided
   */
-class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]]) extends Logg with Serializable {
+class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]],
+                private val reassignMeta: Map[String, String], private val reassignments: Array[Reassignment]) extends Logg with Serializable {
 
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val EMPTY = Array.empty[String]
@@ -55,16 +56,17 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     assume(isHL7(hl7Message), "Not a Valid HL7. Check with Facility :: " + hl7Message)
     val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
     Try(transform(hl7Message split delim, pre_num_len, segment_code_len, index_num_len)) match {
-      case Success(map) =>
-        handleCommonSegments(map)
-        val meta = msgMeta(map)
+      case Success(parsed) =>
+        handleCommonSegments(parsed.data)
+        val meta = msgMeta(parsed.data)
         metRequirement(meta) match {
           case true =>
-            if (msgHasmultiMSH(map)) throw new InvalidHl7FormatException("Message has Multiple MSH Segments. This is not Expected.")
-            Try(toJson(map)) match {
+            if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException("Message has Multiple MSH Segments. This is not Expected.")
+            checkForReassignments(parsed)
+            Try(toJson(parsed.data)) match {
               case Success(json) =>
                 updateMetrics(PROCESSED)
-                HL7TransRec(Left((json, map, meta)))
+                HL7TransRec(Left((json, parsed.data, meta)))
               case Failure(t) =>
                 error("Transforming to Json Failed for HL7 " + t.getMessage, t)
                 updateMetrics(FAILED)
@@ -92,6 +94,111 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   def overSizeMsgFound(): Unit = updateMetrics(OVERSIZED)
 
+  private def checkForReassignments(hL7Parsed: HL7Parsed): Unit = {
+    if (!((reassignMeta isDefinedAt hL7Parsed.srcVersion) & isSource(hL7Parsed.data))) return
+    hL7Parsed.data.foreach(node => {
+      if (reassignMeta isDefinedAt node._1.substring(node._1.indexOf(DOT) + 1)) reassign(node._2.asInstanceOf[mapType])
+    })
+  }
+
+  private def isSource(data: mapType) = {
+    val temp = data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]](Control_Id_key)
+    reassignMeta isDefinedAt temp.substring(0, temp.indexOf("_"))
+  }
+
+  private def reassign(data: mapType) = {
+    reassignments.foreach(reassign => {
+      if ((data isDefinedAt reassign.path._1) && (data isDefinedAt reassign.path._4)) {
+        if (valid(reassign.path._2) && valid(reassign.path._5)) {
+          (data(reassign.path._1), data(reassign.path._4)) match {
+            case (left: mapType, right: mapType) =>
+              if ((left isDefinedAt reassign.path._2) && (right isDefinedAt reassign.path._5)) {
+                if (valid(reassign.path._3) && valid(reassign.path._6)) {
+                  (left(reassign.path._2), right(reassign.path._5)) match {
+                    case (left1: mapType, right1: mapType) =>
+                      if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
+                        right1 update(reassign.path._6, left1(reassign.path._3))
+                        left1 update(reassign.path._3, EMPTYSTR)
+                      }
+                  }
+                } else {
+                  right update(reassign.path._5, left(reassign.path._2))
+                  left update(reassign.path._2, EMPTYSTR)
+                }
+              }
+            case (left: listType, right: listType) =>
+              val leftTemp = findReassignNode(left, reassign.path._2)
+              val rightTemp = findReassignNode(left, reassign.path._5)
+              if (valid(leftTemp) && valid(rightTemp)) {
+                if ((leftTemp isDefinedAt reassign.path._2) && (rightTemp isDefinedAt reassign.path._5)) {
+                  if (valid(reassign.path._3) && valid(reassign.path._6)) {
+                    (leftTemp(reassign.path._2), rightTemp(reassign.path._5)) match {
+                      case (left1: mapType, right1: mapType) =>
+                        if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
+                          right1 update(reassign.path._6, left1(reassign.path._3))
+                          left1 update(reassign.path._3, EMPTYSTR)
+                        }
+                    }
+                  } else {
+                    rightTemp update(reassign.path._5, leftTemp(reassign.path._2))
+                    leftTemp update(reassign.path._2, EMPTYSTR)
+                  }
+                }
+              }
+            case (left: listType, right: mapType) =>
+              val leftTemp = findReassignNode(left, reassign.path._2)
+              if (valid(leftTemp)) {
+                if ((leftTemp isDefinedAt reassign.path._2) && (right isDefinedAt reassign.path._5)) {
+                  if (valid(reassign.path._3) && valid(reassign.path._6)) {
+                    (leftTemp(reassign.path._2), right(reassign.path._5)) match {
+                      case (left1: mapType, right1: mapType) =>
+                        if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
+                          right1 update(reassign.path._6, left1(reassign.path._3))
+                          left1 update(reassign.path._3, EMPTYSTR)
+                        }
+                    }
+                  } else {
+                    right update(reassign.path._5, leftTemp(reassign.path._2))
+                    leftTemp update(reassign.path._2, EMPTYSTR)
+                  }
+                }
+              }
+
+            case (left: mapType, right: listType) =>
+              val rightTemp = findReassignNode(right, reassign.path._5)
+              if (valid(rightTemp)) {
+                if ((left isDefinedAt reassign.path._2) && (rightTemp isDefinedAt reassign.path._5)) {
+                  if (valid(reassign.path._3) && valid(reassign.path._6)) {
+                    (left(reassign.path._2), rightTemp(reassign.path._5)) match {
+                      case (left1: mapType, right1: mapType) =>
+                        if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
+                          right1 update(reassign.path._6, left1(reassign.path._3))
+                          left1 update(reassign.path._3, EMPTYSTR)
+                        }
+                    }
+                  } else {
+                    rightTemp update(reassign.path._5, left(reassign.path._2))
+                    left update(reassign.path._2, EMPTYSTR)
+                  }
+                }
+              }
+          }
+        }
+        else {
+          data update(reassign.path._4, data(reassign.path._1))
+          data update(reassign.path._1, EMPTYSTR)
+        }
+      }
+    })
+  }
+
+  private def findReassignNode(list: listType, key: String): mapType = {
+    list.foreach(data => {
+      if (data.isDefinedAt(key)) return data
+    })
+    null
+  }
+
   private def updateMetrics(state: hl7State) = {
     val key = hl7 + COLON + state
     metrics get key match {
@@ -104,7 +211,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var segment = EMPTYSTR
     breakable {
       data.foreach(node => {
-        if (node._1.substring(node._1.indexOf(".") + 1) == reqSeg) {
+        if (node._1.substring(node._1.indexOf(DOT) + 1) == reqSeg) {
           segment = node._1
           break
         }
@@ -195,6 +302,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                  var standardIndex: Map[String, Array[String]] = MAP, var realignIndex: Map[String, Array[String]] = MAP,
                                  var finalIndex: Map[String, Array[String]] = MAP)
 
+  private case class HL7Parsed(data: mapType, sourceSystem: String, srcVersion: String)
+
   private def transform(rawSplit: Array[String], preNumLen: Int, segCodeLen: Int, indexNumLen: Int) = {
     val dataLayout = new mutable.LinkedHashMap[String, Any]
     dataLayout += commonNodeStr -> commonNode.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
@@ -210,14 +319,14 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var segments: Segments = null
     var realignVal = EMPTYSTR
     var versionData: VersionData = null
-    val segmentsMapping = mapSegments(_: String, _: Int, _: Int, versionData.controlId, versionData.hl7Version, versionData.mappedIndex,
+    val segmentsMapping = mapSegments(new Segments,_: String, _: Int, _: Int, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_", versionData.mappedIndex,
       versionData.standardIndex, versionData.realignIndex, versionData.finalIndex)
     var i = 0
     try {
       rawSplit.foreach(msgSegment => {
         i = inc(i)
         val whichSegment = msgSegment substring(0, 3)
-        val segmentIndex = sutil.leftPad(i + EMPTYSTR, preNumLen, ZEROStr) + "." + whichSegment
+        val segmentIndex = sutil.leftPad(i + EMPTYSTR, preNumLen, ZEROStr) + DOT + whichSegment
         val componentLayout = mutable.LinkedHashMap[String, Any]()
         var fields: Array[String] = null
         whichSegment == MSH match {
@@ -232,7 +341,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             var j = 0
             fields.foreach(field => {
               j = inc(j)
-              val componentIndex = whichSegment + "." + sutil.leftPad(j + EMPTYSTR, indexNumLen, ZEROStr)
+              val componentIndex = whichSegment + DOT + sutil.leftPad(j + EMPTYSTR, indexNumLen, ZEROStr)
               segments = segmentsMapping(componentIndex, segCodeLen, indexNumLen)
               val componentData = segments.componentData
               !(whichSegment == MSH && j == 2) match {
@@ -248,7 +357,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                         var k = 0
                         subComponent.foreach(subComp => {
                           k = inc(k)
-                          val subComponentIndex = componentIndex + "." + sutil.leftPad(k + EMPTYSTR, indexNumLen, ZEROStr)
+                          val subComponentIndex = componentIndex + DOT + sutil.leftPad(k + EMPTYSTR, indexNumLen, ZEROStr)
                           segments = segmentsMapping(subComponentIndex, segCodeLen, indexNumLen)
                           subComponentData = segments.componentData
                           var subSubComponent: Array[String] = EMPTY
@@ -260,7 +369,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                 else realignVal = realignVal + subComp
                               case MOVE =>
                                 val subCompRep = fieldRepeatItem.replace(delimiters(CMPNT_DELIM), delimiters(SUBCMPNT_DELIM))
-                                subComponentData = generateMapIndex(subComponentIndex, indexNumLen) + "." + segments.realignCompName
+                                subComponentData = generateMapIndex(subComponentIndex, indexNumLen) + DOT + segments.realignCompName
                                 subSubComponent = subCompRep.split("\\" + delimiters(SUBCMPNT_DELIM), -1)
                               case _ =>
                             }
@@ -272,7 +381,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                               var l = 0
                               subSubComponent.foreach(msgSubSubComponent => {
                                 l = inc(l)
-                                segments = segmentsMapping(subComponentIndex + "." + sutil.leftPad(l + EMPTYSTR, indexNumLen, ZEROStr), segCodeLen, indexNumLen)
+                                segments = segmentsMapping(subComponentIndex + DOT + sutil.leftPad(l + EMPTYSTR, indexNumLen, ZEROStr), segCodeLen, indexNumLen)
                                 subSubComponentLayout += segments.componentData -> msgSubSubComponent
                               })
                               subComponentLayout += subComponentData -> subSubComponentLayout
@@ -304,7 +413,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         }
         dataLayout += segmentIndex -> componentLayout
       })
-      dataLayout
+      HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")), versionData.hl7Version)
     } catch {
       case t: Throwable => throw new CdmException(t)
     }
@@ -334,21 +443,21 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def matcher(in: String, seq: String) = in != null & in.contains(seq)
 
 
-  private def mapSegments(mappingElement: String, segCodeLen: Int, indexLen: Int, controlId: String, hl7Version: String, mappedIndex: Map[String, Array[String]]
+  private def mapSegments(segment: Segments,mappingElement: String, segCodeLen: Int, indexLen: Int, controlVersion: String, mappedIndex: Map[String, Array[String]]
                           , standardIndex: Map[String, Array[String]], realignIndex: Map[String, Array[String]], finalIndex: Map[String, Array[String]]): Segments = {
-    val segments = new Segments
+    val segments = segment
     var segmentIndex = EMPTYSTR
     var mappedColumnData = EMPTYSTR
     if (mappingElement.split("\\.").length > 2) {
-      val firstDelimPos = mappingElement.indexOf(".") + 1
-      val secondDelimPos = mappingElement.lastIndexOf(".") + 1
+      val firstDelimPos = mappingElement.indexOf(DOT) + 1
+      val secondDelimPos = mappingElement.lastIndexOf(DOT) + 1
       segmentIndex = mappingElement.substring(0, segCodeLen + 1) + mappingElement.substring(firstDelimPos + 1, firstDelimPos + indexLen).
-        replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR) + "." + mappingElement.substring(secondDelimPos + 1, secondDelimPos + indexLen).
+        replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR) + DOT + mappingElement.substring(secondDelimPos + 1, secondDelimPos + indexLen).
         replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR)
-    } else segmentIndex = mappingElement.substring(0, segCodeLen + 1) + mappingElement.substring(mappingElement.indexOf(".") + 1,
+    } else segmentIndex = mappingElement.substring(0, segCodeLen + 1) + mappingElement.substring(mappingElement.indexOf(DOT) + 1,
       mappingElement.length).replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR)
     try {
-      val realignColumnValues = lookUp(realignIndex, controlId.substring(0, controlId.indexOf("_")) + "_" + hl7Version + "_" + segmentIndex)
+      val realignColumnValues = lookUp(realignIndex, controlVersion + segmentIndex)
       realignColumnValues.nonEmpty match {
         case true => segments.realignColStatus = true
           segmentIndex = realignColumnValues(6)
@@ -359,7 +468,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           if (nonEmpty(realignColumnValues(8))) mappedColumnData = realignColumnValues(8)
           if (nonEmpty(realignColumnValues(9))) mappedColumnData = realignColumnValues(9)
           segments.realignColOption = realignColumnValues(10)
-          Segments(generateMapIndex(segmentIndex, indexLen) + "." + mappedColumnData, segments.realignColStatus, EMPTYSTR, segments.realignFieldName,
+          Segments(generateMapIndex(segmentIndex, indexLen) + DOT + mappedColumnData, segments.realignColStatus, EMPTYSTR, segments.realignFieldName,
             segments.realignCompName, segments.realignSubCompName, segments.realignColOption)
         case _ => segments.realignColStatus = false
           val standardMappedColumnValues = lookUp(standardIndex, segmentIndex)
@@ -387,15 +496,14 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             else if (nonEmpty(mappedFinalResultValues(4))) mappedColumnData = mappedFinalResultValues(4)
             case _ =>
           }
-          segments.componentData = mappingElement.substring(mappingElement.lastIndexOf(".") + 1, mappingElement.lastIndexOf(".") + 1 +
-            indexLen) + "." + mappedColumnData
+          segments.componentData = mappingElement.substring(mappingElement.lastIndexOf(DOT) + 1, mappingElement.lastIndexOf(DOT) + 1 +
+            indexLen) + DOT + mappedColumnData
           segments
       }
     } catch {
       case t: Throwable =>
-        segments.componentData = mappingElement + "." + mappedColumnData
+        segments.componentData = mappingElement + DOT + mappedColumnData
         segments
-
     }
   }
 
@@ -424,6 +532,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
 object HL7Parser {
 
-  def apply(msgType: HL7, templateMappings: Map[String, Map[String, Array[String]]]): HL7Parser = new HL7Parser(msgType, templateMappings)
+  def apply(msgType: HL7, templateMappings: Map[String, Map[String, Array[String]]], reassignMeta: Map[String, String],
+            reassignments: Array[Reassignment]): HL7Parser = new HL7Parser(msgType, templateMappings, reassignMeta, reassignments)
 
 }
