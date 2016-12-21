@@ -25,16 +25,3 @@ MT6_2.4_OBR.35.5,2.4,,OBR.35.5,obr_transcriptionist,suffix,,OBR.35.1.5,obr_trans
 MT6_2.4_OBR.35.6,2.4,,OBR.35.6,obr_transcriptionist,person_prefix,,OBR.35.1.6,obr_transcriptionist,name,person_prefix,move
 MT6_2.4_OBR.35.7,2.4,,OBR.35.7,obr_transcriptionist,degree,,OBR.35.1.7,obr_transcriptionist,name,degree,move
 IPL_2.5_SCH,2.5,,SCH,,,,SCHIPL,,,,
-MT_2.1_GT1.17,2.1,,GT1.17,gt1_guarantor_employer_phone_num,,,GT1.18,gt1_guarantor_employer_phone_num,,,reassign
-MT_2.1_GT1.16.1,2.1,,GT1.16.1,gt1_guarantor_employer_address,street_address1,,GT1.17.1,gt1_guarantor_employer_address,street_address1,,reassign
-MT_2.1_GT1.16.2,2.1,,GT1.16.2,gt1_guarantor_employer_address,street_address2,,GT1.17.2,gt1_guarantor_employer_address,street_address2,,reassign
-MT_2.1_GT1.16.3,2.1,,GT1.16.3,gt1_guarantor_employer_address,city,,GT1.17.3,gt1_guarantor_employer_address,city,,reassign
-MT_2.1_GT1.16.4,2.1,,GT1.16.4,gt1_guarantor_employer_address,state_province,,GT1.17.4,gt1_guarantor_employer_address,state_province,,reassign
-MT_2.1_GT1.16.5,2.1,,GT1.16.5,gt1_guarantor_employer_address,zip_postal_code,,GT1.17.5,gt1_guarantor_employer_address,zip_postal_code,,reassign
-MT_2.1_GT1.16.6,2.1,,GT1.16.6,gt1_guarantor_employer_address,county,,GT1.17.6,gt1_guarantor_employer_address,county,,reassign
-MT_2.1_GT1.15.1,2.1,,GT1.15.1,gt1_guarantor_employer_name,last_name,,GT1.16.1,gt1_guarantor_employer_name,last_name,,reassign
-MT_2.1_GT1.15.2,2.1,,GT1.15.2,gt1_guarantor_employer_name,first_name,,GT1.16.2,gt1_guarantor_employer_name,first_name,,reassign
-MT_2.1_GT1.15.3,2.1,,GT1.15.3,gt1_guarantor_employer_name,middle_name,,GT1.16.3,gt1_guarantor_employer_name,middle_name,,reassign
-MT_2.1_GT1.15.4,2.1,,GT1.15.4,gt1_guarantor_employer_name,suffix,,GT1.16.4,gt1_guarantor_employer_name,suffix,,reassign
-MT_2.1_GT1.15.5,2.1,,GT1.15.5,gt1_guarantor_employer_name,person_prefix,,GT1.16.5,gt1_guarantor_employer_name,person_prefix,,reassign
-MT_2.1_GT1.15.6,2.1,,GT1.15.6,gt1_guarantor_employer_name,degree,,GT1.16.6,gt1_guarantor_employer_name,degree,,reassign
