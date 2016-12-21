@@ -1,0 +1,49 @@
+USE hl7;
+
+DROP TABLE hl7_zin_data;
+
+CREATE EXTERNAL TABLE hl7_zin_data (
+segment_type String,
+msh_sending_facility String,
+msh_msg_control_id String,
+pid_medical_record_num String,
+pid_medical_record_urn String,
+pid_pat_account_num String,
+zin_set_id STRING,
+zin_precertification_agency_name STRING,
+zin_insured_id STRING,
+zin_bed_days_information STRING,
+zin_bed_days_information_start_date STRING,
+zin_bed_days_information_end_date STRING,
+zin_bed_days_information_bed_days_type STRING,
+zin_bed_days_information_total_days STRING,
+zin_insurance_mail_to_name STRING,
+zin_bed_days_next_review_date STRING,
+zin_insurance_verification_ind STRING,
+zin_total_approved_day STRING,
+zin_insurance_verification_date STRING,
+zin_denied_days_information STRING,
+zin_denied_days_information_start_date STRING,
+zin_denied_days_information_end_date STRING,
+zin_insurance_verified_by STRING,
+zin_total_denied_day STRING,
+zin_approved_length_of_stay STRING,
+zin_alternative_subscriber_name STRING,
+zin_authorization_precertification_required STRING,
+zin_alternative_subscriber_birth_date STRING,
+zin_authorization_type STRING,
+zin_insured_relationship_to_guarantor STRING,
+zin_authorized_by STRING,
+zin_member_relationship_to_guarantor STRING,
+zin_authorization_phone STRING,
+zin_process_control_num STRING,
+zin_referral_num STRING,
+zin_attached_referral_id STRING,
+zin_insurance_plan_id STRING,
+etl_firstinsert_datetime String,
+field_sequence_num String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7/hl7_all_segment_data';
