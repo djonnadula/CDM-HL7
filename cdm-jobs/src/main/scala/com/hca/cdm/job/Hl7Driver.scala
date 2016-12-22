@@ -39,7 +39,7 @@ object Hl7Driver extends App with Logg {
       console("******************************************************************************************")
       console("*****************                Job terminated                ***********************")
       console("*******************************************************************************************")
-      System.exit(-8)
+      abend(1)
   }
   printConfig()
 
@@ -58,6 +58,7 @@ object Hl7Driver extends App with Logg {
   private val hl7_spark_deploy_mode = lookUpProp("hl7.spark.deploy-mode")
   private val defaultPar = lookUpProp("hl7.spark.default.parallelism")
   private val hl7_spark_executor_memory = lookUpProp("hl7.spark.executor-memory")
+  private val offHeap = ((hl7_spark_executor_memory.substring(0, hl7_spark_executor_memory.indexOf("G")).toInt * 1024) / 10).toString
   private val hl7_spark_driver_maxResultSize = lookUpProp("hl7.spark.driver.maxResultSize")
   private val hl7_spark_dynamicAllocation_enabled = lookUpProp("hl7.spark.dynamicAllocation.enabled")
   private val hl7_spark_dynamicAllocation_minExecutors = lookUpProp("hl7.spark.dynamicAllocation.minExecutors")
@@ -71,7 +72,6 @@ object Hl7Driver extends App with Logg {
     .setMaster(hl7_spark_master)
     .setDeployMode(hl7_spark_deploy_mode)
     .setVerbose(true)
-    .setConf("spark.akka.frameSize", "200")
     .setConf(EXECUTOR_MEMORY, hl7_spark_executor_memory)
     .setConf(EXECUTOR_CORES, defaultPar)
     .setConf("spark.driver-memory", hl7_spark_driver_memory)
@@ -84,18 +84,33 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.driver.maxResultSize", hl7_spark_driver_maxResultSize)
     .setConf("spark.streaming.stopGracefullyOnShutdown", "true")
     .setConf("spark.yarn.max.executor.failures", "10")
+    .setConf("spark.task.maxFailures", "10")
     .setMainClass(lookUpProp("hl7.class"))
     .setAppResource(lookUpProp("hl7.artifact"))
     .setJavaHome("/usr/bin/java")
     .setSparkHome(lookUpProp("spark.home"))
     .setConf("spark.yarn.preserve.staging.files", "true")
+    .setConf("spark.ui.showConsoleProgress", "false")
+    .setConf("spark.logConf", "true")
+    .setConf("spark.eventLog.enabled", "false")
+    .setConf("spark.ui.killEnabled", "false")
+    .setConf("spark.serializer.objectStreamReset", "100")
+    .setConf("spark.cleaner.ttl", "3600")
+    .setConf("spark.dynamicAllocation.cachedExecutorIdleTimeout", "3600")
+    .setConf("spark.yarn.executor.memoryOverhead", "4096")
+    .setConf("spark.ui.retainedJobs", "50")
+    .setConf("spark.ui.retainedStages", "50")
+    .setConf("spark.worker.ui.retainedExecutors", "50")
+    .setConf("spark.worker.ui.retainedDrivers", "50")
+    .setConf("spark.streaming.ui.retainedBatches", "50")
+    .setConf("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
     .setConf("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab"))
     .setConf("spark.yarn.principal", lookUpProp("hl7.spark.yarn.principal"))
-  // For Testing Only
-  /*.setConf("spark.yarn.token.renewal.interval", "1")
-  .setConf("spark.yarn.credentials.renewalTime", "5000")
-  .setConf("spark.yarn.credentials.updateTime", "5000")
-  .setConf("spark.yarn.credentials.file.retention.count", "1")*/
+    .setConf("spark.executor.logs.rolling.maxRetainedFiles", "10")
+    .setConf("spark.executor.logs.rolling.strategy", "size")
+    .setConf("spark.executor.logs.rolling.maxSize", "307200")
+    .setConf("spark.driver.extraJavaOptions", "-XX:+PrintGCDetails")
+    .setConf("spark.executor.extraJavaOptions", "-XX:+PrintGCDetails")
 
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
@@ -122,6 +137,7 @@ object Hl7Driver extends App with Logg {
         abend(1)
     }
     info(app + " Driver Shutdown Completed ")
+    abend(1)
   })))
 
   while (job.getAppId == null) {
