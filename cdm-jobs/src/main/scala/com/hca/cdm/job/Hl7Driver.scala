@@ -67,6 +67,7 @@ object Hl7Driver extends App with Logg {
   private val hl7_spark_master = lookUpProp("hl7.spark.master")
   private val hl7_spark_num_executors = lookUpProp("hl7.spark.num-executors")
   private val hl7_spark_driver_memory = lookUpProp("hl7.spark.driver-memory")
+  private val ENV = lookUpProp("hl7.env")
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
     .setMaster(hl7_spark_master)
@@ -74,7 +75,8 @@ object Hl7Driver extends App with Logg {
     .setVerbose(true)
     .setConf(EXECUTOR_MEMORY, hl7_spark_executor_memory)
     .setConf(EXECUTOR_CORES, defaultPar)
-    .setConf("spark.driver-memory", hl7_spark_driver_memory)
+    .setConf(DRIVER_MEMORY, hl7_spark_driver_memory)
+    .setConf("spark.driver.cores", "2")
     .setConf("spark.num-executors", hl7_spark_num_executors)
     .setConf("spark.dynamicAllocation.initialExecutors", hl7_spark_num_executors)
     .setConf("spark.yarn.queue", hl7_spark_queue)
@@ -92,12 +94,13 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.yarn.preserve.staging.files", "true")
     .setConf("spark.ui.showConsoleProgress", "false")
     .setConf("spark.logConf", "true")
-    .setConf("spark.eventLog.enabled", "false")
+    .setConf("spark.eventLog.enabled", "true")
     .setConf("spark.ui.killEnabled", "false")
     .setConf("spark.serializer.objectStreamReset", "100")
     .setConf("spark.cleaner.ttl", "3600")
     .setConf("spark.dynamicAllocation.cachedExecutorIdleTimeout", "3600")
-    .setConf("spark.yarn.executor.memoryOverhead", "4096")
+    .setConf("spark.yarn.executor.memoryOverhead", "3072")
+    .setConf("spark.yarn.driver.memoryOverhead", "2048")
     .setConf("spark.ui.retainedJobs", "50")
     .setConf("spark.ui.retainedStages", "50")
     .setConf("spark.worker.ui.retainedExecutors", "50")
@@ -109,9 +112,10 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.executor.logs.rolling.maxRetainedFiles", "10")
     .setConf("spark.executor.logs.rolling.strategy", "size")
     .setConf("spark.executor.logs.rolling.maxSize", "307200")
-    .setConf("spark.driver.extraJavaOptions", "-XX:+PrintGCDetails")
-    .setConf("spark.executor.extraJavaOptions", "-XX:+PrintGCDetails")
-
+  if (ENV != "PROD") {
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps")
+      .setConf("spark.executor.extraJavaOptions", "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps")
+  }
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
   sparkLauncher addFile configFile.getPath
