@@ -237,47 +237,31 @@ package object model {
 
   }
 
-  case class Reassignment(sourceSystem: String, msgVersion: String, segment: String, path: ReassignmentPath)
-
-  case class ReassignmentPath(var _1: String = null, var _2: String = null, var _3: String = null, var _4: String = null, var _5: String = null, var _6: String = null)
-
-  def loadReassignments(file: String, delimitedBy: String = COMMA): Array[Reassignment] = {
-    Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(delimitedBy, -1)) takeWhile (valid(_)) map {
+  def Reassignments(file: String): (Map[String, String], Map[String, Map[String, String]], Map[String, mutable.LinkedHashMap[String, Any]]) = {
+    val reassignMeta = new mutable.HashMap[String, String]()
+    val reassignStruct = new mutable.HashMap[String, mutable.LinkedHashMap[String, Any]]
+    val reassignmentMapping = new mutable.HashMap[String, Map[String, String]]
+    Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
       case data@ele if data.nonEmpty =>
-        val path = data.takeRight(data.length - 3)
-        val reassign = new ReassignmentPath
-        path.indices.foreach {
-          case index@0 =>
-            if (path(index) contains PIPE_DELIMITED) {
-              val temp = PIPER split path(index)
-              temp.length match {
-                case 2 =>
-                  reassign._1 = temp(0)
-                  reassign._2 = temp(1)
-                case 3 =>
-                  reassign._1 = temp(0)
-                  reassign._2 = temp(1)
-                  reassign._3 = temp(2)
-              }
-            }
-            else reassign._1 = path(0)
-          case index@1 =>
-            if (path(index) contains PIPE_DELIMITED) {
-              val temp = PIPER split path(index)
-              temp.length match {
-                case 2 =>
-                  reassign._4 = temp(0)
-                  reassign._5 = temp(1)
-                case 3 =>
-                  reassign._4 = temp(0)
-                  reassign._5 = temp(1)
-                  reassign._6 = temp(2)
-              }
-            }
-            else reassign._4 = path(1)
-        }
-        Reassignment(data(0), data(1), data(2), reassign)
-    } toArray
+        val reassignStructTemp = new mutable.LinkedHashMap[String, Any]
+        val reassignmentMappingTemp = new mutable.HashMap[String, String]
+        reassignMeta += data(0) -> EMPTYSTR
+        reassignMeta += data(1) -> EMPTYSTR
+        reassignMeta += data(2) -> EMPTYSTR
+        val reassignData = data.takeRight(data.length - 3)
+        reassignData.foreach(x => {
+          val rData = x.split("\\" + repeat, -1)
+          val structData = PIPER split rData(1)
+          val struct = new mutable.LinkedHashMap[String, String]
+          structData.tail.map(x => struct += x -> EMPTYSTR)
+          if (struct isEmpty) reassignStructTemp += structData(0) -> EMPTYSTR
+          else reassignStructTemp += structData(0) -> struct
+          reassignmentMappingTemp += rData(0) -> structData(0)
+        })
+        reassignmentMapping += s"${data.apply(0)}${data.apply(1)}${data.apply(2)}" -> reassignmentMappingTemp.toMap
+        reassignStruct += s"${data.apply(0)}${data.apply(1)}${data.apply(2)}" -> reassignStructTemp
+    }
+    (reassignMeta toMap, reassignmentMapping toMap, reassignStruct toMap)
   }
 
   def loadFile(file: String, delimitedBy: String = EQUAL, keyIndex: Int = 0): Map[String, String] = {
@@ -288,7 +272,7 @@ package object model {
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = ","): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
-      val reader = Source.fromFile("C:\\Users\\pzi7542\\Desktop\\hl7\\prod\\config\\" + file._2).bufferedReader()
+      val reader = Source.fromFile(file._2).bufferedReader()
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
       })

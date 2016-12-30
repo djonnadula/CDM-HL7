@@ -29,8 +29,8 @@ import scala.util.{Failure, Success, Try}
   *
   * Transforms Raw HL7 Message into Required Output formats as Per Templates Provided
   */
-class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]],
-                private val reassignMeta: Map[String, String], private val reassignments: Array[Reassignment]) extends Logg with Serializable {
+class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]], private val reassignMeta: Map[String, String],
+                private val reassignMapping: Map[String, Map[String, String]], private val reassignStruct: Map[String, mutable.Map[String, Any]]) extends Logg with Serializable {
 
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val EMPTY = Array.empty[String]
@@ -95,108 +95,52 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   def overSizeMsgFound(): Unit = updateMetrics(OVERSIZED)
 
   private def checkForReassignments(hL7Parsed: HL7Parsed): Unit = {
-    if (!((reassignMeta isDefinedAt hL7Parsed.srcVersion) & isSource(hL7Parsed.data))) return
+    if (!((reassignMeta isDefinedAt hL7Parsed.srcVersion) && (reassignMeta isDefinedAt hL7Parsed.sourceSystem))) return
     hL7Parsed.data.foreach(node => {
-      if (reassignMeta isDefinedAt node._1.substring(node._1.indexOf(DOT) + 1)) reassign(node._2.asInstanceOf[mapType])
-    })
-  }
-
-  private def isSource(data: mapType) = {
-    val temp = data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]](Control_Id_key)
-    reassignMeta isDefinedAt temp.substring(0, temp.indexOf("_"))
-  }
-
-  private def reassign(data: mapType) = {
-    reassignments.foreach(reassign => {
-      if ((data isDefinedAt reassign.path._1) && (data isDefinedAt reassign.path._4)) {
-        if (valid(reassign.path._2) && valid(reassign.path._5)) {
-          (data(reassign.path._1), data(reassign.path._4)) match {
-            case (left: mapType, right: mapType) =>
-              if ((left isDefinedAt reassign.path._2) && (right isDefinedAt reassign.path._5)) {
-                if (valid(reassign.path._3) && valid(reassign.path._6)) {
-                  (left(reassign.path._2), right(reassign.path._5)) match {
-                    case (left1: mapType, right1: mapType) =>
-                      if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
-                        right1 update(reassign.path._6, left1(reassign.path._3))
-                        left1 update(reassign.path._3, EMPTYSTR)
-                      }
-                  }
-                } else {
-                  right update(reassign.path._5, left(reassign.path._2))
-                  left update(reassign.path._2, EMPTYSTR)
-                }
-              }
-            case (left: listType, right: listType) =>
-              val leftTemp = findReassignNode(left, reassign.path._2)
-              val rightTemp = findReassignNode(left, reassign.path._5)
-              if (valid(leftTemp) && valid(rightTemp)) {
-                if ((leftTemp isDefinedAt reassign.path._2) && (rightTemp isDefinedAt reassign.path._5)) {
-                  if (valid(reassign.path._3) && valid(reassign.path._6)) {
-                    (leftTemp(reassign.path._2), rightTemp(reassign.path._5)) match {
-                      case (left1: mapType, right1: mapType) =>
-                        if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
-                          right1 update(reassign.path._6, left1(reassign.path._3))
-                          left1 update(reassign.path._3, EMPTYSTR)
-                        }
-                    }
-                  } else {
-                    rightTemp update(reassign.path._5, leftTemp(reassign.path._2))
-                    leftTemp update(reassign.path._2, EMPTYSTR)
-                  }
-                }
-              }
-            case (left: listType, right: mapType) =>
-              val leftTemp = findReassignNode(left, reassign.path._2)
-              if (valid(leftTemp)) {
-                if ((leftTemp isDefinedAt reassign.path._2) && (right isDefinedAt reassign.path._5)) {
-                  if (valid(reassign.path._3) && valid(reassign.path._6)) {
-                    (leftTemp(reassign.path._2), right(reassign.path._5)) match {
-                      case (left1: mapType, right1: mapType) =>
-                        if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
-                          right1 update(reassign.path._6, left1(reassign.path._3))
-                          left1 update(reassign.path._3, EMPTYSTR)
-                        }
-                    }
-                  } else {
-                    right update(reassign.path._5, leftTemp(reassign.path._2))
-                    leftTemp update(reassign.path._2, EMPTYSTR)
-                  }
-                }
-              }
-
-            case (left: mapType, right: listType) =>
-              val rightTemp = findReassignNode(right, reassign.path._5)
-              if (valid(rightTemp)) {
-                if ((left isDefinedAt reassign.path._2) && (rightTemp isDefinedAt reassign.path._5)) {
-                  if (valid(reassign.path._3) && valid(reassign.path._6)) {
-                    (left(reassign.path._2), rightTemp(reassign.path._5)) match {
-                      case (left1: mapType, right1: mapType) =>
-                        if ((left1 isDefinedAt reassign.path._3) && (right1 isDefinedAt reassign.path._6)) {
-                          right1 update(reassign.path._6, left1(reassign.path._3))
-                          left1 update(reassign.path._3, EMPTYSTR)
-                        }
-                    }
-                  } else {
-                    rightTemp update(reassign.path._5, left(reassign.path._2))
-                    left update(reassign.path._2, EMPTYSTR)
-                  }
-                }
-              }
-          }
-        }
-        else {
-          data update(reassign.path._4, data(reassign.path._1))
-          data update(reassign.path._1, EMPTYSTR)
+      if (reassignMeta isDefinedAt node._1.substring(node._1.indexOf(DOT) + 1)) {
+        val versionSegment = s"${hL7Parsed.sourceSystem}${hL7Parsed.srcVersion}${node._1.substring(node._1.indexOf(DOT) + 1)}"
+        if ((reassignStruct isDefinedAt versionSegment) && (reassignMapping isDefinedAt versionSegment)) {
+          val structToReassign = reassignStruct(versionSegment) clone()
+          val nodeToUpdate = node._2.asInstanceOf[mapType]
+          reassign(reassignMapping(versionSegment), nodeToUpdate, structToReassign)
+          var index = 0
+          reassignMapping(versionSegment).foreach(reassign => {
+            if (nodeToUpdate isDefinedAt reassign._2) nodeToUpdate update(reassign._2, structToReassign(reassign._2))
+            index = inc(index)
+            if (index == 1) {
+              if (nodeToUpdate isDefinedAt reassign._1) nodeToUpdate update(reassign._1, EMPTYSTR)
+            }
+          })
         }
       }
     })
   }
 
-  private def findReassignNode(list: listType, key: String): mapType = {
-    list.foreach(data => {
-      if (data.isDefinedAt(key)) return data
-    })
-    null
+  private def reassign(mapping: Map[String, String], data: mapType, structToReassign: mutable.Map[String, Any]): Unit = {
+    mapping.foreach { case (k, v) =>
+      if ((data isDefinedAt k) && (structToReassign isDefinedAt v)) {
+        data(k) match {
+          case map: mapType =>
+            structToReassign(v) = swapData(map.asInstanceOf[mutable.Map[String, String]], structToReassign(v))
+          case list: listType =>
+            list.foreach(map => structToReassign(v) = swapData(map.asInstanceOf[mutable.Map[String, String]], structToReassign(v)))
+          case s: String => structToReassign update(v, s)
+        }
+      }
+    }
+  }
+
+  private def swapData(source: mutable.Map[String, String], dest: Any): Any = {
+    dest match {
+      case map: mutable.LinkedHashMap[String, String] =>
+        var index = 0
+        source.foreach { case (k, v) => map.view.zipWithIndex.foreach(x => if (x._2 == index) map update(x._1._1, v))
+          index = inc(index)
+        }
+        map
+      case s: String =>
+        source.values mkString repeat
+    }
   }
 
   private def updateMetrics(state: hl7State) = {
@@ -233,7 +177,6 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       case Some(node) => nodeToUpdate update(whichKey, findData(node, path))
       case _ =>
     }
-
   }
 
   private def findData(data: Any, path: Array[(String, String, String, String)]): String = {
@@ -319,7 +262,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var segments: Segments = null
     var realignVal = EMPTYSTR
     var versionData: VersionData = null
-    val segmentsMapping = mapSegments(new Segments,_: String, _: Int, _: Int, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_", versionData.mappedIndex,
+    val segmentsMapping = mapSegments(new Segments, _: String, _: Int, _: Int, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_", versionData.mappedIndex,
       versionData.standardIndex, versionData.realignIndex, versionData.finalIndex)
     var i = 0
     try {
@@ -443,7 +386,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def matcher(in: String, seq: String) = in != null & in.contains(seq)
 
 
-  private def mapSegments(segment: Segments,mappingElement: String, segCodeLen: Int, indexLen: Int, controlVersion: String, mappedIndex: Map[String, Array[String]]
+  private def mapSegments(segment: Segments, mappingElement: String, segCodeLen: Int, indexLen: Int, controlVersion: String, mappedIndex: Map[String, Array[String]]
                           , standardIndex: Map[String, Array[String]], realignIndex: Map[String, Array[String]], finalIndex: Map[String, Array[String]]): Segments = {
     val segments = segment
     var segmentIndex = EMPTYSTR
@@ -496,8 +439,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             else if (nonEmpty(mappedFinalResultValues(4))) mappedColumnData = mappedFinalResultValues(4)
             case _ =>
           }
-          segments.componentData = mappingElement.substring(mappingElement.lastIndexOf(DOT) + 1, mappingElement.lastIndexOf(DOT) + 1 +
-            indexLen) + DOT + mappedColumnData
+          segments.componentData = mappingElement.substring(mappingElement.lastIndexOf(DOT) + 1, mappingElement.lastIndexOf(DOT) + 1 + indexLen) + DOT + mappedColumnData
           segments
       }
     } catch {
@@ -513,16 +455,16 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def isHL7(message: String) = matcher(message, MSH)
 
   private def lookUp(store: Map[String, Array[String]], key: String) = {
-    store.get(key) match {
+    store get key match {
       case Some(data) => data
       case _ => EMPTY
     }
   }
 
   private def generateMapIndex(segmentIndex: String, indexLen: Int): String = {
-    val indArry = segmentIndex.split("\\.")
-    indArry.nonEmpty match {
-      case true => sutil.leftPad(indArry(indArry.length - 1), indexLen, ZEROStr)
+    val split = segmentIndex.split("\\.")
+    split nonEmpty match {
+      case true => sutil.leftPad(split(split.length - 1), indexLen, ZEROStr)
       case _ => segmentIndex
     }
   }
@@ -533,6 +475,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 object HL7Parser {
 
   def apply(msgType: HL7, templateMappings: Map[String, Map[String, Array[String]]], reassignMeta: Map[String, String],
-            reassignments: Array[Reassignment]): HL7Parser = new HL7Parser(msgType, templateMappings, reassignMeta, reassignments)
+            reassignMapping: Map[String, Map[String, String]], reassignStruct: Map[String, mutable.Map[String, Any]]): HL7Parser =
+    new HL7Parser(msgType, templateMappings, reassignMeta, reassignMapping, reassignStruct)
 
 }
