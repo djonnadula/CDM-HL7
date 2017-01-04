@@ -37,7 +37,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private lazy val MAP = Map.empty[String, Array[String]]
   private val metrics = new TrieMap[String, Long]
   private val hl7 = msgType.toString
-  HL7State.values.foreach(state => metrics += hl7 + COLON + state.toString -> 0L)
+  HL7State.values.foreach(state => metrics += s"$hl7$COLON${state.toString}" -> 0L)
   outStream.println(
     hl7 + " " +
       """Template Registered For Parsing ::
@@ -52,8 +52,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   @throws(classOf[AssertionError])
   @throws(classOf[CdmException])
   def transformHL7(hl7Message: String, pre_num_len: Int = 4, segment_code_len: Int = 3, index_num_len: Int = 3): HL7TransRec = {
-    require(hl7Message != null && !hl7Message.isEmpty, "Error Nothing to parse " + hl7Message)
-    assume(isHL7(hl7Message), "Not a Valid HL7. Check with Facility :: " + hl7Message)
+    require(hl7Message != null && !hl7Message.isEmpty, s"Error Nothing to parse $hl7Message")
+    assume(isHL7(hl7Message), s"Not a Valid HL7. Check with Facility :: $hl7Message")
     val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
     Try(transform(hl7Message split delim, pre_num_len, segment_code_len, index_num_len)) match {
       case Success(parsed) =>
@@ -61,14 +61,14 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         val meta = msgMeta(parsed.data)
         metRequirement(meta) match {
           case true =>
-            if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException("Message has Multiple MSH Segments. This is not Expected.")
+            if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException(s"Message has Multiple MSH Segments. This is not Expected.")
             checkForReassignments(parsed)
             Try(toJson(parsed.data)) match {
               case Success(json) =>
                 updateMetrics(PROCESSED)
                 HL7TransRec(Left((json, parsed.data, meta)))
               case Failure(t) =>
-                error("Transforming to Json Failed for HL7 " + t.getMessage, t)
+                error(s"Transforming to Json Failed for HL7 ${t.getMessage}", t)
                 updateMetrics(FAILED)
                 HL7TransRec(Right(t))
             }
@@ -100,20 +100,34 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       if (reassignMeta isDefinedAt node._1.substring(node._1.indexOf(DOT) + 1)) {
         val versionSegment = s"${hL7Parsed.sourceSystem}${hL7Parsed.srcVersion}${node._1.substring(node._1.indexOf(DOT) + 1)}"
         if ((reassignStruct isDefinedAt versionSegment) && (reassignMapping isDefinedAt versionSegment)) {
-          val structToReassign = reassignStruct(versionSegment) clone()
+          val structToReassign = structCopy(reassignStruct(versionSegment))
           val nodeToUpdate = node._2.asInstanceOf[mapType]
           reassign(reassignMapping(versionSegment), nodeToUpdate, structToReassign)
           var index = 0
           reassignMapping(versionSegment).foreach(reassign => {
             if (nodeToUpdate isDefinedAt reassign._2) nodeToUpdate update(reassign._2, structToReassign(reassign._2))
             index = inc(index)
-            if (index == 1) {
-              if (nodeToUpdate isDefinedAt reassign._1) nodeToUpdate update(reassign._1, EMPTYSTR)
-            }
+            if (index == 1 && (nodeToUpdate isDefinedAt reassign._1)) nodeToUpdate update(reassign._1, EMPTYSTR)
           })
+
         }
       }
     })
+  }
+
+  private def structCopy(struct: mutable.Map[String, Any]): mutable.LinkedHashMap[String, Any] = {
+    val temp = new mutable.LinkedHashMap[String, Any]()
+    struct.foreach({ case (k, v) =>
+      val struct = v match {
+        case map: mutable.LinkedHashMap[String, String] =>
+          val temp1 = new mutable.LinkedHashMap[String, String]()
+          map.foreach({ case (k1, v1) => temp1 += k1 -> EMPTYSTR })
+          temp1
+        case s: String => EMPTYSTR
+      }
+      temp += k -> struct
+    })
+    temp
   }
 
   private def reassign(mapping: Map[String, String], data: mapType, structToReassign: mutable.Map[String, Any]): Unit = {
@@ -144,10 +158,10 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   }
 
   private def updateMetrics(state: hl7State) = {
-    val key = hl7 + COLON + state
+    val key = s"$hl7$COLON$state"
     metrics get key match {
       case Some(stat) => metrics update(key, cdm.inc(stat))
-      case _ => throw new DataModelException("Cannot Update Metrics Key not Found." + logIdent + " This should not Happen :: " + state)
+      case _ => throw new DataModelException(s"Cannot Update Metrics Key not Found. $logIdent This should not Happen :: $state")
     }
   }
 
@@ -448,7 +462,6 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         segments
     }
   }
-
 
   private def nonEmpty(key: String) = key != null & key != EMPTYSTR
 
