@@ -109,12 +109,22 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
     .setConf("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab"))
     .setConf("spark.yarn.principal", lookUpProp("hl7.spark.yarn.principal"))
-    .setConf("spark.executor.logs.rolling.maxRetainedFiles", "10")
-    .setConf("spark.executor.logs.rolling.strategy", "size")
-    .setConf("spark.executor.logs.rolling.maxSize", "307200")
-  if (ENV != "PROD") {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps")
-      .setConf("spark.executor.extraJavaOptions", "-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps")
+    .setConf("spark.streaming.stopSparkContextByDefault", "false")
+    .setConf("spark.streaming.gracefulStopTimeout", "300000")
+
+  // Applicable only in Standalone Mode
+  /* .setConf("spark.executor.logs.rolling.strategy", "size")
+   .setConf("spark.executor.logs.rolling.maxSize", "307200")
+   .setConf("spark.executor.logs.rolling.maxRetainedFiles", "10")
+  */
+  ENV != "PROD" match {
+    case true =>
+      sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+        .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+    case _ =>
+      sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
+        .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
+
   }
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
@@ -141,7 +151,7 @@ object Hl7Driver extends App with Logg {
         abend(1)
     }
     info(app + " Driver Shutdown Completed ")
-    abend(1)
+    abend(0)
   })))
 
   while (job.getAppId == null) {
@@ -179,7 +189,7 @@ object Hl7Driver extends App with Logg {
     trace(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
   }
 
-  object Tracker extends Listener {
+  private[job] object Tracker extends Listener {
     override def infoChanged(handle: SparkAppHandle): Unit = checkJob(handle)
 
     override def stateChanged(handle: SparkAppHandle): Unit = checkJob(handle)
@@ -202,6 +212,8 @@ object Hl7Driver extends App with Logg {
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What was happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
             , CRITICAL)
+          job stop()
+          job kill()
           abend(1)
       }
     }
