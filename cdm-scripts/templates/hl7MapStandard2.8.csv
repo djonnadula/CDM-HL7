@@ -7549,8 +7549,6 @@ ZVN.1.5,zvn_triggering_workstation,user_login_dept,,ZVN.1.5,zvn_triggering_works
 ZCD.2.1,zcd_query_data,mnem,,ZCD.2.1,zcd_query_data,query_code,
 ZCD.2.2,zcd_query_data,text,,ZCD.2.2,zcd_query_data,query_text,
 ZCD.2.3,zcd_query_data,response,,ZCD.2.3,zcd_query_data,query_response,
-DG1.11,dg1_outlier_type,,,DG1.11,dg1_outlier_type_or_bill_amt,,
-DG1.12,dg1_outlier_day,,,DG1.12,dg1_outlier_day_or_total_charge_amt,,
 AL1.9,al1_clin_sysl_override_9,,,AL1.9,al1_clin_sys_override_9_or_al1_sensitivity_causative_agent_cd,,
 AL1.9.1,al1_clin_sys_override_9,primary_id,,AL1.9.1,al1_clin_sys_override_9_or_al1_sensitivity_causative_agent_cd,primary_id,
 AL1.9.2,al1_clin_sys_override_9,text,,AL1.9.2,al1_clin_sys_override_9_or_al1_sensitivity_causative_agent_cd,text,
