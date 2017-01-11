@@ -112,6 +112,13 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.stopSparkContextByDefault", "false")
     .setConf("spark.streaming.gracefulStopTimeout", "300000")
 
+  // For Testing Only
+  /* .setConf("spark.yarn.token.renewal.interval", "1")
+   .setConf("spark.yarn.credentials.renewalTime", "50")
+   .setConf("spark.yarn.credentials.updateTime", "50")
+   .setConf("spark.yarn.credentials.file.retention.count", "1")
+   */
+
   // Applicable only in Standalone Mode
   /* .setConf("spark.executor.logs.rolling.strategy", "size")
    .setConf("spark.executor.logs.rolling.maxSize", "307200")
