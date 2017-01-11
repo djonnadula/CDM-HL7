@@ -10,7 +10,6 @@ import kafka.utils.SystemTime
 import com.hca.cdm._
 import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.hadoop.OverSizeHandler
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => conf}
 import com.hca.cdm.kafka.util.{TopicUtil => topicUtil}
 import com.hca.cdm.utils.RetryHandler
 import org.apache.kafka.clients.producer.ProducerConfig._
@@ -194,10 +193,47 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
 }
 
-object KafkaProducerHandler {
-  def apply(implicit props: Properties): KafkaProducerHandler = new KafkaProducerHandler(EMPTYSTR, true)(props)
+object KafkaProducerHandler extends AutoCloseable {
 
-  def apply(topicToProduce: String)(implicit props: Properties): KafkaProducerHandler = new KafkaProducerHandler(topicToProduce, false)(props)
+  private var producer: KafkaProducerHandler = _
+  private val lock = new Object()
 
-  def apply(multiDest: Boolean = true)(implicit props: Properties): KafkaProducerHandler = new KafkaProducerHandler("", true)(props)
+  def apply(implicit props: Properties): KafkaProducerHandler = {
+    def createIfNotExist = new (() => KafkaProducerHandler) {
+      override def apply(): KafkaProducerHandler = new KafkaProducerHandler(EMPTYSTR, true)(props)
+    }
+    createProducer(createIfNotExist)
+  }
+
+  def apply(topicToProduce: String)(implicit props: Properties): KafkaProducerHandler = {
+    def createIfNotExist = new (() => KafkaProducerHandler) {
+      override def apply(): KafkaProducerHandler = new KafkaProducerHandler(topicToProduce, false)(props)
+    }
+    createProducer(createIfNotExist)
+  }
+
+  def apply(multiDest: Boolean = true)(implicit props: Properties): KafkaProducerHandler = {
+    def createIfNotExist = new (() => KafkaProducerHandler) {
+      override def apply(): KafkaProducerHandler = new KafkaProducerHandler("", true)(props)
+    }
+    createProducer(createIfNotExist)
+  }
+
+  private def createProducer(createIfNotExist: () => KafkaProducerHandler): KafkaProducerHandler = {
+    lock.synchronized(
+      producer == null match {
+        case true =>
+          producer = createIfNotExist()
+          info(s"Created Kafka Producer handler $producer")
+          producer
+        case _ => producer
+      })
+  }
+
+  override def close(): Unit = {
+    lock.synchronized({
+      info(s"Closing Kafka Producer handler $producer")
+      closeResource(producer)
+    })
+  }
 }
