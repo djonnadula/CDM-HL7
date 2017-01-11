@@ -5,7 +5,7 @@ package com.hca.cdm.hl7.exception
   *
   * Exception thrown at Runtime if HL7 format is not Valid.
   */
-class InvalidHl7FormatException(message: String, t: Throwable) extends RuntimeException {
+class InvalidHl7FormatException(message: String, t: Throwable) extends RuntimeException(message,t) {
 
   def this(message: String) = this(message, null)
 
