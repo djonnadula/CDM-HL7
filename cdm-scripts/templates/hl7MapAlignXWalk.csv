@@ -10,6 +10,13 @@ MT_2.5_ACC.1.1,2.1,,ACC.1.1,acc_accident_date_time,acc_accident_date,,ACC.1,acc_
 MT_2.5_ACC.1.2,2.1,,ACC.1.2,acc_accident_date_time,acc_accident_time,,ACC.1,acc_accident_date_time,,,merge
 MT_2.5.1_ACC.1.1,2.1,,ACC.1.1,acc_accident_date_time,acc_accident_date,,ACC.1,acc_accident_date_time,,,merge
 MT_2.5.1_ACC.1.2,2.1,,ACC.1.2,acc_accident_date_time,acc_accident_time,,ACC.1,acc_accident_date_time,,,merge
+MT6_2.4_OBR.32.1,2.4,,OBR.32.1,obr_principal_result_interpreter,person_id,,OBR.32.1.1,obr_principal_result_interpreter,name,person_id,move
+MT6_2.4_OBR.32.2,2.4,,OBR.32.2,obr_principal_result_interpreter,last_name,,OBR.32.1.2,obr_principal_result_interpreter,name,last_name,move
+MT6_2.4_OBR.32.3,2.4,,OBR.32.3,obr_principal_result_interpreter,first_name,,OBR.32.1.3,obr_principal_result_interpreter,name,first_name,move
+MT6_2.4_OBR.32.4,2.4,,OBR.32.4,obr_principal_result_interpreter,middle_name,,OBR.32.1.4,obr_principal_result_interpreter,name,middle_name,move
+MT6_2.4_OBR.32.5,2.4,,OBR.32.5,obr_principal_result_interpreter,suffix,,OBR.32.1.5,obr_principal_result_interpreter,name,suffix,move
+MT6_2.4_OBR.32.6,2.4,,OBR.32.6,obr_principal_result_interpreter,prefix,,OBR.32.1.6,obr_principal_result_interpreter,name,person_prefix,move
+MT6_2.4_OBR.32.7,2.4,,OBR.32.7,obr_principal_result_interpreter,degree,,OBR.32.1.7,obr_principal_result_interpreter,name,degree,move
 MT6_2.4_OBR.34.1,2.4,,OBR.34.1,obr_technician,person_id,,OBR.34.1.1,obr_technician,name,person_id,move
 MT6_2.4_OBR.34.2,2.4,,OBR.34.2,obr_technician,last_name,,OBR.34.1.2,obr_technician,name,last_name,move
 MT6_2.4_OBR.34.3,2.4,,OBR.34.3,obr_technician,first_name,,OBR.34.1.3,obr_technician,name,first_name,move
