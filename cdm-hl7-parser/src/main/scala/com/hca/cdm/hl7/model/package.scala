@@ -26,13 +26,13 @@ import scala.util.{Success, Try}
 package object model {
 
   lazy val MSH_Segment = "0001.MSH"
-  lazy val Message_Type_Segment = "009.msh_msg_type"
-  lazy val Message_Control_Id = "001.message_code"
-  lazy val Message_Version = "012.msh_version_id"
-  lazy val Control_Id_key = "010.msh_msg_control_id"
-  lazy val sending_Facility = "004.msh_sending_facility"
+  lazy val Message_Type_Segment = "msh_msg_type"
+  lazy val Message_Control_Id = "message_code"
+  lazy val Message_Version = "msh_version_id"
+  lazy val Control_Id_key = "msh_msg_control_id"
+  lazy val sending_Facility = "msh_sending_facility"
   lazy val Msg_Type_Hier = Seq(MSH_Segment, Message_Type_Segment, Message_Control_Id)
-  lazy val Observation_Col = "005.obx_observation_value"
+  lazy val Observation_Col = "obx_observation_value"
   lazy val MSH_INDEX = "0001.MSH"
   lazy val commonNodeStr = "0000.COMN"
   lazy val OBX_SEG = "OBX"
@@ -44,9 +44,10 @@ package object model {
   lazy val NA = "Not Applicable"
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
-  lazy val repeat = "^"
+  lazy val caret = "^"
   lazy val DOT = "."
   lazy val EQUAL = "="
+  lazy val ESCAPE = "\\"
   lazy val segmentSequence = "segment_sequence"
   val commonNode = synchronized {
     val temp = new mutable.LinkedHashMap[String, String]
@@ -60,6 +61,19 @@ package object model {
 
   val MSHMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
   val PIDMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
+
+  private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id", tranTime: String = "msg_create_date_time",
+                                  mrn: String = "patient_mrn", urn: String = "patient_urn", accntNum: String = "patient_account_num",
+                                  rejectReason: String = "reject_reason", rejectData: String = "rejected_message_data", etlTime: String = "etl_firstinsert_datetime")
+
+  private val rejectSchemaMapping = RejectSchema()
+  private val rejectSchema = {
+    val temp = new mutable.LinkedHashMap[String, String]
+    rejectSchemaMapping.productIterator.foreach(sch => temp += sch.asInstanceOf[String] -> EMPTYSTR)
+    temp
+  }
+
+  private def getRejectSchema = rejectSchema.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
 
   private def commonSegmentMappings(mappingData: String) = {
     val temp = new mutable.HashMap[String, Array[(String, String, String, String)]]
@@ -83,15 +97,16 @@ package object model {
 
     })
     temp
-
   }
 
   object HL7State extends Enumeration {
+
     type hl7State = Value
     val PROCESSED = Value("PROCESSED")
     val FAILED = Value("FAILED")
     val REJECTED = Value("REJECTED")
     val OVERSIZED = Value("OVERSIZED")
+    val UNKNOWNMAPPING = Value("UNKNOWNMAPPING")
   }
 
   object SegmentsState extends Enumeration {
@@ -116,14 +131,23 @@ package object model {
   }
 
 
-  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = EMPTYSTR): String = {
-    s"$hl7$COLON$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}" +
-      s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED$timeStamp$PIPE_DELIMITED" +
-      (if (t != null) reason + (t.getStackTrace mkString repeat) else reason) + PIPE_DELIMITED + (if (raw ne EMPTYSTR) raw else toJson(data))
+  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true): String = {
+    val rejectSchema = getRejectSchema
+    import rejectSchemaMapping._
+    rejectSchema update(processName, s"$hl7$COLON$stage")
+    rejectSchema update(controlID, meta.controlId)
+    rejectSchema update(tranTime, meta.msgCreateTime)
+    rejectSchema update(mrn, meta.medical_record_num)
+    rejectSchema update(urn, meta.medical_record_urn)
+    rejectSchema update(accntNum, meta.account_num)
+    rejectSchema update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
+    rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) toJson(data) else EMPTYSTR)
+    rejectSchema update(etlTime, timeStamp)
+    toJson(rejectSchema)
   }
 
-  def rejectRawMsg(hl7: String, stage: String = EMPTYSTR, raw: String, reason: String, t: Throwable): String = {
-    rejectMsg(hl7, stage, metaFromRaw(raw), reason, null, t, raw)
+  def rejectRawMsg(hl7: String, stage: String = EMPTYSTR, raw: String, reason: String, t: Throwable, stackTrace: Boolean = true): String = {
+    rejectMsg(hl7, stage, metaFromRaw(raw), reason, null, t, raw, stackTrace)
   }
 
   def metaFromRaw(raw: String): MSGMeta = {
@@ -147,7 +171,7 @@ package object model {
     temp
   }
 
-  def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = "\\^", modelFieldDelim: String = "|"): Hl7Segments = {
+  def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED): Hl7Segments = {
     import OutFormats._
     Hl7Segments(msgType, segments flatMap (seg => {
       seg._1 contains "ADHOC" match {
@@ -163,7 +187,7 @@ package object model {
               case Success(x) => x.split("\\&", -1)
               case _ => Array.empty[String]
             }
-            val segStruc = adhoc take 2 mkString COLON
+            val segStruct = adhoc take 2 mkString COLON
             val outFormats = adhoc(2) split "\\^"
             val outDest = adhoc(3) split "\\^"
             var index = -1
@@ -172,9 +196,9 @@ package object model {
               val outFormSplit = outFormat split AMPERSAND
               outFormat contains JSON.toString match {
                 case true =>
-                  (segStruc + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0), fieldWithNoAppends), loadFilters(filterFile))
+                  (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0), fieldWithNoAppends), loadFilters(filterFile))
                 case _ =>
-                  (segStruc + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends), loadFilters(filterFile))
+                  (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends), loadFilters(filterFile))
               }
             }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
           } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -191,7 +215,7 @@ package object model {
 
   case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String], reqNoAppends: Array[String] = Array.empty[String])
 
-  case class Model(reqSeg: String, segStr: String, delimitedBy: String = "\\" + repeat, modelFieldDelim: String = PIPE_DELIMITED,
+  case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
     lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
@@ -226,6 +250,17 @@ package object model {
     temp
   }
 
+  def applySegmentsToAll(template: Map[String, List[(String, String)]], messageTypes: Array[String]): Map[String, List[(String, String)]] = {
+    val temp = new mutable.HashMap[String, List[(String, String)]]() ++ template
+    val allSegments = temp.getOrElse("ALL", new Array[(String, String)](0).toList)
+    if (allSegments.nonEmpty) temp -= "ALL"
+    messageTypes.foreach(hl7 => {
+      if (temp isDefinedAt hl7) temp update(hl7, temp(hl7) ::: allSegments)
+      else temp += hl7 -> allSegments
+    })
+    temp.toMap
+  }
+
   def loadFilters(file: String, delimitedBy: String = ","): Array[FILTER] = {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
@@ -234,7 +269,6 @@ package object model {
           case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
         } toArray
     }
-
   }
 
   def Reassignments(file: String): (Map[String, String], Map[String, Map[String, String]], Map[String, mutable.LinkedHashMap[String, Any]]) = {
@@ -250,13 +284,15 @@ package object model {
         reassignMeta += data(2) -> EMPTYSTR
         val reassignData = data.takeRight(data.length - 3)
         reassignData.foreach(x => {
-          val rData = x.split("\\" + repeat, -1)
-          val structData = PIPER split rData(1)
-          val struct = new mutable.LinkedHashMap[String, String]
-          structData.tail.map(x => struct += x -> EMPTYSTR)
-          if (struct isEmpty) reassignStructTemp += structData(0) -> EMPTYSTR
-          else reassignStructTemp += structData(0) -> struct
-          reassignmentMappingTemp += rData(0) -> structData(0)
+          if (x != EMPTYSTR) {
+            val rData = x.split("\\" + caret, -1)
+            val structData = PIPER split rData(1)
+            val struct = new mutable.LinkedHashMap[String, String]
+            structData.tail.map(x => struct += x -> EMPTYSTR)
+            if (struct isEmpty) reassignStructTemp += structData(0) -> EMPTYSTR
+            else reassignStructTemp += structData(0) -> struct
+            reassignmentMappingTemp += rData(0) -> structData(0)
+          }
         })
         reassignmentMapping += s"${data.apply(0)}${data.apply(1)}${data.apply(2)}" -> reassignmentMappingTemp.toMap
         reassignStruct += s"${data.apply(0)}${data.apply(1)}${data.apply(2)}" -> reassignStructTemp
