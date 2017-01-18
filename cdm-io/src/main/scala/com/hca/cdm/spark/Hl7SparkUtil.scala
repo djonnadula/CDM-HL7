@@ -1,7 +1,6 @@
 package com.hca.cdm.spark
 
 import kafka.serializer.StringDecoder
-import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -9,6 +8,7 @@ import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -21,22 +21,6 @@ object Hl7SparkUtil {
   def getConf(app: String, parHint: String): SparkConf = {
     val rate = lookUpProp("hl7.batch.rate").toInt
     new SparkConf()
-      .setAppName(app)
-      .set("spark.default.parallelism", parHint)
-      .setMaster(lookUpProp("hl7.spark.master"))
-      .set(EXECUTOR_MEMORY, lookUpProp("hl7.spark.executor-memory"))
-      .set(EXECUTOR_CORES, parHint)
-      .set("spark.driver-memory", lookUpProp("hl7.spark.driver-memory"))
-      .set("spark.dynamicAllocation.initialExecutors", lookUpProp("hl7.spark.num-executors"))
-      .set("spark.yarn.queue", lookUpProp("hl7.spark.queue"))
-      .set("spark.dynamicAllocation.enabled", lookUpProp("hl7.spark.dynamicAllocation.enabled"))
-      .set("spark.dynamicAllocation.maxExecutors", lookUpProp("hl7.spark.dynamicAllocation.maxExecutors"))
-      .set("spark.dynamicAllocation.minExecutors", lookUpProp("hl7.spark.dynamicAllocation.minExecutors"))
-      .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
-      .set("spark.streaming.receiver.writeAheadLog.enable", "true")
-      .set("spark.streaming.stopGracefullyOnShutdown", "true")
-      .set("spark.streaming.unpersist", "true")
-      .set("spark.streaming.kafka.maxRetries", lookUpProp("h7.spark.kafka.retries"))
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
       .set("spark.streaming.backpressure.pid.derived", "0.1")
@@ -69,9 +53,20 @@ object Hl7SparkUtil {
 
 
   /**
-    * Shutdowns Spark context and Streaming Context Gracefully allowing already Executing taks to be Completed
+    * Shutdowns Streaming Context Gracefully allowing already Executing tasks to be Completed
     */
-  def shutdown(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
+  def shutdownStreaming(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = false, stopGracefully = true)
+
+
+  /**
+    * Shutdowns Spark Context Gracefully allowing already Executing tasks to be Completed
+    */
+  def shutdownContext(sparkCtx: SparkContext): Unit = if (sparkCtx != null) sparkCtx stop
+
+  /**
+    * Shutdowns Spark context and Streaming Context Gracefully allowing already Executing tasks to be Completed
+    */
+  def shutdownEverything(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
 
 
 }
