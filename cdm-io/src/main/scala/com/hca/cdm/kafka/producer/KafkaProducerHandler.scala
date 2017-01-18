@@ -10,6 +10,7 @@ import kafka.utils.SystemTime
 import com.hca.cdm._
 import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.hadoop.OverSizeHandler
+import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => conf}
 import com.hca.cdm.kafka.util.{TopicUtil => topicUtil}
 import com.hca.cdm.utils.RetryHandler
 import org.apache.kafka.clients.producer.ProducerConfig._
@@ -136,6 +137,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
           this.producer.close()
         }))
         registerHook(sHook)
+        info(s"Registered SHook for $producer with Name ${sHook.getName}")
       }
     } else {
       fatal("Topic Doesn't Exist for Producing  and creating one with default config failed for topic :: " + topicToProduce)
@@ -186,7 +188,6 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
     if (this.producer != null) {
       flushEverything(producer)
       this.producer.close(1, TimeUnit.HOURS)
-      unregister(sHook)
     }
   }
 
