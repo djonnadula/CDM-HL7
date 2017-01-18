@@ -36,10 +36,10 @@ package object audit {
 
   def segmentsInMsg(segments: Set[String], data: mutable.LinkedHashMap[String, Any]): String = {
     data.map({ case (k, v) =>
-      val seg = k.substring(k.indexOf(".") + 1)
+      val seg = k.substring(k.indexOf(DOT) + 1)
       if (segments contains seg) seg
       else EMPTYSTR
-    }).filter(_ != EMPTYSTR).toSet mkString repeat
+    }).filter(_ != EMPTYSTR).toSet mkString caret
   }
 
 
