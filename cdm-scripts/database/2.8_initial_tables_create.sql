@@ -12836,7 +12836,6 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 	mrg_prior_internal_pat_id_assgn_authr_universal_id String,
 	mrg_prior_internal_pat_id_assgn_authr_universal_id_type String,
 	mrg_prior_internal_pat_id_identifier_type_code String,
-	mrg_prior_internal_pat_id_assgn_authr String,
 	mrg_prior_internal_pat_id_assgn_facility String,
 	mrg_prior_internal_pat_id_assgn_facility_namespace_id String,
 	mrg_prior_internal_pat_id_assgn_facility_universal_id String,
