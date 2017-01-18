@@ -28,15 +28,15 @@ CREATE EXTERNAL TABLE hl7_abs_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ABS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS';
 
-CREATE VIEW vw_hl7_abs_data AS SELECT * FROM hl7_abs_data WHERE segment_type='ABS';
+
 
 DROP TABLE hl7_acc_data;
 
@@ -356,15 +356,15 @@ CREATE EXTERNAL TABLE hl7_acc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ACC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC';
 
-CREATE VIEW vw_hl7_acc_data AS SELECT * FROM hl7_acc_data WHERE segment_type='ACC';
+
 
 DROP TABLE hl7_add_data;
 
@@ -381,15 +381,15 @@ CREATE EXTERNAL TABLE hl7_add_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ADD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD';
 
-CREATE VIEW vw_hl7_add_data AS SELECT * FROM hl7_add_data WHERE segment_type='ADD';
+
 
 DROP TABLE hl7_adj_data;
 
@@ -420,15 +420,15 @@ CREATE EXTERNAL TABLE hl7_adj_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ADJ';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ';
 
-CREATE VIEW vw_hl7_adj_data AS SELECT * FROM hl7_adj_data WHERE segment_type='ADJ';
+
 
 DROP TABLE hl7_aff_data;
 
@@ -449,15 +449,15 @@ CREATE EXTERNAL TABLE hl7_aff_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AFF';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF';
 
-CREATE VIEW vw_hl7_aff_data AS SELECT * FROM hl7_aff_data WHERE segment_type='AFF';
+
 
 DROP TABLE hl7_aig_data;
 
@@ -487,15 +487,15 @@ CREATE EXTERNAL TABLE hl7_aig_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AIG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG';
 
-CREATE VIEW vw_hl7_aig_data AS SELECT * FROM hl7_aig_data WHERE segment_type='AIG';
+
 
 DROP TABLE hl7_ail_data;
 
@@ -523,15 +523,15 @@ CREATE EXTERNAL TABLE hl7_ail_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AIL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL';
 
-CREATE VIEW vw_hl7_ail_data AS SELECT * FROM hl7_ail_data WHERE segment_type='AIL';
+
 
 DROP TABLE hl7_aip_data;
 
@@ -559,15 +559,15 @@ CREATE EXTERNAL TABLE hl7_aip_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AIP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP';
 
-CREATE VIEW vw_hl7_aip_data AS SELECT * FROM hl7_aip_data WHERE segment_type='AIP';
+
 
 DROP TABLE hl7_ais_data;
 
@@ -595,15 +595,15 @@ CREATE EXTERNAL TABLE hl7_ais_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AIS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS';
 
-CREATE VIEW vw_hl7_ais_data AS SELECT * FROM hl7_ais_data WHERE segment_type='AIS';
+
 
 DROP TABLE hl7_al1_data;
 
@@ -740,15 +740,15 @@ CREATE EXTERNAL TABLE hl7_al1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AL1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1';
 
-CREATE VIEW vw_hl7_al1_data AS SELECT * FROM hl7_al1_data WHERE segment_type='AL1';
+
 
 DROP TABLE hl7_apr_data;
 
@@ -769,15 +769,15 @@ CREATE EXTERNAL TABLE hl7_apr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=APR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR';
 
-CREATE VIEW vw_hl7_apr_data AS SELECT * FROM hl7_apr_data WHERE segment_type='APR';
+
 
 DROP TABLE hl7_arq_data;
 
@@ -818,15 +818,15 @@ CREATE EXTERNAL TABLE hl7_arq_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ARQ';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ';
 
-CREATE VIEW vw_hl7_arq_data AS SELECT * FROM hl7_arq_data WHERE segment_type='ARQ';
+
 
 DROP TABLE hl7_arv_data;
 
@@ -916,15 +916,15 @@ CREATE EXTERNAL TABLE hl7_arv_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ARV';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV';
 
-CREATE VIEW vw_hl7_arv_data AS SELECT * FROM hl7_arv_data WHERE segment_type='ARV';
+
 
 DROP TABLE hl7_aut_data;
 
@@ -952,15 +952,15 @@ CREATE EXTERNAL TABLE hl7_aut_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=AUT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT';
 
-CREATE VIEW vw_hl7_aut_data AS SELECT * FROM hl7_aut_data WHERE segment_type='AUT';
+
 
 DROP TABLE hl7_bhs_data;
 
@@ -990,15 +990,15 @@ CREATE EXTERNAL TABLE hl7_bhs_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BHS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS';
 
-CREATE VIEW vw_hl7_bhs_data AS SELECT * FROM hl7_bhs_data WHERE segment_type='BHS';
+
 
 DROP TABLE hl7_blc_data;
 
@@ -1016,15 +1016,15 @@ CREATE EXTERNAL TABLE hl7_blc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BLC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC';
 
-CREATE VIEW vw_hl7_blc_data AS SELECT * FROM hl7_blc_data WHERE segment_type='BLC';
+
 
 DROP TABLE hl7_blg_data;
 
@@ -1044,15 +1044,15 @@ CREATE EXTERNAL TABLE hl7_blg_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BLG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG';
 
-CREATE VIEW vw_hl7_blg_data AS SELECT * FROM hl7_blg_data WHERE segment_type='BLG';
+
 
 DROP TABLE hl7_bpo_data;
 
@@ -1082,15 +1082,15 @@ CREATE EXTERNAL TABLE hl7_bpo_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BPO';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO';
 
-CREATE VIEW vw_hl7_bpo_data AS SELECT * FROM hl7_bpo_data WHERE segment_type='BPO';
+
 
 DROP TABLE hl7_bpx_data;
 
@@ -1127,15 +1127,15 @@ CREATE EXTERNAL TABLE hl7_bpx_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BPX';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX';
 
-CREATE VIEW vw_hl7_bpx_data AS SELECT * FROM hl7_bpx_data WHERE segment_type='BPX';
+
 
 DROP TABLE hl7_bts_data;
 
@@ -1154,15 +1154,15 @@ CREATE EXTERNAL TABLE hl7_bts_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BTS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS';
 
-CREATE VIEW vw_hl7_bts_data AS SELECT * FROM hl7_bts_data WHERE segment_type='BTS';
+
 
 DROP TABLE hl7_btx_data;
 
@@ -1197,15 +1197,15 @@ CREATE EXTERNAL TABLE hl7_btx_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=BTX';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX';
 
-CREATE VIEW vw_hl7_btx_data AS SELECT * FROM hl7_btx_data WHERE segment_type='BTX';
+
 
 DROP TABLE hl7_cdm_data;
 
@@ -1234,15 +1234,15 @@ CREATE EXTERNAL TABLE hl7_cdm_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CDM';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM';
 
-CREATE VIEW vw_hl7_cdm_data AS SELECT * FROM hl7_cdm_data WHERE segment_type='CDM';
+
 
 DROP TABLE hl7_cdo_data;
 
@@ -1310,15 +1310,15 @@ CREATE EXTERNAL TABLE hl7_cdo_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CDO';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO';
 
-CREATE VIEW vw_hl7_cdo_data AS SELECT * FROM hl7_cdo_data WHERE segment_type='CDO';
+
 
 DROP TABLE hl7_cer_data;
 
@@ -1365,15 +1365,15 @@ CREATE EXTERNAL TABLE hl7_cer_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CER';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER';
 
-CREATE VIEW vw_hl7_cer_data AS SELECT * FROM hl7_cer_data WHERE segment_type='CER';
+
 
 DROP TABLE hl7_cm0_data;
 
@@ -1400,15 +1400,15 @@ CREATE EXTERNAL TABLE hl7_cm0_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CM0';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0';
 
-CREATE VIEW vw_hl7_cm0_data AS SELECT * FROM hl7_cm0_data WHERE segment_type='CM0';
+
 
 DROP TABLE hl7_cm1_data;
 
@@ -1427,15 +1427,15 @@ CREATE EXTERNAL TABLE hl7_cm1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CM1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1';
 
-CREATE VIEW vw_hl7_cm1_data AS SELECT * FROM hl7_cm1_data WHERE segment_type='CM1';
+
 
 DROP TABLE hl7_cm2_data;
 
@@ -1455,15 +1455,15 @@ CREATE EXTERNAL TABLE hl7_cm2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CM2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2';
 
-CREATE VIEW vw_hl7_cm2_data AS SELECT * FROM hl7_cm2_data WHERE segment_type='CM2';
+
 
 DROP TABLE hl7_cns_data;
 
@@ -1485,15 +1485,15 @@ CREATE EXTERNAL TABLE hl7_cns_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CNS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS';
 
-CREATE VIEW vw_hl7_cns_data AS SELECT * FROM hl7_cns_data WHERE segment_type='CNS';
+
 
 DROP TABLE hl7_con_data;
 
@@ -1758,15 +1758,15 @@ CREATE EXTERNAL TABLE hl7_con_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CON';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON';
 
-CREATE VIEW vw_hl7_con_data AS SELECT * FROM hl7_con_data WHERE segment_type='CON';
+
 
 DROP TABLE hl7_csp_data;
 
@@ -1786,15 +1786,15 @@ CREATE EXTERNAL TABLE hl7_csp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CSP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP';
 
-CREATE VIEW vw_hl7_csp_data AS SELECT * FROM hl7_csp_data WHERE segment_type='CSP';
+
 
 DROP TABLE hl7_csr_data;
 
@@ -1826,15 +1826,15 @@ CREATE EXTERNAL TABLE hl7_csr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CSR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR';
 
-CREATE VIEW vw_hl7_csr_data AS SELECT * FROM hl7_csr_data WHERE segment_type='CSR';
+
 
 DROP TABLE hl7_css_data;
 
@@ -1853,15 +1853,15 @@ CREATE EXTERNAL TABLE hl7_css_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CSS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS';
 
-CREATE VIEW vw_hl7_css_data AS SELECT * FROM hl7_css_data WHERE segment_type='CSS';
+
 
 DROP TABLE hl7_ctd_data;
 
@@ -2220,15 +2220,15 @@ CREATE EXTERNAL TABLE hl7_ctd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CTD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD';
 
-CREATE VIEW vw_hl7_ctd_data AS SELECT * FROM hl7_ctd_data WHERE segment_type='CTD';
+
 
 DROP TABLE hl7_cti_data;
 
@@ -2295,15 +2295,15 @@ CREATE EXTERNAL TABLE hl7_cti_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=CTI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI';
 
-CREATE VIEW vw_hl7_cti_data AS SELECT * FROM hl7_cti_data WHERE segment_type='CTI';
+
 
 DROP TABLE hl7_db1_data;
 
@@ -2327,15 +2327,15 @@ CREATE EXTERNAL TABLE hl7_db1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=DB1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1';
 
-CREATE VIEW vw_hl7_db1_data AS SELECT * FROM hl7_db1_data WHERE segment_type='DB1';
+
 
 DROP TABLE hl7_dg1_data;
 
@@ -2733,15 +2733,15 @@ CREATE EXTERNAL TABLE hl7_dg1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=DG1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1';
 
-CREATE VIEW vw_hl7_dg1_data AS SELECT * FROM hl7_dg1_data WHERE segment_type='DG1';
+
 
 DROP TABLE hl7_dmi_data;
 
@@ -2762,15 +2762,15 @@ CREATE EXTERNAL TABLE hl7_dmi_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=DMI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI';
 
-CREATE VIEW vw_hl7_dmi_data AS SELECT * FROM hl7_dmi_data WHERE segment_type='DMI';
+
 
 DROP TABLE hl7_drg_data;
 
@@ -3277,15 +3277,15 @@ CREATE EXTERNAL TABLE hl7_drg_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=DRG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG';
 
-CREATE VIEW vw_hl7_drg_data AS SELECT * FROM hl7_drg_data WHERE segment_type='DRG';
+
 
 DROP TABLE hl7_dsc_data;
 
@@ -3303,15 +3303,15 @@ CREATE EXTERNAL TABLE hl7_dsc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=DSC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC';
 
-CREATE VIEW vw_hl7_dsc_data AS SELECT * FROM hl7_dsc_data WHERE segment_type='DSC';
+
 
 DROP TABLE hl7_dsp_data;
 
@@ -3332,15 +3332,15 @@ CREATE EXTERNAL TABLE hl7_dsp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=DSP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP';
 
-CREATE VIEW vw_hl7_dsp_data AS SELECT * FROM hl7_dsp_data WHERE segment_type='DSP';
+
 
 DROP TABLE hl7_ecd_data;
 
@@ -3361,15 +3361,15 @@ CREATE EXTERNAL TABLE hl7_ecd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ECD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD';
 
-CREATE VIEW vw_hl7_ecd_data AS SELECT * FROM hl7_ecd_data WHERE segment_type='ECD';
+
 
 DROP TABLE hl7_ecr_data;
 
@@ -3388,15 +3388,15 @@ CREATE EXTERNAL TABLE hl7_ecr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ECR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR';
 
-CREATE VIEW vw_hl7_ecr_data AS SELECT * FROM hl7_ecr_data WHERE segment_type='ECR';
+
 
 DROP TABLE hl7_edu_data;
 
@@ -3421,15 +3421,15 @@ CREATE EXTERNAL TABLE hl7_edu_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=EDU';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU';
 
-CREATE VIEW vw_hl7_edu_data AS SELECT * FROM hl7_edu_data WHERE segment_type='EDU';
+
 
 DROP TABLE hl7_eqp_data;
 
@@ -3450,15 +3450,15 @@ CREATE EXTERNAL TABLE hl7_eqp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=EQP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP';
 
-CREATE VIEW vw_hl7_eqp_data AS SELECT * FROM hl7_eqp_data WHERE segment_type='EQP';
+
 
 DROP TABLE hl7_equ_data;
 
@@ -3479,15 +3479,15 @@ CREATE EXTERNAL TABLE hl7_equ_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=EQU';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU';
 
-CREATE VIEW vw_hl7_equ_data AS SELECT * FROM hl7_equ_data WHERE segment_type='EQU';
+
 
 DROP TABLE hl7_err_data;
 
@@ -3515,15 +3515,15 @@ CREATE EXTERNAL TABLE hl7_err_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ERR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR';
 
-CREATE VIEW vw_hl7_err_data AS SELECT * FROM hl7_err_data WHERE segment_type='ERR';
+
 
 DROP TABLE hl7_evn_data;
 
@@ -3697,15 +3697,15 @@ CREATE EXTERNAL TABLE hl7_evn_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=EVN';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN';
 
-CREATE VIEW vw_hl7_evn_data AS SELECT * FROM hl7_evn_data WHERE segment_type='EVN';
+
 
 DROP TABLE hl7_fac_data;
 
@@ -3733,15 +3733,15 @@ CREATE EXTERNAL TABLE hl7_fac_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=FAC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC';
 
-CREATE VIEW vw_hl7_fac_data AS SELECT * FROM hl7_fac_data WHERE segment_type='FAC';
+
 
 DROP TABLE hl7_fhs_data;
 
@@ -3771,15 +3771,15 @@ CREATE EXTERNAL TABLE hl7_fhs_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=FHS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS';
 
-CREATE VIEW vw_hl7_fhs_data AS SELECT * FROM hl7_fhs_data WHERE segment_type='FHS';
+
 
 DROP TABLE hl7_ft1_data;
 
@@ -5038,15 +5038,15 @@ CREATE EXTERNAL TABLE hl7_ft1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=FT1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1';
 
-CREATE VIEW vw_hl7_ft1_data AS SELECT * FROM hl7_ft1_data WHERE segment_type='FT1';
+
 
 DROP TABLE hl7_fts_data;
 
@@ -5064,15 +5064,15 @@ CREATE EXTERNAL TABLE hl7_fts_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=FTS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS';
 
-CREATE VIEW vw_hl7_fts_data AS SELECT * FROM hl7_fts_data WHERE segment_type='FTS';
+
 
 DROP TABLE hl7_gol_data;
 
@@ -5110,15 +5110,15 @@ CREATE EXTERNAL TABLE hl7_gol_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=GOL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL';
 
-CREATE VIEW vw_hl7_gol_data AS SELECT * FROM hl7_gol_data WHERE segment_type='GOL';
+
 
 DROP TABLE hl7_gp1_data;
 
@@ -5139,15 +5139,15 @@ CREATE EXTERNAL TABLE hl7_gp1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=GP1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1';
 
-CREATE VIEW vw_hl7_gp1_data AS SELECT * FROM hl7_gp1_data WHERE segment_type='GP1';
+
 
 DROP TABLE hl7_gp2_data;
 
@@ -5177,15 +5177,15 @@ CREATE EXTERNAL TABLE hl7_gp2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=GP2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2';
 
-CREATE VIEW vw_hl7_gp2_data AS SELECT * FROM hl7_gp2_data WHERE segment_type='GP2';
+
 
 DROP TABLE hl7_gt1_data;
 
@@ -6853,15 +6853,15 @@ CREATE EXTERNAL TABLE hl7_gt1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=GT1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1';
 
-CREATE VIEW vw_hl7_gt1_data AS SELECT * FROM hl7_gt1_data WHERE segment_type='GT1';
+
 
 DROP TABLE hl7_iam_data;
 
@@ -7831,15 +7831,15 @@ CREATE EXTERNAL TABLE hl7_iam_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IAM';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM';
 
-CREATE VIEW vw_hl7_iam_data AS SELECT * FROM hl7_iam_data WHERE segment_type='IAM';
+
 
 DROP TABLE hl7_iar_data;
 
@@ -7859,15 +7859,15 @@ CREATE EXTERNAL TABLE hl7_iar_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IAR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR';
 
-CREATE VIEW vw_hl7_iar_data AS SELECT * FROM hl7_iar_data WHERE segment_type='IAR';
+
 
 DROP TABLE hl7_iim_data;
 
@@ -7898,15 +7898,15 @@ CREATE EXTERNAL TABLE hl7_iim_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IIM';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM';
 
-CREATE VIEW vw_hl7_iim_data AS SELECT * FROM hl7_iim_data WHERE segment_type='IIM';
+
 
 DROP TABLE hl7_ilt_data;
 
@@ -7932,15 +7932,15 @@ CREATE EXTERNAL TABLE hl7_ilt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ILT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT';
 
-CREATE VIEW vw_hl7_ilt_data AS SELECT * FROM hl7_ilt_data WHERE segment_type='ILT';
+
 
 DROP TABLE hl7_in1_data;
 
@@ -9398,15 +9398,15 @@ CREATE EXTERNAL TABLE hl7_in1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IN1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1';
 
-CREATE VIEW vw_hl7_in1_data AS SELECT * FROM hl7_in1_data WHERE segment_type='IN1';
+
 
 DROP TABLE hl7_in2_data;
 
@@ -11330,15 +11330,15 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IN2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2';
 
-CREATE VIEW vw_hl7_in2_data AS SELECT * FROM hl7_in2_data WHERE segment_type='IN2';
+
 
 DROP TABLE hl7_in3_data;
 
@@ -12239,15 +12239,15 @@ CREATE EXTERNAL TABLE hl7_in3_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IN3';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3';
 
-CREATE VIEW vw_hl7_in3_data AS SELECT * FROM hl7_in3_data WHERE segment_type='IN3';
+
 
 DROP TABLE hl7_inv_data;
 
@@ -12283,15 +12283,15 @@ CREATE EXTERNAL TABLE hl7_inv_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=INV';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV';
 
-CREATE VIEW vw_hl7_inv_data AS SELECT * FROM hl7_inv_data WHERE segment_type='INV';
+
 
 DROP TABLE hl7_ipc_data;
 
@@ -12316,15 +12316,15 @@ CREATE EXTERNAL TABLE hl7_ipc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IPC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC';
 
-CREATE VIEW vw_hl7_ipc_data AS SELECT * FROM hl7_ipc_data WHERE segment_type='IPC';
+
 
 DROP TABLE hl7_ipr_data;
 
@@ -12348,15 +12348,15 @@ CREATE EXTERNAL TABLE hl7_ipr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IPR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR';
 
-CREATE VIEW vw_hl7_ipr_data AS SELECT * FROM hl7_ipr_data WHERE segment_type='IPR';
+
 
 DROP TABLE hl7_isd_data;
 
@@ -12375,15 +12375,15 @@ CREATE EXTERNAL TABLE hl7_isd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ISD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD';
 
-CREATE VIEW vw_hl7_isd_data AS SELECT * FROM hl7_isd_data WHERE segment_type='ISD';
+
 
 DROP TABLE hl7_itm_data;
 
@@ -12428,15 +12428,15 @@ CREATE EXTERNAL TABLE hl7_itm_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ITM';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM';
 
-CREATE VIEW vw_hl7_itm_data AS SELECT * FROM hl7_itm_data WHERE segment_type='ITM';
+
 
 DROP TABLE hl7_ivc_data;
 
@@ -12482,15 +12482,15 @@ CREATE EXTERNAL TABLE hl7_ivc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IVC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC';
 
-CREATE VIEW vw_hl7_ivc_data AS SELECT * FROM hl7_ivc_data WHERE segment_type='IVC';
+
 
 DROP TABLE hl7_ivt_data;
 
@@ -12532,15 +12532,15 @@ CREATE EXTERNAL TABLE hl7_ivt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=IVT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT';
 
-CREATE VIEW vw_hl7_ivt_data AS SELECT * FROM hl7_ivt_data WHERE segment_type='IVT';
+
 
 DROP TABLE hl7_lan_data;
 
@@ -12560,15 +12560,15 @@ CREATE EXTERNAL TABLE hl7_lan_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=LAN';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN';
 
-CREATE VIEW vw_hl7_lan_data AS SELECT * FROM hl7_lan_data WHERE segment_type='LAN';
+
 
 DROP TABLE hl7_lcc_data;
 
@@ -12588,15 +12588,15 @@ CREATE EXTERNAL TABLE hl7_lcc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=LCC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC';
 
-CREATE VIEW vw_hl7_lcc_data AS SELECT * FROM hl7_lcc_data WHERE segment_type='LCC';
+
 
 DROP TABLE hl7_lch_data;
 
@@ -12617,15 +12617,15 @@ CREATE EXTERNAL TABLE hl7_lch_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=LCH';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH';
 
-CREATE VIEW vw_hl7_lch_data AS SELECT * FROM hl7_lch_data WHERE segment_type='LCH';
+
 
 DROP TABLE hl7_ldp_data;
 
@@ -12653,15 +12653,15 @@ CREATE EXTERNAL TABLE hl7_ldp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=LDP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP';
 
-CREATE VIEW vw_hl7_ldp_data AS SELECT * FROM hl7_ldp_data WHERE segment_type='LDP';
+
 
 DROP TABLE hl7_loc_data;
 
@@ -12686,15 +12686,15 @@ CREATE EXTERNAL TABLE hl7_loc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=LOC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC';
 
-CREATE VIEW vw_hl7_loc_data AS SELECT * FROM hl7_loc_data WHERE segment_type='LOC';
+
 
 DROP TABLE hl7_lrl_data;
 
@@ -12716,15 +12716,15 @@ CREATE EXTERNAL TABLE hl7_lrl_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=LRL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL';
 
-CREATE VIEW vw_hl7_lrl_data AS SELECT * FROM hl7_lrl_data WHERE segment_type='LRL';
+
 
 DROP TABLE hl7_mfa_data;
 
@@ -12746,15 +12746,15 @@ CREATE EXTERNAL TABLE hl7_mfa_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=MFA';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA';
 
-CREATE VIEW vw_hl7_mfa_data AS SELECT * FROM hl7_mfa_data WHERE segment_type='MFA';
+
 
 DROP TABLE hl7_mfe_data;
 
@@ -12777,15 +12777,15 @@ CREATE EXTERNAL TABLE hl7_mfe_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=MFE';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE';
 
-CREATE VIEW vw_hl7_mfe_data AS SELECT * FROM hl7_mfe_data WHERE segment_type='MFE';
+
 
 DROP TABLE hl7_mfi_data;
 
@@ -12807,15 +12807,15 @@ CREATE EXTERNAL TABLE hl7_mfi_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=MFI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI';
 
-CREATE VIEW vw_hl7_mfi_data AS SELECT * FROM hl7_mfi_data WHERE segment_type='MFI';
+
 
 DROP TABLE hl7_mrg_data;
 
@@ -13197,15 +13197,15 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=MRG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG';
 
-CREATE VIEW vw_hl7_mrg_data AS SELECT * FROM hl7_mrg_data WHERE segment_type='MRG';
+
 
 DROP TABLE hl7_msa_data;
 
@@ -13229,15 +13229,15 @@ CREATE EXTERNAL TABLE hl7_msa_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=MSA';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA';
 
-CREATE VIEW vw_hl7_msa_data AS SELECT * FROM hl7_msa_data WHERE segment_type='MSA';
+
 
 DROP TABLE hl7_msh_data;
 
@@ -13450,15 +13450,15 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=MSH';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH';
 
-CREATE VIEW vw_hl7_msh_data AS SELECT * FROM hl7_msh_data WHERE segment_type='MSH';
+
 
 DROP TABLE hl7_nck_data;
 
@@ -13475,15 +13475,15 @@ CREATE EXTERNAL TABLE hl7_nck_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NCK';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK';
 
-CREATE VIEW vw_hl7_nck_data AS SELECT * FROM hl7_nck_data WHERE segment_type='NCK';
+
 
 DROP TABLE hl7_nds_data;
 
@@ -13503,15 +13503,15 @@ CREATE EXTERNAL TABLE hl7_nds_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NDS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS';
 
-CREATE VIEW vw_hl7_nds_data AS SELECT * FROM hl7_nds_data WHERE segment_type='NDS';
+
 
 DROP TABLE hl7_nk1_data;
 
@@ -14897,15 +14897,15 @@ CREATE EXTERNAL TABLE hl7_nk1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NK1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1';
 
-CREATE VIEW vw_hl7_nk1_data AS SELECT * FROM hl7_nk1_data WHERE segment_type='NK1';
+
 
 DROP TABLE hl7_npu_data;
 
@@ -14923,15 +14923,15 @@ CREATE EXTERNAL TABLE hl7_npu_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NPU';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU';
 
-CREATE VIEW vw_hl7_npu_data AS SELECT * FROM hl7_npu_data WHERE segment_type='NPU';
+
 
 DROP TABLE hl7_nsc_data;
 
@@ -14956,15 +14956,15 @@ CREATE EXTERNAL TABLE hl7_nsc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NSC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC';
 
-CREATE VIEW vw_hl7_nsc_data AS SELECT * FROM hl7_nsc_data WHERE segment_type='NSC';
+
 
 DROP TABLE hl7_nst_data;
 
@@ -14995,15 +14995,15 @@ CREATE EXTERNAL TABLE hl7_nst_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NST';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST';
 
-CREATE VIEW vw_hl7_nst_data AS SELECT * FROM hl7_nst_data WHERE segment_type='NST';
+
 
 DROP TABLE hl7_nte_data;
 
@@ -15180,15 +15180,15 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=NTE';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE';
 
-CREATE VIEW vw_hl7_nte_data AS SELECT * FROM hl7_nte_data WHERE segment_type='NTE';
+
 
 DROP TABLE hl7_obr_data;
 
@@ -16318,15 +16318,15 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OBR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR';
 
-CREATE VIEW vw_hl7_obr_data AS SELECT * FROM hl7_obr_data WHERE segment_type='OBR';
+
 
 DROP TABLE hl7_obx_data;
 
@@ -16371,15 +16371,15 @@ CREATE EXTERNAL TABLE hl7_obx_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OBX';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX';
 
-CREATE VIEW vw_hl7_obx_data AS SELECT * FROM hl7_obx_data WHERE segment_type='OBX';
+
 
 DROP TABLE hl7_ods_data;
 
@@ -16399,15 +16399,15 @@ CREATE EXTERNAL TABLE hl7_ods_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ODS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS';
 
-CREATE VIEW vw_hl7_ods_data AS SELECT * FROM hl7_ods_data WHERE segment_type='ODS';
+
 
 DROP TABLE hl7_odt_data;
 
@@ -16426,15 +16426,15 @@ CREATE EXTERNAL TABLE hl7_odt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ODT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT';
 
-CREATE VIEW vw_hl7_odt_data AS SELECT * FROM hl7_odt_data WHERE segment_type='ODT';
+
 
 DROP TABLE hl7_om1_data;
 
@@ -16497,15 +16497,15 @@ CREATE EXTERNAL TABLE hl7_om1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1';
 
-CREATE VIEW vw_hl7_om1_data AS SELECT * FROM hl7_om1_data WHERE segment_type='OM1';
+
 
 DROP TABLE hl7_om2_data;
 
@@ -16531,15 +16531,15 @@ CREATE EXTERNAL TABLE hl7_om2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2';
 
-CREATE VIEW vw_hl7_om2_data AS SELECT * FROM hl7_om2_data WHERE segment_type='OM2';
+
 
 DROP TABLE hl7_om3_data;
 
@@ -16562,15 +16562,15 @@ CREATE EXTERNAL TABLE hl7_om3_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM3';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3';
 
-CREATE VIEW vw_hl7_om3_data AS SELECT * FROM hl7_om3_data WHERE segment_type='OM3';
+
 
 DROP TABLE hl7_om4_data;
 
@@ -16600,15 +16600,15 @@ CREATE EXTERNAL TABLE hl7_om4_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM4';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4';
 
-CREATE VIEW vw_hl7_om4_data AS SELECT * FROM hl7_om4_data WHERE segment_type='OM4';
+
 
 DROP TABLE hl7_om5_data;
 
@@ -16627,15 +16627,15 @@ CREATE EXTERNAL TABLE hl7_om5_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM5';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5';
 
-CREATE VIEW vw_hl7_om5_data AS SELECT * FROM hl7_om5_data WHERE segment_type='OM5';
+
 
 DROP TABLE hl7_om6_data;
 
@@ -16653,15 +16653,15 @@ CREATE EXTERNAL TABLE hl7_om6_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM6';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6';
 
-CREATE VIEW vw_hl7_om6_data AS SELECT * FROM hl7_om6_data WHERE segment_type='OM6';
+
 
 DROP TABLE hl7_om7_data;
 
@@ -16701,15 +16701,15 @@ CREATE EXTERNAL TABLE hl7_om7_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OM7';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7';
 
-CREATE VIEW vw_hl7_om7_data AS SELECT * FROM hl7_om7_data WHERE segment_type='OM7';
+
 
 DROP TABLE hl7_orc_data;
 
@@ -18032,15 +18032,15 @@ CREATE EXTERNAL TABLE hl7_orc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ORC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC';
 
-CREATE VIEW vw_hl7_orc_data AS SELECT * FROM hl7_orc_data WHERE segment_type='ORC';
+
 
 DROP TABLE hl7_org_data;
 
@@ -18069,15 +18069,15 @@ CREATE EXTERNAL TABLE hl7_org_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ORG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG';
 
-CREATE VIEW vw_hl7_org_data AS SELECT * FROM hl7_org_data WHERE segment_type='ORG';
+
 
 DROP TABLE hl7_ovr_data;
 
@@ -18098,15 +18098,15 @@ CREATE EXTERNAL TABLE hl7_ovr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=OVR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR';
 
-CREATE VIEW vw_hl7_ovr_data AS SELECT * FROM hl7_ovr_data WHERE segment_type='OVR';
+
 
 DROP TABLE hl7_pac_data;
 
@@ -18130,15 +18130,15 @@ CREATE EXTERNAL TABLE hl7_pac_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PAC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC';
 
-CREATE VIEW vw_hl7_pac_data AS SELECT * FROM hl7_pac_data WHERE segment_type='PAC';
+
 
 DROP TABLE hl7_pce_data;
 
@@ -18158,15 +18158,15 @@ CREATE EXTERNAL TABLE hl7_pce_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PCE';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE';
 
-CREATE VIEW vw_hl7_pce_data AS SELECT * FROM hl7_pce_data WHERE segment_type='PCE';
+
 
 DROP TABLE hl7_pcr_data;
 
@@ -18205,15 +18205,15 @@ CREATE EXTERNAL TABLE hl7_pcr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PCR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR';
 
-CREATE VIEW vw_hl7_pcr_data AS SELECT * FROM hl7_pcr_data WHERE segment_type='PCR';
+
 
 DROP TABLE hl7_pd1_data;
 
@@ -18779,15 +18779,15 @@ CREATE EXTERNAL TABLE hl7_pd1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PD1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1';
 
-CREATE VIEW vw_hl7_pd1_data AS SELECT * FROM hl7_pd1_data WHERE segment_type='PD1';
+
 
 DROP TABLE hl7_pda_data;
 
@@ -18812,15 +18812,15 @@ CREATE EXTERNAL TABLE hl7_pda_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PDA';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA';
 
-CREATE VIEW vw_hl7_pda_data AS SELECT * FROM hl7_pda_data WHERE segment_type='PDA';
+
 
 DROP TABLE hl7_pdc_data;
 
@@ -18851,15 +18851,15 @@ CREATE EXTERNAL TABLE hl7_pdc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PDC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC';
 
-CREATE VIEW vw_hl7_pdc_data AS SELECT * FROM hl7_pdc_data WHERE segment_type='PDC';
+
 
 DROP TABLE hl7_peo_data;
 
@@ -18900,15 +18900,15 @@ CREATE EXTERNAL TABLE hl7_peo_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PEO';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO';
 
-CREATE VIEW vw_hl7_peo_data AS SELECT * FROM hl7_peo_data WHERE segment_type='PEO';
+
 
 DROP TABLE hl7_pes_data;
 
@@ -18937,15 +18937,15 @@ CREATE EXTERNAL TABLE hl7_pes_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PES';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES';
 
-CREATE VIEW vw_hl7_pes_data AS SELECT * FROM hl7_pes_data WHERE segment_type='PES';
+
 
 DROP TABLE hl7_pid_data;
 
@@ -19932,15 +19932,15 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PID';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID';
 
-CREATE VIEW vw_hl7_pid_data AS SELECT * FROM hl7_pid_data WHERE segment_type='PID';
+
 
 DROP TABLE hl7_pkg_data;
 
@@ -19963,15 +19963,15 @@ CREATE EXTERNAL TABLE hl7_pkg_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PKG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG';
 
-CREATE VIEW vw_hl7_pkg_data AS SELECT * FROM hl7_pkg_data WHERE segment_type='PKG';
+
 
 DROP TABLE hl7_pmt_data;
 
@@ -19999,15 +19999,15 @@ CREATE EXTERNAL TABLE hl7_pmt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PMT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT';
 
-CREATE VIEW vw_hl7_pmt_data AS SELECT * FROM hl7_pmt_data WHERE segment_type='PMT';
+
 
 DROP TABLE hl7_pr1_data;
 
@@ -20312,15 +20312,15 @@ CREATE EXTERNAL TABLE hl7_pr1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PR1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1';
 
-CREATE VIEW vw_hl7_pr1_data AS SELECT * FROM hl7_pr1_data WHERE segment_type='PR1';
+
 
 DROP TABLE hl7_pra_data;
 
@@ -20348,15 +20348,15 @@ CREATE EXTERNAL TABLE hl7_pra_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PRA';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA';
 
-CREATE VIEW vw_hl7_pra_data AS SELECT * FROM hl7_pra_data WHERE segment_type='PRA';
+
 
 DROP TABLE hl7_prb_data;
 
@@ -20428,15 +20428,15 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PRB';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB';
 
-CREATE VIEW vw_hl7_prb_data AS SELECT * FROM hl7_prb_data WHERE segment_type='PRB';
+
 
 DROP TABLE hl7_prc_data;
 
@@ -20470,15 +20470,15 @@ CREATE EXTERNAL TABLE hl7_prc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PRC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC';
 
-CREATE VIEW vw_hl7_prc_data AS SELECT * FROM hl7_prc_data WHERE segment_type='PRC';
+
 
 DROP TABLE hl7_prd_data;
 
@@ -20508,15 +20508,15 @@ CREATE EXTERNAL TABLE hl7_prd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PRD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD';
 
-CREATE VIEW vw_hl7_prd_data AS SELECT * FROM hl7_prd_data WHERE segment_type='PRD';
+
 
 DROP TABLE hl7_prt_data;
 
@@ -21051,15 +21051,15 @@ CREATE EXTERNAL TABLE hl7_prt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PRT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT';
 
-CREATE VIEW vw_hl7_prt_data AS SELECT * FROM hl7_prt_data WHERE segment_type='PRT';
+
 
 DROP TABLE hl7_psg_data;
 
@@ -21081,15 +21081,15 @@ CREATE EXTERNAL TABLE hl7_psg_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PSG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG';
 
-CREATE VIEW vw_hl7_psg_data AS SELECT * FROM hl7_psg_data WHERE segment_type='PSG';
+
 
 DROP TABLE hl7_psh_data;
 
@@ -21119,15 +21119,15 @@ CREATE EXTERNAL TABLE hl7_psh_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PSH';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH';
 
-CREATE VIEW vw_hl7_psh_data AS SELECT * FROM hl7_psh_data WHERE segment_type='PSH';
+
 
 DROP TABLE hl7_psl_data;
 
@@ -21191,15 +21191,15 @@ CREATE EXTERNAL TABLE hl7_psl_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PSL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL';
 
-CREATE VIEW vw_hl7_psl_data AS SELECT * FROM hl7_psl_data WHERE segment_type='PSL';
+
 
 DROP TABLE hl7_pss_data;
 
@@ -21220,15 +21220,15 @@ CREATE EXTERNAL TABLE hl7_pss_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PSS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS';
 
-CREATE VIEW vw_hl7_pss_data AS SELECT * FROM hl7_pss_data WHERE segment_type='PSS';
+
 
 DROP TABLE hl7_pth_data;
 
@@ -21251,15 +21251,15 @@ CREATE EXTERNAL TABLE hl7_pth_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PTH';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH';
 
-CREATE VIEW vw_hl7_pth_data AS SELECT * FROM hl7_pth_data WHERE segment_type='PTH';
+
 
 DROP TABLE hl7_pv1_data;
 
@@ -22873,15 +22873,15 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PV1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1';
 
-CREATE VIEW vw_hl7_pv1_data AS SELECT * FROM hl7_pv1_data WHERE segment_type='PV1';
+
 
 DROP TABLE hl7_pv2_data;
 
@@ -23609,15 +23609,15 @@ CREATE EXTERNAL TABLE hl7_pv2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PV2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2';
 
-CREATE VIEW vw_hl7_pv2_data AS SELECT * FROM hl7_pv2_data WHERE segment_type='PV2';
+
 
 DROP TABLE hl7_pye_data;
 
@@ -23640,15 +23640,15 @@ CREATE EXTERNAL TABLE hl7_pye_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=PYE';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE';
 
-CREATE VIEW vw_hl7_pye_data AS SELECT * FROM hl7_pye_data WHERE segment_type='PYE';
+
 
 DROP TABLE hl7_qak_data;
 
@@ -23670,15 +23670,15 @@ CREATE EXTERNAL TABLE hl7_qak_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=QAK';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK';
 
-CREATE VIEW vw_hl7_qak_data AS SELECT * FROM hl7_qak_data WHERE segment_type='QAK';
+
 
 DROP TABLE hl7_qid_data;
 
@@ -23696,15 +23696,15 @@ CREATE EXTERNAL TABLE hl7_qid_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=QID';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID';
 
-CREATE VIEW vw_hl7_qid_data AS SELECT * FROM hl7_qid_data WHERE segment_type='QID';
+
 
 DROP TABLE hl7_qpd_data;
 
@@ -23723,15 +23723,15 @@ CREATE EXTERNAL TABLE hl7_qpd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=QPD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD';
 
-CREATE VIEW vw_hl7_qpd_data AS SELECT * FROM hl7_qpd_data WHERE segment_type='QPD';
+
 
 DROP TABLE hl7_qrd_data;
 
@@ -23759,15 +23759,15 @@ CREATE EXTERNAL TABLE hl7_qrd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=QRD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD';
 
-CREATE VIEW vw_hl7_qrd_data AS SELECT * FROM hl7_qrd_data WHERE segment_type='QRD';
+
 
 DROP TABLE hl7_qrf_data;
 
@@ -23793,15 +23793,15 @@ CREATE EXTERNAL TABLE hl7_qrf_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=QRF';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF';
 
-CREATE VIEW vw_hl7_qrf_data AS SELECT * FROM hl7_qrf_data WHERE segment_type='QRF';
+
 
 DROP TABLE hl7_qri_data;
 
@@ -23820,15 +23820,15 @@ CREATE EXTERNAL TABLE hl7_qri_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=QRI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI';
 
-CREATE VIEW vw_hl7_qri_data AS SELECT * FROM hl7_qri_data WHERE segment_type='QRI';
+
 
 DROP TABLE hl7_rcp_data;
 
@@ -23851,15 +23851,15 @@ CREATE EXTERNAL TABLE hl7_rcp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RCP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP';
 
-CREATE VIEW vw_hl7_rcp_data AS SELECT * FROM hl7_rcp_data WHERE segment_type='RCP';
+
 
 DROP TABLE hl7_rdf_data;
 
@@ -23877,15 +23877,15 @@ CREATE EXTERNAL TABLE hl7_rdf_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RDF';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF';
 
-CREATE VIEW vw_hl7_rdf_data AS SELECT * FROM hl7_rdf_data WHERE segment_type='RDF';
+
 
 DROP TABLE hl7_rdt_data;
 
@@ -23902,15 +23902,15 @@ CREATE EXTERNAL TABLE hl7_rdt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RDT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT';
 
-CREATE VIEW vw_hl7_rdt_data AS SELECT * FROM hl7_rdt_data WHERE segment_type='RDT';
+
 
 DROP TABLE hl7_rel_data;
 
@@ -23942,15 +23942,15 @@ CREATE EXTERNAL TABLE hl7_rel_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=REL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL';
 
-CREATE VIEW vw_hl7_rel_data AS SELECT * FROM hl7_rel_data WHERE segment_type='REL';
+
 
 DROP TABLE hl7_rf1_data;
 
@@ -23978,15 +23978,15 @@ CREATE EXTERNAL TABLE hl7_rf1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RF1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1';
 
-CREATE VIEW vw_hl7_rf1_data AS SELECT * FROM hl7_rf1_data WHERE segment_type='RF1';
+
 
 DROP TABLE hl7_rfi_data;
 
@@ -24006,15 +24006,15 @@ CREATE EXTERNAL TABLE hl7_rfi_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RFI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI';
 
-CREATE VIEW vw_hl7_rfi_data AS SELECT * FROM hl7_rfi_data WHERE segment_type='RFI';
+
 
 DROP TABLE hl7_rgs_data;
 
@@ -24033,15 +24033,15 @@ CREATE EXTERNAL TABLE hl7_rgs_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RGS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS';
 
-CREATE VIEW vw_hl7_rgs_data AS SELECT * FROM hl7_rgs_data WHERE segment_type='RGS';
+
 
 DROP TABLE hl7_rmi_data;
 
@@ -24060,15 +24060,15 @@ CREATE EXTERNAL TABLE hl7_rmi_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RMI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI';
 
-CREATE VIEW vw_hl7_rmi_data AS SELECT * FROM hl7_rmi_data WHERE segment_type='RMI';
+
 
 DROP TABLE hl7_rol_data;
 
@@ -24617,15 +24617,15 @@ CREATE EXTERNAL TABLE hl7_rol_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ROL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL';
 
-CREATE VIEW vw_hl7_rol_data AS SELECT * FROM hl7_rol_data WHERE segment_type='ROL';
+
 
 DROP TABLE hl7_rq1_data;
 
@@ -24648,15 +24648,15 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RQ1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1';
 
-CREATE VIEW vw_hl7_rq1_data AS SELECT * FROM hl7_rq1_data WHERE segment_type='RQ1';
+
 
 DROP TABLE hl7_rqd_data;
 
@@ -24682,15 +24682,15 @@ CREATE EXTERNAL TABLE hl7_rqd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RQD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD';
 
-CREATE VIEW vw_hl7_rqd_data AS SELECT * FROM hl7_rqd_data WHERE segment_type='RQD';
+
 
 DROP TABLE hl7_rxa_data;
 
@@ -25252,15 +25252,15 @@ CREATE EXTERNAL TABLE hl7_rxa_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXA';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA';
 
-CREATE VIEW vw_hl7_rxa_data AS SELECT * FROM hl7_rxa_data WHERE segment_type='RXA';
+
 
 DROP TABLE hl7_rxc_data;
 
@@ -25419,15 +25419,15 @@ CREATE EXTERNAL TABLE hl7_rxc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC';
 
-CREATE VIEW vw_hl7_rxc_data AS SELECT * FROM hl7_rxc_data WHERE segment_type='RXC';
+
 
 DROP TABLE hl7_rxd_data;
 
@@ -25477,15 +25477,15 @@ CREATE EXTERNAL TABLE hl7_rxd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD';
 
-CREATE VIEW vw_hl7_rxd_data AS SELECT * FROM hl7_rxd_data WHERE segment_type='RXD';
+
 
 DROP TABLE hl7_rxe_data;
 
@@ -26516,15 +26516,15 @@ CREATE EXTERNAL TABLE hl7_rxe_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXE';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE';
 
-CREATE VIEW vw_hl7_rxe_data AS SELECT * FROM hl7_rxe_data WHERE segment_type='RXE';
+
 
 DROP TABLE hl7_rxg_data;
 
@@ -26570,15 +26570,15 @@ CREATE EXTERNAL TABLE hl7_rxg_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXG';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG';
 
-CREATE VIEW vw_hl7_rxg_data AS SELECT * FROM hl7_rxg_data WHERE segment_type='RXG';
+
 
 DROP TABLE hl7_rxo_data;
 
@@ -27561,15 +27561,15 @@ CREATE EXTERNAL TABLE hl7_rxo_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXO';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO';
 
-CREATE VIEW vw_hl7_rxo_data AS SELECT * FROM hl7_rxo_data WHERE segment_type='RXO';
+
 
 DROP TABLE hl7_rxr_data;
 
@@ -27723,15 +27723,15 @@ CREATE EXTERNAL TABLE hl7_rxr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR';
 
-CREATE VIEW vw_hl7_rxr_data AS SELECT * FROM hl7_rxr_data WHERE segment_type='RXR';
+
 
 DROP TABLE hl7_rxv_data;
 
@@ -28015,15 +28015,15 @@ CREATE EXTERNAL TABLE hl7_rxv_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=RXV';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV';
 
-CREATE VIEW vw_hl7_rxv_data AS SELECT * FROM hl7_rxv_data WHERE segment_type='RXV';
+
 
 DROP TABLE hl7_sac_data;
 
@@ -28083,15 +28083,15 @@ CREATE EXTERNAL TABLE hl7_sac_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SAC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC';
 
-CREATE VIEW vw_hl7_sac_data AS SELECT * FROM hl7_sac_data WHERE segment_type='SAC';
+
 
 DROP TABLE hl7_scd_data;
 
@@ -28144,15 +28144,15 @@ CREATE EXTERNAL TABLE hl7_scd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SCD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD';
 
-CREATE VIEW vw_hl7_scd_data AS SELECT * FROM hl7_scd_data WHERE segment_type='SCD';
+
 
 DROP TABLE hl7_sch_data;
 
@@ -28315,15 +28315,15 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SCH';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH';
 
-CREATE VIEW vw_hl7_sch_data AS SELECT * FROM hl7_sch_data WHERE segment_type='SCH';
+
 
 DROP TABLE hl7_scp_data;
 
@@ -28347,15 +28347,15 @@ CREATE EXTERNAL TABLE hl7_scp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SCP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP';
 
-CREATE VIEW vw_hl7_scp_data AS SELECT * FROM hl7_scp_data WHERE segment_type='SCP';
+
 
 DROP TABLE hl7_sdd_data;
 
@@ -28378,15 +28378,15 @@ CREATE EXTERNAL TABLE hl7_sdd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SDD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD';
 
-CREATE VIEW vw_hl7_sdd_data AS SELECT * FROM hl7_sdd_data WHERE segment_type='SDD';
+
 
 DROP TABLE hl7_sft_data;
 
@@ -28446,15 +28446,15 @@ CREATE EXTERNAL TABLE hl7_sft_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SFT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT';
 
-CREATE VIEW vw_hl7_sft_data AS SELECT * FROM hl7_sft_data WHERE segment_type='SFT';
+
 
 DROP TABLE hl7_shp_data;
 
@@ -28481,15 +28481,15 @@ CREATE EXTERNAL TABLE hl7_shp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SHP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP';
 
-CREATE VIEW vw_hl7_shp_data AS SELECT * FROM hl7_shp_data WHERE segment_type='SHP';
+
 
 DROP TABLE hl7_sid_data;
 
@@ -28509,15 +28509,15 @@ CREATE EXTERNAL TABLE hl7_sid_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SID';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID';
 
-CREATE VIEW vw_hl7_sid_data AS SELECT * FROM hl7_sid_data WHERE segment_type='SID';
+
 
 DROP TABLE hl7_slt_data;
 
@@ -28538,15 +28538,15 @@ CREATE EXTERNAL TABLE hl7_slt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SLT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT';
 
-CREATE VIEW vw_hl7_slt_data AS SELECT * FROM hl7_slt_data WHERE segment_type='SLT';
+
 
 DROP TABLE hl7_spm_data;
 
@@ -29166,15 +29166,15 @@ CREATE EXTERNAL TABLE hl7_spm_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=SPM';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM';
 
-CREATE VIEW vw_hl7_spm_data AS SELECT * FROM hl7_spm_data WHERE segment_type='SPM';
+
 
 DROP TABLE hl7_stf_data;
 
@@ -29231,15 +29231,15 @@ CREATE EXTERNAL TABLE hl7_stf_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=STF';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF';
 
-CREATE VIEW vw_hl7_stf_data AS SELECT * FROM hl7_stf_data WHERE segment_type='STF';
+
 
 DROP TABLE hl7_stz_data;
 
@@ -29259,15 +29259,15 @@ CREATE EXTERNAL TABLE hl7_stz_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=STZ';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ';
 
-CREATE VIEW vw_hl7_stz_data AS SELECT * FROM hl7_stz_data WHERE segment_type='STZ';
+
 
 DROP TABLE hl7_tcc_data;
 
@@ -29297,15 +29297,15 @@ CREATE EXTERNAL TABLE hl7_tcc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=TCC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC';
 
-CREATE VIEW vw_hl7_tcc_data AS SELECT * FROM hl7_tcc_data WHERE segment_type='TCC';
+
 
 DROP TABLE hl7_tcd_data;
 
@@ -29329,15 +29329,15 @@ CREATE EXTERNAL TABLE hl7_tcd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=TCD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD';
 
-CREATE VIEW vw_hl7_tcd_data AS SELECT * FROM hl7_tcd_data WHERE segment_type='TCD';
+
 
 DROP TABLE hl7_tq1_data;
 
@@ -29562,15 +29562,15 @@ CREATE EXTERNAL TABLE hl7_tq1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=TQ1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1';
 
-CREATE VIEW vw_hl7_tq1_data AS SELECT * FROM hl7_tq1_data WHERE segment_type='TQ1';
+
 
 DROP TABLE hl7_tq2_data;
 
@@ -29632,15 +29632,15 @@ CREATE EXTERNAL TABLE hl7_tq2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=TQ2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2';
 
-CREATE VIEW vw_hl7_tq2_data AS SELECT * FROM hl7_tq2_data WHERE segment_type='TQ2';
+
 
 DROP TABLE hl7_txa_data;
 
@@ -30497,15 +30497,15 @@ CREATE EXTERNAL TABLE hl7_txa_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=TXA';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA';
 
-CREATE VIEW vw_hl7_txa_data AS SELECT * FROM hl7_txa_data WHERE segment_type='TXA';
+
 
 DROP TABLE hl7_uac_data;
 
@@ -30553,15 +30553,15 @@ CREATE EXTERNAL TABLE hl7_uac_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=UAC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC';
 
-CREATE VIEW vw_hl7_uac_data AS SELECT * FROM hl7_uac_data WHERE segment_type='UAC';
+
 
 DROP TABLE hl7_ub1_data;
 
@@ -30600,15 +30600,15 @@ CREATE EXTERNAL TABLE hl7_ub1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=UB1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1';
 
-CREATE VIEW vw_hl7_ub1_data AS SELECT * FROM hl7_ub1_data WHERE segment_type='UB1';
+
 
 DROP TABLE hl7_ub2_data;
 
@@ -30762,15 +30762,15 @@ CREATE EXTERNAL TABLE hl7_ub2_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=UB2';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2';
 
-CREATE VIEW vw_hl7_ub2_data AS SELECT * FROM hl7_ub2_data WHERE segment_type='UB2';
+
 
 DROP TABLE hl7_urd_data;
 
@@ -30793,15 +30793,15 @@ CREATE EXTERNAL TABLE hl7_urd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=URD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD';
 
-CREATE VIEW vw_hl7_urd_data AS SELECT * FROM hl7_urd_data WHERE segment_type='URD';
+
 
 DROP TABLE hl7_urs_data;
 
@@ -30826,15 +30826,15 @@ CREATE EXTERNAL TABLE hl7_urs_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=URS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS';
 
-CREATE VIEW vw_hl7_urs_data AS SELECT * FROM hl7_urs_data WHERE segment_type='URS';
+
 
 DROP TABLE hl7_var_data;
 
@@ -30856,15 +30856,15 @@ CREATE EXTERNAL TABLE hl7_var_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=VAR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR';
 
-CREATE VIEW vw_hl7_var_data AS SELECT * FROM hl7_var_data WHERE segment_type='VAR';
+
 
 DROP TABLE hl7_vnd_data;
 
@@ -30885,15 +30885,15 @@ CREATE EXTERNAL TABLE hl7_vnd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=VND';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND';
 
-CREATE VIEW vw_hl7_vnd_data AS SELECT * FROM hl7_vnd_data WHERE segment_type='VND';
+
 
 DROP TABLE hl7_zao_data;
 
@@ -30925,15 +30925,15 @@ CREATE EXTERNAL TABLE hl7_zao_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZAO';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO';
 
-CREATE VIEW vw_hl7_zao_data AS SELECT * FROM hl7_zao_data WHERE segment_type='ZAO';
+
 
 DROP TABLE hl7_zcd_data;
 
@@ -30954,15 +30954,15 @@ CREATE EXTERNAL TABLE hl7_zcd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZCD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD';
 
-CREATE VIEW vw_hl7_zcd_data AS SELECT * FROM hl7_zcd_data WHERE segment_type='ZCD';
+
 
 DROP TABLE hl7_zcl_data;
 
@@ -30990,15 +30990,15 @@ CREATE EXTERNAL TABLE hl7_zcl_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZCL';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL';
 
-CREATE VIEW vw_hl7_zcl_data AS SELECT * FROM hl7_zcl_data WHERE segment_type='ZCL';
+
 
 DROP TABLE hl7_zcn_data;
 
@@ -31018,15 +31018,15 @@ CREATE EXTERNAL TABLE hl7_zcn_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZCN';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN';
 
-CREATE VIEW vw_hl7_zcn_data AS SELECT * FROM hl7_zcn_data WHERE segment_type='ZCN';
+
 
 DROP TABLE hl7_zcp_data;
 
@@ -31052,15 +31052,15 @@ CREATE EXTERNAL TABLE hl7_zcp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZCP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP';
 
-CREATE VIEW vw_hl7_zcp_data AS SELECT * FROM hl7_zcp_data WHERE segment_type='ZCP';
+
 
 DROP TABLE hl7_zcs_data;
 
@@ -31087,15 +31087,15 @@ CREATE EXTERNAL TABLE hl7_zcs_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZCS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS';
 
-CREATE VIEW vw_hl7_zcs_data AS SELECT * FROM hl7_zcs_data WHERE segment_type='ZCS';
+
 
 DROP TABLE hl7_zds_data;
 
@@ -31116,15 +31116,15 @@ CREATE EXTERNAL TABLE hl7_zds_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZDS';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS';
 
-CREATE VIEW vw_hl7_zds_data AS SELECT * FROM hl7_zds_data WHERE segment_type='ZDS';
+
 
 DROP TABLE hl7_zdt_data;
 
@@ -31157,15 +31157,15 @@ CREATE EXTERNAL TABLE hl7_zdt_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZDT';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT';
 
-CREATE VIEW vw_hl7_zdt_data AS SELECT * FROM hl7_zdt_data WHERE segment_type='ZDT';
+
 
 DROP TABLE hl7_zdu_data;
 
@@ -31189,15 +31189,15 @@ CREATE EXTERNAL TABLE hl7_zdu_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZDU';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU';
 
-CREATE VIEW vw_hl7_zdu_data AS SELECT * FROM hl7_zdu_data WHERE segment_type='ZDU';
+
 
 DROP TABLE hl7_zer_data;
 
@@ -31264,15 +31264,15 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZER';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER';
 
-CREATE VIEW vw_hl7_zer_data AS SELECT * FROM hl7_zer_data WHERE segment_type='ZER';
+
 
 DROP TABLE hl7_zex_data;
 
@@ -31290,15 +31290,15 @@ CREATE EXTERNAL TABLE hl7_zex_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZEX';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX';
 
-CREATE VIEW vw_hl7_zex_data AS SELECT * FROM hl7_zex_data WHERE segment_type='ZEX';
+
 
 DROP TABLE hl7_zg1_data;
 
@@ -31318,15 +31318,15 @@ CREATE EXTERNAL TABLE hl7_zg1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZG1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1';
 
-CREATE VIEW vw_hl7_zg1_data AS SELECT * FROM hl7_zg1_data WHERE segment_type='ZG1';
+
 
 DROP TABLE hl7_zid_data;
 
@@ -31344,15 +31344,15 @@ CREATE EXTERNAL TABLE hl7_zid_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZID';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID';
 
-CREATE VIEW vw_hl7_zid_data AS SELECT * FROM hl7_zid_data WHERE segment_type='ZID';
+
 
 DROP TABLE hl7_zif_data;
 
@@ -31376,15 +31376,15 @@ CREATE EXTERNAL TABLE hl7_zif_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZIF';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF';
 
-CREATE VIEW vw_hl7_zif_data AS SELECT * FROM hl7_zif_data WHERE segment_type='ZIF';
+
 
 DROP TABLE hl7_zin_data;
 
@@ -31431,15 +31431,15 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZIN';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN';
 
-CREATE VIEW vw_hl7_zin_data AS SELECT * FROM hl7_zin_data WHERE segment_type='ZIN';
+
 
 DROP TABLE hl7_zm1_data;
 
@@ -31461,15 +31461,15 @@ CREATE EXTERNAL TABLE hl7_zm1_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZM1';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1';
 
-CREATE VIEW vw_hl7_zm1_data AS SELECT * FROM hl7_zm1_data WHERE segment_type='ZM1';
+
 
 DROP TABLE hl7_zmp_data;
 
@@ -31582,15 +31582,15 @@ CREATE EXTERNAL TABLE hl7_zmp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZMP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP';
 
-CREATE VIEW vw_hl7_zmp_data AS SELECT * FROM hl7_zmp_data WHERE segment_type='ZMP';
+
 
 DROP TABLE hl7_zmr_data;
 
@@ -31608,15 +31608,15 @@ CREATE EXTERNAL TABLE hl7_zmr_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZMR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR';
 
-CREATE VIEW vw_hl7_zmr_data AS SELECT * FROM hl7_zmr_data WHERE segment_type='ZMR';
+
 
 DROP TABLE hl7_zpd_data;
 
@@ -31641,15 +31641,15 @@ CREATE EXTERNAL TABLE hl7_zpd_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZPD';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD';
 
-CREATE VIEW vw_hl7_zpd_data AS SELECT * FROM hl7_zpd_data WHERE segment_type='ZPD';
+
 
 DROP TABLE hl7_zpe_data;
 
@@ -31672,15 +31672,15 @@ CREATE EXTERNAL TABLE hl7_zpe_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZPE';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE';
 
-CREATE VIEW vw_hl7_zpe_data AS SELECT * FROM hl7_zpe_data WHERE segment_type='ZPE';
+
 
 DROP TABLE hl7_zpo_data;
 
@@ -31705,15 +31705,15 @@ CREATE EXTERNAL TABLE hl7_zpo_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZPO';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO';
 
-CREATE VIEW vw_hl7_zpo_data AS SELECT * FROM hl7_zpo_data WHERE segment_type='ZPO';
+
 
 DROP TABLE hl7_zpp_data;
 
@@ -31743,15 +31743,15 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZPP';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP';
 
-CREATE VIEW vw_hl7_zpp_data AS SELECT * FROM hl7_zpp_data WHERE segment_type='ZPP';
+
 
 DROP TABLE hl7_zpv_data;
 
@@ -31803,15 +31803,15 @@ CREATE EXTERNAL TABLE hl7_zpv_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZPV';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV';
 
-CREATE VIEW vw_hl7_zpv_data AS SELECT * FROM hl7_zpv_data WHERE segment_type='ZPV';
+
 
 DROP TABLE hl7_zrq_data;
 
@@ -31832,15 +31832,15 @@ CREATE EXTERNAL TABLE hl7_zrq_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZRQ';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ';
 
-CREATE VIEW vw_hl7_zrq_data AS SELECT * FROM hl7_zrq_data WHERE segment_type='ZRQ';
+
 
 DROP TABLE hl7_zrx_data;
 
@@ -31880,15 +31880,15 @@ CREATE EXTERNAL TABLE hl7_zrx_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZRX';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX';
 
-CREATE VIEW vw_hl7_zrx_data AS SELECT * FROM hl7_zrx_data WHERE segment_type='ZRX';
+
 
 DROP TABLE hl7_zsc_data;
 
@@ -31911,15 +31911,15 @@ CREATE EXTERNAL TABLE hl7_zsc_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZSC';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC';
 
-CREATE VIEW vw_hl7_zsc_data AS SELECT * FROM hl7_zsc_data WHERE segment_type='ZSC';
+
 
 DROP TABLE hl7_zsi_data;
 
@@ -31938,15 +31938,15 @@ CREATE EXTERNAL TABLE hl7_zsi_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZSI';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI';
 
-CREATE VIEW vw_hl7_zsi_data AS SELECT * FROM hl7_zsi_data WHERE segment_type='ZSI';
+
 
 DROP TABLE hl7_zst_data;
 
@@ -31974,15 +31974,15 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZST';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST';
 
-CREATE VIEW vw_hl7_zst_data AS SELECT * FROM hl7_zst_data WHERE segment_type='ZST';
+
 
 DROP TABLE hl7_zsu_data;
 
@@ -32000,15 +32000,15 @@ CREATE EXTERNAL TABLE hl7_zsu_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZSU';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU';
 
-CREATE VIEW vw_hl7_zsu_data AS SELECT * FROM hl7_zsu_data WHERE segment_type='ZSU';
+
 
 DROP TABLE hl7_ztf_data;
 
@@ -32036,15 +32036,15 @@ CREATE EXTERNAL TABLE hl7_ztf_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZTF';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF';
 
-CREATE VIEW vw_hl7_ztf_data AS SELECT * FROM hl7_ztf_data WHERE segment_type='ZTF';
+
 
 DROP TABLE hl7_ztm_data;
 
@@ -32192,15 +32192,15 @@ CREATE EXTERNAL TABLE hl7_ztm_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZTM';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM';
 
-CREATE VIEW vw_hl7_ztm_data AS SELECT * FROM hl7_ztm_data WHERE segment_type='ZTM';
+
 
 DROP TABLE hl7_zur_data;
 
@@ -32218,15 +32218,15 @@ CREATE EXTERNAL TABLE hl7_zur_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZUR';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR';
 
-CREATE VIEW vw_hl7_zur_data AS SELECT * FROM hl7_zur_data WHERE segment_type='ZUR';
+
 
 DROP TABLE hl7_zvn_data;
 
@@ -32248,12 +32248,12 @@ CREATE EXTERNAL TABLE hl7_zvn_data (
 	field_sequence_num String
 )
 PARTITIONED BY (
-	messageType String,
-	transactionDate String
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landingZone=SEGMENTS/hl7Segment=ZVN';
+LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZVN';
 
-CREATE VIEW vw_hl7_zvn_data AS SELECT * FROM hl7_zvn_data WHERE segment_type='ZVN';
+
