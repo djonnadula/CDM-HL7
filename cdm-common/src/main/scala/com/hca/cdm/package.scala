@@ -61,7 +61,7 @@ package object cdm extends Logg {
   def sleep(howLong: Long): Unit = {
     try Thread.sleep(howLong)
     catch {
-      case in: InterruptedException => error(currThread.getName + " Sleep Interrupted :: " + in.getMessage,in)
+      case in: InterruptedException => error(currThread.getName + " Sleep Interrupted :: " + in.getMessage, in)
     }
   }
 
@@ -141,11 +141,15 @@ package object cdm extends Logg {
   def registerHook(hook: Thread): Unit = rt addShutdownHook hook
 
 
-  def unregister(hook: Thread): Unit = {
-    try rt removeShutdownHook hook
-    catch {
-      case ist: IllegalStateException =>
+  def unregister(hook: Thread): Boolean = {
+    try {
+      rt removeShutdownHook hook
+      return true
     }
+    catch {
+      case ist: Throwable => error(s"Cannot Remove Shutdown hook :: ${hook.getName}",ist)
+    }
+    false
   }
 
   def runTime: Runtime = rt
@@ -215,9 +219,9 @@ package object cdm extends Logg {
     null.asInstanceOf[T]
   }
 
-  def tryAndLogErrorMes[T](fun: => T, reporter: (String, Throwable) => Unit): Option[T] = {
+  def tryAndLogErrorMes[T](fun: () => T, reporter: (String, Throwable) => Unit): Option[T] = {
     try {
-      val out = fun
+      val out = fun()
       if (null != out) return Some(out)
     }
     catch {
