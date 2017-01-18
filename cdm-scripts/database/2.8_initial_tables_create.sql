@@ -29,7 +29,7 @@ CREATE EXTERNAL TABLE hl7_abs_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -357,7 +357,7 @@ CREATE EXTERNAL TABLE hl7_acc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -382,7 +382,7 @@ CREATE EXTERNAL TABLE hl7_add_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -421,7 +421,7 @@ CREATE EXTERNAL TABLE hl7_adj_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -450,7 +450,7 @@ CREATE EXTERNAL TABLE hl7_aff_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -488,7 +488,7 @@ CREATE EXTERNAL TABLE hl7_aig_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -524,7 +524,7 @@ CREATE EXTERNAL TABLE hl7_ail_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -560,7 +560,7 @@ CREATE EXTERNAL TABLE hl7_aip_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -596,7 +596,7 @@ CREATE EXTERNAL TABLE hl7_ais_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -741,7 +741,7 @@ CREATE EXTERNAL TABLE hl7_al1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -770,7 +770,7 @@ CREATE EXTERNAL TABLE hl7_apr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -819,7 +819,7 @@ CREATE EXTERNAL TABLE hl7_arq_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -917,7 +917,7 @@ CREATE EXTERNAL TABLE hl7_arv_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -953,7 +953,7 @@ CREATE EXTERNAL TABLE hl7_aut_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -991,7 +991,7 @@ CREATE EXTERNAL TABLE hl7_bhs_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1017,7 +1017,7 @@ CREATE EXTERNAL TABLE hl7_blc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1045,7 +1045,7 @@ CREATE EXTERNAL TABLE hl7_blg_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1083,7 +1083,7 @@ CREATE EXTERNAL TABLE hl7_bpo_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1128,7 +1128,7 @@ CREATE EXTERNAL TABLE hl7_bpx_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1155,7 +1155,7 @@ CREATE EXTERNAL TABLE hl7_bts_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1198,7 +1198,7 @@ CREATE EXTERNAL TABLE hl7_btx_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1235,7 +1235,7 @@ CREATE EXTERNAL TABLE hl7_cdm_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1311,7 +1311,7 @@ CREATE EXTERNAL TABLE hl7_cdo_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1366,7 +1366,7 @@ CREATE EXTERNAL TABLE hl7_cer_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1401,7 +1401,7 @@ CREATE EXTERNAL TABLE hl7_cm0_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1428,7 +1428,7 @@ CREATE EXTERNAL TABLE hl7_cm1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1456,7 +1456,7 @@ CREATE EXTERNAL TABLE hl7_cm2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1486,7 +1486,7 @@ CREATE EXTERNAL TABLE hl7_cns_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1759,7 +1759,7 @@ CREATE EXTERNAL TABLE hl7_con_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1787,7 +1787,7 @@ CREATE EXTERNAL TABLE hl7_csp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1827,7 +1827,7 @@ CREATE EXTERNAL TABLE hl7_csr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -1854,7 +1854,7 @@ CREATE EXTERNAL TABLE hl7_css_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -2221,7 +2221,7 @@ CREATE EXTERNAL TABLE hl7_ctd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -2296,7 +2296,7 @@ CREATE EXTERNAL TABLE hl7_cti_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -2328,7 +2328,7 @@ CREATE EXTERNAL TABLE hl7_db1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -2734,7 +2734,7 @@ CREATE EXTERNAL TABLE hl7_dg1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -2763,7 +2763,7 @@ CREATE EXTERNAL TABLE hl7_dmi_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3278,7 +3278,7 @@ CREATE EXTERNAL TABLE hl7_drg_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3304,7 +3304,7 @@ CREATE EXTERNAL TABLE hl7_dsc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3333,7 +3333,7 @@ CREATE EXTERNAL TABLE hl7_dsp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3362,7 +3362,7 @@ CREATE EXTERNAL TABLE hl7_ecd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3389,7 +3389,7 @@ CREATE EXTERNAL TABLE hl7_ecr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3422,7 +3422,7 @@ CREATE EXTERNAL TABLE hl7_edu_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3451,7 +3451,7 @@ CREATE EXTERNAL TABLE hl7_eqp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3480,7 +3480,7 @@ CREATE EXTERNAL TABLE hl7_equ_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3516,7 +3516,7 @@ CREATE EXTERNAL TABLE hl7_err_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3698,7 +3698,7 @@ CREATE EXTERNAL TABLE hl7_evn_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3734,7 +3734,7 @@ CREATE EXTERNAL TABLE hl7_fac_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -3772,7 +3772,7 @@ CREATE EXTERNAL TABLE hl7_fhs_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -5039,7 +5039,7 @@ CREATE EXTERNAL TABLE hl7_ft1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -5065,7 +5065,7 @@ CREATE EXTERNAL TABLE hl7_fts_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -5111,7 +5111,7 @@ CREATE EXTERNAL TABLE hl7_gol_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -5140,7 +5140,7 @@ CREATE EXTERNAL TABLE hl7_gp1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -5178,7 +5178,7 @@ CREATE EXTERNAL TABLE hl7_gp2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -6854,7 +6854,7 @@ CREATE EXTERNAL TABLE hl7_gt1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -7832,7 +7832,7 @@ CREATE EXTERNAL TABLE hl7_iam_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -7860,7 +7860,7 @@ CREATE EXTERNAL TABLE hl7_iar_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -7899,7 +7899,7 @@ CREATE EXTERNAL TABLE hl7_iim_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -7933,7 +7933,7 @@ CREATE EXTERNAL TABLE hl7_ilt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -9399,7 +9399,7 @@ CREATE EXTERNAL TABLE hl7_in1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -11331,7 +11331,7 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12240,7 +12240,7 @@ CREATE EXTERNAL TABLE hl7_in3_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12284,7 +12284,7 @@ CREATE EXTERNAL TABLE hl7_inv_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12317,7 +12317,7 @@ CREATE EXTERNAL TABLE hl7_ipc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12349,7 +12349,7 @@ CREATE EXTERNAL TABLE hl7_ipr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12376,7 +12376,7 @@ CREATE EXTERNAL TABLE hl7_isd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12429,7 +12429,7 @@ CREATE EXTERNAL TABLE hl7_itm_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12483,7 +12483,7 @@ CREATE EXTERNAL TABLE hl7_ivc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12533,7 +12533,7 @@ CREATE EXTERNAL TABLE hl7_ivt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12561,7 +12561,7 @@ CREATE EXTERNAL TABLE hl7_lan_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12589,7 +12589,7 @@ CREATE EXTERNAL TABLE hl7_lcc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12618,7 +12618,7 @@ CREATE EXTERNAL TABLE hl7_lch_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12654,7 +12654,7 @@ CREATE EXTERNAL TABLE hl7_ldp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12687,7 +12687,7 @@ CREATE EXTERNAL TABLE hl7_loc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12717,7 +12717,7 @@ CREATE EXTERNAL TABLE hl7_lrl_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12747,7 +12747,7 @@ CREATE EXTERNAL TABLE hl7_mfa_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12778,7 +12778,7 @@ CREATE EXTERNAL TABLE hl7_mfe_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -12808,7 +12808,7 @@ CREATE EXTERNAL TABLE hl7_mfi_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -13199,7 +13199,7 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -13231,7 +13231,7 @@ CREATE EXTERNAL TABLE hl7_msa_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -13254,7 +13254,6 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	msh_sending_appl_namespace_id String,
 	msh_sending_appl_universal_id String,
 	msh_sending_appl_universal_id_type String,
-	msh_sending_facility String,
 	msh_sending_facility_namespace_id String,
 	msh_sending_facility_universal_id String,
 	msh_sending_facility_universal_id_type String,
@@ -13267,14 +13266,12 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	msh_receiving_facility_universal_id String,
 	msh_receiving_facility_universal_id_type String,
 	msh_msg_create_date_time String,
-	msh_msg_create_date_time String,
 	msh_msg_create_precision String,
 	msh_security String,
 	msh_msg_type String,
 	msh_msg_type_message_code String,
 	msh_msg_type_trigger_event String,
 	msh_msg_type_message_structure String,
-	msh_msg_control_id String,
 	msh_processing_id String,
 	msh_processing_id_processing_id String,
 	msh_processing_id_processing_mode String,
@@ -13455,7 +13452,7 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -13480,7 +13477,7 @@ CREATE EXTERNAL TABLE hl7_nck_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -13508,7 +13505,7 @@ CREATE EXTERNAL TABLE hl7_nds_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -14902,7 +14899,7 @@ CREATE EXTERNAL TABLE hl7_nk1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -14928,7 +14925,7 @@ CREATE EXTERNAL TABLE hl7_npu_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -14961,7 +14958,7 @@ CREATE EXTERNAL TABLE hl7_nsc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -15000,7 +14997,7 @@ CREATE EXTERNAL TABLE hl7_nst_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -15185,7 +15182,7 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -15904,8 +15901,6 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 	obr_principal_result_interpreter_context String,
 	obr_principal_result_interpreter_validity_range String,
 	obr_principal_result_interpreter_assembly_order String,
-	obr_principal_result_interpreter_eff_from_date_time String,
-	obr_principal_result_interpreter_eff_to_date_time String,
 	obr_principal_result_interpreter_prof_suffix String,
 	obr_principal_result_interpreter_assgn_jurisdiction String,
 	obr_principal_result_interpreter_assgn_agency_dept String,
@@ -16319,13 +16314,13 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 	obr_alternate_placer_order_num_assgn_agency_dept_second_alt_value_set_ver_id String,
 	obr_alternate_placer_order_num_security_check String,
 	obr_alternate_placer_order_num_security_check_scheme String,
-	obrALL String,
+	obr_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16378,7 +16373,7 @@ CREATE EXTERNAL TABLE hl7_obx_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16406,7 +16401,7 @@ CREATE EXTERNAL TABLE hl7_ods_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16433,7 +16428,7 @@ CREATE EXTERNAL TABLE hl7_odt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16504,7 +16499,7 @@ CREATE EXTERNAL TABLE hl7_om1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16538,7 +16533,7 @@ CREATE EXTERNAL TABLE hl7_om2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16569,7 +16564,7 @@ CREATE EXTERNAL TABLE hl7_om3_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16607,7 +16602,7 @@ CREATE EXTERNAL TABLE hl7_om4_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16634,7 +16629,7 @@ CREATE EXTERNAL TABLE hl7_om5_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16660,7 +16655,7 @@ CREATE EXTERNAL TABLE hl7_om6_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -16708,7 +16703,7 @@ CREATE EXTERNAL TABLE hl7_om7_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18039,7 +18034,7 @@ CREATE EXTERNAL TABLE hl7_orc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18076,7 +18071,7 @@ CREATE EXTERNAL TABLE hl7_org_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18105,7 +18100,7 @@ CREATE EXTERNAL TABLE hl7_ovr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18137,7 +18132,7 @@ CREATE EXTERNAL TABLE hl7_pac_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18165,7 +18160,7 @@ CREATE EXTERNAL TABLE hl7_pce_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18212,7 +18207,7 @@ CREATE EXTERNAL TABLE hl7_pcr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18786,7 +18781,7 @@ CREATE EXTERNAL TABLE hl7_pd1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18819,7 +18814,7 @@ CREATE EXTERNAL TABLE hl7_pda_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18858,7 +18853,7 @@ CREATE EXTERNAL TABLE hl7_pdc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18907,7 +18902,7 @@ CREATE EXTERNAL TABLE hl7_peo_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18944,7 +18939,7 @@ CREATE EXTERNAL TABLE hl7_pes_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -18982,7 +18977,6 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	pid_pat_id_assgn_jurisdiction String,
 	pid_pat_id_assgn_agency_dept String,
 	pid_pat_id_list String,
-	pid_medical_record_num String,
 	pid_pat_id_list_identifier_num String,
 	pid_pat_id_list_identifier_check_digit String,
 	pid_pat_id_list_check_digit_scheme String,
@@ -19046,7 +19040,6 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	pid_pat_id_list_security_check String,
 	pid_pat_id_list_security_check_scheme String,
 	pid_alt_pat_id String,
-	pid_medical_record_urn String,
 	pid_alt_pat_id_identifier_num String,
 	pid_alt_pat_id_identifier_check_digit String,
 	pid_alt_pat_id_check_digit_scheme String,
@@ -19540,7 +19533,6 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	pid_religion_second_alt_coding_sys_oid String,
 	pid_religion_second_alt_value_set_oid String,
 	pid_religion_second_alt_value_set_ver_id String,
-	pid_pat_account_num String,
 	pid_pat_account_num_identifier_num String,
 	pid_pat_account_num_identifier_check_digit String,
 	pid_pat_account_num_check_digit_scheme String,
@@ -19606,7 +19598,6 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	pid_pat_social_security_num String,
 	pid_pat_driver_license_num String,
 	pid_mother_id String,
-	pid_mother_name String,
 	pid_mother_id_identifier_num String,
 	pid_mother_name_last String,
 	pid_mother_id_identifier_check_digit String,
@@ -19943,7 +19934,7 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -19974,7 +19965,7 @@ CREATE EXTERNAL TABLE hl7_pkg_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -20010,7 +20001,7 @@ CREATE EXTERNAL TABLE hl7_pmt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -20323,7 +20314,7 @@ CREATE EXTERNAL TABLE hl7_pr1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -20359,7 +20350,7 @@ CREATE EXTERNAL TABLE hl7_pra_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -20439,7 +20430,7 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -20481,7 +20472,7 @@ CREATE EXTERNAL TABLE hl7_prc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -20519,7 +20510,7 @@ CREATE EXTERNAL TABLE hl7_prd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21062,7 +21053,7 @@ CREATE EXTERNAL TABLE hl7_prt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21092,7 +21083,7 @@ CREATE EXTERNAL TABLE hl7_psg_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21130,7 +21121,7 @@ CREATE EXTERNAL TABLE hl7_psh_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21202,7 +21193,7 @@ CREATE EXTERNAL TABLE hl7_psl_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21231,7 +21222,7 @@ CREATE EXTERNAL TABLE hl7_pss_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21262,7 +21253,7 @@ CREATE EXTERNAL TABLE hl7_pth_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -21874,7 +21865,6 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 	pv1_consulting_doctor_security_check String,
 	pv1_consulting_doctor_security_check_scheme String,
 	pv1_hospital_service String,
-	pv1_pat_type String,
 	pv1_hospital_service_primary_id String,
 	pv1_hospital_service_text String,
 	pv1_hospital_service_name_of_coding_sys String,
@@ -22885,7 +22875,7 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23621,7 +23611,7 @@ CREATE EXTERNAL TABLE hl7_pv2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23652,7 +23642,7 @@ CREATE EXTERNAL TABLE hl7_pye_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23682,7 +23672,7 @@ CREATE EXTERNAL TABLE hl7_qak_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23708,7 +23698,7 @@ CREATE EXTERNAL TABLE hl7_qid_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23735,7 +23725,7 @@ CREATE EXTERNAL TABLE hl7_qpd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23771,7 +23761,7 @@ CREATE EXTERNAL TABLE hl7_qrd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23805,7 +23795,7 @@ CREATE EXTERNAL TABLE hl7_qrf_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23832,7 +23822,7 @@ CREATE EXTERNAL TABLE hl7_qri_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23863,7 +23853,7 @@ CREATE EXTERNAL TABLE hl7_rcp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23889,7 +23879,7 @@ CREATE EXTERNAL TABLE hl7_rdf_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23914,7 +23904,7 @@ CREATE EXTERNAL TABLE hl7_rdt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23954,7 +23944,7 @@ CREATE EXTERNAL TABLE hl7_rel_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -23990,7 +23980,7 @@ CREATE EXTERNAL TABLE hl7_rf1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -24018,7 +24008,7 @@ CREATE EXTERNAL TABLE hl7_rfi_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -24045,7 +24035,7 @@ CREATE EXTERNAL TABLE hl7_rgs_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -24072,7 +24062,7 @@ CREATE EXTERNAL TABLE hl7_rmi_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -24629,7 +24619,7 @@ CREATE EXTERNAL TABLE hl7_rol_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -24660,7 +24650,7 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -24694,7 +24684,7 @@ CREATE EXTERNAL TABLE hl7_rqd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -25264,7 +25254,7 @@ CREATE EXTERNAL TABLE hl7_rxa_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -25431,7 +25421,7 @@ CREATE EXTERNAL TABLE hl7_rxc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -25489,7 +25479,7 @@ CREATE EXTERNAL TABLE hl7_rxd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -26528,7 +26518,7 @@ CREATE EXTERNAL TABLE hl7_rxe_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -26582,7 +26572,7 @@ CREATE EXTERNAL TABLE hl7_rxg_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -27573,7 +27563,7 @@ CREATE EXTERNAL TABLE hl7_rxo_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -27735,7 +27725,7 @@ CREATE EXTERNAL TABLE hl7_rxr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28027,7 +28017,7 @@ CREATE EXTERNAL TABLE hl7_rxv_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28095,7 +28085,7 @@ CREATE EXTERNAL TABLE hl7_sac_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28156,7 +28146,7 @@ CREATE EXTERNAL TABLE hl7_scd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28327,7 +28317,7 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28359,7 +28349,7 @@ CREATE EXTERNAL TABLE hl7_scp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28390,7 +28380,7 @@ CREATE EXTERNAL TABLE hl7_sdd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28458,7 +28448,7 @@ CREATE EXTERNAL TABLE hl7_sft_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28493,7 +28483,7 @@ CREATE EXTERNAL TABLE hl7_shp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28521,7 +28511,7 @@ CREATE EXTERNAL TABLE hl7_sid_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -28550,7 +28540,7 @@ CREATE EXTERNAL TABLE hl7_slt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29178,7 +29168,7 @@ CREATE EXTERNAL TABLE hl7_spm_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29243,7 +29233,7 @@ CREATE EXTERNAL TABLE hl7_stf_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29271,7 +29261,7 @@ CREATE EXTERNAL TABLE hl7_stz_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29309,7 +29299,7 @@ CREATE EXTERNAL TABLE hl7_tcc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29341,7 +29331,7 @@ CREATE EXTERNAL TABLE hl7_tcd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29574,7 +29564,7 @@ CREATE EXTERNAL TABLE hl7_tq1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -29644,7 +29634,7 @@ CREATE EXTERNAL TABLE hl7_tq2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30509,7 +30499,7 @@ CREATE EXTERNAL TABLE hl7_txa_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30565,7 +30555,7 @@ CREATE EXTERNAL TABLE hl7_uac_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30612,7 +30602,7 @@ CREATE EXTERNAL TABLE hl7_ub1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30774,7 +30764,7 @@ CREATE EXTERNAL TABLE hl7_ub2_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30805,7 +30795,7 @@ CREATE EXTERNAL TABLE hl7_urd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30838,7 +30828,7 @@ CREATE EXTERNAL TABLE hl7_urs_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30868,7 +30858,7 @@ CREATE EXTERNAL TABLE hl7_var_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30897,7 +30887,7 @@ CREATE EXTERNAL TABLE hl7_vnd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30937,7 +30927,7 @@ CREATE EXTERNAL TABLE hl7_zao_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -30966,7 +30956,7 @@ CREATE EXTERNAL TABLE hl7_zcd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31002,7 +30992,7 @@ CREATE EXTERNAL TABLE hl7_zcl_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31030,7 +31020,7 @@ CREATE EXTERNAL TABLE hl7_zcn_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31064,7 +31054,7 @@ CREATE EXTERNAL TABLE hl7_zcp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31099,7 +31089,7 @@ CREATE EXTERNAL TABLE hl7_zcs_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31128,7 +31118,7 @@ CREATE EXTERNAL TABLE hl7_zds_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31169,7 +31159,7 @@ CREATE EXTERNAL TABLE hl7_zdt_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31201,7 +31191,7 @@ CREATE EXTERNAL TABLE hl7_zdu_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31276,7 +31266,7 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31302,7 +31292,7 @@ CREATE EXTERNAL TABLE hl7_zex_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31330,7 +31320,7 @@ CREATE EXTERNAL TABLE hl7_zg1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31356,7 +31346,7 @@ CREATE EXTERNAL TABLE hl7_zid_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31388,7 +31378,7 @@ CREATE EXTERNAL TABLE hl7_zif_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31443,7 +31433,7 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31473,7 +31463,7 @@ CREATE EXTERNAL TABLE hl7_zm1_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31594,7 +31584,7 @@ CREATE EXTERNAL TABLE hl7_zmp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31620,7 +31610,7 @@ CREATE EXTERNAL TABLE hl7_zmr_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31653,7 +31643,7 @@ CREATE EXTERNAL TABLE hl7_zpd_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31684,7 +31674,7 @@ CREATE EXTERNAL TABLE hl7_zpe_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31717,7 +31707,7 @@ CREATE EXTERNAL TABLE hl7_zpo_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31755,7 +31745,7 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31815,7 +31805,7 @@ CREATE EXTERNAL TABLE hl7_zpv_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31844,7 +31834,7 @@ CREATE EXTERNAL TABLE hl7_zrq_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31892,7 +31882,7 @@ CREATE EXTERNAL TABLE hl7_zrx_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31923,7 +31913,7 @@ CREATE EXTERNAL TABLE hl7_zsc_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31950,7 +31940,7 @@ CREATE EXTERNAL TABLE hl7_zsi_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -31986,7 +31976,7 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -32012,7 +32002,7 @@ CREATE EXTERNAL TABLE hl7_zsu_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -32048,7 +32038,7 @@ CREATE EXTERNAL TABLE hl7_ztf_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -32204,7 +32194,7 @@ CREATE EXTERNAL TABLE hl7_ztm_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -32230,7 +32220,7 @@ CREATE EXTERNAL TABLE hl7_zur_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
@@ -32260,7 +32250,7 @@ CREATE EXTERNAL TABLE hl7_zvn_data (
 )
 PARTITIONED BY (
 	messageType String,
-	transactionDate String,
+	transactionDate String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
