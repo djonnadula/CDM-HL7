@@ -39,7 +39,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 if (out._1) {
                   // Case to Strip Out Fields which require Only One Occurrence
                   adhoc.reqNoAppends.foreach(field =>
-                    if (layout.isDefinedAt(field) && layout(field).contains(repeat)) layout update(field, layout(field).substring(0, layout(field).indexOf(repeat))))
+                    if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).substring(0, layout(field).indexOf(caret))))
                   adhoc.outFormat match {
                     case JSON =>
                       handleCommonSegments(data, layout)
@@ -187,7 +187,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
         case true => node._2 match {
           case str: String => if (underlying isDefinedAt node._1) {
             if (!appendSegment) dataHandler(node._1, str, EMPTYSTR)
-            else dataHandler(node._1, str, repeat)
+            else dataHandler(node._1, str, caret)
             dataExist = true
           }
           case map: mapType =>
@@ -211,12 +211,12 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
           case str: String =>
             if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
               if (!appendSegment) dataHandler(node + model.modelFieldDelim + k, str, EMPTYSTR)
-              else dataHandler(node + model.modelFieldDelim + k, str, repeat)
+              else dataHandler(node + model.modelFieldDelim + k, str, caret)
               dataExist = true
             }
             else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
               if (!appendSegment) dataHandler(node, str, EMPTYSTR)
-              else dataHandler(node, str, repeat)
+              else dataHandler(node, str, caret)
               dataExist = true
             }
           case listType: listType => handleList(listType, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
@@ -233,11 +233,11 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
       v match {
         case str: String =>
           if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
-            dataHandler(node + model.modelFieldDelim + k, str, repeat)
+            dataHandler(node + model.modelFieldDelim + k, str, caret)
             dataExist = true
           }
           else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
-            dataHandler(node, str, repeat)
+            dataHandler(node, str, caret)
             dataExist = true
           }
         case list: listType => handleList(list, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)

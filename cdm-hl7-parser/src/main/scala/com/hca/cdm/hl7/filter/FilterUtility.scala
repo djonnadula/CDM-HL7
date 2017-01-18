@@ -5,6 +5,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.utils.Filters.Conditions._
 import com.hca.cdm.utils.Filters.Expressions._
 import com.hca.cdm.utils.Filters.FILTER
+import scala.language.postfixOps
 import scala.util.control.Breaks.{break, breakable}
 import scala.util.{Success, Try}
 

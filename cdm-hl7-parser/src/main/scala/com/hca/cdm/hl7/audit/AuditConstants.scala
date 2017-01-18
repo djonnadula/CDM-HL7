@@ -7,12 +7,12 @@ package com.hca.cdm.hl7.audit
   */
 object AuditConstants {
 
-  lazy val msg_control_id = "010.msh_msg_control_id"
-  lazy val msg_create_time = "007.msh_msg_create_date_time"
-  lazy val medical_record_num = "003.pid_medical_record_num"
-  lazy val medical_record_urn = "004.pid_medical_record_urn"
-  lazy val account_num = "018.pid_pat_account_num"
-  lazy val sending_facility = "004.msh_sending_facility"
+  lazy val msg_control_id = "msh_msg_control_id"
+  lazy val msg_create_time = "msh_msg_create_date_time"
+  lazy val medical_record_num = "pid_medical_record_num"
+  lazy val medical_record_urn = "pid_medical_record_urn"
+  lazy val account_num = "pid_pat_account_num"
+  lazy val sending_facility = "msh_sending_facility"
   lazy val rawStage = "RAW"
   lazy val jsonStage = "JSON"
   lazy val segmentStage = "SEG"
@@ -20,9 +20,11 @@ object AuditConstants {
   lazy val adhocStage = "ADHOC"
   lazy val rejectStage = "REJECT"
   lazy val auditHeader ="AUDIT"
+  lazy val missingTemplate = "TEMPLATE_MAPPING"
   lazy val invalidHl7 = "Not a Valid HL7. Req Info Not Found. Check Message for Requirement "
   lazy val hl7JsonIOFun ="hl7JsonIO"
   lazy val hl7JsonAuditIOFun = "hl7JsonAuditIO"
-
+  lazy val cdmScri = "CDMSCRI"
+  lazy val processed = "PROCESSED"
 
 }
