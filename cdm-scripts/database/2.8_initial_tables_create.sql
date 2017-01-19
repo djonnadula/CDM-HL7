@@ -31738,6 +31738,8 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 	zpp_surgeon_person_id String,
 	zpp_surgeon_last_name String,
 	zpp_surgeon_first_name String,
+	zpp_clin_sys_override_7 String,
+    zpp_props_opr_duration String,
 	zpp_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
