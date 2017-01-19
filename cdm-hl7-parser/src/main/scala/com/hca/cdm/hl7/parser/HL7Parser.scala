@@ -205,7 +205,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   private case class TemplateUnknownMapping(var unknownMappings: ListBuffer[String] = null)
 
-  private def transform(rawSplit: Array[String], preNumLen: Int = 4, segCodeLen: Int = 3, indexNumLen: Int = 3) = {
+  private def transform(rawSplit: Array[String], preNumLen: Int = 4) = {
     val dataLayout = new mutable.LinkedHashMap[String, Any]
     dataLayout += commonNodeStr -> commonNode.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
     val delimiters = new mutable.HashMap[String, String]()
@@ -221,7 +221,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var realignVal = EMPTYSTR
     var versionData: VersionData = null
     var missingMappings = new TemplateUnknownMapping
-    val segmentsMapping = mapSegments(segments, _: String, _: Int, _: Int, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_"
+    val segmentsMapping = mapSegments(segments, _: String, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_"
       , versionData.srcSystem, versionData.standardMapping, versionData.realignment)(versionData.controlId, missingMappings)
     var i = 0
     rawSplit foreach { msgSegment =>
@@ -245,8 +245,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           fields foreach { field =>
             j = inc(j)
             if (nonEmpty(field)) {
-              val componentIndex = s"$whichSegment$DOT${lPad(s"$j$EMPTYSTR", indexNumLen, ZEROStr)}"
-              segments = segmentsMapping(componentIndex, segCodeLen, indexNumLen)._1
+              val componentIndex = s"$whichSegment$DOT$j"
+              segments = segmentsMapping(componentIndex)._1
               val componentData = segments.componentData
               !(whichSegment == MSH && j == 2) match {
                 case true =>
@@ -262,8 +262,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                         subComponent foreach { subComp =>
                           k = inc(k)
                           if (nonEmpty(subComp)) {
-                            val subComponentIndex = s"$componentIndex$DOT${lPad(s"$k$EMPTYSTR", indexNumLen, ZEROStr)}"
-                            segments = segmentsMapping(subComponentIndex, segCodeLen, indexNumLen)._1
+                            val subComponentIndex = s"$componentIndex$DOT$k"
+                            segments = segmentsMapping(subComponentIndex)._1
                             subComponentData = segments.componentData
                             var subSubComponent: Array[String] = EMPTY
                             realignColStatus = segments.realignColStatus
@@ -287,7 +287,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                 subSubComponent foreach { msgSubSubComponent =>
                                   l = inc(l)
                                   if (nonEmpty(msgSubSubComponent)) {
-                                    segments = segmentsMapping(s"$subComponentIndex$DOT${lPad(s"$l$EMPTYSTR", indexNumLen, ZEROStr)}", segCodeLen, indexNumLen)._1
+                                    segments = segmentsMapping(s"$subComponentIndex$DOT$l")._1
                                     subSubComponentLayout += segments.componentData -> msgSubSubComponent
                                   }
                                 }
@@ -317,7 +317,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                   if (multiFields.length > 1) {
                     componentLayout += componentData -> componentList
                   }
-                case _ => componentLayout += segmentsMapping(componentIndex, segCodeLen, indexNumLen)._1.componentData -> field
+                case _ => componentLayout += segmentsMapping(componentIndex)._1.componentData -> field
               }
             }
           }
@@ -357,26 +357,15 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def matcher(in: String, seq: String) = in != null & in.contains(seq)
 
 
-  private def mapSegments(segment: Segments, mappingElement: String, segCodeLen: Int, indexLen: Int, controlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]])
-                         (controlId: String, missingMappings: TemplateUnknownMapping): (Segments, TemplateUnknownMapping) = {
+  private def mapSegments(segment: Segments, segmentIndex: String, controlVersion: String, srcSystemMapping: Map[String, Array[String]]
+                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segments, TemplateUnknownMapping) = {
     val segments = resetSegment(segment)
-    var segmentIndex = EMPTYSTR
     var mappedColumnData = EMPTYSTR
-    if (mappingElement.split(s"$ESCAPE$DOT").length > 2) {
-      val firstDelimPos = mappingElement.indexOf(DOT) + 1
-      val secondDelimPos = mappingElement.lastIndexOf(DOT) + 1
-      segmentIndex = mappingElement.substring(0, segCodeLen + 1) + mappingElement.substring(firstDelimPos + 1, firstDelimPos + indexLen).
-        replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR) + DOT + mappingElement.substring(secondDelimPos + 1, secondDelimPos + indexLen).
-        replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR)
-    } else segmentIndex = mappingElement.substring(0, segCodeLen + 1) + mappingElement.substring(mappingElement.indexOf(DOT) + 1,
-      mappingElement.length).replaceFirst(REPEAT_ZERO_STAR, EMPTYSTR)
     try {
       val realignColumnValues = lookUp(realignment, controlVersion + segmentIndex)
       realignColumnValues.nonEmpty match {
         case true =>
           segments.realignColStatus = true
-          segmentIndex = realignColumnValues(6)
           segments.realignFieldName = realignColumnValues(7)
           segments.realignCompName = realignColumnValues(8)
           segments.realignSubCompName = realignColumnValues(9)
@@ -409,17 +398,18 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             case _ =>
           }
           if (mappedColumnData == EMPTYSTR || mappedColumnData.contains(DOT) ||
-            mappedColumnData.substring(3) == mappingElement.substring(3)) {
-            mappedColumnData = s"${mappingElement.substring(0, mappingElement.indexOf(DOT)).toLowerCase}_unknown"
+            (mappedColumnData.length > 2 && mappedColumnData.substring(3) == segmentIndex.substring(3))) {
+            mappedColumnData = s"${segmentIndex.substring(0, segmentIndex.indexOf(DOT)).toLowerCase}_unknown"
             if (missingMappings.unknownMappings == null) missingMappings.unknownMappings = new ListBuffer[String]
-            else missingMappings.unknownMappings += mappingElement
+            else missingMappings.unknownMappings += segmentIndex
           }
           segments.componentData = mappedColumnData
           (segments, missingMappings)
       }
     } catch {
       case t: Throwable =>
-        throw new InvalidTemplateFormatException(s"Template has invalid Format for $mappingElement & Source System Version $controlVersion & Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
+        t.printStackTrace()
+        throw new InvalidTemplateFormatException(s"Template has invalid Format for $segmentIndex & Source System Version $controlVersion & Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
     }
   }
 
@@ -445,14 +435,6 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     store get key match {
       case Some(data) => data
       case _ => EMPTY
-    }
-  }
-
-  private def generateMapIndex(segmentIndex: String, indexLen: Int): String = {
-    val split = segmentIndex.split(s"$ESCAPE$DOT")
-    split nonEmpty match {
-      case true => lPad(split(split.length - 1), indexLen, ZEROStr)
-      case _ => segmentIndex
     }
   }
 
