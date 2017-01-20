@@ -31426,6 +31426,11 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	zin_referral_num String,
 	zin_attached_referral_id String,
 	zin_insurance_plan_id String,
+	zin_guarantor_id String,
+    zin_authorized_visit_num String,
+    zin_authorized_completed_visit_num String,
+    zin_covered_through String,
+    zin_sponsor_employer_size String,
 	zin_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
