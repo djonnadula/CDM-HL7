@@ -9,7 +9,22 @@ import com.hca.cdm.hl7.constants.HL7Constants._
   */
 object ValidationUtil {
 
-  def isValidMsg(meta: MSGMeta): Boolean = meta.controlId != EMPTYSTR & meta.facility != EMPTYSTR
+  case class Validation(status: Either[Boolean, (String, String)])
+
+  private val valid = Validation(Left(true))
+  private val invalidControlId = Validation(Right("Control Id ", EMPTYSTR))
+  private val invalidFacilityMnemonic = Validation(Right(EMPTYSTR, "Facility Mnemonic "))
+  private val invalid = Validation(Right(EMPTYSTR, EMPTYSTR))
+
+  def isValidMsg(meta: MSGMeta): Validation = {
+    meta.controlId != EMPTYSTR & meta.facility != EMPTYSTR match {
+      case true => return valid
+      case _ =>
+        if (meta.controlId == EMPTYSTR) return invalidControlId
+        else if (meta.facility == EMPTYSTR) return invalidFacilityMnemonic
+    }
+    invalid
+  }
 
   def hasMultiMSH(data: mapType): Boolean = {
     data.count({ case (node, any) =>
