@@ -11326,6 +11326,7 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	in2_patient_relationship_to_insured_second_alt_value_set_oid String,
 	in2_patient_relationship_to_insured_second_alt_value_set_ver_id String,
 	in2_unknown String,
+	in2_set_id String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
