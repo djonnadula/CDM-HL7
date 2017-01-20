@@ -11326,6 +11326,7 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	in2_patient_relationship_to_insured_second_alt_value_set_oid String,
 	in2_patient_relationship_to_insured_second_alt_value_set_ver_id String,
 	in2_unknown String,
+	in2_set_id String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
@@ -31415,6 +31416,10 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	zin_total_denied_day String,
 	zin_approved_length_of_stay String,
 	zin_alternative_subscriber_name String,
+	zin_alternative_subscriber_name_last_name String,
+    zin_alternative_subscriber_name_first_name String,
+    zin_alternative_subscriber_name_middle_name String,
+    zin_alternative_subscriber_name_suffix String,
 	zin_authorization_precertification_required String,
 	zin_alternative_subscriber_birth_date String,
 	zin_authorization_type String,
@@ -31426,6 +31431,11 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	zin_referral_num String,
 	zin_attached_referral_id String,
 	zin_insurance_plan_id String,
+	zin_guarantor_id String,
+    zin_authorized_visit_num String,
+    zin_authorized_completed_visit_num String,
+    zin_covered_through String,
+    zin_sponsor_employer_size String,
 	zin_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
@@ -31738,6 +31748,8 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 	zpp_surgeon_person_id String,
 	zpp_surgeon_last_name String,
 	zpp_surgeon_first_name String,
+	zpp_clin_sys_override_7 String,
+    zpp_props_opr_duration String,
 	zpp_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
