@@ -62,8 +62,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           invalidTemplateAlert(rejectMsg(hl7, missingTemplate, meta, parsed.missingMappings, null, null, null), header(hl7, rejectStage, Left(meta)))
           updateMetrics(UNKNOWNMAPPING)
         }
-        metRequirement(meta) match {
-          case true =>
+        metRequirement(meta) status match {
+          case Left(true) =>
             if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException(s"Message has Multiple MSH Segments. This is not Expected.")
             Try(toJson(parsed.data)) match {
               case Success(json) =>
@@ -74,9 +74,13 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                 updateMetrics(FAILED)
                 HL7TransRec(Right(t))
             }
-          case _ =>
+          case Right(invalid) =>
             updateMetrics(REJECTED)
-            throw new NotValidHl7Exception(invalidHl7)
+            invalid match {
+              case (EMPTYSTR, EMPTYSTR) => throw new NotValidHl7Exception(invalidHl7)
+              case (_, EMPTYSTR) => throw new NotValidHl7Exception(s"$invalidHl7 for ${invalid._1}")
+              case (EMPTYSTR, _) => throw new NotValidHl7Exception(s"$invalidHl7 for ${invalid._2}")
+            }
         }
       case Failure(t) =>
         t match {
