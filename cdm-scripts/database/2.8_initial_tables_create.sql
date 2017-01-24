@@ -9417,7 +9417,6 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	pid_medical_record_num String,
 	pid_medical_record_urn String,
 	pid_pat_account_num String,
-	in2_set_id String,
 	in2_insured_employee_id String,
 	in2_insured_employee_id_identifier_num String,
 	in2_insured_employee_id_identifier_check_digit String,
