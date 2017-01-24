@@ -21,7 +21,7 @@ object AuditConstants {
   lazy val rejectStage = "REJECT"
   lazy val auditHeader ="AUDIT"
   lazy val missingTemplate = "TEMPLATE_MAPPING"
-  lazy val invalidHl7 = "Not a Valid HL7. Req Info Not Found. Check Message for Requirement "
+  lazy val invalidHl7 = "Not a Valid HL7. Req Info Not Found. Check Message Requirement"
   lazy val hl7JsonIOFun ="hl7JsonIO"
   lazy val hl7JsonAuditIOFun = "hl7JsonAuditIO"
   lazy val cdmScri = "CDMSCRI"

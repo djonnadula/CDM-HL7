@@ -21,7 +21,7 @@ object HL7Constants {
   lazy val FIELD_DELIM = "field_delim"
   lazy val MT_ = "MT_"
   lazy val MT6_ = "MT6_"
-  lazy val EPIC_ = "^EPIC_"
+  lazy val EPIC_ = "EPIC_"
   lazy val ECW_ = "ECW_"
   lazy val NG_ = "NG_"
   lazy val IP_ = "IP_"
