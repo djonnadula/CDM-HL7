@@ -30187,7 +30187,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT'
 DROP TABLE hl7_sgh_data;
 
 CREATE EXTERNAL TABLE hl7_sgh_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30211,7 +30210,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGH'
 DROP TABLE hl7_sgt_data;
 
 CREATE EXTERNAL TABLE hl7_sgt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
