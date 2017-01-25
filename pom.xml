@@ -113,6 +113,18 @@
             <version>${spark.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.10</artifactId>
+            <version>${spark.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.10</artifactId>
+            <version>${spark.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
