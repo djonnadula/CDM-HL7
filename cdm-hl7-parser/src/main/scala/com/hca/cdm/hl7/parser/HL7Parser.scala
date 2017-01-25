@@ -208,7 +208,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   private case class HL7Parsed(data: mapType, sourceSystem: String, srcVersion: String, var missingMappings: String = EMPTYSTR)
 
-  private case class TemplateUnknownMapping(var unknownMappings: ListBuffer[String] = null)
+  private case class TemplateUnknownMapping(var unknownMappings: mutable.HashSet[String] = null)
 
   private def transform(rawSplit: Array[String], preNumLen: Int = 4) = {
     val dataLayout = new mutable.LinkedHashMap[String, Any]
@@ -437,7 +437,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           if (mappedColumnData == EMPTYSTR || mappedColumnData.contains(DOT) ||
             (mappedColumnData.length > 2 && mappedColumnData.substring(3) == segmentIndex.substring(3))) {
             mappedColumnData = UNKNOWN
-            if (missingMappings.unknownMappings == null) missingMappings.unknownMappings = new ListBuffer[String]
+            if (missingMappings.unknownMappings == null) missingMappings.unknownMappings = new mutable.HashSet[String]
             missingMappings.unknownMappings += segmentIndex
           }
           segments.componentData = mappedColumnData
