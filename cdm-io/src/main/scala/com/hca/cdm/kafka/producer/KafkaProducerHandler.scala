@@ -188,6 +188,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
     if (this.producer != null) {
       flushEverything(producer)
       this.producer.close(1, TimeUnit.HOURS)
+      this.producer = null
     }
   }
 
