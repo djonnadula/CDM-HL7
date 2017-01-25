@@ -18,6 +18,8 @@ object HL7Types extends Enumeration {
   val SIU = Value("SIU")
   val VXU = Value("VXU")
   val IPLORU = Value("IPLORU")
+  val ORM = Value("ORM")
+  val ORMORDERS = Value("ORMORDERS")
   val UNKNOWN = Value("UNKNOWN")
   val ALL = Value("ALL")
 }
