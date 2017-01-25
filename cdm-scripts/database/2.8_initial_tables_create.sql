@@ -16547,7 +16547,7 @@ CREATE EXTERNAL TABLE hl7_obx_data (
     obx_observation_value String,
     obx_observation_value_primary_id String,
     obx_observation_value_text String,
-    obx_observation_value_data_type, String,
+    obx_observation_value_data_type String,
     obx_observation_value_name_of_coding_sys String,
     obx_observation_value_encoding_scheme String,
     obx_observation_value_data String,
