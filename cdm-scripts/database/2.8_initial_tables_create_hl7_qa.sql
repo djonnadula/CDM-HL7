@@ -1,4 +1,4 @@
-USE hl7;
+USE hl7_qa;
 
 DROP TABLE hl7_abs_data;
 
@@ -26,14 +26,10 @@ CREATE EXTERNAL TABLE hl7_abs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -353,14 +349,10 @@ CREATE EXTERNAL TABLE hl7_acc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -377,14 +369,10 @@ CREATE EXTERNAL TABLE hl7_add_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -415,14 +403,10 @@ CREATE EXTERNAL TABLE hl7_adj_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -443,14 +427,10 @@ CREATE EXTERNAL TABLE hl7_aff_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -480,14 +460,10 @@ CREATE EXTERNAL TABLE hl7_aig_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -515,14 +491,10 @@ CREATE EXTERNAL TABLE hl7_ail_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -550,14 +522,10 @@ CREATE EXTERNAL TABLE hl7_aip_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -585,14 +553,10 @@ CREATE EXTERNAL TABLE hl7_ais_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -729,14 +693,10 @@ CREATE EXTERNAL TABLE hl7_al1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -757,14 +717,10 @@ CREATE EXTERNAL TABLE hl7_apr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -805,14 +761,10 @@ CREATE EXTERNAL TABLE hl7_arq_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -902,14 +854,10 @@ CREATE EXTERNAL TABLE hl7_arv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -937,14 +885,10 @@ CREATE EXTERNAL TABLE hl7_aut_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -974,14 +918,10 @@ CREATE EXTERNAL TABLE hl7_bhs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -999,14 +939,10 @@ CREATE EXTERNAL TABLE hl7_blc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1026,14 +962,10 @@ CREATE EXTERNAL TABLE hl7_blg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1063,14 +995,10 @@ CREATE EXTERNAL TABLE hl7_bpo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1107,14 +1035,10 @@ CREATE EXTERNAL TABLE hl7_bpx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1133,14 +1057,10 @@ CREATE EXTERNAL TABLE hl7_bts_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1175,14 +1095,10 @@ CREATE EXTERNAL TABLE hl7_btx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1211,14 +1127,10 @@ CREATE EXTERNAL TABLE hl7_cdm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1286,14 +1198,10 @@ CREATE EXTERNAL TABLE hl7_cdo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1340,14 +1248,10 @@ CREATE EXTERNAL TABLE hl7_cer_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1374,14 +1278,10 @@ CREATE EXTERNAL TABLE hl7_cm0_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1400,14 +1300,10 @@ CREATE EXTERNAL TABLE hl7_cm1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1427,14 +1323,10 @@ CREATE EXTERNAL TABLE hl7_cm2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1456,14 +1348,10 @@ CREATE EXTERNAL TABLE hl7_cns_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1728,14 +1616,10 @@ CREATE EXTERNAL TABLE hl7_con_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1755,14 +1639,10 @@ CREATE EXTERNAL TABLE hl7_csp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1794,14 +1674,10 @@ CREATE EXTERNAL TABLE hl7_csr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1820,14 +1696,10 @@ CREATE EXTERNAL TABLE hl7_css_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2186,14 +2058,10 @@ CREATE EXTERNAL TABLE hl7_ctd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2260,14 +2128,10 @@ CREATE EXTERNAL TABLE hl7_cti_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2291,14 +2155,10 @@ CREATE EXTERNAL TABLE hl7_db1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2696,14 +2556,10 @@ CREATE EXTERNAL TABLE hl7_dg1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2724,14 +2580,10 @@ CREATE EXTERNAL TABLE hl7_dmi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3238,14 +3090,10 @@ CREATE EXTERNAL TABLE hl7_drg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3263,14 +3111,10 @@ CREATE EXTERNAL TABLE hl7_dsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3291,14 +3135,10 @@ CREATE EXTERNAL TABLE hl7_dsp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3319,14 +3159,10 @@ CREATE EXTERNAL TABLE hl7_ecd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3345,14 +3181,10 @@ CREATE EXTERNAL TABLE hl7_ecr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3377,14 +3209,10 @@ CREATE EXTERNAL TABLE hl7_edu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3405,14 +3233,10 @@ CREATE EXTERNAL TABLE hl7_eqp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3433,14 +3257,10 @@ CREATE EXTERNAL TABLE hl7_equ_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3468,14 +3288,10 @@ CREATE EXTERNAL TABLE hl7_err_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3649,14 +3465,10 @@ CREATE EXTERNAL TABLE hl7_evn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3684,14 +3496,10 @@ CREATE EXTERNAL TABLE hl7_fac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3721,14 +3529,10 @@ CREATE EXTERNAL TABLE hl7_fhs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -4987,14 +4791,10 @@ CREATE EXTERNAL TABLE hl7_ft1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5012,14 +4812,10 @@ CREATE EXTERNAL TABLE hl7_fts_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5057,14 +4853,10 @@ CREATE EXTERNAL TABLE hl7_gol_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5085,14 +4877,10 @@ CREATE EXTERNAL TABLE hl7_gp1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5122,14 +4910,10 @@ CREATE EXTERNAL TABLE hl7_gp2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -6797,14 +6581,10 @@ CREATE EXTERNAL TABLE hl7_gt1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7774,14 +7554,10 @@ CREATE EXTERNAL TABLE hl7_iam_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7801,14 +7577,10 @@ CREATE EXTERNAL TABLE hl7_iar_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7839,14 +7611,10 @@ CREATE EXTERNAL TABLE hl7_iim_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7872,14 +7640,10 @@ CREATE EXTERNAL TABLE hl7_ilt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -9337,14 +9101,10 @@ CREATE EXTERNAL TABLE hl7_in1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -11269,14 +11029,10 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12177,14 +11933,10 @@ CREATE EXTERNAL TABLE hl7_in3_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12220,14 +11972,10 @@ CREATE EXTERNAL TABLE hl7_inv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12252,14 +12000,10 @@ CREATE EXTERNAL TABLE hl7_ipc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12283,14 +12027,10 @@ CREATE EXTERNAL TABLE hl7_ipr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12309,14 +12049,10 @@ CREATE EXTERNAL TABLE hl7_isd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12361,14 +12097,10 @@ CREATE EXTERNAL TABLE hl7_itm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12414,14 +12146,10 @@ CREATE EXTERNAL TABLE hl7_ivc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12463,14 +12191,10 @@ CREATE EXTERNAL TABLE hl7_ivt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12490,14 +12214,10 @@ CREATE EXTERNAL TABLE hl7_lan_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12517,14 +12237,10 @@ CREATE EXTERNAL TABLE hl7_lcc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12545,14 +12261,10 @@ CREATE EXTERNAL TABLE hl7_lch_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12580,14 +12292,10 @@ CREATE EXTERNAL TABLE hl7_ldp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12612,14 +12320,10 @@ CREATE EXTERNAL TABLE hl7_loc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12641,14 +12345,10 @@ CREATE EXTERNAL TABLE hl7_lrl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12670,14 +12370,10 @@ CREATE EXTERNAL TABLE hl7_mfa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12700,14 +12396,10 @@ CREATE EXTERNAL TABLE hl7_mfe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12729,14 +12421,10 @@ CREATE EXTERNAL TABLE hl7_mfi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13118,14 +12806,10 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13149,14 +12833,10 @@ CREATE EXTERNAL TABLE hl7_msa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13185,8 +12865,7 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	msh_receiving_facility_universal_id String,
 	msh_receiving_facility_universal_id_type String,
 	msh_msg_create_date_time String,
-	msh_msg_create_date_time_date_time STRING,
-	msh_msg_create_date_time_precision String,
+	msh_msg_create_precision String,
 	msh_security String,
 	msh_msg_type String,
 	msh_msg_type_message_code String,
@@ -13370,14 +13049,10 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13394,14 +13069,10 @@ CREATE EXTERNAL TABLE hl7_nck_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13421,14 +13092,10 @@ CREATE EXTERNAL TABLE hl7_nds_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14814,14 +14481,10 @@ CREATE EXTERNAL TABLE hl7_nk1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14839,14 +14502,10 @@ CREATE EXTERNAL TABLE hl7_npu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14871,14 +14530,10 @@ CREATE EXTERNAL TABLE hl7_nsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14909,14 +14564,10 @@ CREATE EXTERNAL TABLE hl7_nst_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15093,14 +14744,10 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16230,14 +15877,10 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16282,14 +15925,10 @@ CREATE EXTERNAL TABLE hl7_obx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16309,14 +15948,10 @@ CREATE EXTERNAL TABLE hl7_ods_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16335,14 +15970,10 @@ CREATE EXTERNAL TABLE hl7_odt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16405,14 +16036,10 @@ CREATE EXTERNAL TABLE hl7_om1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16438,14 +16065,10 @@ CREATE EXTERNAL TABLE hl7_om2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16468,14 +16091,10 @@ CREATE EXTERNAL TABLE hl7_om3_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16505,14 +16124,10 @@ CREATE EXTERNAL TABLE hl7_om4_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16531,14 +16146,10 @@ CREATE EXTERNAL TABLE hl7_om5_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16556,14 +16167,10 @@ CREATE EXTERNAL TABLE hl7_om6_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16603,14 +16210,10 @@ CREATE EXTERNAL TABLE hl7_om7_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17933,14 +17536,10 @@ CREATE EXTERNAL TABLE hl7_orc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17969,14 +17568,10 @@ CREATE EXTERNAL TABLE hl7_org_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17997,14 +17592,10 @@ CREATE EXTERNAL TABLE hl7_ovr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18028,14 +17619,10 @@ CREATE EXTERNAL TABLE hl7_pac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18055,14 +17642,10 @@ CREATE EXTERNAL TABLE hl7_pce_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18101,14 +17684,10 @@ CREATE EXTERNAL TABLE hl7_pcr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18674,14 +18253,10 @@ CREATE EXTERNAL TABLE hl7_pd1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18706,14 +18281,10 @@ CREATE EXTERNAL TABLE hl7_pda_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18744,14 +18315,10 @@ CREATE EXTERNAL TABLE hl7_pdc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18792,14 +18359,10 @@ CREATE EXTERNAL TABLE hl7_peo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18828,14 +18391,10 @@ CREATE EXTERNAL TABLE hl7_pes_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19822,14 +19381,10 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19852,14 +19407,10 @@ CREATE EXTERNAL TABLE hl7_pkg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19887,14 +19438,10 @@ CREATE EXTERNAL TABLE hl7_pmt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20199,14 +19746,10 @@ CREATE EXTERNAL TABLE hl7_pr1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20234,14 +19777,10 @@ CREATE EXTERNAL TABLE hl7_pra_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20313,14 +19852,10 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20354,14 +19889,10 @@ CREATE EXTERNAL TABLE hl7_prc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20391,14 +19922,10 @@ CREATE EXTERNAL TABLE hl7_prd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20933,14 +20460,10 @@ CREATE EXTERNAL TABLE hl7_prt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20962,14 +20485,10 @@ CREATE EXTERNAL TABLE hl7_psg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20999,14 +20518,10 @@ CREATE EXTERNAL TABLE hl7_psh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21070,14 +20585,10 @@ CREATE EXTERNAL TABLE hl7_psl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21098,14 +20609,10 @@ CREATE EXTERNAL TABLE hl7_pss_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21128,14 +20635,10 @@ CREATE EXTERNAL TABLE hl7_pth_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22749,14 +22252,10 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23484,14 +22983,10 @@ CREATE EXTERNAL TABLE hl7_pv2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23514,14 +23009,10 @@ CREATE EXTERNAL TABLE hl7_pye_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23543,14 +23034,10 @@ CREATE EXTERNAL TABLE hl7_qak_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23568,14 +23055,10 @@ CREATE EXTERNAL TABLE hl7_qid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23594,14 +23077,10 @@ CREATE EXTERNAL TABLE hl7_qpd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23629,14 +23108,10 @@ CREATE EXTERNAL TABLE hl7_qrd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23662,14 +23137,10 @@ CREATE EXTERNAL TABLE hl7_qrf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23688,14 +23159,10 @@ CREATE EXTERNAL TABLE hl7_qri_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23718,14 +23185,10 @@ CREATE EXTERNAL TABLE hl7_rcp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23743,14 +23206,10 @@ CREATE EXTERNAL TABLE hl7_rdf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23767,14 +23226,10 @@ CREATE EXTERNAL TABLE hl7_rdt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23806,14 +23261,10 @@ CREATE EXTERNAL TABLE hl7_rel_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23841,14 +23292,10 @@ CREATE EXTERNAL TABLE hl7_rf1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23868,14 +23315,10 @@ CREATE EXTERNAL TABLE hl7_rfi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23894,14 +23337,10 @@ CREATE EXTERNAL TABLE hl7_rgs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23920,14 +23359,10 @@ CREATE EXTERNAL TABLE hl7_rmi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24476,14 +23911,10 @@ CREATE EXTERNAL TABLE hl7_rol_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24506,14 +23937,10 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24539,14 +23966,10 @@ CREATE EXTERNAL TABLE hl7_rqd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25108,14 +24531,10 @@ CREATE EXTERNAL TABLE hl7_rxa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25274,14 +24693,10 @@ CREATE EXTERNAL TABLE hl7_rxc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25331,14 +24746,10 @@ CREATE EXTERNAL TABLE hl7_rxd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26369,14 +25780,10 @@ CREATE EXTERNAL TABLE hl7_rxe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26422,14 +25829,10 @@ CREATE EXTERNAL TABLE hl7_rxg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27412,14 +26815,10 @@ CREATE EXTERNAL TABLE hl7_rxo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27573,14 +26972,10 @@ CREATE EXTERNAL TABLE hl7_rxr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27864,14 +27259,10 @@ CREATE EXTERNAL TABLE hl7_rxv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27931,14 +27322,10 @@ CREATE EXTERNAL TABLE hl7_sac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27991,14 +27378,10 @@ CREATE EXTERNAL TABLE hl7_scd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28161,14 +27544,10 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28192,14 +27571,10 @@ CREATE EXTERNAL TABLE hl7_scp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28222,14 +27597,10 @@ CREATE EXTERNAL TABLE hl7_sdd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28289,14 +27660,10 @@ CREATE EXTERNAL TABLE hl7_sft_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28323,14 +27690,10 @@ CREATE EXTERNAL TABLE hl7_shp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28350,14 +27713,10 @@ CREATE EXTERNAL TABLE hl7_sid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28378,14 +27737,10 @@ CREATE EXTERNAL TABLE hl7_slt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29005,14 +28360,10 @@ CREATE EXTERNAL TABLE hl7_spm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29069,14 +28420,10 @@ CREATE EXTERNAL TABLE hl7_stf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29096,14 +28443,10 @@ CREATE EXTERNAL TABLE hl7_stz_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29133,14 +28476,10 @@ CREATE EXTERNAL TABLE hl7_tcc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29164,14 +28503,10 @@ CREATE EXTERNAL TABLE hl7_tcd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29396,14 +28731,10 @@ CREATE EXTERNAL TABLE hl7_tq1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29465,14 +28796,10 @@ CREATE EXTERNAL TABLE hl7_tq2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30329,14 +29656,10 @@ CREATE EXTERNAL TABLE hl7_txa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30384,14 +29707,10 @@ CREATE EXTERNAL TABLE hl7_uac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30430,14 +29749,10 @@ CREATE EXTERNAL TABLE hl7_ub1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30591,14 +29906,10 @@ CREATE EXTERNAL TABLE hl7_ub2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30621,14 +29932,10 @@ CREATE EXTERNAL TABLE hl7_urd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30653,14 +29960,10 @@ CREATE EXTERNAL TABLE hl7_urs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30682,14 +29985,10 @@ CREATE EXTERNAL TABLE hl7_var_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30710,14 +30009,10 @@ CREATE EXTERNAL TABLE hl7_vnd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30749,14 +30044,10 @@ CREATE EXTERNAL TABLE hl7_zao_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30777,14 +30068,10 @@ CREATE EXTERNAL TABLE hl7_zcd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30812,14 +30099,10 @@ CREATE EXTERNAL TABLE hl7_zcl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30839,14 +30122,10 @@ CREATE EXTERNAL TABLE hl7_zcn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30872,14 +30151,10 @@ CREATE EXTERNAL TABLE hl7_zcp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30906,14 +30181,10 @@ CREATE EXTERNAL TABLE hl7_zcs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30934,14 +30205,10 @@ CREATE EXTERNAL TABLE hl7_zds_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30974,14 +30241,10 @@ CREATE EXTERNAL TABLE hl7_zdt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31005,14 +30268,10 @@ CREATE EXTERNAL TABLE hl7_zdu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31079,14 +30338,10 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31104,14 +30359,10 @@ CREATE EXTERNAL TABLE hl7_zex_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31131,14 +30382,10 @@ CREATE EXTERNAL TABLE hl7_zg1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31156,14 +30403,10 @@ CREATE EXTERNAL TABLE hl7_zid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31187,14 +30430,10 @@ CREATE EXTERNAL TABLE hl7_zif_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31250,14 +30489,10 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31279,14 +30514,10 @@ CREATE EXTERNAL TABLE hl7_zm1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31399,14 +30630,10 @@ CREATE EXTERNAL TABLE hl7_zmp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31424,14 +30651,10 @@ CREATE EXTERNAL TABLE hl7_zmr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31456,14 +30679,10 @@ CREATE EXTERNAL TABLE hl7_zpd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31486,14 +30705,10 @@ CREATE EXTERNAL TABLE hl7_zpe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31518,14 +30733,10 @@ CREATE EXTERNAL TABLE hl7_zpo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31557,14 +30768,10 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31616,14 +30823,10 @@ CREATE EXTERNAL TABLE hl7_zpv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31644,14 +30847,10 @@ CREATE EXTERNAL TABLE hl7_zrq_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31691,14 +30890,10 @@ CREATE EXTERNAL TABLE hl7_zrx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31721,14 +30916,10 @@ CREATE EXTERNAL TABLE hl7_zsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31747,14 +30938,10 @@ CREATE EXTERNAL TABLE hl7_zsi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31782,14 +30969,10 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31807,14 +30990,10 @@ CREATE EXTERNAL TABLE hl7_zsu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31842,14 +31021,10 @@ CREATE EXTERNAL TABLE hl7_ztf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31997,14 +31172,10 @@ CREATE EXTERNAL TABLE hl7_ztm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32022,14 +31193,10 @@ CREATE EXTERNAL TABLE hl7_zur_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32051,13 +31218,9 @@ CREATE EXTERNAL TABLE hl7_zvn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZVN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
