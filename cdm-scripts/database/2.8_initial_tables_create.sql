@@ -3,7 +3,6 @@ USE hl7;
 DROP TABLE hl7_abs_data;
 
 CREATE EXTERNAL TABLE hl7_abs_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -41,7 +40,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS'
 DROP TABLE hl7_acc_data;
 
 CREATE EXTERNAL TABLE hl7_acc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -369,7 +367,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC'
 DROP TABLE hl7_add_data;
 
 CREATE EXTERNAL TABLE hl7_add_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -394,7 +391,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD'
 DROP TABLE hl7_adj_data;
 
 CREATE EXTERNAL TABLE hl7_adj_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -433,7 +429,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ'
 DROP TABLE hl7_aff_data;
 
 CREATE EXTERNAL TABLE hl7_aff_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -462,7 +457,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF'
 DROP TABLE hl7_aig_data;
 
 CREATE EXTERNAL TABLE hl7_aig_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -500,7 +494,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG'
 DROP TABLE hl7_ail_data;
 
 CREATE EXTERNAL TABLE hl7_ail_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -536,7 +529,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL'
 DROP TABLE hl7_aip_data;
 
 CREATE EXTERNAL TABLE hl7_aip_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -572,7 +564,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP'
 DROP TABLE hl7_ais_data;
 
 CREATE EXTERNAL TABLE hl7_ais_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -608,7 +599,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS'
 DROP TABLE hl7_al1_data;
 
 CREATE EXTERNAL TABLE hl7_al1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -753,7 +743,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1'
 DROP TABLE hl7_apr_data;
 
 CREATE EXTERNAL TABLE hl7_apr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -782,7 +771,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR'
 DROP TABLE hl7_arq_data;
 
 CREATE EXTERNAL TABLE hl7_arq_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -831,7 +819,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ'
 DROP TABLE hl7_arv_data;
 
 CREATE EXTERNAL TABLE hl7_arv_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -929,7 +916,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV'
 DROP TABLE hl7_aut_data;
 
 CREATE EXTERNAL TABLE hl7_aut_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -965,7 +951,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT'
 DROP TABLE hl7_bhs_data;
 
 CREATE EXTERNAL TABLE hl7_bhs_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1003,7 +988,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS'
 DROP TABLE hl7_blc_data;
 
 CREATE EXTERNAL TABLE hl7_blc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1029,7 +1013,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC'
 DROP TABLE hl7_blg_data;
 
 CREATE EXTERNAL TABLE hl7_blg_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1057,7 +1040,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG'
 DROP TABLE hl7_bpo_data;
 
 CREATE EXTERNAL TABLE hl7_bpo_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1095,7 +1077,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO'
 DROP TABLE hl7_bpx_data;
 
 CREATE EXTERNAL TABLE hl7_bpx_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1140,7 +1121,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX'
 DROP TABLE hl7_bts_data;
 
 CREATE EXTERNAL TABLE hl7_bts_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1167,7 +1147,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS'
 DROP TABLE hl7_btx_data;
 
 CREATE EXTERNAL TABLE hl7_btx_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1210,7 +1189,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX'
 DROP TABLE hl7_cdm_data;
 
 CREATE EXTERNAL TABLE hl7_cdm_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1247,7 +1225,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM'
 DROP TABLE hl7_cdo_data;
 
 CREATE EXTERNAL TABLE hl7_cdo_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1323,7 +1300,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO'
 DROP TABLE hl7_cer_data;
 
 CREATE EXTERNAL TABLE hl7_cer_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1378,7 +1354,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER'
 DROP TABLE hl7_cm0_data;
 
 CREATE EXTERNAL TABLE hl7_cm0_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1413,7 +1388,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0'
 DROP TABLE hl7_cm1_data;
 
 CREATE EXTERNAL TABLE hl7_cm1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1440,7 +1414,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1'
 DROP TABLE hl7_cm2_data;
 
 CREATE EXTERNAL TABLE hl7_cm2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1468,7 +1441,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2'
 DROP TABLE hl7_cns_data;
 
 CREATE EXTERNAL TABLE hl7_cns_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1498,7 +1470,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS'
 DROP TABLE hl7_con_data;
 
 CREATE EXTERNAL TABLE hl7_con_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1771,7 +1742,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON'
 DROP TABLE hl7_csp_data;
 
 CREATE EXTERNAL TABLE hl7_csp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1799,7 +1769,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP'
 DROP TABLE hl7_csr_data;
 
 CREATE EXTERNAL TABLE hl7_csr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1839,7 +1808,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR'
 DROP TABLE hl7_css_data;
 
 CREATE EXTERNAL TABLE hl7_css_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -1866,7 +1834,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS'
 DROP TABLE hl7_ctd_data;
 
 CREATE EXTERNAL TABLE hl7_ctd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -2233,7 +2200,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD'
 DROP TABLE hl7_cti_data;
 
 CREATE EXTERNAL TABLE hl7_cti_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -2308,7 +2274,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI'
 DROP TABLE hl7_db1_data;
 
 CREATE EXTERNAL TABLE hl7_db1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -2340,7 +2305,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1'
 DROP TABLE hl7_dg1_data;
 
 CREATE EXTERNAL TABLE hl7_dg1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -2746,7 +2710,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1'
 DROP TABLE hl7_dmi_data;
 
 CREATE EXTERNAL TABLE hl7_dmi_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -2775,7 +2738,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI'
 DROP TABLE hl7_drg_data;
 
 CREATE EXTERNAL TABLE hl7_drg_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3290,7 +3252,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG'
 DROP TABLE hl7_dsc_data;
 
 CREATE EXTERNAL TABLE hl7_dsc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3316,7 +3277,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC'
 DROP TABLE hl7_dsp_data;
 
 CREATE EXTERNAL TABLE hl7_dsp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3345,7 +3305,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP'
 DROP TABLE hl7_ecd_data;
 
 CREATE EXTERNAL TABLE hl7_ecd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3374,7 +3333,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD'
 DROP TABLE hl7_ecr_data;
 
 CREATE EXTERNAL TABLE hl7_ecr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3401,7 +3359,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR'
 DROP TABLE hl7_edu_data;
 
 CREATE EXTERNAL TABLE hl7_edu_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3434,7 +3391,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU'
 DROP TABLE hl7_eqp_data;
 
 CREATE EXTERNAL TABLE hl7_eqp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3463,7 +3419,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP'
 DROP TABLE hl7_equ_data;
 
 CREATE EXTERNAL TABLE hl7_equ_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3492,7 +3447,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU'
 DROP TABLE hl7_err_data;
 
 CREATE EXTERNAL TABLE hl7_err_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3528,7 +3482,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR'
 DROP TABLE hl7_evn_data;
 
 CREATE EXTERNAL TABLE hl7_evn_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3710,7 +3663,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN'
 DROP TABLE hl7_fac_data;
 
 CREATE EXTERNAL TABLE hl7_fac_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3746,7 +3698,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC'
 DROP TABLE hl7_fhs_data;
 
 CREATE EXTERNAL TABLE hl7_fhs_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3784,7 +3735,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS'
 DROP TABLE hl7_ft1_data;
 
 CREATE EXTERNAL TABLE hl7_ft1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -5051,7 +5001,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1'
 DROP TABLE hl7_fts_data;
 
 CREATE EXTERNAL TABLE hl7_fts_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -5077,7 +5026,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS'
 DROP TABLE hl7_gol_data;
 
 CREATE EXTERNAL TABLE hl7_gol_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -5123,7 +5071,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL'
 DROP TABLE hl7_gp1_data;
 
 CREATE EXTERNAL TABLE hl7_gp1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -5152,7 +5099,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1'
 DROP TABLE hl7_gp2_data;
 
 CREATE EXTERNAL TABLE hl7_gp2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -5190,7 +5136,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2'
 DROP TABLE hl7_gt1_data;
 
 CREATE EXTERNAL TABLE hl7_gt1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -6866,7 +6811,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1'
 DROP TABLE hl7_iam_data;
 
 CREATE EXTERNAL TABLE hl7_iam_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -7844,7 +7788,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM'
 DROP TABLE hl7_iar_data;
 
 CREATE EXTERNAL TABLE hl7_iar_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -7872,7 +7815,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR'
 DROP TABLE hl7_iim_data;
 
 CREATE EXTERNAL TABLE hl7_iim_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -7911,7 +7853,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM'
 DROP TABLE hl7_ilt_data;
 
 CREATE EXTERNAL TABLE hl7_ilt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -7945,7 +7886,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT'
 DROP TABLE hl7_in1_data;
 
 CREATE EXTERNAL TABLE hl7_in1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -9411,7 +9351,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1'
 DROP TABLE hl7_in2_data;
 
 CREATE EXTERNAL TABLE hl7_in2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -11344,7 +11283,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2'
 DROP TABLE hl7_in3_data;
 
 CREATE EXTERNAL TABLE hl7_in3_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12253,7 +12191,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3'
 DROP TABLE hl7_inv_data;
 
 CREATE EXTERNAL TABLE hl7_inv_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12297,7 +12234,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV'
 DROP TABLE hl7_ipc_data;
 
 CREATE EXTERNAL TABLE hl7_ipc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12330,7 +12266,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC'
 DROP TABLE hl7_ipr_data;
 
 CREATE EXTERNAL TABLE hl7_ipr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12362,7 +12297,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR'
 DROP TABLE hl7_isd_data;
 
 CREATE EXTERNAL TABLE hl7_isd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12389,7 +12323,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD'
 DROP TABLE hl7_itm_data;
 
 CREATE EXTERNAL TABLE hl7_itm_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12442,7 +12375,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM'
 DROP TABLE hl7_ivc_data;
 
 CREATE EXTERNAL TABLE hl7_ivc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12496,7 +12428,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC'
 DROP TABLE hl7_ivt_data;
 
 CREATE EXTERNAL TABLE hl7_ivt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12546,7 +12477,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT'
 DROP TABLE hl7_lan_data;
 
 CREATE EXTERNAL TABLE hl7_lan_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12574,7 +12504,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN'
 DROP TABLE hl7_lcc_data;
 
 CREATE EXTERNAL TABLE hl7_lcc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12602,7 +12531,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC'
 DROP TABLE hl7_lch_data;
 
 CREATE EXTERNAL TABLE hl7_lch_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12631,7 +12559,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH'
 DROP TABLE hl7_ldp_data;
 
 CREATE EXTERNAL TABLE hl7_ldp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12667,7 +12594,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP'
 DROP TABLE hl7_loc_data;
 
 CREATE EXTERNAL TABLE hl7_loc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12700,7 +12626,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC'
 DROP TABLE hl7_lrl_data;
 
 CREATE EXTERNAL TABLE hl7_lrl_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12730,7 +12655,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL'
 DROP TABLE hl7_mfa_data;
 
 CREATE EXTERNAL TABLE hl7_mfa_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12760,7 +12684,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA'
 DROP TABLE hl7_mfe_data;
 
 CREATE EXTERNAL TABLE hl7_mfe_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12791,7 +12714,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE'
 DROP TABLE hl7_mfi_data;
 
 CREATE EXTERNAL TABLE hl7_mfi_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -12821,7 +12743,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI'
 DROP TABLE hl7_mrg_data;
 
 CREATE EXTERNAL TABLE hl7_mrg_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -13211,7 +13132,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG'
 DROP TABLE hl7_msa_data;
 
 CREATE EXTERNAL TABLE hl7_msa_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -13243,7 +13163,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA'
 DROP TABLE hl7_msh_data;
 
 CREATE EXTERNAL TABLE hl7_msh_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -13464,7 +13383,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH'
 DROP TABLE hl7_nck_data;
 
 CREATE EXTERNAL TABLE hl7_nck_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -13489,7 +13407,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK'
 DROP TABLE hl7_nds_data;
 
 CREATE EXTERNAL TABLE hl7_nds_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -13517,7 +13434,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS'
 DROP TABLE hl7_nk1_data;
 
 CREATE EXTERNAL TABLE hl7_nk1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -14911,7 +14827,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1'
 DROP TABLE hl7_npu_data;
 
 CREATE EXTERNAL TABLE hl7_npu_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -14937,7 +14852,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU'
 DROP TABLE hl7_nsc_data;
 
 CREATE EXTERNAL TABLE hl7_nsc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -14970,7 +14884,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC'
 DROP TABLE hl7_nst_data;
 
 CREATE EXTERNAL TABLE hl7_nst_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -15009,7 +14922,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST'
 DROP TABLE hl7_nte_data;
 
 CREATE EXTERNAL TABLE hl7_nte_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -15194,7 +15106,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE'
 DROP TABLE hl7_obr_data;
 
 CREATE EXTERNAL TABLE hl7_obr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16332,7 +16243,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR'
 DROP TABLE hl7_obx_data;
 
 CREATE EXTERNAL TABLE hl7_obx_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16385,7 +16295,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX'
 DROP TABLE hl7_ods_data;
 
 CREATE EXTERNAL TABLE hl7_ods_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16413,7 +16322,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS'
 DROP TABLE hl7_odt_data;
 
 CREATE EXTERNAL TABLE hl7_odt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16440,7 +16348,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT'
 DROP TABLE hl7_om1_data;
 
 CREATE EXTERNAL TABLE hl7_om1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16511,7 +16418,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1'
 DROP TABLE hl7_om2_data;
 
 CREATE EXTERNAL TABLE hl7_om2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16545,7 +16451,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2'
 DROP TABLE hl7_om3_data;
 
 CREATE EXTERNAL TABLE hl7_om3_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16576,7 +16481,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3'
 DROP TABLE hl7_om4_data;
 
 CREATE EXTERNAL TABLE hl7_om4_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16614,7 +16518,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4'
 DROP TABLE hl7_om5_data;
 
 CREATE EXTERNAL TABLE hl7_om5_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16641,7 +16544,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5'
 DROP TABLE hl7_om6_data;
 
 CREATE EXTERNAL TABLE hl7_om6_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16667,7 +16569,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6'
 DROP TABLE hl7_om7_data;
 
 CREATE EXTERNAL TABLE hl7_om7_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -16715,7 +16616,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7'
 DROP TABLE hl7_orc_data;
 
 CREATE EXTERNAL TABLE hl7_orc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18046,7 +17946,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC'
 DROP TABLE hl7_org_data;
 
 CREATE EXTERNAL TABLE hl7_org_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18083,7 +17982,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG'
 DROP TABLE hl7_ovr_data;
 
 CREATE EXTERNAL TABLE hl7_ovr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18112,7 +18010,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR'
 DROP TABLE hl7_pac_data;
 
 CREATE EXTERNAL TABLE hl7_pac_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18144,7 +18041,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC'
 DROP TABLE hl7_pce_data;
 
 CREATE EXTERNAL TABLE hl7_pce_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18172,7 +18068,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE'
 DROP TABLE hl7_pcr_data;
 
 CREATE EXTERNAL TABLE hl7_pcr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18219,7 +18114,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR'
 DROP TABLE hl7_pd1_data;
 
 CREATE EXTERNAL TABLE hl7_pd1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18793,7 +18687,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1'
 DROP TABLE hl7_pda_data;
 
 CREATE EXTERNAL TABLE hl7_pda_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18826,7 +18719,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA'
 DROP TABLE hl7_pdc_data;
 
 CREATE EXTERNAL TABLE hl7_pdc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18865,7 +18757,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC'
 DROP TABLE hl7_peo_data;
 
 CREATE EXTERNAL TABLE hl7_peo_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18914,7 +18805,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO'
 DROP TABLE hl7_pes_data;
 
 CREATE EXTERNAL TABLE hl7_pes_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -18951,7 +18841,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES'
 DROP TABLE hl7_pid_data;
 
 CREATE EXTERNAL TABLE hl7_pid_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -19946,7 +19835,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID'
 DROP TABLE hl7_pkg_data;
 
 CREATE EXTERNAL TABLE hl7_pkg_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -19977,7 +19865,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG'
 DROP TABLE hl7_pmt_data;
 
 CREATE EXTERNAL TABLE hl7_pmt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -20013,7 +19900,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT'
 DROP TABLE hl7_pr1_data;
 
 CREATE EXTERNAL TABLE hl7_pr1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -20326,7 +20212,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1'
 DROP TABLE hl7_pra_data;
 
 CREATE EXTERNAL TABLE hl7_pra_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -20362,7 +20247,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA'
 DROP TABLE hl7_prb_data;
 
 CREATE EXTERNAL TABLE hl7_prb_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -20442,7 +20326,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB'
 DROP TABLE hl7_prc_data;
 
 CREATE EXTERNAL TABLE hl7_prc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -20484,7 +20367,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC'
 DROP TABLE hl7_prd_data;
 
 CREATE EXTERNAL TABLE hl7_prd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -20522,7 +20404,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD'
 DROP TABLE hl7_prt_data;
 
 CREATE EXTERNAL TABLE hl7_prt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -21065,7 +20946,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT'
 DROP TABLE hl7_psg_data;
 
 CREATE EXTERNAL TABLE hl7_psg_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -21095,7 +20975,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG'
 DROP TABLE hl7_psh_data;
 
 CREATE EXTERNAL TABLE hl7_psh_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -21133,7 +21012,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH'
 DROP TABLE hl7_psl_data;
 
 CREATE EXTERNAL TABLE hl7_psl_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -21205,7 +21083,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL'
 DROP TABLE hl7_pss_data;
 
 CREATE EXTERNAL TABLE hl7_pss_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -21234,7 +21111,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS'
 DROP TABLE hl7_pth_data;
 
 CREATE EXTERNAL TABLE hl7_pth_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -21265,7 +21141,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH'
 DROP TABLE hl7_pv1_data;
 
 CREATE EXTERNAL TABLE hl7_pv1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -22887,7 +22762,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1'
 DROP TABLE hl7_pv2_data;
 
 CREATE EXTERNAL TABLE hl7_pv2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23623,7 +23497,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2'
 DROP TABLE hl7_pye_data;
 
 CREATE EXTERNAL TABLE hl7_pye_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23654,7 +23527,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE'
 DROP TABLE hl7_qak_data;
 
 CREATE EXTERNAL TABLE hl7_qak_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23684,7 +23556,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK'
 DROP TABLE hl7_qid_data;
 
 CREATE EXTERNAL TABLE hl7_qid_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23710,7 +23581,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID'
 DROP TABLE hl7_qpd_data;
 
 CREATE EXTERNAL TABLE hl7_qpd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23737,7 +23607,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD'
 DROP TABLE hl7_qrd_data;
 
 CREATE EXTERNAL TABLE hl7_qrd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23773,7 +23642,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD'
 DROP TABLE hl7_qrf_data;
 
 CREATE EXTERNAL TABLE hl7_qrf_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23807,7 +23675,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF'
 DROP TABLE hl7_qri_data;
 
 CREATE EXTERNAL TABLE hl7_qri_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23834,7 +23701,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI'
 DROP TABLE hl7_rcp_data;
 
 CREATE EXTERNAL TABLE hl7_rcp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23865,7 +23731,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP'
 DROP TABLE hl7_rdf_data;
 
 CREATE EXTERNAL TABLE hl7_rdf_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23891,7 +23756,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF'
 DROP TABLE hl7_rdt_data;
 
 CREATE EXTERNAL TABLE hl7_rdt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23916,7 +23780,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT'
 DROP TABLE hl7_rel_data;
 
 CREATE EXTERNAL TABLE hl7_rel_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23956,7 +23819,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL'
 DROP TABLE hl7_rf1_data;
 
 CREATE EXTERNAL TABLE hl7_rf1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -23992,7 +23854,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1'
 DROP TABLE hl7_rfi_data;
 
 CREATE EXTERNAL TABLE hl7_rfi_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24020,7 +23881,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI'
 DROP TABLE hl7_rgs_data;
 
 CREATE EXTERNAL TABLE hl7_rgs_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24047,7 +23907,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS'
 DROP TABLE hl7_rmi_data;
 
 CREATE EXTERNAL TABLE hl7_rmi_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24074,7 +23933,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI'
 DROP TABLE hl7_rol_data;
 
 CREATE EXTERNAL TABLE hl7_rol_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24631,7 +24489,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL'
 DROP TABLE hl7_rq1_data;
 
 CREATE EXTERNAL TABLE hl7_rq1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24662,7 +24519,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1'
 DROP TABLE hl7_rqd_data;
 
 CREATE EXTERNAL TABLE hl7_rqd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24696,7 +24552,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD'
 DROP TABLE hl7_rxa_data;
 
 CREATE EXTERNAL TABLE hl7_rxa_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -25266,7 +25121,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA'
 DROP TABLE hl7_rxc_data;
 
 CREATE EXTERNAL TABLE hl7_rxc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -25433,7 +25287,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC'
 DROP TABLE hl7_rxd_data;
 
 CREATE EXTERNAL TABLE hl7_rxd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -25491,7 +25344,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD'
 DROP TABLE hl7_rxe_data;
 
 CREATE EXTERNAL TABLE hl7_rxe_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -26530,7 +26382,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE'
 DROP TABLE hl7_rxg_data;
 
 CREATE EXTERNAL TABLE hl7_rxg_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -26584,7 +26435,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG'
 DROP TABLE hl7_rxo_data;
 
 CREATE EXTERNAL TABLE hl7_rxo_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -27575,7 +27425,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO'
 DROP TABLE hl7_rxr_data;
 
 CREATE EXTERNAL TABLE hl7_rxr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -27737,7 +27586,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR'
 DROP TABLE hl7_rxv_data;
 
 CREATE EXTERNAL TABLE hl7_rxv_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28029,7 +27877,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV'
 DROP TABLE hl7_sac_data;
 
 CREATE EXTERNAL TABLE hl7_sac_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28097,7 +27944,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC'
 DROP TABLE hl7_scd_data;
 
 CREATE EXTERNAL TABLE hl7_scd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28158,7 +28004,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD'
 DROP TABLE hl7_sch_data;
 
 CREATE EXTERNAL TABLE hl7_sch_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28329,7 +28174,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH'
 DROP TABLE hl7_scp_data;
 
 CREATE EXTERNAL TABLE hl7_scp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28361,7 +28205,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP'
 DROP TABLE hl7_sdd_data;
 
 CREATE EXTERNAL TABLE hl7_sdd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28392,7 +28235,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD'
 DROP TABLE hl7_sft_data;
 
 CREATE EXTERNAL TABLE hl7_sft_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28460,7 +28302,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT'
 DROP TABLE hl7_shp_data;
 
 CREATE EXTERNAL TABLE hl7_shp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28495,7 +28336,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP'
 DROP TABLE hl7_sid_data;
 
 CREATE EXTERNAL TABLE hl7_sid_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28523,7 +28363,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID'
 DROP TABLE hl7_slt_data;
 
 CREATE EXTERNAL TABLE hl7_slt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -28552,7 +28391,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT'
 DROP TABLE hl7_spm_data;
 
 CREATE EXTERNAL TABLE hl7_spm_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29180,7 +29018,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM'
 DROP TABLE hl7_stf_data;
 
 CREATE EXTERNAL TABLE hl7_stf_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29245,7 +29082,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF'
 DROP TABLE hl7_stz_data;
 
 CREATE EXTERNAL TABLE hl7_stz_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29273,7 +29109,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ'
 DROP TABLE hl7_tcc_data;
 
 CREATE EXTERNAL TABLE hl7_tcc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29311,7 +29146,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC'
 DROP TABLE hl7_tcd_data;
 
 CREATE EXTERNAL TABLE hl7_tcd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29343,7 +29177,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD'
 DROP TABLE hl7_tq1_data;
 
 CREATE EXTERNAL TABLE hl7_tq1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29576,7 +29409,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1'
 DROP TABLE hl7_tq2_data;
 
 CREATE EXTERNAL TABLE hl7_tq2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -29646,7 +29478,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2'
 DROP TABLE hl7_txa_data;
 
 CREATE EXTERNAL TABLE hl7_txa_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30511,7 +30342,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA'
 DROP TABLE hl7_uac_data;
 
 CREATE EXTERNAL TABLE hl7_uac_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30567,7 +30397,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC'
 DROP TABLE hl7_ub1_data;
 
 CREATE EXTERNAL TABLE hl7_ub1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30614,7 +30443,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1'
 DROP TABLE hl7_ub2_data;
 
 CREATE EXTERNAL TABLE hl7_ub2_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30776,7 +30604,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2'
 DROP TABLE hl7_urd_data;
 
 CREATE EXTERNAL TABLE hl7_urd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30807,7 +30634,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD'
 DROP TABLE hl7_urs_data;
 
 CREATE EXTERNAL TABLE hl7_urs_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30840,7 +30666,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS'
 DROP TABLE hl7_var_data;
 
 CREATE EXTERNAL TABLE hl7_var_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30870,7 +30695,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR'
 DROP TABLE hl7_vnd_data;
 
 CREATE EXTERNAL TABLE hl7_vnd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30899,7 +30723,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND'
 DROP TABLE hl7_zao_data;
 
 CREATE EXTERNAL TABLE hl7_zao_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30939,7 +30762,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO'
 DROP TABLE hl7_zcd_data;
 
 CREATE EXTERNAL TABLE hl7_zcd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -30968,7 +30790,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD'
 DROP TABLE hl7_zcl_data;
 
 CREATE EXTERNAL TABLE hl7_zcl_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31004,7 +30825,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL'
 DROP TABLE hl7_zcn_data;
 
 CREATE EXTERNAL TABLE hl7_zcn_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31032,7 +30852,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN'
 DROP TABLE hl7_zcp_data;
 
 CREATE EXTERNAL TABLE hl7_zcp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31066,7 +30885,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP'
 DROP TABLE hl7_zcs_data;
 
 CREATE EXTERNAL TABLE hl7_zcs_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31101,7 +30919,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS'
 DROP TABLE hl7_zds_data;
 
 CREATE EXTERNAL TABLE hl7_zds_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31130,7 +30947,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS'
 DROP TABLE hl7_zdt_data;
 
 CREATE EXTERNAL TABLE hl7_zdt_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31171,7 +30987,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT'
 DROP TABLE hl7_zdu_data;
 
 CREATE EXTERNAL TABLE hl7_zdu_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31203,7 +31018,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU'
 DROP TABLE hl7_zer_data;
 
 CREATE EXTERNAL TABLE hl7_zer_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31278,7 +31092,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER'
 DROP TABLE hl7_zex_data;
 
 CREATE EXTERNAL TABLE hl7_zex_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31304,7 +31117,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX'
 DROP TABLE hl7_zg1_data;
 
 CREATE EXTERNAL TABLE hl7_zg1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31332,7 +31144,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1'
 DROP TABLE hl7_zid_data;
 
 CREATE EXTERNAL TABLE hl7_zid_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31358,7 +31169,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID'
 DROP TABLE hl7_zif_data;
 
 CREATE EXTERNAL TABLE hl7_zif_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31390,7 +31200,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF'
 DROP TABLE hl7_zin_data;
 
 CREATE EXTERNAL TABLE hl7_zin_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31454,7 +31263,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN'
 DROP TABLE hl7_zm1_data;
 
 CREATE EXTERNAL TABLE hl7_zm1_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31484,7 +31292,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1'
 DROP TABLE hl7_zmp_data;
 
 CREATE EXTERNAL TABLE hl7_zmp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31605,7 +31412,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP'
 DROP TABLE hl7_zmr_data;
 
 CREATE EXTERNAL TABLE hl7_zmr_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31631,7 +31437,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR'
 DROP TABLE hl7_zpd_data;
 
 CREATE EXTERNAL TABLE hl7_zpd_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31664,7 +31469,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD'
 DROP TABLE hl7_zpe_data;
 
 CREATE EXTERNAL TABLE hl7_zpe_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31695,7 +31499,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE'
 DROP TABLE hl7_zpo_data;
 
 CREATE EXTERNAL TABLE hl7_zpo_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31728,7 +31531,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO'
 DROP TABLE hl7_zpp_data;
 
 CREATE EXTERNAL TABLE hl7_zpp_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31768,7 +31570,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP'
 DROP TABLE hl7_zpv_data;
 
 CREATE EXTERNAL TABLE hl7_zpv_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31828,7 +31629,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV'
 DROP TABLE hl7_zrq_data;
 
 CREATE EXTERNAL TABLE hl7_zrq_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31857,7 +31657,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ'
 DROP TABLE hl7_zrx_data;
 
 CREATE EXTERNAL TABLE hl7_zrx_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31905,7 +31704,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX'
 DROP TABLE hl7_zsc_data;
 
 CREATE EXTERNAL TABLE hl7_zsc_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31936,7 +31734,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC'
 DROP TABLE hl7_zsi_data;
 
 CREATE EXTERNAL TABLE hl7_zsi_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31963,7 +31760,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI'
 DROP TABLE hl7_zst_data;
 
 CREATE EXTERNAL TABLE hl7_zst_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -31999,7 +31795,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST'
 DROP TABLE hl7_zsu_data;
 
 CREATE EXTERNAL TABLE hl7_zsu_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -32025,7 +31820,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU'
 DROP TABLE hl7_ztf_data;
 
 CREATE EXTERNAL TABLE hl7_ztf_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -32061,7 +31855,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF'
 DROP TABLE hl7_ztm_data;
 
 CREATE EXTERNAL TABLE hl7_ztm_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -32217,7 +32010,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM'
 DROP TABLE hl7_zur_data;
 
 CREATE EXTERNAL TABLE hl7_zur_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -32243,7 +32035,6 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR'
 DROP TABLE hl7_zvn_data;
 
 CREATE EXTERNAL TABLE hl7_zvn_data (
-	segment_type String,
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
