@@ -68,12 +68,12 @@ package object model {
 
   private val rejectSchemaMapping = RejectSchema()
   private val rejectSchema = {
-    val temp = new mutable.LinkedHashMap[String, String]
+    val temp = new mutable.LinkedHashMap[String, Any]
     rejectSchemaMapping.productIterator.foreach(sch => temp += sch.asInstanceOf[String] -> EMPTYSTR)
     temp
   }
 
-  private def getRejectSchema = rejectSchema.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
+  private def getRejectSchema = rejectSchema.clone().transform((k, v) => EMPTYSTR)
 
   private def commonSegmentMappings(mappingData: String) = {
     val temp = new mutable.HashMap[String, Array[(String, String, String, String)]]
@@ -141,7 +141,7 @@ package object model {
     rejectSchema update(urn, meta.medical_record_urn)
     rejectSchema update(accntNum, meta.account_num)
     rejectSchema update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
-    rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) toJson(data) else EMPTYSTR)
+    rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
     rejectSchema update(etlTime, timeStamp)
     toJson(rejectSchema)
   }
@@ -261,7 +261,7 @@ package object model {
     temp.toMap
   }
 
-  def loadFilters(file: String, delimitedBy: String = ","): Array[FILTER] = {
+  def loadFilters(file: String, delimitedBy: String = COMMA): Array[FILTER] = {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
@@ -306,7 +306,7 @@ package object model {
     } toMap
   }
 
-  def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = ","): Map[String, Map[String, Array[String]]] = {
+  def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
       val reader = Source.fromFile(file._2).bufferedReader()
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
@@ -348,7 +348,8 @@ package object model {
                           isAdhoc: Boolean = false): mutable.LinkedHashMap[String, String] = synchronized {
     val layout = new mutable.LinkedHashMap[String, String]
     if (!isAdhoc) {
-      layout += commonSegkey -> whichSeg
+      // Storing Which Segment for Every Record makes Redundant data. Which already exist in Partition
+      // layout += commonSegkey -> whichSeg
       commonNode.clone() transform ((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v) foreach (ele => layout += ele)
     }
     (segmentData split(delimitedBy, -1)) foreach (ele => layout += ele -> EMPTYSTR)

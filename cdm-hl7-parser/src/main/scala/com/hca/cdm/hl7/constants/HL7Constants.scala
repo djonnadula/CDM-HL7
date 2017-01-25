@@ -1,7 +1,6 @@
 package com.hca.cdm.hl7.constants
 
 import scala.collection.mutable
-import com.hca.cdm.hl7.constants.HL7Constants._
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
   *
@@ -36,6 +35,7 @@ object HL7Constants {
   lazy val COMMA = ","
   lazy val PIPE_DELIMITED = "|"
   lazy val COLON = ":"
+  lazy val UNKNOWN = "unknown"
   type mapType = mutable.LinkedHashMap[String, Any]
   type listType = mutable.ListBuffer[mutable.LinkedHashMap[String, Any]]
 

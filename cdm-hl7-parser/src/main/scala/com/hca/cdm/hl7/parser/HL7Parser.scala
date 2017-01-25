@@ -81,6 +81,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
               case (_, EMPTYSTR) => throw new NotValidHl7Exception(s"$invalidHl7 for ${invalid._1}")
               case (EMPTYSTR, _) => throw new NotValidHl7Exception(s"$invalidHl7 for ${invalid._2}")
             }
+          case Left(false) => throw new RuntimeException("Invalid Case. This should not happen")
         }
       case Failure(t) =>
         t match {
@@ -243,6 +244,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           if (msgSegment.length > 4) fields = msgSegment.substring(4, msgSegment.length).split(ESCAPE + delimiters(FIELD_DELIM))
           else fields = msgSegment.split(ESCAPE + delimiters(FIELD_DELIM))
       }
+      val moveToUnknown = moveUnknown(componentLayout, unknownKey(whichSegment), _: String)
       valid(fields) match {
         case true =>
           var j = 0
@@ -282,7 +284,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                   subSubComponent = subCompRep.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
                                 case _ =>
                               }
-                              case _ => subSubComponent = subComp.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
+                              case _ =>
+                                subSubComponent = subComp.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
                             }
                             subSubComponent.nonEmpty & subSubComponent.length > 1 match {
                               case true =>
@@ -292,7 +295,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                   l = inc(l)
                                   if (nonEmpty(msgSubSubComponent)) {
                                     segments = segmentsMapping(s"$subComponentIndex$DOT$l")._1
-                                    subSubComponentLayout += segments.componentData -> msgSubSubComponent
+                                    if (segments.componentData == UNKNOWN) moveToUnknown(msgSubSubComponent)
+                                    else subSubComponentLayout += segments.componentData -> msgSubSubComponent
                                   }
                                 }
                                 if (subSubComponentLayout nonEmpty) subComponentLayout += subComponentData -> subSubComponentLayout
@@ -300,13 +304,16 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                   componentLayout += componentData -> subComponentLayout
                                   break
                                 }
-                              case _ => subComponentLayout += subComponentData -> subComp
+                              case _ =>
+                                if (subComponentData == UNKNOWN) moveToUnknown(subComp)
+                                else subComponentLayout += subComponentData -> subComp
                             }
                           }
                         }
                         realignColStatus match {
                           case true =>
-                            componentLayout += componentData -> realignVal
+                            if (componentData == UNKNOWN) moveToUnknown(realignVal)
+                            else componentLayout += componentData -> realignVal
                             segments.realignColValue = EMPTYSTR
                             realignColStatus = false
                             realignVal = EMPTYSTR
@@ -315,13 +322,19 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                             else if (subComponentLayout nonEmpty) componentLayout += componentData -> subComponentLayout
                         }
                       }
-                      else componentLayout += componentData -> field
+                      else {
+                        if (componentData == UNKNOWN) moveToUnknown(field)
+                        else componentLayout += componentData -> field
+                      }
                     }
                   }
                   if (multiFields.length > 1) {
                     componentLayout += componentData -> componentList
                   }
-                case _ => componentLayout += segmentsMapping(componentIndex)._1.componentData -> field
+                case _ =>
+                  segments = segmentsMapping(componentIndex)._1
+                  if (segments.componentData == UNKNOWN) moveToUnknown(field)
+                  else componentLayout += segments.componentData -> field
               }
             }
           }
@@ -337,6 +350,26 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version} & Msg Control Id ${versionData.controlId}")
     }
   }
+
+  private def moveUnknown(layout: mapType, mapping: String, data: String): Unit = {
+    addUnknownEntry(mapping, layout)
+    handleUnKnown(mapping, data, layout)
+  }
+
+  private def handleUnKnown(mapping: String, data: String, underlying: mapType): Unit = {
+    underlying isDefinedAt mapping match {
+      case true =>
+        if (underlying(mapping) == EMPTYSTR) underlying update(mapping, data)
+        else underlying update(mapping, s"${underlying(mapping)}$caret$data")
+      case _ =>
+    }
+  }
+
+  private def addUnknownEntry(unknown: String, data: mapType): Unit = {
+    if (!(data isDefinedAt unknown)) data += unknown -> EMPTYSTR
+  }
+
+  private def unknownKey(segment: String): String = s"${segment.toLowerCase}_$UNKNOWN"
 
   private def inc(v: Int, step: Int = 1) = v + step
 
@@ -403,9 +436,9 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           }
           if (mappedColumnData == EMPTYSTR || mappedColumnData.contains(DOT) ||
             (mappedColumnData.length > 2 && mappedColumnData.substring(3) == segmentIndex.substring(3))) {
-            mappedColumnData = s"${segmentIndex.substring(0, segmentIndex.indexOf(DOT)).toLowerCase}_unknown"
+            mappedColumnData = UNKNOWN
             if (missingMappings.unknownMappings == null) missingMappings.unknownMappings = new ListBuffer[String]
-            else missingMappings.unknownMappings += segmentIndex
+            missingMappings.unknownMappings += segmentIndex
           }
           segments.componentData = mappedColumnData
           (segments, missingMappings)

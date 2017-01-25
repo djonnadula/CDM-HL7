@@ -1,4 +1,4 @@
-USE hl7;
+USE hl7_qa;
 
 DROP TABLE hl7_abs_data;
 
@@ -26,14 +26,10 @@ CREATE EXTERNAL TABLE hl7_abs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -353,14 +349,10 @@ CREATE EXTERNAL TABLE hl7_acc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -377,14 +369,10 @@ CREATE EXTERNAL TABLE hl7_add_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -415,14 +403,10 @@ CREATE EXTERNAL TABLE hl7_adj_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -443,14 +427,10 @@ CREATE EXTERNAL TABLE hl7_aff_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -480,14 +460,10 @@ CREATE EXTERNAL TABLE hl7_aig_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -515,14 +491,10 @@ CREATE EXTERNAL TABLE hl7_ail_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -550,14 +522,10 @@ CREATE EXTERNAL TABLE hl7_aip_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -585,14 +553,10 @@ CREATE EXTERNAL TABLE hl7_ais_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -729,14 +693,10 @@ CREATE EXTERNAL TABLE hl7_al1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -757,14 +717,10 @@ CREATE EXTERNAL TABLE hl7_apr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -805,14 +761,10 @@ CREATE EXTERNAL TABLE hl7_arq_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -902,14 +854,10 @@ CREATE EXTERNAL TABLE hl7_arv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -937,14 +885,10 @@ CREATE EXTERNAL TABLE hl7_aut_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -974,14 +918,10 @@ CREATE EXTERNAL TABLE hl7_bhs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -999,14 +939,10 @@ CREATE EXTERNAL TABLE hl7_blc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1026,14 +962,10 @@ CREATE EXTERNAL TABLE hl7_blg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1063,14 +995,10 @@ CREATE EXTERNAL TABLE hl7_bpo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1107,14 +1035,10 @@ CREATE EXTERNAL TABLE hl7_bpx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1133,14 +1057,10 @@ CREATE EXTERNAL TABLE hl7_bts_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1175,14 +1095,10 @@ CREATE EXTERNAL TABLE hl7_btx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1211,14 +1127,10 @@ CREATE EXTERNAL TABLE hl7_cdm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1286,14 +1198,10 @@ CREATE EXTERNAL TABLE hl7_cdo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1340,14 +1248,10 @@ CREATE EXTERNAL TABLE hl7_cer_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1374,14 +1278,10 @@ CREATE EXTERNAL TABLE hl7_cm0_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1400,14 +1300,10 @@ CREATE EXTERNAL TABLE hl7_cm1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1427,14 +1323,10 @@ CREATE EXTERNAL TABLE hl7_cm2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1456,14 +1348,10 @@ CREATE EXTERNAL TABLE hl7_cns_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1728,14 +1616,10 @@ CREATE EXTERNAL TABLE hl7_con_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1755,14 +1639,10 @@ CREATE EXTERNAL TABLE hl7_csp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1794,14 +1674,10 @@ CREATE EXTERNAL TABLE hl7_csr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1820,14 +1696,10 @@ CREATE EXTERNAL TABLE hl7_css_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2186,14 +2058,10 @@ CREATE EXTERNAL TABLE hl7_ctd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2260,14 +2128,10 @@ CREATE EXTERNAL TABLE hl7_cti_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2291,14 +2155,10 @@ CREATE EXTERNAL TABLE hl7_db1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2696,14 +2556,10 @@ CREATE EXTERNAL TABLE hl7_dg1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2724,14 +2580,10 @@ CREATE EXTERNAL TABLE hl7_dmi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3238,14 +3090,10 @@ CREATE EXTERNAL TABLE hl7_drg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3263,14 +3111,10 @@ CREATE EXTERNAL TABLE hl7_dsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3291,14 +3135,10 @@ CREATE EXTERNAL TABLE hl7_dsp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3319,14 +3159,10 @@ CREATE EXTERNAL TABLE hl7_ecd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3345,14 +3181,10 @@ CREATE EXTERNAL TABLE hl7_ecr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3377,14 +3209,10 @@ CREATE EXTERNAL TABLE hl7_edu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3405,14 +3233,10 @@ CREATE EXTERNAL TABLE hl7_eqp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3433,14 +3257,10 @@ CREATE EXTERNAL TABLE hl7_equ_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3454,210 +3274,24 @@ CREATE EXTERNAL TABLE hl7_err_data (
 	pid_pat_account_num String,
 	err_error_code_and_location String,
 	err_error_location String,
-	err_error_location_segment_id String,
-	err_error_location_segment_sequence String,
-	err_error_location_field_position String,
-	err_error_location_field_repetition String,
-	err_error_location_component_number String,
-	err_error_location_sub_component_number String,
 	err_hl7_error_code String,
-	err_hl7_error_code_primary_id String,
-	err_hl7_error_code_text String,
-	err_hl7_error_code_name_of_coding_sys String,
-	err_hl7_error_code_alt_id String,
-	err_hl7_error_code_alt_text String,
-	err_hl7_error_code_name_of_alt_coding_sys String,
-	err_hl7_error_code_coding_sys_ver_id String,
-	err_hl7_error_code_alt_coding_sys_ver_id String,
-	err_hl7_error_code_original_text String,
-	err_hl7_error_code_second_alt_id String,
-	err_hl7_error_code_second_alt_text String,
-	err_hl7_error_code_name_of_second_alt_coding_sys String,
-	err_hl7_error_code_second_alt_coding_sys_ver_id String,
-	err_hl7_error_code_coding_sys_oid String,
-	err_hl7_error_code_value_set_oid String,
-	err_hl7_error_code_value_set_ver_id String,
-	err_hl7_error_code_alt_coding_sys_oid String,
-	err_hl7_error_code_alt_value_set_oid String,
-	err_hl7_error_code_alt_value_set_ver_id String,
-	err_hl7_error_code_second_alt_coding_sys_oid String,
-	err_hl7_error_code_second_alt_value_set_oid String,
-	err_hl7_error_code_second_alt_value_set_ver_id String,
 	err_severity String,
 	err_application_error_code String,
-	err_application_error_code_primary_id String,
-	err_application_error_code_text String,
-	err_application_error_code_name_of_coding_sys String,
-	err_application_error_code_alt_id String,
-	err_application_error_code_alt_text String,
-	err_application_error_code_name_of_alt_coding_sys String,
-	err_application_error_code_coding_sys_ver_id String,
-	err_application_error_code_alt_coding_sys_ver_id String,
-	err_application_error_code_original_text String,
-	err_application_error_code_second_alt_id String,
-	err_application_error_code_second_alt_text String,
-	err_application_error_code_name_of_second_alt_coding_sys String,
-	err_application_error_code_second_alt_coding_sys_ver_id String,
-	err_application_error_code_coding_sys_oid String,
-	err_application_error_code_value_set_oid String,
-	err_application_error_code_value_set_ver_id String,
-	err_application_error_code_alt_coding_sys_oid String,
-	err_application_error_code_alt_value_set_oid String,
-	err_application_error_code_alt_value_set_ver_id String,
-	err_application_error_code_second_alt_coding_sys_oid String,
-	err_application_error_code_second_alt_value_set_oid String,
-	err_application_error_code_second_alt_value_set_ver_id String,
 	err_application_error_parameter String,
-	err_diagnostic_info String,
+	err_diagnostic_information String,
 	err_user_message String,
-	err_inform_person_indicator String,
-	err_inform_person_indicator_primary_id String,
-	err_inform_person_indicator_text String,
-	err_inform_person_indicator_name_of_coding_sys String,
-	err_inform_person_indicator_alt_id String,
-	err_inform_person_indicator_alt_text String,
-	err_inform_person_indicator_name_of_alt_coding_sys String,
-	err_inform_person_indicator_coding_sys_ver_id String,
-	err_inform_person_indicator_alt_coding_sys_ver_id String,
-	err_inform_person_indicator_original_text String,
-	err_inform_person_indicator_second_alt_id String,
-	err_inform_person_indicator_second_alt_text String,
-	err_inform_person_indicator_name_of_second_alt_coding_sys String,
-	err_inform_person_indicator_second_alt_coding_sys_ver_id String,
-	err_inform_person_indicator_coding_sys_oid String,
-	err_inform_person_indicator_value_set_oid String,
-	err_inform_person_indicator_value_set_ver_id String,
-	err_inform_person_indicator_alt_coding_sys_oid String,
-	err_inform_person_indicator_alt_value_set_oid String,
-	err_inform_person_indicator_alt_value_set_ver_id String,
-	err_inform_person_indicator_second_alt_coding_sys_oid String,
-	err_inform_person_indicator_second_alt_value_set_oid String,
-	err_inform_person_indicator_second_alt_value_set_ver_id String,
+	err_inform_person_ind String,
 	err_override_type String,
-	err_override_type_primary_id String,
-	err_override_type_text String,
-	err_override_type_name_of_coding_sys String,
-	err_override_type_alt_id String,
-	err_override_type_alt_text String,
-	err_override_type_name_of_alt_coding_sys String,
-	err_override_type_coding_sys_ver_id String,
-	err_override_type_alt_coding_sys_ver_id String,
-	err_override_type_original_text String,
-	err_override_type_second_alt_id String,
-	err_override_type_second_alt_text String,
-	err_override_type_name_of_second_alt_coding_sys String,
-	err_override_type_second_alt_coding_sys_ver_id String,
-	err_override_type_coding_sys_oid String,
-	err_override_type_value_set_oid String,
-	err_override_type_value_set_ver_id String,
-	err_override_type_alt_coding_sys_oid String,
-	err_override_type_alt_value_set_oid String,
-	err_override_type_alt_value_set_ver_id String,
-	err_override_type_second_alt_coding_sys_oid String,
-	err_override_type_second_alt_value_set_oid String,
-	err_override_type_second_alt_value_set_ver_id String,
 	err_override_reason_code String,
-	err_override_reason_code_primary_id String,
-	err_override_reason_code_text String,
-	err_override_reason_code_name_of_coding_sys String,
-	err_override_reason_code_alt_id String,
-	err_override_reason_code_alt_text String,
-	err_override_reason_code_name_of_alt_coding_sys String,
-	err_override_reason_code_coding_sys_ver_id String,
-	err_override_reason_code_alt_coding_sys_ver_id String,
-	err_override_reason_code_original_text String,
-	err_override_reason_code_second_alt_id String,
-	err_override_reason_code_second_alt_text String,
-	err_override_reason_code_name_of_second_alt_coding_sys String,
-	err_override_reason_code_second_alt_coding_sys_ver_id String,
-	err_override_reason_code_coding_sys_oid String,
-	err_override_reason_code_value_set_oid String,
-	err_override_reason_code_value_set_ver_id String,
-	err_override_reason_code_alt_coding_sys_oid String,
-	err_override_reason_code_alt_value_set_oid String,
-	err_override_reason_code_alt_value_set_ver_id String,
-	err_override_reason_code_second_alt_coding_sys_oid String,
-	err_override_reason_code_second_alt_value_set_oid String,
-	err_override_reason_code_second_alt_value_set_ver_id String,
 	err_help_desk_contact_point String,
-	err_help_desk_contact_point_formatted_num String,
-	err_help_desk_contact_point_use_code String,
-	err_help_desk_contact_point_equipment_type String,
-	err_help_desk_contact_point_comm_address String,
-	err_help_desk_contact_point_country_code String,
-	err_help_desk_contact_point_area_city_code String,
-	err_help_desk_contact_point_local_number String,
-	err_help_desk_contact_point_extension String,
-	err_help_desk_contact_point_any_text String,
-	err_help_desk_contact_point_extension_prefix String,
-	err_help_desk_contact_point_speed_dial_code String,
-	err_help_desk_contact_point_unformatted_num String,
-	err_help_desk_contact_point_eff_from_date String,
-	err_help_desk_contact_point_eff_to_date String,
-	err_help_desk_contact_point_expr_reason String,
-	err_help_desk_contact_point_expr_reason_primary_id String,
-	err_help_desk_contact_point_expr_reason_text String,
-	err_help_desk_contact_point_expr_reason_name_of_coding_sys String,
-	err_help_desk_contact_point_expr_reason_alt_id String,
-	err_help_desk_contact_point_expr_reason_alt_text String,
-	err_help_desk_contact_point_expr_reason_name_of_alt_coding_sys String,
-	err_help_desk_contact_point_expr_reason_coding_sys_ver_id String,
-	err_help_desk_contact_point_expr_reason_alt_coding_sys_ver_id String,
-	err_help_desk_contact_point_expr_reason_original_text String,
-	err_help_desk_contact_point_expr_reason_second_alt_id String,
-	err_help_desk_contact_point_expr_reason_second_alt_text String,
-	err_help_desk_contact_point_expr_reason_name_of_second_alt_coding_sys String,
-	err_help_desk_contact_point_expr_reason_second_alt_coding_sys_ver_id String,
-	err_help_desk_contact_point_expr_reason_coding_sys_oid String,
-	err_help_desk_contact_point_expr_reason_value_set_oid String,
-	err_help_desk_contact_point_expr_reason_value_set_ver_id String,
-	err_help_desk_contact_point_expr_reason_alt_coding_sys_oid String,
-	err_help_desk_contact_point_expr_reason_alt_value_set_oid String,
-	err_help_desk_contact_point_expr_reason_alt_value_set_ver_id String,
-	err_help_desk_contact_point_expr_reason_second_alt_coding_sys_oid String,
-	err_help_desk_contact_point_expr_reason_second_alt_value_set_oid String,
-	err_help_desk_contact_point_expr_reason_second_alt_value_set_ver_id String,
-	err_help_desk_contact_point_protection_code String,
-	err_help_desk_contact_point_protection_code_primary_id String,
-	err_help_desk_contact_point_protection_code_text String,
-	err_help_desk_contact_point_protection_code_name_of_coding_sys String,
-	err_help_desk_contact_point_protection_code_alt_id String,
-	err_help_desk_contact_point_protection_code_alt_text String,
-	err_help_desk_contact_point_protection_code_name_of_alt_coding_sys String,
-	err_help_desk_contact_point_protection_code_coding_sys_ver_id String,
-	err_help_desk_contact_point_protection_code_alt_coding_sys_ver_id String,
-	err_help_desk_contact_point_protection_code_original_text String,
-	err_help_desk_contact_point_protection_code_second_alt_id String,
-	err_help_desk_contact_point_protection_code_second_alt_text String,
-	err_help_desk_contact_point_protection_code_name_of_second_alt_coding_sys String,
-	err_help_desk_contact_point_protection_code_second_alt_coding_sys_ver_id String,
-	err_help_desk_contact_point_protection_code_coding_sys_oid String,
-	err_help_desk_contact_point_protection_code_value_set_oid String,
-	err_help_desk_contact_point_protection_code_value_set_ver_id String,
-	err_help_desk_contact_point_protection_code_alt_coding_sys_oid String,
-	err_help_desk_contact_point_protection_code_alt_value_set_oid String,
-	err_help_desk_contact_point_protection_code_alt_value_set_ver_id String,
-	err_help_desk_contact_point_protection_code_second_alt_coding_sys_oid String,
-	err_help_desk_contact_point_protection_code_second_alt_value_set_oid String,
-	err_help_desk_contact_point_protection_code_second_alt_value_set_ver_id String,
-	err_help_desk_contact_point_shared_id String,
-	err_help_desk_contact_point_shared_id_entity_id String,
-	err_help_desk_contact_point_shared_id_namespace_id String,
-	err_help_desk_contact_point_shared_id_universal_id String,
-	err_help_desk_contact_point_shared_id_universal_id_type String,
-	err_help_desk_contact_point_pref_order String,
 	err_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3831,14 +3465,10 @@ CREATE EXTERNAL TABLE hl7_evn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3866,14 +3496,10 @@ CREATE EXTERNAL TABLE hl7_fac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3903,14 +3529,10 @@ CREATE EXTERNAL TABLE hl7_fhs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5169,14 +4791,10 @@ CREATE EXTERNAL TABLE hl7_ft1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5194,14 +4812,10 @@ CREATE EXTERNAL TABLE hl7_fts_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5239,14 +4853,10 @@ CREATE EXTERNAL TABLE hl7_gol_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5267,14 +4877,10 @@ CREATE EXTERNAL TABLE hl7_gp1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5304,14 +4910,10 @@ CREATE EXTERNAL TABLE hl7_gp2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -6979,14 +6581,10 @@ CREATE EXTERNAL TABLE hl7_gt1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7956,14 +7554,10 @@ CREATE EXTERNAL TABLE hl7_iam_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7983,14 +7577,10 @@ CREATE EXTERNAL TABLE hl7_iar_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -8021,14 +7611,10 @@ CREATE EXTERNAL TABLE hl7_iim_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -8054,14 +7640,10 @@ CREATE EXTERNAL TABLE hl7_ilt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -9519,14 +9101,10 @@ CREATE EXTERNAL TABLE hl7_in1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -11451,14 +11029,10 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12359,14 +11933,10 @@ CREATE EXTERNAL TABLE hl7_in3_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12402,14 +11972,10 @@ CREATE EXTERNAL TABLE hl7_inv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12421,114 +11987,23 @@ CREATE EXTERNAL TABLE hl7_ipc_data (
 	pid_medical_record_num String,
 	pid_medical_record_urn String,
 	pid_pat_account_num String,
-	ipc_accession_identifier String,
-	ipc_accession_identifier_entity_id String,
-	ipc_accession_identifier_namespace_id String,
-	ipc_accession_identifier_universal_id String,
-	ipc_accession_identifier_universal_id_type String,
+	ipc_accession_id String,
 	ipc_requested_procedure_id String,
-	ipc_requested_procedure_id_entity_id String,
-	ipc_requested_procedure_id_namespace_id String,
-	ipc_requested_procedure_id_universal_id String,
-	ipc_requested_procedure_id_universal_id_type String,
 	ipc_study_instance_uid String,
-	ipc_study_instance_uid_entity_id String,
-	ipc_study_instance_uid_namespace_id String,
-	ipc_study_instance_uid_universal_id String,
-	ipc_study_instance_uid_universal_id_type String,
 	ipc_scheduled_procedure_step_id String,
-	ipc_scheduled_procedure_step_id_entity_id String,
-	ipc_scheduled_procedure_step_id_namespace_id String,
-	ipc_scheduled_procedure_step_id_universal_id String,
-	ipc_scheduled_procedure_step_id_universal_id_type String,
 	ipc_modality String,
-	ipc_modality_primary_id String,
-	ipc_modality_text String,
-	ipc_modality_name_of_coding_sys String,
-	ipc_modality_alt_id String,
-	ipc_modality_alt_text String,
-	ipc_modality_name_of_alt_coding_sys String,
-	ipc_modality_coding_sys_ver_id String,
-	ipc_modality_alt_coding_sys_ver_id String,
-	ipc_modality_original_text String,
-	ipc_modality_second_alt_id String,
-	ipc_modality_second_alt_text String,
-	ipc_modality_name_of_second_alt_coding_sys String,
-	ipc_modality_second_alt_coding_sys_ver_id String,
-	ipc_modality_coding_sys_oid String,
-	ipc_modality_value_set_oid String,
-	ipc_modality_value_set_ver_id String,
-	ipc_modality_alt_coding_sys_oid String,
-	ipc_modality_alt_value_set_oid String,
-	ipc_modality_alt_value_set_ver_id String,
-	ipc_modality_second_alt_coding_sys_oid String,
-	ipc_modality_second_alt_value_set_oid String,
-	ipc_modality_second_alt_value_set_ver_id String,
 	ipc_protocol_code String,
-	ipc_protocol_code_primary_id String,
-	ipc_protocol_code_text String,
-	ipc_protocol_code_name_of_coding_sys String,
-	ipc_protocol_code_alt_id String,
-	ipc_protocol_code_alt_text String,
-	ipc_protocol_code_name_of_alt_coding_sys String,
-	ipc_protocol_code_coding_sys_ver_id String,
-	ipc_protocol_code_alt_coding_sys_ver_id String,
-	ipc_protocol_code_original_text String,
-	ipc_protocol_code_second_alt_id String,
-	ipc_protocol_code_second_alt_text String,
-	ipc_protocol_code_name_of_second_alt_coding_sys String,
-	ipc_protocol_code_second_alt_coding_sys_ver_id String,
-	ipc_protocol_code_coding_sys_oid String,
-	ipc_protocol_code_value_set_oid String,
-	ipc_protocol_code_value_set_ver_id String,
-	ipc_protocol_code_alt_coding_sys_oid String,
-	ipc_protocol_code_alt_value_set_oid String,
-	ipc_protocol_code_alt_value_set_ver_id String,
-	ipc_protocol_code_second_alt_coding_sys_oid String,
-	ipc_protocol_code_second_alt_value_set_oid String,
-	ipc_protocol_code_second_alt_value_set_ver_id String,
 	ipc_scheduled_station_name String,
-	ipc_scheduled_station_name_entity_id String,
-	ipc_scheduled_station_name_namespace_id String,
-	ipc_scheduled_station_name_universal_id String,
-	ipc_scheduled_station_name_universal_id_type String,
-	ipc_scheduled_station_application_entity_title String,
 	ipc_scheduled_procedure_step_location String,
-	ipc_scheduled_procedure_step_location_primary_id String,
-	ipc_scheduled_procedure_step_location_text String,
-	ipc_scheduled_procedure_step_location_name_of_coding_sys String,
-	ipc_scheduled_procedure_step_location_alt_id String,
-	ipc_scheduled_procedure_step_location_alt_text String,
-	ipc_scheduled_procedure_step_location_name_of_alt_coding_sys String,
-	ipc_scheduled_procedure_step_location_coding_sys_ver_id String,
-	ipc_scheduled_procedure_step_location_alt_coding_sys_ver_id String,
-	ipc_scheduled_procedure_step_location_original_text String,
-	ipc_scheduled_procedure_step_location_second_alt_id String,
-	ipc_scheduled_procedure_step_location_second_alt_text String,
-	ipc_scheduled_procedure_step_location_name_of_second_alt_coding_sys String,
-	ipc_scheduled_procedure_step_location_second_alt_coding_sys_ver_id String,
-	ipc_scheduled_procedure_step_location_coding_sys_oid String,
-	ipc_scheduled_procedure_step_location_value_set_oid String,
-	ipc_scheduled_procedure_step_location_value_set_ver_id String,
-	ipc_scheduled_procedure_step_location_alt_coding_sys_oid String,
-	ipc_scheduled_procedure_step_location_alt_value_set_oid String,
-	ipc_scheduled_procedure_step_location_alt_value_set_ver_id String,
-	ipc_scheduled_procedure_step_location_second_alt_coding_sys_oid String,
-	ipc_scheduled_procedure_step_location_second_alt_value_set_oid String,
-	ipc_scheduled_procedure_step_location_second_alt_value_set_ver_id String,
-	ipc_scheduled_station_ae_title String,
+	ipc_scheduled_station_application_entity_title String,
 	ipc_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12552,14 +12027,10 @@ CREATE EXTERNAL TABLE hl7_ipr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12578,14 +12049,10 @@ CREATE EXTERNAL TABLE hl7_isd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12630,14 +12097,10 @@ CREATE EXTERNAL TABLE hl7_itm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12683,14 +12146,10 @@ CREATE EXTERNAL TABLE hl7_ivc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12732,14 +12191,10 @@ CREATE EXTERNAL TABLE hl7_ivt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12759,14 +12214,10 @@ CREATE EXTERNAL TABLE hl7_lan_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12786,14 +12237,10 @@ CREATE EXTERNAL TABLE hl7_lcc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12814,14 +12261,10 @@ CREATE EXTERNAL TABLE hl7_lch_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12849,14 +12292,10 @@ CREATE EXTERNAL TABLE hl7_ldp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12881,14 +12320,10 @@ CREATE EXTERNAL TABLE hl7_loc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12910,14 +12345,10 @@ CREATE EXTERNAL TABLE hl7_lrl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12939,14 +12370,10 @@ CREATE EXTERNAL TABLE hl7_mfa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12969,14 +12396,10 @@ CREATE EXTERNAL TABLE hl7_mfe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12998,14 +12421,10 @@ CREATE EXTERNAL TABLE hl7_mfi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13387,14 +12806,10 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13418,14 +12833,10 @@ CREATE EXTERNAL TABLE hl7_msa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13454,8 +12865,7 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	msh_receiving_facility_universal_id String,
 	msh_receiving_facility_universal_id_type String,
 	msh_msg_create_date_time String,
-	msh_msg_create_date_time_date_time STRING,
-	msh_msg_create_date_time_precision String,
+	msh_msg_create_precision String,
 	msh_security String,
 	msh_msg_type String,
 	msh_msg_type_message_code String,
@@ -13639,14 +13049,10 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13663,14 +13069,10 @@ CREATE EXTERNAL TABLE hl7_nck_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13690,14 +13092,10 @@ CREATE EXTERNAL TABLE hl7_nds_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15083,14 +14481,10 @@ CREATE EXTERNAL TABLE hl7_nk1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15108,14 +14502,10 @@ CREATE EXTERNAL TABLE hl7_npu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15140,14 +14530,10 @@ CREATE EXTERNAL TABLE hl7_nsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15178,14 +14564,10 @@ CREATE EXTERNAL TABLE hl7_nst_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15362,14 +14744,10 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16499,14 +15877,10 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16519,643 +15893,42 @@ CREATE EXTERNAL TABLE hl7_obx_data (
 	pid_medical_record_urn String,
 	pid_pat_account_num String,
 	obx_set_id String,
-    obx_value_type String,
-    obx_observation_id String,
-    obx_observation_id_primary_id String,
-    obx_observation_id_text String,
-    obx_observation_id_name_of_coding_sys String,
-    obx_observation_id_alt_id String,
-    obx_observation_id_alt_text String,
-    obx_observation_id_name_of_alt_coding_sys String,
-    obx_observation_id_coding_sys_ver_id String,
-    obx_observation_id_alt_coding_sys_ver_id String,
-    obx_observation_id_original_text String,
-    obx_observation_id_second_alt_id String,
-    obx_observation_id_second_alt_text String,
-    obx_observation_id_name_of_second_alt_coding_sys String,
-    obx_observation_id_second_alt_coding_sys_ver_id String,
-    obx_observation_id_coding_sys_oid String,
-    obx_observation_id_value_set_oid String,
-    obx_observation_id_value_set_ver_id String,
-    obx_observation_id_alt_coding_sys_oid String,
-    obx_observation_id_alt_value_set_oid String,
-    obx_observation_id_alt_value_set_ver_id String,
-    obx_observation_id_second_alt_coding_sys_oid String,
-    obx_observation_id_second_alt_value_set_oid String,
-    obx_observation_id_second_alt_value_set_ver_id String,
-    obx_observation_sub_id String,
-    obx_observation_value String,
-    obx_observation_value_primary_id String,
-    obx_observation_value_text String,
-    obx_observation_value_data_type, String,
-    obx_observation_value_name_of_coding_sys String,
-    obx_observation_value_encoding_scheme String,
-    obx_observation_value_data String,
-    obx_unit String,
-    obx_unit_primary_id String,
-    obx_unit_text String,
-    obx_unit_name_of_coding_sys String,
-    obx_unit_alt_id String,
-    obx_unit_alt_text String,
-    obx_unit_name_of_alt_coding_sys String,
-    obx_unit_coding_sys_ver_id String,
-    obx_unit_alt_coding_sys_ver_id String,
-    obx_unit_original_text String,
-    obx_unit_second_alt_id String,
-    obx_unit_second_alt_text String,
-    obx_unit_name_of_second_alt_coding_sys String,
-    obx_unit_second_alt_coding_sys_ver_id String,
-    obx_unit_coding_sys_oid String,
-    obx_unit_value_set_oid String,
-    obx_unit_value_set_ver_id String,
-    obx_unit_alt_coding_sys_oid String,
-    obx_unit_alt_value_set_oid String,
-    obx_unit_alt_value_set_ver_id String,
-    obx_unit_second_alt_coding_sys_oid String,
-    obx_unit_second_alt_value_set_oid String,
-    obx_unit_second_alt_value_set_ver_id String,
-    obx_reference_range String,
-    obx_interpretation_code String,
-    obx_interpretation_code_primary_id String,
-    obx_interpretation_code_text String,
-    obx_interpretation_code_name_of_coding_sys String,
-    obx_interpretation_code_alt_id String,
-    obx_interpretation_code_alt_text String,
-    obx_interpretation_code_name_of_alt_coding_sys String,
-    obx_interpretation_code_coding_sys_ver_id String,
-    obx_interpretation_code_alt_coding_sys_ver_id String,
-    obx_interpretation_code_original_text String,
-    obx_interpretation_code_second_alt_id String,
-    obx_interpretation_code_second_alt_text String,
-    obx_interpretation_code_name_of_second_alt_coding_sys String,
-    obx_interpretation_code_second_alt_coding_sys_ver_id String,
-    obx_interpretation_code_coding_sys_oid String,
-    obx_interpretation_code_value_set_oid String,
-    obx_interpretation_code_value_set_ver_id String,
-    obx_interpretation_code_alt_coding_sys_oid String,
-    obx_interpretation_code_alt_value_set_oid String,
-    obx_interpretation_code_alt_value_set_ver_id String,
-    obx_interpretation_code_second_alt_coding_sys_oid String,
-    obx_interpretation_code_second_alt_value_set_oid String,
-    obx_interpretation_code_second_alt_value_set_ver_id String,
-    obx_probability String,
-    obx_nature_of_abnormal_test String,
-    obx_observation_result_status String,
-    obx_reference_range_eff_date_time String,
-    obx_user_defined_access_check String,
-    obx_user_defined_access_check_primary_id String,
-    obx_user_defined_access_check_text String,
-    obx_user_defined_access_check_name_of_coding_sys String,
-    obx_user_defined_access_check_alt_id String,
-    obx_user_defined_access_check_alt_text String,
-    obx_user_defined_access_check_name_of_alt_coding_sys String,
-    obx_user_defined_access_check_coding_sys_ver_id String,
-    obx_user_defined_access_check_alt_coding_sys_ver_id String,
-    obx_user_defined_access_check_original_text String,
-    obx_user_defined_access_check_second_alt_id String,
-    obx_user_defined_access_check_second_alt_text String,
-    obx_user_defined_access_check_name_of_second_alt_coding_sys String,
-    obx_user_defined_access_check_second_alt_coding_sys_ver_id String,
-    obx_user_defined_access_check_coding_sys_oid String,
-    obx_user_defined_access_check_value_set_oid String,
-    obx_user_defined_access_check_value_set_ver_id String,
-    obx_user_defined_access_check_alt_coding_sys_oid String,
-    obx_user_defined_access_check_alt_value_set_oid String,
-    obx_user_defined_access_check_alt_value_set_ver_id String,
-    obx_user_defined_access_check_second_alt_coding_sys_oid String,
-    obx_user_defined_access_check_second_alt_value_set_oid String,
-    obx_user_defined_access_check_second_alt_value_set_ver_id String,
-    obx_observation_date_time String,
-    obx_producer_id String,
-    obx_producer_id_primary_id String,
-    obx_producer_id_text String,
-    obx_producer_id_name_of_coding_sys String,
-    obx_producer_id_alt_id String,
-    obx_producer_id_alt_text String,
-    obx_producer_id_name_of_alt_coding_sys String,
-    obx_producer_id_coding_sys_ver_id String,
-    obx_producer_id_alt_coding_sys_ver_id String,
-    obx_producer_id_original_text String,
-    obx_producer_id_second_alt_id String,
-    obx_producer_id_second_alt_text String,
-    obx_producer_id_name_of_second_alt_coding_sys String,
-    obx_producer_id_second_alt_coding_sys_ver_id String,
-    obx_producer_id_coding_sys_oid String,
-    obx_producer_id_value_set_oid String,
-    obx_producer_id_value_set_ver_id String,
-    obx_producer_id_alt_coding_sys_oid String,
-    obx_producer_id_alt_value_set_oid String,
-    obx_producer_id_alt_value_set_ver_id String,
-    obx_producer_id_second_alt_coding_sys_oid String,
-    obx_producer_id_second_alt_value_set_oid String,
-    obx_producer_id_second_alt_value_set_ver_id String,
-    obx_responsible_observer String,
-    obx_responsible_observer_person_id String,
-    obx_responsible_observer_last_name String,
-    obx_responsible_observer_last_name_surname String,
-    obx_responsible_observer_last_name_own_surname_prefix String,
-    obx_responsible_observer_last_name_own_surname String,
-    obx_responsible_observer_last_name_surname_prefix_from_partner String,
-    obx_responsible_observer_last_name_surname_from_partner String,
-    obx_responsible_observer_first_name String,
-    obx_responsible_observer_middle_name String,
-    obx_responsible_observer_suffix String,
-    obx_responsible_observer_person_prefix String,
-    obx_responsible_observer_degree String,
-    obx_responsible_observer_source_table String,
-    obx_responsible_observer_source_table_primary_id String,
-    obx_responsible_observer_source_table_text String,
-    obx_responsible_observer_source_table_name_of_coding_sys String,
-    obx_responsible_observer_source_table_alt_id String,
-    obx_responsible_observer_source_table_alt_text String,
-    obx_responsible_observer_source_table_name_of_alt_coding_sys String,
-    obx_responsible_observer_source_table_coding_sys_ver_id String,
-    obx_responsible_observer_source_table_alt_coding_sys_ver_id String,
-    obx_responsible_observer_source_table_original_text String,
-    obx_responsible_observer_source_table_second_alt_id String,
-    obx_responsible_observer_source_table_second_alt_text String,
-    obx_responsible_observer_source_table_name_of_second_alt_coding_sys String,
-    obx_responsible_observer_source_table_second_alt_coding_sys_ver_id String,
-    obx_responsible_observer_source_table_coding_sys_oid String,
-    obx_responsible_observer_source_table_value_set_oid String,
-    obx_responsible_observer_source_table_value_set_ver_id String,
-    obx_responsible_observer_source_table_alt_coding_sys_oid String,
-    obx_responsible_observer_source_table_alt_value_set_oid String,
-    obx_responsible_observer_source_table_alt_value_set_ver_id String,
-    obx_responsible_observer_source_table_second_alt_coding_sys_oid String,
-    obx_responsible_observer_source_table_second_alt_value_set_oid String,
-    obx_responsible_observer_source_table_second_alt_value_set_ver_id String,
-    obx_responsible_observer_assgn_authr String,
-    obx_responsible_observer_assgn_authr_namespace_id String,
-    obx_responsible_observer_assgn_authr_universal_id String,
-    obx_responsible_observer_assgn_authr_universal_id_type String,
-    obx_responsible_observer_name_type_code String,
-    obx_responsible_observer_identifier_check_digit String,
-    obx_responsible_observer_check_digit_scheme String,
-    obx_responsible_observer_identifier_type_code String,
-    obx_responsible_observer_assgn_facility String,
-    obx_responsible_observer_assgn_facility_namespace_id String,
-    obx_responsible_observer_assgn_facility_universal_id String,
-    obx_responsible_observer_assgn_facility_universal_id_type String,
-    obx_responsible_observer_name_rep_code String,
-    obx_responsible_observer_context String,
-    obx_responsible_observer_context_primary_id String,
-    obx_responsible_observer_context_text String,
-    obx_responsible_observer_context_name_of_coding_sys String,
-    obx_responsible_observer_context_alt_id String,
-    obx_responsible_observer_context_alt_text String,
-    obx_responsible_observer_context_name_of_alt_coding_sys String,
-    obx_responsible_observer_context_coding_sys_ver_id String,
-    obx_responsible_observer_context_alt_coding_sys_ver_id String,
-    obx_responsible_observer_context_original_text String,
-    obx_responsible_observer_context_second_alt_id String,
-    obx_responsible_observer_context_second_alt_text String,
-    obx_responsible_observer_context_name_of_second_alt_coding_sys String,
-    obx_responsible_observer_context_second_alt_coding_sys_ver_id String,
-    obx_responsible_observer_context_coding_sys_oid String,
-    obx_responsible_observer_context_value_set_oid String,
-    obx_responsible_observer_context_value_set_ver_id String,
-    obx_responsible_observer_context_alt_coding_sys_oid String,
-    obx_responsible_observer_context_alt_value_set_oid String,
-    obx_responsible_observer_context_alt_value_set_ver_id String,
-    obx_responsible_observer_context_second_alt_coding_sys_oid String,
-    obx_responsible_observer_context_second_alt_value_set_oid String,
-    obx_responsible_observer_context_second_alt_value_set_ver_id String,
-    obx_responsible_observer_validity_range String,
-    obx_responsible_observer_validity_range_eff_from_date_time String,
-    obx_responsible_observer_validity_range_eff_to_date_time String,
-    obx_responsible_observer_assembly_order String,
-    obx_responsible_observer_eff_from_date_time String,
-    obx_responsible_observer_eff_to_date_time String,
-    obx_responsible_observer_prof_suffix String,
-    obx_responsible_observer_assgn_jurisdiction String,
-    obx_responsible_observer_assgn_jurisdiction_primary_id String,
-    obx_responsible_observer_assgn_jurisdiction_text String,
-    obx_responsible_observer_assgn_jurisdiction_name_of_coding_sys String,
-    obx_responsible_observer_assgn_jurisdiction_alt_id String,
-    obx_responsible_observer_assgn_jurisdiction_alt_text String,
-    obx_responsible_observer_assgn_jurisdiction_name_of_alt_coding_sys String,
-    obx_responsible_observer_assgn_jurisdiction_coding_sys_ver_id String,
-    obx_responsible_observer_assgn_jurisdiction_alt_coding_sys_ver_id String,
-    obx_responsible_observer_assgn_jurisdiction_original_text String,
-    obx_responsible_observer_assgn_jurisdiction_second_alt_id String,
-    obx_responsible_observer_assgn_jurisdiction_second_alt_text String,
-    obx_responsible_observer_assgn_jurisdiction_name_of_second_alt_coding_sys String,
-    obx_responsible_observer_assgn_jurisdiction_second_alt_coding_sys_ver_id String,
-    obx_responsible_observer_assgn_jurisdiction_coding_sys_oid String,
-    obx_responsible_observer_assgn_jurisdiction_value_set_oid String,
-    obx_responsible_observer_assgn_jurisdiction_value_set_ver_id String,
-    obx_responsible_observer_assgn_jurisdiction_alt_coding_sys_oid String,
-    obx_responsible_observer_assgn_jurisdiction_alt_value_set_oid String,
-    obx_responsible_observer_assgn_jurisdiction_alt_value_set_ver_id String,
-    obx_responsible_observer_assgn_jurisdiction_second_alt_coding_sys_oid String,
-    obx_responsible_observer_assgn_jurisdiction_second_alt_value_set_oid String,
-    obx_responsible_observer_assgn_jurisdiction_second_alt_value_set_ver_id String,
-    obx_responsible_observer_assgn_agency_dept String,
-    obx_responsible_observer_assgn_agency_dept_primary_id String,
-    obx_responsible_observer_assgn_agency_dept_text String,
-    obx_responsible_observer_assgn_agency_dept_name_of_coding_sys String,
-    obx_responsible_observer_assgn_agency_dept_alt_id String,
-    obx_responsible_observer_assgn_agency_dept_alt_text String,
-    obx_responsible_observer_assgn_agency_dept_name_of_alt_coding_sys String,
-    obx_responsible_observer_assgn_agency_dept_coding_sys_ver_id String,
-    obx_responsible_observer_assgn_agency_dept_alt_coding_sys_ver_id String,
-    obx_responsible_observer_assgn_agency_dept_original_text String,
-    obx_responsible_observer_assgn_agency_dept_second_alt_id String,
-    obx_responsible_observer_assgn_agency_dept_second_alt_text String,
-    obx_responsible_observer_assgn_agency_dept_name_of_second_alt_coding_sys String,
-    obx_responsible_observer_assgn_agency_dept_second_alt_coding_sys_ver_id String,
-    obx_responsible_observer_assgn_agency_dept_coding_sys_oid String,
-    obx_responsible_observer_assgn_agency_dept_value_set_oid String,
-    obx_responsible_observer_assgn_agency_dept_value_set_ver_id String,
-    obx_responsible_observer_assgn_agency_dept_alt_coding_sys_oid String,
-    obx_responsible_observer_assgn_agency_dept_alt_value_set_oid String,
-    obx_responsible_observer_assgn_agency_dept_alt_value_set_ver_id String,
-    obx_responsible_observer_assgn_agency_dept_second_alt_coding_sys_oid String,
-    obx_responsible_observer_assgn_agency_dept_second_alt_value_set_oid String,
-    obx_responsible_observer_assgn_agency_dept_second_alt_value_set_ver_id String,
-    obx_responsible_observer_security_check String,
-    obx_responsible_observer_security_check_scheme String,
-    obx_observation_method String,
-    obx_observation_method_primary_id String,
-    obx_observation_method_text String,
-    obx_observation_method_name_of_coding_sys String,
-    obx_observation_method_alt_id String,
-    obx_observation_method_alt_text String,
-    obx_observation_method_name_of_alt_coding_sys String,
-    obx_observation_method_coding_sys_ver_id String,
-    obx_observation_method_alt_coding_sys_ver_id String,
-    obx_observation_method_original_text String,
-    obx_observation_method_second_alt_id String,
-    obx_observation_method_second_alt_text String,
-    obx_observation_method_name_of_second_alt_coding_sys String,
-    obx_observation_method_second_alt_coding_sys_ver_id String,
-    obx_observation_method_coding_sys_oid String,
-    obx_observation_method_value_set_oid String,
-    obx_observation_method_value_set_ver_id String,
-    obx_observation_method_alt_coding_sys_oid String,
-    obx_observation_method_alt_value_set_oid String,
-    obx_observation_method_alt_value_set_ver_id String,
-    obx_observation_method_second_alt_coding_sys_oid String,
-    obx_observation_method_second_alt_value_set_oid String,
-    obx_observation_method_second_alt_value_set_ver_id String,
-    obx_equipment_instance_id String,
-    obx_equipment_instance_id_entity_id String,
-    obx_equipment_instance_id_namespace_id String,
-    obx_equipment_instance_id_universal_id String,
-    obx_equipment_instance_id_universal_id_type String,
-    obx_analysis_date_time String,
-    obx_observation_site String,
-    obx_observation_site_primary_id String,
-    obx_observation_site_text String,
-    obx_observation_site_name_of_coding_sys String,
-    obx_observation_site_alt_id String,
-    obx_observation_site_alt_text String,
-    obx_observation_site_name_of_alt_coding_sys String,
-    obx_observation_site_coding_sys_ver_id String,
-    obx_observation_site_alt_coding_sys_ver_id String,
-    obx_observation_site_original_text String,
-    obx_observation_site_second_alt_id String,
-    obx_observation_site_second_alt_text String,
-    obx_observation_site_name_of_second_alt_coding_sys String,
-    obx_observation_site_second_alt_coding_sys_ver_id String,
-    obx_observation_site_coding_sys_oid String,
-    obx_observation_site_value_set_oid String,
-    obx_observation_site_value_set_ver_id String,
-    obx_observation_site_alt_coding_sys_oid String,
-    obx_observation_site_alt_value_set_oid String,
-    obx_observation_site_alt_value_set_ver_id String,
-    obx_observation_site_second_alt_coding_sys_oid String,
-    obx_observation_site_second_alt_value_set_oid String,
-    obx_observation_site_second_alt_value_set_ver_id String,
-    obx_observation_instance_id String,
-    obx_observation_instance_id_entity_id String,
-    obx_observation_instance_id_namespace_id String,
-    obx_observation_instance_id_universal_id String,
-    obx_observation_instance_id_universal_id_type String,
-    obx_mood_code String,
-    obx_mood_code_primary_id String,
-    obx_mood_code_text String,
-    obx_mood_code_name_of_coding_sys String,
-    obx_mood_code_alt_id String,
-    obx_mood_code_alt_text String,
-    obx_mood_code_name_of_alt_coding_sys String,
-    obx_mood_code_coding_sys_ver_id String,
-    obx_mood_code_alt_coding_sys_ver_id String,
-    obx_mood_code_original_text String,
-    obx_mood_code_second_alt_id String,
-    obx_mood_code_second_alt_text String,
-    obx_mood_code_name_of_second_alt_coding_sys String,
-    obx_mood_code_second_alt_coding_sys_ver_id String,
-    obx_mood_code_coding_sys_oid String,
-    obx_mood_code_value_set_oid String,
-    obx_mood_code_value_set_ver_id String,
-    obx_mood_code_alt_coding_sys_oid String,
-    obx_mood_code_alt_value_set_oid String,
-    obx_mood_code_alt_value_set_ver_id String,
-    obx_mood_code_second_alt_coding_sys_oid String,
-    obx_mood_code_second_alt_value_set_oid String,
-    obx_mood_code_second_alt_value_set_ver_id String,
-    obx_performing_organization_name String,
-    obx_performing_organization_name_org_name String,
-    obx_performing_organization_name_org_name_type_code String,
-    obx_performing_organization_name_org_name_type_code_primary_id String,
-    obx_performing_organization_name_org_name_type_code_text String,
-    obx_performing_organization_name_org_name_type_code_name_of_coding_sys String,
-    obx_performing_organization_name_org_name_type_code_alt_id String,
-    obx_performing_organization_name_org_name_type_code_alt_text String,
-    obx_performing_organization_name_org_name_type_code_name_of_alt_coding_sys String,
-    obx_performing_organization_name_org_name_type_code_coding_sys_ver_id String,
-    obx_performing_organization_name_org_name_type_code_alt_coding_sys_ver_id String,
-    obx_performing_organization_name_org_name_type_code_original_text String,
-    obx_performing_organization_name_org_name_type_code_second_alt_id String,
-    obx_performing_organization_name_org_name_type_code_second_alt_text String,
-    obx_performing_organization_name_org_name_type_code_name_of_second_alt_coding_sys String,
-    obx_performing_organization_name_org_name_type_code_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_name_org_name_type_code_coding_sys_oid String,
-    obx_performing_organization_name_org_name_type_code_value_set_oid String,
-    obx_performing_organization_name_org_name_type_code_value_set_ver_id String,
-    obx_performing_organization_name_org_name_type_code_alt_coding_sys_oid String,
-    obx_performing_organization_name_org_name_type_code_alt_value_set_oid String,
-    obx_performing_organization_name_org_name_type_code_alt_value_set_ver_id String,
-    obx_performing_organization_name_org_name_type_code_second_alt_coding_sys_oid String,
-    obx_performing_organization_name_org_name_type_code_second_alt_value_set_oid String,
-    obx_performing_organization_name_org_name_type_code_second_alt_value_set_ver_id String,
-    obx_performing_organization_name_identifier_num String,
-    obx_performing_organization_name_identifier_check_digit String,
-    obx_performing_organization_name_check_digit_scheme String,
-    obx_performing_organization_name_assgn_authr String,
-    obx_performing_organization_name_assgn_authr_namespace_id String,
-    obx_performing_organization_name_assgn_authr_universal_id String,
-    obx_performing_organization_name_assgn_authr_universal_id_type String,
-    obx_performing_organization_name_identifier_type_code String,
-    obx_performing_organization_name_assgn_facility String,
-    obx_performing_organization_name_assgn_facility_namespace_id String,
-    obx_performing_organization_name_assgn_facility_universal_id String,
-    obx_performing_organization_name_assgn_facility_universal_id_type String,
-    obx_performing_organization_name_name_rep_code String,
-    obx_performing_organization_name_org_id String,
-    obx_performing_organization_address String,
-    obx_performing_organization_address_street_address1 String,
-    obx_performing_organization_address_street_address1_street_mailing_address String,
-    obx_performing_organization_address_street_address1_street_name String,
-    obx_performing_organization_address_street_address1_dwelling_num String,
-    obx_performing_organization_address_street_address2 String,
-    obx_performing_organization_address_city String,
-    obx_performing_organization_address_state_province String,
-    obx_performing_organization_address_zip_postal_code String,
-    obx_performing_organization_address_country String,
-    obx_performing_organization_address_address_type String,
-    obx_performing_organization_address_other_geo_designation String,
-    obx_performing_organization_address_county_parish_code String,
-    obx_performing_organization_address_county_parish_code_primary_id String,
-    obx_performing_organization_address_county_parish_code_text String,
-    obx_performing_organization_address_county_parish_code_name_of_coding_sys String,
-    obx_performing_organization_address_county_parish_code_alt_id String,
-    obx_performing_organization_address_county_parish_code_alt_text String,
-    obx_performing_organization_address_county_parish_code_name_of_alt_coding_sys String,
-    obx_performing_organization_address_county_parish_code_coding_sys_ver_id String,
-    obx_performing_organization_address_county_parish_code_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_county_parish_code_original_text String,
-    obx_performing_organization_address_county_parish_code_second_alt_id String,
-    obx_performing_organization_address_county_parish_code_second_alt_text String,
-    obx_performing_organization_address_county_parish_code_name_of_second_alt_coding_sys String,
-    obx_performing_organization_address_county_parish_code_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_county_parish_code_coding_sys_oid String,
-    obx_performing_organization_address_county_parish_code_value_set_oid String,
-    obx_performing_organization_address_county_parish_code_value_set_ver_id String,
-    obx_performing_organization_address_county_parish_code_alt_coding_sys_oid String,
-    obx_performing_organization_address_county_parish_code_alt_value_set_oid String,
-    obx_performing_organization_address_county_parish_code_alt_value_set_ver_id String,
-    obx_performing_organization_address_county_parish_code_second_alt_coding_sys_oid String,
-    obx_performing_organization_address_county_parish_code_second_alt_value_set_oid String,
-    obx_performing_organization_address_county_parish_code_second_alt_value_set_ver_id String,
-    obx_performing_organization_address_census_tract String,
-    obx_performing_organization_address_census_tract_primary_id String,
-    obx_performing_organization_address_census_tract_text String,
-    obx_performing_organization_address_census_tract_name_of_coding_sys String,
-    obx_performing_organization_address_census_tract_alt_id String,
-    obx_performing_organization_address_census_tract_alt_text String,
-    obx_performing_organization_address_census_tract_name_of_alt_coding_sys String,
-    obx_performing_organization_address_census_tract_coding_sys_ver_id String,
-    obx_performing_organization_address_census_tract_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_census_tract_original_text String,
-    obx_performing_organization_address_census_tract_second_alt_id String,
-    obx_performing_organization_address_census_tract_second_alt_text String,
-    obx_performing_organization_address_census_tract_name_of_second_alt_coding_sys String,
-    obx_performing_organization_address_census_tract_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_census_tract_coding_sys_oid String,
-    obx_performing_organization_address_census_tract_value_set_oid String,
-    obx_performing_organization_address_census_tract_value_set_ver_id String,
-    obx_performing_organization_address_census_tract_alt_coding_sys_oid String,
-    obx_performing_organization_address_census_tract_alt_value_set_oid String,
-    obx_performing_organization_address_census_tract_alt_value_set_ver_id String,
-    obx_performing_organization_address_census_tract_second_alt_coding_sys_oid String,
-    obx_performing_organization_address_census_tract_second_alt_value_set_oid String,
-    obx_performing_organization_address_census_tract_second_alt_value_set_ver_id String,
-    obx_performing_organization_address_rep_code String,
-    obx_performing_organization_address_validity_range String,
-    obx_performing_organization_address_validity_range_eff_from_date_time String,
-    obx_performing_organization_address_validity_range_eff_to_date_time String,
-    obx_performing_organization_address_eff_from_date_time String,
-    obx_performing_organization_address_eff_to_date_time String,
-    obx_performing_organization_address_expr_reason String,
-    obx_performing_organization_address_expr_reason_primary_id String,
-    obx_performing_organization_address_expr_reason_text String,
-    obx_performing_organization_address_expr_reason_name_of_coding_sys String,
-    obx_performing_organization_address_expr_reason_alt_id String,
-    obx_performing_organization_address_expr_reason_alt_text String,
-    obx_performing_organization_address_expr_reason_name_of_alt_coding_sys String,
-    obx_performing_organization_address_expr_reason_coding_sys_ver_id String,
-    obx_performing_organization_address_expr_reason_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_expr_reason_original_text String,
-    obx_performing_organization_address_expr_reason_second_alt_id String,
-    obx_performing_organization_address_expr_reason_second_alt_text String,
-    obx_performing_organization_address_expr_reason_name_of_second_alt_coding_sys String,
-    obx_performing_organization_address_expr_reason_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_expr_reason_coding_sys_oid String,
-    obx_performing_organization_address_expr_reason_value_set_oid String,
-    obx_performing_organization_address_expr_reason_value_set_ver_id String,
-    obx_performing_organization_address_expr_reason_alt_coding_sys_oid String,
-    obx_performing_organization_address_expr_reason_alt_value_set_oid String,
-    obx_performing_organization_address_expr_reason_alt_value_set_ver_id String,
-    obx_performing_organization_address_expr_reason_second_alt_coding_sys_oid String,
-    obx_performing_organization_address_expr_reason_second_alt_value_set_oid String,
-    obx_performing_organization_address_expr_reason_second_alt_value_set_ver_id String,
-    obx_performing_organization_address_temporary_indicator String,
-    obx_performing_organization_address_bad_indicator String,
-    obx_performing_organization_address_address_usage String,
-    obx_performing_organization_address_addressee String,
-    obx_performing_organization_address_address_comment String,
-    obx_performing_organization_address_pref_order String,
-    obx_performing_organization_address_protection_code String,
-    obx_performing_organization_address_protection_code_primary_id String,
-    obx_performing_organization_address_protection_code_text String,
-    obx_performing_organization_address_protection_code_name_of_coding_sys String,
-    obx_performing_organization_address_protection_code_alt_id String,
-    obx_performing_organization_address_protection_code_alt_text String,
-    obx_performing_organization_address_protection_code_name_of_alt_coding_sys String,
-    obx_performing_organization_address_protection_code_coding_sys_ver_id String,
-    obx_performing_organization_address_protection_code_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_protection_code_original_text String,
-    obx_performing_organization_address_protection_code_second_alt_id String,
-    obx_performing_organization_address_protection_code_second_alt_text String,
-    obx_performing_organization_address_protection_code_name_of_second_alt_coding_sys String,
-    obx_performing_organization_address_protection_code_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_address_protection_code_coding_sys_oid String,
-    obx_performing_organization_address_protection_code_value_set_oid String,
-    obx_performing_organization_address_protection_code_value_set_ver_id String,
-    obx_performing_organization_address_protection_code_alt_coding_sys_oid String,
-    obx_performing_organization_address_protection_code_alt_value_set_oid String,
-    obx_performing_organization_address_protection_code_alt_value_set_ver_id String,
-    obx_performing_organization_address_protection_code_second_alt_coding_sys_oid String,
-    obx_performing_organization_address_protection_code_second_alt_value_set_oid String,
-    obx_performing_organization_address_protection_code_second_alt_value_set_ver_id String,
-    obx_performing_organization_address_address_id String,
-    obx_performing_organization_address_address_id_entity_id String,
-    obx_performing_organization_address_address_id_namespace_id String,
-    obx_performing_organization_address_address_id_universal_id String,
-    obx_performing_organization_address_address_id_universal_id_type String,
-    obx_performing_organization_medical_director_name String,
-    obx_performing_organization_medical_director_name_person_id String,
-    obx_performing_organization_medical_director_name_last_name String,
-    obx_performing_organization_medical_director_name_last_name_surname String,
-    obx_performing_organization_medical_director_name_last_name_own_surname_prefix String,
-    obx_performing_organization_medical_director_name_last_name_own_surname String,
-    obx_performing_organization_medical_director_name_last_name_surname_prefix_from_partner String,
-    obx_performing_organization_medical_director_name_last_name_surname_from_partner String,
-    obx_performing_organization_medical_director_name_first_name String,
-    obx_performing_organization_medical_director_name_middle_name String,
-    obx_performing_organization_medical_director_name_suffix String,
-    obx_performing_organization_medical_director_name_person_prefix String,
-    obx_performing_organization_medical_director_name_degree String,
-    obx_performing_organization_medical_director_name_source_table String,
-    obx_performing_organization_medical_director_name_source_table_primary_id String,
-    obx_performing_organization_medical_director_name_source_table_text String,
-    obx_performing_organization_medical_director_name_source_table_name_of_coding_sys String,
-    obx_performing_organization_medical_director_name_source_table_alt_id String,
-    obx_performing_organization_medical_director_name_source_table_alt_text String,
-    obx_performing_organization_medical_director_name_source_table_name_of_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_source_table_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_source_table_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_source_table_original_text String,
-    obx_performing_organization_medical_director_name_source_table_second_alt_id String,
-    obx_performing_organization_medical_director_name_source_table_second_alt_text String,
-    obx_performing_organization_medical_director_name_source_table_name_of_second_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_source_table_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_source_table_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_source_table_value_set_oid String,
-    obx_performing_organization_medical_director_name_source_table_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_source_table_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_source_table_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_source_table_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_source_table_second_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_source_table_second_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_source_table_second_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_authr String,
-    obx_performing_organization_medical_director_name_assgn_authr_namespace_id String,
-    obx_performing_organization_medical_director_name_assgn_authr_universal_id String,
-    obx_performing_organization_medical_director_name_assgn_authr_universal_id_type String,
-    obx_performing_organization_medical_director_name_name_type_code String,
-    obx_performing_organization_medical_director_name_identifier_check_digit String,
-    obx_performing_organization_medical_director_name_check_digit_scheme String,
-    obx_performing_organization_medical_director_name_identifier_type_code String,
-    obx_performing_organization_medical_director_name_assgn_facility String,
-    obx_performing_organization_medical_director_name_assgn_facility_namespace_id String,
-    obx_performing_organization_medical_director_name_assgn_facility_universal_id String,
-    obx_performing_organization_medical_director_name_assgn_facility_universal_id_type String,
-    obx_performing_organization_medical_director_name_name_rep_code String,
-    obx_performing_organization_medical_director_name_context String,
-    obx_performing_organization_medical_director_name_context_primary_id String,
-    obx_performing_organization_medical_director_name_context_text String,
-    obx_performing_organization_medical_director_name_context_name_of_coding_sys String,
-    obx_performing_organization_medical_director_name_context_alt_id String,
-    obx_performing_organization_medical_director_name_context_alt_text String,
-    obx_performing_organization_medical_director_name_context_name_of_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_context_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_context_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_context_original_text String,
-    obx_performing_organization_medical_director_name_context_second_alt_id String,
-    obx_performing_organization_medical_director_name_context_second_alt_text String,
-    obx_performing_organization_medical_director_name_context_name_of_second_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_context_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_context_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_context_value_set_oid String,
-    obx_performing_organization_medical_director_name_context_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_context_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_context_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_context_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_context_second_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_context_second_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_context_second_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_validity_range String,
-    obx_performing_organization_medical_director_name_validity_range_eff_from_date_time String,
-    obx_performing_organization_medical_director_name_validity_range_eff_to_date_time String,
-    obx_performing_organization_medical_director_name_assembly_order String,
-    obx_performing_organization_medical_director_name_eff_from_date_time String,
-    obx_performing_organization_medical_director_name_eff_to_date_time String,
-    obx_performing_organization_medical_director_name_prof_suffix String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_primary_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_text String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_name_of_coding_sys String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_alt_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_alt_text String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_name_of_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_original_text String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_second_alt_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_second_alt_text String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_name_of_second_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_value_set_oid String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_second_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_second_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_assgn_jurisdiction_second_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_primary_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_text String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_name_of_coding_sys String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_alt_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_alt_text String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_name_of_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_original_text String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_second_alt_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_second_alt_text String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_name_of_second_alt_coding_sys String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_second_alt_coding_sys_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_value_set_oid String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_second_alt_coding_sys_oid String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_second_alt_value_set_oid String,
-    obx_performing_organization_medical_director_name_assgn_agency_dept_second_alt_value_set_ver_id String,
-    obx_performing_organization_medical_director_name_security_check String,
-    obx_performing_organization_medical_director_name_security_check_scheme String,
-    obx_patient_result_release_category String,
-    obx_unknown String,
-    etl_firstinsert_datetime String,
+	obx_value_type String,
+	obx_observation_id String,
+	obx_observation_id_primary_id String,
+	obx_observation_id_text String,
+	obx_observation_id_name_of_coding_sys String,
+	obx_observation_id_alt_id String,
+	obx_observation_id_alt_text String,
+	obx_observation_id_name_of_alt_coding_sys String,
+	obx_observation_id_coding_sys_ver_id String,
+	obx_observation_id_alt_coding_sys_ver_id String,
+	obx_observation_id_original_text String,
+	obx_observation_id_second_alt_id String,
+	obx_observation_id_second_alt_text String,
+	obx_observation_id_name_of_second_alt_coding_sys String,
+	obx_observation_id_second_alt_coding_sys_ver_id String,
+	obx_observation_id_coding_sys_oid String,
+	obx_observation_id_value_set_oid String,
+	obx_observation_id_value_set_ver_id String,
+	obx_observation_id_alt_coding_sys_oid String,
+	obx_observation_id_alt_value_set_oid String,
+	obx_observation_id_alt_value_set_ver_id String,
+	obx_observation_id_second_alt_coding_sys_oid String,
+	obx_observation_id_second_alt_value_set_oid String,
+	obx_observation_id_second_alt_value_set_ver_id String,
+	obx_observation_sub_id String,
+	obx_observation_value String,
+	obx_observation_value_primary_id String,
+	obx_observation_value_text String,
+	obx_observation_value_data_type String,
+	etl_firstinsert_datetime String,
 	field_sequence_num String
-)
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17169,64 +15942,16 @@ CREATE EXTERNAL TABLE hl7_ods_data (
 	pid_pat_account_num String,
 	ods_type String,
 	ods_service_period String,
-	ods_service_period_primary_id String,
-	ods_service_period_text String,
-	ods_service_period_name_of_coding_sys String,
-	ods_service_period_alt_id String,
-	ods_service_period_alt_text String,
-	ods_service_period_name_of_alt_coding_sys String,
-	ods_service_period_coding_sys_ver_id String,
-	ods_service_period_alt_coding_sys_ver_id String,
-	ods_service_period_original_text String,
-	ods_service_period_second_alt_id String,
-	ods_service_period_second_alt_text String,
-	ods_service_period_name_of_second_alt_coding_sys String,
-	ods_service_period_second_alt_coding_sys_ver_id String,
-	ods_service_period_coding_sys_oid String,
-	ods_service_period_value_set_oid String,
-	ods_service_period_value_set_ver_id String,
-	ods_service_period_alt_coding_sys_oid String,
-	ods_service_period_alt_value_set_oid String,
-	ods_service_period_alt_value_set_ver_id String,
-	ods_service_period_second_alt_coding_sys_oid String,
-	ods_service_period_second_alt_value_set_oid String,
-	ods_service_period_second_alt_value_set_ver_id String,
-	ods_diet_supp_pref_code String,
-	ods_diet_supp_pref_code_primary_id String,
-	ods_diet_supp_pref_code_text String,
-	ods_diet_supp_pref_code_name_of_coding_sys String,
-	ods_diet_supp_pref_code_alt_id String,
-	ods_diet_supp_pref_code_alt_text String,
-	ods_diet_supp_pref_code_name_of_alt_coding_sys String,
-	ods_diet_supp_pref_code_coding_sys_ver_id String,
-	ods_diet_supp_pref_code_alt_coding_sys_ver_id String,
-	ods_diet_supp_pref_code_original_text String,
-	ods_diet_supp_pref_code_second_alt_id String,
-	ods_diet_supp_pref_code_second_alt_text String,
-	ods_diet_supp_pref_code_name_of_second_alt_coding_sys String,
-	ods_diet_supp_pref_code_second_alt_coding_sys_ver_id String,
-	ods_diet_supp_pref_code_coding_sys_oid String,
-	ods_diet_supp_pref_code_value_set_oid String,
-	ods_diet_supp_pref_code_value_set_ver_id String,
-	ods_diet_supp_pref_code_alt_coding_sys_oid String,
-	ods_diet_supp_pref_code_alt_value_set_oid String,
-	ods_diet_supp_pref_code_alt_value_set_ver_id String,
-	ods_diet_supp_pref_code_second_alt_coding_sys_oid String,
-	ods_diet_supp_pref_code_second_alt_value_set_oid String,
-	ods_diet_supp_pref_code_second_alt_value_set_ver_id String,
-	ods_text_instruction String,
+	ods_diet_supplement_preference_code String,
+	ods_instruction String,
 	ods_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17245,14 +15970,10 @@ CREATE EXTERNAL TABLE hl7_odt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17315,14 +16036,10 @@ CREATE EXTERNAL TABLE hl7_om1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17348,14 +16065,10 @@ CREATE EXTERNAL TABLE hl7_om2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17378,14 +16091,10 @@ CREATE EXTERNAL TABLE hl7_om3_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17415,14 +16124,10 @@ CREATE EXTERNAL TABLE hl7_om4_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17441,14 +16146,10 @@ CREATE EXTERNAL TABLE hl7_om5_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17466,14 +16167,10 @@ CREATE EXTERNAL TABLE hl7_om6_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17513,14 +16210,10 @@ CREATE EXTERNAL TABLE hl7_om7_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18843,14 +17536,10 @@ CREATE EXTERNAL TABLE hl7_orc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18879,14 +17568,10 @@ CREATE EXTERNAL TABLE hl7_org_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18907,14 +17592,10 @@ CREATE EXTERNAL TABLE hl7_ovr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18938,14 +17619,10 @@ CREATE EXTERNAL TABLE hl7_pac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18965,14 +17642,10 @@ CREATE EXTERNAL TABLE hl7_pce_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19011,14 +17684,10 @@ CREATE EXTERNAL TABLE hl7_pcr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19584,14 +18253,10 @@ CREATE EXTERNAL TABLE hl7_pd1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19616,14 +18281,10 @@ CREATE EXTERNAL TABLE hl7_pda_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19654,14 +18315,10 @@ CREATE EXTERNAL TABLE hl7_pdc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19702,14 +18359,10 @@ CREATE EXTERNAL TABLE hl7_peo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19738,14 +18391,10 @@ CREATE EXTERNAL TABLE hl7_pes_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20732,14 +19381,10 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20762,14 +19407,10 @@ CREATE EXTERNAL TABLE hl7_pkg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20797,14 +19438,10 @@ CREATE EXTERNAL TABLE hl7_pmt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21109,14 +19746,10 @@ CREATE EXTERNAL TABLE hl7_pr1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21144,14 +19777,10 @@ CREATE EXTERNAL TABLE hl7_pra_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21192,15 +19821,7 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 	prb_problem_id_second_alt_value_set_oid String,
 	prb_problem_id_second_alt_value_set_ver_id String,
 	prb_problem_instance_id String,
-	prb_problem_instance_id_entity_id String,
-	prb_problem_instance_id_namespace_id String,
-	prb_problem_instance_id_universal_id String,
-	prb_problem_instance_id_universal_id_type String,
 	prb_episode_of_care_id String,
-	prb_episode_of_care_id_entity_id String,
-	prb_episode_of_care_id_namespace_id String,
-	prb_episode_of_care_id_universal_id String,
-	prb_episode_of_care_id_universal_id_type String,
 	prb_problem_list_priority String,
 	prb_problem_estbl_date_time String,
 	prb_problem_estbl_date_time_date_time String,
@@ -21209,344 +19830,32 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 	prb_anticipated_problem_resolution_date_time String,
 	prb_actual_problem_resolution_date_time String,
 	prb_problem_classification String,
-	prb_problem_classification_primary_id String,
-	prb_problem_classification_text String,
-	prb_problem_classification_name_of_coding_sys String,
-	prb_problem_classification_alt_id String,
-	prb_problem_classification_alt_text String,
-	prb_problem_classification_name_of_alt_coding_sys String,
-	prb_problem_classification_coding_sys_ver_id String,
-	prb_problem_classification_alt_coding_sys_ver_id String,
-	prb_problem_classification_original_text String,
-	prb_problem_classification_second_alt_id String,
-	prb_problem_classification_second_alt_text String,
-	prb_problem_classification_name_of_second_alt_coding_sys String,
-	prb_problem_classification_second_alt_coding_sys_ver_id String,
-	prb_problem_classification_coding_sys_oid String,
-	prb_problem_classification_value_set_oid String,
-	prb_problem_classification_value_set_ver_id String,
-	prb_problem_classification_alt_coding_sys_oid String,
-	prb_problem_classification_alt_value_set_oid String,
-	prb_problem_classification_alt_value_set_ver_id String,
-	prb_problem_classification_second_alt_coding_sys_oid String,
-	prb_problem_classification_second_alt_value_set_oid String,
-	prb_problem_classification_second_alt_value_set_ver_id String,
 	prb_problem_management_discipline String,
-	prb_problem_management_discipline_primary_id String,
-	prb_problem_management_discipline_text String,
-	prb_problem_management_discipline_name_of_coding_sys String,
-	prb_problem_management_discipline_alt_id String,
-	prb_problem_management_discipline_alt_text String,
-	prb_problem_management_discipline_name_of_alt_coding_sys String,
-	prb_problem_management_discipline_coding_sys_ver_id String,
-	prb_problem_management_discipline_alt_coding_sys_ver_id String,
-	prb_problem_management_discipline_original_text String,
-	prb_problem_management_discipline_second_alt_id String,
-	prb_problem_management_discipline_second_alt_text String,
-	prb_problem_management_discipline_name_of_second_alt_coding_sys String,
-	prb_problem_management_discipline_second_alt_coding_sys_ver_id String,
-	prb_problem_management_discipline_coding_sys_oid String,
-	prb_problem_management_discipline_value_set_oid String,
-	prb_problem_management_discipline_value_set_ver_id String,
-	prb_problem_management_discipline_alt_coding_sys_oid String,
-	prb_problem_management_discipline_alt_value_set_oid String,
-	prb_problem_management_discipline_alt_value_set_ver_id String,
-	prb_problem_management_discipline_second_alt_coding_sys_oid String,
-	prb_problem_management_discipline_second_alt_value_set_oid String,
-	prb_problem_management_discipline_second_alt_value_set_ver_id String,
 	prb_problem_persistence String,
-	prb_problem_persistence_primary_id String,
-	prb_problem_persistence_text String,
-	prb_problem_persistence_name_of_coding_sys String,
-	prb_problem_persistence_alt_id String,
-	prb_problem_persistence_alt_text String,
-	prb_problem_persistence_name_of_alt_coding_sys String,
-	prb_problem_persistence_coding_sys_ver_id String,
-	prb_problem_persistence_alt_coding_sys_ver_id String,
-	prb_problem_persistence_original_text String,
-	prb_problem_persistence_second_alt_id String,
-	prb_problem_persistence_second_alt_text String,
-	prb_problem_persistence_name_of_second_alt_coding_sys String,
-	prb_problem_persistence_second_alt_coding_sys_ver_id String,
-	prb_problem_persistence_coding_sys_oid String,
-	prb_problem_persistence_value_set_oid String,
-	prb_problem_persistence_value_set_ver_id String,
-	prb_problem_persistence_alt_coding_sys_oid String,
-	prb_problem_persistence_alt_value_set_oid String,
-	prb_problem_persistence_alt_value_set_ver_id String,
-	prb_problem_persistence_second_alt_coding_sys_oid String,
-	prb_problem_persistence_second_alt_value_set_oid String,
-	prb_problem_persistence_second_alt_value_set_ver_id String,
 	prb_problem_confirmation_status String,
-	prb_problem_confirmation_status_primary_id String,
-	prb_problem_confirmation_status_text String,
-	prb_problem_confirmation_status_name_of_coding_sys String,
-	prb_problem_confirmation_status_alt_id String,
-	prb_problem_confirmation_status_alt_text String,
-	prb_problem_confirmation_status_name_of_alt_coding_sys String,
-	prb_problem_confirmation_status_coding_sys_ver_id String,
-	prb_problem_confirmation_status_alt_coding_sys_ver_id String,
-	prb_problem_confirmation_status_original_text String,
-	prb_problem_confirmation_status_second_alt_id String,
-	prb_problem_confirmation_status_second_alt_text String,
-	prb_problem_confirmation_status_name_of_second_alt_coding_sys String,
-	prb_problem_confirmation_status_second_alt_coding_sys_ver_id String,
-	prb_problem_confirmation_status_coding_sys_oid String,
-	prb_problem_confirmation_status_value_set_oid String,
-	prb_problem_confirmation_status_value_set_ver_id String,
-	prb_problem_confirmation_status_alt_coding_sys_oid String,
-	prb_problem_confirmation_status_alt_value_set_oid String,
-	prb_problem_confirmation_status_alt_value_set_ver_id String,
-	prb_problem_confirmation_status_second_alt_coding_sys_oid String,
-	prb_problem_confirmation_status_second_alt_value_set_oid String,
-	prb_problem_confirmation_status_second_alt_value_set_ver_id String,
 	prb_problem_life_cycle_status String,
-	prb_problem_life_cycle_status_primary_id String,
-	prb_problem_life_cycle_status_text String,
-	prb_problem_life_cycle_status_name_of_coding_sys String,
-	prb_problem_life_cycle_status_alt_id String,
-	prb_problem_life_cycle_status_alt_text String,
-	prb_problem_life_cycle_status_name_of_alt_coding_sys String,
-	prb_problem_life_cycle_status_coding_sys_ver_id String,
-	prb_problem_life_cycle_status_alt_coding_sys_ver_id String,
-	prb_problem_life_cycle_status_original_text String,
-	prb_problem_life_cycle_status_second_alt_id String,
-	prb_problem_life_cycle_status_second_alt_text String,
-	prb_problem_life_cycle_status_name_of_second_alt_coding_sys String,
-	prb_problem_life_cycle_status_second_alt_coding_sys_ver_id String,
-	prb_problem_life_cycle_status_coding_sys_oid String,
-	prb_problem_life_cycle_status_value_set_oid String,
-	prb_problem_life_cycle_status_value_set_ver_id String,
-	prb_problem_life_cycle_status_alt_coding_sys_oid String,
-	prb_problem_life_cycle_status_alt_value_set_oid String,
-	prb_problem_life_cycle_status_alt_value_set_ver_id String,
-	prb_problem_life_cycle_status_second_alt_coding_sys_oid String,
-	prb_problem_life_cycle_status_second_alt_value_set_oid String,
-	prb_problem_life_cycle_status_second_alt_value_set_ver_id String,
 	prb_problem_life_cycle_status_date_time String,
 	prb_problem_onset_date_time String,
 	prb_problem_onset String,
 	prb_problem_ranking String,
-	prb_problem_ranking_primary_id String,
-	prb_problem_ranking_text String,
-	prb_problem_ranking_name_of_coding_sys String,
-	prb_problem_ranking_alt_id String,
-	prb_problem_ranking_alt_text String,
-	prb_problem_ranking_name_of_alt_coding_sys String,
-	prb_problem_ranking_coding_sys_ver_id String,
-	prb_problem_ranking_alt_coding_sys_ver_id String,
-	prb_problem_ranking_original_text String,
-	prb_problem_ranking_second_alt_id String,
-	prb_problem_ranking_second_alt_text String,
-	prb_problem_ranking_name_of_second_alt_coding_sys String,
-	prb_problem_ranking_second_alt_coding_sys_ver_id String,
-	prb_problem_ranking_coding_sys_oid String,
-	prb_problem_ranking_value_set_oid String,
-	prb_problem_ranking_value_set_ver_id String,
-	prb_problem_ranking_alt_coding_sys_oid String,
-	prb_problem_ranking_alt_value_set_oid String,
-	prb_problem_ranking_alt_value_set_ver_id String,
-	prb_problem_ranking_second_alt_coding_sys_oid String,
-	prb_problem_ranking_second_alt_value_set_oid String,
-	prb_problem_ranking_second_alt_value_set_ver_id String,
 	prb_certainty_of_problem String,
-	prb_certainty_of_problem_primary_id String,
-	prb_certainty_of_problem_text String,
-	prb_certainty_of_problem_name_of_coding_sys String,
-	prb_certainty_of_problem_alt_id String,
-	prb_certainty_of_problem_alt_text String,
-	prb_certainty_of_problem_name_of_alt_coding_sys String,
-	prb_certainty_of_problem_coding_sys_ver_id String,
-	prb_certainty_of_problem_alt_coding_sys_ver_id String,
-	prb_certainty_of_problem_original_text String,
-	prb_certainty_of_problem_second_alt_id String,
-	prb_certainty_of_problem_second_alt_text String,
-	prb_certainty_of_problem_name_of_second_alt_coding_sys String,
-	prb_certainty_of_problem_second_alt_coding_sys_ver_id String,
-	prb_certainty_of_problem_coding_sys_oid String,
-	prb_certainty_of_problem_value_set_oid String,
-	prb_certainty_of_problem_value_set_ver_id String,
-	prb_certainty_of_problem_alt_coding_sys_oid String,
-	prb_certainty_of_problem_alt_value_set_oid String,
-	prb_certainty_of_problem_alt_value_set_ver_id String,
-	prb_certainty_of_problem_second_alt_coding_sys_oid String,
-	prb_certainty_of_problem_second_alt_value_set_oid String,
-	prb_certainty_of_problem_second_alt_value_set_ver_id String,
 	prb_probability_of_problem String,
 	prb_individual_awareness_of_problem String,
-	prb_individual_awareness_of_problem_primary_id String,
-	prb_individual_awareness_of_problem_text String,
-	prb_individual_awareness_of_problem_name_of_coding_sys String,
-	prb_individual_awareness_of_problem_alt_id String,
-	prb_individual_awareness_of_problem_alt_text String,
-	prb_individual_awareness_of_problem_name_of_alt_coding_sys String,
-	prb_individual_awareness_of_problem_coding_sys_ver_id String,
-	prb_individual_awareness_of_problem_alt_coding_sys_ver_id String,
-	prb_individual_awareness_of_problem_original_text String,
-	prb_individual_awareness_of_problem_second_alt_id String,
-	prb_individual_awareness_of_problem_second_alt_text String,
-	prb_individual_awareness_of_problem_name_of_second_alt_coding_sys String,
-	prb_individual_awareness_of_problem_second_alt_coding_sys_ver_id String,
-	prb_individual_awareness_of_problem_coding_sys_oid String,
-	prb_individual_awareness_of_problem_value_set_oid String,
-	prb_individual_awareness_of_problem_value_set_ver_id String,
-	prb_individual_awareness_of_problem_alt_coding_sys_oid String,
-	prb_individual_awareness_of_problem_alt_value_set_oid String,
-	prb_individual_awareness_of_problem_alt_value_set_ver_id String,
-	prb_individual_awareness_of_problem_second_alt_coding_sys_oid String,
-	prb_individual_awareness_of_problem_second_alt_value_set_oid String,
-	prb_individual_awareness_of_problem_second_alt_value_set_ver_id String,
 	prb_problem_prognosis String,
-	prb_problem_prognosis_primary_id String,
-	prb_problem_prognosis_text String,
-	prb_problem_prognosis_name_of_coding_sys String,
-	prb_problem_prognosis_alt_id String,
-	prb_problem_prognosis_alt_text String,
-	prb_problem_prognosis_name_of_alt_coding_sys String,
-	prb_problem_prognosis_coding_sys_ver_id String,
-	prb_problem_prognosis_alt_coding_sys_ver_id String,
-	prb_problem_prognosis_original_text String,
-	prb_problem_prognosis_second_alt_id String,
-	prb_problem_prognosis_second_alt_text String,
-	prb_problem_prognosis_name_of_second_alt_coding_sys String,
-	prb_problem_prognosis_second_alt_coding_sys_ver_id String,
-	prb_problem_prognosis_coding_sys_oid String,
-	prb_problem_prognosis_value_set_oid String,
-	prb_problem_prognosis_value_set_ver_id String,
-	prb_problem_prognosis_alt_coding_sys_oid String,
-	prb_problem_prognosis_alt_value_set_oid String,
-	prb_problem_prognosis_alt_value_set_ver_id String,
-	prb_problem_prognosis_second_alt_coding_sys_oid String,
-	prb_problem_prognosis_second_alt_value_set_oid String,
-	prb_problem_prognosis_second_alt_value_set_ver_id String,
 	prb_individual_awareness_of_prognosis String,
-	prb_individual_awareness_of_prognosis_primary_id String,
-	prb_individual_awareness_of_prognosis_text String,
-	prb_individual_awareness_of_prognosis_name_of_coding_sys String,
-	prb_individual_awareness_of_prognosis_alt_id String,
-	prb_individual_awareness_of_prognosis_alt_text String,
-	prb_individual_awareness_of_prognosis_name_of_alt_coding_sys String,
-	prb_individual_awareness_of_prognosis_coding_sys_ver_id String,
-	prb_individual_awareness_of_prognosis_alt_coding_sys_ver_id String,
-	prb_individual_awareness_of_prognosis_original_text String,
-	prb_individual_awareness_of_prognosis_second_alt_id String,
-	prb_individual_awareness_of_prognosis_second_alt_text String,
-	prb_individual_awareness_of_prognosis_name_of_second_alt_coding_sys String,
-	prb_individual_awareness_of_prognosis_second_alt_coding_sys_ver_id String,
-	prb_individual_awareness_of_prognosis_coding_sys_oid String,
-	prb_individual_awareness_of_prognosis_value_set_oid String,
-	prb_individual_awareness_of_prognosis_value_set_ver_id String,
-	prb_individual_awareness_of_prognosis_alt_coding_sys_oid String,
-	prb_individual_awareness_of_prognosis_alt_value_set_oid String,
-	prb_individual_awareness_of_prognosis_alt_value_set_ver_id String,
-	prb_individual_awareness_of_prognosis_second_alt_coding_sys_oid String,
-	prb_individual_awareness_of_prognosis_second_alt_value_set_oid String,
-	prb_individual_awareness_of_prognosis_second_alt_value_set_ver_id String,
 	prb_family_significant_other_awareness_of_problem_prognosis String,
 	prb_security_sensitivity String,
-	prb_security_sensitivity_primary_id String,
-	prb_security_sensitivity_text String,
-	prb_security_sensitivity_name_of_coding_sys String,
-	prb_security_sensitivity_alt_id String,
-	prb_security_sensitivity_alt_text String,
-	prb_security_sensitivity_name_of_alt_coding_sys String,
-	prb_security_sensitivity_coding_sys_ver_id String,
-	prb_security_sensitivity_alt_coding_sys_ver_id String,
-	prb_security_sensitivity_original_text String,
-	prb_security_sensitivity_second_alt_id String,
-	prb_security_sensitivity_second_alt_text String,
-	prb_security_sensitivity_name_of_second_alt_coding_sys String,
-	prb_security_sensitivity_second_alt_coding_sys_ver_id String,
-	prb_security_sensitivity_coding_sys_oid String,
-	prb_security_sensitivity_value_set_oid String,
-	prb_security_sensitivity_value_set_ver_id String,
-	prb_security_sensitivity_alt_coding_sys_oid String,
-	prb_security_sensitivity_alt_value_set_oid String,
-	prb_security_sensitivity_alt_value_set_ver_id String,
-	prb_security_sensitivity_second_alt_coding_sys_oid String,
-	prb_security_sensitivity_second_alt_value_set_oid String,
-	prb_security_sensitivity_second_alt_value_set_ver_id String,
 	prb_problem_severity String,
-	prb_problem_severity_primary_id String,
-	prb_problem_severity_text String,
-	prb_problem_severity_name_of_coding_sys String,
-	prb_problem_severity_alt_id String,
-	prb_problem_severity_alt_text String,
-	prb_problem_severity_name_of_alt_coding_sys String,
-	prb_problem_severity_coding_sys_ver_id String,
-	prb_problem_severity_alt_coding_sys_ver_id String,
-	prb_problem_severity_original_text String,
-	prb_problem_severity_second_alt_id String,
-	prb_problem_severity_second_alt_text String,
-	prb_problem_severity_name_of_second_alt_coding_sys String,
-	prb_problem_severity_second_alt_coding_sys_ver_id String,
-	prb_problem_severity_coding_sys_oid String,
-	prb_problem_severity_value_set_oid String,
-	prb_problem_severity_value_set_ver_id String,
-	prb_problem_severity_alt_coding_sys_oid String,
-	prb_problem_severity_alt_value_set_oid String,
-	prb_problem_severity_alt_value_set_ver_id String,
-	prb_problem_severity_second_alt_coding_sys_oid String,
-	prb_problem_severity_second_alt_value_set_oid String,
-	prb_problem_severity_second_alt_value_set_ver_id String,
 	prb_problem_perspective String,
-	prb_problem_perspective_primary_id String,
-	prb_problem_perspective_text String,
-	prb_problem_perspective_name_of_coding_sys String,
-	prb_problem_perspective_alt_id String,
-	prb_problem_perspective_alt_text String,
-	prb_problem_perspective_name_of_alt_coding_sys String,
-	prb_problem_perspective_coding_sys_ver_id String,
-	prb_problem_perspective_alt_coding_sys_ver_id String,
-	prb_problem_perspective_original_text String,
-	prb_problem_perspective_second_alt_id String,
-	prb_problem_perspective_second_alt_text String,
-	prb_problem_perspective_name_of_second_alt_coding_sys String,
-	prb_problem_perspective_second_alt_coding_sys_ver_id String,
-	prb_problem_perspective_coding_sys_oid String,
-	prb_problem_perspective_value_set_oid String,
-	prb_problem_perspective_value_set_ver_id String,
-	prb_problem_perspective_alt_coding_sys_oid String,
-	prb_problem_perspective_alt_value_set_oid String,
-	prb_problem_perspective_alt_value_set_ver_id String,
-	prb_problem_perspective_second_alt_coding_sys_oid String,
-	prb_problem_perspective_second_alt_value_set_oid String,
-	prb_problem_perspective_second_alt_value_set_ver_id String,
 	prb_mood_code String,
-	prb_mood_code_primary_id String,
-	prb_mood_code_text String,
-	prb_mood_code_name_of_coding_sys String,
-	prb_mood_code_alt_id String,
-	prb_mood_code_alt_text String,
-	prb_mood_code_name_of_alt_coding_sys String,
-	prb_mood_code_coding_sys_ver_id String,
-	prb_mood_code_alt_coding_sys_ver_id String,
-	prb_mood_code_original_text String,
-	prb_mood_code_second_alt_id String,
-	prb_mood_code_second_alt_text String,
-	prb_mood_code_name_of_second_alt_coding_sys String,
-	prb_mood_code_second_alt_coding_sys_ver_id String,
-	prb_mood_code_coding_sys_oid String,
-	prb_mood_code_value_set_oid String,
-	prb_mood_code_value_set_ver_id String,
-	prb_mood_code_alt_coding_sys_oid String,
-	prb_mood_code_alt_value_set_oid String,
-	prb_mood_code_alt_value_set_ver_id String,
-	prb_mood_code_second_alt_coding_sys_oid String,
-	prb_mood_code_second_alt_value_set_oid String,
-	prb_mood_code_second_alt_value_set_ver_id String,
 	prb_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21580,14 +19889,10 @@ CREATE EXTERNAL TABLE hl7_prc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21617,14 +19922,10 @@ CREATE EXTERNAL TABLE hl7_prd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22159,14 +20460,10 @@ CREATE EXTERNAL TABLE hl7_prt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22188,14 +20485,10 @@ CREATE EXTERNAL TABLE hl7_psg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22225,14 +20518,10 @@ CREATE EXTERNAL TABLE hl7_psh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22296,14 +20585,10 @@ CREATE EXTERNAL TABLE hl7_psl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22324,14 +20609,10 @@ CREATE EXTERNAL TABLE hl7_pss_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -22354,14 +20635,10 @@ CREATE EXTERNAL TABLE hl7_pth_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23975,14 +22252,10 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24710,14 +22983,10 @@ CREATE EXTERNAL TABLE hl7_pv2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24740,14 +23009,10 @@ CREATE EXTERNAL TABLE hl7_pye_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24769,14 +23034,10 @@ CREATE EXTERNAL TABLE hl7_qak_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24794,14 +23055,10 @@ CREATE EXTERNAL TABLE hl7_qid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24820,14 +23077,10 @@ CREATE EXTERNAL TABLE hl7_qpd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24855,14 +23108,10 @@ CREATE EXTERNAL TABLE hl7_qrd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24888,14 +23137,10 @@ CREATE EXTERNAL TABLE hl7_qrf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24914,14 +23159,10 @@ CREATE EXTERNAL TABLE hl7_qri_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24944,14 +23185,10 @@ CREATE EXTERNAL TABLE hl7_rcp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24969,14 +23206,10 @@ CREATE EXTERNAL TABLE hl7_rdf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24993,14 +23226,10 @@ CREATE EXTERNAL TABLE hl7_rdt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25032,14 +23261,10 @@ CREATE EXTERNAL TABLE hl7_rel_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25067,14 +23292,10 @@ CREATE EXTERNAL TABLE hl7_rf1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25094,14 +23315,10 @@ CREATE EXTERNAL TABLE hl7_rfi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25120,14 +23337,10 @@ CREATE EXTERNAL TABLE hl7_rgs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25146,14 +23359,10 @@ CREATE EXTERNAL TABLE hl7_rmi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25702,14 +23911,10 @@ CREATE EXTERNAL TABLE hl7_rol_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25723,52 +23928,8 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 	pid_pat_account_num String,
 	rq1_anticipated_price String,
 	rq1_manufacturer_id String,
-	rq1_manufacturer_id_primary_id String,
-	rq1_manufacturer_id_text String,
-	rq1_manufacturer_id_name_of_coding_sys String,
-	rq1_manufacturer_id_alt_id String,
-	rq1_manufacturer_id_alt_text String,
-	rq1_manufacturer_id_name_of_alt_coding_sys String,
-	rq1_manufacturer_id_coding_sys_ver_id String,
-	rq1_manufacturer_id_alt_coding_sys_ver_id String,
-	rq1_manufacturer_id_original_text String,
-	rq1_manufacturer_id_second_alt_id String,
-	rq1_manufacturer_id_second_alt_text String,
-	rq1_manufacturer_id_name_of_second_alt_coding_sys String,
-	rq1_manufacturer_id_second_alt_coding_sys_ver_id String,
-	rq1_manufacturer_id_coding_sys_oid String,
-	rq1_manufacturer_id_value_set_oid String,
-	rq1_manufacturer_id_value_set_ver_id String,
-	rq1_manufacturer_id_alt_coding_sys_oid String,
-	rq1_manufacturer_id_alt_value_set_oid String,
-	rq1_manufacturer_id_alt_value_set_ver_id String,
-	rq1_manufacturer_id_second_alt_coding_sys_oid String,
-	rq1_manufacturer_id_second_alt_value_set_oid String,
-	rq1_manufacturer_id_second_alt_value_set_ver_id String,
-	rq1_manufacturers_catalog String,
+	rq1_manufacturer_catalog String,
 	rq1_vendor_id String,
-	rq1_vendor_id_primary_id String,
-	rq1_vendor_id_text String,
-	rq1_vendor_id_name_of_coding_sys String,
-	rq1_vendor_id_alt_id String,
-	rq1_vendor_id_alt_text String,
-	rq1_vendor_id_name_of_alt_coding_sys String,
-	rq1_vendor_id_coding_sys_ver_id String,
-	rq1_vendor_id_alt_coding_sys_ver_id String,
-	rq1_vendor_id_original_text String,
-	rq1_vendor_id_second_alt_id String,
-	rq1_vendor_id_second_alt_text String,
-	rq1_vendor_id_name_of_second_alt_coding_sys String,
-	rq1_vendor_id_second_alt_coding_sys_ver_id String,
-	rq1_vendor_id_coding_sys_oid String,
-	rq1_vendor_id_value_set_oid String,
-	rq1_vendor_id_value_set_ver_id String,
-	rq1_vendor_id_alt_coding_sys_oid String,
-	rq1_vendor_id_alt_value_set_oid String,
-	rq1_vendor_id_alt_value_set_ver_id String,
-	rq1_vendor_id_second_alt_coding_sys_oid String,
-	rq1_vendor_id_second_alt_value_set_oid String,
-	rq1_vendor_id_second_alt_value_set_ver_id String,
 	rq1_vendor_catalog String,
 	rq1_taxable String,
 	rq1_substitute_allowed String,
@@ -25776,14 +23937,10 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25797,158 +23954,22 @@ CREATE EXTERNAL TABLE hl7_rqd_data (
 	pid_pat_account_num String,
 	rqd_requisition_line_num String,
 	rqd_item_code_internal String,
-	rqd_item_code_internal_primary_id String,
-	rqd_item_code_internal_text String,
-	rqd_item_code_internal_name_of_coding_sys String,
-	rqd_item_code_internal_alt_id String,
-	rqd_item_code_internal_alt_text String,
-	rqd_item_code_internal_name_of_alt_coding_sys String,
-	rqd_item_code_internal_coding_sys_ver_id String,
-	rqd_item_code_internal_alt_coding_sys_ver_id String,
-	rqd_item_code_internal_original_text String,
-	rqd_item_code_internal_second_alt_id String,
-	rqd_item_code_internal_second_alt_text String,
-	rqd_item_code_internal_name_of_second_alt_coding_sys String,
-	rqd_item_code_internal_second_alt_coding_sys_ver_id String,
-	rqd_item_code_internal_coding_sys_oid String,
-	rqd_item_code_internal_value_set_oid String,
-	rqd_item_code_internal_value_set_ver_id String,
-	rqd_item_code_internal_alt_coding_sys_oid String,
-	rqd_item_code_internal_alt_value_set_oid String,
-	rqd_item_code_internal_alt_value_set_ver_id String,
-	rqd_item_code_internal_second_alt_coding_sys_oid String,
-	rqd_item_code_internal_second_alt_value_set_oid String,
-	rqd_item_code_internal_second_alt_value_set_ver_id String,
 	rqd_item_code_external String,
-	rqd_item_code_external_primary_id String,
-	rqd_item_code_external_text String,
-	rqd_item_code_external_name_of_coding_sys String,
-	rqd_item_code_external_alt_id String,
-	rqd_item_code_external_alt_text String,
-	rqd_item_code_external_name_of_alt_coding_sys String,
-	rqd_item_code_external_coding_sys_ver_id String,
-	rqd_item_code_external_alt_coding_sys_ver_id String,
-	rqd_item_code_external_original_text String,
-	rqd_item_code_external_second_alt_id String,
-	rqd_item_code_external_second_alt_text String,
-	rqd_item_code_external_name_of_second_alt_coding_sys String,
-	rqd_item_code_external_second_alt_coding_sys_ver_id String,
-	rqd_item_code_external_coding_sys_oid String,
-	rqd_item_code_external_value_set_oid String,
-	rqd_item_code_external_value_set_ver_id String,
-	rqd_item_code_external_alt_coding_sys_oid String,
-	rqd_item_code_external_alt_value_set_oid String,
-	rqd_item_code_external_alt_value_set_ver_id String,
-	rqd_item_code_external_second_alt_coding_sys_oid String,
-	rqd_item_code_external_second_alt_value_set_oid String,
-	rqd_item_code_external_second_alt_value_set_ver_id String,
 	rqd_hospital_item_code String,
-	rqd_hospital_item_code_primary_id String,
-	rqd_hospital_item_code_text String,
-	rqd_hospital_item_code_name_of_coding_sys String,
-	rqd_hospital_item_code_alt_id String,
-	rqd_hospital_item_code_alt_text String,
-	rqd_hospital_item_code_name_of_alt_coding_sys String,
-	rqd_hospital_item_code_coding_sys_ver_id String,
-	rqd_hospital_item_code_alt_coding_sys_ver_id String,
-	rqd_hospital_item_code_original_text String,
-	rqd_hospital_item_code_second_alt_id String,
-	rqd_hospital_item_code_second_alt_text String,
-	rqd_hospital_item_code_name_of_second_alt_coding_sys String,
-	rqd_hospital_item_code_second_alt_coding_sys_ver_id String,
-	rqd_hospital_item_code_coding_sys_oid String,
-	rqd_hospital_item_code_value_set_oid String,
-	rqd_hospital_item_code_value_set_ver_id String,
-	rqd_hospital_item_code_alt_coding_sys_oid String,
-	rqd_hospital_item_code_alt_value_set_oid String,
-	rqd_hospital_item_code_alt_value_set_ver_id String,
-	rqd_hospital_item_code_second_alt_coding_sys_oid String,
-	rqd_hospital_item_code_second_alt_value_set_oid String,
-	rqd_hospital_item_code_second_alt_value_set_ver_id String,
 	rqd_requisition_qty String,
 	rqd_requisition_unit_of_measure String,
-	rqd_requisition_unit_of_measure_primary_id String,
-	rqd_requisition_unit_of_measure_text String,
-	rqd_requisition_unit_of_measure_name_of_coding_sys String,
-	rqd_requisition_unit_of_measure_alt_id String,
-	rqd_requisition_unit_of_measure_alt_text String,
-	rqd_requisition_unit_of_measure_name_of_alt_coding_sys String,
-	rqd_requisition_unit_of_measure_coding_sys_ver_id String,
-	rqd_requisition_unit_of_measure_alt_coding_sys_ver_id String,
-	rqd_requisition_unit_of_measure_original_text String,
-	rqd_requisition_unit_of_measure_second_alt_id String,
-	rqd_requisition_unit_of_measure_second_alt_text String,
-	rqd_requisition_unit_of_measure_name_of_second_alt_coding_sys String,
-	rqd_requisition_unit_of_measure_second_alt_coding_sys_ver_id String,
-	rqd_requisition_unit_of_measure_coding_sys_oid String,
-	rqd_requisition_unit_of_measure_value_set_oid String,
-	rqd_requisition_unit_of_measure_value_set_ver_id String,
-	rqd_requisition_unit_of_measure_alt_coding_sys_oid String,
-	rqd_requisition_unit_of_measure_alt_value_set_oid String,
-	rqd_requisition_unit_of_measure_alt_value_set_ver_id String,
-	rqd_requisition_unit_of_measure_second_alt_coding_sys_oid String,
-	rqd_requisition_unit_of_measure_second_alt_value_set_oid String,
-	rqd_requisition_unit_of_measure_second_alt_value_set_ver_id String,
 	rqd_cost_center_account_num String,
 	rqd_item_natural_account_code String,
-	rqd_item_natural_account_code_primary_id String,
-	rqd_item_natural_account_code_text String,
-	rqd_item_natural_account_code_name_of_coding_sys String,
-	rqd_item_natural_account_code_alt_id String,
-	rqd_item_natural_account_code_alt_text String,
-	rqd_item_natural_account_code_name_of_alt_coding_sys String,
-	rqd_item_natural_account_code_coding_sys_ver_id String,
-	rqd_item_natural_account_code_alt_coding_sys_ver_id String,
-	rqd_item_natural_account_code_original_text String,
-	rqd_item_natural_account_code_second_alt_id String,
-	rqd_item_natural_account_code_second_alt_text String,
-	rqd_item_natural_account_code_name_of_second_alt_coding_sys String,
-	rqd_item_natural_account_code_second_alt_coding_sys_ver_id String,
-	rqd_item_natural_account_code_coding_sys_oid String,
-	rqd_item_natural_account_code_value_set_oid String,
-	rqd_item_natural_account_code_value_set_ver_id String,
-	rqd_item_natural_account_code_alt_coding_sys_oid String,
-	rqd_item_natural_account_code_alt_value_set_oid String,
-	rqd_item_natural_account_code_alt_value_set_ver_id String,
-	rqd_item_natural_account_code_second_alt_coding_sys_oid String,
-	rqd_item_natural_account_code_second_alt_value_set_oid String,
-	rqd_item_natural_account_code_second_alt_value_set_ver_id String,
 	rqd_deliver_to_id String,
-	rqd_deliver_to_id_primary_id String,
-	rqd_deliver_to_id_text String,
-	rqd_deliver_to_id_name_of_coding_sys String,
-	rqd_deliver_to_id_alt_id String,
-	rqd_deliver_to_id_alt_text String,
-	rqd_deliver_to_id_name_of_alt_coding_sys String,
-	rqd_deliver_to_id_coding_sys_ver_id String,
-	rqd_deliver_to_id_alt_coding_sys_ver_id String,
-	rqd_deliver_to_id_original_text String,
-	rqd_deliver_to_id_second_alt_id String,
-	rqd_deliver_to_id_second_alt_text String,
-	rqd_deliver_to_id_name_of_second_alt_coding_sys String,
-	rqd_deliver_to_id_second_alt_coding_sys_ver_id String,
-	rqd_deliver_to_id_coding_sys_oid String,
-	rqd_deliver_to_id_value_set_oid String,
-	rqd_deliver_to_id_value_set_ver_id String,
-	rqd_deliver_to_id_alt_coding_sys_oid String,
-	rqd_deliver_to_id_alt_value_set_oid String,
-	rqd_deliver_to_id_alt_value_set_ver_id String,
-	rqd_deliver_to_id_second_alt_coding_sys_oid String,
-	rqd_deliver_to_id_second_alt_value_set_oid String,
-	rqd_deliver_to_id_second_alt_value_set_ver_id String,
 	rqd_need_date String,
 	rqd_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26510,14 +24531,10 @@ CREATE EXTERNAL TABLE hl7_rxa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26676,14 +24693,10 @@ CREATE EXTERNAL TABLE hl7_rxc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26733,14 +24746,10 @@ CREATE EXTERNAL TABLE hl7_rxd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27771,14 +25780,10 @@ CREATE EXTERNAL TABLE hl7_rxe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27824,14 +25829,10 @@ CREATE EXTERNAL TABLE hl7_rxg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28814,14 +26815,10 @@ CREATE EXTERNAL TABLE hl7_rxo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28975,14 +26972,10 @@ CREATE EXTERNAL TABLE hl7_rxr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29266,14 +27259,10 @@ CREATE EXTERNAL TABLE hl7_rxv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29286,545 +27275,57 @@ CREATE EXTERNAL TABLE hl7_sac_data (
 	pid_medical_record_urn String,
 	pid_pat_account_num String,
 	sac_external_accession_id String,
-	sac_external_accession_id_entity_id String,
-	sac_external_accession_id_namespace_id String,
-	sac_external_accession_id_universal_id String,
-	sac_external_accession_id_universal_id_type String,
 	sac_accession_id String,
-	sac_accession_id_entity_id String,
-	sac_accession_id_namespace_id String,
-	sac_accession_id_universal_id String,
-	sac_accession_id_universal_id_type String,
 	sac_container_id String,
-	sac_container_id_entity_id String,
-	sac_container_id_namespace_id String,
-	sac_container_id_universal_id String,
-	sac_container_id_universal_id_type String,
 	sac_primary_parent_container_id String,
-	sac_primary_parent_container_id_entity_id String,
-	sac_primary_parent_container_id_namespace_id String,
-	sac_primary_parent_container_id_universal_id String,
-	sac_primary_parent_container_id_universal_id_type String,
 	sac_equipment_container_id String,
-	sac_equipment_container_id_entity_id String,
-	sac_equipment_container_id_namespace_id String,
-	sac_equipment_container_id_universal_id String,
-	sac_equipment_container_id_universal_id_type String,
 	sac_specimen_source String,
 	sac_registration_date_time String,
 	sac_container_status String,
-	sac_container_status_primary_id String,
-	sac_container_status_text String,
-	sac_container_status_name_of_coding_sys String,
-	sac_container_status_alt_id String,
-	sac_container_status_alt_text String,
-	sac_container_status_name_of_alt_coding_sys String,
-	sac_container_status_coding_sys_ver_id String,
-	sac_container_status_alt_coding_sys_ver_id String,
-	sac_container_status_original_text String,
-	sac_container_status_second_alt_id String,
-	sac_container_status_second_alt_text String,
-	sac_container_status_name_of_second_alt_coding_sys String,
-	sac_container_status_second_alt_coding_sys_ver_id String,
-	sac_container_status_coding_sys_oid String,
-	sac_container_status_value_set_oid String,
-	sac_container_status_value_set_ver_id String,
-	sac_container_status_alt_coding_sys_oid String,
-	sac_container_status_alt_value_set_oid String,
-	sac_container_status_alt_value_set_ver_id String,
-	sac_container_status_second_alt_coding_sys_oid String,
-	sac_container_status_second_alt_value_set_oid String,
-	sac_container_status_second_alt_value_set_ver_id String,
 	sac_carrier_type String,
-	sac_carrier_type_primary_id String,
-	sac_carrier_type_text String,
-	sac_carrier_type_name_of_coding_sys String,
-	sac_carrier_type_alt_id String,
-	sac_carrier_type_alt_text String,
-	sac_carrier_type_name_of_alt_coding_sys String,
-	sac_carrier_type_coding_sys_ver_id String,
-	sac_carrier_type_alt_coding_sys_ver_id String,
-	sac_carrier_type_original_text String,
-	sac_carrier_type_second_alt_id String,
-	sac_carrier_type_second_alt_text String,
-	sac_carrier_type_name_of_second_alt_coding_sys String,
-	sac_carrier_type_second_alt_coding_sys_ver_id String,
-	sac_carrier_type_coding_sys_oid String,
-	sac_carrier_type_value_set_oid String,
-	sac_carrier_type_value_set_ver_id String,
-	sac_carrier_type_alt_coding_sys_oid String,
-	sac_carrier_type_alt_value_set_oid String,
-	sac_carrier_type_alt_value_set_ver_id String,
-	sac_carrier_type_second_alt_coding_sys_oid String,
-	sac_carrier_type_second_alt_value_set_oid String,
-	sac_carrier_type_second_alt_value_set_ver_id String,
 	sac_carrier_id String,
-	sac_carrier_id_entity_id String,
-	sac_carrier_id_namespace_id String,
-	sac_carrier_id_universal_id String,
-	sac_carrier_id_universal_id_type String,
 	sac_position_in_carrier String,
-	sac_position_in_carrier_value1 String,
-	sac_position_in_carrier_value2 String,
-	sac_position_in_carrier_value3 String,
-	sac_position_in_carrier_value4 String,
 	sac_tray_type String,
-	sac_tray_type_primary_id String,
-	sac_tray_type_text String,
-	sac_tray_type_name_of_coding_sys String,
-	sac_tray_type_alt_id String,
-	sac_tray_type_alt_text String,
-	sac_tray_type_name_of_alt_coding_sys String,
-	sac_tray_type_coding_sys_ver_id String,
-	sac_tray_type_alt_coding_sys_ver_id String,
-	sac_tray_type_original_text String,
-	sac_tray_type_second_alt_id String,
-	sac_tray_type_second_alt_text String,
-	sac_tray_type_name_of_second_alt_coding_sys String,
-	sac_tray_type_second_alt_coding_sys_ver_id String,
-	sac_tray_type_coding_sys_oid String,
-	sac_tray_type_value_set_oid String,
-	sac_tray_type_value_set_ver_id String,
-	sac_tray_type_alt_coding_sys_oid String,
-	sac_tray_type_alt_value_set_oid String,
-	sac_tray_type_alt_value_set_ver_id String,
-	sac_tray_type_second_alt_coding_sys_oid String,
-	sac_tray_type_second_alt_value_set_oid String,
-	sac_tray_type_second_alt_value_set_ver_id String,
 	sac_tray_id String,
-	sac_tray_id_entity_id String,
-	sac_tray_id_namespace_id String,
-	sac_tray_id_universal_id String,
-	sac_tray_id_universal_id_type String,
 	sac_position_in_tray String,
-	sac_position_in_tray_value1 String,
-	sac_position_in_tray_value2 String,
-	sac_position_in_tray_value3 String,
-	sac_position_in_tray_value4 String,
 	sac_location String,
-	sac_location_primary_id String,
-	sac_location_text String,
-	sac_location_name_of_coding_sys String,
-	sac_location_alt_id String,
-	sac_location_alt_text String,
-	sac_location_name_of_alt_coding_sys String,
-	sac_location_coding_sys_ver_id String,
-	sac_location_alt_coding_sys_ver_id String,
-	sac_location_original_text String,
-	sac_location_second_alt_id String,
-	sac_location_second_alt_text String,
-	sac_location_name_of_second_alt_coding_sys String,
-	sac_location_second_alt_coding_sys_ver_id String,
-	sac_location_coding_sys_oid String,
-	sac_location_value_set_oid String,
-	sac_location_value_set_ver_id String,
-	sac_location_alt_coding_sys_oid String,
-	sac_location_alt_value_set_oid String,
-	sac_location_alt_value_set_ver_id String,
-	sac_location_second_alt_coding_sys_oid String,
-	sac_location_second_alt_value_set_oid String,
-	sac_location_second_alt_value_set_ver_id String,
 	sac_container_height String,
 	sac_container_diameter String,
 	sac_barrier_delta String,
 	sac_bottom_delta String,
 	sac_container_height_diameter_delta_unit String,
-	sac_container_height_diameter_delta_unit_primary_id String,
-	sac_container_height_diameter_delta_unit_text String,
-	sac_container_height_diameter_delta_unit_name_of_coding_sys String,
-	sac_container_height_diameter_delta_unit_alt_id String,
-	sac_container_height_diameter_delta_unit_alt_text String,
-	sac_container_height_diameter_delta_unit_name_of_alt_coding_sys String,
-	sac_container_height_diameter_delta_unit_coding_sys_ver_id String,
-	sac_container_height_diameter_delta_unit_alt_coding_sys_ver_id String,
-	sac_container_height_diameter_delta_unit_original_text String,
-	sac_container_height_diameter_delta_unit_second_alt_id String,
-	sac_container_height_diameter_delta_unit_second_alt_text String,
-	sac_container_height_diameter_delta_unit_name_of_second_alt_coding_sys String,
-	sac_container_height_diameter_delta_unit_second_alt_coding_sys_ver_id String,
-	sac_container_height_diameter_delta_unit_coding_sys_oid String,
-	sac_container_height_diameter_delta_unit_value_set_oid String,
-	sac_container_height_diameter_delta_unit_value_set_ver_id String,
-	sac_container_height_diameter_delta_unit_alt_coding_sys_oid String,
-	sac_container_height_diameter_delta_unit_alt_value_set_oid String,
-	sac_container_height_diameter_delta_unit_alt_value_set_ver_id String,
-	sac_container_height_diameter_delta_unit_second_alt_coding_sys_oid String,
-	sac_container_height_diameter_delta_unit_second_alt_value_set_oid String,
-	sac_container_height_diameter_delta_unit_second_alt_value_set_ver_id String,
 	sac_container_volume String,
 	sac_available_specimen_volume String,
 	sac_initial_specimen_volume String,
 	sac_volume_unit String,
-	sac_volume_unit_primary_id String,
-	sac_volume_unit_text String,
-	sac_volume_unit_name_of_coding_sys String,
-	sac_volume_unit_alt_id String,
-	sac_volume_unit_alt_text String,
-	sac_volume_unit_name_of_alt_coding_sys String,
-	sac_volume_unit_coding_sys_ver_id String,
-	sac_volume_unit_alt_coding_sys_ver_id String,
-	sac_volume_unit_original_text String,
-	sac_volume_unit_second_alt_id String,
-	sac_volume_unit_second_alt_text String,
-	sac_volume_unit_name_of_second_alt_coding_sys String,
-	sac_volume_unit_second_alt_coding_sys_ver_id String,
-	sac_volume_unit_coding_sys_oid String,
-	sac_volume_unit_value_set_oid String,
-	sac_volume_unit_value_set_ver_id String,
-	sac_volume_unit_alt_coding_sys_oid String,
-	sac_volume_unit_alt_value_set_oid String,
-	sac_volume_unit_alt_value_set_ver_id String,
-	sac_volume_unit_second_alt_coding_sys_oid String,
-	sac_volume_unit_second_alt_value_set_oid String,
-	sac_volume_unit_second_alt_value_set_ver_id String,
 	sac_separator_type String,
-	sac_separator_type_primary_id String,
-	sac_separator_type_text String,
-	sac_separator_type_name_of_coding_sys String,
-	sac_separator_type_alt_id String,
-	sac_separator_type_alt_text String,
-	sac_separator_type_name_of_alt_coding_sys String,
-	sac_separator_type_coding_sys_ver_id String,
-	sac_separator_type_alt_coding_sys_ver_id String,
-	sac_separator_type_original_text String,
-	sac_separator_type_second_alt_id String,
-	sac_separator_type_second_alt_text String,
-	sac_separator_type_name_of_second_alt_coding_sys String,
-	sac_separator_type_second_alt_coding_sys_ver_id String,
-	sac_separator_type_coding_sys_oid String,
-	sac_separator_type_value_set_oid String,
-	sac_separator_type_value_set_ver_id String,
-	sac_separator_type_alt_coding_sys_oid String,
-	sac_separator_type_alt_value_set_oid String,
-	sac_separator_type_alt_value_set_ver_id String,
-	sac_separator_type_second_alt_coding_sys_oid String,
-	sac_separator_type_second_alt_value_set_oid String,
-	sac_separator_type_second_alt_value_set_ver_id String,
 	sac_cap_type String,
-	sac_cap_type_primary_id String,
-	sac_cap_type_text String,
-	sac_cap_type_name_of_coding_sys String,
-	sac_cap_type_alt_id String,
-	sac_cap_type_alt_text String,
-	sac_cap_type_name_of_alt_coding_sys String,
-	sac_cap_type_coding_sys_ver_id String,
-	sac_cap_type_alt_coding_sys_ver_id String,
-	sac_cap_type_original_text String,
-	sac_cap_type_second_alt_id String,
-	sac_cap_type_second_alt_text String,
-	sac_cap_type_name_of_second_alt_coding_sys String,
-	sac_cap_type_second_alt_coding_sys_ver_id String,
-	sac_cap_type_coding_sys_oid String,
-	sac_cap_type_value_set_oid String,
-	sac_cap_type_value_set_ver_id String,
-	sac_cap_type_alt_coding_sys_oid String,
-	sac_cap_type_alt_value_set_oid String,
-	sac_cap_type_alt_value_set_ver_id String,
-	sac_cap_type_second_alt_coding_sys_oid String,
-	sac_cap_type_second_alt_value_set_oid String,
-	sac_cap_type_second_alt_value_set_ver_id String,
 	sac_additive String,
-	sac_additive_primary_id String,
-	sac_additive_text String,
-	sac_additive_name_of_coding_sys String,
-	sac_additive_alt_id String,
-	sac_additive_alt_text String,
-	sac_additive_name_of_alt_coding_sys String,
-	sac_additive_coding_sys_ver_id String,
-	sac_additive_alt_coding_sys_ver_id String,
-	sac_additive_original_text String,
-	sac_additive_second_alt_id String,
-	sac_additive_second_alt_text String,
-	sac_additive_name_of_second_alt_coding_sys String,
-	sac_additive_second_alt_coding_sys_ver_id String,
-	sac_additive_coding_sys_oid String,
-	sac_additive_value_set_oid String,
-	sac_additive_value_set_ver_id String,
-	sac_additive_alt_coding_sys_oid String,
-	sac_additive_alt_value_set_oid String,
-	sac_additive_alt_value_set_ver_id String,
-	sac_additive_second_alt_coding_sys_oid String,
-	sac_additive_second_alt_value_set_oid String,
-	sac_additive_second_alt_value_set_ver_id String,
 	sac_specimen_component String,
-	sac_specimen_component_primary_id String,
-	sac_specimen_component_text String,
-	sac_specimen_component_name_of_coding_sys String,
-	sac_specimen_component_alt_id String,
-	sac_specimen_component_alt_text String,
-	sac_specimen_component_name_of_alt_coding_sys String,
-	sac_specimen_component_coding_sys_ver_id String,
-	sac_specimen_component_alt_coding_sys_ver_id String,
-	sac_specimen_component_original_text String,
-	sac_specimen_component_second_alt_id String,
-	sac_specimen_component_second_alt_text String,
-	sac_specimen_component_name_of_second_alt_coding_sys String,
-	sac_specimen_component_second_alt_coding_sys_ver_id String,
-	sac_specimen_component_coding_sys_oid String,
-	sac_specimen_component_value_set_oid String,
-	sac_specimen_component_value_set_ver_id String,
-	sac_specimen_component_alt_coding_sys_oid String,
-	sac_specimen_component_alt_value_set_oid String,
-	sac_specimen_component_alt_value_set_ver_id String,
-	sac_specimen_component_second_alt_coding_sys_oid String,
-	sac_specimen_component_second_alt_value_set_oid String,
-	sac_specimen_component_second_alt_value_set_ver_id String,
 	sac_dilution_factor String,
-	sac_dilution_factor_comparator String,
-	sac_dilution_factor_num1 String,
-	sac_dilution_factor_separator_suffix String,
-	sac_dilution_factor_num2 String,
 	sac_treatment String,
-	sac_treatment_primary_id String,
-	sac_treatment_text String,
-	sac_treatment_name_of_coding_sys String,
-	sac_treatment_alt_id String,
-	sac_treatment_alt_text String,
-	sac_treatment_name_of_alt_coding_sys String,
-	sac_treatment_coding_sys_ver_id String,
-	sac_treatment_alt_coding_sys_ver_id String,
-	sac_treatment_original_text String,
-	sac_treatment_second_alt_id String,
-	sac_treatment_second_alt_text String,
-	sac_treatment_name_of_second_alt_coding_sys String,
-	sac_treatment_second_alt_coding_sys_ver_id String,
-	sac_treatment_coding_sys_oid String,
-	sac_treatment_value_set_oid String,
-	sac_treatment_value_set_ver_id String,
-	sac_treatment_alt_coding_sys_oid String,
-	sac_treatment_alt_value_set_oid String,
-	sac_treatment_alt_value_set_ver_id String,
-	sac_treatment_second_alt_coding_sys_oid String,
-	sac_treatment_second_alt_value_set_oid String,
-	sac_treatment_second_alt_value_set_ver_id String,
 	sac_temperature String,
-	sac_temperature_comparator String,
-	sac_temperature_num1 String,
-	sac_temperature_separator_suffix String,
-	sac_temperature_num2 String,
 	sac_hemolysis_index String,
 	sac_hemolysis_index_unit String,
-	sac_hemolysis_index_unit_primary_id String,
-	sac_hemolysis_index_unit_text String,
-	sac_hemolysis_index_unit_name_of_coding_sys String,
-	sac_hemolysis_index_unit_alt_id String,
-	sac_hemolysis_index_unit_alt_text String,
-	sac_hemolysis_index_unit_name_of_alt_coding_sys String,
-	sac_hemolysis_index_unit_coding_sys_ver_id String,
-	sac_hemolysis_index_unit_alt_coding_sys_ver_id String,
-	sac_hemolysis_index_unit_original_text String,
-	sac_hemolysis_index_unit_second_alt_id String,
-	sac_hemolysis_index_unit_second_alt_text String,
-	sac_hemolysis_index_unit_name_of_second_alt_coding_sys String,
-	sac_hemolysis_index_unit_second_alt_coding_sys_ver_id String,
-	sac_hemolysis_index_unit_coding_sys_oid String,
-	sac_hemolysis_index_unit_value_set_oid String,
-	sac_hemolysis_index_unit_value_set_ver_id String,
-	sac_hemolysis_index_unit_alt_coding_sys_oid String,
-	sac_hemolysis_index_unit_alt_value_set_oid String,
-	sac_hemolysis_index_unit_alt_value_set_ver_id String,
-	sac_hemolysis_index_unit_second_alt_coding_sys_oid String,
-	sac_hemolysis_index_unit_second_alt_value_set_oid String,
-	sac_hemolysis_index_unit_second_alt_value_set_ver_id String,
 	sac_lipemia_index String,
 	sac_lipemia_index_unit String,
-	sac_lipemia_index_unit_primary_id String,
-	sac_lipemia_index_unit_text String,
-	sac_lipemia_index_unit_name_of_coding_sys String,
-	sac_lipemia_index_unit_alt_id String,
-	sac_lipemia_index_unit_alt_text String,
-	sac_lipemia_index_unit_name_of_alt_coding_sys String,
-	sac_lipemia_index_unit_coding_sys_ver_id String,
-	sac_lipemia_index_unit_alt_coding_sys_ver_id String,
-	sac_lipemia_index_unit_original_text String,
-	sac_lipemia_index_unit_second_alt_id String,
-	sac_lipemia_index_unit_second_alt_text String,
-	sac_lipemia_index_unit_name_of_second_alt_coding_sys String,
-	sac_lipemia_index_unit_second_alt_coding_sys_ver_id String,
-	sac_lipemia_index_unit_coding_sys_oid String,
-	sac_lipemia_index_unit_value_set_oid String,
-	sac_lipemia_index_unit_value_set_ver_id String,
-	sac_lipemia_index_unit_alt_coding_sys_oid String,
-	sac_lipemia_index_unit_alt_value_set_oid String,
-	sac_lipemia_index_unit_alt_value_set_ver_id String,
-	sac_lipemia_index_unit_second_alt_coding_sys_oid String,
-	sac_lipemia_index_unit_second_alt_value_set_oid String,
-	sac_lipemia_index_unit_second_alt_value_set_ver_id String,
 	sac_icterus_index String,
 	sac_icterus_index_unit String,
-	sac_icterus_index_unit_primary_id String,
-	sac_icterus_index_unit_text String,
-	sac_icterus_index_unit_name_of_coding_sys String,
-	sac_icterus_index_unit_alt_id String,
-	sac_icterus_index_unit_alt_text String,
-	sac_icterus_index_unit_name_of_alt_coding_sys String,
-	sac_icterus_index_unit_coding_sys_ver_id String,
-	sac_icterus_index_unit_alt_coding_sys_ver_id String,
-	sac_icterus_index_unit_original_text String,
-	sac_icterus_index_unit_second_alt_id String,
-	sac_icterus_index_unit_second_alt_text String,
-	sac_icterus_index_unit_name_of_second_alt_coding_sys String,
-	sac_icterus_index_unit_second_alt_coding_sys_ver_id String,
-	sac_icterus_index_unit_coding_sys_oid String,
-	sac_icterus_index_unit_value_set_oid String,
-	sac_icterus_index_unit_value_set_ver_id String,
-	sac_icterus_index_unit_alt_coding_sys_oid String,
-	sac_icterus_index_unit_alt_value_set_oid String,
-	sac_icterus_index_unit_alt_value_set_ver_id String,
-	sac_icterus_index_unit_second_alt_coding_sys_oid String,
-	sac_icterus_index_unit_second_alt_value_set_oid String,
-	sac_icterus_index_unit_second_alt_value_set_ver_id String,
 	sac_fibrin_index String,
 	sac_fibrin_index_unit String,
-	sac_fibrin_index_unit_primary_id String,
-	sac_fibrin_index_unit_text String,
-	sac_fibrin_index_unit_name_of_coding_sys String,
-	sac_fibrin_index_unit_alt_id String,
-	sac_fibrin_index_unit_alt_text String,
-	sac_fibrin_index_unit_name_of_alt_coding_sys String,
-	sac_fibrin_index_unit_coding_sys_ver_id String,
-	sac_fibrin_index_unit_alt_coding_sys_ver_id String,
-	sac_fibrin_index_unit_original_text String,
-	sac_fibrin_index_unit_second_alt_id String,
-	sac_fibrin_index_unit_second_alt_text String,
-	sac_fibrin_index_unit_name_of_second_alt_coding_sys String,
-	sac_fibrin_index_unit_second_alt_coding_sys_ver_id String,
-	sac_fibrin_index_unit_coding_sys_oid String,
-	sac_fibrin_index_unit_value_set_oid String,
-	sac_fibrin_index_unit_value_set_ver_id String,
-	sac_fibrin_index_unit_alt_coding_sys_oid String,
-	sac_fibrin_index_unit_alt_value_set_oid String,
-	sac_fibrin_index_unit_alt_value_set_ver_id String,
-	sac_fibrin_index_unit_second_alt_coding_sys_oid String,
-	sac_fibrin_index_unit_second_alt_value_set_oid String,
-	sac_fibrin_index_unit_second_alt_value_set_ver_id String,
 	sac_sys_induced_contaminant String,
-	sac_sys_induced_contaminant_primary_id String,
-	sac_sys_induced_contaminant_text String,
-	sac_sys_induced_contaminant_name_of_coding_sys String,
-	sac_sys_induced_contaminant_alt_id String,
-	sac_sys_induced_contaminant_alt_text String,
-	sac_sys_induced_contaminant_name_of_alt_coding_sys String,
-	sac_sys_induced_contaminant_coding_sys_ver_id String,
-	sac_sys_induced_contaminant_alt_coding_sys_ver_id String,
-	sac_sys_induced_contaminant_original_text String,
-	sac_sys_induced_contaminant_second_alt_id String,
-	sac_sys_induced_contaminant_second_alt_text String,
-	sac_sys_induced_contaminant_name_of_second_alt_coding_sys String,
-	sac_sys_induced_contaminant_second_alt_coding_sys_ver_id String,
-	sac_sys_induced_contaminant_coding_sys_oid String,
-	sac_sys_induced_contaminant_value_set_oid String,
-	sac_sys_induced_contaminant_value_set_ver_id String,
-	sac_sys_induced_contaminant_alt_coding_sys_oid String,
-	sac_sys_induced_contaminant_alt_value_set_oid String,
-	sac_sys_induced_contaminant_alt_value_set_ver_id String,
-	sac_sys_induced_contaminant_second_alt_coding_sys_oid String,
-	sac_sys_induced_contaminant_second_alt_value_set_oid String,
-	sac_sys_induced_contaminant_second_alt_value_set_ver_id String,
 	sac_drug_interference String,
-	sac_drug_interference_primary_id String,
-	sac_drug_interference_text String,
-	sac_drug_interference_name_of_coding_sys String,
-	sac_drug_interference_alt_id String,
-	sac_drug_interference_alt_text String,
-	sac_drug_interference_name_of_alt_coding_sys String,
-	sac_drug_interference_coding_sys_ver_id String,
-	sac_drug_interference_alt_coding_sys_ver_id String,
-	sac_drug_interference_original_text String,
-	sac_drug_interference_second_alt_id String,
-	sac_drug_interference_second_alt_text String,
-	sac_drug_interference_name_of_second_alt_coding_sys String,
-	sac_drug_interference_second_alt_coding_sys_ver_id String,
-	sac_drug_interference_coding_sys_oid String,
-	sac_drug_interference_value_set_oid String,
-	sac_drug_interference_value_set_ver_id String,
-	sac_drug_interference_alt_coding_sys_oid String,
-	sac_drug_interference_alt_value_set_oid String,
-	sac_drug_interference_alt_value_set_ver_id String,
-	sac_drug_interference_second_alt_coding_sys_oid String,
-	sac_drug_interference_second_alt_value_set_oid String,
-	sac_drug_interference_second_alt_value_set_ver_id String,
 	sac_artificial_blood String,
-	sac_artificial_blood_primary_id String,
-	sac_artificial_blood_text String,
-	sac_artificial_blood_name_of_coding_sys String,
-	sac_artificial_blood_alt_id String,
-	sac_artificial_blood_alt_text String,
-	sac_artificial_blood_name_of_alt_coding_sys String,
-	sac_artificial_blood_coding_sys_ver_id String,
-	sac_artificial_blood_alt_coding_sys_ver_id String,
-	sac_artificial_blood_original_text String,
-	sac_artificial_blood_second_alt_id String,
-	sac_artificial_blood_second_alt_text String,
-	sac_artificial_blood_name_of_second_alt_coding_sys String,
-	sac_artificial_blood_second_alt_coding_sys_ver_id String,
-	sac_artificial_blood_coding_sys_oid String,
-	sac_artificial_blood_value_set_oid String,
-	sac_artificial_blood_value_set_ver_id String,
-	sac_artificial_blood_alt_coding_sys_oid String,
-	sac_artificial_blood_alt_value_set_oid String,
-	sac_artificial_blood_alt_value_set_ver_id String,
-	sac_artificial_blood_second_alt_coding_sys_oid String,
-	sac_artificial_blood_second_alt_value_set_oid String,
-	sac_artificial_blood_second_alt_value_set_ver_id String,
 	sac_special_handling_code String,
-	sac_special_handling_code_primary_id String,
-	sac_special_handling_code_text String,
-	sac_special_handling_code_name_of_coding_sys String,
-	sac_special_handling_code_alt_id String,
-	sac_special_handling_code_alt_text String,
-	sac_special_handling_code_name_of_alt_coding_sys String,
-	sac_special_handling_code_coding_sys_ver_id String,
-	sac_special_handling_code_alt_coding_sys_ver_id String,
-	sac_special_handling_code_original_text String,
-	sac_special_handling_code_second_alt_id String,
-	sac_special_handling_code_second_alt_text String,
-	sac_special_handling_code_name_of_second_alt_coding_sys String,
-	sac_special_handling_code_second_alt_coding_sys_ver_id String,
-	sac_special_handling_code_coding_sys_oid String,
-	sac_special_handling_code_value_set_oid String,
-	sac_special_handling_code_value_set_ver_id String,
-	sac_special_handling_code_alt_coding_sys_oid String,
-	sac_special_handling_code_alt_value_set_oid String,
-	sac_special_handling_code_alt_value_set_ver_id String,
-	sac_special_handling_code_second_alt_coding_sys_oid String,
-	sac_special_handling_code_second_alt_value_set_oid String,
-	sac_special_handling_code_second_alt_value_set_ver_id String,
 	sac_other_environmental_factor String,
-	sac_other_environmental_factor_primary_id String,
-	sac_other_environmental_factor_text String,
-	sac_other_environmental_factor_name_of_coding_sys String,
-	sac_other_environmental_factor_alt_id String,
-	sac_other_environmental_factor_alt_text String,
-	sac_other_environmental_factor_name_of_alt_coding_sys String,
-	sac_other_environmental_factor_coding_sys_ver_id String,
-	sac_other_environmental_factor_alt_coding_sys_ver_id String,
-	sac_other_environmental_factor_original_text String,
-	sac_other_environmental_factor_second_alt_id String,
-	sac_other_environmental_factor_second_alt_text String,
-	sac_other_environmental_factor_name_of_second_alt_coding_sys String,
-	sac_other_environmental_factor_second_alt_coding_sys_ver_id String,
-	sac_other_environmental_factor_coding_sys_oid String,
-	sac_other_environmental_factor_value_set_oid String,
-	sac_other_environmental_factor_value_set_ver_id String,
-	sac_other_environmental_factor_alt_coding_sys_oid String,
-	sac_other_environmental_factor_alt_value_set_oid String,
-	sac_other_environmental_factor_alt_value_set_ver_id String,
-	sac_other_environmental_factor_second_alt_coding_sys_oid String,
-	sac_other_environmental_factor_second_alt_value_set_oid String,
-	sac_other_environmental_factor_second_alt_value_set_ver_id String,
 	sac_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29877,14 +27378,10 @@ CREATE EXTERNAL TABLE hl7_scd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30047,14 +27544,10 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30078,14 +27571,10 @@ CREATE EXTERNAL TABLE hl7_scp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30108,14 +27597,10 @@ CREATE EXTERNAL TABLE hl7_sdd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30175,62 +27660,11 @@ CREATE EXTERNAL TABLE hl7_sft_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
-DROP TABLE hl7_sgh_data;
-
-CREATE EXTERNAL TABLE hl7_sgh_data (
-	segment_type String,
-	msh_sending_facility String,
-	msh_msg_control_id String,
-	pid_medical_record_num String,
-	pid_medical_record_urn String,
-	pid_pat_account_num String,
-	sgh_set_id String,
-	sgh_segment_group_name String,
-	sgh_unknown String,
-	etl_firstinsert_datetime String,
-	field_sequence_num String
-)
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGH';
-
-DROP TABLE hl7_sgt_data;
-
-CREATE EXTERNAL TABLE hl7_sgt_data (
-	segment_type String,
-	msh_sending_facility String,
-	msh_msg_control_id String,
-	pid_medical_record_num String,
-	pid_medical_record_urn String,
-	pid_pat_account_num String,
-	sgt_set_id String,
-	sgt_segment_group_name String,
-	sgt_unknown String,
-	etl_firstinsert_datetime String,
-	field_sequence_num String
-)
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGT';
 
 
 DROP TABLE hl7_shp_data;
@@ -30256,14 +27690,10 @@ CREATE EXTERNAL TABLE hl7_shp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30283,14 +27713,10 @@ CREATE EXTERNAL TABLE hl7_sid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30311,14 +27737,10 @@ CREATE EXTERNAL TABLE hl7_slt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30938,14 +28360,10 @@ CREATE EXTERNAL TABLE hl7_spm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31002,14 +28420,10 @@ CREATE EXTERNAL TABLE hl7_stf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31029,14 +28443,10 @@ CREATE EXTERNAL TABLE hl7_stz_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31066,14 +28476,10 @@ CREATE EXTERNAL TABLE hl7_tcc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31086,85 +28492,21 @@ CREATE EXTERNAL TABLE hl7_tcd_data (
 	pid_medical_record_urn String,
 	pid_pat_account_num String,
 	tcd_universal_service_id String,
-	tcd_universal_service_id_primary_id String,
-	tcd_universal_service_id_text String,
-	tcd_universal_service_id_name_of_coding_sys String,
-	tcd_universal_service_id_alt_id String,
-	tcd_universal_service_id_alt_text String,
-	tcd_universal_service_id_name_of_alt_coding_sys String,
-	tcd_universal_service_id_coding_sys_ver_id String,
-	tcd_universal_service_id_alt_coding_sys_ver_id String,
-	tcd_universal_service_id_original_text String,
-	tcd_universal_service_id_second_alt_id String,
-	tcd_universal_service_id_second_alt_text String,
-	tcd_universal_service_id_name_of_second_alt_coding_sys String,
-	tcd_universal_service_id_second_alt_coding_sys_ver_id String,
-	tcd_universal_service_id_coding_sys_oid String,
-	tcd_universal_service_id_value_set_oid String,
-	tcd_universal_service_id_value_set_ver_id String,
-	tcd_universal_service_id_alt_coding_sys_oid String,
-	tcd_universal_service_id_alt_value_set_oid String,
-	tcd_universal_service_id_alt_value_set_ver_id String,
-	tcd_universal_service_id_second_alt_coding_sys_oid String,
-	tcd_universal_service_id_second_alt_value_set_oid String,
-	tcd_universal_service_id_second_alt_value_set_ver_id String,
 	tcd_auto_dilution_factor String,
-	tcd_auto_dilution_factor_comparator String,
-	tcd_auto_dilution_factor_num1 String,
-	tcd_auto_dilution_factor_separator_suffix String,
-	tcd_auto_dilution_factor_num2 String,
 	tcd_rerun_dilution_factor String,
-	tcd_rerun_dilution_factor_comparator String,
-	tcd_rerun_dilution_factor_num1 String,
-	tcd_rerun_dilution_factor_separator_suffix String,
-	tcd_rerun_dilution_factor_num2 String,
 	tcd_pre_dilution_factor String,
-	tcd_pre_dilution_factor_comparator String,
-	tcd_pre_dilution_factor_num1 String,
-	tcd_pre_dilution_factor_separator_suffix String,
-	tcd_pre_dilution_factor_num2 String,
 	tcd_endogenous_content_of_pre_dilution_diluent String,
-	tcd_endogenous_content_of_pre_dilution_diluent_comparator String,
-	tcd_endogenous_content_of_pre_dilution_diluent_num1 String,
-	tcd_endogenous_content_of_pre_dilution_diluent_separator_suffix String,
-	tcd_endogenous_content_of_pre_dilution_diluent_num2 String,
 	tcd_automatic_repeat_allowed String,
 	tcd_reflex_allowed String,
 	tcd_analyte_repeat_status String,
-	tcd_analyte_repeat_status_primary_id String,
-	tcd_analyte_repeat_status_text String,
-	tcd_analyte_repeat_status_name_of_coding_sys String,
-	tcd_analyte_repeat_status_alt_id String,
-	tcd_analyte_repeat_status_alt_text String,
-	tcd_analyte_repeat_status_name_of_alt_coding_sys String,
-	tcd_analyte_repeat_status_coding_sys_ver_id String,
-	tcd_analyte_repeat_status_alt_coding_sys_ver_id String,
-	tcd_analyte_repeat_status_original_text String,
-	tcd_analyte_repeat_status_second_alt_id String,
-	tcd_analyte_repeat_status_second_alt_text String,
-	tcd_analyte_repeat_status_name_of_second_alt_coding_sys String,
-	tcd_analyte_repeat_status_second_alt_coding_sys_ver_id String,
-	tcd_analyte_repeat_status_coding_sys_oid String,
-	tcd_analyte_repeat_status_value_set_oid String,
-	tcd_analyte_repeat_status_value_set_ver_id String,
-	tcd_analyte_repeat_status_alt_coding_sys_oid String,
-	tcd_analyte_repeat_status_alt_value_set_oid String,
-	tcd_analyte_repeat_status_alt_value_set_ver_id String,
-	tcd_analyte_repeat_status_second_alt_coding_sys_oid String,
-	tcd_analyte_repeat_status_second_alt_value_set_oid String,
-	tcd_analyte_repeat_status_second_alt_value_set_ver_id String,
 	tcd_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31389,14 +28731,10 @@ CREATE EXTERNAL TABLE hl7_tq1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31458,14 +28796,10 @@ CREATE EXTERNAL TABLE hl7_tq2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32322,14 +29656,10 @@ CREATE EXTERNAL TABLE hl7_txa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32377,14 +29707,10 @@ CREATE EXTERNAL TABLE hl7_uac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32423,14 +29749,10 @@ CREATE EXTERNAL TABLE hl7_ub1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32584,14 +29906,10 @@ CREATE EXTERNAL TABLE hl7_ub2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32614,14 +29932,10 @@ CREATE EXTERNAL TABLE hl7_urd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32646,14 +29960,10 @@ CREATE EXTERNAL TABLE hl7_urs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32675,14 +29985,10 @@ CREATE EXTERNAL TABLE hl7_var_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32703,14 +30009,10 @@ CREATE EXTERNAL TABLE hl7_vnd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32742,14 +30044,10 @@ CREATE EXTERNAL TABLE hl7_zao_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32770,14 +30068,10 @@ CREATE EXTERNAL TABLE hl7_zcd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32805,14 +30099,10 @@ CREATE EXTERNAL TABLE hl7_zcl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32832,14 +30122,10 @@ CREATE EXTERNAL TABLE hl7_zcn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32865,14 +30151,10 @@ CREATE EXTERNAL TABLE hl7_zcp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32899,14 +30181,10 @@ CREATE EXTERNAL TABLE hl7_zcs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32927,14 +30205,10 @@ CREATE EXTERNAL TABLE hl7_zds_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32967,14 +30241,10 @@ CREATE EXTERNAL TABLE hl7_zdt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32998,14 +30268,10 @@ CREATE EXTERNAL TABLE hl7_zdu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33072,14 +30338,10 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33097,14 +30359,10 @@ CREATE EXTERNAL TABLE hl7_zex_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33124,14 +30382,10 @@ CREATE EXTERNAL TABLE hl7_zg1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33149,14 +30403,10 @@ CREATE EXTERNAL TABLE hl7_zid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33180,14 +30430,10 @@ CREATE EXTERNAL TABLE hl7_zif_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33243,14 +30489,10 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33272,14 +30514,10 @@ CREATE EXTERNAL TABLE hl7_zm1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33392,14 +30630,10 @@ CREATE EXTERNAL TABLE hl7_zmp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33417,14 +30651,10 @@ CREATE EXTERNAL TABLE hl7_zmr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33449,14 +30679,10 @@ CREATE EXTERNAL TABLE hl7_zpd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33479,14 +30705,10 @@ CREATE EXTERNAL TABLE hl7_zpe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33511,14 +30733,10 @@ CREATE EXTERNAL TABLE hl7_zpo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33550,14 +30768,10 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33609,14 +30823,10 @@ CREATE EXTERNAL TABLE hl7_zpv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33637,14 +30847,10 @@ CREATE EXTERNAL TABLE hl7_zrq_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33684,14 +30890,10 @@ CREATE EXTERNAL TABLE hl7_zrx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33714,14 +30916,10 @@ CREATE EXTERNAL TABLE hl7_zsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33740,14 +30938,10 @@ CREATE EXTERNAL TABLE hl7_zsi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33775,14 +30969,10 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33800,14 +30990,10 @@ CREATE EXTERNAL TABLE hl7_zsu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33835,14 +31021,10 @@ CREATE EXTERNAL TABLE hl7_ztf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33990,14 +31172,10 @@ CREATE EXTERNAL TABLE hl7_ztm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -34015,14 +31193,10 @@ CREATE EXTERNAL TABLE hl7_zur_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -34044,13 +31218,9 @@ CREATE EXTERNAL TABLE hl7_zvn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
-PARTITIONED BY (
-	message_type String,
-	transaction_date String
-)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZVN';
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
