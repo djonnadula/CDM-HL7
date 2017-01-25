@@ -1,4 +1,4 @@
-USE hl7_reg_test;
+USE hl7_qa;
 
 DROP TABLE hl7_abs_data;
 
@@ -29,7 +29,7 @@ CREATE EXTERNAL TABLE hl7_abs_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -352,7 +352,7 @@ CREATE EXTERNAL TABLE hl7_acc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -372,7 +372,7 @@ CREATE EXTERNAL TABLE hl7_add_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -406,7 +406,7 @@ CREATE EXTERNAL TABLE hl7_adj_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -430,7 +430,7 @@ CREATE EXTERNAL TABLE hl7_aff_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -463,7 +463,7 @@ CREATE EXTERNAL TABLE hl7_aig_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -494,7 +494,7 @@ CREATE EXTERNAL TABLE hl7_ail_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -525,7 +525,7 @@ CREATE EXTERNAL TABLE hl7_aip_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -556,7 +556,7 @@ CREATE EXTERNAL TABLE hl7_ais_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -696,7 +696,7 @@ CREATE EXTERNAL TABLE hl7_al1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -720,7 +720,7 @@ CREATE EXTERNAL TABLE hl7_apr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -764,7 +764,7 @@ CREATE EXTERNAL TABLE hl7_arq_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -857,7 +857,7 @@ CREATE EXTERNAL TABLE hl7_arv_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -888,7 +888,7 @@ CREATE EXTERNAL TABLE hl7_aut_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -921,7 +921,7 @@ CREATE EXTERNAL TABLE hl7_bhs_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -942,7 +942,7 @@ CREATE EXTERNAL TABLE hl7_blc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -965,7 +965,7 @@ CREATE EXTERNAL TABLE hl7_blg_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -998,7 +998,7 @@ CREATE EXTERNAL TABLE hl7_bpo_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1038,7 +1038,7 @@ CREATE EXTERNAL TABLE hl7_bpx_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1060,7 +1060,7 @@ CREATE EXTERNAL TABLE hl7_bts_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1098,7 +1098,7 @@ CREATE EXTERNAL TABLE hl7_btx_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1130,7 +1130,7 @@ CREATE EXTERNAL TABLE hl7_cdm_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1201,7 +1201,7 @@ CREATE EXTERNAL TABLE hl7_cdo_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1251,7 +1251,7 @@ CREATE EXTERNAL TABLE hl7_cer_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1281,7 +1281,7 @@ CREATE EXTERNAL TABLE hl7_cm0_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1303,7 +1303,7 @@ CREATE EXTERNAL TABLE hl7_cm1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1326,7 +1326,7 @@ CREATE EXTERNAL TABLE hl7_cm2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1351,7 +1351,7 @@ CREATE EXTERNAL TABLE hl7_cns_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1619,7 +1619,7 @@ CREATE EXTERNAL TABLE hl7_con_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1642,7 +1642,7 @@ CREATE EXTERNAL TABLE hl7_csp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1677,7 +1677,7 @@ CREATE EXTERNAL TABLE hl7_csr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -1699,7 +1699,7 @@ CREATE EXTERNAL TABLE hl7_css_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2061,7 +2061,7 @@ CREATE EXTERNAL TABLE hl7_ctd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2131,7 +2131,7 @@ CREATE EXTERNAL TABLE hl7_cti_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2158,7 +2158,7 @@ CREATE EXTERNAL TABLE hl7_db1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2559,7 +2559,7 @@ CREATE EXTERNAL TABLE hl7_dg1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -2583,7 +2583,7 @@ CREATE EXTERNAL TABLE hl7_dmi_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3093,7 +3093,7 @@ CREATE EXTERNAL TABLE hl7_drg_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3114,7 +3114,7 @@ CREATE EXTERNAL TABLE hl7_dsc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3138,7 +3138,7 @@ CREATE EXTERNAL TABLE hl7_dsp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3162,7 +3162,7 @@ CREATE EXTERNAL TABLE hl7_ecd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3184,7 +3184,7 @@ CREATE EXTERNAL TABLE hl7_ecr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3212,7 +3212,7 @@ CREATE EXTERNAL TABLE hl7_edu_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3236,7 +3236,7 @@ CREATE EXTERNAL TABLE hl7_eqp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3260,7 +3260,7 @@ CREATE EXTERNAL TABLE hl7_equ_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3473,7 +3473,7 @@ CREATE EXTERNAL TABLE hl7_err_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3650,7 +3650,7 @@ CREATE EXTERNAL TABLE hl7_evn_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3681,7 +3681,7 @@ CREATE EXTERNAL TABLE hl7_fac_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -3714,7 +3714,7 @@ CREATE EXTERNAL TABLE hl7_fhs_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -4976,7 +4976,7 @@ CREATE EXTERNAL TABLE hl7_ft1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -4997,7 +4997,7 @@ CREATE EXTERNAL TABLE hl7_fts_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5038,7 +5038,7 @@ CREATE EXTERNAL TABLE hl7_gol_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5062,7 +5062,7 @@ CREATE EXTERNAL TABLE hl7_gp1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -5095,7 +5095,7 @@ CREATE EXTERNAL TABLE hl7_gp2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -6766,7 +6766,7 @@ CREATE EXTERNAL TABLE hl7_gt1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7739,7 +7739,7 @@ CREATE EXTERNAL TABLE hl7_iam_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7762,7 +7762,7 @@ CREATE EXTERNAL TABLE hl7_iar_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7796,7 +7796,7 @@ CREATE EXTERNAL TABLE hl7_iim_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -7825,7 +7825,7 @@ CREATE EXTERNAL TABLE hl7_ilt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -9286,7 +9286,7 @@ CREATE EXTERNAL TABLE hl7_in1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -11214,7 +11214,7 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12118,7 +12118,7 @@ CREATE EXTERNAL TABLE hl7_in3_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12157,7 +12157,7 @@ CREATE EXTERNAL TABLE hl7_inv_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12272,7 +12272,7 @@ CREATE EXTERNAL TABLE hl7_ipc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12299,7 +12299,7 @@ CREATE EXTERNAL TABLE hl7_ipr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12321,7 +12321,7 @@ CREATE EXTERNAL TABLE hl7_isd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12369,7 +12369,7 @@ CREATE EXTERNAL TABLE hl7_itm_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12418,7 +12418,7 @@ CREATE EXTERNAL TABLE hl7_ivc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12463,7 +12463,7 @@ CREATE EXTERNAL TABLE hl7_ivt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12486,7 +12486,7 @@ CREATE EXTERNAL TABLE hl7_lan_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12509,7 +12509,7 @@ CREATE EXTERNAL TABLE hl7_lcc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12533,7 +12533,7 @@ CREATE EXTERNAL TABLE hl7_lch_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12564,7 +12564,7 @@ CREATE EXTERNAL TABLE hl7_ldp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12592,7 +12592,7 @@ CREATE EXTERNAL TABLE hl7_loc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12617,7 +12617,7 @@ CREATE EXTERNAL TABLE hl7_lrl_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12642,7 +12642,7 @@ CREATE EXTERNAL TABLE hl7_mfa_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12668,7 +12668,7 @@ CREATE EXTERNAL TABLE hl7_mfe_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -12693,7 +12693,7 @@ CREATE EXTERNAL TABLE hl7_mfi_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13078,7 +13078,7 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13105,7 +13105,7 @@ CREATE EXTERNAL TABLE hl7_msa_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13322,7 +13322,7 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13342,7 +13342,7 @@ CREATE EXTERNAL TABLE hl7_nck_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -13365,7 +13365,7 @@ CREATE EXTERNAL TABLE hl7_nds_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14754,7 +14754,7 @@ CREATE EXTERNAL TABLE hl7_nk1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14775,7 +14775,7 @@ CREATE EXTERNAL TABLE hl7_npu_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14803,7 +14803,7 @@ CREATE EXTERNAL TABLE hl7_nsc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -14837,7 +14837,7 @@ CREATE EXTERNAL TABLE hl7_nst_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -15017,7 +15017,7 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16150,7 +16150,7 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16795,7 +16795,7 @@ CREATE EXTERNAL TABLE hl7_obx_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16862,7 +16862,7 @@ CREATE EXTERNAL TABLE hl7_ods_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16884,7 +16884,7 @@ CREATE EXTERNAL TABLE hl7_odt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16950,7 +16950,7 @@ CREATE EXTERNAL TABLE hl7_om1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -16979,7 +16979,7 @@ CREATE EXTERNAL TABLE hl7_om2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17005,7 +17005,7 @@ CREATE EXTERNAL TABLE hl7_om3_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17038,7 +17038,7 @@ CREATE EXTERNAL TABLE hl7_om4_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17060,7 +17060,7 @@ CREATE EXTERNAL TABLE hl7_om5_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17081,7 +17081,7 @@ CREATE EXTERNAL TABLE hl7_om6_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -17124,7 +17124,7 @@ CREATE EXTERNAL TABLE hl7_om7_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18450,7 +18450,7 @@ CREATE EXTERNAL TABLE hl7_orc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18482,7 +18482,7 @@ CREATE EXTERNAL TABLE hl7_org_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18506,7 +18506,7 @@ CREATE EXTERNAL TABLE hl7_ovr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18533,7 +18533,7 @@ CREATE EXTERNAL TABLE hl7_pac_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18556,7 +18556,7 @@ CREATE EXTERNAL TABLE hl7_pce_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -18598,7 +18598,7 @@ CREATE EXTERNAL TABLE hl7_pcr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19167,7 +19167,7 @@ CREATE EXTERNAL TABLE hl7_pd1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19195,7 +19195,7 @@ CREATE EXTERNAL TABLE hl7_pda_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19229,7 +19229,7 @@ CREATE EXTERNAL TABLE hl7_pdc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19273,7 +19273,7 @@ CREATE EXTERNAL TABLE hl7_peo_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -19305,7 +19305,7 @@ CREATE EXTERNAL TABLE hl7_pes_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20295,7 +20295,7 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20321,7 +20321,7 @@ CREATE EXTERNAL TABLE hl7_pkg_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20352,7 +20352,7 @@ CREATE EXTERNAL TABLE hl7_pmt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20660,7 +20660,7 @@ CREATE EXTERNAL TABLE hl7_pr1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -20691,7 +20691,7 @@ CREATE EXTERNAL TABLE hl7_pra_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21082,7 +21082,7 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21119,7 +21119,7 @@ CREATE EXTERNAL TABLE hl7_prc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21152,7 +21152,7 @@ CREATE EXTERNAL TABLE hl7_prd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21690,7 +21690,7 @@ CREATE EXTERNAL TABLE hl7_prt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21715,7 +21715,7 @@ CREATE EXTERNAL TABLE hl7_psg_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21748,7 +21748,7 @@ CREATE EXTERNAL TABLE hl7_psh_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21815,7 +21815,7 @@ CREATE EXTERNAL TABLE hl7_psl_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21839,7 +21839,7 @@ CREATE EXTERNAL TABLE hl7_pss_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -21865,7 +21865,7 @@ CREATE EXTERNAL TABLE hl7_pth_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -23482,7 +23482,7 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24213,7 +24213,7 @@ CREATE EXTERNAL TABLE hl7_pv2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24239,13 +24239,13 @@ CREATE EXTERNAL TABLE hl7_pye_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
-DROP TABLE hl7_reg_testk_data;
+DROP TABLE hl7_qak_data;
 
-CREATE EXTERNAL TABLE hl7_reg_testk_data (
+CREATE EXTERNAL TABLE hl7_qak_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24264,7 +24264,7 @@ CREATE EXTERNAL TABLE hl7_reg_testk_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24285,7 +24285,7 @@ CREATE EXTERNAL TABLE hl7_qid_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24307,7 +24307,7 @@ CREATE EXTERNAL TABLE hl7_qpd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24338,7 +24338,7 @@ CREATE EXTERNAL TABLE hl7_qrd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24367,7 +24367,7 @@ CREATE EXTERNAL TABLE hl7_qrf_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24389,7 +24389,7 @@ CREATE EXTERNAL TABLE hl7_qri_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24415,7 +24415,7 @@ CREATE EXTERNAL TABLE hl7_rcp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24436,7 +24436,7 @@ CREATE EXTERNAL TABLE hl7_rdf_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24456,7 +24456,7 @@ CREATE EXTERNAL TABLE hl7_rdt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24491,7 +24491,7 @@ CREATE EXTERNAL TABLE hl7_rel_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24522,7 +24522,7 @@ CREATE EXTERNAL TABLE hl7_rf1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24545,7 +24545,7 @@ CREATE EXTERNAL TABLE hl7_rfi_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24567,7 +24567,7 @@ CREATE EXTERNAL TABLE hl7_rgs_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -24589,7 +24589,7 @@ CREATE EXTERNAL TABLE hl7_rmi_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25141,7 +25141,7 @@ CREATE EXTERNAL TABLE hl7_rol_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25211,7 +25211,7 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25372,7 +25372,7 @@ CREATE EXTERNAL TABLE hl7_rqd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -25937,7 +25937,7 @@ CREATE EXTERNAL TABLE hl7_rxa_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26099,7 +26099,7 @@ CREATE EXTERNAL TABLE hl7_rxc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -26152,7 +26152,7 @@ CREATE EXTERNAL TABLE hl7_rxd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27186,7 +27186,7 @@ CREATE EXTERNAL TABLE hl7_rxe_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -27235,7 +27235,7 @@ CREATE EXTERNAL TABLE hl7_rxg_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28221,7 +28221,7 @@ CREATE EXTERNAL TABLE hl7_rxo_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28378,7 +28378,7 @@ CREATE EXTERNAL TABLE hl7_rxr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -28665,7 +28665,7 @@ CREATE EXTERNAL TABLE hl7_rxv_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29212,7 +29212,7 @@ CREATE EXTERNAL TABLE hl7_sac_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29268,7 +29268,7 @@ CREATE EXTERNAL TABLE hl7_scd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29434,7 +29434,7 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29461,7 +29461,7 @@ CREATE EXTERNAL TABLE hl7_scp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29487,7 +29487,7 @@ CREATE EXTERNAL TABLE hl7_sdd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29550,7 +29550,7 @@ CREATE EXTERNAL TABLE hl7_sft_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 DROP TABLE hl7_sgh_data;
 
@@ -29569,7 +29569,7 @@ CREATE EXTERNAL TABLE hl7_sgh_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 DROP TABLE hl7_sgt_data;
 
@@ -29588,7 +29588,7 @@ CREATE EXTERNAL TABLE hl7_sgt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 DROP TABLE hl7_shp_data;
@@ -29617,7 +29617,7 @@ CREATE EXTERNAL TABLE hl7_shp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29640,7 +29640,7 @@ CREATE EXTERNAL TABLE hl7_sid_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -29664,7 +29664,7 @@ CREATE EXTERNAL TABLE hl7_slt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30287,7 +30287,7 @@ CREATE EXTERNAL TABLE hl7_spm_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30347,7 +30347,7 @@ CREATE EXTERNAL TABLE hl7_stf_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30370,7 +30370,7 @@ CREATE EXTERNAL TABLE hl7_stz_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30403,7 +30403,7 @@ CREATE EXTERNAL TABLE hl7_tcc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30490,7 +30490,7 @@ CREATE EXTERNAL TABLE hl7_tcd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30718,7 +30718,7 @@ CREATE EXTERNAL TABLE hl7_tq1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -30783,7 +30783,7 @@ CREATE EXTERNAL TABLE hl7_tq2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31643,7 +31643,7 @@ CREATE EXTERNAL TABLE hl7_txa_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31694,7 +31694,7 @@ CREATE EXTERNAL TABLE hl7_uac_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31736,7 +31736,7 @@ CREATE EXTERNAL TABLE hl7_ub1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31893,7 +31893,7 @@ CREATE EXTERNAL TABLE hl7_ub2_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31919,7 +31919,7 @@ CREATE EXTERNAL TABLE hl7_urd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31947,7 +31947,7 @@ CREATE EXTERNAL TABLE hl7_urs_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31972,7 +31972,7 @@ CREATE EXTERNAL TABLE hl7_var_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -31996,7 +31996,7 @@ CREATE EXTERNAL TABLE hl7_vnd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32031,7 +32031,7 @@ CREATE EXTERNAL TABLE hl7_zao_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32055,7 +32055,7 @@ CREATE EXTERNAL TABLE hl7_zcd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32086,7 +32086,7 @@ CREATE EXTERNAL TABLE hl7_zcl_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32109,7 +32109,7 @@ CREATE EXTERNAL TABLE hl7_zcn_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32138,7 +32138,7 @@ CREATE EXTERNAL TABLE hl7_zcp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32168,7 +32168,7 @@ CREATE EXTERNAL TABLE hl7_zcs_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32192,7 +32192,7 @@ CREATE EXTERNAL TABLE hl7_zds_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32228,7 +32228,7 @@ CREATE EXTERNAL TABLE hl7_zdt_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32255,7 +32255,7 @@ CREATE EXTERNAL TABLE hl7_zdu_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32325,7 +32325,7 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32346,7 +32346,7 @@ CREATE EXTERNAL TABLE hl7_zex_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32369,7 +32369,7 @@ CREATE EXTERNAL TABLE hl7_zg1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32390,7 +32390,7 @@ CREATE EXTERNAL TABLE hl7_zid_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32417,7 +32417,7 @@ CREATE EXTERNAL TABLE hl7_zif_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32476,7 +32476,7 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32501,7 +32501,7 @@ CREATE EXTERNAL TABLE hl7_zm1_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32617,7 +32617,7 @@ CREATE EXTERNAL TABLE hl7_zmp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32638,7 +32638,7 @@ CREATE EXTERNAL TABLE hl7_zmr_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32666,7 +32666,7 @@ CREATE EXTERNAL TABLE hl7_zpd_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32692,7 +32692,7 @@ CREATE EXTERNAL TABLE hl7_zpe_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32720,7 +32720,7 @@ CREATE EXTERNAL TABLE hl7_zpo_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32755,7 +32755,7 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32810,7 +32810,7 @@ CREATE EXTERNAL TABLE hl7_zpv_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32834,7 +32834,7 @@ CREATE EXTERNAL TABLE hl7_zrq_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32877,7 +32877,7 @@ CREATE EXTERNAL TABLE hl7_zrx_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32903,7 +32903,7 @@ CREATE EXTERNAL TABLE hl7_zsc_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32925,7 +32925,7 @@ CREATE EXTERNAL TABLE hl7_zsi_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32956,7 +32956,7 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -32977,7 +32977,7 @@ CREATE EXTERNAL TABLE hl7_zsu_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33008,7 +33008,7 @@ CREATE EXTERNAL TABLE hl7_ztf_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33159,7 +33159,7 @@ CREATE EXTERNAL TABLE hl7_ztm_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33180,7 +33180,7 @@ CREATE EXTERNAL TABLE hl7_zur_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
 
@@ -33205,6 +33205,6 @@ CREATE EXTERNAL TABLE hl7_zvn_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_qa/hl7_all_segment_data';
 
 
