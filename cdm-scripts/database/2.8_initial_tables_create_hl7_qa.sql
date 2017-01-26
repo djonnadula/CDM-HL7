@@ -16789,6 +16789,10 @@ CREATE EXTERNAL TABLE hl7_obx_data (
     obx_performing_organization_medical_director_name_security_check_scheme String,
     obx_patient_result_release_category String,
     obx_unknown String,
+    obx_observation_sub_id_orig_sub_id String,
+    obx_observation_sub_id_group String,
+    obx_observation_sub_id_sequence String,
+    obx_observation_sub_id_identifier String,
     etl_firstinsert_datetime String,
 	field_sequence_num String
 )
