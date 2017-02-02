@@ -121,7 +121,7 @@ object HL7Receiver extends Logg with App {
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkStrCtx.union((0 until numberOfReceivers).map(receiver => {
-      val stream = sparkStrCtx.receiverStream(new receiver(app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
+      val stream = sparkStrCtx.receiverStream(new receiver(receiver,app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
       info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $receiver")
       stream
     }))

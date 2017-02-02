@@ -20,7 +20,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
 /**
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
-class MqReceiver(app: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchInterval: Int, batchSize: Int, sources: Set[String])
+class MqReceiver(id : Int ,app: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (ackQueue: Option[String], tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
   extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_SER) with Logg with MqConnector {
 
@@ -28,14 +28,13 @@ class MqReceiver(app: String, jobDesc: String, hosts: String, port: Int, queueMa
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
   private var dataFetcher: Thread = _
-  private val cnt = new AtomicInteger(0)
   private var sHook: Thread = _
 
 
   def getCurrentConnection: ConnectionMeta = activeConnection.get()
 
   override def onStart(): Unit = {
-    val t = newThread(s"$app-${cnt.incrementAndGet()}-MqReceiver", runnable(
+    val t = newThread(s"$app-$id-MqReceiver", runnable(
       try {
         val con = handleConsumer()
         if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
