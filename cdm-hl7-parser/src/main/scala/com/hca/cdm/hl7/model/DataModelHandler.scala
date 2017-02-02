@@ -13,6 +13,7 @@ import scala.concurrent.duration.Duration.{Inf => waitTillTaskCompletes}
 import scala.concurrent.{Await, Future => async}
 import scala.util.{Failure, Success, Try}
 import AuditConstants._
+import com.hca.cdm.Models.MSGMeta
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -25,7 +26,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   extends SegmentsHandler with Logg {
 
   private val hl7 = hl7Segments.msgType.toString
-  outStream.println(
+  info(
     hl7 + " " +
       """ Handler Registered For Modeling ::
       ____
@@ -33,11 +34,11 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
       / /
      / /
     /_/
-      " Segments Registered with Handler :: """ + hl7Segments.models.keys.mkString(repeat))
-  logIdent = hl7 + " Model Handler "
-  private val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
+      " Segments Registered with Handler :: """ + hl7Segments.models.keys.mkString(caret))
+  logIdent = s"$hl7-Model Handler"
+  private lazy val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
 
-  private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: String = EMPTYSTR, auditKey: String, headerKey : String )
+  private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: String = EMPTYSTR, auditKey: String, headerKey: String)
 
   private val metrics = new TrieMap[String, Long]
   private val dataModeler = DataModeler(hl7Segments.msgType)
@@ -47,15 +48,14 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
       models.foreach(model => {
         temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType), model.adhoc.isDefined, if (model.adhoc.isDefined) model.adhoc.get.dest else EMPTYSTR,
           if (model.adhoc.isDefined) seg substring ((seg indexOf COLON) + 1) else EMPTYSTR,
-          if (model.adhoc.isDefined) seg.replaceAll(COLON,"-") else EMPTYSTR)
+          if (model.adhoc.isDefined) seg.replaceAll(COLON, "-") else EMPTYSTR)
         SegmentsState.values.foreach(state => {
-          metrics += hl7 + COLON + seg + COLON + state -> 0L
+          metrics += s"$hl7$COLON$seg$COLON$state" -> 0L
         })
       })
     })
     temp
   }
-
   private lazy val nonAdhocSegments = segRef map (seg => if (!seg.adhoc) seg.seg else EMPTYSTR) filter (_ != EMPTYSTR)
 
   private def runModel(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
@@ -72,14 +72,14 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                     val msg = rejectMsg(hl7, segment.seg, meta, skippedStr, data)
                     sizeCheck(msg, segment.seg)
                     tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-skippedSegment", error(_: Throwable))
-                    debug("Segment Skipped :: " + msg)
+                    debug(s"Segment Skipped :: $msg")
                   case `filteredStr` =>
                     updateMetrics(segment.seg, FILTERED)
                     val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, data)
                     // This Check Added After Discussing this Log is not Required as of now So commenting.
                     /* sizeCheck(msg, segment.seg)
                     tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-filteredSegment", error(_: Throwable)) */
-                    debug("Segment Filtered :: " + msg)
+                    debug(s"Segment Filtered :: $msg")
                   case _ =>
                     sizeCheck(rec, segment.seg)
                     segment.adhoc match {
@@ -123,7 +123,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                 val msg = rejectMsg(hl7, segment.seg, meta, " Invalid Input or Meta Data Required to process Doesn't Exist", data)
                 sizeCheck(msg, segment.seg)
                 tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-$notValidStr", error(_: Throwable))
-                error("Invalid Input Came :: " + msg)
+                error(s"Invalid Input Came :: $msg")
               case `NA` => updateMetrics(segment.seg, NOTAPPLICABLE)
               case _ =>
             }
@@ -133,7 +133,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
         val msg = rejectMsg(hl7, segment.seg, meta, t.getMessage, data, t)
         sizeCheck(msg, segment.seg)
         tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-${t.getMessage}", error(_: Throwable))
-        error(t.getMessage + " :: " + msg, t)
+        error(s"Applying $hl7 Model For Segment ${segment.seg} Failed ${t.getMessage} :: $msg", t)
     }
     }
     if (segRef.nonEmpty) tryAndLogThr(auditIO(segmentsInHl7Auditor(segmentsInMsg(allSegmentsForHl7, data), meta), header(hl7, auditHeader, Left(meta))),
@@ -149,7 +149,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   private def tryForTaskExe[T](action: async[T]): Try[T] = Try(Await result(action, waitTillTaskCompletes))
 
   private def updateMetrics(seg: String, state: SegState) = {
-    val key = hl7 + COLON + seg + COLON + state
+    val key = s"$hl7$COLON$seg$COLON$state"
     metrics get key match {
       case Some(stat) => metrics update(key, inc(stat))
       case _ => throw new DataModelException("Cannot Update Metrics Key not Found." + logIdent + " This should not Happen :: " + seg)
