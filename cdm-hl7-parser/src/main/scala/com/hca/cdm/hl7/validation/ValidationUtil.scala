@@ -1,7 +1,7 @@
 package com.hca.cdm.hl7.validation
 
+import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
-import com.hca.cdm.hl7.audit.MSGMeta
 import com.hca.cdm.hl7.constants.HL7Constants._
 
 /**

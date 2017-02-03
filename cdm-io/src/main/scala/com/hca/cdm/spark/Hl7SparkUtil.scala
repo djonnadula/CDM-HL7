@@ -3,7 +3,7 @@ package com.hca.cdm.spark
 import kafka.serializer.StringDecoder
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
-import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.{Duration,StreamingContext}
 import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
@@ -18,22 +18,24 @@ object Hl7SparkUtil {
   /**
     * Creates Spark Configuration from Config File Provided
     */
-  def getConf(app: String, parHint: String): SparkConf = {
+  def getConf(app: String, parHint: String, kafkaConsumer: Boolean = true): SparkConf = {
+    val conf = new SparkConf()
     val rate = lookUpProp("hl7.batch.rate").toInt
-    new SparkConf()
+    conf
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
       .set("spark.streaming.backpressure.pid.derived", "0.1")
-      .set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+    if (kafkaConsumer) conf.set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+    conf
   }
 
 
-  def createStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
+  def createStreamingContext(conf: SparkConf, timeUnit : Duration): StreamingContext = new StreamingContext(conf, timeUnit)
 
   /**
     * Creates Spark Streaming Context
     */
-  def streamingContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
+  def streamingContext(checkpointPath: String, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
     val ctx = create(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
     ctx checkpoint checkpointPath
     ctx

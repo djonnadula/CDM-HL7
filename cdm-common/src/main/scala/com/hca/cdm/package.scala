@@ -56,6 +56,8 @@ package object cdm extends Logg {
 
   def currMillis: Long = currentTimeMillis
 
+  def currNanos : Long = nanoTime
+
   def currThread: Thread = currentThread()
 
   def sleep(howLong: Long): Unit = {
