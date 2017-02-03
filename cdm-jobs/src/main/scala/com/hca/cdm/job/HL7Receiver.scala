@@ -48,7 +48,7 @@ object HL7Receiver extends Logg with App {
       case _ => Seconds(batchCycle)
     }
   }
-  private val numberOfReceivers = lookUpProp("hl7.spark.dynamicAllocation.minExecutors").toInt
+  private val numberOfReceivers = Range(0, lookUpProp("hl7.spark.dynamicAllocation.minExecutors").toInt)
   printConfig()
 
   // ******************************************************** Job Part ***********************************************
@@ -104,12 +104,11 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val streamLine = sparkStrCtx.union((0 until numberOfReceivers).map(receiver => {
-      val stream = sparkStrCtx.receiverStream(new receiver(receiver, app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
-      info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $receiver")
+    sparkStrCtx.union(numberOfReceivers.map(id => {
+      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
+      info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
       stream
-    }))
-    streamLine foreachRDD (rdd => {
+    })) foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
       val rejectOut = rejectedTopic
       val auditOut = auditTopic
