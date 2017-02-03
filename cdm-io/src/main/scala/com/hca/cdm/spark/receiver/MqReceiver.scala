@@ -20,7 +20,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
 /**
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
-class MqReceiver(id : Int ,app: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchInterval: Int, batchSize: Int, sources: Set[String])
+class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (ackQueue: Option[String], tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
   extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_SER) with Logg with MqConnector {
 
@@ -62,10 +62,13 @@ class MqReceiver(id : Int ,app: String, jobDesc: String, hosts: String, port: In
   private def init(): Unit = {
     val con = activeConnection.get()
     if (con != null) {
+      var prod: MessageProducer = null
+      if (ackQueue isDefined) {
+        prod = con createProducer ackQueue.get
+        info(s"Created Initial Queue ${ackQueue.get} to Send TLM ACKS from Producer $prod")
+      }
       sources.foreach(queue => {
         if (ackQueue isDefined) {
-          val prod = con createProducer ackQueue.get
-          info(s"Created Initial Queue $queue to Send TLM ACKS from Producer $prod")
           con addEventListener EventListener(queue, con sendMessage(_: String, prod))
         } else con addEventListener EventListener(queue, null)
       })

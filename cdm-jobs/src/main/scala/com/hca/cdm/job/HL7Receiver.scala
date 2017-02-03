@@ -3,7 +3,6 @@ package com.hca.cdm.job
 
 import java.lang.System.{getenv => fromEnv}
 import java.util.Date
-import java.util.concurrent.atomic.AtomicBoolean
 import com.hca.cdm.Models.MSGMeta
 import scala.Int.MaxValue
 import com.hca.cdm._
@@ -49,7 +48,7 @@ object HL7Receiver extends Logg with App {
       case _ => Seconds(batchCycle)
     }
   }
-  private val numberOfReceivers = lookUpProp("hl7.spark.dynamicAllocation.minExecutors").toInt + 1
+  private val numberOfReceivers = lookUpProp("hl7.spark.dynamicAllocation.minExecutors").toInt
   printConfig()
 
   // ******************************************************** Job Part ***********************************************
@@ -77,42 +76,27 @@ object HL7Receiver extends Logg with App {
   private val tlmAuditor = hl7MsgMeta map (x => x._2.wsmq -> (tlmAckMsg(x._1)(_: MSGMeta)))
   private val rawOverSized = OverSizeHandler(rawStage, lookUpProp("hl7.direct.raw"))
   private val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
+  initialise()
 
   // ****************** Spark Part ***********************************************
   private val checkpointEnable = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
   private val checkPoint = lookUpProp("hl7.checkpoint")
-  private val restoreFromChk = new AtomicBoolean(true)
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
   if (checkpointEnable) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
-    restoreFromChk set false
   }
   private val newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
-      restoreFromChk set false
+      info(s"New Checkpoint Created for $app $ctx")
+      runJob(ctx)
       ctx
     }
   }
   private val sparkStrCtx: StreamingContext = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
-  initialise(sparkStrCtx)
+  if (!checkpointEnable) runJob(sparkStrCtx)
   startStreams()
-
-  private def initialise(sparkStrCtx: StreamingContext): Unit = {
-    info("Job Initialisation Started on :: " + new Date())
-    createTopic(auditTopic, segmentPartitions = false)
-    createTopic(rejectedTopic, segmentPartitions = false)
-    hl7KafkaOut.foreach(topic => createTopic(topic._2, segmentPartitions = false))
-    sHook = newThread(s"$app SparkCtx SHook", runnable({
-      close()
-      info(currThread.getName + " Shutdown HOOK Completed for " + app)
-    }))
-    registerHook(sHook)
-    info("Initialisation Done. Running Job")
-    if (!restoreFromChk.get()) runJob(sparkStrCtx)
-  }
-
 
   /**
     * Main Job Execution
@@ -121,7 +105,7 @@ object HL7Receiver extends Logg with App {
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkStrCtx.union((0 until numberOfReceivers).map(receiver => {
-      val stream = sparkStrCtx.receiverStream(new receiver(receiver,app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
+      val stream = sparkStrCtx.receiverStream(new receiver(receiver, app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
       info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $receiver")
       stream
     }))
@@ -130,12 +114,6 @@ object HL7Receiver extends Logg with App {
       val rejectOut = rejectedTopic
       val auditOut = auditTopic
       val prodConf = kafkaProducerConf
-      val tlmDest = tlmAck
-      val mqHosts = this.mqHosts
-      val mqManager = this.mqManager
-      val mqChannel = this.mqChannel
-      val mqPort = this.mqPort
-      val app = this.app
       val confFile = config_file
       val maxMessageSize = this.maxMessageSize
       val hl7QueueMapping = this.hl7QueueMapping
@@ -188,6 +166,19 @@ object HL7Receiver extends Logg with App {
     } finally {
       close()
     }
+  }
+
+  private def initialise(): Unit = {
+    info("Job Initialisation Started on :: " + new Date())
+    createTopic(auditTopic, segmentPartitions = false)
+    createTopic(rejectedTopic, segmentPartitions = false)
+    hl7KafkaOut.foreach(topic => createTopic(topic._2, segmentPartitions = false))
+    sHook = newThread(s"$app SparkCtx SHook", runnable({
+      close()
+      info(currThread.getName + " Shutdown HOOK Completed for " + app)
+    }))
+    registerHook(sHook)
+    info("Initialisation Done. Running Job")
   }
 
 
