@@ -21,10 +21,10 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
         error("Failed to Send Record : " + data.value() + " to topic " + data.topic() + " Trying to Sending again .. ", exception)
         kafkaProducer.send(data).get()
       } else {
-        this.retryHandler = RetryHandler()
+        if(retryHandler == null) this.retryHandler = RetryHandler()
         retrySend(exception)
       }
-    } else debug("Record Has been sent to Topic : " + metadata.topic() + " at Offset " + metadata.offset())
+    }else debug("Record Has been sent to Topic : " + metadata.topic() + " at Offset " + metadata.offset())
 
   }
 
@@ -32,7 +32,7 @@ class DataBackedCallBack(val data: ProducerRecord[Array[Byte], Array[Byte]], val
   private def retrySend(exception: Exception): Unit = {
     while (retryHandler.tryAgain()) {
       error("Failed to Send Record : " + data.value() + " for topic " + data.topic() + " Trying to send again with Retry Policy .. ", exception)
-      if (kafkaProducer.send(data).get() != null) return
+      kafkaProducer.send(data, this)
     }
     giveUp()
   }
