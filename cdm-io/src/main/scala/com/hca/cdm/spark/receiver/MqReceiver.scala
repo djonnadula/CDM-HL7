@@ -27,34 +27,24 @@ class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int
   self =>
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
-  private var dataFetcher: Thread = _
-  private var sHook: Thread = _
+  sHook()
 
 
   def getCurrentConnection: ConnectionMeta = activeConnection.get()
 
   override def onStart(): Unit = {
-    val t = newThread(s"$app-$id-MqReceiver", runnable(
-      try {
-        val con = handleConsumer()
-        if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
-        activeConnection set con
-        init()
-        if (sHook == null) {
-          sHook = newThread(s"$app- MqReceiver-SHook", runnable({
-            close()
-          }))
-        }
-      } catch {
-        case t: Throwable =>
-          self.restart(s"Unable to Start Receiver with Id $app will make an attempt to Start Again", t, restartTimeInterval * 2)
-      }))
-    dataFetcher = t
-    dataFetcher start()
+    try {
+      val con = handleConsumer()
+      if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
+      activeConnection set con
+      init()
+    } catch {
+      case t: Throwable =>
+        self.restart(s"Unable to Start Receiver with Id $app will make an attempt to Start Again", t, restartTimeInterval * 2)
+    }
   }
 
   override def onStop(): Unit = {
-    //self.stop(s"Stopping Receiver with Id ${self.app} and WSMQ Client Id $app Consuming Messages from WSMQ Queues ${sources.mkString(";")}")
     close()
   }
 
@@ -79,7 +69,6 @@ class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int
   }
 
   override def close(): Unit = {
-    if (dataFetcher != null) dataFetcher.join()
     closeResource(activeConnection.get())
   }
 
@@ -159,6 +148,12 @@ class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int
     }
   }
 
+  private def sHook(): Unit = {
+    registerHook(newThread(s" ${this.getClass}-$id-$app-SHook", runnable({
+      close()
+      self.stop(s"Stopping Receiver with Id $id and WSMQ Client Id $app Consuming Messages from WSMQ Queues ${sources.mkString(";")}")
+    })))
+  }
 
 }
 

@@ -22,7 +22,6 @@ trait MqConnector extends Logg with AutoCloseable {
   private lazy val producers = new ListBuffer[MessageProducer]
   private val CHARSET = 437
   private val ENCODING = 546
-  sHook()
 
   @throws[MqException]
   def createConnection(id: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchSize: Int, batchInterval: Int): ConnectionMeta = {
@@ -161,9 +160,7 @@ trait MqConnector extends Logg with AutoCloseable {
     }
   }
 
-  private def sHook(): Unit = {
-    registerHook(newThread(s" ${this.getClass} SHook", runnable(close())))
-  }
+
 }
 
 

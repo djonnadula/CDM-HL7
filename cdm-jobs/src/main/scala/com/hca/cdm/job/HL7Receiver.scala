@@ -19,7 +19,7 @@ import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.FutureAction
-import org.apache.spark.streaming.{Milliseconds, Seconds, StreamingContext}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
 import scala.collection.mutable.ListBuffer
@@ -41,13 +41,7 @@ object HL7Receiver extends Logg with App {
   private val defaultPar = lookUpProp("hl7.spark.default.parallelism")
   private val batchCycle = lookUpProp("hl7.batch.interval").toInt
   private val batchRate = lookUpProp("hl7.batch.rate").toInt
-  private val batchDuration = {
-    lookUpProp("hl7.batch.time.unit") match {
-      case "seconds" => Seconds(batchCycle)
-      case "ms" => Milliseconds(batchCycle)
-      case _ => Seconds(batchCycle)
-    }
-  }
+  private val batchDuration = sparkUtil batchCycle(lookUpProp("hl7.batch.time.unit"), batchCycle)
   private val numberOfReceivers = Range(0, lookUpProp("hl7.spark.dynamicAllocation.minExecutors").toInt)
   printConfig()
 
@@ -84,6 +78,11 @@ object HL7Receiver extends Logg with App {
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
   if (checkpointEnable) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "12000")
+  }
+  if (lookUpProp("hl7.batch.time.unit") == "ms") {
+    sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
   }
   private val newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
