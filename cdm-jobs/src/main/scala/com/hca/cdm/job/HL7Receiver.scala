@@ -58,7 +58,7 @@ object HL7Receiver extends Logg with App {
   private val mqPort = lookUpProp("mq.port").toInt
   private val tlmAck = {
     val tem = lookUpProp("mq.queueResponse")
-    if (tem == EMPTYSTR || (tem ne null)) Some(tem)
+    if (tem != EMPTYSTR) Some(tem)
     else None
   }
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt

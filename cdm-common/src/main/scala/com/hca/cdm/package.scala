@@ -56,7 +56,7 @@ package object cdm extends Logg {
 
   def currMillis: Long = currentTimeMillis
 
-  def currNanos : Long = nanoTime
+  def currNanos: Long = nanoTime
 
   def currThread: Thread = currentThread()
 
@@ -112,10 +112,8 @@ package object cdm extends Logg {
 
   def lookUpProp(key: String): String = {
     if (prop == null) reload()
-    prop getOrElse(key, EMPTYSTR) match {
-      case EMPTYSTR => throw new CdmException("No property Found for " + key + "  specify property correctly")
-      case x => x
-    }
+    if (!prop.isDefinedAt(key)) throw new CdmException("No property Found for " + key + "  specify property correctly")
+    prop getOrElse(key, EMPTYSTR)
   }
 
   def printConfig(): Unit = {
@@ -149,7 +147,7 @@ package object cdm extends Logg {
       return true
     }
     catch {
-      case ist: Throwable => error(s"Cannot Remove Shutdown hook :: ${hook.getName}",ist)
+      case ist: Throwable => error(s"Cannot Remove Shutdown hook :: ${hook.getName}", ist)
     }
     false
   }
@@ -161,7 +159,7 @@ package object cdm extends Logg {
       def run() = action
     }
 
-  def newThread(name: String, runnable: Runnable, daemon: Boolean = false): Thread = {
+  def newThread(name: String, runnable: Runnable, daemon: Boolean = true): Thread = {
     val thread = new Thread(runnable, name)
     thread.setDaemon(daemon)
     thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler {
