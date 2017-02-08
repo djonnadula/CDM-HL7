@@ -11,9 +11,13 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
+import com.hca.cdm.hl7.constants.HL7Constants.COMMA
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
-import System.{err => errStream}
+import scala.io.Source
+import java.io.InputStream
+import java.lang.{ProcessBuilder => runScript}
+import java.lang.Thread.State._
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2016.
@@ -68,6 +72,9 @@ object Hl7Driver extends App with Logg {
   private val hl7_spark_num_executors = lookUpProp("hl7.spark.num-executors")
   private val hl7_spark_driver_memory = lookUpProp("hl7.spark.driver-memory")
   private val ENV = lookUpProp("hl7.env")
+  private val jobScript = lookUpProp("hl7.runner")
+  private val selfStart = lookUpProp("hl7.selfStart") toBoolean
+  private var sHook: Thread = _
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
     .setMaster(hl7_spark_master)
@@ -76,6 +83,7 @@ object Hl7Driver extends App with Logg {
     .setConf(EXECUTOR_MEMORY, hl7_spark_executor_memory)
     .setConf(EXECUTOR_CORES, defaultPar)
     .setConf(DRIVER_MEMORY, hl7_spark_driver_memory)
+    .setConf(CHILD_PROCESS_LOGGER_NAME, s"$app-Driver")
     .setConf("spark.driver.cores", "2")
     .setConf("spark.num-executors", hl7_spark_num_executors)
     .setConf("spark.dynamicAllocation.initialExecutors", hl7_spark_num_executors)
@@ -99,7 +107,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.serializer.objectStreamReset", "100")
     .setConf("spark.cleaner.ttl", "3600")
     .setConf("spark.dynamicAllocation.cachedExecutorIdleTimeout", "3600")
-    .setConf("spark.yarn.executor.memoryOverhead", "3072")
+    .setConf("spark.yarn.executor.memoryOverhead", "2048")
     .setConf("spark.yarn.driver.memoryOverhead", "2048")
     .setConf("spark.ui.retainedJobs", "50")
     .setConf("spark.ui.retainedStages", "50")
@@ -110,20 +118,8 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab"))
     .setConf("spark.yarn.principal", lookUpProp("hl7.spark.yarn.principal"))
     .setConf("spark.streaming.stopSparkContextByDefault", "false")
-    .setConf("spark.streaming.gracefulStopTimeout", "300000")
-
-  // For Testing Only
-  /* .setConf("spark.yarn.token.renewal.interval", "1")
-   .setConf("spark.yarn.credentials.renewalTime", "50")
-   .setConf("spark.yarn.credentials.updateTime", "50")
-   .setConf("spark.yarn.credentials.file.retention.count", "1")
-   */
-
-  // Applicable only in Standalone Mode
-  /* .setConf("spark.executor.logs.rolling.strategy", "size")
-   .setConf("spark.executor.logs.rolling.maxSize", "307200")
-   .setConf("spark.executor.logs.rolling.maxRetainedFiles", "10")
-  */
+    .setConf("spark.streaming.gracefulStopTimeout", "400000")
+    .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
   ENV != "PROD" match {
     case true =>
       sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
@@ -131,36 +127,21 @@ object Hl7Driver extends App with Logg {
     case _ =>
       sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
         .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
-
   }
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
   sparkLauncher addFile configFile.getPath
-  configFiles foreach (file => sparkLauncher addFile (file getPath))
+  if (configFiles nonEmpty) configFiles foreach (file => sparkLauncher addFile (file getPath))
   private val startTime = currMillis
   private var watchTime = currMillis
   private val maxWait = 300000
   private val job = sparkLauncher startApplication()
-  registerHook(newThread(app + " Driver SHook", runnable({
+  sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
-    job stop()
-    job kill()
-    Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
-      case Success(x) =>
-        if (x.waitFor() != 0) {
-          error(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
-          errStream.println(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
-          abend(1)
-        }
-      case Failure(t) =>
-        error(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
-        errStream.println(s"Stopping Job $job failed. Kill Job Manually by yarn application -kill ${job.getAppId}")
-        abend(1)
-    }
-    info(app + " Driver Shutdown Completed ")
-    abend(0)
-  })))
-
+    shutDown()
+    info(s"$app Driver Shutdown Completed ")
+  }))
+  registerHook(sHook)
   while (job.getAppId == null) {
     sleep(3000)
   }
@@ -175,15 +156,15 @@ object Hl7Driver extends App with Logg {
       case FINISHED | FAILED | KILLED =>
         error(app + " Job Something Wrong ... with Job ID :: " + job.getAppId)
         mail(app + " Job ID " + job.getAppId + " Current State " + job.getState,
-          app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What was happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
+          app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
           , CRITICAL)
-        abend(1)
+        shutDown()
     }
     if ((currMillis - watchTime) >= maxWait) {
       mail(app + " Job ID " + job.getAppId + " Current State " + job.getState,
         app + " Job was submitted to Resource manager but not yet started Running. This Should Not Happen. Job Submitted since :: " + new Date(startTime).toString
           + " There might be some issue with Resource Manager and " +
-          "Some one has to Check What was happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
+          "Some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
         , CRITICAL)
       watchTime = currMillis
     }
@@ -193,7 +174,7 @@ object Hl7Driver extends App with Logg {
   job addListener Tracker
   while (check) {
     sleep(600000)
-    trace(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
+    debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
   }
 
   private[job] object Tracker extends Listener {
@@ -217,13 +198,52 @@ object Hl7Driver extends App with Logg {
         case FINISHED | FAILED | KILLED =>
           error(app + " Job Something Wrong ... with Job ID :: " + jobHandle.getAppId)
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
-            app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What was happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
+            app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
             , CRITICAL)
-          job stop()
-          job kill()
-          abend(1)
+          shutDown()
       }
     }
   }
+
+  private def shutDown(): Unit = {
+    tryAndLogErrorMes(job stop(), error(_: String))
+    tryAndLogErrorMes(job kill(), error(_: String))
+    Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
+      case Success(x) =>
+        if (x.waitFor() != 0) {
+          info(s"Stopping Job $app From Resource Manager resulted with Status ${getStatus(x.getInputStream)}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+        } else info(s"Stopped $app from Resource Manager with Status ${getStatus(x.getInputStream)}")
+      case Failure(t) =>
+        error(s"Stopping Job $app From Resource Manager failed with error ${t.getMessage}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+    }
+    startIfNeeded()
+  }
+
+  private def startIfNeeded(): Unit = {
+    selfStart match {
+      case true =>
+        info(s"Self Start is Requested for $app")
+        handleDriver("restart")
+      case _ =>
+        info(s"No Self Start is Requested So shutting down $app ...")
+        handleDriver("stop")
+        abend(0)
+    }
+  }
+
+  private def handleDriver(command: String): Unit = {
+    info(s"Trying to ${command.toUpperCase} Driver for $app by Running Script $jobScript $command")
+    val process = new runScript(jobScript, command)
+    process inheritIO()
+    Try(process start) match {
+      case Success(x) =>
+        if (x.waitFor() != 0) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
+        else info(s"$app Driver Script ${command.toUpperCase} successfully ${Source.fromInputStream(x.getInputStream).getLines().mkString(COMMA)}")
+      case Failure(t) =>
+        error(s"${command.toUpperCase} Job $app failed. Try Manually by $jobScript $command", t)
+    }
+  }
+
+  private def getStatus(stream: InputStream) = Source.fromInputStream(stream).getLines().mkString(COMMA)
 
 }
