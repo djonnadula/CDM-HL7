@@ -136,12 +136,6 @@ object Hl7Driver extends App with Logg {
   private var watchTime = currMillis
   private val maxWait = 300000
   private val job = sparkLauncher startApplication()
-  sHook = newThread(app + " Driver SHook", runnable({
-    info(app + " Driver Shutdown Hook Called ")
-    shutDown()
-    info(s"$app Driver Shutdown Completed ")
-  }))
-  registerHook(sHook)
   while (job.getAppId == null) {
     sleep(3000)
   }
@@ -172,6 +166,12 @@ object Hl7Driver extends App with Logg {
   }
   watchTime = currMillis
   job addListener Tracker
+  sHook = newThread(app + " Driver SHook", runnable({
+    info(app + " Driver Shutdown Hook Called ")
+    shutDown()
+    info(s"$app Driver Shutdown Completed ")
+  }))
+  registerHook(sHook)
   while (check) {
     sleep(600000)
     debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
