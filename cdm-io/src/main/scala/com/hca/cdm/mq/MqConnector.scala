@@ -58,8 +58,8 @@ trait MqConnector extends Logg with AutoCloseable {
     temp.setQueueManager(queueManager)
     temp.setChannel(channel)
     temp.setMsgBatchSize(batchSize)
-    temp.setPollingInterval(batchInterval)
-    temp.setMaxBufferSize(65 * 1024 * 1024)
+    //temp.setPollingInterval(batchInterval)
+    temp.setMaxBufferSize(120 * 1024 * 1024)
     info(s"Connection Factory Created to Hosts  :: ${temp.getConnectionNameList} with App Name $id")
     temp
   }
