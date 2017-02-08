@@ -3,7 +3,7 @@ package com.hca.cdm.spark
 import kafka.serializer.StringDecoder
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
-import org.apache.spark.streaming.{Duration,StreamingContext}
+import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
@@ -30,7 +30,7 @@ object Hl7SparkUtil {
   }
 
 
-  def createStreamingContext(conf: SparkConf, timeUnit : Duration): StreamingContext = new StreamingContext(conf, timeUnit)
+  def createStreamingContext(conf: SparkConf, timeUnit: Duration): StreamingContext = new StreamingContext(conf, timeUnit)
 
   /**
     * Creates Spark Streaming Context
@@ -71,5 +71,13 @@ object Hl7SparkUtil {
   def shutdownEverything(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
 
 
+  def batchCycle(timeUnit: String, cycle: Int): Duration = {
+    timeUnit match {
+      case "seconds" => Seconds(cycle)
+      case "ms" => Milliseconds(cycle)
+      case "minutes" => Minutes(cycle)
+      case _ => Seconds(cycle)
+    }
+  }
 }
 

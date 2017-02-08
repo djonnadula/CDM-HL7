@@ -18,7 +18,6 @@ import com.hca.cdm.log.Logg
 import org.apache.commons.lang3.StringUtils.{leftPad => lPad}
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.control.Breaks._
 import scala.util.{Failure, Success, Try}
