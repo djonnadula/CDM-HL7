@@ -19,7 +19,7 @@ import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.FutureAction
-import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.StreamingContext
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
 import scala.collection.mutable.ListBuffer
@@ -56,11 +56,6 @@ object HL7Receiver extends Logg with App {
   private val mqManager = lookUpProp("mq.manager")
   private val mqChannel = lookUpProp("mq.channel")
   private val mqPort = lookUpProp("mq.port").toInt
-  private val tlmAck = {
-    val tem = lookUpProp("mq.queueResponse")
-    if (tem != EMPTYSTR) Some(tem)
-    else None
-  }
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => mtyp -> getReceiverMeta(hl7(mtyp), lookUpProp(s"$mtyp.wsmq.source"), lookUpProp(s"$mtyp.kafka"))).toMap
@@ -104,7 +99,7 @@ object HL7Receiver extends Logg with App {
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     sparkStrCtx.union(numberOfReceivers.map(id => {
-      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAck, tlmAuditor, metaFromRaw(_: String)))
+      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
       info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
       stream
     })) foreachRDD (rdd => {

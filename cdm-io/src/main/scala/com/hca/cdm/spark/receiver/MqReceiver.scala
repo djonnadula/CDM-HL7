@@ -1,6 +1,6 @@
 package com.hca.cdm.spark.receiver
 
-import java.util.concurrent.atomic.{AtomicInteger, AtomicReference}
+import java.util.concurrent.atomic.AtomicReference
 import javax.jms._
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
@@ -13,6 +13,7 @@ import com.hca.cdm.exception.MqException
 import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
+import java.lang.System.{getenv => fromEnv}
 
 
 case class MqData(source: String, data: String, msgMeta: MSGMeta)
@@ -21,10 +22,15 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
 class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchInterval: Int, batchSize: Int, sources: Set[String])
-                (ackQueue: Option[String], tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
+                (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
   extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_SER) with Logg with MqConnector {
 
   self =>
+  private val ackQueue = {
+    val tem = lookUpProp("mq.queueResponse")
+    if (tem != EMPTYSTR) Some(tem)
+    else None
+  }
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
   sHook()
