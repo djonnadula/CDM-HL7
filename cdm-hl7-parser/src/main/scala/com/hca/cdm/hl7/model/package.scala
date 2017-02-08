@@ -2,9 +2,9 @@ package com.hca.cdm.hl7
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
 import com.hca.cdm.exception.CdmException
-import com.hca.cdm.hl7.audit.MSGMeta
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types._
 import com.hca.cdm.hl7.model.OutFormats.OutFormat
@@ -49,7 +49,7 @@ package object model {
   lazy val EQUAL = "="
   lazy val ESCAPE = "\\"
   lazy val segmentSequence = "segment_sequence"
-  val commonNode = synchronized {
+  lazy val commonNode = synchronized {
     val temp = new mutable.LinkedHashMap[String, String]
     val nodeEle = lookUpProp("common.elements") match {
       case EMPTYSTR => throw new CdmException("No Common Elements found. ")
@@ -59,8 +59,8 @@ package object model {
     temp
   }
 
-  val MSHMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
-  val PIDMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
+  lazy val MSHMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
+  lazy val PIDMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
 
   private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id", tranTime: String = "msg_create_date_time",
                                   mrn: String = "patient_mrn", urn: String = "patient_urn", accntNum: String = "patient_account_num",
@@ -155,8 +155,9 @@ package object model {
     val rawSplit = raw split delim
     valid(rawSplit, 1) match {
       case true => val msh = rawSplit(0)
-        val temp = PIPER split msh
-        Try(MSGMeta(temp(9), temp(6), EMPTYSTR, EMPTYSTR, EMPTYSTR, temp(3))) match {
+        val tempMsh = PIPER split msh
+        val tempPid = PIPER split findSeg(rawSplit, PID)
+        Try(MSGMeta(tempMsh(9), tempMsh(6), dataAtIndex(tempPid)(3), dataAtIndex(tempPid)(4), dataAtIndex(tempPid)(18, 1), dataAtIndex(tempMsh)(3, 1), dataAtIndex(tempMsh)(8, 1))) match {
           case Success(me) => me
           case _ => NONE
         }
@@ -164,6 +165,17 @@ package object model {
     }
   }
 
+  private def dataAtIndex(segment: Array[String], delim: String = "\\" + caret)(index: Int, dataAtIndex: Int = 0): String = {
+    if (valid(segment, index)) {
+      if (segment(index) contains caret) (segment(index) split delim) (dataAtIndex)
+      else segment(index)
+    } else EMPTYSTR
+  }
+
+  private def findSeg(rawSplit: Array[String], seg: String): String = {
+    if (valid(rawSplit)) rawSplit.foreach(segment => if (segment.startsWith(seg)) return segment)
+    EMPTYSTR
+  }
 
   def initSegStateWithZero: mutable.HashMap[SegState, Long] = {
     val temp = new mutable.HashMap[SegState, Long]()
@@ -236,6 +248,8 @@ package object model {
   }
 
   case class MsgTypeMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, kafka: String)
+
+  case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
     val reader = Source.fromFile(segments).bufferedReader()
@@ -318,6 +332,8 @@ package object model {
   }
 
   def getMsgTypeMeta(msgType: HL7, sourceIn: String): MsgTypeMeta = MsgTypeMeta(msgType, sourceIn)
+
+  def getReceiverMeta(msgType: HL7, sourceIn: String, out: String): ReceiverMeta = ReceiverMeta(msgType, sourceIn, out)
 
   def handleAnyRef(data: AnyRef): String = {
     data match {
