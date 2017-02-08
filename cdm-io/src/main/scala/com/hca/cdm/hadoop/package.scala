@@ -52,54 +52,39 @@ package object hadoop extends Logg {
   }
 
 
-  private def creteFileAtPath(destination: String, stage: String): Path = new Path(s"$destination$FS$stage-${currNanos}")
+  private def creteFileAtPath(destination: String, stage: String): Path = new Path(s"$destination$FS$stage-$currNanos")
 
 
   def readObject[T](path: String, config: Configuration, cleanUp: Boolean = true): Option[T] = {
-    info(config.toString)
     val fs = FileSystem get config
     val temp = new Path(new URI(path))
-    info("Readinf to File " +temp.toString)
+    info(s"Reading Data from Path $temp")
     fs.exists(temp) match {
       case true =>
         def fun(): T = {
           var data = null.asInstanceOf[T]
-          fs.listStatus(temp).foreach(x => info(x.getPath.toString))
-          val status = fs.listStatus(temp).takeWhile(valid(_))
-          status.foreach(x => info(x.getPath.toString))
-          val f = status.filter(_.isFile)
-          f.foreach(x => info(x.getPath.toString))
-          val d = f.sortBy(_.getModificationTime)
-          d.foreach(x => info(x.getPath.toString))
-          d.foreach(x => info(x.toString))
+          val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime).reverse
           if (status.nonEmpty) {
             val reader = new BufferedInputStream(fs.open(status.head.getPath))
             data = deSerialize(reader).asInstanceOf[T]
             reader close()
-            if (cleanUp) status.foreach(file => fs.delete(file.getPath, false))
-            info(data.toString)
+            if (cleanUp) fs.listStatus(temp).filter(_.isFile).foreach(file => fs.delete(file.getPath, false))
           }
           data
         }
-        //println("FUNCTION for " + path +"-" +fun)
-        tryAndLogErrorMes[T](fun, error(_: String, _: Throwable))
+        tryAndLogErrorMes[T](fun, warn(_: String, _: Throwable))
       case _ => None
     }
-
-
   }
 
   def writeObject[T <: Serializable](data: T, name: String, path: String, config: Configuration): Unit = {
-    if(valid(data)) {
-      info(config.toString)
-      info(data.toString)
-      info(serialize(data).length.toString)
+    if (valid(data)) {
       val fs = FileSystem get config
       val fileToWrite = getFile(fs, path, config) match {
         case null => creteFileAtPath(path, name)
         case x => x
       }
-      info("Writing to File " + fileToWrite.toString)
+      info(s"Writing to File $fileToWrite")
       val writer = new BufferedOutputStream(fs create(fileToWrite, true))
       Try(writer write serialize(data)) match {
         case Success(x) =>
@@ -127,5 +112,7 @@ package object hadoop extends Logg {
     fileToAppend
   }
 
-
+  private def deleteFiles(fs: FileSystem, path: Path): Unit = {
+    if (fs isDirectory path) fs delete(path, true)
+  }
 }
