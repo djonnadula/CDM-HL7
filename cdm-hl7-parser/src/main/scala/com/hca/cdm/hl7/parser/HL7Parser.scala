@@ -30,6 +30,8 @@ import scala.util.{Failure, Success, Try}
   */
 class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]]) extends Logg with Serializable {
 
+  require(msgType != null, s"Cannot Register Parser for $msgType")
+  require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
   private lazy val EMPTY = Array.empty[String]
   private lazy val MAP = Map.empty[String, Array[String]]
