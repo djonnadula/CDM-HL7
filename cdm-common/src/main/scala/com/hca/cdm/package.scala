@@ -159,7 +159,7 @@ package object cdm extends Logg {
       def run() = action
     }
 
-  def newThread(name: String, runnable: Runnable, daemon: Boolean = true): Thread = {
+  def newThread(name: String, runnable: Runnable, daemon: Boolean = false): Thread = {
     val thread = new Thread(runnable, name)
     thread.setDaemon(daemon)
     thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler {

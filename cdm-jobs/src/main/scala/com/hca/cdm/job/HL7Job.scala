@@ -43,7 +43,6 @@ import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
-import scala.concurrent.{Await => waitTill, Future => async}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -153,8 +152,11 @@ object HL7Job extends Logg with App {
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
     monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, 10), 610, 600, TimeUnit.SECONDS)
+    sparkUtil addHook persistParserMetrics
+    sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
       close()
+      shutDown()
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
     registerHook(sHook)
@@ -198,10 +200,12 @@ object HL7Job extends Logg with App {
         val rejectOverSized = this.rejectOverSized
         val adhocOverSized = this.adhocOverSized
         val sizeCheck = checkSize(maxMessageSize)(_, _)
+        val confFile = config_file
         val tracker = new ListBuffer[FutureAction[Unit]]
         tracker += rdd foreachPartitionAsync (dataItr => {
           dataItr nonEmpty match {
             case true =>
+              propFile = confFile
               val kafkaOut = KProducer(multiDest = true)(prodConf)
               val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
               val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
@@ -299,18 +303,20 @@ object HL7Job extends Logg with App {
     } catch {
       case t: Throwable => error("Spark Context Starting Failed ", t)
     } finally {
+      shutDown()
       close()
     }
   }
 
+  private def shutDown() : Unit ={
+     sparkUtil shutdownEverything sparkStrCtx
+     closeResource(fileSystem)
+  }
   /**
     * Close All Resources
     */
   private def close() = {
     info(s"Shutdown Invoked for $app")
-    persistMetrics()
-    sparkUtil shutdownEverything sparkStrCtx
-    closeResource(fileSystem)
     monitorHandler shutdown()
     monitorHandler awaitTermination(1, TimeUnit.HOURS)
     info("Metrics For Segments Data Modeling :: ")
@@ -469,7 +475,6 @@ object HL7Job extends Logg with App {
       info("Recovered Parser Metrics ")
     }
     val segmentMetrics = readObject[TrieMap[String, Long]](lookUpProp("hl7.segments.metrics"), hdpConf)
-    info("After Rec " + segmentMetrics)
     if (segmentMetrics.isDefined) {
       segmentMetrics.get.foreach({ case (k, metric) => if ((segmentsDriverMetrics isDefinedAt k) && metric > 0L) segmentsDriverMetrics update(k, metric) })
       collectSegmentMetrics(segmentsDriverMetrics, taskUpdate = false)

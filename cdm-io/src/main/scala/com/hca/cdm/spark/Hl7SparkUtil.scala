@@ -8,12 +8,22 @@ import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+import java.lang.Class.{forName => className}
 import scala.language.postfixOps
+import scala.util.{Failure, Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
 object Hl7SparkUtil {
+
+  private lazy val hookManager: Class[_] = {
+    Try(className("org.apache.spark.util.ShutdownHookManager")) match {
+      case Success(manager) =>
+        manager
+      case Failure(t) => null
+    }
+  }
 
   /**
     * Creates Spark Configuration from Config File Provided
@@ -77,6 +87,25 @@ object Hl7SparkUtil {
       case "ms" => Milliseconds(cycle)
       case "minutes" => Minutes(cycle)
       case _ => Seconds(cycle)
+    }
+  }
+
+  def addHook(fun: () => Unit, runPriority: Int = 100): Unit = {
+    synchronized {
+      if (hookManager != null) {
+        val addShutdownHook = hookManager.getMethod("addShutdownHook", classOf[Int], classOf[() => Unit])
+        addShutdownHook.invoke(hookManager, Int.box(runPriority), hookRunner(fun))
+      }
+      else registerHook(newThread(s"$fun", runnable(fun())))
+    }
+  }
+
+  private def hookRunner(hook: () => Unit): Object = {
+    new (() => Object) {
+      override def apply(): Object = {
+        hook()
+        EMPTYSTR
+      }
     }
   }
 }
