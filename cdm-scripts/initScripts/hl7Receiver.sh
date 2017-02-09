@@ -23,7 +23,7 @@
 #
 
 # Process name ( For display )
-NAME='hl7Receiver'
+NAME='CDM-HL7-Receiver'
 # Daemon name, where is the actual executable
 SERVICEDIR='/hadoop/cdm/lib'
 
