@@ -7,7 +7,6 @@ import java.util.concurrent.{ScheduledExecutorService, TimeUnit}
 import java.util.Date
 import java.util.concurrent.atomic.AtomicBoolean
 import LocalDateTime._
-import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm._
@@ -36,7 +35,6 @@ import org.apache.spark.scheduler._
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.{Accumulator, FutureAction}
-import scala.concurrent.duration.Duration.{Inf => waitTillTaskCompletes}
 import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable.ListBuffer

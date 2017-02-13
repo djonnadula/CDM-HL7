@@ -17,7 +17,7 @@ import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
-import java.lang.Thread.State._
+import org.apache.log4j.PropertyConfigurator._
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2016.
@@ -34,6 +34,7 @@ object Hl7Driver extends App with Logg {
       console("**************************HCA CDM HL7 Processing System Initiated ************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
+      configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
     case _ =>
       console("******************************************************************************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
@@ -73,7 +74,6 @@ object Hl7Driver extends App with Logg {
   private val hl7_spark_driver_memory = lookUpProp("hl7.spark.driver-memory")
   private val ENV = lookUpProp("hl7.env")
   private val jobScript = lookUpProp("hl7.runner")
-  private val selfStart = lookUpProp("hl7.selfStart") toBoolean
   private var sHook: Thread = _
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
@@ -169,6 +169,7 @@ object Hl7Driver extends App with Logg {
   sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
     shutDown()
+    handleDriver("stop")
     info(s"$app Driver Shutdown Completed ")
   }))
   registerHook(sHook)
@@ -195,12 +196,26 @@ object Hl7Driver extends App with Logg {
             app + "  Job Submitted Back To Resource manager ... with Job ID :: " + job.getAppId + " Monitor Whether Job is Running or Not  \n\n" + EVENT_TIME
             , WARNING)
         case RUNNING => info(app + " Job Running ... with Job ID :: " + jobHandle.getAppId)
-        case FINISHED | FAILED | KILLED =>
-          error(app + " Job Something Wrong ... with Job ID :: " + jobHandle.getAppId)
+        case FINISHED | FAILED =>
+          error(s"$app Job ${jobHandle.getState} ... with Job ID ::  ${jobHandle.getAppId}")
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
-            app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
+            app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId +
+              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s"Self Start is Requested. Will Make an Attempt To Start $app" else s"Self Start is not Enabled for $app . Exiting Job.") +
+              " \n\n" + EVENT_TIME
             , CRITICAL)
+          unregister(sHook)
+          sHook.interrupt()
           shutDown()
+          startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
+        case KILLED =>
+          error(s"$app Job ${jobHandle.getState} ... with Job ID ::  ${jobHandle.getAppId}")
+          mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
+            app + " Job is Killed. If job brought down for maintenance please ignore, other wise some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
+            , CRITICAL)
+          unregister(sHook)
+          sHook.interrupt()
+          shutDown()
+          handleDriver("stop")
       }
     }
   }
@@ -216,10 +231,9 @@ object Hl7Driver extends App with Logg {
       case Failure(t) =>
         error(s"Stopping Job $app From Resource Manager failed with error ${t.getMessage}. Kill Job Manually by yarn application -kill ${job.getAppId}")
     }
-    startIfNeeded()
   }
 
-  private def startIfNeeded(): Unit = {
+  private def startIfNeeded(selfStart: Boolean): Unit = {
     selfStart match {
       case true =>
         info(s"Self Start is Requested for $app")

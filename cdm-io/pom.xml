@@ -33,18 +33,38 @@
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
             <version>2.0.1</version>
-           <scope>provided</scope>
+        <!--   <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.ibm.mq.allclient</groupId>
             <artifactId>mq-client</artifactId>
             <version>8.0.0.2</version>
-            <scope>provided</scope>
+           <!-- <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>jms-client</artifactId>
             <version>8.0.0.2</version>
+         <!--   <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>1.1.0-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hive.hcatalog</groupId>
+            <artifactId>hive-hcatalog-core</artifactId>
+            <version>1.1.0-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>spark-client</artifactId>
+            <version>1.1.0-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
