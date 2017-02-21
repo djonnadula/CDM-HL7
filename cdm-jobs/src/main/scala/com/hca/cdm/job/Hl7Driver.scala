@@ -120,6 +120,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.stopSparkContextByDefault", "false")
     .setConf("spark.streaming.gracefulStopTimeout", "400000")
     .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
+    .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
   ENV != "PROD" match {
     case true =>
       sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
@@ -221,8 +222,8 @@ object Hl7Driver extends App with Logg {
   }
 
   private def shutDown(): Unit = {
-    tryAndLogErrorMes(job stop(), error(_: String))
-    tryAndLogErrorMes(job kill(), error(_: String))
+    tryAndLogErrorMes(job stop(), error(_: Throwable))
+    tryAndLogErrorMes(job kill(), error(_: Throwable))
     Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
       case Success(x) =>
         if (x.waitFor() != 0) {
