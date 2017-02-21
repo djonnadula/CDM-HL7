@@ -14857,6 +14857,9 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	nte_comment_source_query_type String,
 	nte_comment String,
 	nte_comment_text String,
+    nte_comment_query_text String,
+    nte_comment_query_element_code String,
+    nte_comment_query_response String,
 	nte_comment_type String,
 	nte_comment_type_primary_id String,
 	nte_comment_type_text String,
@@ -32507,7 +32510,22 @@ FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
 LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
 
-
+CREATE EXTERNAL TABLE hl7_zmn_data (
+	msh_sending_facility String,
+	msh_msg_control_id String,
+	pid_medical_record_num String,
+	pid_medical_record_urn String,
+	pid_pat_account_num String,
+	zmn_icd_diagnosis String,
+	zmn_icd_status String,
+	zmn_unknown String,
+	etl_firstinsert_datetime String,
+	field_sequence_num String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
 
 DROP TABLE hl7_zmp_data;
 
