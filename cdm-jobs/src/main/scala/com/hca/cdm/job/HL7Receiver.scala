@@ -52,10 +52,6 @@ object HL7Receiver extends Logg with App {
   private val rejectedTopic = lookUpProp("hl7.reject")
   private val auditTopic = lookUpProp("hl7.audit")
   private val kafkaProducerConf = producerConf()
-  private val mqHosts = lookUpProp("mq.hosts")
-  private val mqManager = lookUpProp("mq.manager")
-  private val mqChannel = lookUpProp("mq.channel")
-  private val mqPort = lookUpProp("mq.port").toInt
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => mtyp -> getReceiverMeta(hl7(mtyp), lookUpProp(s"$mtyp.wsmq.source"), lookUpProp(s"$mtyp.kafka"))).toMap
@@ -99,7 +95,7 @@ object HL7Receiver extends Logg with App {
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     sparkStrCtx.union(numberOfReceivers.map(id => {
-      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, mqHosts, mqPort, mqManager, mqChannel, batchCycle, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
       info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
       stream
     })) foreachRDD (rdd => {

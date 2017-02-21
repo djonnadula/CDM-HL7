@@ -5,6 +5,7 @@ import com.ibm.mq.jms._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.exception.{CdmException, MqException}
 import com.hca.cdm._
+import com.ibm.msg.client.wmq.common.CommonConstants._
 import com.ibm.msg.client.wmq.compat.jms.internal.JMSC._
 import scala.collection.concurrent.TrieMap
 import scala.util.{Failure, Success, Try}
@@ -24,13 +25,13 @@ trait MqConnector extends Logg with AutoCloseable {
   private val ENCODING = 546
 
   @throws[MqException]
-  def createConnection(id: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchSize: Int, batchInterval: Int): ConnectionMeta = {
+  def createConnection(id: String, jobDesc: String, hosts: String, queueManager: String, channel: String, batchSize: Int, batchInterval: Int): ConnectionMeta = {
     connections.synchronized {
       if (connections.isDefinedAt(id)) return connections(id)
       var connection: Connection = null
       var session: MQSession = null
       try {
-        val factory = connectionFactory(id, jobDesc, hosts, port, queueManager, channel, batchSize, batchInterval)
+        val factory = connectionFactory(id, jobDesc, hosts, queueManager, channel, batchSize, batchInterval)
         connection = factory createConnection()
         session = connection.createSession(false, CLIENT_ACKNOWLEDGE).asInstanceOf[MQSession]
         info(s"Connection Established to WSMQ with Id :: $id ")
@@ -48,17 +49,19 @@ trait MqConnector extends Logg with AutoCloseable {
     }
   }
 
-  private def connectionFactory(id: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchSize: Int, batchInterval: Int) = {
+  private def connectionFactory(id: String, jobDesc: String, hosts: String, queueManager: String, channel: String, batchSize: Int, batchInterval: Int) = {
     val temp = new MQConnectionFactory
     if (valid(id) & id != EMPTYSTR) temp.setAppName(id)
     temp.setDescription(jobDesc)
     temp.setConnectionNameList(hosts)
-    temp.setPort(port)
+    temp.setFailIfQuiesce(1)
     temp.setTransportType(MQJMS_TP_CLIENT_MQ_TCPIP)
     temp.setQueueManager(queueManager)
     temp.setChannel(channel)
     temp.setMsgBatchSize(batchSize)
-    //temp.setPollingInterval(batchInterval)
+    temp.setClientReconnectOptions(WMQ_CLIENT_RECONNECT)
+    temp.setPollingInterval(batchInterval / 9)
+    temp.setRescanInterval(batchInterval / 9)
     temp.setMaxBufferSize(120 * 1024 * 1024)
     info(s"Connection Factory Created to Hosts  :: ${temp.getConnectionNameList} with App Name $id")
     temp

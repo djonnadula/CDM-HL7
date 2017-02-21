@@ -21,11 +21,14 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
 /**
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
-class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int, queueManager: String, channel: String, batchInterval: Int, batchSize: Int, sources: Set[String])
+class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
   extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_SER) with Logg with MqConnector {
 
   self =>
+  private val mqHosts = lookUpProp("mq.hosts")
+  private val mqManager = lookUpProp("mq.manager")
+  private val mqChannel = lookUpProp("mq.channel")
   private val ackQueue = {
     val tem = lookUpProp("mq.queueResponse")
     if (tem != EMPTYSTR) Some(tem)
@@ -85,14 +88,14 @@ class MqReceiver(id: Int, app: String, jobDesc: String, hosts: String, port: Int
     if (con == null) {
       try {
         info(s"Starting MQ Consumer with App Name $app")
-        con = createConnection(app, jobDesc, hosts, port, queueManager, channel, batchSize, batchInterval)
+        con = createConnection(app, jobDesc, mqHosts,mqManager, mqChannel, batchSize, batchInterval)
       } catch {
         case ex: Exception => error("Consumer Connection Failed. Will Try To make connection based on Number of Re Tries Assigned", ex)
           var tryCount: Int = 1
           val retry = RetryHandler()
           while (retry.tryAgain()) {
             try {
-              con = createConnection(app, jobDesc, hosts, port, queueManager, channel, batchSize, batchInterval)
+              con = createConnection(app, jobDesc, mqHosts, mqManager, mqChannel, batchSize, batchInterval)
               info(s"createConnection Started After retries  $tryCount")
               return con
             } catch {
