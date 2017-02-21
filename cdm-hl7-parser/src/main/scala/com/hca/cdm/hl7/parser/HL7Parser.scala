@@ -259,7 +259,6 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                 case true =>
                   val multiFields = if (whichSegment == OBX_SEG && j == 5) Array(field) else field.split(ESCAPE + delimiters(REPTN_DELIM), -1)
                   val componentList = new mutable.ListBuffer[Any]
-                  val fieldRepeatedWithNoSub = (field contains delimiters(REPTN_DELIM)) && (!(field contains delimiters(CMPNT_DELIM)) && !(field contains delimiters(SUBCMPNT_DELIM)))
                   breakable {
                     multiFields foreach { fieldRepeatItem =>
                       val subComponent = fieldRepeatItem.split(ESCAPE + delimiters(CMPNT_DELIM), -1)
@@ -326,7 +325,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       }
                       else {
                         if (componentData == UNKNOWN) moveToUnknown(field)
-                        else if (fieldRepeatedWithNoSub) componentList += (new mutable.LinkedHashMap[String, String] += (componentData -> fieldRepeatItem))
+                        else if ((field contains delimiters(REPTN_DELIM)) && (!(fieldRepeatItem contains delimiters(CMPNT_DELIM)) || !(fieldRepeatItem contains delimiters(SUBCMPNT_DELIM)))) componentList += (new mutable.LinkedHashMap[String, String] += (componentData -> fieldRepeatItem))
                         else componentLayout += componentData -> field
                       }
                     }
