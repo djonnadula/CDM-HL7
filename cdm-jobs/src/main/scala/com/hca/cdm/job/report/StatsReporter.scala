@@ -60,7 +60,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     val to = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(1), DATE_WITH_TIMESTAMP)
     append("</div></div>")
     val parserTable = "<div style=color:#0000FF><h3>Hl7 Messages " + parserGrp.keys.toSeq.sortBy(msg => msg).mkString(";") + " Processed from Dates between " + from + " to " + to + " Stats as Follows</h3>" +
-      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;" +
+      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "<thead><tr>" +
       "<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "Message Type</th>" +
@@ -75,7 +75,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     append("</div> </div>")
     val segmentsTable = "<div style=color:#0000FF><h3>Segments for Hl7 Messages " + parserGrp.keys.mkString(";") + " Processed from Dates between " + from + " to " + to +
       " Stats as follows</h3>" +
-      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;" +
+      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "<thead><tr>" +
       "<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "Message Type</th>" +
