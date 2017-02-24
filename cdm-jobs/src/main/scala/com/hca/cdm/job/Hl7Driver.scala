@@ -207,7 +207,7 @@ object Hl7Driver extends App with Logg {
           error(s"$app Job ${jobHandle.getState} ... with Job ID ::  ${jobHandle.getAppId}")
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId +
-              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s"Self Start is Requested. Will Make an Attempt To Start $app" else s"Self Start is not Enabled for $app . Exiting Job.") +
+              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s".Self Start is Requested. Will Make an Attempt To Start $app" else s".Self Start is not Enabled for $app . Exiting Job.") +
               " \n\n" + EVENT_TIME
             , CRITICAL)
           unregister(sHook)
