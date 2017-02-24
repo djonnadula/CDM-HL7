@@ -1,5 +1,8 @@
 package com.hca.cdm.hl7.parser.tests
 
+import java.io.{BufferedReader, FileReader}
+import java.nio.file.Paths
+
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
 import com.hca.cdm.hl7.audit.AuditConstants._
@@ -22,12 +25,10 @@ class HL7ParserSetup(msgType: HL7) {
     //reload(null,Some(currThread.getContextClassLoader.getResourceAsStream("Hl7TestConfig.properties")))
 //    println(lookUpProp("/home/cloudera/projects/Cdm-HL7/cdm-scripts/templates/templateinfo.properties"))
 //    println(loadSegments("/home/cloudera/projects/Cdm-HL7/cdm-scripts/templates/segments.txt"))
+    loadProperties("Hl7TestConfig.properties")
     val res = ""
-    println(lookUpProp("hl7.messages.type"))
     val messageTypes = lookUpProp("hl7.messages.type") split ","
-    println(lookUpProp("hl7.template"))
     val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
-    println(lookUpProp("hl7.segments"))
     val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")), messageTypes)
     val hl7MsgMeta = messageTypes.map(mtyp => hl7(mtyp) -> getMsgTypeMeta(hl7(mtyp), mtyp + ".kafka.source")) toMap
     val modelsForHl7 = hl7MsgMeta.map(msgType => msgType._1 -> segmentsForHl7Type(msgType._1, segmentsMapping(msgType._1.toString)))
@@ -70,6 +71,27 @@ class HL7ParserSetup(msgType: HL7) {
 
     def adhocDestination(k: String, v: String, dest: String) = {
         info("adhocDestiation: " + k)
+    }
+
+    def message(fileNamePrefix: String): String = {
+        val currentDir = Paths.get(System.getProperty("user.dir"))
+        val msgDir = currentDir.toString + fileNamePrefix
+        val br = new BufferedReader(new FileReader(msgDir))
+        val sb = new StringBuilder
+        var line = br.readLine()
+
+        while (line != null) {
+            sb.append(line)
+            sb.append(System.lineSeparator())
+            line = br.readLine()
+        }
+        val ev = sb.toString
+        println(ev)
+        ev
+    }
+
+    def expected(): Unit = {
+
     }
 
 }
