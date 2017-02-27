@@ -3,6 +3,7 @@ package com.hca.cdm.hl7.parser.tests
 import java.io.{BufferedReader, FileReader}
 import java.nio.file.Paths
 
+import com.google.gson.JsonParser
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
 import com.hca.cdm.hl7.audit.AuditConstants._
@@ -90,8 +91,13 @@ class HL7ParserSetup(msgType: HL7) {
         ev
     }
 
-    def expected(): Unit = {
-
+    def expected(messageLocation: String): String = {
+        val currentDir = Paths.get(System.getProperty("user.dir"))
+        val msgDir = currentDir.toString + messageLocation
+        val jsonReader = new JsonParser
+        val msg = jsonReader.parse(new FileReader(msgDir))
+        println("json expected: \n" + msg.toString)
+        msg.toString
     }
 
 }

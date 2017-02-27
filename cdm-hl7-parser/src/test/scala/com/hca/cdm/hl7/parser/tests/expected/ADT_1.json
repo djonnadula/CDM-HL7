@@ -136,11 +136,13 @@
       "name_of_coding_sys": "No Known Allergies"
     },
     "al1_allergy_severity_code": "U",
-    "al1_identification_date": "20170207 ACC",
-    "al1_unknown": "20170207",
-    "al1_clin_sys_override_8": "11"
+    "al1_identification_date": "20170207"
   },
-  "0008.GT1": {
+  "0008.ACC": {
+    "acc_accident_date_time": "20170207",
+    "acc_accident_code": "11"
+  },
+  "0009.GT1": {
     "gt1_set_id": "1",
     "gt1_guarantor_name": {
       "last_name": "JONES",
@@ -170,10 +172,10 @@
     "gt1_guarantor_employer_phone_num": "(702)999-9999",
     "gt1_guarantor_employment_status": "N"
   },
-  "0009.GT1": {
+  "0010.GT1": {
     "gt1_set_id": "2"
   },
-  "0010.IN1": {
+  "0011.IN1": {
     "in1_set_id": "1",
     "in1_insurance_plan_id": "MEDNVPA",
     "in1_insurance_company_name": "MEDICAID PENDING",
@@ -197,7 +199,7 @@
     "in1_policy_num": "777777777",
     "in1_insured_sex": "M"
   },
-  "0011.IN1": {
+  "0012.IN1": {
     "in1_set_id": "2",
     "in1_insurance_plan_id": "CHAX050",
     "in1_insurance_company_name": "CHARITY PENDING",
@@ -221,7 +223,7 @@
     "in1_policy_num": "777777777",
     "in1_insured_sex": "M"
   },
-  "0012.IN1": {
+  "0013.IN1": {
     "in1_set_id": "3",
     "in1_insurance_plan_id": "UNINSURED",
     "in1_insurance_company_name": "UNINSURED DISCOUNT PLAN",
@@ -245,7 +247,7 @@
     "in1_policy_num": "777777777",
     "in1_insured_sex": "M"
   },
-  "0013.ZCD": {
+  "0014.ZCD": {
     "zcd_set_id": "1",
     "zcd_query_data": {
       "mnem": "ETHNICITY",
@@ -253,7 +255,7 @@
       "response": "2"
     }
   },
-  "0014.ZCD": {
+  "0015.ZCD": {
     "zcd_set_id": "2",
     "zcd_query_data": {
       "mnem": "ZSS.DEPREQ",
@@ -261,7 +263,7 @@
       "response": "N"
     }
   },
-  "0015.ZCD": {
+  "0016.ZCD": {
     "zcd_set_id": "3",
     "zcd_query_data": {
       "mnem": "ZSS.ESTCHG",
@@ -269,7 +271,7 @@
       "response": "200.00"
     }
   },
-  "0016.ZCD": {
+  "0017.ZCD": {
     "zcd_set_id": "4",
     "zcd_query_data": {
       "mnem": "ZSS.UNABLE",
@@ -277,7 +279,7 @@
       "response": "PAY AT FAC"
     }
   },
-  "0017.ZIN": {
+  "0018.ZIN": {
     "zin_set_id": "1",
     "zin_insured_id": "SP",
     "zin_insurance_mail_to_name": "MEDICAID PENDING",
@@ -285,7 +287,7 @@
     "zin_authorization_precertification_required": "N",
     "zin_insurance_plan_id": "MEDNVPA"
   },
-  "0018.ZIN": {
+  "0019.ZIN": {
     "zin_set_id": "2",
     "zin_insured_id": "SP",
     "zin_insurance_mail_to_name": "SELF PAY",
@@ -293,7 +295,7 @@
     "zin_authorization_precertification_required": "N",
     "zin_insurance_plan_id": "CHAX050"
   },
-  "0019.ZIN": {
+  "0020.ZIN": {
     "zin_set_id": "3",
     "zin_insured_id": "SP",
     "zin_insurance_mail_to_name": "UNINSURED DISCOUNT PLAN",
@@ -301,7 +303,7 @@
     "zin_authorization_precertification_required": "N",
     "zin_insurance_plan_id": "UNINSURED"
   },
-  "0020.ZCS": {
+  "0021.ZCS": {
     "zcs_patient_employer": "UNK",
     "zcs_patient_employer_address": {
       "street_address1": "UNKNOWN",
@@ -312,6 +314,6 @@
     "zcs_patient_employment_status": "N",
     "zcs_patient_e_mail_address": "NONE",
     "zcs_guarantor_e_mail_address": "NONE",
-    "zcs_patient_accounting_facility_id": "01541\t"
+    "zcs_patient_accounting_facility_id": "01541\\t"
   }
 }
