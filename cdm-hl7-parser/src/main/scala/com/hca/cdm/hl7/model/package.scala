@@ -204,10 +204,14 @@ package object model {
             val outDest = adhoc(3) split "\\^"
             var index = -1
             outFormats.map(outFormat => {
+              println("outFormat: " + outFormat)
               index += 1
               val outFormSplit = outFormat split AMPERSAND
               outFormat contains JSON.toString match {
                 case true =>
+                  println("filterFile: " + filterFile)
+                  println("outFormSplit(0): " + outFormSplit(0))
+                  println("outFormSplit(1): " + outFormSplit(1))
                   (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0), fieldWithNoAppends), loadFilters(filterFile))
                 case _ =>
                   (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends), loadFilters(filterFile))
@@ -315,6 +319,7 @@ package object model {
   }
 
   def loadFile(file: String, delimitedBy: String = EQUAL, keyIndex: Int = 0): Map[String, String] = {
+    println("loadFile.file: " + file, " delimitedBy: " + delimitedBy, " keyIndex: " + keyIndex)
     Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
       case x@ele if ele.nonEmpty => ele(keyIndex) -> x(keyIndex + 1)
     } toMap
@@ -327,6 +332,7 @@ package object model {
         splits.head -> splits.tail
       })
       closeResource(reader)
+      println("file: " + file)
       file._1 -> temp.toMap
     })
   }

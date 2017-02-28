@@ -1,9 +1,5 @@
 package com.hca.cdm.hl7.parser.tests
 
-import java.io.{BufferedReader, FileReader}
-import java.nio.file.Paths
-
-import com.google.gson.JsonParser
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
 import com.hca.cdm.hl7.audit.AuditConstants._
@@ -17,7 +13,7 @@ import scala.util.{Success, Try}
 /**
   * Created by cloudera on 2/16/17.
   */
-class HL7ParserSetup(msgType: HL7) {
+class HL7ParserTestSetup(msgType: HL7) {
 
     def loadProperties(properties: String): Unit = {
         reload(null, Some(currThread.getContextClassLoader.getResourceAsStream(properties)))
@@ -28,6 +24,8 @@ class HL7ParserSetup(msgType: HL7) {
 //    println(loadSegments("/home/cloudera/projects/Cdm-HL7/cdm-scripts/templates/segments.txt"))
     loadProperties("Hl7TestConfig.properties")
     val res = ""
+    val test = lookUpProp("test")
+    println("test: " + test)
     val messageTypes = lookUpProp("hl7.messages.type") split ","
     val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
     val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")), messageTypes)
@@ -71,33 +69,6 @@ class HL7ParserSetup(msgType: HL7) {
     }
 
     def adhocDestination(k: String, v: String, dest: String) = {
-        info("adhocDestiation: " + k)
+        info("adhocDestination: " + k)
     }
-
-    def message(fileNamePrefix: String): String = {
-        val currentDir = Paths.get(System.getProperty("user.dir"))
-        val msgDir = currentDir.toString + fileNamePrefix
-        val br = new BufferedReader(new FileReader(msgDir))
-        val sb = new StringBuilder
-        var line = br.readLine()
-
-        while (line != null) {
-            sb.append(line)
-            sb.append(System.lineSeparator())
-            line = br.readLine()
-        }
-        val ev = sb.toString
-        println(ev)
-        ev
-    }
-
-    def expected(messageLocation: String): String = {
-        val currentDir = Paths.get(System.getProperty("user.dir"))
-        val msgDir = currentDir.toString + messageLocation
-        val jsonReader = new JsonParser
-        val msg = jsonReader.parse(new FileReader(msgDir))
-        println("json expected: \n" + msg.toString)
-        msg.toString
-    }
-
 }
