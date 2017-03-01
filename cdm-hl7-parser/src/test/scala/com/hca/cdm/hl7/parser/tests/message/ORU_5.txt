@@ -1,0 +1,36 @@
+MSH|^~\&|COCQA1A|COCQA1A|OV|OV|201611091503||ORU^R01|IP_COQ1A_ORU_NURQA.191416.6593|T|2.5||KYA^04446|ER|NE
+PID|1||J000425961^^^COCQA1A^MRN|J502566|PARKER^MAY^R||19620105|F||||||||||J00021035470
+PV1|1|I|J.8E^J.CCU^7^COCQA1A|EL|||DRBRI^DOCTOR^BRITTANY|||||||||||IN|||||||||||||||||||||||ADM
+ORC|NEW||J00021035470-4008-1-20161109-1458-2
+OBR|1|4008|J00021035470-4008-1-20161109-1458-2|4008^CPP TESTING FOR MU|4||201611091458|||||||201611091501||1TSQBE8554||CPPMUDOC
+OBX|1|TX|hcaMU204^Smoking status for patients 13 years old or older:||1:Current every day smoker||||||N
+OBX|2|TX|hcaMU2COG^Cognitive Status:||Alert:Alert and oriented||||||N
+OBX|3|TX|hcaMU2FCT^Functional Status:||Bed:Bed bound||||||N
+OBX|4|TX|NUR25002^LOC:||AWAKE/ALER:AWAKE/ALERT||||||N
+OBX|5|TX|NUR40002AB^Oriented To:|1|TIMES 3:TIMES 3||||||N
+OBX|6|TX|NUR35003Q1^Pulse Ox %:||98||||||N
+OBX|7|TX|NUR10006^Pulse:||80||||||N
+OBX|8|TX|NUR10014^Blood Pressure:||120/80||||||N
+OBX|9|TX|NUR10018^Ht-Ft:||5||||||N
+OBX|10|TX|NUR10018A^Ht-In:||5||||||N
+OBX|11|TX|NUR10020^Wt-Lbs:||152||||||N
+OBX|12|TX|NUR10020A^Oz:||6.00||||||N
+OBX|13|TX|NUR65002^Moves all extremities:||Y||||||N
+OBX|14|TX|NUR98400J^Call Doctor's Office:||ST:Stabbing||||||N
+OBX|15|TX|K31010007A^Height ft:||5||||||N
+OBX|16|TX|K31010008A^Height in:||5||||||N
+OBX|17|TX|K31010006A^Height cm:||1.000||||||N
+OBX|18|TX|K31010001A^Weight lb:||152||||||N
+OBX|19|TX|K31010002A^Weight oz:||6.00||||||N
+OBX|20|TX|K31010003A^Weight kg:||69.00||||||N
+OBX|21|TX|K31010005A^Weight source:||Stated:Stated/Reported||||||N
+OBX|22|TX|K33010024A^Blood pressure:||120/80||||||N
+OBX|23|TX|K33010028A^Blood pressure source:||Manualcuff:Manual cuff||||||N
+OBX|24|TX|K33010003A^Temperature F:||89.6||||||N
+OBX|25|TX|K33010004A^Temperature source:||Oral:Oral||||||N
+OBX|26|TX|K33010016A^Respiratory rate:||18||||||N
+OBX|27|TX|K33010018A^Respiratory source:||Observed:Observed||||||N
+OBX|28|TX|K33010006A^Pulse:||80||||||N
+OBX|29|TX|K33010010A^Pulse source:||Palpation:Palpation||||||N
+OBX|30|TX|L35010001A^SPO2 %:||98||||||N
+OBX|31|TX|Q47010214A^Numeric pain scale:||5||||||N

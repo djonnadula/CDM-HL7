@@ -1,0 +1,405 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "AKAR",
+    "msh_msg_control_id": "EPIC_AKAR_ADT_30444114",
+    "pid_medical_record_num": "1001713019",
+    "pid_medical_record_urn": "",
+    "pid_pat_account_num": "700272816"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_facility": "AKAR",
+    "msh_msg_create_date_time": "20160721111150",
+    "msh_security": "FLP8458",
+    "msh_msg_type": {
+      "message_code": "ADT",
+      "trigger_event": "A04"
+    },
+    "msh_msg_control_id": "EPIC_AKAR_ADT_30444114",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.3",
+    "msh_continuation_pointer": "Epic_Mountain_PRD"
+  },
+  "0002.EVN": {
+    "evn_evnt_type": "A04",
+    "evn_recorded_date_time": "20160721111150",
+    "evn_evnt_resn_code": "ADT_EVENT",
+    "evn_oper_id": {
+      "person_id": "FLP8458",
+      "last_name": "ALTER",
+      "first_name": "PATTI",
+      "middle_name": "S",
+      "assgn_authr": "MTN A",
+      "assgn_facility": "AKAR"
+    },
+    "evn_evnt_occurred": "20160721105500"
+  },
+  "0003.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": {
+      "identifier_num": "1001713019",
+      "assgn_authr": "EPIC",
+      "identifier_type_code": "MRN"
+    },
+    "pid_pat_name": {
+      "last_name": "NATIVIDAD",
+      "first_name": "JAIRUS",
+      "middle_name": "RUEL"
+    },
+    "pid_birth_date_time": "20111123",
+    "pid_sex": "M",
+    "pid_pat_alias": {
+      "last_name": "NATIVIDAD",
+      "first_name": "JAIRUS"
+    },
+    "pid_race": "A",
+    "pid_pat_address": {
+      "street_address1": "4627 E 4TH AVE",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99508",
+      "country": "USA",
+      "address_type": "P",
+      "county_parish_code": "ANCHORAGE"
+    },
+    "pid_county_code": "ANCHORAGE",
+    "pid_home_phone_num": [
+      {
+        "formatted_num": "(907)903-0740",
+        "use_code": "P",
+        "equipment_type": "H",
+        "area_city_code": "907",
+        "local_number": "9030740"
+      },
+      {
+        "formatted_num": "(907)903-0740",
+        "use_code": "P",
+        "equipment_type": "M",
+        "area_city_code": "907",
+        "local_number": "9030740"
+      }
+    ],
+    "pid_primary_language": "ENGLISH",
+    "pid_marital_status": "S",
+    "pid_religion": "COC",
+    "pid_pat_account_num": "700272816",
+    "pid_pat_social_security_num": "777-77-7777",
+    "pid_mother_name": {
+      "last_name": "Natividad",
+      "first_name": "Aillyn",
+      "middle_name": "T"
+    },
+    "pid_ethnic_group": "NOT HISPANIC",
+    "pid_pat_death_ind": "N"
+  },
+  "0004.ZPD": {
+    "zpd_pregnancy_flag": "N"
+  },
+  "0005.PD1": {
+    "pd1_patient_prim_facility": {
+      "org_name": "ALASKA REGIONAL HOSPITAL",
+      "identifier_num": "40001001"
+    }
+  },
+  "0006.NK1": {
+    "nk1_set_id": "1",
+    "nk1_name": {
+      "last_name": "NATIVIDAD",
+      "first_name": "AILLYN",
+      "middle_name": "T"
+    },
+    "nk1_relationship": "03",
+    "nk1_address": {
+      "street_address1": "4627 E 4TH AVE",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99508",
+      "country": "USA"
+    },
+    "nk1_phone_num": {
+      "formatted_num": "(907)903-0740",
+      "area_city_code": "907",
+      "local_number": "9030740"
+    },
+    "nk1_contact_role": "NOT"
+  },
+  "0007.NK1": {
+    "nk1_set_id": "2",
+    "nk1_address": {
+      "street_address1": "SAME AS PT",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99508",
+      "country": "USA"
+    },
+    "nk1_phone_num": {
+      "formatted_num": "(907)999-9999",
+      "area_city_code": "907",
+      "local_number": "9999999"
+    },
+    "nk1_contact_role": "EMP",
+    "nk1_organization_name": "UNEMPLOYED",
+    "nk1_asoc_party_id": "6459",
+    "nk1_job_status": "N"
+  },
+  "0008.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "O",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "AKARRD",
+      "facility": "AKAR"
+    },
+    "pv1_adm_type": "L",
+    "pv1_attending_doctor": [
+      {
+        "person_id": "1255441788",
+        "last_name": "STANGE",
+        "first_name": "CATHERINE",
+        "assgn_authr": "NPI",
+        "identifier_type_code": "NPI"
+      },
+      {
+        "person_id": "GYE8850",
+        "last_name": "STANGE",
+        "first_name": "CATHERINE",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      },
+      {
+        "person_id": "1201033093",
+        "last_name": "STANGE",
+        "first_name": "CATHERINE",
+        "assgn_authr": "EPICPROVID",
+        "identifier_type_code": "EPICPROVID"
+      }
+    ],
+    "pv1_referring_doctor": [
+      {
+        "person_id": "1255441788",
+        "last_name": "STANGE",
+        "first_name": "CATHERINE",
+        "assgn_authr": "NPI",
+        "identifier_type_code": "NPI"
+      },
+      {
+        "person_id": "GYE8850",
+        "last_name": "STANGE",
+        "first_name": "CATHERINE",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      },
+      {
+        "person_id": "1201033093",
+        "last_name": "STANGE",
+        "first_name": "CATHERINE",
+        "assgn_authr": "EPICPROVID",
+        "identifier_type_code": "EPICPROVID"
+      }
+    ],
+    "pv1_adm_source": "2",
+    "pv1_visit_num": "21060324",
+    "pv1_financial_classification": "03",
+    "pv1_account_status": "REG",
+    "pv1_pending_loc": {
+      "facility": "AKAR"
+    },
+    "pv1_adm_date_time": "20160721105500",
+    "pv1_alternate_visit_id": "21060324"
+  },
+  "0009.PV2": {
+    "pv2_expected_adm_date_time": "20160721105500",
+    "pv2_visit_publicity_code": "n",
+    "pv2_visit_protection_ind": "N"
+  },
+  "0010.ZPV": {
+    "zpv_first_outpatient_occurence_date_time": "20160721105500"
+  },
+  "0011.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "ADMSRCDETAIL",
+      "text": "POINT OF ORIGIN"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "2",
+    "obx_observation_date_time": "20160721"
+  },
+  "0012.OBX": {
+    "obx_set_id": "2",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "ACCSTAT1",
+      "text": "ADT: PATIENT STATUS"
+    },
+    "obx_observation_sub_id": "2",
+    "obx_observation_value": "HOV",
+    "obx_observation_date_time": "20160721"
+  },
+  "0013.OBX": {
+    "obx_set_id": "3",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "ACCSTAT2",
+      "text": "HOSPITAL - ADMIT CONFIRMATION STATUS"
+    },
+    "obx_observation_sub_id": "3",
+    "obx_observation_value": "Conf",
+    "obx_observation_date_time": "20160721"
+  },
+  "0014.CON": {
+    "con_set_id": "1",
+    "con_consent_type": "REV.DRIVER'S",
+    "con_consent_form_id_and_version": "AK DL",
+    "con_consent_status": "RECEIVED",
+    "con_consent_decision_date_time": "20160721110500"
+  },
+  "0015.CON": {
+    "con_set_id": "2",
+    "con_consent_type": "PHYSICIAN OR",
+    "con_consent_form_id_and_version": "PHYS ORD -- XR",
+    "con_consent_status": "RECEIVED",
+    "con_consent_decision_date_time": "20160721110500"
+  },
+  "0016.CON": {
+    "con_set_id": "3",
+    "con_consent_type": "REV.INSUR",
+    "con_consent_form_id_and_version": "INS CD -- MEDICAID - EXP CD - VERIFIED 7/21/2016",
+    "con_consent_status": "RECEIVED",
+    "con_consent_decision_date_time": "20160721110500"
+  },
+  "0017.CON": {
+    "con_set_id": "4",
+    "con_consent_type": "REV.CONSENT",
+    "con_consent_form_id_and_version": "COA FOR XR -- 7/21/2016",
+    "con_consent_status": "RECEIVED",
+    "con_consent_decision_date_time": "20160721110500"
+  },
+  "0018.AL1": {
+    "al1_set_id": "1"
+  },
+  "0019.DG1": {
+    "dg1_set_id": "1",
+    "dg1_diagnosis_coding_method": "I10",
+    "dg1_diagnosis_code": {
+      "primary_id": "J18.9",
+      "text": "Pneumonia, unspecified organism",
+      "name_of_coding_sys": "I10"
+    },
+    "dg1_diagnosis_desc": "Pneumonia, unspecified organism"
+  },
+  "0020.GT1": {
+    "gt1_set_id": "1",
+    "gt1_guarantor_num": "120045849",
+    "gt1_guarantor_name": {
+      "last_name": "NATIVIDAD",
+      "first_name": "AILLYN",
+      "middle_name": "T"
+    },
+    "gt1_guarantor_address": {
+      "street_address1": "4627 E 4TH AVE",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99508",
+      "country": "USA",
+      "county_parish_code": "ANCHORAGE"
+    },
+    "gt1_guarantor_home_phone_num": {
+      "formatted_num": "(907)903-0740",
+      "area_city_code": "907",
+      "local_number": "9030740"
+    },
+    "gt1_guarantor_birth_date_time": "19750507",
+    "gt1_guarantor_sex": "F",
+    "gt1_guarantor_type": "Facility P/F",
+    "gt1_guarantor_relationship": "G8",
+    "gt1_guarantor_social_security_num": "586-11-5831",
+    "gt1_guarantor_employer_name": "AIA - ALASKA IMAGING ASSOCIATES",
+    "gt1_guarantor_employer_address": {
+      "country": "USA"
+    },
+    "gt1_guarantor_employment_status": "F"
+  },
+  "0021.IN1": {
+    "in1_set_id": "1",
+    "in1_insurance_plan_id": {
+      "primary_id": "101033",
+      "text": "MEDICAID ALASKA"
+    },
+    "in1_insurance_company_id": "1471",
+    "in1_insurance_company_name": "MEDICAID AK",
+    "in1_insurance_company_address": {
+      "street_address1": "PO BOX 240729",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99524-0729"
+    },
+    "in1_insurance_company_phone_num": {
+      "formatted_num": "(800)884-3223",
+      "area_city_code": "800",
+      "local_number": "8843223"
+    },
+    "in1_plan_eff_from_date": "20160720",
+    "in1_insured_name": {
+      "last_name": "NATIVIDAD",
+      "first_name": "JAIRUS",
+      "middle_name": "RUEL"
+    },
+    "in1_insured_relationship_to_patient": "Self",
+    "in1_insured_birth_date": "20111123",
+    "in1_insured_address": {
+      "street_address1": "4627 E 4TH AVE",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99508",
+      "country": "USA",
+      "county_parish_code": "ANCHORAGE"
+    },
+    "in1_coordination_of_benefits_priority": "1*1",
+    "in1_verification_date_time": "20160721110847",
+    "in1_verification_by": {
+      "person_id": "FLP8458",
+      "last_name": "ALTER",
+      "first_name": "PATTI",
+      "middle_name": "S"
+    },
+    "in1_company_plan_code": "487099",
+    "in1_policy_num": "0601272004",
+    "in1_insured_employment_status": "N",
+    "in1_insured_sex": "M",
+    "in1_insured_employer_address": {
+      "street_address1": "SAME AS PT",
+      "city": "ANCHORAGE",
+      "state_province": "AK",
+      "zip_postal_code": "99508",
+      "country": "USA"
+    },
+    "in1_verification_status": "Ver by Web",
+    "in1_coverage_type": "BOTH",
+    "in1_insured_id_num": "487099"
+  },
+  "0022.IN2": {
+    "in2_insured_social_security_num": "777-77-7777",
+    "in2_mail_claim_party": "Payor Plan",
+    "in2_patient_member_num": "0601272004",
+    "in2_insured_phone_num_home": {
+      "formatted_num": "(907)903-0740",
+      "area_city_code": "907",
+      "local_number": "9030740"
+    },
+    "in2_insured_employer_phone_num": {
+      "formatted_num": "(907)999-9999",
+      "area_city_code": "907",
+      "local_number": "9999999"
+    },
+    "in2_insured_employer_organization_name_id": "UNEMPLOYED"
+  },
+  "0023.ZIN": {
+    "zin_alternative_subscriber_name": {
+      "last_name": "NATIVIDAD",
+      "first_name": "JAIRUS",
+      "middle_name": "R"
+    }
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCQA1A",
+    "msh_msg_control_id": "IP_COCQC_ORU_EDMQC.160112.19",
+    "pid_medical_record_num": "J000426114",
+    "pid_medical_record_urn": "J502719",
+    "pid_pat_account_num": "J00021037132"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "COCQA1A",
+    "msh_sending_facility": "COCQA1A",
+    "msh_receiving_appl": "OV",
+    "msh_receiving_facility": "OV",
+    "msh_msg_create_date_time": "201610251401",
+    "msh_msg_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "msh_msg_control_id": "IP_COCQC_ORU_EDMQC.160112.19",
+    "msh_processing_id": "T",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "msh_accept_acknowledgment_type": "ER",
+    "msh_appl_acknowledgment_type": "NE"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": {
+      "identifier_num": "J000426114",
+      "assgn_authr": "COCQA1A",
+      "identifier_type_code": "MRN"
+    },
+    "pid_alt_pat_id": "J502719",
+    "pid_pat_name": {
+      "last_name": "Test",
+      "first_name": "KM82100"
+    },
+    "pid_birth_date_time": "19430920",
+    "pid_sex": "M",
+    "pid_pat_account_num": "J00021037132"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "E",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "D.ER",
+      "facility": "COCQA1A"
+    },
+    "pv1_adm_type": "EM",
+    "pv1_attending_doctor": {
+      "person_id": "1CSMMW6007",
+      "last_name": "WILLIAMS",
+      "first_name": "NP"
+    },
+    "pv1_pat_type": "ER",
+    "pv1_account_status": "REG"
+  },
+  "0004.ORC": {
+    "orc_order_control": "NEW",
+    "orc_filler_order_num": "J00021037132-IO-20161025-1359-1"
+  },
+  "0005.OBR": {
+    "obr_set_id": "1",
+    "obr_placer_order_num": "IO",
+    "obr_filler_order_num": "J00021037132-IO-20161025-1359-1",
+    "obr_universal_service_id": {
+      "primary_id": "IO",
+      "text": "INTAKE AND OUTPUT"
+    },
+    "obr_observation_date_time": "201610251359",
+    "obr_specimen_received_date_time": "201610251400",
+    "obr_ordering_provider": "1PKLUD7997",
+    "obr_placer_first_generic_field": "NURI\\T\\O"
+  },
+  "0006.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15002",
+      "text": "Oral:"
+    },
+    "obx_observation_value": "6",
+    "obx_observation_result_status": "N"
+  },
+  "0007.OBX": {
+    "obx_set_id": "2",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15014A",
+      "text": "IV #1 Intake:"
+    },
+    "obx_observation_value": "7",
+    "obx_observation_result_status": "N"
+  },
+  "0008.OBX": {
+    "obx_set_id": "3",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15018A",
+      "text": "IVPB #1 Amount:"
+    },
+    "obx_observation_value": "8",
+    "obx_observation_result_status": "N"
+  },
+  "0009.OBX": {
+    "obx_set_id": "4",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15003",
+      "text": "Tube feeding:"
+    },
+    "obx_observation_value": "9",
+    "obx_observation_result_status": "N"
+  },
+  "0010.OBX": {
+    "obx_set_id": "5",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15004",
+      "text": "NG Feeding:"
+    },
+    "obx_observation_value": "10",
+    "obx_observation_result_status": "N"
+  },
+  "0011.OBX": {
+    "obx_set_id": "6",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15102",
+      "text": "Urine:"
+    },
+    "obx_observation_value": "11",
+    "obx_observation_result_status": "N"
+  },
+  "0012.OBX": {
+    "obx_set_id": "7",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15104",
+      "text": "Stool, Liquid:"
+    },
+    "obx_observation_value": "10",
+    "obx_observation_result_status": "N"
+  },
+  "0013.OBX": {
+    "obx_set_id": "8",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15106",
+      "text": "Emesis:"
+    },
+    "obx_observation_value": "9",
+    "obx_observation_result_status": "N"
+  },
+  "0014.OBX": {
+    "obx_set_id": "9",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15108",
+      "text": "NG tube:"
+    },
+    "obx_observation_value": "8",
+    "obx_observation_result_status": "N"
+  },
+  "0015.OBX": {
+    "obx_set_id": "10",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "NUR15112",
+      "text": "Gastrostomy:"
+    },
+    "obx_observation_value": "7",
+    "obx_observation_result_status": "N"
+  },
+  "0016.ZER": {
+    "zer_arrival_date_time": "201610241023",
+    "zer_current_status_event": {
+      "event_code": "REG",
+      "event_desc": "Registration"
+    }
+  }
+}

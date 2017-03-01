@@ -1,6 +1,6 @@
 package com.hca.cdm.hl7.parser.tests
 
-import java.io.{FileReader, BufferedReader}
+import java.io.{BufferedReader, FileReader}
 import java.nio.file.Paths
 
 import com.google.gson.JsonParser
@@ -48,5 +48,13 @@ package object HL7ParserTestUtils {
 
     def testFilePath(basePath: String, fileType: String): String = {
         basePath + "/" + fileType + "/"
+    }
+
+    def getMessage(testFileBasePath: String, messageName: String): String = {
+        message(testFilePath(testFileBasePath, "message") + createMessageFileName(messageName))
+    }
+
+    def getExpected(testFileBasePath: String, messageName: String): String = {
+        expected(testFilePath(testFileBasePath, "expected") + createExpectedFileName(messageName))
     }
 }

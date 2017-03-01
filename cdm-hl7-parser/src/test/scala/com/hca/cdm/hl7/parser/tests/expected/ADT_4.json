@@ -1,0 +1,159 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "FRNK",
+    "msh_msg_control_id": "MT6_FRNK_ADT_137523803",
+    "pid_medical_record_num": "K000102025",
+    "pid_medical_record_urn": "K96519",
+    "pid_pat_account_num": "FR0804087583"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "ADM",
+    "msh_sending_facility": "FRNK",
+    "msh_msg_create_date_time": "201607211540",
+    "msh_msg_type": {
+      "message_code": "ADT",
+      "trigger_event": "A08"
+    },
+    "msh_msg_control_id": "MT6_FRNK_ADT_137523803",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.4"
+  },
+  "0002.EVN": {
+    "evn_recorded_date_time": "201607211540",
+    "evn_oper_id": {
+      "person_id": "SHZ2579",
+      "last_name": "Gaines",
+      "first_name": "Angel",
+      "middle_name": "M"
+    },
+    "evn_evnt_occurred": "201608261100"
+  },
+  "0003.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": [
+      {
+        "identifier_num": "K000102025",
+        "identifier_type_code": "MR",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "403-23-8060",
+        "identifier_type_code": "SS",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "K96519",
+        "identifier_type_code": "PI",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "A00200382",
+        "identifier_type_code": "HUB",
+        "assgn_facility": "FRNK"
+      }
+    ],
+    "pid_pat_name": [
+      {
+        "last_name": "RUSSELL",
+        "first_name": "KATHY",
+        "middle_name": "LYNN",
+        "type_code": "L"
+      },
+      {
+        "last_name": "RUSSELL",
+        "first_name": "KATHY",
+        "middle_name": "L",
+        "type_code": "M"
+      }
+    ],
+    "pid_mother_name": "DIANE",
+    "pid_birth_date_time": "19760920",
+    "pid_sex": "F",
+    "pid_race": "U",
+    "pid_pat_address": {
+      "address_type": "P"
+    },
+    "pid_home_phone_num": "(502)517-5291",
+    "pid_pat_account_num": "FR0804087583",
+    "pid_pat_social_security_num": "403-23-8060"
+  },
+  "0004.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "P",
+    "pv1_assgn_pat_loc": "FR.SURG",
+    "pv1_attending_doctor": {
+      "person_id": "BYG2418",
+      "last_name": "Wainwright",
+      "first_name": "Mark",
+      "middle_name": "A.",
+      "identifier_type_code": "XX"
+    },
+    "pv1_pat_type": "SDC",
+    "pv1_financial_classification": "09",
+    "pv1_servicing_facility": "FRNK",
+    "pv1_account_status": "PRE",
+    "pv1_adm_date_time": "201608261100"
+  },
+  "0005.PV2": {
+    "pv2_adm_reason": "IRREG BLEEDING",
+    "pv2_newborn_baby_ind": "N"
+  },
+  "0006.ROL": {
+    "rol_role_instance_id": "1",
+    "rol_action_code": "AD",
+    "rol_role_name": "AT",
+    "rol_role_person_name": {
+      "person_id": "BYG2418",
+      "last_name": "Wainwright",
+      "first_name": "Mark",
+      "middle_name": "A.",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0007.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1CWS0P093A",
+      "text": "CPT code",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "58563",
+    "obx_observation_result_status": "F"
+  },
+  "0008.DRG": {
+    "drg_diagnostic_related_group": "33"
+  },
+  "0009.IN1": {
+    "in1_set_id": "1",
+    "in1_insurance_plan_id": "BCANTHMCD",
+    "in1_insurance_company_name": "BC ANTHEM MEDICAID KY",
+    "in1_insurance_company_address": {
+      "street_address1": "PO BOX 61010",
+      "street_address2": "ATTN CLAIMS",
+      "city": "VIRGINIA BEACH",
+      "state_province": "VA",
+      "zip_postal_code": "23456-1010"
+    },
+    "in1_insurance_company_phone_num": "(855)661-2028",
+    "in1_insured_name": {
+      "last_name": "RUSSELL",
+      "first_name": "KATHY",
+      "middle_name": "LYNN"
+    },
+    "in1_insured_relationship_to_patient": "SA",
+    "in1_insured_birth_date": "19760920",
+    "in1_insured_address": {
+      "address_type": "P"
+    },
+    "in1_policy_num": "403238060",
+    "in1_insured_sex": "F"
+  },
+  "0010.IN2": {
+    "in2_set_id": "1",
+    "in2_insured_social_security_num": "403-23-8060",
+    "in2_insured_phone_num_home": "(502)517-5291"
+  }
+}

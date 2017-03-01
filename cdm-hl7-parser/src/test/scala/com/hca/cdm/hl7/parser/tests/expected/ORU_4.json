@@ -1,0 +1,566 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCQA1A",
+    "msh_msg_control_id": "IP_COQ1A_ORU_NURQA.161007.9693",
+    "pid_medical_record_num": "J000425961",
+    "pid_medical_record_urn": "J502566",
+    "pid_pat_account_num": "J00021035470"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "COCQA1A",
+    "msh_sending_facility": "COCQA1A",
+    "msh_receiving_appl": "OV",
+    "msh_receiving_facility": "OV",
+    "msh_msg_create_date_time": "201611091447",
+    "msh_msg_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "msh_msg_control_id": "IP_COQ1A_ORU_NURQA.161007.9693",
+    "msh_processing_id": "T",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "msh_accept_acknowledgment_type": "ER",
+    "msh_appl_acknowledgment_type": "NE"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": {
+      "identifier_num": "J000425961",
+      "assgn_authr": "COCQA1A",
+      "identifier_type_code": "MRN"
+    },
+    "pid_alt_pat_id": "J502566",
+    "pid_pat_name": {
+      "last_name": "PARKER",
+      "first_name": "MAY",
+      "middle_name": "R"
+    },
+    "pid_birth_date_time": "19620105",
+    "pid_sex": "F",
+    "pid_pat_account_num": "J00021035470"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "I",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "J.8E",
+      "room": "J.CCU",
+      "bed": "7",
+      "facility": "COCQA1A"
+    },
+    "pv1_adm_type": "EL",
+    "pv1_attending_doctor": {
+      "person_id": "DRBRI",
+      "last_name": "DOCTOR",
+      "first_name": "BRITTANY"
+    },
+    "pv1_pat_type": "IN",
+    "pv1_account_status": "ADM"
+  },
+  "0004.ORC": {
+    "orc_order_control": "NEW",
+    "orc_filler_order_num": "J00021035470-220400-1-20161109-1441-2"
+  },
+  "0005.OBR": {
+    "obr_set_id": "1",
+    "obr_placer_order_num": "220400",
+    "obr_filler_order_num": "J00021035470-220400-1-20161109-1441-2",
+    "obr_universal_service_id": {
+      "primary_id": "220400",
+      "text": "Vitals/Ht/ Wt/ Measurements +"
+    },
+    "obr_priority": "3",
+    "obr_observation_date_time": "201611091441",
+    "obr_specimen_received_date_time": "201611091445",
+    "obr_ordering_provider": "1TSQBE8554",
+    "obr_placer_first_generic_field": "HCAEBVSSGNASTOB"
+  },
+  "0006.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "HCAEBDL1",
+      "text": "          -"
+    },
+    "obx_observation_value": "- VITAL SIGNS - -",
+    "obx_observation_result_status": "N"
+  },
+  "0007.OBX": {
+    "obx_set_id": "2",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K3301A001A",
+      "text": "Document vital signs:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0008.OBX": {
+    "obx_set_id": "3",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010003A",
+      "text": "Temperature F:"
+    },
+    "obx_observation_value": "98.5",
+    "obx_observation_result_status": "N"
+  },
+  "0009.OBX": {
+    "obx_set_id": "4",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010004A",
+      "text": "Temperature source:"
+    },
+    "obx_observation_value": "Oral:Oral",
+    "obx_observation_result_status": "N"
+  },
+  "0010.OBX": {
+    "obx_set_id": "5",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010006A",
+      "text": "Pulse:"
+    },
+    "obx_observation_value": "80",
+    "obx_observation_result_status": "N"
+  },
+  "0011.OBX": {
+    "obx_set_id": "6",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010008A",
+      "text": "Pulse location:"
+    },
+    "obx_observation_value": "Radial:Radial",
+    "obx_observation_result_status": "N"
+  },
+  "0012.OBX": {
+    "obx_set_id": "7",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010010A",
+      "text": "Pulse source:"
+    },
+    "obx_observation_value": "Palpation:Palpation",
+    "obx_observation_result_status": "N"
+  },
+  "0013.OBX": {
+    "obx_set_id": "8",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010016A",
+      "text": "Respiratory rate:"
+    },
+    "obx_observation_value": "18",
+    "obx_observation_result_status": "N"
+  },
+  "0014.OBX": {
+    "obx_set_id": "9",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010018A",
+      "text": "Respiratory source:"
+    },
+    "obx_observation_value": "Observed:Observed",
+    "obx_observation_result_status": "N"
+  },
+  "0015.OBX": {
+    "obx_set_id": "10",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010012A",
+      "text": "Vital signs position:"
+    },
+    "obx_observation_value": "Lying:Lying",
+    "obx_observation_result_status": "N"
+  },
+  "0016.OBX": {
+    "obx_set_id": "11",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010024A",
+      "text": "Blood pressure:"
+    },
+    "obx_observation_value": "120/80",
+    "obx_observation_result_status": "N"
+  },
+  "0017.OBX": {
+    "obx_set_id": "12",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010026A",
+      "text": "Blood pressure location:"
+    },
+    "obx_observation_value": "Arm left:Arm left",
+    "obx_observation_result_status": "N"
+  },
+  "0018.OBX": {
+    "obx_set_id": "13",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010028A",
+      "text": "Blood pressure source:"
+    },
+    "obx_observation_value": "Manualcuff:Manual cuff",
+    "obx_observation_result_status": "N"
+  },
+  "0019.OBX": {
+    "obx_set_id": "14",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "L35010001A",
+      "text": "SPO2 %:"
+    },
+    "obx_observation_value": "99",
+    "obx_observation_result_status": "N"
+  },
+  "0020.OBX": {
+    "obx_set_id": "15",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "L35020009A",
+      "text": "Oxygen detail:"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "Humidfied:Humidified",
+    "obx_observation_result_status": "N"
+  },
+  "0021.OBX": {
+    "obx_set_id": "16",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "L35020010A",
+      "text": "Oxygen delivery devices:"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "NC:Nasal cannula",
+    "obx_observation_result_status": "N"
+  },
+  "0022.OBX": {
+    "obx_set_id": "17",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "L35020016A",
+      "text": "O2 liters per minute:"
+    },
+    "obx_observation_value": "02",
+    "obx_observation_result_status": "N"
+  },
+  "0023.OBX": {
+    "obx_set_id": "18",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaMEWS01",
+      "text": "LOC:"
+    },
+    "obx_observation_value": "Alert:Alert",
+    "obx_observation_result_status": "N"
+  },
+  "0024.OBX": {
+    "obx_set_id": "19",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaMEWS02",
+      "text": "MEWS score:"
+    },
+    "obx_observation_value": "1",
+    "obx_observation_result_status": "N"
+  },
+  "0025.OBX": {
+    "obx_set_id": "20",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010029A",
+      "text": "MEWS change:"
+    },
+    "obx_observation_value": "1",
+    "obx_observation_result_status": "N"
+  },
+  "0026.OBX": {
+    "obx_set_id": "21",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "HCAEBDL2",
+      "text": "          -"
+    },
+    "obx_observation_value": "- HEIGHT/WEIGHT - -",
+    "obx_observation_result_status": "N"
+  },
+  "0027.OBX": {
+    "obx_set_id": "22",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K3301A002A",
+      "text": "Document height/weight measurements:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0028.OBX": {
+    "obx_set_id": "23",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31010007A",
+      "text": "Height ft:"
+    },
+    "obx_observation_value": "5",
+    "obx_observation_result_status": "N"
+  },
+  "0029.OBX": {
+    "obx_set_id": "24",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31010008A",
+      "text": "Height in:"
+    },
+    "obx_observation_value": "5",
+    "obx_observation_result_status": "N"
+  },
+  "0030.OBX": {
+    "obx_set_id": "25",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31010009A",
+      "text": "Height source:"
+    },
+    "obx_observation_value": "Stated:Stated/Reported",
+    "obx_observation_result_status": "N"
+  },
+  "0031.OBX": {
+    "obx_set_id": "26",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31010003A",
+      "text": "Weight kg:"
+    },
+    "obx_observation_value": "69.00",
+    "obx_observation_result_status": "N"
+  },
+  "0032.OBX": {
+    "obx_set_id": "27",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31010005A",
+      "text": "Weight source:"
+    },
+    "obx_observation_value": "Stated:Stated/Reported",
+    "obx_observation_result_status": "N"
+  },
+  "0033.OBX": {
+    "obx_set_id": "28",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31420006A",
+      "text": "BSA calculated - sq m:"
+    },
+    "obx_observation_value": "1.79",
+    "obx_observation_result_status": "N"
+  },
+  "0034.OBX": {
+    "obx_set_id": "29",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31420007A",
+      "text": "BMI calculated:"
+    },
+    "obx_observation_value": "25.3",
+    "obx_observation_result_status": "N"
+  },
+  "0035.OBX": {
+    "obx_set_id": "30",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31420008A",
+      "text": "IBW calculated:"
+    },
+    "obx_observation_value": "125",
+    "obx_observation_result_status": "N"
+  },
+  "0036.OBX": {
+    "obx_set_id": "31",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31420010A",
+      "text": "Weight in lb to have BMI equal to 25:"
+    },
+    "obx_observation_value": "149.7",
+    "obx_observation_result_status": "N"
+  },
+  "0037.OBX": {
+    "obx_set_id": "32",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "HCAEBDL4",
+      "text": "          -"
+    },
+    "obx_observation_value": "- ORTHOSTATIC VITAL SIGNS - -",
+    "obx_observation_result_status": "N"
+  },
+  "0038.OBX": {
+    "obx_set_id": "33",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K3301A004A",
+      "text": "Document orthostatic vital signs:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0039.OBX": {
+    "obx_set_id": "34",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010200A",
+      "text": "Blood pressure lying:"
+    },
+    "obx_observation_value": "120/80",
+    "obx_observation_result_status": "N"
+  },
+  "0040.OBX": {
+    "obx_set_id": "35",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010201A",
+      "text": "Heart rate lying:"
+    },
+    "obx_observation_value": "80",
+    "obx_observation_result_status": "N"
+  },
+  "0041.OBX": {
+    "obx_set_id": "36",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010202A",
+      "text": "Blood pressure sitting:"
+    },
+    "obx_observation_value": "120/80",
+    "obx_observation_result_status": "N"
+  },
+  "0042.OBX": {
+    "obx_set_id": "37",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010203A",
+      "text": "Heart rate sitting:"
+    },
+    "obx_observation_value": "80",
+    "obx_observation_result_status": "N"
+  },
+  "0043.OBX": {
+    "obx_set_id": "38",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010204A",
+      "text": "Blood pressure standing:"
+    },
+    "obx_observation_value": "110/70",
+    "obx_observation_result_status": "N"
+  },
+  "0044.OBX": {
+    "obx_set_id": "39",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010205A",
+      "text": "Heart rate standing:"
+    },
+    "obx_observation_value": "70",
+    "obx_observation_result_status": "N"
+  },
+  "0045.OBX": {
+    "obx_set_id": "40",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010206A",
+      "text": "Does patient complain of dizziness when standing:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0046.OBX": {
+    "obx_set_id": "41",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K33010207A",
+      "text": "Positive tilt test:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0047.OBX": {
+    "obx_set_id": "42",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K3301A005A",
+      "text": "Document ICP/CPP monitoring:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0048.OBX": {
+    "obx_set_id": "43",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "HCAEBDL6",
+      "text": "          -"
+    },
+    "obx_observation_value": "- ARTERIAL LINE MONITORING - -",
+    "obx_observation_result_status": "N"
+  },
+  "0049.OBX": {
+    "obx_set_id": "44",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K3301A006A",
+      "text": "Document arterial line monitoring:"
+    },
+    "obx_observation_value": "Yes:Yes",
+    "obx_observation_result_status": "N"
+  },
+  "0050.OBX": {
+    "obx_set_id": "45",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "F79000034A",
+      "text": "Arterial line blood pressure:"
+    },
+    "obx_observation_value": "120/80",
+    "obx_observation_result_status": "N"
+  },
+  "0051.OBX": {
+    "obx_set_id": "46",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "F79000035A",
+      "text": "Arterial line MAP:"
+    },
+    "obx_observation_value": "1",
+    "obx_observation_result_status": "N"
+  },
+  "0052.OBX": {
+    "obx_set_id": "47",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "F79000036A",
+      "text": "Arterial line location:"
+    },
+    "obx_observation_value": "LFemoral:Femoral left",
+    "obx_observation_result_status": "N"
+  },
+  "0053.OBX": {
+    "obx_set_id": "48",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "F79000037A",
+      "text": "Arterial line waveform:"
+    },
+    "obx_observation_value": "Appropriat:Appropriate waveforms",
+    "obx_observation_result_status": "N"
+  }
+}
