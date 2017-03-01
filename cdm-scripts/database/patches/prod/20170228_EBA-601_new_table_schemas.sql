@@ -1,6 +1,296 @@
-USE hl7;
+use cdm_scri;
 
-DROP TABLE hl7_abs_data;
+DROP TABLE nlp_patient_id_data;
+DROP TABLE nlp_patient_id_data_hist;
+
+CREATE EXTERNAL TABLE nlp_patient_id_data (
+	msh_msg_control_id STRING,
+	msh_sending_facility STRING,
+	msh_msg_create_date_time STRING,
+	txa_unique_document_num STRING,
+	txa_unique_document_num_entity_id STRING,
+	txa_unique_document_num_namespace_id STRING,
+	txa_origination_date_time STRING,
+	txa_transcription_date_time STRING,
+	msh_msg_type_message_code STRING,
+	msh_msg_type_trigger_event STRING,
+	pid_pat_account_num STRING,
+	pid_pat_id_list_id_num STRING,
+	pid_pat_id_list STRING,
+	pid_medical_record_num STRING,
+	pid_alt_pat_id_id_num STRING,
+	pid_alt_pat_id STRING,
+	pid_medical_record_urn STRING,
+	pid_birth_date_time STRING,
+	pid_pat_name_last_name STRING,
+	pid_pat_name_first_name STRING,
+	pid_sex STRING,
+	pv1_adm_date_time STRING,
+	pv1_dchg_date_time STRING,
+	txa_originator_person_id STRING,
+	txa_originator_last_name STRING,
+	txa_originator_first_name STRING,
+	txa_originator_middle_name STRING,
+	txa_originator_suffix STRING,
+	txa_originator_prefix STRING,
+	txa_originator_degree STRING,
+	txa_filler_order_num STRING,
+	txa_document_type_identifier STRING,
+	txa_document_type_text STRING,
+	txa_name_of_coding_sys STRING,
+	txa_document_completion_status STRING,
+	obx_observation_value STRING,
+	etl_firstinsert_datetime STRING
+)
+PARTITIONED BY (
+	 message_type String,
+	 transaction_date String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-CDI-DELIMITED';
+
+CREATE EXTERNAL TABLE cdm_scri.nlp_patient_id_data_hist (
+	msh_msg_control_id STRING,
+	msh_sending_facility STRING,
+	txa_origination_date_time STRING,
+	txa_transcription_date_time STRING,
+	msh_msg_type_message_code STRING,
+	msh_msg_type_trigger_event STRING,
+	pid_pat_account_num STRING,
+	pid_medical_record_num STRING,
+	pid_medical_record_urn STRING,
+	pid_birth_date_time STRING,
+	pid_pat_name_last_name STRING,
+	pid_pat_name_first_name STRING,
+	pid_sex STRING,
+	pv1_adm_date_time STRING,
+	txa_originator_person_id STRING,
+	txa_originator_last_name STRING,
+	txa_originator_first_name STRING,
+	txa_originator_middle_name STRING,
+	txa_originator_suffix STRING,
+	txa_originator_prefix STRING,
+	txa_originator_degree STRING,
+	txa_filler_order_num STRING,
+	txa_document_type_identifier STRING,
+	txa_document_type_text STRING,
+	txa_document_completion_status STRING,
+	obx_observation_value STRING
+)
+PARTITIONED BY (
+	 message_type String,
+	 transaction_date String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data_hist';
+
+use hl7;
+
+drop table hl7_acc_data;
+drop table hl7_al1_data;
+drop table hl7_all_proc_rejected;
+drop table hl7_arv_data;
+drop table hl7_audit_data;
+drop table hl7_blg_data;
+drop table hl7_cdo_data;
+drop table hl7_con_data;
+drop table hl7_cti_data;
+drop table hl7_dg1_data;
+drop table hl7_drg_data;
+drop table hl7_dsc_data;
+drop table hl7_evn_data;
+drop table hl7_ft1_data;
+drop table hl7_gt1_data;
+drop table hl7_iam_data;
+drop table hl7_in1_data;
+drop table hl7_in2_data;
+drop table hl7_in3_data;
+drop table hl7_json_data;
+drop table hl7_mrg_data;
+drop table hl7_msh_data;
+drop table hl7_nk1_data;
+drop table hl7_nte_data;
+drop table hl7_obr_data;
+drop table hl7_obx_data;
+drop table hl7_orc_data;
+drop table hl7_pd1_data;
+drop table hl7_pid_data;
+drop table hl7_pr1_data;
+drop table hl7_prt_data;
+drop table hl7_pv1_data;
+drop table hl7_pv2_data;
+drop table hl7_raw_data;
+drop table hl7_rol_data;
+drop table hl7_rxa_data;
+drop table hl7_rxe_data;
+drop table hl7_rxo_data;
+drop table hl7_rxr_data;
+drop table hl7_rxv_data;
+drop table hl7_sft_data;
+drop table hl7_spm_data;
+drop table hl7_tq1_data;
+drop table hl7_tq2_data;
+drop table hl7_txa_data;
+drop table hl7_uac_data;
+drop table hl7_ub1_data;
+drop table hl7_ub2_data;
+drop table hl7_zcd_data;
+drop table hl7_zcl_data;
+drop table hl7_zcn_data;
+drop table hl7_zcs_data;
+drop table hl7_zds_data;
+drop table hl7_zdt_data;
+drop table hl7_zdu_data;
+drop table hl7_zer_data;
+drop table hl7_zex_data;
+drop table hl7_zg1_data;
+drop table hl7_zid_data;
+drop table hl7_zif_data;
+drop table hl7_zin_data;
+drop table hl7_zm1_data;
+drop table hl7_zmp_data;
+drop table hl7_zmr_data;
+drop table hl7_zpd_data;
+drop table hl7_zpe_data;
+drop table hl7_zpv_data;
+drop table hl7_zrq_data;
+drop table hl7_zsi_data;
+drop table hl7_zsu_data;
+drop table hl7_zur_data;
+drop table hl7_zvn_data;
+drop view vw_hl7_acc_data;
+drop view vw_hl7_al1_data;
+drop view vw_hl7_all_proc_rejected;
+drop view vw_hl7_arv_data;
+drop view vw_hl7_blg_data;
+drop view vw_hl7_cdo_data;
+drop view vw_hl7_con_data;
+drop view vw_hl7_cti_data;
+drop view vw_hl7_dg1_data;
+drop view vw_hl7_drg_data;
+drop view vw_hl7_dsc_data;
+drop view vw_hl7_evn_data;
+drop view vw_hl7_ft1_data;
+drop view vw_hl7_gt1_data;
+drop view vw_hl7_iam_data;
+drop view vw_hl7_in1_data;
+drop view vw_hl7_in2_data;
+drop view vw_hl7_in3_data;
+drop view vw_hl7_mrg_data;
+drop view vw_hl7_msh_data;
+drop view vw_hl7_nk1_data;
+drop view vw_hl7_nte_data;
+drop view vw_hl7_obr_data;
+drop view vw_hl7_obx_data;
+drop view vw_hl7_orc_data;
+drop view vw_hl7_pd1_data;
+drop view vw_hl7_pid_data;
+drop view vw_hl7_pr1_data;
+drop view vw_hl7_prt_data;
+drop view vw_hl7_pv1_data;
+drop view vw_hl7_pv2_data;
+drop view vw_hl7_rol_data;
+drop view vw_hl7_rxa_data;
+drop view vw_hl7_rxe_data;
+drop view vw_hl7_rxo_data;
+drop view vw_hl7_rxr_data;
+drop view vw_hl7_rxv_data;
+drop view vw_hl7_sft_data;
+drop view vw_hl7_spm_data;
+drop view vw_hl7_tq1_data;
+drop view vw_hl7_tq2_data;
+drop view vw_hl7_txa_data;
+drop view vw_hl7_uac_data;
+drop view vw_hl7_ub1_data;
+drop view vw_hl7_ub2_data;
+drop view vw_hl7_zcd_data;
+drop view vw_hl7_zcl_data;
+drop view vw_hl7_zcn_data;
+drop view vw_hl7_zcs_data;
+drop view vw_hl7_zds_data;
+drop view vw_hl7_zdt_data;
+drop view vw_hl7_zdu_data;
+drop view vw_hl7_zer_data;
+drop view vw_hl7_zex_data;
+drop view vw_hl7_zg1_data;
+drop view vw_hl7_zid_data;
+drop view vw_hl7_zif_data;
+drop view vw_hl7_zin_data;
+drop view vw_hl7_zm1_data;
+drop view vw_hl7_zmp_data;
+drop view vw_hl7_zmr_data;
+drop view vw_hl7_zpd_data;
+drop view vw_hl7_zpe_data;
+drop view vw_hl7_zpv_data;
+drop view vw_hl7_zrq_data;
+drop view vw_hl7_zsi_data;
+drop view vw_hl7_zsu_data;
+drop view vw_hl7_zur_data;
+drop view vw_hl7_zvn_data;
+
+CREATE EXTERNAL TABLE hl7.hl7_audit_data (
+	process_name STRING,
+	msg_control_id STRING,
+	msg_create_date_time STRING,
+	patient_mrn STRING,
+	patient_urn STRING,
+	patient_account_num STRING,
+	etl_firstinsert_datetime STRING
+)
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=AUDIT';
+
+CREATE EXTERNAL TABLE hl7.hl7_json_data(
+	json_data STRING
+)
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
+WITH SERDEPROPERTIES ('serialization.format'='1')
+STORED AS SEQUENCEFILE
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=JSON'
+
+CREATE EXTERNAL TABLE hl7.hl7_raw_data (
+	msg_data STRING
+)
+PARTITIONED BY (
+	message_type STRING,
+	transaction_date STRING
+)
+STORED AS SEQUENCEFILE
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=RAW'
+
+CREATE EXTERNAL TABLE hl7.hl7_all_proc_rejected (
+	process_name String,
+	msg_control_id String,
+	msg_create_date_time String,
+	patient_mrn String,
+	patient_urn String,
+	patient_account_num String,
+	etl_firstinsert_datetime String,
+	reject_reason String,
+	rejected_message_data String,
+	rejected_message_data_extn String
+)
+PARTITIONED BY (
+	 message_type String,
+	 transaction_date String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=REJECT' ;
 
 CREATE EXTERNAL TABLE hl7_abs_data (
 	msh_sending_facility String,
@@ -33,11 +323,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS';
-
-
-
-DROP TABLE hl7_acc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ABS';
 
 CREATE EXTERNAL TABLE hl7_acc_data (
 	msh_sending_facility String,
@@ -360,11 +646,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC';
-
-
-
-DROP TABLE hl7_add_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ACC';
 
 CREATE EXTERNAL TABLE hl7_add_data (
 	msh_sending_facility String,
@@ -384,11 +666,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD';
-
-
-
-DROP TABLE hl7_adj_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADD';
 
 CREATE EXTERNAL TABLE hl7_adj_data (
 	msh_sending_facility String,
@@ -422,11 +700,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ';
-
-
-
-DROP TABLE hl7_aff_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADJ';
 
 CREATE EXTERNAL TABLE hl7_aff_data (
 	msh_sending_facility String,
@@ -450,11 +724,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF';
-
-
-
-DROP TABLE hl7_aig_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AFF';
 
 CREATE EXTERNAL TABLE hl7_aig_data (
 	msh_sending_facility String,
@@ -663,11 +933,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG';
-
-
-
-DROP TABLE hl7_ail_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIG';
 
 CREATE EXTERNAL TABLE hl7_ail_data (
 	msh_sending_facility String,
@@ -866,11 +1132,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL';
-
-
-
-DROP TABLE hl7_aip_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIL';
 
 CREATE EXTERNAL TABLE hl7_aip_data (
 	msh_sending_facility String,
@@ -1159,11 +1421,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP';
-
-
-
-DROP TABLE hl7_ais_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIP';
 
 CREATE EXTERNAL TABLE hl7_ais_data (
 	msh_sending_facility String,
@@ -1348,11 +1606,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS';
-
-
-
-DROP TABLE hl7_al1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIS';
 
 CREATE EXTERNAL TABLE hl7_al1_data (
 	msh_sending_facility String,
@@ -1492,11 +1746,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1';
-
-
-
-DROP TABLE hl7_apr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AL1';
 
 CREATE EXTERNAL TABLE hl7_apr_data (
 	msh_sending_facility String,
@@ -1520,11 +1770,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR';
-
-
-
-DROP TABLE hl7_arq_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=APR';
 
 CREATE EXTERNAL TABLE hl7_arq_data (
 	msh_sending_facility String,
@@ -1568,11 +1814,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ';
-
-
-
-DROP TABLE hl7_arv_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARQ';
 
 CREATE EXTERNAL TABLE hl7_arv_data (
 	msh_sending_facility String,
@@ -1665,11 +1907,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV';
-
-
-
-DROP TABLE hl7_aut_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARV';
 
 CREATE EXTERNAL TABLE hl7_aut_data (
 	msh_sending_facility String,
@@ -1700,11 +1938,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT';
-
-
-
-DROP TABLE hl7_bhs_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AUT';
 
 CREATE EXTERNAL TABLE hl7_bhs_data (
 	msh_sending_facility String,
@@ -1737,11 +1971,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS';
-
-
-
-DROP TABLE hl7_blc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BHS';
 
 CREATE EXTERNAL TABLE hl7_blc_data (
 	msh_sending_facility String,
@@ -1762,11 +1992,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC';
-
-
-
-DROP TABLE hl7_blg_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLC';
 
 CREATE EXTERNAL TABLE hl7_blg_data (
 	msh_sending_facility String,
@@ -1789,11 +2015,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG';
-
-
-
-DROP TABLE hl7_bpo_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLG';
 
 CREATE EXTERNAL TABLE hl7_bpo_data (
 	msh_sending_facility String,
@@ -1826,11 +2048,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO';
-
-
-
-DROP TABLE hl7_bpx_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPO';
 
 CREATE EXTERNAL TABLE hl7_bpx_data (
 	msh_sending_facility String,
@@ -1870,11 +2088,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX';
-
-
-
-DROP TABLE hl7_bts_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPX';
 
 CREATE EXTERNAL TABLE hl7_bts_data (
 	msh_sending_facility String,
@@ -1896,11 +2110,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS';
-
-
-
-DROP TABLE hl7_btx_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTS';
 
 CREATE EXTERNAL TABLE hl7_btx_data (
 	msh_sending_facility String,
@@ -1938,11 +2148,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX';
-
-
-
-DROP TABLE hl7_cdm_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTX';
 
 CREATE EXTERNAL TABLE hl7_cdm_data (
 	msh_sending_facility String,
@@ -1974,11 +2180,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM';
-
-
-
-DROP TABLE hl7_cdo_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDM';
 
 CREATE EXTERNAL TABLE hl7_cdo_data (
 	msh_sending_facility String,
@@ -2049,11 +2251,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO';
-
-
-
-DROP TABLE hl7_cer_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDO';
 
 CREATE EXTERNAL TABLE hl7_cer_data (
 	msh_sending_facility String,
@@ -2103,11 +2301,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER';
-
-
-
-DROP TABLE hl7_cm0_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CER';
 
 CREATE EXTERNAL TABLE hl7_cm0_data (
 	msh_sending_facility String,
@@ -2137,11 +2331,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0';
-
-
-
-DROP TABLE hl7_cm1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM0';
 
 CREATE EXTERNAL TABLE hl7_cm1_data (
 	msh_sending_facility String,
@@ -2163,11 +2353,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1';
-
-
-
-DROP TABLE hl7_cm2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM1';
 
 CREATE EXTERNAL TABLE hl7_cm2_data (
 	msh_sending_facility String,
@@ -2190,11 +2376,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2';
-
-
-
-DROP TABLE hl7_cns_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM2';
 
 CREATE EXTERNAL TABLE hl7_cns_data (
 	msh_sending_facility String,
@@ -2219,11 +2401,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS';
-
-
-
-DROP TABLE hl7_con_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CNS';
 
 CREATE EXTERNAL TABLE hl7_con_data (
 	msh_sending_facility String,
@@ -2491,11 +2669,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON';
-
-
-
-DROP TABLE hl7_csp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CON';
 
 CREATE EXTERNAL TABLE hl7_csp_data (
 	msh_sending_facility String,
@@ -2518,11 +2692,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP';
-
-
-
-DROP TABLE hl7_csr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSP';
 
 CREATE EXTERNAL TABLE hl7_csr_data (
 	msh_sending_facility String,
@@ -2557,11 +2727,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR';
-
-
-
-DROP TABLE hl7_css_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSR';
 
 CREATE EXTERNAL TABLE hl7_css_data (
 	msh_sending_facility String,
@@ -2583,11 +2749,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS';
-
-
-
-DROP TABLE hl7_ctd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSS';
 
 CREATE EXTERNAL TABLE hl7_ctd_data (
 	msh_sending_facility String,
@@ -2949,11 +3111,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD';
-
-
-
-DROP TABLE hl7_cti_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTD';
 
 CREATE EXTERNAL TABLE hl7_cti_data (
 	msh_sending_facility String,
@@ -3023,13 +3181,9 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTI';
 
-
-
-DROP TABLE hl7_db1_data;
-
-CREATE EXTERNAL TABLE hl7_db1_data (
+CREATE EXTERNAL TABLE hl71_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -3054,11 +3208,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1';
-
-
-
-DROP TABLE hl7_dg1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DB1';
 
 CREATE EXTERNAL TABLE hl7_dg1_data (
 	msh_sending_facility String,
@@ -3459,11 +3609,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1';
-
-
-
-DROP TABLE hl7_dmi_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DG1';
 
 CREATE EXTERNAL TABLE hl7_dmi_data (
 	msh_sending_facility String,
@@ -3487,11 +3633,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI';
-
-
-
-DROP TABLE hl7_drg_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DMI';
 
 CREATE EXTERNAL TABLE hl7_drg_data (
 	msh_sending_facility String,
@@ -4001,11 +4143,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG';
-
-
-
-DROP TABLE hl7_dsc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DRG';
 
 CREATE EXTERNAL TABLE hl7_dsc_data (
 	msh_sending_facility String,
@@ -4026,11 +4164,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC';
-
-
-
-DROP TABLE hl7_dsp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSC';
 
 CREATE EXTERNAL TABLE hl7_dsp_data (
 	msh_sending_facility String,
@@ -4054,11 +4188,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP';
-
-
-
-DROP TABLE hl7_ecd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSP';
 
 CREATE EXTERNAL TABLE hl7_ecd_data (
 	msh_sending_facility String,
@@ -4082,11 +4212,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD';
-
-
-
-DROP TABLE hl7_ecr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECD';
 
 CREATE EXTERNAL TABLE hl7_ecr_data (
 	msh_sending_facility String,
@@ -4108,11 +4234,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR';
-
-
-
-DROP TABLE hl7_edu_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECR';
 
 CREATE EXTERNAL TABLE hl7_edu_data (
 	msh_sending_facility String,
@@ -4140,11 +4262,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU';
-
-
-
-DROP TABLE hl7_eqp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EDU';
 
 CREATE EXTERNAL TABLE hl7_eqp_data (
 	msh_sending_facility String,
@@ -4168,11 +4286,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP';
-
-
-
-DROP TABLE hl7_equ_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQP';
 
 CREATE EXTERNAL TABLE hl7_equ_data (
 	msh_sending_facility String,
@@ -4196,11 +4310,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU';
-
-
-
-DROP TABLE hl7_err_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQU';
 
 CREATE EXTERNAL TABLE hl7_err_data (
 	msh_sending_facility String,
@@ -4413,11 +4523,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR';
-
-
-
-DROP TABLE hl7_evn_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ERR';
 
 CREATE EXTERNAL TABLE hl7_evn_data (
 	msh_sending_facility String,
@@ -4594,11 +4700,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN';
-
-
-
-DROP TABLE hl7_fac_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EVN';
 
 CREATE EXTERNAL TABLE hl7_fac_data (
 	msh_sending_facility String,
@@ -4629,11 +4731,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC';
-
-
-
-DROP TABLE hl7_fhs_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FAC';
 
 CREATE EXTERNAL TABLE hl7_fhs_data (
 	msh_sending_facility String,
@@ -4666,11 +4764,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS';
-
-
-
-DROP TABLE hl7_ft1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FHS';
 
 CREATE EXTERNAL TABLE hl7_ft1_data (
 	msh_sending_facility String,
@@ -5932,11 +6026,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1';
-
-
-
-DROP TABLE hl7_fts_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FT1';
 
 CREATE EXTERNAL TABLE hl7_fts_data (
 	msh_sending_facility String,
@@ -5957,11 +6047,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS';
-
-
-
-DROP TABLE hl7_gol_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FTS';
 
 CREATE EXTERNAL TABLE hl7_gol_data (
 	msh_sending_facility String,
@@ -6002,11 +6088,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL';
-
-
-
-DROP TABLE hl7_gp1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GOL';
 
 CREATE EXTERNAL TABLE hl7_gp1_data (
 	msh_sending_facility String,
@@ -6030,11 +6112,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1';
-
-
-
-DROP TABLE hl7_gp2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP1';
 
 CREATE EXTERNAL TABLE hl7_gp2_data (
 	msh_sending_facility String,
@@ -6067,11 +6145,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2';
-
-
-
-DROP TABLE hl7_gt1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP2';
 
 CREATE EXTERNAL TABLE hl7_gt1_data (
 	msh_sending_facility String,
@@ -7742,11 +7816,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1';
-
-
-
-DROP TABLE hl7_iam_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GT1';
 
 CREATE EXTERNAL TABLE hl7_iam_data (
 	msh_sending_facility String,
@@ -8719,11 +8789,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM';
-
-
-
-DROP TABLE hl7_iar_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAM';
 
 CREATE EXTERNAL TABLE hl7_iar_data (
 	msh_sending_facility String,
@@ -8746,11 +8812,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR';
-
-
-
-DROP TABLE hl7_iim_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAR';
 
 CREATE EXTERNAL TABLE hl7_iim_data (
 	msh_sending_facility String,
@@ -8784,11 +8846,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM';
-
-
-
-DROP TABLE hl7_ilt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IIM';
 
 CREATE EXTERNAL TABLE hl7_ilt_data (
 	msh_sending_facility String,
@@ -8817,11 +8875,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT';
-
-
-
-DROP TABLE hl7_in1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ILT';
 
 CREATE EXTERNAL TABLE hl7_in1_data (
 	msh_sending_facility String,
@@ -10282,11 +10336,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1';
-
-
-
-DROP TABLE hl7_in2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN1';
 
 CREATE EXTERNAL TABLE hl7_in2_data (
 	msh_sending_facility String,
@@ -12214,11 +12264,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2';
-
-
-
-DROP TABLE hl7_in3_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN2';
 
 CREATE EXTERNAL TABLE hl7_in3_data (
 	msh_sending_facility String,
@@ -13122,11 +13168,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3';
-
-
-
-DROP TABLE hl7_inv_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN3';
 
 CREATE EXTERNAL TABLE hl7_inv_data (
 	msh_sending_facility String,
@@ -13165,11 +13207,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV';
-
-
-
-DROP TABLE hl7_ipc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=INV';
 
 CREATE EXTERNAL TABLE hl7_ipc_data (
 	msh_sending_facility String,
@@ -13284,11 +13322,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC';
-
-
-
-DROP TABLE hl7_ipr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPC';
 
 CREATE EXTERNAL TABLE hl7_ipr_data (
 	msh_sending_facility String,
@@ -13315,11 +13349,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR';
-
-
-
-DROP TABLE hl7_isd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPR';
 
 CREATE EXTERNAL TABLE hl7_isd_data (
 	msh_sending_facility String,
@@ -13341,11 +13371,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD';
-
-
-
-DROP TABLE hl7_itm_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ISD';
 
 CREATE EXTERNAL TABLE hl7_itm_data (
 	msh_sending_facility String,
@@ -13393,11 +13419,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM';
-
-
-
-DROP TABLE hl7_ivc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ITM';
 
 CREATE EXTERNAL TABLE hl7_ivc_data (
 	msh_sending_facility String,
@@ -13446,11 +13468,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC';
-
-
-
-DROP TABLE hl7_ivt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVC';
 
 CREATE EXTERNAL TABLE hl7_ivt_data (
 	msh_sending_facility String,
@@ -13495,11 +13513,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT';
-
-
-
-DROP TABLE hl7_lan_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVT';
 
 CREATE EXTERNAL TABLE hl7_lan_data (
 	msh_sending_facility String,
@@ -13522,11 +13536,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN';
-
-
-
-DROP TABLE hl7_lcc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LAN';
 
 CREATE EXTERNAL TABLE hl7_lcc_data (
 	msh_sending_facility String,
@@ -13549,11 +13559,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC';
-
-
-
-DROP TABLE hl7_lch_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCC';
 
 CREATE EXTERNAL TABLE hl7_lch_data (
 	msh_sending_facility String,
@@ -13577,11 +13583,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH';
-
-
-
-DROP TABLE hl7_ldp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCH';
 
 CREATE EXTERNAL TABLE hl7_ldp_data (
 	msh_sending_facility String,
@@ -13612,11 +13614,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP';
-
-
-
-DROP TABLE hl7_loc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LDP';
 
 CREATE EXTERNAL TABLE hl7_loc_data (
 	msh_sending_facility String,
@@ -13644,11 +13642,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC';
-
-
-
-DROP TABLE hl7_lrl_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LOC';
 
 CREATE EXTERNAL TABLE hl7_lrl_data (
 	msh_sending_facility String,
@@ -13673,11 +13667,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL';
-
-
-
-DROP TABLE hl7_mfa_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LRL';
 
 CREATE EXTERNAL TABLE hl7_mfa_data (
 	msh_sending_facility String,
@@ -13702,11 +13692,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA';
-
-
-
-DROP TABLE hl7_mfe_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFA';
 
 CREATE EXTERNAL TABLE hl7_mfe_data (
 	msh_sending_facility String,
@@ -13732,11 +13718,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE';
-
-
-
-DROP TABLE hl7_mfi_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFE';
 
 CREATE EXTERNAL TABLE hl7_mfi_data (
 	msh_sending_facility String,
@@ -13761,11 +13743,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI';
-
-
-
-DROP TABLE hl7_mrg_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFI';
 
 CREATE EXTERNAL TABLE hl7_mrg_data (
 	msh_sending_facility String,
@@ -14150,11 +14128,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG';
-
-
-
-DROP TABLE hl7_msa_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MRG';
 
 CREATE EXTERNAL TABLE hl7_msa_data (
 	msh_sending_facility String,
@@ -14181,11 +14155,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA';
-
-
-
-DROP TABLE hl7_msh_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSA';
 
 CREATE EXTERNAL TABLE hl7_msh_data (
 	msh_sending_facility String,
@@ -14402,11 +14372,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH';
-
-
-
-DROP TABLE hl7_nck_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSH';
 
 CREATE EXTERNAL TABLE hl7_nck_data (
 	msh_sending_facility String,
@@ -14426,11 +14392,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK';
-
-
-
-DROP TABLE hl7_nds_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NCK';
 
 CREATE EXTERNAL TABLE hl7_nds_data (
 	msh_sending_facility String,
@@ -14453,11 +14415,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS';
-
-
-
-DROP TABLE hl7_nk1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NDS';
 
 CREATE EXTERNAL TABLE hl7_nk1_data (
 	msh_sending_facility String,
@@ -15846,11 +15804,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1';
-
-
-
-DROP TABLE hl7_npu_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NK1';
 
 CREATE EXTERNAL TABLE hl7_npu_data (
 	msh_sending_facility String,
@@ -15871,11 +15825,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU';
-
-
-
-DROP TABLE hl7_nsc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NPU';
 
 CREATE EXTERNAL TABLE hl7_nsc_data (
 	msh_sending_facility String,
@@ -15903,11 +15853,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC';
-
-
-
-DROP TABLE hl7_nst_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NSC';
 
 CREATE EXTERNAL TABLE hl7_nst_data (
 	msh_sending_facility String,
@@ -15941,11 +15887,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST';
-
-
-
-DROP TABLE hl7_nte_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NST';
 
 CREATE EXTERNAL TABLE hl7_nte_data (
 	msh_sending_facility String,
@@ -16128,11 +16070,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE';
-
-
-
-DROP TABLE hl7_obr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NTE';
 
 CREATE EXTERNAL TABLE hl7_obr_data (
 	msh_sending_facility String,
@@ -17265,11 +17203,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR';
-
-
-
-DROP TABLE hl7_obx_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBR';
 
 CREATE EXTERNAL TABLE hl7_obx_data (
 	msh_sending_facility String,
@@ -17918,11 +17852,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX';
-
-
-
-DROP TABLE hl7_ods_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBX';
 
 CREATE EXTERNAL TABLE hl7_ods_data (
 	msh_sending_facility String,
@@ -17989,11 +17919,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS';
-
-
-
-DROP TABLE hl7_odt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODS';
 
 CREATE EXTERNAL TABLE hl7_odt_data (
 	msh_sending_facility String,
@@ -18015,11 +17941,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT';
-
-
-
-DROP TABLE hl7_om1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODT';
 
 CREATE EXTERNAL TABLE hl7_om1_data (
 	msh_sending_facility String,
@@ -18085,11 +18007,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1';
-
-
-
-DROP TABLE hl7_om2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM1';
 
 CREATE EXTERNAL TABLE hl7_om2_data (
 	msh_sending_facility String,
@@ -18118,11 +18036,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2';
-
-
-
-DROP TABLE hl7_om3_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM2';
 
 CREATE EXTERNAL TABLE hl7_om3_data (
 	msh_sending_facility String,
@@ -18148,11 +18062,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3';
-
-
-
-DROP TABLE hl7_om4_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM3';
 
 CREATE EXTERNAL TABLE hl7_om4_data (
 	msh_sending_facility String,
@@ -18185,11 +18095,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4';
-
-
-
-DROP TABLE hl7_om5_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM4';
 
 CREATE EXTERNAL TABLE hl7_om5_data (
 	msh_sending_facility String,
@@ -18211,11 +18117,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5';
-
-
-
-DROP TABLE hl7_om6_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM5';
 
 CREATE EXTERNAL TABLE hl7_om6_data (
 	msh_sending_facility String,
@@ -18236,11 +18138,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6';
-
-
-
-DROP TABLE hl7_om7_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM6';
 
 CREATE EXTERNAL TABLE hl7_om7_data (
 	msh_sending_facility String,
@@ -18283,11 +18181,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7';
-
-
-
-DROP TABLE hl7_orc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM7';
 
 CREATE EXTERNAL TABLE hl7_orc_data (
 	msh_sending_facility String,
@@ -19613,11 +19507,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC';
-
-
-
-DROP TABLE hl7_org_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORC';
 
 CREATE EXTERNAL TABLE hl7_org_data (
 	msh_sending_facility String,
@@ -19649,11 +19539,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG';
-
-
-
-DROP TABLE hl7_ovr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORG';
 
 CREATE EXTERNAL TABLE hl7_ovr_data (
 	msh_sending_facility String,
@@ -19677,11 +19563,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR';
-
-
-
-DROP TABLE hl7_pac_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OVR';
 
 CREATE EXTERNAL TABLE hl7_pac_data (
 	msh_sending_facility String,
@@ -19708,11 +19590,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC';
-
-
-
-DROP TABLE hl7_pce_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PAC';
 
 CREATE EXTERNAL TABLE hl7_pce_data (
 	msh_sending_facility String,
@@ -19735,11 +19613,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE';
-
-
-
-DROP TABLE hl7_pcr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCE';
 
 CREATE EXTERNAL TABLE hl7_pcr_data (
 	msh_sending_facility String,
@@ -19781,11 +19655,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR';
-
-
-
-DROP TABLE hl7_pd1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCR';
 
 CREATE EXTERNAL TABLE hl7_pd1_data (
 	msh_sending_facility String,
@@ -20354,11 +20224,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1';
-
-
-
-DROP TABLE hl7_pda_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PD1';
 
 CREATE EXTERNAL TABLE hl7_pda_data (
 	msh_sending_facility String,
@@ -20386,11 +20252,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA';
-
-
-
-DROP TABLE hl7_pdc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDA';
 
 CREATE EXTERNAL TABLE hl7_pdc_data (
 	msh_sending_facility String,
@@ -20424,11 +20286,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC';
-
-
-
-DROP TABLE hl7_peo_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDC';
 
 CREATE EXTERNAL TABLE hl7_peo_data (
 	msh_sending_facility String,
@@ -20472,11 +20330,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO';
-
-
-
-DROP TABLE hl7_pes_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PEO';
 
 CREATE EXTERNAL TABLE hl7_pes_data (
 	msh_sending_facility String,
@@ -20508,11 +20362,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES';
-
-
-
-DROP TABLE hl7_pid_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PES';
 
 CREATE EXTERNAL TABLE hl7_pid_data (
 	msh_sending_facility String,
@@ -21502,11 +21352,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID';
-
-
-
-DROP TABLE hl7_pkg_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PID';
 
 CREATE EXTERNAL TABLE hl7_pkg_data (
 	msh_sending_facility String,
@@ -21532,11 +21378,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG';
-
-
-
-DROP TABLE hl7_pmt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PKG';
 
 CREATE EXTERNAL TABLE hl7_pmt_data (
 	msh_sending_facility String,
@@ -21567,11 +21409,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT';
-
-
-
-DROP TABLE hl7_pr1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PMT';
 
 CREATE EXTERNAL TABLE hl7_pr1_data (
 	msh_sending_facility String,
@@ -21879,11 +21717,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1';
-
-
-
-DROP TABLE hl7_pra_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PR1';
 
 CREATE EXTERNAL TABLE hl7_pra_data (
 	msh_sending_facility String,
@@ -21914,11 +21748,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA';
-
-
-
-DROP TABLE hl7_prb_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRA';
 
 CREATE EXTERNAL TABLE hl7_prb_data (
 	msh_sending_facility String,
@@ -22309,11 +22139,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB';
-
-
-
-DROP TABLE hl7_prc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRB';
 
 CREATE EXTERNAL TABLE hl7_prc_data (
 	msh_sending_facility String,
@@ -22350,11 +22176,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC';
-
-
-
-DROP TABLE hl7_prd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRC';
 
 CREATE EXTERNAL TABLE hl7_prd_data (
 	msh_sending_facility String,
@@ -22387,11 +22209,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD';
-
-
-
-DROP TABLE hl7_prt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRD';
 
 CREATE EXTERNAL TABLE hl7_prt_data (
 	msh_sending_facility String,
@@ -22929,11 +22747,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT';
-
-
-
-DROP TABLE hl7_psg_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRT';
 
 CREATE EXTERNAL TABLE hl7_psg_data (
 	msh_sending_facility String,
@@ -22958,11 +22772,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG';
-
-
-
-DROP TABLE hl7_psh_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSG';
 
 CREATE EXTERNAL TABLE hl7_psh_data (
 	msh_sending_facility String,
@@ -22995,11 +22805,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH';
-
-
-
-DROP TABLE hl7_psl_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSH';
 
 CREATE EXTERNAL TABLE hl7_psl_data (
 	msh_sending_facility String,
@@ -23066,11 +22872,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL';
-
-
-
-DROP TABLE hl7_pss_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSL';
 
 CREATE EXTERNAL TABLE hl7_pss_data (
 	msh_sending_facility String,
@@ -23094,11 +22896,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS';
-
-
-
-DROP TABLE hl7_pth_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSS';
 
 CREATE EXTERNAL TABLE hl7_pth_data (
 	msh_sending_facility String,
@@ -23124,11 +22922,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH';
-
-
-
-DROP TABLE hl7_pv1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PTH';
 
 CREATE EXTERNAL TABLE hl7_pv1_data (
 	msh_sending_facility String,
@@ -24745,11 +24539,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1';
-
-
-
-DROP TABLE hl7_pv2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV1';
 
 CREATE EXTERNAL TABLE hl7_pv2_data (
 	msh_sending_facility String,
@@ -25480,11 +25270,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2';
-
-
-
-DROP TABLE hl7_pye_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV2';
 
 CREATE EXTERNAL TABLE hl7_pye_data (
 	msh_sending_facility String,
@@ -25510,11 +25296,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE';
-
-
-
-DROP TABLE hl7_qak_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PYE';
 
 CREATE EXTERNAL TABLE hl7_qak_data (
 	msh_sending_facility String,
@@ -25539,11 +25321,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK';
-
-
-
-DROP TABLE hl7_qid_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QAK';
 
 CREATE EXTERNAL TABLE hl7_qid_data (
 	msh_sending_facility String,
@@ -25564,11 +25342,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID';
-
-
-
-DROP TABLE hl7_qpd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QID';
 
 CREATE EXTERNAL TABLE hl7_qpd_data (
 	msh_sending_facility String,
@@ -25590,11 +25364,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD';
-
-
-
-DROP TABLE hl7_qrd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QPD';
 
 CREATE EXTERNAL TABLE hl7_qrd_data (
 	msh_sending_facility String,
@@ -25625,11 +25395,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD';
-
-
-
-DROP TABLE hl7_qrf_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRD';
 
 CREATE EXTERNAL TABLE hl7_qrf_data (
 	msh_sending_facility String,
@@ -25658,11 +25424,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF';
-
-
-
-DROP TABLE hl7_qri_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRF';
 
 CREATE EXTERNAL TABLE hl7_qri_data (
 	msh_sending_facility String,
@@ -25684,11 +25446,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI';
-
-
-
-DROP TABLE hl7_rcp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRI';
 
 CREATE EXTERNAL TABLE hl7_rcp_data (
 	msh_sending_facility String,
@@ -25714,11 +25472,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP';
-
-
-
-DROP TABLE hl7_rdf_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RCP';
 
 CREATE EXTERNAL TABLE hl7_rdf_data (
 	msh_sending_facility String,
@@ -25739,11 +25493,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF';
-
-
-
-DROP TABLE hl7_rdt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDF';
 
 CREATE EXTERNAL TABLE hl7_rdt_data (
 	msh_sending_facility String,
@@ -25763,11 +25513,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT';
-
-
-
-DROP TABLE hl7_rel_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDT';
 
 CREATE EXTERNAL TABLE hl7_rel_data (
 	msh_sending_facility String,
@@ -25802,11 +25548,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL';
-
-
-
-DROP TABLE hl7_rf1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=REL';
 
 CREATE EXTERNAL TABLE hl7_rf1_data (
 	msh_sending_facility String,
@@ -25837,11 +25579,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1';
-
-
-
-DROP TABLE hl7_rfi_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RF1';
 
 CREATE EXTERNAL TABLE hl7_rfi_data (
 	msh_sending_facility String,
@@ -25864,11 +25602,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI';
-
-
-
-DROP TABLE hl7_rgs_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RFI';
 
 CREATE EXTERNAL TABLE hl7_rgs_data (
 	msh_sending_facility String,
@@ -25912,11 +25646,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS';
-
-
-
-DROP TABLE hl7_rmi_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RGS';
 
 CREATE EXTERNAL TABLE hl7_rmi_data (
 	msh_sending_facility String,
@@ -25938,11 +25668,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI';
-
-
-
-DROP TABLE hl7_rol_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RMI';
 
 CREATE EXTERNAL TABLE hl7_rol_data (
 	msh_sending_facility String,
@@ -26494,11 +26220,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL';
-
-
-
-DROP TABLE hl7_rq1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ROL';
 
 CREATE EXTERNAL TABLE hl7_rq1_data (
 	msh_sending_facility String,
@@ -26568,11 +26290,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1';
-
-
-
-DROP TABLE hl7_rqd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQ1';
 
 CREATE EXTERNAL TABLE hl7_rqd_data (
 	msh_sending_facility String,
@@ -26733,11 +26451,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD';
-
-
-
-DROP TABLE hl7_rxa_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQD';
 
 CREATE EXTERNAL TABLE hl7_rxa_data (
 	msh_sending_facility String,
@@ -27302,11 +27016,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA';
-
-
-
-DROP TABLE hl7_rxc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXA';
 
 CREATE EXTERNAL TABLE hl7_rxc_data (
 	msh_sending_facility String,
@@ -27468,11 +27178,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC';
-
-
-
-DROP TABLE hl7_rxd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXC';
 
 CREATE EXTERNAL TABLE hl7_rxd_data (
 	msh_sending_facility String,
@@ -27525,11 +27231,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD';
-
-
-
-DROP TABLE hl7_rxe_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXD';
 
 CREATE EXTERNAL TABLE hl7_rxe_data (
 	msh_sending_facility String,
@@ -28563,11 +28265,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE';
-
-
-
-DROP TABLE hl7_rxg_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXE';
 
 CREATE EXTERNAL TABLE hl7_rxg_data (
 	msh_sending_facility String,
@@ -28616,11 +28314,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG';
-
-
-
-DROP TABLE hl7_rxo_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXG';
 
 CREATE EXTERNAL TABLE hl7_rxo_data (
 	msh_sending_facility String,
@@ -29606,11 +29300,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO';
-
-
-
-DROP TABLE hl7_rxr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXO';
 
 CREATE EXTERNAL TABLE hl7_rxr_data (
 	msh_sending_facility String,
@@ -29767,11 +29457,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR';
-
-
-
-DROP TABLE hl7_rxv_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXR';
 
 CREATE EXTERNAL TABLE hl7_rxv_data (
 	msh_sending_facility String,
@@ -30058,11 +29744,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV';
-
-
-
-DROP TABLE hl7_sac_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXV';
 
 CREATE EXTERNAL TABLE hl7_sac_data (
 	msh_sending_facility String,
@@ -30609,11 +30291,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC';
-
-
-
-DROP TABLE hl7_scd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SAC';
 
 CREATE EXTERNAL TABLE hl7_scd_data (
 	msh_sending_facility String,
@@ -30669,11 +30347,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD';
-
-
-
-DROP TABLE hl7_sch_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCD';
 
 CREATE EXTERNAL TABLE hl7_sch_data (
 	msh_sending_facility String,
@@ -31860,11 +31534,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH';
-
-
-
-DROP TABLE hl7_scp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCH';
 
 CREATE EXTERNAL TABLE hl7_scp_data (
 	msh_sending_facility String,
@@ -31891,11 +31561,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP';
-
-
-
-DROP TABLE hl7_sdd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCP';
 
 CREATE EXTERNAL TABLE hl7_sdd_data (
 	msh_sending_facility String,
@@ -31921,11 +31587,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD';
-
-
-
-DROP TABLE hl7_sft_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SDD';
 
 CREATE EXTERNAL TABLE hl7_sft_data (
 	msh_sending_facility String,
@@ -31988,11 +31650,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT';
-
-DROP TABLE hl7_sgh_data;
-
-CREATE EXTERNAL TABLE hl7_sgh_data (
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SFT';CREATE EXTERNAL TABLE hl7_sgh_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -32011,11 +31669,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGH';
-
-DROP TABLE hl7_sgt_data;
-
-CREATE EXTERNAL TABLE hl7_sgt_data (
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGH';CREATE EXTERNAL TABLE hl7_sgt_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -32034,11 +31688,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGT';
-
-
-DROP TABLE hl7_shp_data;
-
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGT';
 CREATE EXTERNAL TABLE hl7_shp_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
@@ -32067,11 +31717,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP';
-
-
-
-DROP TABLE hl7_sid_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SHP';
 
 CREATE EXTERNAL TABLE hl7_sid_data (
 	msh_sending_facility String,
@@ -32094,11 +31740,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID';
-
-
-
-DROP TABLE hl7_slt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SID';
 
 CREATE EXTERNAL TABLE hl7_slt_data (
 	msh_sending_facility String,
@@ -32122,11 +31764,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT';
-
-
-
-DROP TABLE hl7_spm_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SLT';
 
 CREATE EXTERNAL TABLE hl7_spm_data (
 	msh_sending_facility String,
@@ -32749,11 +32387,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM';
-
-
-
-DROP TABLE hl7_stf_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SPM';
 
 CREATE EXTERNAL TABLE hl7_stf_data (
 	msh_sending_facility String,
@@ -32813,11 +32447,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF';
-
-
-
-DROP TABLE hl7_stz_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STF';
 
 CREATE EXTERNAL TABLE hl7_stz_data (
 	msh_sending_facility String,
@@ -32840,11 +32470,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ';
-
-
-
-DROP TABLE hl7_tcc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STZ';
 
 CREATE EXTERNAL TABLE hl7_tcc_data (
 	msh_sending_facility String,
@@ -32877,11 +32503,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC';
-
-
-
-DROP TABLE hl7_tcd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCC';
 
 CREATE EXTERNAL TABLE hl7_tcd_data (
 	msh_sending_facility String,
@@ -32968,11 +32590,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD';
-
-
-
-DROP TABLE hl7_tq1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCD';
 
 CREATE EXTERNAL TABLE hl7_tq1_data (
 	msh_sending_facility String,
@@ -33200,11 +32818,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1';
-
-
-
-DROP TABLE hl7_tq2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ1';
 
 CREATE EXTERNAL TABLE hl7_tq2_data (
 	msh_sending_facility String,
@@ -33269,11 +32883,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2';
-
-
-
-DROP TABLE hl7_txa_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ2';
 
 CREATE EXTERNAL TABLE hl7_txa_data (
 	msh_sending_facility String,
@@ -34133,11 +33743,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA';
-
-
-
-DROP TABLE hl7_uac_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TXA';
 
 CREATE EXTERNAL TABLE hl7_uac_data (
 	msh_sending_facility String,
@@ -34188,11 +33794,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC';
-
-
-
-DROP TABLE hl7_ub1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UAC';
 
 CREATE EXTERNAL TABLE hl7_ub1_data (
 	msh_sending_facility String,
@@ -34234,11 +33836,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1';
-
-
-
-DROP TABLE hl7_ub2_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB1';
 
 CREATE EXTERNAL TABLE hl7_ub2_data (
 	msh_sending_facility String,
@@ -34395,11 +33993,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2';
-
-
-
-DROP TABLE hl7_urd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB2';
 
 CREATE EXTERNAL TABLE hl7_urd_data (
 	msh_sending_facility String,
@@ -34425,11 +34019,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD';
-
-
-
-DROP TABLE hl7_urs_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URD';
 
 CREATE EXTERNAL TABLE hl7_urs_data (
 	msh_sending_facility String,
@@ -34457,11 +34047,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS';
-
-
-
-DROP TABLE hl7_var_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URS';
 
 CREATE EXTERNAL TABLE hl7_var_data (
 	msh_sending_facility String,
@@ -34486,11 +34072,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR';
-
-
-
-DROP TABLE hl7_vnd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VAR';
 
 CREATE EXTERNAL TABLE hl7_vnd_data (
 	msh_sending_facility String,
@@ -34514,11 +34096,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND';
-
-
-
-DROP TABLE hl7_zao_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VND';
 
 CREATE EXTERNAL TABLE hl7_zao_data (
 	msh_sending_facility String,
@@ -34553,11 +34131,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO';
-
-
-
-DROP TABLE hl7_zcd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAO';
 
 CREATE EXTERNAL TABLE hl7_zcd_data (
 	msh_sending_facility String,
@@ -34581,11 +34155,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD';
-
-
-
-DROP TABLE hl7_zcl_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCD';
 
 CREATE EXTERNAL TABLE hl7_zcl_data (
 	msh_sending_facility String,
@@ -34616,11 +34186,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL';
-
-
-
-DROP TABLE hl7_zcn_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCL';
 
 CREATE EXTERNAL TABLE hl7_zcn_data (
 	msh_sending_facility String,
@@ -34643,11 +34209,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN';
-
-
-
-DROP TABLE hl7_zcp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCN';
 
 CREATE EXTERNAL TABLE hl7_zcp_data (
 	msh_sending_facility String,
@@ -34676,11 +34238,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP';
-
-
-
-DROP TABLE hl7_zcs_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCP';
 
 CREATE EXTERNAL TABLE hl7_zcs_data (
 	msh_sending_facility String,
@@ -34710,11 +34268,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS';
-
-
-
-DROP TABLE hl7_zds_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCS';
 
 CREATE EXTERNAL TABLE hl7_zds_data (
 	msh_sending_facility String,
@@ -34738,11 +34292,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS';
-
-
-
-DROP TABLE hl7_zdt_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDS';
 
 CREATE EXTERNAL TABLE hl7_zdt_data (
 	msh_sending_facility String,
@@ -34778,11 +34328,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT';
-
-
-
-DROP TABLE hl7_zdu_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDT';
 
 CREATE EXTERNAL TABLE hl7_zdu_data (
 	msh_sending_facility String,
@@ -34809,11 +34355,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU';
-
-
-
-DROP TABLE hl7_zer_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDU';
 
 CREATE EXTERNAL TABLE hl7_zer_data (
 	msh_sending_facility String,
@@ -34883,11 +34425,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER';
-
-
-
-DROP TABLE hl7_zex_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZER';
 
 CREATE EXTERNAL TABLE hl7_zex_data (
 	msh_sending_facility String,
@@ -34908,11 +34446,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX';
-
-
-
-DROP TABLE hl7_zg1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEX';
 
 CREATE EXTERNAL TABLE hl7_zg1_data (
 	msh_sending_facility String,
@@ -34935,11 +34469,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1';
-
-
-
-DROP TABLE hl7_zid_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZG1';
 
 CREATE EXTERNAL TABLE hl7_zid_data (
 	msh_sending_facility String,
@@ -34960,11 +34490,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID';
-
-
-
-DROP TABLE hl7_zif_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZID';
 
 CREATE EXTERNAL TABLE hl7_zif_data (
 	msh_sending_facility String,
@@ -34991,11 +34517,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF';
-
-
-
-DROP TABLE hl7_zin_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIF';
 
 CREATE EXTERNAL TABLE hl7_zin_data (
 	msh_sending_facility String,
@@ -35054,11 +34576,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN';
-
-
-
-DROP TABLE hl7_zm1_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIN';
 
 CREATE EXTERNAL TABLE hl7_zm1_data (
 	msh_sending_facility String,
@@ -35083,7 +34601,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM1';
 
 CREATE EXTERNAL TABLE hl7_zmn_data (
 	msh_sending_facility String,
@@ -35104,11 +34622,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMN';
-
-
-DROP TABLE hl7_zmp_data;
-
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMN';
 CREATE EXTERNAL TABLE hl7_zmp_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
@@ -35223,11 +34737,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP';
-
-
-
-DROP TABLE hl7_zmr_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMP';
 
 CREATE EXTERNAL TABLE hl7_zmr_data (
 	msh_sending_facility String,
@@ -35248,11 +34758,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR';
-
-
-
-DROP TABLE hl7_zpd_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMR';
 
 CREATE EXTERNAL TABLE hl7_zpd_data (
 	msh_sending_facility String,
@@ -35280,11 +34786,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD';
-
-
-
-DROP TABLE hl7_zpe_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPD';
 
 CREATE EXTERNAL TABLE hl7_zpe_data (
 	msh_sending_facility String,
@@ -35310,11 +34812,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE';
-
-
-
-DROP TABLE hl7_zpo_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPE';
 
 CREATE EXTERNAL TABLE hl7_zpo_data (
 	msh_sending_facility String,
@@ -35342,11 +34840,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO';
-
-
-
-DROP TABLE hl7_zpp_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPO';
 
 CREATE EXTERNAL TABLE hl7_zpp_data (
 	msh_sending_facility String,
@@ -35381,11 +34875,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP';
-
-
-
-DROP TABLE hl7_zpv_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPP';
 
 CREATE EXTERNAL TABLE hl7_zpv_data (
 	msh_sending_facility String,
@@ -35440,11 +34930,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV';
-
-
-
-DROP TABLE hl7_zrq_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPV';
 
 CREATE EXTERNAL TABLE hl7_zrq_data (
 	msh_sending_facility String,
@@ -35468,11 +34954,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ';
-
-
-
-DROP TABLE hl7_zrx_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRQ';
 
 CREATE EXTERNAL TABLE hl7_zrx_data (
 	msh_sending_facility String,
@@ -35515,11 +34997,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX';
-
-
-
-DROP TABLE hl7_zsc_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRX';
 
 CREATE EXTERNAL TABLE hl7_zsc_data (
 	msh_sending_facility String,
@@ -35545,11 +35023,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC';
-
-
-
-DROP TABLE hl7_zsi_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSC';
 
 CREATE EXTERNAL TABLE hl7_zsi_data (
 	msh_sending_facility String,
@@ -35571,11 +35045,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI';
-
-
-
-DROP TABLE hl7_zst_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSI';
 
 CREATE EXTERNAL TABLE hl7_zst_data (
 	msh_sending_facility String,
@@ -35606,11 +35076,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST';
-
-
-
-DROP TABLE hl7_zsu_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZST';
 
 CREATE EXTERNAL TABLE hl7_zsu_data (
 	msh_sending_facility String,
@@ -35631,11 +35097,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU';
-
-
-
-DROP TABLE hl7_ztf_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSU';
 
 CREATE EXTERNAL TABLE hl7_ztf_data (
 	msh_sending_facility String,
@@ -35666,11 +35128,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF';
-
-
-
-DROP TABLE hl7_ztm_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTF';
 
 CREATE EXTERNAL TABLE hl7_ztm_data (
 	msh_sending_facility String,
@@ -35821,11 +35279,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM';
-
-
-
-DROP TABLE hl7_zur_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTM';
 
 CREATE EXTERNAL TABLE hl7_zur_data (
 	msh_sending_facility String,
@@ -35846,11 +35300,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR';
-
-
-
-DROP TABLE hl7_zvn_data;
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZUR';
 
 CREATE EXTERNAL TABLE hl7_zvn_data (
 	msh_sending_facility String,
@@ -35875,6 +35325,4 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZVN';
-
-
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZVN';

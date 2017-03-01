@@ -223,11 +223,11 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     delimiters.put(SUBCMPNT_DELIM, (rawSplit(0).charAt(7) + EMPTYSTR).trim)
     delimiters.put(TRUNC_DELIM, if (rawSplit(0).charAt(8) + EMPTYSTR != PIPE_DELIMITED) (rawSplit(0).charAt(8) + EMPTYSTR).trim else "//")
     var realignColStatus = false
-    var segments: Segments = new Segments
+    var segments: Segments = null
     var realignVal = EMPTYSTR
     var versionData: VersionData = null
     var missingMappings = new TemplateUnknownMapping
-    val segmentsMapping = mapSegments(segments, _: String, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_"
+    val segmentsMapping = mapSegments(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_"
       , versionData.srcSystem, versionData.standardMapping, versionData.realignment)(versionData.controlId, missingMappings)
     var i = 0
     rawSplit foreach { msgSegment =>
@@ -295,9 +295,9 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                 subSubComponent foreach { msgSubSubComponent =>
                                   l = inc(l)
                                   if (nonEmpty(msgSubSubComponent)) {
-                                    segments = segmentsMapping(s"$subComponentIndex$DOT$l")._1
-                                    if (segments.componentData == UNKNOWN) moveToUnknown(msgSubSubComponent)
-                                    else subSubComponentLayout += segments.componentData -> msgSubSubComponent
+                                    val tempSegments = segmentsMapping(s"$subComponentIndex$DOT$l")._1
+                                    if (tempSegments.componentData == UNKNOWN) moveToUnknown(msgSubSubComponent)
+                                    else subSubComponentLayout += tempSegments.componentData -> msgSubSubComponent
                                   }
                                 }
                                 if (subSubComponentLayout nonEmpty) subComponentLayout += subComponentData -> subSubComponentLayout
@@ -325,6 +325,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       }
                       else {
                         if (componentData == UNKNOWN) moveToUnknown(field)
+                        else if ((field contains delimiters(REPTN_DELIM)) && (!(fieldRepeatItem contains delimiters(CMPNT_DELIM)) || !(fieldRepeatItem contains delimiters(SUBCMPNT_DELIM)))) componentList += (new mutable.LinkedHashMap[String, String] += (componentData -> fieldRepeatItem))
                         else componentLayout += componentData -> field
                       }
                     }
@@ -395,26 +396,26 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def matcher(in: String, seq: String) = in != null & in.contains(seq)
 
 
-  private def mapSegments(segment: Segments, segmentIndex: String, controlVersion: String, srcSystemMapping: Map[String, Array[String]]
+  private def mapSegments(segmentIndex: String, controlVersion: String, srcSystemMapping: Map[String, Array[String]]
                           , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segments, TemplateUnknownMapping) = {
-    val segments = resetSegment(segment)
+    val segment = new Segments
     var mappedColumnData = EMPTYSTR
     try {
       val realignColumnValues = lookUp(realignment, controlVersion + segmentIndex)
       realignColumnValues.nonEmpty match {
         case true =>
-          segments.realignColStatus = true
-          segments.realignFieldName = realignColumnValues(7)
-          segments.realignCompName = realignColumnValues(8)
-          segments.realignSubCompName = realignColumnValues(9)
+          segment.realignColStatus = true
+          segment.realignFieldName = realignColumnValues(7)
+          segment.realignCompName = realignColumnValues(8)
+          segment.realignSubCompName = realignColumnValues(9)
           if (mappingExist(9, realignColumnValues) && nonEmpty(realignColumnValues(9))) mappedColumnData = realignColumnValues(9)
           else if (mappingExist(8, realignColumnValues) && nonEmpty(realignColumnValues(8))) mappedColumnData = realignColumnValues(8)
           else if (mappingExist(7, realignColumnValues) && nonEmpty(realignColumnValues(7))) mappedColumnData = realignColumnValues(7)
-          segments.realignColOption = realignColumnValues(10)
-          segments.componentData = mappedColumnData
+          segment.realignColOption = realignColumnValues(10)
+          segment.componentData = mappedColumnData
           (segment, missingMappings)
         case _ =>
-          segments.realignColStatus = false
+          segment.realignColStatus = false
           val standardMappedValues = lookUp(standardMapping, segmentIndex)
           val srcSystemValues = lookUp(srcSystemMapping, segmentIndex)
           mappedColumnData = segmentIndex
@@ -441,8 +442,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             if (missingMappings.unknownMappings == null) missingMappings.unknownMappings = new mutable.HashSet[String]
             missingMappings.unknownMappings += segmentIndex
           }
-          segments.componentData = mappedColumnData
-          (segments, missingMappings)
+          segment.componentData = mappedColumnData
+          (segment, missingMappings)
       }
     } catch {
       case t: Throwable =>

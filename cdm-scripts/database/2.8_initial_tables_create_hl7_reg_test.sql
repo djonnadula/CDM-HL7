@@ -26,10 +26,14 @@ CREATE EXTERNAL TABLE hl7_abs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ABS';
 
 
 
@@ -349,10 +353,14 @@ CREATE EXTERNAL TABLE hl7_acc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ACC';
 
 
 
@@ -369,10 +377,14 @@ CREATE EXTERNAL TABLE hl7_add_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ADD';
 
 
 
@@ -403,10 +415,14 @@ CREATE EXTERNAL TABLE hl7_adj_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ADJ';
 
 
 
@@ -427,10 +443,14 @@ CREATE EXTERNAL TABLE hl7_aff_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AFF';
 
 
 
@@ -445,25 +465,205 @@ CREATE EXTERNAL TABLE hl7_aig_data (
 	aig_set_id String,
 	aig_segment_action_code String,
 	aig_resource_id String,
+	aig_resource_id_primary_id String,
+	aig_resource_id_text String,
+	aig_resource_id_name_of_coding_sys String,
+	aig_resource_id_alt_id String,
+	aig_resource_id_alt_text String,
+	aig_resource_id_name_of_alt_coding_sys String,
+	aig_resource_id_coding_sys_ver_id String,
+	aig_resource_id_alt_coding_sys_ver_id String,
+	aig_resource_id_original_text String,
+	aig_resource_id_second_alt_id String,
+	aig_resource_id_second_alt_text String,
+	aig_resource_id_name_of_second_alt_coding_sys String,
+	aig_resource_id_second_alt_coding_sys_ver_id String,
+	aig_resource_id_coding_sys_oid String,
+	aig_resource_id_value_set_oid String,
+	aig_resource_id_value_set_ver_id String,
+	aig_resource_id_alt_coding_sys_oid String,
+	aig_resource_id_alt_value_set_oid String,
+	aig_resource_id_alt_value_set_ver_id String,
+	aig_resource_id_second_alt_coding_sys_oid String,
+	aig_resource_id_second_alt_value_set_oid String,
+	aig_resource_id_second_alt_value_set_ver_id String,
 	aig_resource_type String,
+	aig_resource_type_primary_id String,
+	aig_resource_type_text String,
+	aig_resource_type_name_of_coding_sys String,
+	aig_resource_type_alt_id String,
+	aig_resource_type_alt_text String,
+	aig_resource_type_name_of_alt_coding_sys String,
+	aig_resource_type_coding_sys_ver_id String,
+	aig_resource_type_alt_coding_sys_ver_id String,
+	aig_resource_type_original_text String,
+	aig_resource_type_second_alt_id String,
+	aig_resource_type_second_alt_text String,
+	aig_resource_type_name_of_second_alt_coding_sys String,
+	aig_resource_type_second_alt_coding_sys_ver_id String,
+	aig_resource_type_coding_sys_oid String,
+	aig_resource_type_value_set_oid String,
+	aig_resource_type_value_set_ver_id String,
+	aig_resource_type_alt_coding_sys_oid String,
+	aig_resource_type_alt_value_set_oid String,
+	aig_resource_type_alt_value_set_ver_id String,
+	aig_resource_type_second_alt_coding_sys_oid String,
+	aig_resource_type_second_alt_value_set_oid String,
+	aig_resource_type_second_alt_value_set_ver_id String,
 	aig_resource_group String,
+	aig_resource_group_primary_id String,
+	aig_resource_group_text String,
+	aig_resource_group_name_of_coding_sys String,
+	aig_resource_group_alt_id String,
+	aig_resource_group_alt_text String,
+	aig_resource_group_name_of_alt_coding_sys String,
+	aig_resource_group_coding_sys_ver_id String,
+	aig_resource_group_alt_coding_sys_ver_id String,
+	aig_resource_group_original_text String,
+	aig_resource_group_second_alt_id String,
+	aig_resource_group_second_alt_text String,
+	aig_resource_group_name_of_second_alt_coding_sys String,
+	aig_resource_group_second_alt_coding_sys_ver_id String,
+	aig_resource_group_coding_sys_oid String,
+	aig_resource_group_value_set_oid String,
+	aig_resource_group_value_set_ver_id String,
+	aig_resource_group_alt_coding_sys_oid String,
+	aig_resource_group_alt_value_set_oid String,
+	aig_resource_group_alt_value_set_ver_id String,
+	aig_resource_group_second_alt_coding_sys_oid String,
+	aig_resource_group_second_alt_value_set_oid String,
+	aig_resource_group_second_alt_value_set_ver_id String,
 	aig_resource_qty String,
 	aig_resource_qty_unit String,
+	aig_resource_qty_unit_primary_id String,
+	aig_resource_qty_unit_text String,
+	aig_resource_qty_unit_name_of_coding_sys String,
+	aig_resource_qty_unit_alt_id String,
+	aig_resource_qty_unit_alt_text String,
+	aig_resource_qty_unit_name_of_alt_coding_sys String,
+	aig_resource_qty_unit_coding_sys_ver_id String,
+	aig_resource_qty_unit_alt_coding_sys_ver_id String,
+	aig_resource_qty_unit_original_text String,
+	aig_resource_qty_unit_second_alt_id String,
+	aig_resource_qty_unit_second_alt_text String,
+	aig_resource_qty_unit_name_of_second_alt_coding_sys String,
+	aig_resource_qty_unit_second_alt_coding_sys_ver_id String,
+	aig_resource_qty_unit_coding_sys_oid String,
+	aig_resource_qty_unit_value_set_oid String,
+	aig_resource_qty_unit_value_set_ver_id String,
+	aig_resource_qty_unit_alt_coding_sys_oid String,
+	aig_resource_qty_unit_alt_value_set_oid String,
+	aig_resource_qty_unit_alt_value_set_ver_id String,
+	aig_resource_qty_unit_second_alt_coding_sys_oid String,
+	aig_resource_qty_unit_second_alt_value_set_oid String,
+	aig_resource_qty_unit_second_alt_value_set_ver_id String,
 	aig_start_date_time String,
 	aig_start_date_time_offset String,
 	aig_start_date_time_offset_unit String,
+	aig_start_date_time_offset_unit_primary_id String,
+	aig_start_date_time_offset_unit_text String,
+	aig_start_date_time_offset_unit_name_of_coding_sys String,
+	aig_start_date_time_offset_unit_alt_id String,
+	aig_start_date_time_offset_unit_alt_text String,
+	aig_start_date_time_offset_unit_name_of_alt_coding_sys String,
+	aig_start_date_time_offset_unit_coding_sys_ver_id String,
+	aig_start_date_time_offset_unit_alt_coding_sys_ver_id String,
+	aig_start_date_time_offset_unit_original_text String,
+	aig_start_date_time_offset_unit_second_alt_id String,
+	aig_start_date_time_offset_unit_second_alt_text String,
+	aig_start_date_time_offset_unit_name_of_second_alt_coding_sys String,
+	aig_start_date_time_offset_unit_second_alt_coding_sys_ver_id String,
+	aig_start_date_time_offset_unit_coding_sys_oid String,
+	aig_start_date_time_offset_unit_value_set_oid String,
+	aig_start_date_time_offset_unit_value_set_ver_id String,
+	aig_start_date_time_offset_unit_alt_coding_sys_oid String,
+	aig_start_date_time_offset_unit_alt_value_set_oid String,
+	aig_start_date_time_offset_unit_alt_value_set_ver_id String,
+	aig_start_date_time_offset_unit_second_alt_coding_sys_oid String,
+	aig_start_date_time_offset_unit_second_alt_value_set_oid String,
+	aig_start_date_time_offset_unit_second_alt_value_set_ver_id String,
 	aig_duration String,
 	aig_duration_unit String,
+	aig_duration_unit_primary_id String,
+	aig_duration_unit_text String,
+	aig_duration_unit_name_of_coding_sys String,
+	aig_duration_unit_alt_id String,
+	aig_duration_unit_alt_text String,
+	aig_duration_unit_name_of_alt_coding_sys String,
+	aig_duration_unit_coding_sys_ver_id String,
+	aig_duration_unit_alt_coding_sys_ver_id String,
+	aig_duration_unit_original_text String,
+	aig_duration_unit_second_alt_id String,
+	aig_duration_unit_second_alt_text String,
+	aig_duration_unit_name_of_second_alt_coding_sys String,
+	aig_duration_unit_second_alt_coding_sys_ver_id String,
+	aig_duration_unit_coding_sys_oid String,
+	aig_duration_unit_value_set_oid String,
+	aig_duration_unit_value_set_ver_id String,
+	aig_duration_unit_alt_coding_sys_oid String,
+	aig_duration_unit_alt_value_set_oid String,
+	aig_duration_unit_alt_value_set_ver_id String,
+	aig_duration_unit_second_alt_coding_sys_oid String,
+	aig_duration_unit_second_alt_value_set_oid String,
+	aig_duration_unit_second_alt_value_set_ver_id String,
 	aig_allow_substitution_code String,
+	aig_allow_substitution_code_primary_id String,
+	aig_allow_substitution_code_text String,
+	aig_allow_substitution_code_name_of_coding_sys String,
+	aig_allow_substitution_code_alt_id String,
+	aig_allow_substitution_code_alt_text String,
+	aig_allow_substitution_code_name_of_alt_coding_sys String,
+	aig_allow_substitution_code_coding_sys_ver_id String,
+	aig_allow_substitution_code_alt_coding_sys_ver_id String,
+	aig_allow_substitution_code_original_text String,
+	aig_allow_substitution_code_second_alt_id String,
+	aig_allow_substitution_code_second_alt_text String,
+	aig_allow_substitution_code_name_of_second_alt_coding_sys String,
+	aig_allow_substitution_code_second_alt_coding_sys_ver_id String,
+	aig_allow_substitution_code_coding_sys_oid String,
+	aig_allow_substitution_code_value_set_oid String,
+	aig_allow_substitution_code_value_set_ver_id String,
+	aig_allow_substitution_code_alt_coding_sys_oid String,
+	aig_allow_substitution_code_alt_value_set_oid String,
+	aig_allow_substitution_code_alt_value_set_ver_id String,
+	aig_allow_substitution_code_second_alt_coding_sys_oid String,
+	aig_allow_substitution_code_second_alt_value_set_oid String,
+	aig_allow_substitution_code_second_alt_value_set_ver_id String,
 	aig_filler_status_code String,
+	aig_filler_status_code_primary_id String,
+	aig_filler_status_code_text String,
+	aig_filler_status_code_name_of_coding_sys String,
+	aig_filler_status_code_alt_id String,
+	aig_filler_status_code_alt_text String,
+	aig_filler_status_code_name_of_alt_coding_sys String,
+	aig_filler_status_code_coding_sys_ver_id String,
+	aig_filler_status_code_alt_coding_sys_ver_id String,
+	aig_filler_status_code_original_text String,
+	aig_filler_status_code_second_alt_id String,
+	aig_filler_status_code_second_alt_text String,
+	aig_filler_status_code_name_of_second_alt_coding_sys String,
+	aig_filler_status_code_second_alt_coding_sys_ver_id String,
+	aig_filler_status_code_coding_sys_oid String,
+	aig_filler_status_code_value_set_oid String,
+	aig_filler_status_code_value_set_ver_id String,
+	aig_filler_status_code_alt_coding_sys_oid String,
+	aig_filler_status_code_alt_value_set_oid String,
+	aig_filler_status_code_alt_value_set_ver_id String,
+	aig_filler_status_code_second_alt_coding_sys_oid String,
+	aig_filler_status_code_second_alt_value_set_oid String,
+	aig_filler_status_code_second_alt_value_set_ver_id String,
 	aig_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIG';
 
 
 
@@ -478,23 +678,195 @@ CREATE EXTERNAL TABLE hl7_ail_data (
 	ail_set_id String,
 	ail_segment_action_code String,
 	ail_location_resource_id String,
+	ail_location_resource_id_point_of_care String,
+	ail_location_resource_id_point_of_care_namespace_id String,
+	ail_location_resource_id_point_of_care_universal_id String,
+	ail_location_resource_id_point_of_care_universal_id_type String,
+	ail_location_resource_id_room String,
+	ail_location_resource_id_room_namespace_id String,
+	ail_location_resource_id_room_universal_id String,
+	ail_location_resource_id_room_universal_id_type String,
+	ail_location_resource_id_bed String,
+	ail_location_resource_id_bed_namespace_id String,
+	ail_location_resource_id_bed_universal_id String,
+	ail_location_resource_id_bed_universal_id_type String,
+	ail_location_resource_id_facility String,
+	ail_location_resource_id_facility_namespace_id String,
+	ail_location_resource_id_facility_universal_id String,
+	ail_location_resource_id_facility_universal_id_type String,
+	ail_location_resource_id_status String,
+	ail_location_resource_id_person_loc_type String,
+	ail_location_resource_id_building String,
+	ail_location_resource_id_building_namespace_id String,
+	ail_location_resource_id_building_universal_id String,
+	ail_location_resource_id_building_universal_id_type String,
+	ail_location_resource_id_loc_floor String,
+	ail_location_resource_id_loc_floor_namespace_id String,
+	ail_location_resource_id_loc_floor_universal_id String,
+	ail_location_resource_id_loc_floor_universal_id_type String,
+	ail_location_resource_id_loc_desc String,
+	ail_location_resource_id_cmprhnsv_loc_id String,
+	ail_location_resource_id_cmprhnsv_loc_id_entity_id String,
+	ail_location_resource_id_cmprhnsv_loc_id_namespace_id String,
+	ail_location_resource_id_cmprhnsv_loc_id_universal_id String,
+	ail_location_resource_id_cmprhnsv_loc_id_universal_id_type String,
+	ail_location_resource_id_assgn_authr_for_loc String,
+	ail_location_resource_id_assgn_authr_for_loc_namespace_id String,
+	ail_location_resource_id_assgn_authr_for_loc_universal_id String,
+	ail_location_resource_id_assgn_authr_for_loc_universal_id_type String,
 	ail_location_type String,
+	ail_location_type_primary_id String,
+	ail_location_type_text String,
+	ail_location_type_name_of_coding_sys String,
+	ail_location_type_alt_id String,
+	ail_location_type_alt_text String,
+	ail_location_type_name_of_alt_coding_sys String,
+	ail_location_type_coding_sys_ver_id String,
+	ail_location_type_alt_coding_sys_ver_id String,
+	ail_location_type_original_text String,
+	ail_location_type_second_alt_id String,
+	ail_location_type_second_alt_text String,
+	ail_location_type_name_of_second_alt_coding_sys String,
+	ail_location_type_second_alt_coding_sys_ver_id String,
+	ail_location_type_coding_sys_oid String,
+	ail_location_type_value_set_oid String,
+	ail_location_type_value_set_ver_id String,
+	ail_location_type_alt_coding_sys_oid String,
+	ail_location_type_alt_value_set_oid String,
+	ail_location_type_alt_value_set_ver_id String,
+	ail_location_type_second_alt_coding_sys_oid String,
+	ail_location_type_second_alt_value_set_oid String,
+	ail_location_type_second_alt_value_set_ver_id String,
 	ail_location_group String,
+	ail_location_group_primary_id String,
+	ail_location_group_text String,
+	ail_location_group_name_of_coding_sys String,
+	ail_location_group_alt_id String,
+	ail_location_group_alt_text String,
+	ail_location_group_name_of_alt_coding_sys String,
+	ail_location_group_coding_sys_ver_id String,
+	ail_location_group_alt_coding_sys_ver_id String,
+	ail_location_group_original_text String,
+	ail_location_group_second_alt_id String,
+	ail_location_group_second_alt_text String,
+	ail_location_group_name_of_second_alt_coding_sys String,
+	ail_location_group_second_alt_coding_sys_ver_id String,
+	ail_location_group_coding_sys_oid String,
+	ail_location_group_value_set_oid String,
+	ail_location_group_value_set_ver_id String,
+	ail_location_group_alt_coding_sys_oid String,
+	ail_location_group_alt_value_set_oid String,
+	ail_location_group_alt_value_set_ver_id String,
+	ail_location_group_second_alt_coding_sys_oid String,
+	ail_location_group_second_alt_value_set_oid String,
+	ail_location_group_second_alt_value_set_ver_id String,
 	ail_start_date_time String,
 	ail_start_date_time_offset String,
 	ail_start_date_time_offset_unit String,
+	ail_start_date_time_offset_unit_primary_id String,
+	ail_start_date_time_offset_unit_text String,
+	ail_start_date_time_offset_unit_name_of_coding_sys String,
+	ail_start_date_time_offset_unit_alt_id String,
+	ail_start_date_time_offset_unit_alt_text String,
+	ail_start_date_time_offset_unit_name_of_alt_coding_sys String,
+	ail_start_date_time_offset_unit_coding_sys_ver_id String,
+	ail_start_date_time_offset_unit_alt_coding_sys_ver_id String,
+	ail_start_date_time_offset_unit_original_text String,
+	ail_start_date_time_offset_unit_second_alt_id String,
+	ail_start_date_time_offset_unit_second_alt_text String,
+	ail_start_date_time_offset_unit_name_of_second_alt_coding_sys String,
+	ail_start_date_time_offset_unit_second_alt_coding_sys_ver_id String,
+	ail_start_date_time_offset_unit_coding_sys_oid String,
+	ail_start_date_time_offset_unit_value_set_oid String,
+	ail_start_date_time_offset_unit_value_set_ver_id String,
+	ail_start_date_time_offset_unit_alt_coding_sys_oid String,
+	ail_start_date_time_offset_unit_alt_value_set_oid String,
+	ail_start_date_time_offset_unit_alt_value_set_ver_id String,
+	ail_start_date_time_offset_unit_second_alt_coding_sys_oid String,
+	ail_start_date_time_offset_unit_second_alt_value_set_oid String,
+	ail_start_date_time_offset_unit_second_alt_value_set_ver_id String,
 	ail_duration String,
 	ail_duration_unit String,
+	ail_duration_unit_primary_id String,
+	ail_duration_unit_text String,
+	ail_duration_unit_name_of_coding_sys String,
+	ail_duration_unit_alt_id String,
+	ail_duration_unit_alt_text String,
+	ail_duration_unit_name_of_alt_coding_sys String,
+	ail_duration_unit_coding_sys_ver_id String,
+	ail_duration_unit_alt_coding_sys_ver_id String,
+	ail_duration_unit_original_text String,
+	ail_duration_unit_second_alt_id String,
+	ail_duration_unit_second_alt_text String,
+	ail_duration_unit_name_of_second_alt_coding_sys String,
+	ail_duration_unit_second_alt_coding_sys_ver_id String,
+	ail_duration_unit_coding_sys_oid String,
+	ail_duration_unit_value_set_oid String,
+	ail_duration_unit_value_set_ver_id String,
+	ail_duration_unit_alt_coding_sys_oid String,
+	ail_duration_unit_alt_value_set_oid String,
+	ail_duration_unit_alt_value_set_ver_id String,
+	ail_duration_unit_second_alt_coding_sys_oid String,
+	ail_duration_unit_second_alt_value_set_oid String,
+	ail_duration_unit_second_alt_value_set_ver_id String,
 	ail_allow_substitution_code String,
+	ail_allow_substitution_code_primary_id String,
+	ail_allow_substitution_code_text String,
+	ail_allow_substitution_code_name_of_coding_sys String,
+	ail_allow_substitution_code_alt_id String,
+	ail_allow_substitution_code_alt_text String,
+	ail_allow_substitution_code_name_of_alt_coding_sys String,
+	ail_allow_substitution_code_coding_sys_ver_id String,
+	ail_allow_substitution_code_alt_coding_sys_ver_id String,
+	ail_allow_substitution_code_original_text String,
+	ail_allow_substitution_code_second_alt_id String,
+	ail_allow_substitution_code_second_alt_text String,
+	ail_allow_substitution_code_name_of_second_alt_coding_sys String,
+	ail_allow_substitution_code_second_alt_coding_sys_ver_id String,
+	ail_allow_substitution_code_coding_sys_oid String,
+	ail_allow_substitution_code_value_set_oid String,
+	ail_allow_substitution_code_value_set_ver_id String,
+	ail_allow_substitution_code_alt_coding_sys_oid String,
+	ail_allow_substitution_code_alt_value_set_oid String,
+	ail_allow_substitution_code_alt_value_set_ver_id String,
+	ail_allow_substitution_code_second_alt_coding_sys_oid String,
+	ail_allow_substitution_code_second_alt_value_set_oid String,
+	ail_allow_substitution_code_second_alt_value_set_ver_id String,
 	ail_filler_status_code String,
+	ail_filler_status_code_primary_id String,
+	ail_filler_status_code_text String,
+	ail_filler_status_code_name_of_coding_sys String,
+	ail_filler_status_code_alt_id String,
+	ail_filler_status_code_alt_text String,
+	ail_filler_status_code_name_of_alt_coding_sys String,
+	ail_filler_status_code_coding_sys_ver_id String,
+	ail_filler_status_code_alt_coding_sys_ver_id String,
+	ail_filler_status_code_original_text String,
+	ail_filler_status_code_second_alt_id String,
+	ail_filler_status_code_second_alt_text String,
+	ail_filler_status_code_name_of_second_alt_coding_sys String,
+	ail_filler_status_code_second_alt_coding_sys_ver_id String,
+	ail_filler_status_code_coding_sys_oid String,
+	ail_filler_status_code_value_set_oid String,
+	ail_filler_status_code_value_set_ver_id String,
+	ail_filler_status_code_alt_coding_sys_oid String,
+	ail_filler_status_code_alt_value_set_oid String,
+	ail_filler_status_code_alt_value_set_ver_id String,
+	ail_filler_status_code_second_alt_coding_sys_oid String,
+	ail_filler_status_code_second_alt_value_set_oid String,
+	ail_filler_status_code_second_alt_value_set_ver_id String,
 	ail_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIL';
 
 
 
@@ -509,23 +881,285 @@ CREATE EXTERNAL TABLE hl7_aip_data (
 	aip_set_id String,
 	aip_segment_action_code String,
 	aip_personnel_resource_id String,
+	aip_personnel_resource_id_person_id String,
+	aip_personnel_resource_id_last_name String,
+	aip_personnel_resource_id_last_name_surname String,
+	aip_personnel_resource_id_last_name_own_surname_prefix String,
+	aip_personnel_resource_id_last_name_own_surname String,
+	aip_personnel_resource_id_last_name_surname_prefix_from_partner String,
+	aip_personnel_resource_id_last_name_surname_from_partner String,
+	aip_personnel_resource_id_first_name String,
+	aip_personnel_resource_id_middle_name String,
+	aip_personnel_resource_id_suffix String,
+	aip_personnel_resource_id_person_prefix String,
+	aip_personnel_resource_id_degree String,
+	aip_personnel_resource_id_source_table String,
+	aip_personnel_resource_id_source_table_primary_id String,
+	aip_personnel_resource_id_source_table_text String,
+	aip_personnel_resource_id_source_table_name_of_coding_sys String,
+	aip_personnel_resource_id_source_table_alt_id String,
+	aip_personnel_resource_id_source_table_alt_text String,
+	aip_personnel_resource_id_source_table_name_of_alt_coding_sys String,
+	aip_personnel_resource_id_source_table_coding_sys_ver_id String,
+	aip_personnel_resource_id_source_table_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_source_table_original_text String,
+	aip_personnel_resource_id_source_table_second_alt_id String,
+	aip_personnel_resource_id_source_table_second_alt_text String,
+	aip_personnel_resource_id_source_table_name_of_second_alt_coding_sys String,
+	aip_personnel_resource_id_source_table_second_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_source_table_coding_sys_oid String,
+	aip_personnel_resource_id_source_table_value_set_oid String,
+	aip_personnel_resource_id_source_table_value_set_ver_id String,
+	aip_personnel_resource_id_source_table_alt_coding_sys_oid String,
+	aip_personnel_resource_id_source_table_alt_value_set_oid String,
+	aip_personnel_resource_id_source_table_alt_value_set_ver_id String,
+	aip_personnel_resource_id_source_table_second_alt_coding_sys_oid String,
+	aip_personnel_resource_id_source_table_second_alt_value_set_oid String,
+	aip_personnel_resource_id_source_table_second_alt_value_set_ver_id String,
+	aip_personnel_resource_id_assgn_authr String,
+	aip_personnel_resource_id_assgn_authr_namespace_id String,
+	aip_personnel_resource_id_assgn_authr_universal_id String,
+	aip_personnel_resource_id_assgn_authr_universal_id_type String,
+	aip_personnel_resource_id_name_type_code String,
+	aip_personnel_resource_id_identifier_check_digit String,
+	aip_personnel_resource_id_check_digit_scheme String,
+	aip_personnel_resource_id_identifier_type_code String,
+	aip_personnel_resource_id_assgn_facility String,
+	aip_personnel_resource_id_assgn_facility_namespace_id String,
+	aip_personnel_resource_id_assgn_facility_universal_id String,
+	aip_personnel_resource_id_assgn_facility_universal_id_type String,
+	aip_personnel_resource_id_name_rep_code String,
+	aip_personnel_resource_id_context String,
+	aip_personnel_resource_id_context_primary_id String,
+	aip_personnel_resource_id_context_text String,
+	aip_personnel_resource_id_context_name_of_coding_sys String,
+	aip_personnel_resource_id_context_alt_id String,
+	aip_personnel_resource_id_context_alt_text String,
+	aip_personnel_resource_id_context_name_of_alt_coding_sys String,
+	aip_personnel_resource_id_context_coding_sys_ver_id String,
+	aip_personnel_resource_id_context_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_context_original_text String,
+	aip_personnel_resource_id_context_second_alt_id String,
+	aip_personnel_resource_id_context_second_alt_text String,
+	aip_personnel_resource_id_context_name_of_second_alt_coding_sys String,
+	aip_personnel_resource_id_context_second_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_context_coding_sys_oid String,
+	aip_personnel_resource_id_context_value_set_oid String,
+	aip_personnel_resource_id_context_value_set_ver_id String,
+	aip_personnel_resource_id_context_alt_coding_sys_oid String,
+	aip_personnel_resource_id_context_alt_value_set_oid String,
+	aip_personnel_resource_id_context_alt_value_set_ver_id String,
+	aip_personnel_resource_id_context_second_alt_coding_sys_oid String,
+	aip_personnel_resource_id_context_second_alt_value_set_oid String,
+	aip_personnel_resource_id_context_second_alt_value_set_ver_id String,
+	aip_personnel_resource_id_validity_range String,
+	aip_personnel_resource_id_validity_range_eff_from_date_time String,
+	aip_personnel_resource_id_validity_range_eff_to_date_time String,
+	aip_personnel_resource_id_assembly_order String,
+	aip_personnel_resource_id_eff_from_date_time String,
+	aip_personnel_resource_id_eff_to_date_time String,
+	aip_personnel_resource_id_prof_suffix String,
+	aip_personnel_resource_id_assgn_jurisdiction String,
+	aip_personnel_resource_id_assgn_jurisdiction_primary_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_text String,
+	aip_personnel_resource_id_assgn_jurisdiction_name_of_coding_sys String,
+	aip_personnel_resource_id_assgn_jurisdiction_alt_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_alt_text String,
+	aip_personnel_resource_id_assgn_jurisdiction_name_of_alt_coding_sys String,
+	aip_personnel_resource_id_assgn_jurisdiction_coding_sys_ver_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_original_text String,
+	aip_personnel_resource_id_assgn_jurisdiction_second_alt_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_second_alt_text String,
+	aip_personnel_resource_id_assgn_jurisdiction_name_of_second_alt_coding_sys String,
+	aip_personnel_resource_id_assgn_jurisdiction_second_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_coding_sys_oid String,
+	aip_personnel_resource_id_assgn_jurisdiction_value_set_oid String,
+	aip_personnel_resource_id_assgn_jurisdiction_value_set_ver_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_alt_coding_sys_oid String,
+	aip_personnel_resource_id_assgn_jurisdiction_alt_value_set_oid String,
+	aip_personnel_resource_id_assgn_jurisdiction_alt_value_set_ver_id String,
+	aip_personnel_resource_id_assgn_jurisdiction_second_alt_coding_sys_oid String,
+	aip_personnel_resource_id_assgn_jurisdiction_second_alt_value_set_oid String,
+	aip_personnel_resource_id_assgn_jurisdiction_second_alt_value_set_ver_id String,
+	aip_personnel_resource_id_assgn_agency_dept String,
+	aip_personnel_resource_id_assgn_agency_dept_primary_id String,
+	aip_personnel_resource_id_assgn_agency_dept_text String,
+	aip_personnel_resource_id_assgn_agency_dept_name_of_coding_sys String,
+	aip_personnel_resource_id_assgn_agency_dept_alt_id String,
+	aip_personnel_resource_id_assgn_agency_dept_alt_text String,
+	aip_personnel_resource_id_assgn_agency_dept_name_of_alt_coding_sys String,
+	aip_personnel_resource_id_assgn_agency_dept_coding_sys_ver_id String,
+	aip_personnel_resource_id_assgn_agency_dept_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_assgn_agency_dept_original_text String,
+	aip_personnel_resource_id_assgn_agency_dept_second_alt_id String,
+	aip_personnel_resource_id_assgn_agency_dept_second_alt_text String,
+	aip_personnel_resource_id_assgn_agency_dept_name_of_second_alt_coding_sys String,
+	aip_personnel_resource_id_assgn_agency_dept_second_alt_coding_sys_ver_id String,
+	aip_personnel_resource_id_assgn_agency_dept_coding_sys_oid String,
+	aip_personnel_resource_id_assgn_agency_dept_value_set_oid String,
+	aip_personnel_resource_id_assgn_agency_dept_value_set_ver_id String,
+	aip_personnel_resource_id_assgn_agency_dept_alt_coding_sys_oid String,
+	aip_personnel_resource_id_assgn_agency_dept_alt_value_set_oid String,
+	aip_personnel_resource_id_assgn_agency_dept_alt_value_set_ver_id String,
+	aip_personnel_resource_id_assgn_agency_dept_second_alt_coding_sys_oid String,
+	aip_personnel_resource_id_assgn_agency_dept_second_alt_value_set_oid String,
+	aip_personnel_resource_id_assgn_agency_dept_second_alt_value_set_ver_id String,
+	aip_personnel_resource_id_security_check String,
+	aip_personnel_resource_id_security_check_scheme String,
 	aip_resource_type String,
+	aip_resource_type_primary_id String,
+	aip_resource_type_text String,
+	aip_resource_type_name_of_coding_sys String,
+	aip_resource_type_alt_id String,
+	aip_resource_type_alt_text String,
+	aip_resource_type_name_of_alt_coding_sys String,
+	aip_resource_type_coding_sys_ver_id String,
+	aip_resource_type_alt_coding_sys_ver_id String,
+	aip_resource_type_original_text String,
+	aip_resource_type_second_alt_id String,
+	aip_resource_type_second_alt_text String,
+	aip_resource_type_name_of_second_alt_coding_sys String,
+	aip_resource_type_second_alt_coding_sys_ver_id String,
+	aip_resource_type_coding_sys_oid String,
+	aip_resource_type_value_set_oid String,
+	aip_resource_type_value_set_ver_id String,
+	aip_resource_type_alt_coding_sys_oid String,
+	aip_resource_type_alt_value_set_oid String,
+	aip_resource_type_alt_value_set_ver_id String,
+	aip_resource_type_second_alt_coding_sys_oid String,
+	aip_resource_type_second_alt_value_set_oid String,
+	aip_resource_type_second_alt_value_set_ver_id String,
 	aip_resource_group String,
+	aip_resource_group_primary_id String,
+	aip_resource_group_text String,
+	aip_resource_group_name_of_coding_sys String,
+	aip_resource_group_alt_id String,
+	aip_resource_group_alt_text String,
+	aip_resource_group_name_of_alt_coding_sys String,
+	aip_resource_group_coding_sys_ver_id String,
+	aip_resource_group_alt_coding_sys_ver_id String,
+	aip_resource_group_original_text String,
+	aip_resource_group_second_alt_id String,
+	aip_resource_group_second_alt_text String,
+	aip_resource_group_name_of_second_alt_coding_sys String,
+	aip_resource_group_second_alt_coding_sys_ver_id String,
+	aip_resource_group_coding_sys_oid String,
+	aip_resource_group_value_set_oid String,
+	aip_resource_group_value_set_ver_id String,
+	aip_resource_group_alt_coding_sys_oid String,
+	aip_resource_group_alt_value_set_oid String,
+	aip_resource_group_alt_value_set_ver_id String,
+	aip_resource_group_second_alt_coding_sys_oid String,
+	aip_resource_group_second_alt_value_set_oid String,
+	aip_resource_group_second_alt_value_set_ver_id String,
 	aip_start_date_time String,
 	aip_start_date_time_offset String,
 	aip_start_date_time_offset_unit String,
+	aip_start_date_time_offset_unit_primary_id String,
+	aip_start_date_time_offset_unit_text String,
+	aip_start_date_time_offset_unit_name_of_coding_sys String,
+	aip_start_date_time_offset_unit_alt_id String,
+	aip_start_date_time_offset_unit_alt_text String,
+	aip_start_date_time_offset_unit_name_of_alt_coding_sys String,
+	aip_start_date_time_offset_unit_coding_sys_ver_id String,
+	aip_start_date_time_offset_unit_alt_coding_sys_ver_id String,
+	aip_start_date_time_offset_unit_original_text String,
+	aip_start_date_time_offset_unit_second_alt_id String,
+	aip_start_date_time_offset_unit_second_alt_text String,
+	aip_start_date_time_offset_unit_name_of_second_alt_coding_sys String,
+	aip_start_date_time_offset_unit_second_alt_coding_sys_ver_id String,
+	aip_start_date_time_offset_unit_coding_sys_oid String,
+	aip_start_date_time_offset_unit_value_set_oid String,
+	aip_start_date_time_offset_unit_value_set_ver_id String,
+	aip_start_date_time_offset_unit_alt_coding_sys_oid String,
+	aip_start_date_time_offset_unit_alt_value_set_oid String,
+	aip_start_date_time_offset_unit_alt_value_set_ver_id String,
+	aip_start_date_time_offset_unit_second_alt_coding_sys_oid String,
+	aip_start_date_time_offset_unit_second_alt_value_set_oid String,
+	aip_start_date_time_offset_unit_second_alt_value_set_ver_id String,
 	aip_duration String,
 	aip_duration_unit String,
+	aip_duration_unit_primary_id String,
+	aip_duration_unit_text String,
+	aip_duration_unit_name_of_coding_sys String,
+	aip_duration_unit_alt_id String,
+	aip_duration_unit_alt_text String,
+	aip_duration_unit_name_of_alt_coding_sys String,
+	aip_duration_unit_coding_sys_ver_id String,
+	aip_duration_unit_alt_coding_sys_ver_id String,
+	aip_duration_unit_original_text String,
+	aip_duration_unit_second_alt_id String,
+	aip_duration_unit_second_alt_text String,
+	aip_duration_unit_name_of_second_alt_coding_sys String,
+	aip_duration_unit_second_alt_coding_sys_ver_id String,
+	aip_duration_unit_coding_sys_oid String,
+	aip_duration_unit_value_set_oid String,
+	aip_duration_unit_value_set_ver_id String,
+	aip_duration_unit_alt_coding_sys_oid String,
+	aip_duration_unit_alt_value_set_oid String,
+	aip_duration_unit_alt_value_set_ver_id String,
+	aip_duration_unit_second_alt_coding_sys_oid String,
+	aip_duration_unit_second_alt_value_set_oid String,
+	aip_duration_unit_second_alt_value_set_ver_id String,
 	aip_allow_substitution_code String,
+	aip_allow_substitution_code_primary_id String,
+	aip_allow_substitution_code_text String,
+	aip_allow_substitution_code_name_of_coding_sys String,
+	aip_allow_substitution_code_alt_id String,
+	aip_allow_substitution_code_alt_text String,
+	aip_allow_substitution_code_name_of_alt_coding_sys String,
+	aip_allow_substitution_code_coding_sys_ver_id String,
+	aip_allow_substitution_code_alt_coding_sys_ver_id String,
+	aip_allow_substitution_code_original_text String,
+	aip_allow_substitution_code_second_alt_id String,
+	aip_allow_substitution_code_second_alt_text String,
+	aip_allow_substitution_code_name_of_second_alt_coding_sys String,
+	aip_allow_substitution_code_second_alt_coding_sys_ver_id String,
+	aip_allow_substitution_code_coding_sys_oid String,
+	aip_allow_substitution_code_value_set_oid String,
+	aip_allow_substitution_code_value_set_ver_id String,
+	aip_allow_substitution_code_alt_coding_sys_oid String,
+	aip_allow_substitution_code_alt_value_set_oid String,
+	aip_allow_substitution_code_alt_value_set_ver_id String,
+	aip_allow_substitution_code_second_alt_coding_sys_oid String,
+	aip_allow_substitution_code_second_alt_value_set_oid String,
+	aip_allow_substitution_code_second_alt_value_set_ver_id String,
 	aip_filler_status_code String,
+	aip_filler_status_code_primary_id String,
+	aip_filler_status_code_text String,
+	aip_filler_status_code_name_of_coding_sys String,
+	aip_filler_status_code_alt_id String,
+	aip_filler_status_code_alt_text String,
+	aip_filler_status_code_name_of_alt_coding_sys String,
+	aip_filler_status_code_coding_sys_ver_id String,
+	aip_filler_status_code_alt_coding_sys_ver_id String,
+	aip_filler_status_code_original_text String,
+	aip_filler_status_code_second_alt_id String,
+	aip_filler_status_code_second_alt_text String,
+	aip_filler_status_code_name_of_second_alt_coding_sys String,
+	aip_filler_status_code_second_alt_coding_sys_ver_id String,
+	aip_filler_status_code_coding_sys_oid String,
+	aip_filler_status_code_value_set_oid String,
+	aip_filler_status_code_value_set_ver_id String,
+	aip_filler_status_code_alt_coding_sys_oid String,
+	aip_filler_status_code_alt_value_set_oid String,
+	aip_filler_status_code_alt_value_set_ver_id String,
+	aip_filler_status_code_second_alt_coding_sys_oid String,
+	aip_filler_status_code_second_alt_value_set_oid String,
+	aip_filler_status_code_second_alt_value_set_ver_id String,
 	aip_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIP';
 
 
 
@@ -540,23 +1174,181 @@ CREATE EXTERNAL TABLE hl7_ais_data (
 	ais_set_id String,
 	ais_segment_action_code String,
 	ais_universal_service_id String,
+	ais_universal_service_id_primary_id String,
+	ais_universal_service_id_text String,
+	ais_universal_service_id_name_of_coding_sys String,
+	ais_universal_service_id_alt_id String,
+	ais_universal_service_id_alt_text String,
+	ais_universal_service_id_name_of_alt_coding_sys String,
+	ais_universal_service_id_coding_sys_ver_id String,
+	ais_universal_service_id_alt_coding_sys_ver_id String,
+	ais_universal_service_id_original_text String,
+	ais_universal_service_id_second_alt_id String,
+	ais_universal_service_id_second_alt_text String,
+	ais_universal_service_id_name_of_second_alt_coding_sys String,
+	ais_universal_service_id_second_alt_coding_sys_ver_id String,
+	ais_universal_service_id_coding_sys_oid String,
+	ais_universal_service_id_value_set_oid String,
+	ais_universal_service_id_value_set_ver_id String,
+	ais_universal_service_id_alt_coding_sys_oid String,
+	ais_universal_service_id_alt_value_set_oid String,
+	ais_universal_service_id_alt_value_set_ver_id String,
+	ais_universal_service_id_second_alt_coding_sys_oid String,
+	ais_universal_service_id_second_alt_value_set_oid String,
+	ais_universal_service_id_second_alt_value_set_ver_id String,
 	ais_start_date_time String,
 	ais_start_date_time_offset String,
 	ais_start_date_time_offset_unit String,
+	ais_start_date_time_offset_unit_primary_id String,
+	ais_start_date_time_offset_unit_text String,
+	ais_start_date_time_offset_unit_name_of_coding_sys String,
+	ais_start_date_time_offset_unit_alt_id String,
+	ais_start_date_time_offset_unit_alt_text String,
+	ais_start_date_time_offset_unit_name_of_alt_coding_sys String,
+	ais_start_date_time_offset_unit_coding_sys_ver_id String,
+	ais_start_date_time_offset_unit_alt_coding_sys_ver_id String,
+	ais_start_date_time_offset_unit_original_text String,
+	ais_start_date_time_offset_unit_second_alt_id String,
+	ais_start_date_time_offset_unit_second_alt_text String,
+	ais_start_date_time_offset_unit_name_of_second_alt_coding_sys String,
+	ais_start_date_time_offset_unit_second_alt_coding_sys_ver_id String,
+	ais_start_date_time_offset_unit_coding_sys_oid String,
+	ais_start_date_time_offset_unit_value_set_oid String,
+	ais_start_date_time_offset_unit_value_set_ver_id String,
+	ais_start_date_time_offset_unit_alt_coding_sys_oid String,
+	ais_start_date_time_offset_unit_alt_value_set_oid String,
+	ais_start_date_time_offset_unit_alt_value_set_ver_id String,
+	ais_start_date_time_offset_unit_second_alt_coding_sys_oid String,
+	ais_start_date_time_offset_unit_second_alt_value_set_oid String,
+	ais_start_date_time_offset_unit_second_alt_value_set_ver_id String,
 	ais_duration String,
 	ais_duration_unit String,
+	ais_duration_unit_primary_id String,
+	ais_duration_unit_text String,
+	ais_duration_unit_name_of_coding_sys String,
+	ais_duration_unit_alt_id String,
+	ais_duration_unit_alt_text String,
+	ais_duration_unit_name_of_alt_coding_sys String,
+	ais_duration_unit_coding_sys_ver_id String,
+	ais_duration_unit_alt_coding_sys_ver_id String,
+	ais_duration_unit_original_text String,
+	ais_duration_unit_second_alt_id String,
+	ais_duration_unit_second_alt_text String,
+	ais_duration_unit_name_of_second_alt_coding_sys String,
+	ais_duration_unit_second_alt_coding_sys_ver_id String,
+	ais_duration_unit_coding_sys_oid String,
+	ais_duration_unit_value_set_oid String,
+	ais_duration_unit_value_set_ver_id String,
+	ais_duration_unit_alt_coding_sys_oid String,
+	ais_duration_unit_alt_value_set_oid String,
+	ais_duration_unit_alt_value_set_ver_id String,
+	ais_duration_unit_second_alt_coding_sys_oid String,
+	ais_duration_unit_second_alt_value_set_oid String,
+	ais_duration_unit_second_alt_value_set_ver_id String,
 	ais_allow_substitution_code String,
+	ais_allow_substitution_code_primary_id String,
+	ais_allow_substitution_code_text String,
+	ais_allow_substitution_code_name_of_coding_sys String,
+	ais_allow_substitution_code_alt_id String,
+	ais_allow_substitution_code_alt_text String,
+	ais_allow_substitution_code_name_of_alt_coding_sys String,
+	ais_allow_substitution_code_coding_sys_ver_id String,
+	ais_allow_substitution_code_alt_coding_sys_ver_id String,
+	ais_allow_substitution_code_original_text String,
+	ais_allow_substitution_code_second_alt_id String,
+	ais_allow_substitution_code_second_alt_text String,
+	ais_allow_substitution_code_name_of_second_alt_coding_sys String,
+	ais_allow_substitution_code_second_alt_coding_sys_ver_id String,
+	ais_allow_substitution_code_coding_sys_oid String,
+	ais_allow_substitution_code_value_set_oid String,
+	ais_allow_substitution_code_value_set_ver_id String,
+	ais_allow_substitution_code_alt_coding_sys_oid String,
+	ais_allow_substitution_code_alt_value_set_oid String,
+	ais_allow_substitution_code_alt_value_set_ver_id String,
+	ais_allow_substitution_code_second_alt_coding_sys_oid String,
+	ais_allow_substitution_code_second_alt_value_set_oid String,
+	ais_allow_substitution_code_second_alt_value_set_ver_id String,
 	ais_filler_status_code String,
+	ais_filler_status_code_primary_id String,
+	ais_filler_status_code_text String,
+	ais_filler_status_code_name_of_coding_sys String,
+	ais_filler_status_code_alt_id String,
+	ais_filler_status_code_alt_text String,
+	ais_filler_status_code_name_of_alt_coding_sys String,
+	ais_filler_status_code_coding_sys_ver_id String,
+	ais_filler_status_code_alt_coding_sys_ver_id String,
+	ais_filler_status_code_original_text String,
+	ais_filler_status_code_second_alt_id String,
+	ais_filler_status_code_second_alt_text String,
+	ais_filler_status_code_name_of_second_alt_coding_sys String,
+	ais_filler_status_code_second_alt_coding_sys_ver_id String,
+	ais_filler_status_code_coding_sys_oid String,
+	ais_filler_status_code_value_set_oid String,
+	ais_filler_status_code_value_set_ver_id String,
+	ais_filler_status_code_alt_coding_sys_oid String,
+	ais_filler_status_code_alt_value_set_oid String,
+	ais_filler_status_code_alt_value_set_ver_id String,
+	ais_filler_status_code_second_alt_coding_sys_oid String,
+	ais_filler_status_code_second_alt_value_set_oid String,
+	ais_filler_status_code_second_alt_value_set_ver_id String,
 	ais_placer_supplemental_service_information String,
+	ais_placer_supplemental_service_information_primary_id String,
+	ais_placer_supplemental_service_information_text String,
+	ais_placer_supplemental_service_information_name_of_coding_sys String,
+	ais_placer_supplemental_service_information_alt_id String,
+	ais_placer_supplemental_service_information_alt_text String,
+	ais_placer_supplemental_service_information_name_of_alt_coding_sys String,
+	ais_placer_supplemental_service_information_coding_sys_ver_id String,
+	ais_placer_supplemental_service_information_alt_coding_sys_ver_id String,
+	ais_placer_supplemental_service_information_original_text String,
+	ais_placer_supplemental_service_information_second_alt_id String,
+	ais_placer_supplemental_service_information_second_alt_text String,
+	ais_placer_supplemental_service_information_name_of_second_alt_coding_sys String,
+	ais_placer_supplemental_service_information_second_alt_coding_sys_ver_id String,
+	ais_placer_supplemental_service_information_coding_sys_oid String,
+	ais_placer_supplemental_service_information_value_set_oid String,
+	ais_placer_supplemental_service_information_value_set_ver_id String,
+	ais_placer_supplemental_service_information_alt_coding_sys_oid String,
+	ais_placer_supplemental_service_information_alt_value_set_oid String,
+	ais_placer_supplemental_service_information_alt_value_set_ver_id String,
+	ais_placer_supplemental_service_information_second_alt_coding_sys_oid String,
+	ais_placer_supplemental_service_information_second_alt_value_set_oid String,
+	ais_placer_supplemental_service_information_second_alt_value_set_ver_id String,
 	ais_filler_supplemental_service_information String,
+	ais_filler_supplemental_service_information_primary_id String,
+	ais_filler_supplemental_service_information_text String,
+	ais_filler_supplemental_service_information_name_of_coding_sys String,
+	ais_filler_supplemental_service_information_alt_id String,
+	ais_filler_supplemental_service_information_alt_text String,
+	ais_filler_supplemental_service_information_name_of_alt_coding_sys String,
+	ais_filler_supplemental_service_information_coding_sys_ver_id String,
+	ais_filler_supplemental_service_information_alt_coding_sys_ver_id String,
+	ais_filler_supplemental_service_information_original_text String,
+	ais_filler_supplemental_service_information_second_alt_id String,
+	ais_filler_supplemental_service_information_second_alt_text String,
+	ais_filler_supplemental_service_information_name_of_second_alt_coding_sys String,
+	ais_filler_supplemental_service_information_second_alt_coding_sys_ver_id String,
+	ais_filler_supplemental_service_information_coding_sys_oid String,
+	ais_filler_supplemental_service_information_value_set_oid String,
+	ais_filler_supplemental_service_information_value_set_ver_id String,
+	ais_filler_supplemental_service_information_alt_coding_sys_oid String,
+	ais_filler_supplemental_service_information_alt_value_set_oid String,
+	ais_filler_supplemental_service_information_alt_value_set_ver_id String,
+	ais_filler_supplemental_service_information_second_alt_coding_sys_oid String,
+	ais_filler_supplemental_service_information_second_alt_value_set_oid String,
+	ais_filler_supplemental_service_information_second_alt_value_set_ver_id String,
 	ais_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIS';
 
 
 
@@ -693,10 +1485,14 @@ CREATE EXTERNAL TABLE hl7_al1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AL1';
 
 
 
@@ -717,10 +1513,14 @@ CREATE EXTERNAL TABLE hl7_apr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=APR';
 
 
 
@@ -761,10 +1561,14 @@ CREATE EXTERNAL TABLE hl7_arq_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ARQ';
 
 
 
@@ -854,10 +1658,14 @@ CREATE EXTERNAL TABLE hl7_arv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ARV';
 
 
 
@@ -885,10 +1693,14 @@ CREATE EXTERNAL TABLE hl7_aut_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AUT';
 
 
 
@@ -918,10 +1730,14 @@ CREATE EXTERNAL TABLE hl7_bhs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BHS';
 
 
 
@@ -939,10 +1755,14 @@ CREATE EXTERNAL TABLE hl7_blc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BLC';
 
 
 
@@ -962,10 +1782,14 @@ CREATE EXTERNAL TABLE hl7_blg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BLG';
 
 
 
@@ -995,10 +1819,14 @@ CREATE EXTERNAL TABLE hl7_bpo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BPO';
 
 
 
@@ -1035,10 +1863,14 @@ CREATE EXTERNAL TABLE hl7_bpx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BPX';
 
 
 
@@ -1057,10 +1889,14 @@ CREATE EXTERNAL TABLE hl7_bts_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BTS';
 
 
 
@@ -1095,10 +1931,14 @@ CREATE EXTERNAL TABLE hl7_btx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BTX';
 
 
 
@@ -1127,10 +1967,14 @@ CREATE EXTERNAL TABLE hl7_cdm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CDM';
 
 
 
@@ -1198,10 +2042,14 @@ CREATE EXTERNAL TABLE hl7_cdo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CDO';
 
 
 
@@ -1248,10 +2096,14 @@ CREATE EXTERNAL TABLE hl7_cer_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CER';
 
 
 
@@ -1278,10 +2130,14 @@ CREATE EXTERNAL TABLE hl7_cm0_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CM0';
 
 
 
@@ -1300,10 +2156,14 @@ CREATE EXTERNAL TABLE hl7_cm1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CM1';
 
 
 
@@ -1323,10 +2183,14 @@ CREATE EXTERNAL TABLE hl7_cm2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CM2';
 
 
 
@@ -1348,10 +2212,14 @@ CREATE EXTERNAL TABLE hl7_cns_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CNS';
 
 
 
@@ -1616,10 +2484,14 @@ CREATE EXTERNAL TABLE hl7_con_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CON';
 
 
 
@@ -1639,10 +2511,14 @@ CREATE EXTERNAL TABLE hl7_csp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CSP';
 
 
 
@@ -1674,10 +2550,14 @@ CREATE EXTERNAL TABLE hl7_csr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CSR';
 
 
 
@@ -1696,10 +2576,14 @@ CREATE EXTERNAL TABLE hl7_css_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CSS';
 
 
 
@@ -2058,10 +2942,14 @@ CREATE EXTERNAL TABLE hl7_ctd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CTD';
 
 
 
@@ -2128,10 +3016,14 @@ CREATE EXTERNAL TABLE hl7_cti_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CTI';
 
 
 
@@ -2155,10 +3047,14 @@ CREATE EXTERNAL TABLE hl7_db1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DB1';
 
 
 
@@ -2556,10 +3452,14 @@ CREATE EXTERNAL TABLE hl7_dg1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DG1';
 
 
 
@@ -2580,10 +3480,14 @@ CREATE EXTERNAL TABLE hl7_dmi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DMI';
 
 
 
@@ -3090,10 +3994,14 @@ CREATE EXTERNAL TABLE hl7_drg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DRG';
 
 
 
@@ -3111,10 +4019,14 @@ CREATE EXTERNAL TABLE hl7_dsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DSC';
 
 
 
@@ -3135,10 +4047,14 @@ CREATE EXTERNAL TABLE hl7_dsp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DSP';
 
 
 
@@ -3159,10 +4075,14 @@ CREATE EXTERNAL TABLE hl7_ecd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ECD';
 
 
 
@@ -3181,10 +4101,14 @@ CREATE EXTERNAL TABLE hl7_ecr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ECR';
 
 
 
@@ -3209,10 +4133,14 @@ CREATE EXTERNAL TABLE hl7_edu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EDU';
 
 
 
@@ -3233,10 +4161,14 @@ CREATE EXTERNAL TABLE hl7_eqp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EQP';
 
 
 
@@ -3257,10 +4189,14 @@ CREATE EXTERNAL TABLE hl7_equ_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EQU';
 
 
 
@@ -3470,10 +4406,14 @@ CREATE EXTERNAL TABLE hl7_err_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ERR';
 
 
 
@@ -3647,10 +4587,14 @@ CREATE EXTERNAL TABLE hl7_evn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EVN';
 
 
 
@@ -3678,10 +4622,14 @@ CREATE EXTERNAL TABLE hl7_fac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FAC';
 
 
 
@@ -3711,10 +4659,14 @@ CREATE EXTERNAL TABLE hl7_fhs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FHS';
 
 
 
@@ -4973,10 +5925,14 @@ CREATE EXTERNAL TABLE hl7_ft1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FT1';
 
 
 
@@ -4994,10 +5950,14 @@ CREATE EXTERNAL TABLE hl7_fts_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FTS';
 
 
 
@@ -5035,10 +5995,14 @@ CREATE EXTERNAL TABLE hl7_gol_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GOL';
 
 
 
@@ -5059,10 +6023,14 @@ CREATE EXTERNAL TABLE hl7_gp1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GP1';
 
 
 
@@ -5092,10 +6060,14 @@ CREATE EXTERNAL TABLE hl7_gp2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GP2';
 
 
 
@@ -6763,10 +7735,14 @@ CREATE EXTERNAL TABLE hl7_gt1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GT1';
 
 
 
@@ -7736,10 +8712,14 @@ CREATE EXTERNAL TABLE hl7_iam_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IAM';
 
 
 
@@ -7759,10 +8739,14 @@ CREATE EXTERNAL TABLE hl7_iar_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IAR';
 
 
 
@@ -7793,10 +8777,14 @@ CREATE EXTERNAL TABLE hl7_iim_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IIM';
 
 
 
@@ -7822,10 +8810,14 @@ CREATE EXTERNAL TABLE hl7_ilt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ILT';
 
 
 
@@ -9283,10 +10275,14 @@ CREATE EXTERNAL TABLE hl7_in1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IN1';
 
 
 
@@ -11211,10 +12207,14 @@ CREATE EXTERNAL TABLE hl7_in2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IN2';
 
 
 
@@ -12115,10 +13115,14 @@ CREATE EXTERNAL TABLE hl7_in3_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IN3';
 
 
 
@@ -12154,10 +13158,14 @@ CREATE EXTERNAL TABLE hl7_inv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=INV';
 
 
 
@@ -12269,10 +13277,14 @@ CREATE EXTERNAL TABLE hl7_ipc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IPC';
 
 
 
@@ -12296,10 +13308,14 @@ CREATE EXTERNAL TABLE hl7_ipr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IPR';
 
 
 
@@ -12318,10 +13334,14 @@ CREATE EXTERNAL TABLE hl7_isd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ISD';
 
 
 
@@ -12366,10 +13386,14 @@ CREATE EXTERNAL TABLE hl7_itm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ITM';
 
 
 
@@ -12415,10 +13439,14 @@ CREATE EXTERNAL TABLE hl7_ivc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IVC';
 
 
 
@@ -12460,10 +13488,14 @@ CREATE EXTERNAL TABLE hl7_ivt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IVT';
 
 
 
@@ -12483,10 +13515,14 @@ CREATE EXTERNAL TABLE hl7_lan_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LAN';
 
 
 
@@ -12506,10 +13542,14 @@ CREATE EXTERNAL TABLE hl7_lcc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LCC';
 
 
 
@@ -12530,10 +13570,14 @@ CREATE EXTERNAL TABLE hl7_lch_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LCH';
 
 
 
@@ -12561,10 +13605,14 @@ CREATE EXTERNAL TABLE hl7_ldp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LDP';
 
 
 
@@ -12589,10 +13637,14 @@ CREATE EXTERNAL TABLE hl7_loc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LOC';
 
 
 
@@ -12614,10 +13666,14 @@ CREATE EXTERNAL TABLE hl7_lrl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LRL';
 
 
 
@@ -12639,10 +13695,14 @@ CREATE EXTERNAL TABLE hl7_mfa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MFA';
 
 
 
@@ -12665,10 +13725,14 @@ CREATE EXTERNAL TABLE hl7_mfe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MFE';
 
 
 
@@ -12690,10 +13754,14 @@ CREATE EXTERNAL TABLE hl7_mfi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MFI';
 
 
 
@@ -13075,10 +14143,14 @@ CREATE EXTERNAL TABLE hl7_mrg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MRG';
 
 
 
@@ -13102,10 +14174,14 @@ CREATE EXTERNAL TABLE hl7_msa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MSA';
 
 
 
@@ -13319,10 +14395,14 @@ CREATE EXTERNAL TABLE hl7_msh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MSH';
 
 
 
@@ -13339,10 +14419,14 @@ CREATE EXTERNAL TABLE hl7_nck_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NCK';
 
 
 
@@ -13362,10 +14446,14 @@ CREATE EXTERNAL TABLE hl7_nds_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NDS';
 
 
 
@@ -14751,10 +15839,14 @@ CREATE EXTERNAL TABLE hl7_nk1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NK1';
 
 
 
@@ -14772,10 +15864,14 @@ CREATE EXTERNAL TABLE hl7_npu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NPU';
 
 
 
@@ -14800,10 +15896,14 @@ CREATE EXTERNAL TABLE hl7_nsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NSC';
 
 
 
@@ -14834,10 +15934,14 @@ CREATE EXTERNAL TABLE hl7_nst_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NST';
 
 
 
@@ -14857,6 +15961,9 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	nte_comment_source_query_type String,
 	nte_comment String,
 	nte_comment_text String,
+    nte_comment_query_text String,
+    nte_comment_query_element_code String,
+    nte_comment_query_response String,
 	nte_comment_type String,
 	nte_comment_type_primary_id String,
 	nte_comment_type_text String,
@@ -15014,10 +16121,14 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NTE';
 
 
 
@@ -16147,10 +17258,14 @@ CREATE EXTERNAL TABLE hl7_obr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OBR';
 
 
 
@@ -16796,10 +17911,14 @@ CREATE EXTERNAL TABLE hl7_obx_data (
     etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OBX';
 
 
 
@@ -16863,10 +17982,14 @@ CREATE EXTERNAL TABLE hl7_ods_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ODS';
 
 
 
@@ -16885,10 +18008,14 @@ CREATE EXTERNAL TABLE hl7_odt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ODT';
 
 
 
@@ -16951,10 +18078,14 @@ CREATE EXTERNAL TABLE hl7_om1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM1';
 
 
 
@@ -16980,10 +18111,14 @@ CREATE EXTERNAL TABLE hl7_om2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM2';
 
 
 
@@ -17006,10 +18141,14 @@ CREATE EXTERNAL TABLE hl7_om3_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM3';
 
 
 
@@ -17039,10 +18178,14 @@ CREATE EXTERNAL TABLE hl7_om4_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM4';
 
 
 
@@ -17061,10 +18204,14 @@ CREATE EXTERNAL TABLE hl7_om5_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM5';
 
 
 
@@ -17082,10 +18229,14 @@ CREATE EXTERNAL TABLE hl7_om6_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM6';
 
 
 
@@ -17125,10 +18276,14 @@ CREATE EXTERNAL TABLE hl7_om7_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM7';
 
 
 
@@ -18451,10 +19606,14 @@ CREATE EXTERNAL TABLE hl7_orc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ORC';
 
 
 
@@ -18483,10 +19642,14 @@ CREATE EXTERNAL TABLE hl7_org_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ORG';
 
 
 
@@ -18507,10 +19670,14 @@ CREATE EXTERNAL TABLE hl7_ovr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OVR';
 
 
 
@@ -18534,10 +19701,14 @@ CREATE EXTERNAL TABLE hl7_pac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PAC';
 
 
 
@@ -18557,10 +19728,14 @@ CREATE EXTERNAL TABLE hl7_pce_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PCE';
 
 
 
@@ -18599,10 +19774,14 @@ CREATE EXTERNAL TABLE hl7_pcr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PCR';
 
 
 
@@ -19168,10 +20347,14 @@ CREATE EXTERNAL TABLE hl7_pd1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PD1';
 
 
 
@@ -19196,10 +20379,14 @@ CREATE EXTERNAL TABLE hl7_pda_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PDA';
 
 
 
@@ -19230,10 +20417,14 @@ CREATE EXTERNAL TABLE hl7_pdc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PDC';
 
 
 
@@ -19274,10 +20465,14 @@ CREATE EXTERNAL TABLE hl7_peo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PEO';
 
 
 
@@ -19306,10 +20501,14 @@ CREATE EXTERNAL TABLE hl7_pes_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PES';
 
 
 
@@ -20296,10 +21495,14 @@ CREATE EXTERNAL TABLE hl7_pid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PID';
 
 
 
@@ -20322,10 +21525,14 @@ CREATE EXTERNAL TABLE hl7_pkg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PKG';
 
 
 
@@ -20353,10 +21560,14 @@ CREATE EXTERNAL TABLE hl7_pmt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PMT';
 
 
 
@@ -20661,10 +21872,14 @@ CREATE EXTERNAL TABLE hl7_pr1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PR1';
 
 
 
@@ -20692,10 +21907,14 @@ CREATE EXTERNAL TABLE hl7_pra_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRA';
 
 
 
@@ -21083,10 +22302,14 @@ CREATE EXTERNAL TABLE hl7_prb_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRB';
 
 
 
@@ -21120,10 +22343,14 @@ CREATE EXTERNAL TABLE hl7_prc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRC';
 
 
 
@@ -21153,10 +22380,14 @@ CREATE EXTERNAL TABLE hl7_prd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRD';
 
 
 
@@ -21691,10 +22922,14 @@ CREATE EXTERNAL TABLE hl7_prt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRT';
 
 
 
@@ -21716,10 +22951,14 @@ CREATE EXTERNAL TABLE hl7_psg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSG';
 
 
 
@@ -21749,10 +22988,14 @@ CREATE EXTERNAL TABLE hl7_psh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSH';
 
 
 
@@ -21816,10 +23059,14 @@ CREATE EXTERNAL TABLE hl7_psl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSL';
 
 
 
@@ -21840,10 +23087,14 @@ CREATE EXTERNAL TABLE hl7_pss_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSS';
 
 
 
@@ -21866,10 +23117,14 @@ CREATE EXTERNAL TABLE hl7_pth_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PTH';
 
 
 
@@ -23483,10 +24738,14 @@ CREATE EXTERNAL TABLE hl7_pv1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PV1';
 
 
 
@@ -24214,10 +25473,14 @@ CREATE EXTERNAL TABLE hl7_pv2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PV2';
 
 
 
@@ -24240,16 +25503,20 @@ CREATE EXTERNAL TABLE hl7_pye_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PYE';
 
 
 
-DROP TABLE hl7_reg_testk_data;
+DROP TABLE hl7_qak_data;
 
-CREATE EXTERNAL TABLE hl7_reg_testk_data (
+CREATE EXTERNAL TABLE hl7_qak_data (
 	msh_sending_facility String,
 	msh_msg_control_id String,
 	pid_medical_record_num String,
@@ -24265,10 +25532,14 @@ CREATE EXTERNAL TABLE hl7_reg_testk_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QAK';
 
 
 
@@ -24286,10 +25557,14 @@ CREATE EXTERNAL TABLE hl7_qid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QID';
 
 
 
@@ -24308,10 +25583,14 @@ CREATE EXTERNAL TABLE hl7_qpd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QPD';
 
 
 
@@ -24339,10 +25618,14 @@ CREATE EXTERNAL TABLE hl7_qrd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QRD';
 
 
 
@@ -24368,10 +25651,14 @@ CREATE EXTERNAL TABLE hl7_qrf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QRF';
 
 
 
@@ -24390,10 +25677,14 @@ CREATE EXTERNAL TABLE hl7_qri_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QRI';
 
 
 
@@ -24416,10 +25707,14 @@ CREATE EXTERNAL TABLE hl7_rcp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RCP';
 
 
 
@@ -24437,10 +25732,14 @@ CREATE EXTERNAL TABLE hl7_rdf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RDF';
 
 
 
@@ -24457,10 +25756,14 @@ CREATE EXTERNAL TABLE hl7_rdt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RDT';
 
 
 
@@ -24492,10 +25795,14 @@ CREATE EXTERNAL TABLE hl7_rel_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=REL';
 
 
 
@@ -24523,10 +25830,14 @@ CREATE EXTERNAL TABLE hl7_rf1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RF1';
 
 
 
@@ -24546,10 +25857,14 @@ CREATE EXTERNAL TABLE hl7_rfi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RFI';
 
 
 
@@ -24564,14 +25879,40 @@ CREATE EXTERNAL TABLE hl7_rgs_data (
 	rgs_set_id String,
 	rgs_segment_action_code String,
 	rgs_resource_group_id String,
+	rgs_resource_group_id_primary_id String,
+	rgs_resource_group_id_text String,
+	rgs_resource_group_id_name_of_coding_sys String,
+	rgs_resource_group_id_alt_id String,
+	rgs_resource_group_id_alt_text String,
+	rgs_resource_group_id_name_of_alt_coding_sys String,
+	rgs_resource_group_id_coding_sys_ver_id String,
+	rgs_resource_group_id_alt_coding_sys_ver_id String,
+	rgs_resource_group_id_original_text String,
+	rgs_resource_group_id_second_alt_id String,
+	rgs_resource_group_id_second_alt_text String,
+	rgs_resource_group_id_name_of_second_alt_coding_sys String,
+	rgs_resource_group_id_second_alt_coding_sys_ver_id String,
+	rgs_resource_group_id_coding_sys_oid String,
+	rgs_resource_group_id_value_set_oid String,
+	rgs_resource_group_id_value_set_ver_id String,
+	rgs_resource_group_id_alt_coding_sys_oid String,
+	rgs_resource_group_id_alt_value_set_oid String,
+	rgs_resource_group_id_alt_value_set_ver_id String,
+	rgs_resource_group_id_second_alt_coding_sys_oid String,
+	rgs_resource_group_id_second_alt_value_set_oid String,
+	rgs_resource_group_id_second_alt_value_set_ver_id String,
 	rgs_unknown String,
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RGS';
 
 
 
@@ -24590,10 +25931,14 @@ CREATE EXTERNAL TABLE hl7_rmi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RMI';
 
 
 
@@ -25142,10 +26487,14 @@ CREATE EXTERNAL TABLE hl7_rol_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ROL';
 
 
 
@@ -25212,10 +26561,14 @@ CREATE EXTERNAL TABLE hl7_rq1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RQ1';
 
 
 
@@ -25373,10 +26726,14 @@ CREATE EXTERNAL TABLE hl7_rqd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RQD';
 
 
 
@@ -25938,10 +27295,14 @@ CREATE EXTERNAL TABLE hl7_rxa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXA';
 
 
 
@@ -26100,10 +27461,14 @@ CREATE EXTERNAL TABLE hl7_rxc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXC';
 
 
 
@@ -26153,10 +27518,14 @@ CREATE EXTERNAL TABLE hl7_rxd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXD';
 
 
 
@@ -27187,10 +28556,14 @@ CREATE EXTERNAL TABLE hl7_rxe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXE';
 
 
 
@@ -27236,10 +28609,14 @@ CREATE EXTERNAL TABLE hl7_rxg_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXG';
 
 
 
@@ -28222,10 +29599,14 @@ CREATE EXTERNAL TABLE hl7_rxo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXO';
 
 
 
@@ -28379,10 +29760,14 @@ CREATE EXTERNAL TABLE hl7_rxr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXR';
 
 
 
@@ -28666,10 +30051,14 @@ CREATE EXTERNAL TABLE hl7_rxv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXV';
 
 
 
@@ -29213,10 +30602,14 @@ CREATE EXTERNAL TABLE hl7_sac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SAC';
 
 
 
@@ -29269,10 +30662,14 @@ CREATE EXTERNAL TABLE hl7_scd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SCD';
 
 
 
@@ -29284,22 +30681,40 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	pid_medical_record_num String,
 	pid_medical_record_urn String,
 	pid_pat_account_num String,
-	sch_placer_appointment_id String,
 	sch_unique_case_id String,
-	sch_filler_appointment_id String,
+	sch_placer_appointment_id String,
+	sch_placer_appointment_id_entity_id String,
+	sch_placer_appointment_id_namespace_id String,
+	sch_placer_appointment_id_universal_id String,
+	sch_placer_appointment_id_universal_id_type String,
 	sch_unique_appointment_id String,
-	sch_occurrence_num String,
+	sch_filler_appointment_id String,
+	sch_filler_appointment_id_entity_id String,
+	sch_filler_appointment_id_namespace_id String,
+	sch_filler_appointment_id_universal_id String,
+	sch_filler_appointment_id_universal_id_type String,
 	sch_operation_type String,
-	sch_placer_group_num String,
+	sch_occurrence_num String,
 	sch_update_type String,
-	sch_schedule_id String,
+	sch_placer_group_num String,
+	sch_placer_group_num_placer_assigned_id String,
+	sch_placer_group_num_placer_assigned_id_entity_id String,
+	sch_placer_group_num_placer_assigned_id_namespace_id String,
+	sch_placer_group_num_placer_assigned_id_universal_id String,
+	sch_placer_group_num_placer_assigned_id_universal_id_type String,
+	sch_placer_group_num_filler_assigned_id String,
+	sch_placer_group_num_filler_assigned_id_entity_id String,
+	sch_placer_group_num_filler_assigned_id_namespace_id String,
+	sch_placer_group_num_filler_assigned_id_universal_id String,
+	sch_placer_group_num_filler_assigned_id_universal_id_type String,
 	sch_patient_doctor String,
-	sch_schedule_id_primary_id String,
 	sch_patient_doctor_provider_id String,
-	sch_schedule_id_text String,
 	sch_patient_doctor_last_name String,
-	sch_schedule_id_name_of_coding_sys String,
 	sch_patient_doctor_first_name String,
+	sch_schedule_id String,
+	sch_schedule_id_primary_id String,
+	sch_schedule_id_text String,
+	sch_schedule_id_name_of_coding_sys String,
 	sch_schedule_id_alt_id String,
 	sch_schedule_id_alt_text String,
 	sch_schedule_id_name_of_alt_coding_sys String,
@@ -29319,22 +30734,88 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	sch_schedule_id_second_alt_coding_sys_oid String,
 	sch_schedule_id_second_alt_value_set_oid String,
 	sch_schedule_id_second_alt_value_set_ver_id String,
-	sch_event_reason String,
 	sch_patient_service String,
-	sch_appointment_reason String,
+	sch_event_reason String,
+	sch_event_reason_primary_id String,
+	sch_event_reason_text String,
+	sch_event_reason_name_of_coding_sys String,
+	sch_event_reason_alt_id String,
+	sch_event_reason_alt_text String,
+	sch_event_reason_name_of_alt_coding_sys String,
+	sch_event_reason_coding_sys_ver_id String,
+	sch_event_reason_alt_coding_sys_ver_id String,
+	sch_event_reason_original_text String,
+	sch_event_reason_second_alt_id String,
+	sch_event_reason_second_alt_text String,
+	sch_event_reason_name_of_second_alt_coding_sys String,
+	sch_event_reason_second_alt_coding_sys_ver_id String,
+	sch_event_reason_coding_sys_oid String,
+	sch_event_reason_value_set_oid String,
+	sch_event_reason_value_set_ver_id String,
+	sch_event_reason_alt_coding_sys_oid String,
+	sch_event_reason_alt_value_set_oid String,
+	sch_event_reason_alt_value_set_ver_id String,
+	sch_event_reason_second_alt_coding_sys_oid String,
+	sch_event_reason_second_alt_value_set_oid String,
+	sch_event_reason_second_alt_value_set_ver_id String,
 	sch_patient_facility String,
-	sch_appointment_type String,
+	sch_appointment_reason String,
+	sch_appointment_reason_primary_id String,
+	sch_appointment_reason_text String,
+	sch_appointment_reason_name_of_coding_sys String,
+	sch_appointment_reason_alt_id String,
+	sch_appointment_reason_alt_text String,
+	sch_appointment_reason_name_of_alt_coding_sys String,
+	sch_appointment_reason_coding_sys_ver_id String,
+	sch_appointment_reason_alt_coding_sys_ver_id String,
+	sch_appointment_reason_original_text String,
+	sch_appointment_reason_second_alt_id String,
+	sch_appointment_reason_second_alt_text String,
+	sch_appointment_reason_name_of_second_alt_coding_sys String,
+	sch_appointment_reason_second_alt_coding_sys_ver_id String,
+	sch_appointment_reason_coding_sys_oid String,
+	sch_appointment_reason_value_set_oid String,
+	sch_appointment_reason_value_set_ver_id String,
+	sch_appointment_reason_alt_coding_sys_oid String,
+	sch_appointment_reason_alt_value_set_oid String,
+	sch_appointment_reason_alt_value_set_ver_id String,
+	sch_appointment_reason_second_alt_coding_sys_oid String,
+	sch_appointment_reason_second_alt_value_set_oid String,
+	sch_appointment_reason_second_alt_value_set_ver_id String,
 	sch_operating_room String,
 	sch_operating_room_room_id String,
 	sch_operating_room_room_desc String,
-	sch_appointment_duration String,
+	sch_appointment_type String,
+	sch_appointment_type_primary_id String,
+	sch_appointment_type_text String,
+	sch_appointment_type_name_of_coding_sys String,
+	sch_appointment_type_alt_id String,
+	sch_appointment_type_alt_text String,
+	sch_appointment_type_name_of_alt_coding_sys String,
+	sch_appointment_type_coding_sys_ver_id String,
+	sch_appointment_type_alt_coding_sys_ver_id String,
+	sch_appointment_type_original_text String,
+	sch_appointment_type_second_alt_id String,
+	sch_appointment_type_second_alt_text String,
+	sch_appointment_type_name_of_second_alt_coding_sys String,
+	sch_appointment_type_second_alt_coding_sys_ver_id String,
+	sch_appointment_type_coding_sys_oid String,
+	sch_appointment_type_value_set_oid String,
+	sch_appointment_type_value_set_ver_id String,
+	sch_appointment_type_alt_coding_sys_oid String,
+	sch_appointment_type_alt_value_set_oid String,
+	sch_appointment_type_alt_value_set_ver_id String,
+	sch_appointment_type_second_alt_coding_sys_oid String,
+	sch_appointment_type_second_alt_value_set_oid String,
+	sch_appointment_type_second_alt_value_set_ver_id String,
 	sch_principal_surgeon String,
+    sch_principal_surgeon_provider_id String,
+    sch_principal_surgeon_last_name String,
+    sch_principal_surgeon_first_name String,
+	sch_appointment_duration String,
 	sch_appointment_duration_primary_id String,
-	sch_principal_surgeon_provider_id String,
 	sch_appointment_duration_text String,
-	sch_principal_surgeon_last_name String,
 	sch_appointment_duration_name_of_coding_sys String,
-	sch_principal_surgeon_first_name String,
 	sch_appointment_duration_alt_id String,
 	sch_appointment_duration_alt_text String,
 	sch_appointment_duration_name_of_alt_coding_sys String,
@@ -29354,14 +30835,14 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	sch_appointment_duration_second_alt_coding_sys_oid String,
 	sch_appointment_duration_second_alt_value_set_oid String,
 	sch_appointment_duration_second_alt_value_set_ver_id String,
-	sch_appointment_duration_unit String,
 	sch_principal_anesthesiologist String,
+    sch_principal_anesthesiologist_provider_id String,
+    sch_principal_anesthesiologist_last_name String,
+    sch_principal_anesthesiologist_first_name String,
+	sch_appointment_duration_unit String,
 	sch_appointment_duration_unit_primary_id String,
-	sch_principal_anesthesiologist_provider_id String,
 	sch_appointment_duration_unit_text String,
-	sch_principal_anesthesiologist_last_name String,
 	sch_appointment_duration_unit_name_of_coding_sys String,
-	sch_principal_anesthesiologist_first_name String,
 	sch_appointment_duration_unit_alt_id String,
 	sch_appointment_duration_unit_alt_text String,
 	sch_appointment_duration_unit_name_of_alt_coding_sys String,
@@ -29381,64 +30862,1005 @@ CREATE EXTERNAL TABLE hl7_sch_data (
 	sch_appointment_duration_unit_second_alt_coding_sys_oid String,
 	sch_appointment_duration_unit_second_alt_value_set_oid String,
 	sch_appointment_duration_unit_second_alt_value_set_ver_id String,
-	sch_appointment_timing_qty String,
 	sch_operation_date_time String,
-	sch_placer_contact_person String,
+	sch_appointment_timing_qty String,
 	sch_operation_entered String,
-	sch_placer_contact_person_person_id String,
 	sch_operation_entered_entered_date_time String,
+    sch_operation_entered_entered_by String,
+	sch_placer_contact_person String,
+	sch_placer_contact_person_person_id String,
 	sch_placer_contact_person_last_name String,
-	sch_operation_entered_entered_by String,
+	sch_placer_contact_person_last_name_surname String,
+	sch_placer_contact_person_last_name_own_surname_prefix String,
+	sch_placer_contact_person_last_name_own_surname String,
+	sch_placer_contact_person_last_name_surname_prefix_from_partner String,
+	sch_placer_contact_person_last_name_surname_from_partner String,
 	sch_placer_contact_person_first_name String,
 	sch_placer_contact_person_middle_name String,
 	sch_placer_contact_person_suffix String,
 	sch_placer_contact_person_person_prefix String,
 	sch_placer_contact_person_degree String,
 	sch_placer_contact_person_source_table String,
+	sch_placer_contact_person_source_table_primary_id String,
+	sch_placer_contact_person_source_table_text String,
+	sch_placer_contact_person_source_table_name_of_coding_sys String,
+	sch_placer_contact_person_source_table_alt_id String,
+	sch_placer_contact_person_source_table_alt_text String,
+	sch_placer_contact_person_source_table_name_of_alt_coding_sys String,
+	sch_placer_contact_person_source_table_coding_sys_ver_id String,
+	sch_placer_contact_person_source_table_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_source_table_original_text String,
+	sch_placer_contact_person_source_table_second_alt_id String,
+	sch_placer_contact_person_source_table_second_alt_text String,
+	sch_placer_contact_person_source_table_name_of_second_alt_coding_sys String,
+	sch_placer_contact_person_source_table_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_source_table_coding_sys_oid String,
+	sch_placer_contact_person_source_table_value_set_oid String,
+	sch_placer_contact_person_source_table_value_set_ver_id String,
+	sch_placer_contact_person_source_table_alt_coding_sys_oid String,
+	sch_placer_contact_person_source_table_alt_value_set_oid String,
+	sch_placer_contact_person_source_table_alt_value_set_ver_id String,
+	sch_placer_contact_person_source_table_second_alt_coding_sys_oid String,
+	sch_placer_contact_person_source_table_second_alt_value_set_oid String,
+	sch_placer_contact_person_source_table_second_alt_value_set_ver_id String,
 	sch_placer_contact_person_assgn_authr String,
+	sch_placer_contact_person_assgn_authr_namespace_id String,
+	sch_placer_contact_person_assgn_authr_universal_id String,
+	sch_placer_contact_person_assgn_authr_universal_id_type String,
 	sch_placer_contact_person_name_type_code String,
 	sch_placer_contact_person_identifier_check_digit String,
 	sch_placer_contact_person_check_digit_scheme String,
 	sch_placer_contact_person_identifier_type_code String,
 	sch_placer_contact_person_assgn_facility String,
+	sch_placer_contact_person_assgn_facility_namespace_id String,
+	sch_placer_contact_person_assgn_facility_universal_id String,
+	sch_placer_contact_person_assgn_facility_universal_id_type String,
 	sch_placer_contact_person_name_rep_code String,
 	sch_placer_contact_person_context String,
+	sch_placer_contact_person_context_primary_id String,
+	sch_placer_contact_person_context_text String,
+	sch_placer_contact_person_context_name_of_coding_sys String,
+	sch_placer_contact_person_context_alt_id String,
+	sch_placer_contact_person_context_alt_text String,
+	sch_placer_contact_person_context_name_of_alt_coding_sys String,
+	sch_placer_contact_person_context_coding_sys_ver_id String,
+	sch_placer_contact_person_context_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_context_original_text String,
+	sch_placer_contact_person_context_second_alt_id String,
+	sch_placer_contact_person_context_second_alt_text String,
+	sch_placer_contact_person_context_name_of_second_alt_coding_sys String,
+	sch_placer_contact_person_context_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_context_coding_sys_oid String,
+	sch_placer_contact_person_context_value_set_oid String,
+	sch_placer_contact_person_context_value_set_ver_id String,
+	sch_placer_contact_person_context_alt_coding_sys_oid String,
+	sch_placer_contact_person_context_alt_value_set_oid String,
+	sch_placer_contact_person_context_alt_value_set_ver_id String,
+	sch_placer_contact_person_context_second_alt_coding_sys_oid String,
+	sch_placer_contact_person_context_second_alt_value_set_oid String,
+	sch_placer_contact_person_context_second_alt_value_set_ver_id String,
 	sch_placer_contact_person_validity_range String,
+	sch_placer_contact_person_validity_range_eff_from_date_time String,
+	sch_placer_contact_person_validity_range_eff_to_date_time String,
 	sch_placer_contact_person_assembly_order String,
 	sch_placer_contact_person_eff_from_date_time String,
 	sch_placer_contact_person_eff_to_date_time String,
 	sch_placer_contact_person_prof_suffix String,
 	sch_placer_contact_person_assgn_jurisdiction String,
+	sch_placer_contact_person_assgn_jurisdiction_primary_id String,
+	sch_placer_contact_person_assgn_jurisdiction_text String,
+	sch_placer_contact_person_assgn_jurisdiction_name_of_coding_sys String,
+	sch_placer_contact_person_assgn_jurisdiction_alt_id String,
+	sch_placer_contact_person_assgn_jurisdiction_alt_text String,
+	sch_placer_contact_person_assgn_jurisdiction_name_of_alt_coding_sys String,
+	sch_placer_contact_person_assgn_jurisdiction_coding_sys_ver_id String,
+	sch_placer_contact_person_assgn_jurisdiction_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_assgn_jurisdiction_original_text String,
+	sch_placer_contact_person_assgn_jurisdiction_second_alt_id String,
+	sch_placer_contact_person_assgn_jurisdiction_second_alt_text String,
+	sch_placer_contact_person_assgn_jurisdiction_name_of_second_alt_coding_sys String,
+	sch_placer_contact_person_assgn_jurisdiction_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_assgn_jurisdiction_coding_sys_oid String,
+	sch_placer_contact_person_assgn_jurisdiction_value_set_oid String,
+	sch_placer_contact_person_assgn_jurisdiction_value_set_ver_id String,
+	sch_placer_contact_person_assgn_jurisdiction_alt_coding_sys_oid String,
+	sch_placer_contact_person_assgn_jurisdiction_alt_value_set_oid String,
+	sch_placer_contact_person_assgn_jurisdiction_alt_value_set_ver_id String,
+	sch_placer_contact_person_assgn_jurisdiction_second_alt_coding_sys_oid String,
+	sch_placer_contact_person_assgn_jurisdiction_second_alt_value_set_oid String,
+	sch_placer_contact_person_assgn_jurisdiction_second_alt_value_set_ver_id String,
 	sch_placer_contact_person_assgn_agency_dept String,
+	sch_placer_contact_person_assgn_agency_dept_primary_id String,
+	sch_placer_contact_person_assgn_agency_dept_text String,
+	sch_placer_contact_person_assgn_agency_dept_name_of_coding_sys String,
+	sch_placer_contact_person_assgn_agency_dept_alt_id String,
+	sch_placer_contact_person_assgn_agency_dept_alt_text String,
+	sch_placer_contact_person_assgn_agency_dept_name_of_alt_coding_sys String,
+	sch_placer_contact_person_assgn_agency_dept_coding_sys_ver_id String,
+	sch_placer_contact_person_assgn_agency_dept_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_assgn_agency_dept_original_text String,
+	sch_placer_contact_person_assgn_agency_dept_second_alt_id String,
+	sch_placer_contact_person_assgn_agency_dept_second_alt_text String,
+	sch_placer_contact_person_assgn_agency_dept_name_of_second_alt_coding_sys String,
+	sch_placer_contact_person_assgn_agency_dept_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_person_assgn_agency_dept_coding_sys_oid String,
+	sch_placer_contact_person_assgn_agency_dept_value_set_oid String,
+	sch_placer_contact_person_assgn_agency_dept_value_set_ver_id String,
+	sch_placer_contact_person_assgn_agency_dept_alt_coding_sys_oid String,
+	sch_placer_contact_person_assgn_agency_dept_alt_value_set_oid String,
+	sch_placer_contact_person_assgn_agency_dept_alt_value_set_ver_id String,
+	sch_placer_contact_person_assgn_agency_dept_second_alt_coding_sys_oid String,
+	sch_placer_contact_person_assgn_agency_dept_second_alt_value_set_oid String,
+	sch_placer_contact_person_assgn_agency_dept_second_alt_value_set_ver_id String,
 	sch_placer_contact_person_security_check String,
 	sch_placer_contact_person_security_check_scheme String,
-	sch_placer_contact_phone_num String,
 	sch_operation_scheduled_date_time String,
-	sch_placer_contact_address String,
+	sch_placer_contact_phone_num String,
+	sch_placer_contact_phone_num_formatted_num String,
+	sch_placer_contact_phone_num_use_code String,
+	sch_placer_contact_phone_num_equipment_type String,
+	sch_placer_contact_phone_num_comm_address String,
+	sch_placer_contact_phone_num_country_code String,
+	sch_placer_contact_phone_num_area_city_code String,
+	sch_placer_contact_phone_num_local_number String,
+	sch_placer_contact_phone_num_extension String,
+	sch_placer_contact_phone_num_any_text String,
+	sch_placer_contact_phone_num_extension_prefix String,
+	sch_placer_contact_phone_num_speed_dial_code String,
+	sch_placer_contact_phone_num_unformatted_num String,
+	sch_placer_contact_phone_num_eff_from_date String,
+	sch_placer_contact_phone_num_eff_to_date String,
+	sch_placer_contact_phone_num_expr_reason String,
+	sch_placer_contact_phone_num_expr_reason_primary_id String,
+	sch_placer_contact_phone_num_expr_reason_text String,
+	sch_placer_contact_phone_num_expr_reason_name_of_coding_sys String,
+	sch_placer_contact_phone_num_expr_reason_alt_id String,
+	sch_placer_contact_phone_num_expr_reason_alt_text String,
+	sch_placer_contact_phone_num_expr_reason_name_of_alt_coding_sys String,
+	sch_placer_contact_phone_num_expr_reason_coding_sys_ver_id String,
+	sch_placer_contact_phone_num_expr_reason_alt_coding_sys_ver_id String,
+	sch_placer_contact_phone_num_expr_reason_original_text String,
+	sch_placer_contact_phone_num_expr_reason_second_alt_id String,
+	sch_placer_contact_phone_num_expr_reason_second_alt_text String,
+	sch_placer_contact_phone_num_expr_reason_name_of_second_alt_coding_sys String,
+	sch_placer_contact_phone_num_expr_reason_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_phone_num_expr_reason_coding_sys_oid String,
+	sch_placer_contact_phone_num_expr_reason_value_set_oid String,
+	sch_placer_contact_phone_num_expr_reason_value_set_ver_id String,
+	sch_placer_contact_phone_num_expr_reason_alt_coding_sys_oid String,
+	sch_placer_contact_phone_num_expr_reason_alt_value_set_oid String,
+	sch_placer_contact_phone_num_expr_reason_alt_value_set_ver_id String,
+	sch_placer_contact_phone_num_expr_reason_second_alt_coding_sys_oid String,
+	sch_placer_contact_phone_num_expr_reason_second_alt_value_set_oid String,
+	sch_placer_contact_phone_num_expr_reason_second_alt_value_set_ver_id String,
+	sch_placer_contact_phone_num_protection_code String,
+	sch_placer_contact_phone_num_protection_code_primary_id String,
+	sch_placer_contact_phone_num_protection_code_text String,
+	sch_placer_contact_phone_num_protection_code_name_of_coding_sys String,
+	sch_placer_contact_phone_num_protection_code_alt_id String,
+	sch_placer_contact_phone_num_protection_code_alt_text String,
+	sch_placer_contact_phone_num_protection_code_name_of_alt_coding_sys String,
+	sch_placer_contact_phone_num_protection_code_coding_sys_ver_id String,
+	sch_placer_contact_phone_num_protection_code_alt_coding_sys_ver_id String,
+	sch_placer_contact_phone_num_protection_code_original_text String,
+	sch_placer_contact_phone_num_protection_code_second_alt_id String,
+	sch_placer_contact_phone_num_protection_code_second_alt_text String,
+	sch_placer_contact_phone_num_protection_code_name_of_second_alt_coding_sys String,
+	sch_placer_contact_phone_num_protection_code_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_phone_num_protection_code_coding_sys_oid String,
+	sch_placer_contact_phone_num_protection_code_value_set_oid String,
+	sch_placer_contact_phone_num_protection_code_value_set_ver_id String,
+	sch_placer_contact_phone_num_protection_code_alt_coding_sys_oid String,
+	sch_placer_contact_phone_num_protection_code_alt_value_set_oid String,
+	sch_placer_contact_phone_num_protection_code_alt_value_set_ver_id String,
+	sch_placer_contact_phone_num_protection_code_second_alt_coding_sys_oid String,
+	sch_placer_contact_phone_num_protection_code_second_alt_value_set_oid String,
+	sch_placer_contact_phone_num_protection_code_second_alt_value_set_ver_id String,
+	sch_placer_contact_phone_num_shared_id String,
+	sch_placer_contact_phone_num_shared_id_entity_id String,
+	sch_placer_contact_phone_num_shared_id_namespace_id String,
+	sch_placer_contact_phone_num_shared_id_universal_id String,
+	sch_placer_contact_phone_num_shared_id_universal_id_type String,
+	sch_placer_contact_phone_num_pref_order String,
 	sch_operation_cancelled String,
-	sch_operation_cancelled_cancelled_date_time String,
-	sch_operation_cancelled_cancelled_by String,
+    sch_operation_cancelled_cancelled_date_time String,
+    sch_operation_cancelled_cancelled_by String,
+	sch_placer_contact_address String,
+	sch_placer_contact_address_street_address1 String,
+	sch_placer_contact_address_street_address1_street_mailing_address String,
+	sch_placer_contact_address_street_address1_street_name String,
+	sch_placer_contact_address_street_address1_dwelling_num String,
+	sch_placer_contact_address_street_address2 String,
+	sch_placer_contact_address_city String,
+	sch_placer_contact_address_state_province String,
+	sch_placer_contact_address_zip_postal_code String,
+	sch_placer_contact_address_country String,
+	sch_placer_contact_address_address_type String,
+	sch_placer_contact_address_other_geo_designation String,
+	sch_placer_contact_address_county_parish_code String,
+	sch_placer_contact_address_county_parish_code_primary_id String,
+	sch_placer_contact_address_county_parish_code_text String,
+	sch_placer_contact_address_county_parish_code_name_of_coding_sys String,
+	sch_placer_contact_address_county_parish_code_alt_id String,
+	sch_placer_contact_address_county_parish_code_alt_text String,
+	sch_placer_contact_address_county_parish_code_name_of_alt_coding_sys String,
+	sch_placer_contact_address_county_parish_code_coding_sys_ver_id String,
+	sch_placer_contact_address_county_parish_code_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_county_parish_code_original_text String,
+	sch_placer_contact_address_county_parish_code_second_alt_id String,
+	sch_placer_contact_address_county_parish_code_second_alt_text String,
+	sch_placer_contact_address_county_parish_code_name_of_second_alt_coding_sys String,
+	sch_placer_contact_address_county_parish_code_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_county_parish_code_coding_sys_oid String,
+	sch_placer_contact_address_county_parish_code_value_set_oid String,
+	sch_placer_contact_address_county_parish_code_value_set_ver_id String,
+	sch_placer_contact_address_county_parish_code_alt_coding_sys_oid String,
+	sch_placer_contact_address_county_parish_code_alt_value_set_oid String,
+	sch_placer_contact_address_county_parish_code_alt_value_set_ver_id String,
+	sch_placer_contact_address_county_parish_code_second_alt_coding_sys_oid String,
+	sch_placer_contact_address_county_parish_code_second_alt_value_set_oid String,
+	sch_placer_contact_address_county_parish_code_second_alt_value_set_ver_id String,
+	sch_placer_contact_address_census_tract String,
+	sch_placer_contact_address_census_tract_primary_id String,
+	sch_placer_contact_address_census_tract_text String,
+	sch_placer_contact_address_census_tract_name_of_coding_sys String,
+	sch_placer_contact_address_census_tract_alt_id String,
+	sch_placer_contact_address_census_tract_alt_text String,
+	sch_placer_contact_address_census_tract_name_of_alt_coding_sys String,
+	sch_placer_contact_address_census_tract_coding_sys_ver_id String,
+	sch_placer_contact_address_census_tract_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_census_tract_original_text String,
+	sch_placer_contact_address_census_tract_second_alt_id String,
+	sch_placer_contact_address_census_tract_second_alt_text String,
+	sch_placer_contact_address_census_tract_name_of_second_alt_coding_sys String,
+	sch_placer_contact_address_census_tract_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_census_tract_coding_sys_oid String,
+	sch_placer_contact_address_census_tract_value_set_oid String,
+	sch_placer_contact_address_census_tract_value_set_ver_id String,
+	sch_placer_contact_address_census_tract_alt_coding_sys_oid String,
+	sch_placer_contact_address_census_tract_alt_value_set_oid String,
+	sch_placer_contact_address_census_tract_alt_value_set_ver_id String,
+	sch_placer_contact_address_census_tract_second_alt_coding_sys_oid String,
+	sch_placer_contact_address_census_tract_second_alt_value_set_oid String,
+	sch_placer_contact_address_census_tract_second_alt_value_set_ver_id String,
+	sch_placer_contact_address_rep_code String,
+	sch_placer_contact_address_validity_range String,
+	sch_placer_contact_address_validity_range_eff_from_date_time String,
+	sch_placer_contact_address_validity_range_eff_to_date_time String,
+	sch_placer_contact_address_eff_from_date_time String,
+	sch_placer_contact_address_eff_to_date_time String,
+	sch_placer_contact_address_expr_reason String,
+	sch_placer_contact_address_expr_reason_primary_id String,
+	sch_placer_contact_address_expr_reason_text String,
+	sch_placer_contact_address_expr_reason_name_of_coding_sys String,
+	sch_placer_contact_address_expr_reason_alt_id String,
+	sch_placer_contact_address_expr_reason_alt_text String,
+	sch_placer_contact_address_expr_reason_name_of_alt_coding_sys String,
+	sch_placer_contact_address_expr_reason_coding_sys_ver_id String,
+	sch_placer_contact_address_expr_reason_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_expr_reason_original_text String,
+	sch_placer_contact_address_expr_reason_second_alt_id String,
+	sch_placer_contact_address_expr_reason_second_alt_text String,
+	sch_placer_contact_address_expr_reason_name_of_second_alt_coding_sys String,
+	sch_placer_contact_address_expr_reason_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_expr_reason_coding_sys_oid String,
+	sch_placer_contact_address_expr_reason_value_set_oid String,
+	sch_placer_contact_address_expr_reason_value_set_ver_id String,
+	sch_placer_contact_address_expr_reason_alt_coding_sys_oid String,
+	sch_placer_contact_address_expr_reason_alt_value_set_oid String,
+	sch_placer_contact_address_expr_reason_alt_value_set_ver_id String,
+	sch_placer_contact_address_expr_reason_second_alt_coding_sys_oid String,
+	sch_placer_contact_address_expr_reason_second_alt_value_set_oid String,
+	sch_placer_contact_address_expr_reason_second_alt_value_set_ver_id String,
+	sch_placer_contact_address_temporary_indicator String,
+	sch_placer_contact_address_bad_indicator String,
+	sch_placer_contact_address_address_usage String,
+	sch_placer_contact_address_addressee String,
+	sch_placer_contact_address_address_comment String,
+	sch_placer_contact_address_pref_order String,
+	sch_placer_contact_address_protection_code String,
+	sch_placer_contact_address_protection_code_primary_id String,
+	sch_placer_contact_address_protection_code_text String,
+	sch_placer_contact_address_protection_code_name_of_coding_sys String,
+	sch_placer_contact_address_protection_code_alt_id String,
+	sch_placer_contact_address_protection_code_alt_text String,
+	sch_placer_contact_address_protection_code_name_of_alt_coding_sys String,
+	sch_placer_contact_address_protection_code_coding_sys_ver_id String,
+	sch_placer_contact_address_protection_code_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_protection_code_original_text String,
+	sch_placer_contact_address_protection_code_second_alt_id String,
+	sch_placer_contact_address_protection_code_second_alt_text String,
+	sch_placer_contact_address_protection_code_name_of_second_alt_coding_sys String,
+	sch_placer_contact_address_protection_code_second_alt_coding_sys_ver_id String,
+	sch_placer_contact_address_protection_code_coding_sys_oid String,
+	sch_placer_contact_address_protection_code_value_set_oid String,
+	sch_placer_contact_address_protection_code_value_set_ver_id String,
+	sch_placer_contact_address_protection_code_alt_coding_sys_oid String,
+	sch_placer_contact_address_protection_code_alt_value_set_oid String,
+	sch_placer_contact_address_protection_code_alt_value_set_ver_id String,
+	sch_placer_contact_address_protection_code_second_alt_coding_sys_oid String,
+	sch_placer_contact_address_protection_code_second_alt_value_set_oid String,
+	sch_placer_contact_address_protection_code_second_alt_value_set_ver_id String,
+	sch_placer_contact_address_address_id String,
+	sch_placer_contact_address_address_id_entity_id String,
+	sch_placer_contact_address_address_id_namespace_id String,
+	sch_placer_contact_address_address_id_universal_id String,
+	sch_placer_contact_address_address_id_universal_id_type String,
 	sch_placer_contact_location String,
+	sch_placer_contact_location_point_of_care String,
+	sch_placer_contact_location_point_of_care_namespace_id String,
+	sch_placer_contact_location_point_of_care_universal_id String,
+	sch_placer_contact_location_point_of_care_universal_id_type String,
+	sch_placer_contact_location_room String,
+	sch_placer_contact_location_room_namespace_id String,
+	sch_placer_contact_location_room_universal_id String,
+	sch_placer_contact_location_room_universal_id_type String,
+	sch_placer_contact_location_bed String,
+	sch_placer_contact_location_bed_namespace_id String,
+	sch_placer_contact_location_bed_universal_id String,
+	sch_placer_contact_location_bed_universal_id_type String,
+	sch_placer_contact_location_facility String,
+	sch_placer_contact_location_facility_namespace_id String,
+	sch_placer_contact_location_facility_universal_id String,
+	sch_placer_contact_location_facility_universal_id_type String,
+	sch_placer_contact_location_status String,
+	sch_placer_contact_location_person_loc_type String,
+	sch_placer_contact_location_building String,
+	sch_placer_contact_location_building_namespace_id String,
+	sch_placer_contact_location_building_universal_id String,
+	sch_placer_contact_location_building_universal_id_type String,
+	sch_placer_contact_location_loc_floor String,
+	sch_placer_contact_location_loc_floor_namespace_id String,
+	sch_placer_contact_location_loc_floor_universal_id String,
+	sch_placer_contact_location_loc_floor_universal_id_type String,
+	sch_placer_contact_location_loc_desc String,
+	sch_placer_contact_location_cmprhnsv_loc_id String,
+	sch_placer_contact_location_cmprhnsv_loc_id_entity_id String,
+	sch_placer_contact_location_cmprhnsv_loc_id_namespace_id String,
+	sch_placer_contact_location_cmprhnsv_loc_id_universal_id String,
+	sch_placer_contact_location_cmprhnsv_loc_id_universal_id_type String,
+	sch_placer_contact_location_assgn_authr_for_loc String,
+	sch_placer_contact_location_assgn_authr_for_loc_namespace_id String,
+	sch_placer_contact_location_assgn_authr_for_loc_universal_id String,
+	sch_placer_contact_location_assgn_authr_for_loc_universal_id_type String,
 	sch_filler_contact_person String,
+	sch_filler_contact_person_person_id String,
+	sch_filler_contact_person_last_name String,
+	sch_filler_contact_person_last_name_surname String,
+	sch_filler_contact_person_last_name_own_surname_prefix String,
+	sch_filler_contact_person_last_name_own_surname String,
+	sch_filler_contact_person_last_name_surname_prefix_from_partner String,
+	sch_filler_contact_person_last_name_surname_from_partner String,
+	sch_filler_contact_person_first_name String,
+	sch_filler_contact_person_middle_name String,
+	sch_filler_contact_person_suffix String,
+	sch_filler_contact_person_person_prefix String,
+	sch_filler_contact_person_degree String,
+	sch_filler_contact_person_source_table String,
+	sch_filler_contact_person_source_table_primary_id String,
+	sch_filler_contact_person_source_table_text String,
+	sch_filler_contact_person_source_table_name_of_coding_sys String,
+	sch_filler_contact_person_source_table_alt_id String,
+	sch_filler_contact_person_source_table_alt_text String,
+	sch_filler_contact_person_source_table_name_of_alt_coding_sys String,
+	sch_filler_contact_person_source_table_coding_sys_ver_id String,
+	sch_filler_contact_person_source_table_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_source_table_original_text String,
+	sch_filler_contact_person_source_table_second_alt_id String,
+	sch_filler_contact_person_source_table_second_alt_text String,
+	sch_filler_contact_person_source_table_name_of_second_alt_coding_sys String,
+	sch_filler_contact_person_source_table_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_source_table_coding_sys_oid String,
+	sch_filler_contact_person_source_table_value_set_oid String,
+	sch_filler_contact_person_source_table_value_set_ver_id String,
+	sch_filler_contact_person_source_table_alt_coding_sys_oid String,
+	sch_filler_contact_person_source_table_alt_value_set_oid String,
+	sch_filler_contact_person_source_table_alt_value_set_ver_id String,
+	sch_filler_contact_person_source_table_second_alt_coding_sys_oid String,
+	sch_filler_contact_person_source_table_second_alt_value_set_oid String,
+	sch_filler_contact_person_source_table_second_alt_value_set_ver_id String,
+	sch_filler_contact_person_assgn_authr String,
+	sch_filler_contact_person_assgn_authr_namespace_id String,
+	sch_filler_contact_person_assgn_authr_universal_id String,
+	sch_filler_contact_person_assgn_authr_universal_id_type String,
+	sch_filler_contact_person_name_type_code String,
+	sch_filler_contact_person_identifier_check_digit String,
+	sch_filler_contact_person_check_digit_scheme String,
+	sch_filler_contact_person_identifier_type_code String,
+	sch_filler_contact_person_assgn_facility String,
+	sch_filler_contact_person_assgn_facility_namespace_id String,
+	sch_filler_contact_person_assgn_facility_universal_id String,
+	sch_filler_contact_person_assgn_facility_universal_id_type String,
+	sch_filler_contact_person_name_rep_code String,
+	sch_filler_contact_person_context String,
+	sch_filler_contact_person_context_primary_id String,
+	sch_filler_contact_person_context_text String,
+	sch_filler_contact_person_context_name_of_coding_sys String,
+	sch_filler_contact_person_context_alt_id String,
+	sch_filler_contact_person_context_alt_text String,
+	sch_filler_contact_person_context_name_of_alt_coding_sys String,
+	sch_filler_contact_person_context_coding_sys_ver_id String,
+	sch_filler_contact_person_context_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_context_original_text String,
+	sch_filler_contact_person_context_second_alt_id String,
+	sch_filler_contact_person_context_second_alt_text String,
+	sch_filler_contact_person_context_name_of_second_alt_coding_sys String,
+	sch_filler_contact_person_context_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_context_coding_sys_oid String,
+	sch_filler_contact_person_context_value_set_oid String,
+	sch_filler_contact_person_context_value_set_ver_id String,
+	sch_filler_contact_person_context_alt_coding_sys_oid String,
+	sch_filler_contact_person_context_alt_value_set_oid String,
+	sch_filler_contact_person_context_alt_value_set_ver_id String,
+	sch_filler_contact_person_context_second_alt_coding_sys_oid String,
+	sch_filler_contact_person_context_second_alt_value_set_oid String,
+	sch_filler_contact_person_context_second_alt_value_set_ver_id String,
+	sch_filler_contact_person_validity_range String,
+	sch_filler_contact_person_validity_range_eff_from_date_time String,
+	sch_filler_contact_person_validity_range_eff_to_date_time String,
+	sch_filler_contact_person_assembly_order String,
+	sch_filler_contact_person_eff_from_date_time String,
+	sch_filler_contact_person_eff_to_date_time String,
+	sch_filler_contact_person_prof_suffix String,
+	sch_filler_contact_person_assgn_jurisdiction String,
+	sch_filler_contact_person_assgn_jurisdiction_primary_id String,
+	sch_filler_contact_person_assgn_jurisdiction_text String,
+	sch_filler_contact_person_assgn_jurisdiction_name_of_coding_sys String,
+	sch_filler_contact_person_assgn_jurisdiction_alt_id String,
+	sch_filler_contact_person_assgn_jurisdiction_alt_text String,
+	sch_filler_contact_person_assgn_jurisdiction_name_of_alt_coding_sys String,
+	sch_filler_contact_person_assgn_jurisdiction_coding_sys_ver_id String,
+	sch_filler_contact_person_assgn_jurisdiction_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_assgn_jurisdiction_original_text String,
+	sch_filler_contact_person_assgn_jurisdiction_second_alt_id String,
+	sch_filler_contact_person_assgn_jurisdiction_second_alt_text String,
+	sch_filler_contact_person_assgn_jurisdiction_name_of_second_alt_coding_sys String,
+	sch_filler_contact_person_assgn_jurisdiction_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_assgn_jurisdiction_coding_sys_oid String,
+	sch_filler_contact_person_assgn_jurisdiction_value_set_oid String,
+	sch_filler_contact_person_assgn_jurisdiction_value_set_ver_id String,
+	sch_filler_contact_person_assgn_jurisdiction_alt_coding_sys_oid String,
+	sch_filler_contact_person_assgn_jurisdiction_alt_value_set_oid String,
+	sch_filler_contact_person_assgn_jurisdiction_alt_value_set_ver_id String,
+	sch_filler_contact_person_assgn_jurisdiction_second_alt_coding_sys_oid String,
+	sch_filler_contact_person_assgn_jurisdiction_second_alt_value_set_oid String,
+	sch_filler_contact_person_assgn_jurisdiction_second_alt_value_set_ver_id String,
+	sch_filler_contact_person_assgn_agency_dept String,
+	sch_filler_contact_person_assgn_agency_dept_primary_id String,
+	sch_filler_contact_person_assgn_agency_dept_text String,
+	sch_filler_contact_person_assgn_agency_dept_name_of_coding_sys String,
+	sch_filler_contact_person_assgn_agency_dept_alt_id String,
+	sch_filler_contact_person_assgn_agency_dept_alt_text String,
+	sch_filler_contact_person_assgn_agency_dept_name_of_alt_coding_sys String,
+	sch_filler_contact_person_assgn_agency_dept_coding_sys_ver_id String,
+	sch_filler_contact_person_assgn_agency_dept_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_assgn_agency_dept_original_text String,
+	sch_filler_contact_person_assgn_agency_dept_second_alt_id String,
+	sch_filler_contact_person_assgn_agency_dept_second_alt_text String,
+	sch_filler_contact_person_assgn_agency_dept_name_of_second_alt_coding_sys String,
+	sch_filler_contact_person_assgn_agency_dept_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_person_assgn_agency_dept_coding_sys_oid String,
+	sch_filler_contact_person_assgn_agency_dept_value_set_oid String,
+	sch_filler_contact_person_assgn_agency_dept_value_set_ver_id String,
+	sch_filler_contact_person_assgn_agency_dept_alt_coding_sys_oid String,
+	sch_filler_contact_person_assgn_agency_dept_alt_value_set_oid String,
+	sch_filler_contact_person_assgn_agency_dept_alt_value_set_ver_id String,
+	sch_filler_contact_person_assgn_agency_dept_second_alt_coding_sys_oid String,
+	sch_filler_contact_person_assgn_agency_dept_second_alt_value_set_oid String,
+	sch_filler_contact_person_assgn_agency_dept_second_alt_value_set_ver_id String,
+	sch_filler_contact_person_security_check String,
+	sch_filler_contact_person_security_check_scheme String,
 	sch_filler_contact_phone_num String,
+	sch_filler_contact_phone_num_formatted_num String,
+	sch_filler_contact_phone_num_use_code String,
+	sch_filler_contact_phone_num_equipment_type String,
+	sch_filler_contact_phone_num_comm_address String,
+	sch_filler_contact_phone_num_country_code String,
+	sch_filler_contact_phone_num_area_city_code String,
+	sch_filler_contact_phone_num_local_number String,
+	sch_filler_contact_phone_num_extension String,
+	sch_filler_contact_phone_num_any_text String,
+	sch_filler_contact_phone_num_extension_prefix String,
+	sch_filler_contact_phone_num_speed_dial_code String,
+	sch_filler_contact_phone_num_unformatted_num String,
+	sch_filler_contact_phone_num_eff_from_date String,
+	sch_filler_contact_phone_num_eff_to_date String,
+	sch_filler_contact_phone_num_expr_reason String,
+	sch_filler_contact_phone_num_expr_reason_primary_id String,
+	sch_filler_contact_phone_num_expr_reason_text String,
+	sch_filler_contact_phone_num_expr_reason_name_of_coding_sys String,
+	sch_filler_contact_phone_num_expr_reason_alt_id String,
+	sch_filler_contact_phone_num_expr_reason_alt_text String,
+	sch_filler_contact_phone_num_expr_reason_name_of_alt_coding_sys String,
+	sch_filler_contact_phone_num_expr_reason_coding_sys_ver_id String,
+	sch_filler_contact_phone_num_expr_reason_alt_coding_sys_ver_id String,
+	sch_filler_contact_phone_num_expr_reason_original_text String,
+	sch_filler_contact_phone_num_expr_reason_second_alt_id String,
+	sch_filler_contact_phone_num_expr_reason_second_alt_text String,
+	sch_filler_contact_phone_num_expr_reason_name_of_second_alt_coding_sys String,
+	sch_filler_contact_phone_num_expr_reason_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_phone_num_expr_reason_coding_sys_oid String,
+	sch_filler_contact_phone_num_expr_reason_value_set_oid String,
+	sch_filler_contact_phone_num_expr_reason_value_set_ver_id String,
+	sch_filler_contact_phone_num_expr_reason_alt_coding_sys_oid String,
+	sch_filler_contact_phone_num_expr_reason_alt_value_set_oid String,
+	sch_filler_contact_phone_num_expr_reason_alt_value_set_ver_id String,
+	sch_filler_contact_phone_num_expr_reason_second_alt_coding_sys_oid String,
+	sch_filler_contact_phone_num_expr_reason_second_alt_value_set_oid String,
+	sch_filler_contact_phone_num_expr_reason_second_alt_value_set_ver_id String,
+	sch_filler_contact_phone_num_protection_code String,
+	sch_filler_contact_phone_num_protection_code_primary_id String,
+	sch_filler_contact_phone_num_protection_code_text String,
+	sch_filler_contact_phone_num_protection_code_name_of_coding_sys String,
+	sch_filler_contact_phone_num_protection_code_alt_id String,
+	sch_filler_contact_phone_num_protection_code_alt_text String,
+	sch_filler_contact_phone_num_protection_code_name_of_alt_coding_sys String,
+	sch_filler_contact_phone_num_protection_code_coding_sys_ver_id String,
+	sch_filler_contact_phone_num_protection_code_alt_coding_sys_ver_id String,
+	sch_filler_contact_phone_num_protection_code_original_text String,
+	sch_filler_contact_phone_num_protection_code_second_alt_id String,
+	sch_filler_contact_phone_num_protection_code_second_alt_text String,
+	sch_filler_contact_phone_num_protection_code_name_of_second_alt_coding_sys String,
+	sch_filler_contact_phone_num_protection_code_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_phone_num_protection_code_coding_sys_oid String,
+	sch_filler_contact_phone_num_protection_code_value_set_oid String,
+	sch_filler_contact_phone_num_protection_code_value_set_ver_id String,
+	sch_filler_contact_phone_num_protection_code_alt_coding_sys_oid String,
+	sch_filler_contact_phone_num_protection_code_alt_value_set_oid String,
+	sch_filler_contact_phone_num_protection_code_alt_value_set_ver_id String,
+	sch_filler_contact_phone_num_protection_code_second_alt_coding_sys_oid String,
+	sch_filler_contact_phone_num_protection_code_second_alt_value_set_oid String,
+	sch_filler_contact_phone_num_protection_code_second_alt_value_set_ver_id String,
+	sch_filler_contact_phone_num_shared_id String,
+	sch_filler_contact_phone_num_shared_id_entity_id String,
+	sch_filler_contact_phone_num_shared_id_namespace_id String,
+	sch_filler_contact_phone_num_shared_id_universal_id String,
+	sch_filler_contact_phone_num_shared_id_universal_id_type String,
+	sch_filler_contact_phone_num_pref_order String,
 	sch_filler_contact_address String,
+	sch_filler_contact_address_street_address1 String,
+	sch_filler_contact_address_street_address1_street_mailing_address String,
+	sch_filler_contact_address_street_address1_street_name String,
+	sch_filler_contact_address_street_address1_dwelling_num String,
+	sch_filler_contact_address_street_address2 String,
+	sch_filler_contact_address_city String,
+	sch_filler_contact_address_state_province String,
+	sch_filler_contact_address_zip_postal_code String,
+	sch_filler_contact_address_country String,
+	sch_filler_contact_address_address_type String,
+	sch_filler_contact_address_other_geo_designation String,
+	sch_filler_contact_address_county_parish_code String,
+	sch_filler_contact_address_county_parish_code_primary_id String,
+	sch_filler_contact_address_county_parish_code_text String,
+	sch_filler_contact_address_county_parish_code_name_of_coding_sys String,
+	sch_filler_contact_address_county_parish_code_alt_id String,
+	sch_filler_contact_address_county_parish_code_alt_text String,
+	sch_filler_contact_address_county_parish_code_name_of_alt_coding_sys String,
+	sch_filler_contact_address_county_parish_code_coding_sys_ver_id String,
+	sch_filler_contact_address_county_parish_code_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_county_parish_code_original_text String,
+	sch_filler_contact_address_county_parish_code_second_alt_id String,
+	sch_filler_contact_address_county_parish_code_second_alt_text String,
+	sch_filler_contact_address_county_parish_code_name_of_second_alt_coding_sys String,
+	sch_filler_contact_address_county_parish_code_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_county_parish_code_coding_sys_oid String,
+	sch_filler_contact_address_county_parish_code_value_set_oid String,
+	sch_filler_contact_address_county_parish_code_value_set_ver_id String,
+	sch_filler_contact_address_county_parish_code_alt_coding_sys_oid String,
+	sch_filler_contact_address_county_parish_code_alt_value_set_oid String,
+	sch_filler_contact_address_county_parish_code_alt_value_set_ver_id String,
+	sch_filler_contact_address_county_parish_code_second_alt_coding_sys_oid String,
+	sch_filler_contact_address_county_parish_code_second_alt_value_set_oid String,
+	sch_filler_contact_address_county_parish_code_second_alt_value_set_ver_id String,
+	sch_filler_contact_address_census_tract String,
+	sch_filler_contact_address_census_tract_primary_id String,
+	sch_filler_contact_address_census_tract_text String,
+	sch_filler_contact_address_census_tract_name_of_coding_sys String,
+	sch_filler_contact_address_census_tract_alt_id String,
+	sch_filler_contact_address_census_tract_alt_text String,
+	sch_filler_contact_address_census_tract_name_of_alt_coding_sys String,
+	sch_filler_contact_address_census_tract_coding_sys_ver_id String,
+	sch_filler_contact_address_census_tract_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_census_tract_original_text String,
+	sch_filler_contact_address_census_tract_second_alt_id String,
+	sch_filler_contact_address_census_tract_second_alt_text String,
+	sch_filler_contact_address_census_tract_name_of_second_alt_coding_sys String,
+	sch_filler_contact_address_census_tract_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_census_tract_coding_sys_oid String,
+	sch_filler_contact_address_census_tract_value_set_oid String,
+	sch_filler_contact_address_census_tract_value_set_ver_id String,
+	sch_filler_contact_address_census_tract_alt_coding_sys_oid String,
+	sch_filler_contact_address_census_tract_alt_value_set_oid String,
+	sch_filler_contact_address_census_tract_alt_value_set_ver_id String,
+	sch_filler_contact_address_census_tract_second_alt_coding_sys_oid String,
+	sch_filler_contact_address_census_tract_second_alt_value_set_oid String,
+	sch_filler_contact_address_census_tract_second_alt_value_set_ver_id String,
+	sch_filler_contact_address_rep_code String,
+	sch_filler_contact_address_validity_range String,
+	sch_filler_contact_address_validity_range_eff_from_date_time String,
+	sch_filler_contact_address_validity_range_eff_to_date_time String,
+	sch_filler_contact_address_eff_from_date_time String,
+	sch_filler_contact_address_eff_to_date_time String,
+	sch_filler_contact_address_expr_reason String,
+	sch_filler_contact_address_expr_reason_primary_id String,
+	sch_filler_contact_address_expr_reason_text String,
+	sch_filler_contact_address_expr_reason_name_of_coding_sys String,
+	sch_filler_contact_address_expr_reason_alt_id String,
+	sch_filler_contact_address_expr_reason_alt_text String,
+	sch_filler_contact_address_expr_reason_name_of_alt_coding_sys String,
+	sch_filler_contact_address_expr_reason_coding_sys_ver_id String,
+	sch_filler_contact_address_expr_reason_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_expr_reason_original_text String,
+	sch_filler_contact_address_expr_reason_second_alt_id String,
+	sch_filler_contact_address_expr_reason_second_alt_text String,
+	sch_filler_contact_address_expr_reason_name_of_second_alt_coding_sys String,
+	sch_filler_contact_address_expr_reason_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_expr_reason_coding_sys_oid String,
+	sch_filler_contact_address_expr_reason_value_set_oid String,
+	sch_filler_contact_address_expr_reason_value_set_ver_id String,
+	sch_filler_contact_address_expr_reason_alt_coding_sys_oid String,
+	sch_filler_contact_address_expr_reason_alt_value_set_oid String,
+	sch_filler_contact_address_expr_reason_alt_value_set_ver_id String,
+	sch_filler_contact_address_expr_reason_second_alt_coding_sys_oid String,
+	sch_filler_contact_address_expr_reason_second_alt_value_set_oid String,
+	sch_filler_contact_address_expr_reason_second_alt_value_set_ver_id String,
+	sch_filler_contact_address_temporary_indicator String,
+	sch_filler_contact_address_bad_indicator String,
+	sch_filler_contact_address_address_usage String,
+	sch_filler_contact_address_addressee String,
+	sch_filler_contact_address_address_comment String,
+	sch_filler_contact_address_pref_order String,
+	sch_filler_contact_address_protection_code String,
+	sch_filler_contact_address_protection_code_primary_id String,
+	sch_filler_contact_address_protection_code_text String,
+	sch_filler_contact_address_protection_code_name_of_coding_sys String,
+	sch_filler_contact_address_protection_code_alt_id String,
+	sch_filler_contact_address_protection_code_alt_text String,
+	sch_filler_contact_address_protection_code_name_of_alt_coding_sys String,
+	sch_filler_contact_address_protection_code_coding_sys_ver_id String,
+	sch_filler_contact_address_protection_code_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_protection_code_original_text String,
+	sch_filler_contact_address_protection_code_second_alt_id String,
+	sch_filler_contact_address_protection_code_second_alt_text String,
+	sch_filler_contact_address_protection_code_name_of_second_alt_coding_sys String,
+	sch_filler_contact_address_protection_code_second_alt_coding_sys_ver_id String,
+	sch_filler_contact_address_protection_code_coding_sys_oid String,
+	sch_filler_contact_address_protection_code_value_set_oid String,
+	sch_filler_contact_address_protection_code_value_set_ver_id String,
+	sch_filler_contact_address_protection_code_alt_coding_sys_oid String,
+	sch_filler_contact_address_protection_code_alt_value_set_oid String,
+	sch_filler_contact_address_protection_code_alt_value_set_ver_id String,
+	sch_filler_contact_address_protection_code_second_alt_coding_sys_oid String,
+	sch_filler_contact_address_protection_code_second_alt_value_set_oid String,
+	sch_filler_contact_address_protection_code_second_alt_value_set_ver_id String,
+	sch_filler_contact_address_address_id String,
+	sch_filler_contact_address_address_id_entity_id String,
+	sch_filler_contact_address_address_id_namespace_id String,
+	sch_filler_contact_address_address_id_universal_id String,
+	sch_filler_contact_address_address_id_universal_id_type String,
 	sch_filler_contact_location String,
+	sch_filler_contact_location_point_of_care String,
+	sch_filler_contact_location_point_of_care_namespace_id String,
+	sch_filler_contact_location_point_of_care_universal_id String,
+	sch_filler_contact_location_point_of_care_universal_id_type String,
+	sch_filler_contact_location_room String,
+	sch_filler_contact_location_room_namespace_id String,
+	sch_filler_contact_location_room_universal_id String,
+	sch_filler_contact_location_room_universal_id_type String,
+	sch_filler_contact_location_bed String,
+	sch_filler_contact_location_bed_namespace_id String,
+	sch_filler_contact_location_bed_universal_id String,
+	sch_filler_contact_location_bed_universal_id_type String,
+	sch_filler_contact_location_facility String,
+	sch_filler_contact_location_facility_namespace_id String,
+	sch_filler_contact_location_facility_universal_id String,
+	sch_filler_contact_location_facility_universal_id_type String,
+	sch_filler_contact_location_status String,
+	sch_filler_contact_location_person_loc_type String,
+	sch_filler_contact_location_building String,
+	sch_filler_contact_location_building_namespace_id String,
+	sch_filler_contact_location_building_universal_id String,
+	sch_filler_contact_location_building_universal_id_type String,
+	sch_filler_contact_location_loc_floor String,
+	sch_filler_contact_location_loc_floor_namespace_id String,
+	sch_filler_contact_location_loc_floor_universal_id String,
+	sch_filler_contact_location_loc_floor_universal_id_type String,
+	sch_filler_contact_location_loc_desc String,
+	sch_filler_contact_location_cmprhnsv_loc_id String,
+	sch_filler_contact_location_cmprhnsv_loc_id_entity_id String,
+	sch_filler_contact_location_cmprhnsv_loc_id_namespace_id String,
+	sch_filler_contact_location_cmprhnsv_loc_id_universal_id String,
+	sch_filler_contact_location_cmprhnsv_loc_id_universal_id_type String,
+	sch_filler_contact_location_assgn_authr_for_loc String,
+	sch_filler_contact_location_assgn_authr_for_loc_namespace_id String,
+	sch_filler_contact_location_assgn_authr_for_loc_universal_id String,
+	sch_filler_contact_location_assgn_authr_for_loc_universal_id_type String,
 	sch_entered_by_person String,
+	sch_entered_by_person_person_id String,
+	sch_entered_by_person_last_name String,
+	sch_entered_by_person_last_name_surname String,
+	sch_entered_by_person_last_name_own_surname_prefix String,
+	sch_entered_by_person_last_name_own_surname String,
+	sch_entered_by_person_last_name_surname_prefix_from_partner String,
+	sch_entered_by_person_last_name_surname_from_partner String,
+	sch_entered_by_person_first_name String,
+	sch_entered_by_person_middle_name String,
+	sch_entered_by_person_suffix String,
+	sch_entered_by_person_person_prefix String,
+	sch_entered_by_person_degree String,
+	sch_entered_by_person_source_table String,
+	sch_entered_by_person_source_table_primary_id String,
+	sch_entered_by_person_source_table_text String,
+	sch_entered_by_person_source_table_name_of_coding_sys String,
+	sch_entered_by_person_source_table_alt_id String,
+	sch_entered_by_person_source_table_alt_text String,
+	sch_entered_by_person_source_table_name_of_alt_coding_sys String,
+	sch_entered_by_person_source_table_coding_sys_ver_id String,
+	sch_entered_by_person_source_table_alt_coding_sys_ver_id String,
+	sch_entered_by_person_source_table_original_text String,
+	sch_entered_by_person_source_table_second_alt_id String,
+	sch_entered_by_person_source_table_second_alt_text String,
+	sch_entered_by_person_source_table_name_of_second_alt_coding_sys String,
+	sch_entered_by_person_source_table_second_alt_coding_sys_ver_id String,
+	sch_entered_by_person_source_table_coding_sys_oid String,
+	sch_entered_by_person_source_table_value_set_oid String,
+	sch_entered_by_person_source_table_value_set_ver_id String,
+	sch_entered_by_person_source_table_alt_coding_sys_oid String,
+	sch_entered_by_person_source_table_alt_value_set_oid String,
+	sch_entered_by_person_source_table_alt_value_set_ver_id String,
+	sch_entered_by_person_source_table_second_alt_coding_sys_oid String,
+	sch_entered_by_person_source_table_second_alt_value_set_oid String,
+	sch_entered_by_person_source_table_second_alt_value_set_ver_id String,
+	sch_entered_by_person_assgn_authr String,
+	sch_entered_by_person_assgn_authr_namespace_id String,
+	sch_entered_by_person_assgn_authr_universal_id String,
+	sch_entered_by_person_assgn_authr_universal_id_type String,
+	sch_entered_by_person_name_type_code String,
+	sch_entered_by_person_identifier_check_digit String,
+	sch_entered_by_person_check_digit_scheme String,
+	sch_entered_by_person_identifier_type_code String,
+	sch_entered_by_person_assgn_facility String,
+	sch_entered_by_person_assgn_facility_namespace_id String,
+	sch_entered_by_person_assgn_facility_universal_id String,
+	sch_entered_by_person_assgn_facility_universal_id_type String,
+	sch_entered_by_person_name_rep_code String,
+	sch_entered_by_person_context String,
+	sch_entered_by_person_context_primary_id String,
+	sch_entered_by_person_context_text String,
+	sch_entered_by_person_context_name_of_coding_sys String,
+	sch_entered_by_person_context_alt_id String,
+	sch_entered_by_person_context_alt_text String,
+	sch_entered_by_person_context_name_of_alt_coding_sys String,
+	sch_entered_by_person_context_coding_sys_ver_id String,
+	sch_entered_by_person_context_alt_coding_sys_ver_id String,
+	sch_entered_by_person_context_original_text String,
+	sch_entered_by_person_context_second_alt_id String,
+	sch_entered_by_person_context_second_alt_text String,
+	sch_entered_by_person_context_name_of_second_alt_coding_sys String,
+	sch_entered_by_person_context_second_alt_coding_sys_ver_id String,
+	sch_entered_by_person_context_coding_sys_oid String,
+	sch_entered_by_person_context_value_set_oid String,
+	sch_entered_by_person_context_value_set_ver_id String,
+	sch_entered_by_person_context_alt_coding_sys_oid String,
+	sch_entered_by_person_context_alt_value_set_oid String,
+	sch_entered_by_person_context_alt_value_set_ver_id String,
+	sch_entered_by_person_context_second_alt_coding_sys_oid String,
+	sch_entered_by_person_context_second_alt_value_set_oid String,
+	sch_entered_by_person_context_second_alt_value_set_ver_id String,
+	sch_entered_by_person_validity_range String,
+	sch_entered_by_person_validity_range_eff_from_date_time String,
+	sch_entered_by_person_validity_range_eff_to_date_time String,
+	sch_entered_by_person_assembly_order String,
+	sch_entered_by_person_eff_from_date_time String,
+	sch_entered_by_person_eff_to_date_time String,
+	sch_entered_by_person_prof_suffix String,
+	sch_entered_by_person_assgn_jurisdiction String,
+	sch_entered_by_person_assgn_jurisdiction_primary_id String,
+	sch_entered_by_person_assgn_jurisdiction_text String,
+	sch_entered_by_person_assgn_jurisdiction_name_of_coding_sys String,
+	sch_entered_by_person_assgn_jurisdiction_alt_id String,
+	sch_entered_by_person_assgn_jurisdiction_alt_text String,
+	sch_entered_by_person_assgn_jurisdiction_name_of_alt_coding_sys String,
+	sch_entered_by_person_assgn_jurisdiction_coding_sys_ver_id String,
+	sch_entered_by_person_assgn_jurisdiction_alt_coding_sys_ver_id String,
+	sch_entered_by_person_assgn_jurisdiction_original_text String,
+	sch_entered_by_person_assgn_jurisdiction_second_alt_id String,
+	sch_entered_by_person_assgn_jurisdiction_second_alt_text String,
+	sch_entered_by_person_assgn_jurisdiction_name_of_second_alt_coding_sys String,
+	sch_entered_by_person_assgn_jurisdiction_second_alt_coding_sys_ver_id String,
+	sch_entered_by_person_assgn_jurisdiction_coding_sys_oid String,
+	sch_entered_by_person_assgn_jurisdiction_value_set_oid String,
+	sch_entered_by_person_assgn_jurisdiction_value_set_ver_id String,
+	sch_entered_by_person_assgn_jurisdiction_alt_coding_sys_oid String,
+	sch_entered_by_person_assgn_jurisdiction_alt_value_set_oid String,
+	sch_entered_by_person_assgn_jurisdiction_alt_value_set_ver_id String,
+	sch_entered_by_person_assgn_jurisdiction_second_alt_coding_sys_oid String,
+	sch_entered_by_person_assgn_jurisdiction_second_alt_value_set_oid String,
+	sch_entered_by_person_assgn_jurisdiction_second_alt_value_set_ver_id String,
+	sch_entered_by_person_assgn_agency_dept String,
+	sch_entered_by_person_assgn_agency_dept_primary_id String,
+	sch_entered_by_person_assgn_agency_dept_text String,
+	sch_entered_by_person_assgn_agency_dept_name_of_coding_sys String,
+	sch_entered_by_person_assgn_agency_dept_alt_id String,
+	sch_entered_by_person_assgn_agency_dept_alt_text String,
+	sch_entered_by_person_assgn_agency_dept_name_of_alt_coding_sys String,
+	sch_entered_by_person_assgn_agency_dept_coding_sys_ver_id String,
+	sch_entered_by_person_assgn_agency_dept_alt_coding_sys_ver_id String,
+	sch_entered_by_person_assgn_agency_dept_original_text String,
+	sch_entered_by_person_assgn_agency_dept_second_alt_id String,
+	sch_entered_by_person_assgn_agency_dept_second_alt_text String,
+	sch_entered_by_person_assgn_agency_dept_name_of_second_alt_coding_sys String,
+	sch_entered_by_person_assgn_agency_dept_second_alt_coding_sys_ver_id String,
+	sch_entered_by_person_assgn_agency_dept_coding_sys_oid String,
+	sch_entered_by_person_assgn_agency_dept_value_set_oid String,
+	sch_entered_by_person_assgn_agency_dept_value_set_ver_id String,
+	sch_entered_by_person_assgn_agency_dept_alt_coding_sys_oid String,
+	sch_entered_by_person_assgn_agency_dept_alt_value_set_oid String,
+	sch_entered_by_person_assgn_agency_dept_alt_value_set_ver_id String,
+	sch_entered_by_person_assgn_agency_dept_second_alt_coding_sys_oid String,
+	sch_entered_by_person_assgn_agency_dept_second_alt_value_set_oid String,
+	sch_entered_by_person_assgn_agency_dept_second_alt_value_set_ver_id String,
+	sch_entered_by_person_security_check String,
+	sch_entered_by_person_security_check_scheme String,
 	sch_entered_by_phone_num String,
+	sch_entered_by_phone_num_formatted_num String,
+	sch_entered_by_phone_num_use_code String,
+	sch_entered_by_phone_num_equipment_type String,
+	sch_entered_by_phone_num_comm_address String,
+	sch_entered_by_phone_num_country_code String,
+	sch_entered_by_phone_num_area_city_code String,
+	sch_entered_by_phone_num_local_number String,
+	sch_entered_by_phone_num_extension String,
+	sch_entered_by_phone_num_any_text String,
+	sch_entered_by_phone_num_extension_prefix String,
+	sch_entered_by_phone_num_speed_dial_code String,
+	sch_entered_by_phone_num_unformatted_num String,
+	sch_entered_by_phone_num_eff_from_date String,
+	sch_entered_by_phone_num_eff_to_date String,
+	sch_entered_by_phone_num_expr_reason String,
+	sch_entered_by_phone_num_expr_reason_primary_id String,
+	sch_entered_by_phone_num_expr_reason_text String,
+	sch_entered_by_phone_num_expr_reason_name_of_coding_sys String,
+	sch_entered_by_phone_num_expr_reason_alt_id String,
+	sch_entered_by_phone_num_expr_reason_alt_text String,
+	sch_entered_by_phone_num_expr_reason_name_of_alt_coding_sys String,
+	sch_entered_by_phone_num_expr_reason_coding_sys_ver_id String,
+	sch_entered_by_phone_num_expr_reason_alt_coding_sys_ver_id String,
+	sch_entered_by_phone_num_expr_reason_original_text String,
+	sch_entered_by_phone_num_expr_reason_second_alt_id String,
+	sch_entered_by_phone_num_expr_reason_second_alt_text String,
+	sch_entered_by_phone_num_expr_reason_name_of_second_alt_coding_sys String,
+	sch_entered_by_phone_num_expr_reason_second_alt_coding_sys_ver_id String,
+	sch_entered_by_phone_num_expr_reason_coding_sys_oid String,
+	sch_entered_by_phone_num_expr_reason_value_set_oid String,
+	sch_entered_by_phone_num_expr_reason_value_set_ver_id String,
+	sch_entered_by_phone_num_expr_reason_alt_coding_sys_oid String,
+	sch_entered_by_phone_num_expr_reason_alt_value_set_oid String,
+	sch_entered_by_phone_num_expr_reason_alt_value_set_ver_id String,
+	sch_entered_by_phone_num_expr_reason_second_alt_coding_sys_oid String,
+	sch_entered_by_phone_num_expr_reason_second_alt_value_set_oid String,
+	sch_entered_by_phone_num_expr_reason_second_alt_value_set_ver_id String,
+	sch_entered_by_phone_num_protection_code String,
+	sch_entered_by_phone_num_protection_code_primary_id String,
+	sch_entered_by_phone_num_protection_code_text String,
+	sch_entered_by_phone_num_protection_code_name_of_coding_sys String,
+	sch_entered_by_phone_num_protection_code_alt_id String,
+	sch_entered_by_phone_num_protection_code_alt_text String,
+	sch_entered_by_phone_num_protection_code_name_of_alt_coding_sys String,
+	sch_entered_by_phone_num_protection_code_coding_sys_ver_id String,
+	sch_entered_by_phone_num_protection_code_alt_coding_sys_ver_id String,
+	sch_entered_by_phone_num_protection_code_original_text String,
+	sch_entered_by_phone_num_protection_code_second_alt_id String,
+	sch_entered_by_phone_num_protection_code_second_alt_text String,
+	sch_entered_by_phone_num_protection_code_name_of_second_alt_coding_sys String,
+	sch_entered_by_phone_num_protection_code_second_alt_coding_sys_ver_id String,
+	sch_entered_by_phone_num_protection_code_coding_sys_oid String,
+	sch_entered_by_phone_num_protection_code_value_set_oid String,
+	sch_entered_by_phone_num_protection_code_value_set_ver_id String,
+	sch_entered_by_phone_num_protection_code_alt_coding_sys_oid String,
+	sch_entered_by_phone_num_protection_code_alt_value_set_oid String,
+	sch_entered_by_phone_num_protection_code_alt_value_set_ver_id String,
+	sch_entered_by_phone_num_protection_code_second_alt_coding_sys_oid String,
+	sch_entered_by_phone_num_protection_code_second_alt_value_set_oid String,
+	sch_entered_by_phone_num_protection_code_second_alt_value_set_ver_id String,
+	sch_entered_by_phone_num_shared_id String,
+	sch_entered_by_phone_num_shared_id_entity_id String,
+	sch_entered_by_phone_num_shared_id_namespace_id String,
+	sch_entered_by_phone_num_shared_id_universal_id String,
+	sch_entered_by_phone_num_shared_id_universal_id_type String,
+	sch_entered_by_phone_num_pref_order String,
 	sch_entered_by_location String,
-	sch_parent_placer_appointment_id String,
-	sch_parent_filler_appointment_id String,
-	sch_filler_status_code String,
-	sch_placer_order_num String,
-	sch_filler_order_num String,
-	sch_unknown String,
-	etl_firstinsert_datetime String,
-	field_sequence_num String
+	sch_entered_by_location_point_of_care String,
+	sch_entered_by_location_point_of_care_namespace_id String,
+	sch_entered_by_location_point_of_care_universal_id String,
+	sch_entered_by_location_point_of_care_universal_id_type String,
+	sch_entered_by_location_room String,
+	sch_entered_by_location_room_namespace_id String,
+	sch_entered_by_location_room_universal_id String,
+	sch_entered_by_location_room_universal_id_type String,
+	sch_entered_by_location_bed String,
+	sch_entered_by_location_bed_namespace_id String,
+	sch_entered_by_location_bed_universal_id String,
+	sch_entered_by_location_bed_universal_id_type String,
+	sch_entered_by_location_facility String,
+	sch_entered_by_location_facility_namespace_id String,
+	sch_entered_by_location_facility_universal_id String,
+	sch_entered_by_location_facility_universal_id_type String,
+	sch_entered_by_location_status String,
+	sch_entered_by_location_person_loc_type String,
+	sch_entered_by_location_building String,
+	sch_entered_by_location_building_namespace_id String,
+	sch_entered_by_location_building_universal_id String,
+	sch_entered_by_location_building_universal_id_type String,
+	sch_entered_by_location_loc_floor String,
+    sch_entered_by_location_loc_floor_namespace_id String,
+    sch_entered_by_location_loc_floor_universal_id String,
+    sch_entered_by_location_loc_floor_universal_id_type String,
+    sch_entered_by_location_loc_desc String,
+    sch_entered_by_location_cmprhnsv_loc_id String,
+    sch_entered_by_location_cmprhnsv_loc_id_entity_id String,
+    sch_entered_by_location_cmprhnsv_loc_id_namespace_id String,
+    sch_entered_by_location_cmprhnsv_loc_id_universal_id String,
+    sch_entered_by_location_cmprhnsv_loc_id_universal_id_type String,
+    sch_entered_by_location_assgn_authr_for_loc String,
+    sch_entered_by_location_assgn_authr_for_loc_namespace_id String,
+    sch_entered_by_location_assgn_authr_for_loc_universal_id String,
+    sch_entered_by_location_assgn_authr_for_loc_universal_id_type String,
+    sch_parent_placer_appointment_id String,
+    sch_parent_placer_appointment_id_entity_id String,
+    sch_parent_placer_appointment_id_namespace_id String,
+    sch_parent_placer_appointment_id_universal_id String,
+    sch_parent_placer_appointment_id_universal_id_type String,
+    sch_parent_filler_appointment_id String,
+    sch_parent_filler_appointment_id_entity_id String,
+    sch_parent_filler_appointment_id_namespace_id String,
+    sch_parent_filler_appointment_id_universal_id String,
+    sch_parent_filler_appointment_id_universal_id_type String,
+    sch_filler_status_code String,
+    sch_filler_status_code_primary_id String,
+    sch_filler_status_code_text String,
+    sch_filler_status_code_name_of_coding_sys String,
+    sch_filler_status_code_alt_id String,
+    sch_filler_status_code_alt_text String,
+    sch_filler_status_code_name_of_alt_coding_sys String,
+    sch_filler_status_code_coding_sys_ver_id String,
+    sch_filler_status_code_alt_coding_sys_ver_id String,
+    sch_filler_status_code_original_text String,
+    sch_filler_status_code_second_alt_id String,
+    sch_filler_status_code_second_alt_text String,
+    sch_filler_status_code_name_of_second_alt_coding_sys String,
+    sch_filler_status_code_second_alt_coding_sys_ver_id String,
+    sch_filler_status_code_coding_sys_oid String,
+    sch_filler_status_code_value_set_oid String,
+    sch_filler_status_code_value_set_ver_id String,
+    sch_filler_status_code_alt_coding_sys_oid String,
+    sch_filler_status_code_alt_value_set_oid String,
+    sch_filler_status_code_alt_value_set_ver_id String,
+    sch_filler_status_code_second_alt_coding_sys_oid String,
+    sch_filler_status_code_second_alt_value_set_oid String,
+    sch_filler_status_code_second_alt_value_set_ver_id String,
+    sch_placer_order_num String,
+    sch_placer_order_num_entity_id String,
+    sch_placer_order_num_namespace_id String,
+    sch_placer_order_num_universal_id String,
+    sch_placer_order_num_universal_id_type String,
+    sch_filler_order_num String,
+    sch_filler_order_num_entity_id String,
+    sch_filler_order_num_namespace_id String,
+    sch_filler_order_num_universal_id String,
+    sch_filler_order_num_universal_id_type String,
+    sch_unknown String,
+    etl_firstinsert_datetime String,
+    field_sequence_num String
+)
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SCH';
 
 
 
@@ -29462,10 +31884,14 @@ CREATE EXTERNAL TABLE hl7_scp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SCP';
 
 
 
@@ -29488,10 +31914,14 @@ CREATE EXTERNAL TABLE hl7_sdd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SDD';
 
 
 
@@ -29551,10 +31981,14 @@ CREATE EXTERNAL TABLE hl7_sft_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SFT';
 
 DROP TABLE hl7_sgh_data;
 
@@ -29570,10 +32004,14 @@ CREATE EXTERNAL TABLE hl7_sgh_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SGH';
 
 DROP TABLE hl7_sgt_data;
 
@@ -29589,10 +32027,14 @@ CREATE EXTERNAL TABLE hl7_sgt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SGT';
 
 
 DROP TABLE hl7_shp_data;
@@ -29618,10 +32060,14 @@ CREATE EXTERNAL TABLE hl7_shp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SHP';
 
 
 
@@ -29641,10 +32087,14 @@ CREATE EXTERNAL TABLE hl7_sid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SID';
 
 
 
@@ -29665,10 +32115,14 @@ CREATE EXTERNAL TABLE hl7_slt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SLT';
 
 
 
@@ -30288,10 +32742,14 @@ CREATE EXTERNAL TABLE hl7_spm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SPM';
 
 
 
@@ -30348,10 +32806,14 @@ CREATE EXTERNAL TABLE hl7_stf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=STF';
 
 
 
@@ -30371,10 +32833,14 @@ CREATE EXTERNAL TABLE hl7_stz_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=STZ';
 
 
 
@@ -30404,10 +32870,14 @@ CREATE EXTERNAL TABLE hl7_tcc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TCC';
 
 
 
@@ -30491,10 +32961,14 @@ CREATE EXTERNAL TABLE hl7_tcd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TCD';
 
 
 
@@ -30719,10 +33193,14 @@ CREATE EXTERNAL TABLE hl7_tq1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TQ1';
 
 
 
@@ -30784,10 +33262,14 @@ CREATE EXTERNAL TABLE hl7_tq2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TQ2';
 
 
 
@@ -31644,10 +34126,14 @@ CREATE EXTERNAL TABLE hl7_txa_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TXA';
 
 
 
@@ -31695,10 +34181,14 @@ CREATE EXTERNAL TABLE hl7_uac_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=UAC';
 
 
 
@@ -31737,10 +34227,14 @@ CREATE EXTERNAL TABLE hl7_ub1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=UB1';
 
 
 
@@ -31894,10 +34388,14 @@ CREATE EXTERNAL TABLE hl7_ub2_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=UB2';
 
 
 
@@ -31920,10 +34418,14 @@ CREATE EXTERNAL TABLE hl7_urd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=URD';
 
 
 
@@ -31948,10 +34450,14 @@ CREATE EXTERNAL TABLE hl7_urs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=URS';
 
 
 
@@ -31973,10 +34479,14 @@ CREATE EXTERNAL TABLE hl7_var_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=VAR';
 
 
 
@@ -31997,10 +34507,14 @@ CREATE EXTERNAL TABLE hl7_vnd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=VND';
 
 
 
@@ -32032,10 +34546,14 @@ CREATE EXTERNAL TABLE hl7_zao_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZAO';
 
 
 
@@ -32056,10 +34574,14 @@ CREATE EXTERNAL TABLE hl7_zcd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCD';
 
 
 
@@ -32087,10 +34609,14 @@ CREATE EXTERNAL TABLE hl7_zcl_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCL';
 
 
 
@@ -32110,10 +34636,14 @@ CREATE EXTERNAL TABLE hl7_zcn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCN';
 
 
 
@@ -32139,10 +34669,14 @@ CREATE EXTERNAL TABLE hl7_zcp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCP';
 
 
 
@@ -32169,10 +34703,14 @@ CREATE EXTERNAL TABLE hl7_zcs_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCS';
 
 
 
@@ -32193,10 +34731,14 @@ CREATE EXTERNAL TABLE hl7_zds_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDS';
 
 
 
@@ -32229,10 +34771,14 @@ CREATE EXTERNAL TABLE hl7_zdt_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDT';
 
 
 
@@ -32256,10 +34802,14 @@ CREATE EXTERNAL TABLE hl7_zdu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDU';
 
 
 
@@ -32326,10 +34876,14 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZER';
 
 
 
@@ -32347,10 +34901,14 @@ CREATE EXTERNAL TABLE hl7_zex_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZEX';
 
 
 
@@ -32370,10 +34928,14 @@ CREATE EXTERNAL TABLE hl7_zg1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZG1';
 
 
 
@@ -32391,10 +34953,14 @@ CREATE EXTERNAL TABLE hl7_zid_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZID';
 
 
 
@@ -32418,10 +34984,14 @@ CREATE EXTERNAL TABLE hl7_zif_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIF';
 
 
 
@@ -32477,10 +35047,14 @@ CREATE EXTERNAL TABLE hl7_zin_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIN';
 
 
 
@@ -32502,12 +35076,31 @@ CREATE EXTERNAL TABLE hl7_zm1_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZM1';
+
+CREATE EXTERNAL TABLE hl7_zmn_data (
+	msh_sending_facility String,
+	msh_msg_control_id String,
+	pid_medical_record_num String,
+	pid_medical_record_urn String,
+	pid_pat_account_num String,
+	zmn_icd_diagnosis String,
+	zmn_icd_status String,
+	zmn_unknown String,
+	etl_firstinsert_datetime String,
+	field_sequence_num String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
 LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
-
-
 
 DROP TABLE hl7_zmp_data;
 
@@ -32618,10 +35211,14 @@ CREATE EXTERNAL TABLE hl7_zmp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMP';
 
 
 
@@ -32639,10 +35236,14 @@ CREATE EXTERNAL TABLE hl7_zmr_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMR';
 
 
 
@@ -32667,10 +35268,14 @@ CREATE EXTERNAL TABLE hl7_zpd_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPD';
 
 
 
@@ -32693,10 +35298,14 @@ CREATE EXTERNAL TABLE hl7_zpe_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPE';
 
 
 
@@ -32721,10 +35330,14 @@ CREATE EXTERNAL TABLE hl7_zpo_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPO';
 
 
 
@@ -32756,10 +35369,14 @@ CREATE EXTERNAL TABLE hl7_zpp_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPP';
 
 
 
@@ -32811,10 +35428,14 @@ CREATE EXTERNAL TABLE hl7_zpv_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPV';
 
 
 
@@ -32835,10 +35456,14 @@ CREATE EXTERNAL TABLE hl7_zrq_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZRQ';
 
 
 
@@ -32878,10 +35503,14 @@ CREATE EXTERNAL TABLE hl7_zrx_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZRX';
 
 
 
@@ -32904,10 +35533,14 @@ CREATE EXTERNAL TABLE hl7_zsc_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZSC';
 
 
 
@@ -32926,10 +35559,14 @@ CREATE EXTERNAL TABLE hl7_zsi_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZSI';
 
 
 
@@ -32957,10 +35594,14 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZST';
 
 
 
@@ -32978,10 +35619,14 @@ CREATE EXTERNAL TABLE hl7_zsu_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZSU';
 
 
 
@@ -33009,10 +35654,14 @@ CREATE EXTERNAL TABLE hl7_ztf_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZTF';
 
 
 
@@ -33160,10 +35809,14 @@ CREATE EXTERNAL TABLE hl7_ztm_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZTM';
 
 
 
@@ -33181,10 +35834,14 @@ CREATE EXTERNAL TABLE hl7_zur_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZUR';
 
 
 
@@ -33206,9 +35863,13 @@ CREATE EXTERNAL TABLE hl7_zvn_data (
 	etl_firstinsert_datetime String,
 	field_sequence_num String
 )
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
-STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZVN';
 
 

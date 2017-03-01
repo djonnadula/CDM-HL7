@@ -120,6 +120,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.stopSparkContextByDefault", "false")
     .setConf("spark.streaming.gracefulStopTimeout", "400000")
     .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
+    .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
   ENV != "PROD" match {
     case true =>
       sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
@@ -153,6 +154,7 @@ object Hl7Driver extends App with Logg {
           app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
           , CRITICAL)
         shutDown()
+        startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
     }
     if ((currMillis - watchTime) >= maxWait) {
       mail(app + " Job ID " + job.getAppId + " Current State " + job.getState,
@@ -166,6 +168,7 @@ object Hl7Driver extends App with Logg {
   }
   watchTime = currMillis
   job addListener Tracker
+  info(s"Registered Job Tracker $Tracker to Monitor $app")
   sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
     shutDown()
@@ -179,7 +182,11 @@ object Hl7Driver extends App with Logg {
   }
 
   private[job] object Tracker extends Listener {
-    override def infoChanged(handle: SparkAppHandle): Unit = checkJob(handle)
+    override def infoChanged(handle: SparkAppHandle): Unit = {
+      // Not Needed
+      //checkJob(handle)
+      info(s"$app Info Changed with State ${handle.getState}")
+    }
 
     override def stateChanged(handle: SparkAppHandle): Unit = checkJob(handle)
 
@@ -195,12 +202,12 @@ object Hl7Driver extends App with Logg {
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + "  Job Submitted Back To Resource manager ... with Job ID :: " + job.getAppId + " Monitor Whether Job is Running or Not  \n\n" + EVENT_TIME
             , WARNING)
-        case RUNNING => info(app + " Job Running ... with Job ID :: " + jobHandle.getAppId)
+        case RUNNING => info(app + " Job Running ... with Job ID :: " + jobHandle.getAppId + " from "+ this)
         case FINISHED | FAILED =>
           error(s"$app Job ${jobHandle.getState} ... with Job ID ::  ${jobHandle.getAppId}")
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId +
-              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s"Self Start is Requested. Will Make an Attempt To Start $app" else s"Self Start is not Enabled for $app . Exiting Job.") +
+              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s".Self Start is Requested. Will Make an Attempt To Start $app" else s".Self Start is not Enabled for $app . Exiting Job.") +
               " \n\n" + EVENT_TIME
             , CRITICAL)
           unregister(sHook)
@@ -221,8 +228,8 @@ object Hl7Driver extends App with Logg {
   }
 
   private def shutDown(): Unit = {
-    tryAndLogErrorMes(job stop(), error(_: String))
-    tryAndLogErrorMes(job kill(), error(_: String))
+    tryAndLogErrorMes(job stop(), error(_: Throwable))
+    tryAndLogErrorMes(job kill(), error(_: Throwable))
     Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
       case Success(x) =>
         if (x.waitFor() != 0) {
