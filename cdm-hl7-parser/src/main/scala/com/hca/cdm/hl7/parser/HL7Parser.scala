@@ -15,7 +15,7 @@ import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.hl7.validation.ValidationUtil.{hasMultiMSH => msgHasmultiMSH, isValidMsg => metRequirement}
 import com.hca.cdm.log.Logg
-import org.apache.commons.lang3.StringUtils.leftPad
+import org.apache.commons.lang3.StringUtils.{leftPad => lPad}
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.language.postfixOps
@@ -233,7 +233,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     rawSplit foreach { msgSegment =>
       i = inc(i)
       val whichSegment = msgSegment substring(0, 3)
-      val segmentIndex = s"${leftPad(s"$i$EMPTYSTR", preNumLen, ZEROStr)}$DOT$whichSegment"
+      val segmentIndex = s"${lPad(s"$i$EMPTYSTR", preNumLen, ZEROStr)}$DOT$whichSegment"
       val componentLayout = mutable.LinkedHashMap[String, Any]()
       var fields: Array[String] = null
       whichSegment == MSH match {

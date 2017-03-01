@@ -12,10 +12,6 @@
     <name>CMD-HL7-PARSER</name>
     <version>${project.version}</version>
 
-    <properties>
-        <test.properties.dir>${basedir}/..</test.properties.dir>
-    </properties>
-
     <dependencies>
 
         <dependency>
