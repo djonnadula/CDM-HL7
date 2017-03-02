@@ -1,7 +1,7 @@
 package com.hca.cdm.utils
 
 import java.lang.Thread.{currentThread => ct, sleep => sleepFor}
-
+import com.hca.cdm.exception.OperationFailedAfterMaxTriesException
 import com.hca.cdm.log.Logg
 
 /**
@@ -36,6 +36,23 @@ class RetryHandler(val defaultRetries: Int = 30, private val waitBetweenTries: L
     retry
   }
 
+  @throws[OperationFailedAfterMaxTriesException]
+  def retryOperation(op: () => Unit): Boolean = {
+    var tryCount: Int = 1
+    while (tryAgain()) {
+      try {
+        op()
+        return true
+      } catch {
+        case e: Throwable => warn(s"Operation Failed for Try Count $tryCount", e)
+          tryCount += 1
+          if (tryCount == defaultRetries) {
+            throw new OperationFailedAfterMaxTriesException(s"Operation Failed After Max Retries $tryCount for $op")
+          }
+      }
+    }
+    false
+  }
 
 }
 
