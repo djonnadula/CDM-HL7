@@ -101,13 +101,17 @@ package object cdm extends Logg {
   def inc(v: Long, step: Long = 1): Long = v + step
 
   def reload(propFile: String = propFile, stream: Option[InputStream] = None): Unit = {
-    info(s"Loading Property File :: $propFile")
-    val prop = new Properties()
-    stream match {
-      case Some(x) => prop.load(x)
-      case _ => prop.load(Source.fromFile(propFile).reader())
+    synchronized {
+      info(s"Loading Property File :: $propFile")
+      val prop = new Properties()
+      stream match {
+        case Some(x) => prop.load(x)
+        case _ => prop.load(Source.fromFile(propFile).reader())
+      }
+      this.prop = prop.asScala
+      info(s"Env on $host")
+      sys.env.map({ case (k, v) => info(s"$k :: $v") })
     }
-    this.prop = prop.asScala
   }
 
   def lookUpProp(key: String): String = {
@@ -196,25 +200,26 @@ package object cdm extends Logg {
     false
   }
 
-  def tryAndLogErrorMes(fun: => Unit, reporter: (String) => Unit): Boolean = {
+  def tryAndLogErrorMes(fun: => Unit, reporter: (Throwable) => Unit): Boolean = {
     try {
       fun
       return true
     }
     catch {
-      case t: Throwable => reporter(t.getMessage)
+      case t: Throwable => reporter(t)
     }
     false
   }
 
-  def tryAndThrow[T](fun: => T, reporter: (Throwable) => Unit): T = {
+  def tryAndThrow[T](fun: => T, reporter: (Throwable) => Unit, message: Option[String] = None): T = {
     try {
       val out = fun
       if (null != out) return out
     }
     catch {
-      case t: Throwable => reporter(t)
-        throw new CdmException(t)
+      case t: Throwable =>
+        reporter(t)
+        throw new CdmException(message.getOrElse(EMPTYSTR), t)
     }
     null.asInstanceOf[T]
   }
@@ -231,6 +236,8 @@ package object cdm extends Logg {
   }
 
   def abend(code: Int = -1): Unit = System exit code
+
+  def exists[T](store: Map[T, AnyRef], key: T): Boolean = store isDefinedAt key
 
   private class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
