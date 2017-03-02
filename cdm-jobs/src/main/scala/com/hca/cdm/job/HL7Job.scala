@@ -15,7 +15,7 @@ import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
-import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, withName => hl7}
+import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, withName => whichHL7, allKnownHL7}
 import com.hca.cdm.hl7.exception.UnknownMessageTypeException
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
@@ -76,7 +76,7 @@ object HL7Job extends Logg with App {
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private val kafkaProducerConf = producerConf(hl7JsonTopic)
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
-  private val hl7MsgMeta = messageTypes.map(mtyp => hl7(mtyp) -> getMsgTypeMeta(hl7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap
+  private val hl7MsgMeta = messageTypes.map(mtyp => whichHL7(mtyp) -> getMsgTypeMeta(whichHL7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap
   private val topicsToSubscribe = hl7MsgMeta.map(hl7Type => hl7Type._2.kafka) toSet
   private val hl7TypesMapping = hl7MsgMeta.map(hl7Type => hl7Type._1.toString -> hl7Type._1)
   private val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
@@ -110,7 +110,7 @@ object HL7Job extends Logg with App {
   private val lowFrequencyHL7 = {
     val temp = new TrieMap[HL7, Int]
     lookUpProp("hl7.messages.low.frequency").split(COMMA).foreach(x => {
-      temp += hl7(x) -> 0
+      temp += whichHL7(x) -> 0
     })
     temp
   }
@@ -129,6 +129,7 @@ object HL7Job extends Logg with App {
   }
   private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+  private var credentials: String = _
   initialise(sparkStrCtx)
   startStreams()
 
@@ -158,6 +159,13 @@ object HL7Job extends Logg with App {
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
     registerHook(sHook)
+    sparkStrCtx.sparkContext.getConf.getAll.foreach(x => info(x._1 + " :: " + x._2))
+    /* if (isSecured) {
+       val tempCrd = credentialFile(s"$appHomeDir$FS$stagingDir")
+       credentials = tempCrd.getName
+       scheduleGenCredentials(6,tempCrd, sparkConf.get("spark.yarn.principal",lookUpProp("hl7.spark.yarn.principal")),
+         sparkConf.get("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab")), haNameNodes(sparkConf))
+     }*/
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
   }
@@ -306,10 +314,11 @@ object HL7Job extends Logg with App {
     }
   }
 
-  private def shutDown() : Unit ={
-     sparkUtil shutdownEverything sparkStrCtx
-     closeResource(fileSystem)
+  private def shutDown(): Unit = {
+    sparkUtil shutdownEverything sparkStrCtx
+    closeResource(fileSystem)
   }
+
   /**
     * Close All Resources
     */
@@ -532,7 +541,7 @@ object HL7Job extends Logg with App {
         msgTypeFreq.transform({ case (k, v) =>
           lowFrequencyHL7 isDefinedAt v._1 match {
             case true =>
-              if (lowFrequencyHL7(v._1) < 6) {
+              if (lowFrequencyHL7(v._1) < 5) {
                 lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
                 v
               } else {
