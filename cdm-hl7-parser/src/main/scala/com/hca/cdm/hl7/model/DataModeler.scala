@@ -43,8 +43,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   adhoc.outFormat match {
                     case JSON =>
                       handleCommonSegments(data, layout)
-                      val temp = model.adhocLayout(layout, adhoc.outKeyNames)
-                      if (timeStampReq) temp += timeStampKey -> timeStamp
+                      val temp = model.adhocLayout(layout, adhoc.outKeyNames,adhoc.multiColumnLookUp)
+                      if (timeStampReq) temp += ((timeStampKey, timeStamp))
                       out._2 += (toJson(temp) -> null)
                     case DELIMITED =>
                       handleCommonSegments(data, layout)

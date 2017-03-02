@@ -35,7 +35,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
      / /
     /_/
       " Segments Registered with Handler :: """ + hl7Segments.models.keys.mkString(caret))
-  logIdent = s"$hl7-Model Handler"
+  logIdent = s"$hl7-Model Handler  "
   private lazy val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
 
   private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: String = EMPTYSTR, auditKey: String, headerKey: String)
