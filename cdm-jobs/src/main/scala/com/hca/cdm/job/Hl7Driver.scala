@@ -184,7 +184,7 @@ object Hl7Driver extends App with Logg {
   private[job] object Tracker extends Listener {
     override def infoChanged(handle: SparkAppHandle): Unit = {
       // Not Needed
-      //checkJob(handle)
+      // checkJob(handle)
       info(s"$app Info Changed with State ${handle.getState}")
     }
 
@@ -202,7 +202,8 @@ object Hl7Driver extends App with Logg {
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + "  Job Submitted Back To Resource manager ... with Job ID :: " + job.getAppId + " Monitor Whether Job is Running or Not  \n\n" + EVENT_TIME
             , WARNING)
-        case RUNNING => info(app + " Job Running ... with Job ID :: " + jobHandle.getAppId + " from "+ this)
+        case RUNNING =>
+          info(app + " Job Running ... with Job ID :: " + jobHandle.getAppId + " from " + this)
         case FINISHED | FAILED =>
           error(s"$app Job ${jobHandle.getState} ... with Job ID ::  ${jobHandle.getAppId}")
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,

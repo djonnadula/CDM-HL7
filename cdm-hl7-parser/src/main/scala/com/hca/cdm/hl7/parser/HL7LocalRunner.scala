@@ -23,7 +23,7 @@ object HL7LocalRunner extends App with Logg {
   configure(currThread.getContextClassLoader.getResource("local-log4j.properties"))
   reload(null,Some(currThread.getContextClassLoader.getResourceAsStream("Hl7LocalConfig.properties")))
   val msgType = hl7(args(0))
-  private val msgs = "MSH|^~\\&|MHD|HCA03|HCA03||20170206042155||ADT^A08|MHD_HCA03_ADT_20170206042155722|T|2.5\nPID|1|8X300974481|14240095||Atkinson^Neil^A||19560203|M|||1907 West Flamingo Ave NO 62^^NAMPA^ID^83651||541-279-8838^natkinson02@yahoo.com|^|\nPV1|1|0|414811WVC^West Valley Cardiology Services|\\S\\Cardiology, needs updated referral for new Selecthealth insurance Dx. I25.10, Arthrosclerotic heart disease of native coronary artery without angina pectoris|HUB^MHD HUB||1174620512^Box^Lyndon^C|||PEN|||||||||MHD000015386583|||||||||||||||||||||||||20170223083000|20170223090000"
+  private val msgs = EMPTYSTR
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => hl7(mtyp) -> getMsgTypeMeta(hl7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap
   private val templatesMapping = loadTemplate(lookUpProp("hl7.template"))

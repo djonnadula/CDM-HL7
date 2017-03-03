@@ -165,7 +165,7 @@ object HL7Job extends Logg with App {
        credentials = tempCrd.getName
        scheduleGenCredentials(6,tempCrd, sparkConf.get("spark.yarn.principal",lookUpProp("hl7.spark.yarn.principal")),
          sparkConf.get("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab")), haNameNodes(sparkConf))
-     }*/
+     } */
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
   }
@@ -545,7 +545,7 @@ object HL7Job extends Logg with App {
                 lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
                 v
               } else {
-                if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * lowFrequencyHL7(v._1)+1)
+                if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * lowFrequencyHL7(v._1) + 1)
                 lowFrequencyHL7 update(v._1, 0)
                 (v._1, 0L)
               }

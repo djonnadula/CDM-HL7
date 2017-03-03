@@ -37,14 +37,14 @@ class HiveConnector extends Logg with AutoCloseable {
 
   @throws[CdmException]
   def tables(dbName: String): Seq[String] = {
-    import converters._
+    import Converters._
     val statement = client.createStatement()
     tryAndLogErrorMes(statement.executeQuery(s"use $dbName"), debug(_: Throwable))
     tryAndThrow(statement.executeQuery("show tables").asSeq, error(_: Throwable))
   }
 
   private def resultSetMapping(resultSet: ResultSet, primaryKey: String): Map[String, Map[String, String]] = {
-    import converters._
+    import Converters._
     val meta = resultSet.getMetaData
     resultSet.lazyStream.map(rs => {
       rs.getString(primaryKey) -> Range(1, meta.getColumnCount).map(columnIndex => meta.getColumnName(columnIndex) -> rs.getString(columnIndex)).toMap
@@ -64,7 +64,7 @@ class HiveConnector extends Logg with AutoCloseable {
     else s"jdbc:hive2://${config.get("hive2.hosts", "xrdcldbdm010001.unix.medcity.net:10000")}/default;principal=${config.get("hive.server2.authentication.kerberos.principal", "hive/_HOST@HCA.CORPAD.NET")}"
   }
 
-  private[this] object converters {
+  private[this] object Converters {
 
     implicit class ResultSetStream(rs: ResultSet) {
       def lazyStream: Stream[ResultSet] = {

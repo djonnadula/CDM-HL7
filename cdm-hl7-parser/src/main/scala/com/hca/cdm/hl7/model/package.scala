@@ -59,12 +59,18 @@ package object model {
     temp
   }
 
-  lazy val MSHMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
-  lazy val PIDMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
+  lazy val MSHMappings = synchronized(
+    commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
+  lazy val PIDMappings = synchronized(
+    commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
 
-  private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id", tranTime: String = "msg_create_date_time",
-                                  mrn: String = "patient_mrn", urn: String = "patient_urn", accntNum: String = "patient_account_num",
-                                  rejectReason: String = "reject_reason", rejectData: String = "rejected_message_data", etlTime: String = "etl_firstinsert_datetime")
+  private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id",
+                                  tranTime: String = "msg_create_date_time",
+                                  mrn: String = "patient_mrn", urn: String = "patient_urn",
+                                  accntNum: String = "patient_account_num",
+                                  rejectReason: String = "reject_reason",
+                                  rejectData: String = "rejected_message_data",
+                                  etlTime: String = "etl_firstinsert_datetime")
 
   private val rejectSchemaMapping = RejectSchema()
   private val rejectSchema = {

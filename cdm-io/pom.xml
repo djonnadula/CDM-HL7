@@ -84,12 +84,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.kudu</groupId>
-            <artifactId>kudu-spark_2.10</artifactId>
-            <version>1.1.0</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
 </project>
