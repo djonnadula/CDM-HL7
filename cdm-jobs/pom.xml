@@ -5,31 +5,39 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.2</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdm-jobs</artifactId>
-    <version>1.0.0</version>
+    <version>${project.version}</version>
     <name>CDM JOBS</name>
 
     <dependencies>
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-common</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-hl7-parser</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-io</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-yarn_2.10</artifactId>
+            <version>${spark.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -56,6 +64,12 @@
                                 <exclude>META-INF/*.SF</exclude>
                                 <exclude>META-INF/*.DSA</exclude>
                                 <exclude>META-INF/*.RSA</exclude>
+                                <exclude>*.sh</exclude>
+                                <exclude>*.txt</exclude>
+                                <exclude>*.csv</exclude>
+                                <exclude>*.conf</exclude>
+                                <exclude>*.iml</exclude>
+                                <exclude>log4j.properties</exclude>
                             </excludes>
                         </filter>
                     </filters>
@@ -85,44 +99,8 @@
                 <version>2.6</version>
                 <executions>
                     <execution>
-                        <id>copy-resources01</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/resources</outputDirectory>
-                            <encoding>UTF-8</encoding>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/src/main/resources</directory>
-                                    <includes>
-                                        <include>*.properties</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-resources02</id>
+                        <id>copy-managed-deps</id>
                         <phase>verify</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/lib</outputDirectory>
-                            <encoding>UTF-8</encoding>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/lib/</directory>
-                                    <include>*.jar</include>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-resources03</id>
-                        <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -131,14 +109,13 @@
                             <encoding>UTF-8</encoding>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/resources</directory>
-                                    <includes>
-                                        <include>*.sh</include>
-                                    </includes>
+                                    <directory>${basedir}/../lib</directory>
+                                    <include>*.jar</include>
                                 </resource>
                             </resources>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
         </plugins>

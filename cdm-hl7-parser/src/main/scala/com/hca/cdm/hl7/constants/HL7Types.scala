@@ -6,7 +6,7 @@ package com.hca.cdm.hl7.constants
   * HL7 Message Types
   */
 object HL7Types extends Enumeration {
-
+  self =>
   type HL7 = Value
   val ADT = Value("ADT")
   val DFT = Value("DFT")
@@ -17,7 +17,11 @@ object HL7Types extends Enumeration {
   val RDE = Value("RDE")
   val SIU = Value("SIU")
   val VXU = Value("VXU")
+  val IPLORU = Value("IPLORU")
+  val ORM = Value("ORM")
+  val ORMORDERS = Value("ORMORDERS")
   val UNKNOWN = Value("UNKNOWN")
+  val ALL = Value("ALL")
 
-
+   def allKnownHL7 : String = self.values.mkString(":")
 }

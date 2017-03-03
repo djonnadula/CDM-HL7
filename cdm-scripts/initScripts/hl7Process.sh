@@ -23,7 +23,7 @@
 #
 
 # Process name ( For display )
-NAME='hl7Process'
+NAME='CDM-HL7-Process'
 # Daemon name, where is the actual executable
 SERVICEDIR='/hadoop/cdm/lib'
 
@@ -33,14 +33,16 @@ SERVICE='hl7process.jar'
 MINHEAP=512
 MAXHEAP=512
 JMXPORT=50000
-OPTIONS='/hadoop/cdm/cfg/CDMHL7.properties'
+CONFIG='/hadoop/cdm/cfg/CDMHL7.properties'
 INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
--cp hl7process.jar com.hca.cdm.job.Hl7Driver ${OPTIONS} \
+-cp hl7process.jar com.hca.cdm.job.Hl7Driver ${CONFIG} \
 "
 
 # pid file for the daemon
 PIDFILE=/var/log/cdm/cdm-hl7/run/$NAME.pid
 LOCKFILE=/var/log/cdm/cdm-hl7/lock/subsys/$NAME
+OUTFILE=/var/log/cdm/cdm-hl7/logs/logfile
+ERRORFILE=/var/log/cdm/cdm-hl7/logs/errorlog
 
 # Exit if the package is not installed
 if [ ! -e "$SERVICEDIR/$SERVICE" ]; then
@@ -48,45 +50,35 @@ if [ ! -e "$SERVICEDIR/$SERVICE" ]; then
   exit 1;
 fi
 
-# Generate Ticket
-TICKET="kinit -k -t /home/corpsrvcdmbtch/corpsrvcdmbtch.keytab corpsrvcdmbtch@HCA.CORPAD.NET"
-$TICKET
-VALIDTICKET=$?
-if [[ ${VALIDTICKET} > 0 ]]; then
-  echo "Generating Kerberos Ticket Failed, exiting .. $NAME"
-    exit 1;
-   	fi
-
 RETVAL=0
 
 start() {
-    if [ -a $LOCKFILE ];
+    if [ -e $LOCKFILE ];
         then
                 echo "$NAME appears to be running, or has crashed, or was not stopped properly."
                 echo "check $PIDFILE, and remove $LOCKFILE to start again."
-                return -1;
+                return 1;
     fi
     echo -n $"Starting $NAME: "
     set +e
     cd ${SERVICEDIR} && \
-    nohup $INVOCATION >>"/var/log/cdm/cdm-hl7/logs/logfile" 2>>"/var/log/cdm/cdm-hl7/logs/errorlog" &
-    pgrep -f $SERVICE > $PIDFILE
+    nohup $INVOCATION >> $OUTFILE 2>> $ERRORFILE &
+    pgrep -f $CONFIG > $PIDFILE
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && touch ${LOCKFILE}
-    return $RETVAL
 }
 
 stop() {
     echo -n $"Stopping $NAME: "
-    killproc -p ${PIDFILE} ${NAME}
+    killproc -p ${PIDFILE}${NAME}
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && rm -f ${LOCKFILE} ${PIDFILE}
 }
 
 rh_status() {
-    status -p ${PIDFILE} ${INVOCATION}
+    status -p ${PIDFILE} ${NAME}
 }
 
 # See how we were called.
@@ -97,6 +89,10 @@ case "$1" in
         ;;
     stop)
         stop
+        ;;
+    restart)
+     	 stop
+        start
         ;;
     status)
         rh_status

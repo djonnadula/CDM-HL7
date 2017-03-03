@@ -11,6 +11,8 @@ import java.time.LocalDate.now
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.model.SegmentsState._
 import com.hca.cdm.job.{HL7Job => job}
+import java.util.Date
+import com.hca.cdm._
 
 
 /**
@@ -19,7 +21,6 @@ import com.hca.cdm.job.{HL7Job => job}
   * Report Generator for Metrics for This System
   */
 class StatsReporter(private val app: String) extends Logg with Runnable {
-  private var segmentMetrics: Map[String, Long] = _
   private val builder = new StringBuilder
   private val append = builder append (_: Any)
   private val format = NumberFormat.getNumberInstance
@@ -39,19 +40,27 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
       "for this HL7 and it was Filtered.</p>")
   }
   defNotes append ("<p>" + HL7State.REJECTED + " : Hl7 Doesn't meet the Requirement to Process. So it was Rejected as per Criteria and this log can be found in Rejects Topic</p>")
+  defNotes append ("<p>" + HL7State.UNKNOWNMAPPING + " : Templates Used for Parsing HL7 don't have mapping defined. HL7 was still processed by mapping to unknown. " +
+    " To track these scenarios log was recorded in Rejects Topic detailing more on this and which mappings don't exist.</p>")
 
   override def run(): Unit = {
-    this.builder.clear()
+    val from = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(2), DATE_WITH_TIMESTAMP)
+    job.checkForStageToComplete()
     val parserMetrics = job.parserMetrics
     val segmentMetrics = job.segmentMetrics
     job.resetMetrics()
     val parserGrp = parserMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
-    val segmentsGrp = segmentMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
-    val date = dateToString(now.minusDays(1), DATE_PATTERN_YYYY_MM_DD)
-    val from = dateToString(now.minusDays(2), DATE_PATTERN_YYYY_MM_DD)
+    val processedHl7 = parserGrp.map { x => x._1 -> x._2.filter {
+      case (state, metric) => state.substring(state.indexOf(COLON) + 1) == PROCESSED.toString
+    }
+    }.map { x => x._1 -> x._2.head._2 }
+    val segmentsGrp = segmentMetrics.groupBy(x => x._1.substring(0, x._1.indexOf(COLON))).map {
+      case (hl7, segments) => hl7 -> segments.filterNot { case (segState, metric) => segState.substring(segState.lastIndexOf(COLON) + 1) == NOTAPPLICABLE.toString && metric <= processedHl7(hl7) - 100 }
+    }
+    val to = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(1), DATE_WITH_TIMESTAMP)
     append("</div></div>")
-    val parserTable = "<div style=color:#0000FF><h3>Hl7 Messages " + parserGrp.keys.mkString(";") + " Processed from Dates between " + from + " to " + date + " Stats as Follows</h3>" +
-      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;" +
+    val parserTable = "<div style=color:#0000FF><h3>Hl7 Messages " + parserGrp.keys.toSeq.sortBy(msg => msg).mkString(";") + " Processed from Dates between " + from + " to " + to + " Stats as Follows</h3>" +
+      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "<thead><tr>" +
       "<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "Message Type</th>" +
@@ -64,9 +73,9 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     tableData(parserGrp)
     append("</table> </div>")
     append("</div> </div>")
-    val segmentsTable = "<div style=color:#0000FF><h3>Segments for Hl7 Messages " + parserGrp.keys.mkString(";") + " Processed from Dates between " + from + " to " + date +
+    val segmentsTable = "<div style=color:#0000FF><h3>Segments for Hl7 Messages " + parserGrp.keys.mkString(";") + " Processed from Dates between " + from + " to " + to +
       " Stats as follows</h3>" +
-      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;" +
+      "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "<thead><tr>" +
       "<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "Message Type</th>" +
@@ -83,11 +92,12 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     append("</table>")
     append("</div> </div>")
     append("<div style=color:#0000FF><h4><mark>Notes : </mark> Definitions for States Defined </h4>" +
-      defNotes.toString())
+      defNotes.result())
     append("</div>")
     append("</div> </div>")
     append(EVENT_TIME)
-    mail(app + "  Statistics for " + date, builder.result(), WARNING, statsReport = true)
+    mail(app + "  Statistics for " + dateToString(now.minusDays(1), DATE_PATTERN_YYYY_MM_DD), builder.result(), NORMAL, statsReport = true)
+    this.builder.clear()
   }
 
   private def tableData(store: Map[String, Map[String, Long]], segments: Boolean = false) = {
@@ -113,3 +123,4 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     })
   }
 }
+
