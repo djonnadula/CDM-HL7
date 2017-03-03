@@ -14,7 +14,7 @@ import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
 import com.hca.cdm.utils.Filters.FILTER
 import scala.collection.mutable
-import scala.io.Source
+import scala.io.{BufferedSource, Source}
 import scala.language.postfixOps
 import scala.util.{Success, Try}
 
@@ -252,7 +252,7 @@ package object model {
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
-    val reader = Source.fromFile(segments).bufferedReader()
+    val reader = readFile(segments).bufferedReader
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
       valid(splits, 3) match {
@@ -279,7 +279,7 @@ package object model {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
-        Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
+        readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
           case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
         } toArray
     }
@@ -315,14 +315,14 @@ package object model {
   }
 
   def loadFile(file: String, delimitedBy: String = EQUAL, keyIndex: Int = 0): Map[String, String] = {
-    Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
+    readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
       case x@ele if ele.nonEmpty => ele(keyIndex) -> x(keyIndex + 1)
     } toMap
   }
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
-      val reader = Source.fromFile(file._2).bufferedReader()
+      val reader = readFile(file._2).bufferedReader
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
       })
@@ -370,6 +370,13 @@ package object model {
     }
     (segmentData split(delimitedBy, -1)) foreach (ele => layout += ele -> EMPTYSTR)
     layout
+  }
+
+  def readFile(file: String): BufferedSource = {
+    if(lookUpProp("hl7.env") == "QA")
+      Source.fromFile(lookUpProp("hl7.qa.config")+FS+file)
+    else
+      Source.fromFile(file)
   }
 
 }

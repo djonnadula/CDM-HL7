@@ -18,14 +18,8 @@ class HL7ParserTestSetup(msgType: HL7) {
     def loadProperties(properties: String): Unit = {
         reload(null, Some(currThread.getContextClassLoader.getResourceAsStream(properties)))
     }
-    //cdm.propFile = "Hl7TestConfig.properties"
-    //reload(null,Some(currThread.getContextClassLoader.getResourceAsStream("Hl7TestConfig.properties")))
-//    println(lookUpProp("/home/cloudera/projects/Cdm-HL7/cdm-scripts/templates/templateinfo.properties"))
-//    println(loadSegments("/home/cloudera/projects/Cdm-HL7/cdm-scripts/templates/segments.txt"))
     loadProperties("Hl7TestConfig.properties")
     val res = ""
-    val test = lookUpProp("test")
-    println("test: " + test)
     val messageTypes = lookUpProp("hl7.messages.type") split ","
     val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
     val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")), messageTypes)
@@ -33,7 +27,6 @@ class HL7ParserTestSetup(msgType: HL7) {
     val modelsForHl7 = hl7MsgMeta.map(msgType => msgType._1 -> segmentsForHl7Type(msgType._1, segmentsMapping(msgType._1.toString)))
     val registeredSegmentsForHl7 = modelsForHl7.mapValues(_.models.keySet)
     val hl7Parsers = hl7MsgMeta map (hl7 => hl7._1 -> new HL7Parser(hl7._1, templatesMapping))
-    //val jsonAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, jsonStage)(EMPTYSTR, _: MSGMeta)))
     val segmentsAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentStage)(_: String, _: MSGMeta)))
     val adhocAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, adhocStage)(_: String, _: MSGMeta)))
     val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
