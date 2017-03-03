@@ -110,7 +110,7 @@ package object cdm extends Logg {
       }
       this.prop = prop.asScala
       info(s"Env on $host")
-      sys.env.map({ case (k, v) => info(s"$k :: $v") })
+      sys.env.foreach({ case (k, v) => info(s"$k :: $v") })
     }
   }
 

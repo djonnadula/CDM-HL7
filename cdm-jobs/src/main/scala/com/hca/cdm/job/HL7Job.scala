@@ -545,7 +545,7 @@ object HL7Job extends Logg with App {
                 lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
                 v
               } else {
-                if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * lowFrequencyHL7(v._1))
+                if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * lowFrequencyHL7(v._1)+1)
                 lowFrequencyHL7 update(v._1, 0)
                 (v._1, 0L)
               }
