@@ -373,10 +373,27 @@ package object model {
   }
 
   def readFile(file: String): BufferedSource = {
-    if(lookUpProp("hl7.env") == "QA")
-      Source.fromFile(lookUpProp("hl7.qa.config")+FS+file)
-    else
+    if(lookUpProp("hl7.env") == "QA") {
+      val propertyKey = determineTemplatePath(getOS)
+      Source.fromFile(lookUpProp(propertyKey) + FS + file)
+    } else {
       Source.fromFile(file)
+    }
   }
 
+  def getOS: String = {
+    System.getProperty("os.name")
+  }
+
+  def determineTemplatePath(os: String): String = {
+    val windows = "hl7.qa.config.windows"
+    val cdhvm = "hl7.qa.config.cdhvm"
+    if (getOS.toLowerCase().contains("windows")) {
+      info("Using Windows path for templates")
+      windows
+    } else {
+      info("Using Linux path for templates.")
+      cdhvm
+    }
+  }
 }

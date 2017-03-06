@@ -57,4 +57,8 @@ package object HL7ParserTestUtils {
     def getExpected(testFileBasePath: String, messageName: String): String = {
         expected(testFilePath(testFileBasePath, "expected") + createExpectedFileName(messageName))
     }
+
+    def getOS: String = {
+        System.getProperty("os.name")
+    }
 }

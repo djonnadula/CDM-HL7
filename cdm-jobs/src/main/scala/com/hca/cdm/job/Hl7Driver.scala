@@ -228,8 +228,8 @@ object Hl7Driver extends App with Logg {
   }
 
   private def shutDown(): Unit = {
-    tryAndLogErrorMes(job stop(), error(_: Throwable))
-    tryAndLogErrorMes(job kill(), error(_: Throwable))
+    tryAndLogErrorMes(job stop(), error(_: String))
+    tryAndLogErrorMes(job kill(), error(_: String))
     Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
       case Success(x) =>
         if (x.waitFor() != 0) {

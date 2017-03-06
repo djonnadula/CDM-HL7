@@ -19,6 +19,7 @@ class HL7ParserTestSetup(msgType: HL7) {
         reload(null, Some(currThread.getContextClassLoader.getResourceAsStream(properties)))
     }
     loadProperties("Hl7TestConfig.properties")
+
     val res = ""
     val messageTypes = lookUpProp("hl7.messages.type") split ","
     val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
@@ -64,4 +65,6 @@ class HL7ParserTestSetup(msgType: HL7) {
     def adhocDestination(k: String, v: String, dest: String) = {
         info("adhocDestination: " + k)
     }
+
+
 }
