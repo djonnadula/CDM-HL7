@@ -37,12 +37,4 @@ class HL7ParserPPRTest extends FlatSpec{
         assert(res3 === expected3)
     }
 
-    val messageName4 = "PPR_4"
-    val msg4 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName4)
-    val res4 = hl7TestSetup.parse(msg4)
-    val expected4 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName4)
-    "PPR Message Test 4 (PPR_4)" should "have a match for the parsed output" in {
-        assert(res4 === expected4)
-    }
-
 }

@@ -1,0 +1,204 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCQA1A",
+    "msh_msg_control_id": "IP_COCQ1A_RAS_PHAQ1A.161215.5536",
+    "pid_medical_record_num": "J000322080",
+    "pid_medical_record_urn": "J322365",
+    "pid_pat_account_num": "J00020087798"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "COCQA1A",
+    "msh_sending_facility": "COCQA1A",
+    "msh_receiving_appl": "OV",
+    "msh_receiving_facility": "OV",
+    "msh_msg_create_date_time": "201611090950",
+    "msh_msg_type": {
+      "message_code": "RAS",
+      "trigger_event": "O17"
+    },
+    "msh_msg_control_id": "IP_COCQ1A_RAS_PHAQ1A.161215.5536",
+    "msh_processing_id": "T",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "msh_accept_acknowledgment_type": "ER",
+    "msh_appl_acknowledgment_type": "NE"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": {
+      "identifier_num": "J000322080",
+      "assgn_authr": "COCQA1A",
+      "identifier_type_code": "MRN"
+    },
+    "pid_alt_pat_id": "J322365",
+    "pid_pat_name": {
+      "last_name": "TIMBERLAKE",
+      "first_name": "CAMERON"
+    },
+    "pid_birth_date_time": "19991010",
+    "pid_sex": "M",
+    "pid_pat_account_num": "J00020087798"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "I",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "J.SHNT",
+      "room": "J.SHN",
+      "bed": "33",
+      "facility": "COCQA1A"
+    },
+    "pv1_adm_type": "VO",
+    "pv1_attending_doctor": {
+      "person_id": "DOUGLAS",
+      "last_name": "DOUGLAS",
+      "first_name": "JOHN"
+    },
+    "pv1_pat_type": "IN",
+    "pv1_account_status": "ADM"
+  },
+  "0004.ORC": {
+    "orc_order_control": "RE",
+    "orc_placer_order_num": "128421",
+    "orc_filler_order_num": "040243",
+    "orc_order_status": "AC",
+    "orc_qty_timing": {
+      "quantity": "0.5",
+      "interval": "ONCE",
+      "duration": "ONE TIME"
+    },
+    "orc_transaction_date_time": "201611090950",
+    "orc_ordering_provider": "DR.TERESA",
+    "orc_order_eff_date_time": "201611091000"
+  },
+  "0005.RXA": {
+    "rxa_give_sub_id_counter": "1",
+    "rxa_administration_sub_id_counter": "1",
+    "rxa_administration_start_date_time": "201611090947",
+    "rxa_administration_end_date_time": "201611091000",
+    "rxa_administered_code": {
+      "primary_id": "PNEU25VI2",
+      "text": "PNEUMOCOCCAL 23-VAL P-SAC VAC 0.5 ML ML",
+      "name_of_coding_sys": "L",
+      "alt_id": "00006494300",
+      "alt_text": "Pneumovax 23",
+      "name_of_alt_coding_sys": "NDC"
+    },
+    "rxa_administered_amt": "1",
+    "rxa_administered_unit": "ML",
+    "rxa_administered_dosage_form": {
+      "primary_id": "0.5",
+      "text": "1"
+    },
+    "rxa_administration_note": "101568",
+    "rxa_administering_provider": "1PDGKT7313",
+    "rxa_indication": {
+      "primary_id": "N",
+      "text": "N"
+    },
+    "rxa_completion_status": "CP",
+    "rxa_action_code": "D",
+    "rxa_pharmacy_order_type": "MED"
+  },
+  "0006.RXR": {
+    "rxr_route": {
+      "primary_id": "IM",
+      "text": "INTRAMUSC"
+    },
+    "rxr_administration_site": "LUA"
+  },
+  "0007.NTE": {
+    "nte_set_id": "1",
+    "nte_comment_source": "RC",
+    "nte_comment_type": {
+      "primary_id": "GIVEN BY LIP",
+      "text": "ADMINISTERED BY PHYSICIAN/LIP"
+    }
+  },
+  "0008.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaELG.DT",
+      "text": "VFC Elig Date:"
+    },
+    "obx_observation_value": "20161104"
+  },
+  "0009.OBX": {
+    "obx_set_id": "2",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaELG.STS",
+      "text": "VFC Elig Status:"
+    },
+    "obx_observation_value": "V03:VFC elig - Uninsured"
+  },
+  "0010.OBX": {
+    "obx_set_id": "3",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaIMM.EXP",
+      "text": "Expiration:"
+    },
+    "obx_observation_value": "20170118"
+  },
+  "0011.OBX": {
+    "obx_set_id": "4",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaIMM.LOT",
+      "text": "Lot Number:"
+    },
+    "obx_observation_value": "12345"
+  },
+  "0012.OBX": {
+    "obx_set_id": "5",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaIMM.MAN",
+      "text": "Manfacturer:"
+    },
+    "obx_observation_value": "NABI:NABI"
+  },
+  "0013.OBX": {
+    "obx_set_id": "6",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaIMM.SRS",
+      "text": "Series:"
+    },
+    "obx_observation_value": "4321"
+  },
+  "0014.OBX": {
+    "obx_set_id": "7",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaIMM.STE",
+      "text": "Admin Site:"
+    },
+    "obx_observation_value": "LA:Left Arm"
+  },
+  "0015.OBX": {
+    "obx_set_id": "8",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaVIS.GDT",
+      "text": "VIS Given Date:"
+    },
+    "obx_observation_value": "20161109"
+  },
+  "0016.OBX": {
+    "obx_set_id": "9",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "hcaVIS.PDT",
+      "text": "VIS Publication Date:"
+    },
+    "obx_observation_value": "20150424"
+  }
+}
