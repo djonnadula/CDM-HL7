@@ -4,7 +4,9 @@ import com.hca.cdm.hl7.constants.HL7Types
 import org.scalatest.FlatSpec
 
 /**
-  * Created by cloudera on 2/14/17.
+  * Created by Peter James on 2/14/2017.
+  *
+  * ADT Message Parsing Unit Tests
   */
 class HL7ParserADTTest extends FlatSpec {
 
@@ -12,7 +14,6 @@ class HL7ParserADTTest extends FlatSpec {
     val testFileBasePath = "/src/test/scala/com/hca/cdm/hl7/parser/tests"
     val hl7TestSetup = new HL7ParserTestSetup(HL7Types.ADT)
     hl7TestSetup.loadProperties("Hl7TestConfig.properties")
-
 
     val messageName1 = "ADT_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1)

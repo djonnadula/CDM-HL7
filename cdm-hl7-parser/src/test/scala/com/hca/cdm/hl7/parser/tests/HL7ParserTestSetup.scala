@@ -11,7 +11,9 @@ import com.hca.cdm.hl7.parser.HL7Parser
 import scala.util.{Success, Try}
 
 /**
-  * Created by cloudera on 2/16/17.
+  * Created by Peter James on 2/16/2017.
+  *
+  * HL7 Unit Test Setup
   */
 class HL7ParserTestSetup(msgType: HL7) {
 
@@ -19,7 +21,6 @@ class HL7ParserTestSetup(msgType: HL7) {
         reload(null, Some(currThread.getContextClassLoader.getResourceAsStream(properties)))
     }
     loadProperties("Hl7TestConfig.properties")
-
     val res = ""
     val messageTypes = lookUpProp("hl7.messages.type") split ","
     val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
@@ -33,8 +34,6 @@ class HL7ParserTestSetup(msgType: HL7) {
     val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
     val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
         allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1)))
-
-
 
     def parse(message: String): String = {
         Try(hl7Parsers(msgType).transformHL7(message, reject) rec) match {
@@ -65,6 +64,4 @@ class HL7ParserTestSetup(msgType: HL7) {
     def adhocDestination(k: String, v: String, dest: String) = {
         info("adhocDestination: " + k)
     }
-
-
 }

@@ -4,14 +4,15 @@ import com.hca.cdm.hl7.constants.HL7Types
 import org.scalatest.FlatSpec
 
 /**
-  * Created by cloudera on 3/1/17.
+  * Created by Peter James on 3/1/2017.
+  *
+  * PPR Message Parsing Unit Tests
   */
 class HL7ParserPPRTest extends FlatSpec{
 
     val testFileBasePath = "/src/test/scala/com/hca/cdm/hl7/parser/tests"
     val hl7TestSetup = new HL7ParserTestSetup(HL7Types.PPR)
     hl7TestSetup.loadProperties("Hl7TestConfig.properties")
-
 
     val messageName1 = "PPR_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1)
@@ -36,5 +37,4 @@ class HL7ParserPPRTest extends FlatSpec{
     "PPR Message Test 3 (PPR_3)" should "have a match for the parsed output" in {
         assert(res3 === expected3)
     }
-
 }
