@@ -45,29 +45,6 @@ PARTITIONED BY (
 STORED AS SEQUENCEFILE
 LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7.db/dev/landing_zone=RAW'
 
-DROP TABLE hl7.hl7_all_proc_rejected;
-
-CREATE EXTERNAL TABLE hl7.hl7_all_proc_rejected (
-	process_name String,
-	msg_control_id String,
-	msg_create_date_time String,
-	patient_mrn String,
-	patient_urn String,
-	patient_account_num String,
-	etl_firstinsert_datetime String,
-	reject_reason String,
-	rejected_message_data String,
-	rejected_message_data_extn String
-)
-PARTITIONED BY (
-	 message_type String,
-	 transaction_date String
-)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7.db/dev/landing_zone=REJECT' ;
-
 use cdm_scri;
 
 drop table nlp_patient_id_data;
@@ -157,4 +134,4 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data_hist';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-SCRIPATIDHIST-DELIMITED';
