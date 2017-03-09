@@ -35,7 +35,7 @@ CREATE EXTERNAL TABLE hl7_zct_data (
 	zct_count_two_nurse_one String,
 	zct_count_two_nurse_two String,
 	zct_count_two_comment_one String,
-	zct_count_two_comment_one String,
+	zct_count_two_comment_two String,
 	zct_count_two_correct String,
 	zct_count_three_nurse_one String,
 	zct_count_three_nurse_two String,
