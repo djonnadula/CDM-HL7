@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.3</version>
+        <version>1.0.4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdm-io</artifactId>
@@ -84,6 +84,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.kudu</groupId>
+            <artifactId>kudu-spark_2.10</artifactId>
+            <version>1.1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>

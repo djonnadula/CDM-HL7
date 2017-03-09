@@ -86,13 +86,12 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data_hist';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-SCRIPATIDHIST-DELIMITED';
 
 use hl7;
 
 drop table hl7_acc_data;
 drop table hl7_al1_data;
-drop table hl7_all_proc_rejected;
 drop table hl7_arv_data;
 drop table hl7_audit_data;
 drop table hl7_blg_data;
@@ -248,7 +247,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=AUDIT';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=AUDIT';
 
 CREATE EXTERNAL TABLE hl7.hl7_json_data(
 	json_data STRING
@@ -259,7 +258,7 @@ PARTITIONED BY (
 )
 WITH SERDEPROPERTIES ('serialization.format'='1')
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=JSON'
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=JSON'
 
 CREATE EXTERNAL TABLE hl7.hl7_raw_data (
 	msg_data STRING
@@ -269,28 +268,7 @@ PARTITIONED BY (
 	transaction_date STRING
 )
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=RAW'
-
-CREATE EXTERNAL TABLE hl7.hl7_all_proc_rejected (
-	process_name String,
-	msg_control_id String,
-	msg_create_date_time String,
-	patient_mrn String,
-	patient_urn String,
-	patient_account_num String,
-	etl_firstinsert_datetime String,
-	reject_reason String,
-	rejected_message_data String,
-	rejected_message_data_extn String
-)
-PARTITIONED BY (
-	 message_type String,
-	 transaction_date String
-)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=REJECT' ;
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=RAW'
 
 CREATE EXTERNAL TABLE hl7_abs_data (
 	msh_sending_facility String,
@@ -34387,8 +34365,8 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 	zer_current_status_event String,
 	zer_current_status_event_event_code String,
 	zer_current_status_event_event_desc String,
-	zer_nurse_id String,
-	zer_practitioner_id String,
+	zer_nurse_mnem String,
+	zer_practitioner_mnem String,
 	zer_departure_information String,
 	zer_departure_information_departure_date String,
 	zer_departure_information_disposition String,
