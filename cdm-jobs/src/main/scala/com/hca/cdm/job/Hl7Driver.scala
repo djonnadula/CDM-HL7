@@ -27,14 +27,15 @@ import org.apache.log4j.PropertyConfigurator._
 object Hl7Driver extends App with Logg {
 
   args length match {
-    case 1 => reload(args(0))
+    case 1 =>
+      configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
+      reload(args(0))
       console("******************************************************************************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
       console("**************************HCA CDM HL7 Processing System Initiated ************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
-      configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
     case _ =>
       console("******************************************************************************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")

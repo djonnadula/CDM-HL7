@@ -65,6 +65,9 @@ object HL7Job extends Logg with App {
 
 
   // ******************************************************** Job Part ***********************************************
+  private val monitorInterval = lookUpProp("hl7.monitor.interval").toInt
+  private val iscAlertInterval = lookUpProp("hl7.alert.isc.interval").toInt
+  private val iscMonitoringEnabled = iscAlertInterval > 0
   private var sHook: Thread = _
   private val app = lookUpProp("hl7.app")
   private val consumerGroup = lookUpProp("hl7.group")
@@ -150,7 +153,7 @@ object HL7Job extends Logg with App {
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, 10), 610, 600, TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), 10, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
@@ -345,6 +348,10 @@ object HL7Job extends Logg with App {
   private def checkSize(threshold: Int)(data: AnyRef, parser: HL7Parser) = if (!IOCanHandle(data, threshold)) parser.overSizeMsgFound()
 
 
+  private def minToSec(min: Int): Long = {
+    min * 60L
+  }
+
   /**
     * Creates Accumulator for HL7 Segments Tasks
     */
@@ -534,6 +541,12 @@ object HL7Job extends Logg with App {
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
     val timeCheck = timeInterval * 60000L
+    val lowFrequencyHl7AlertInterval = 5
+    val iscMsgAlertFreq = {
+      val temp = new TrieMap[HL7, Int]()
+      hl7MsgMeta.foreach(hl7 => temp += hl7._1 -> 0)
+      temp
+    }
 
     override def run(): Unit = {
       checkForStageToComplete()
@@ -541,16 +554,21 @@ object HL7Job extends Logg with App {
         msgTypeFreq.transform({ case (k, v) =>
           lowFrequencyHL7 isDefinedAt v._1 match {
             case true =>
-              if (lowFrequencyHL7(v._1) < 5) {
+              if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
                 lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
                 v
               } else {
-                if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * lowFrequencyHL7(v._1) + 1)
+                if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+                else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
                 lowFrequencyHL7 update(v._1, 0)
                 (v._1, 0L)
               }
             case _ =>
-              if (v._2 <= 0) noDataAlert(v._1, k)
+              if (v._2 <= 0) {
+                if (iscMonitoringEnabled) {
+                  IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
+                } else noDataAlert(v._1, k)
+              }
               (v._1, 0L)
           }
         })
@@ -565,11 +583,32 @@ object HL7Job extends Logg with App {
       }
     }
 
+    private def IscAlertCheck(hl7: HL7, source: String, howLong: Int): Unit = {
+      if (iscMsgAlertFreq(hl7) < iscAlertInterval) {
+        iscMsgAlertFreq update(hl7, iscMsgAlertFreq(hl7) + 1)
+        noDataAlert(hl7, source)
+      }
+      else {
+        noDataAlertForISC(hl7, source, howLong)
+        iscMsgAlertFreq update(hl7, 0)
+      }
+    }
+
     private def noDataAlert(hl7: HL7, whichSource: String, howLong: Int = timeInterval): Unit = {
-      mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for Stream " + hl7,
+      mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for HL7 Stream " + hl7,
         app + " Job has not Received any Data in last " + howLong + " minutes. Some one has to Check Immediately What is happening with Receiver Job for HL7 Message Type "
           + hl7 + ".\nSource for this Stream " + whichSource + "\n\n" + EVENT_TIME
         , CRITICAL)
+    }
+
+    private def noDataAlertForISC(hl7: HL7, whichSource: String, howLong: Int = timeInterval): Unit = {
+      mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for HL7 Stream " + hl7,
+        "Production Control,\n\n   " +
+          app + " Job has not Received any Data in last " + howLong + " minutes. Please contact On Call person from CDM-BD Group and " +
+          "notify about this Event to Check Immediately what is happening with Receiver Job for HL7 Message Type " + hl7 + ".\n Source for this Stream " + whichSource +
+          "\n\n   Thanks,\n   CDM-BD Team  " +
+          "\n\n" + EVENT_TIME
+        , CRITICAL, statsReport = false, lookUpProp("monitoring.notify.group").split(COMMA))
     }
   }
 
