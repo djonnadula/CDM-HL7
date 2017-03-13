@@ -1,7 +1,7 @@
 use cdm_scri;
 
 DROP TABLE nlp_patient_id_data;
-DROP TABLE nlp_patient_id_data_hist;
+DROP TABLE scri_patient_id_history;
 
 CREATE EXTERNAL TABLE nlp_patient_id_data (
 	msh_msg_control_id STRING,

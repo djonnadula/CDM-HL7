@@ -97,9 +97,9 @@ FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-CDI-DELIMITED';
 
-drop table nlp_patient_id_data_hist;
+drop table scri_patient_id_history;
 
-CREATE EXTERNAL TABLE cdm_scri.nlp_patient_id_data_hist (
+CREATE EXTERNAL TABLE scri_patient_id_history (
 	msh_msg_control_id STRING,
 	msh_sending_facility STRING,
 	txa_origination_date_time STRING,
