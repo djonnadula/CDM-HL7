@@ -1,6 +1,6 @@
 USE hl7;
 
-DROP TABLE hl7.hl7_audit_data;
+ALTER TABLE hl7.hl7_audit_data RENAME TO hl7.hl7_audit_data_old;
 
 CREATE EXTERNAL TABLE hl7.hl7_audit_data (
 	process_name STRING,
@@ -20,7 +20,7 @@ FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7.db/dev/landing_zone=AUDIT';
 
-DROP TABLE hl7.hl7_json_data;
+ALTER TABLE hl7.hl7_json_data RENAME TO hl7.hl7_json_data_old;
 
 CREATE EXTERNAL TABLE hl7.hl7_json_data(
 	json_data STRING
@@ -33,7 +33,7 @@ WITH SERDEPROPERTIES ('serialization.format'='1')
 STORED AS SEQUENCEFILE
 LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7.db/dev/landing_zone=JSON'
 
-DROP TABLE hl7.hl7_raw_data;
+ALTER TABLE hl7.hl7_raw_data RENAME TO hl7.hl7_raw_data_old;
 
 CREATE EXTERNAL TABLE hl7.hl7_raw_data (
 	msg_data STRING
@@ -47,7 +47,7 @@ LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7.db/dev/landing_zone=RAW'
 
 use cdm_scri;
 
-drop table nlp_patient_id_data;
+ALTER TABLE hl7.nlp_patient_id_data RENAME TO hl7.nlp_patient_id_data_old;
 
 CREATE EXTERNAL TABLE nlp_patient_id_data (
 	msh_msg_control_id STRING,
@@ -97,7 +97,7 @@ FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-CDI-DELIMITED';
 
-drop table scri_patient_id_history;
+ALTER TABLE hl7.scri_patient_id_history RENAME TO hl7.scri_patient_id_history_old;
 
 CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history (
 	msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',

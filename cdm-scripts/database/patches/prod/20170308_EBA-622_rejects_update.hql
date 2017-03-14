@@ -1,6 +1,6 @@
 use hl7;
 
-DROP TABLE hl7_all_proc_rejected;
+ALTER TABLE hl7.hl7_all_proc_rejected RENAME TO hl7.hl7_all_proc_rejected_old;
 
 CREATE EXTERNAL TABLE `hl7_all_proc_rejected`(
   `process_name` string,

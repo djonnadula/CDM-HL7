@@ -1,7 +1,7 @@
 use cdm_scri;
 
-DROP TABLE nlp_patient_id_data;
-DROP TABLE scri_patient_id_history;
+ALTER TABLE hl7.nlp_patient_id_data RENAME TO hl7.nlp_patient_id_data_old;
+ALTER TABLE hl7.scri_patient_id_history RENAME TO hl7.scri_patient_id_history_old;
 
 CREATE EXTERNAL TABLE nlp_patient_id_data (
 	msh_msg_control_id STRING,
@@ -101,10 +101,12 @@ LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-SC
 
 use hl7;
 
+ALTER TABLE hl7.hl7_audit_data RENAME TO hl7.hl7_audit_data_old;
+ALTER TABLE hl7.hl7_json_data RENAME TO hl7.hl7_json_data_old;
+
 drop table hl7_acc_data;
 drop table hl7_al1_data;
 drop table hl7_arv_data;
-drop table hl7_audit_data;
 drop table hl7_blg_data;
 drop table hl7_cdo_data;
 drop table hl7_con_data;
@@ -119,7 +121,6 @@ drop table hl7_iam_data;
 drop table hl7_in1_data;
 drop table hl7_in2_data;
 drop table hl7_in3_data;
-drop table hl7_json_data;
 drop table hl7_mrg_data;
 drop table hl7_msh_data;
 drop table hl7_nk1_data;
