@@ -5,20 +5,25 @@ import java.lang.Runtime.{getRuntime => rt}
 import java.lang.Thread.UncaughtExceptionHandler
 import java.net.InetAddress
 import java.nio.charset.StandardCharsets
-import java.time.{LocalDate, Period}
-import java.util.Properties
+import java.time.{LocalDate, Period, ZoneId}
+import java.util.{Properties, TimeZone}
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.{ScheduledExecutorService, ThreadFactory, ThreadPoolExecutor}
 import java.util.concurrent.Executors._
-import com.hca.cdm.notification.{sendMail => mail, EVENT_TIME}
+import Thread._
+import System._
+import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.log.Logg
 import com.hca.cdm.notification.TaskState._
 import org.apache.commons.lang.SerializationException
 import org.apache.commons.lang3.SerializationUtils.{deserialize => des, serialize => ser}
+import TimeZone._
+import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
+import scala.util.Random
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -30,24 +35,35 @@ package object cdm extends Logg {
   lazy val UTF8 = StandardCharsets.UTF_8
   lazy val ASCII = StandardCharsets.US_ASCII
   private var prop: scala.collection.mutable.Map[String, String] = _
-  lazy val propFile = "CDMHL7.properties"
+  var propFile = "CDMHL7.properties"
   lazy val EMPTYSTR = ""
+  lazy val AMPERSAND = "&"
   lazy val emptyArray = Array.empty[Any]
   lazy val FS = File separator
   lazy val outStream = System out
+  private lazy val random = new Random()
+
+
+  def randomString: String = randomUUID.toString
+
+  def sys_timeZone: TimeZone = getTimeZone(ZoneId.systemDefault())
+
+  def sys_ZoneId: ZoneId = sys_timeZone.toZoneId
 
   def defaultSleep(): Unit = sleep(8000)
 
   def host: String = InetAddress.getLocalHost.getHostName
 
-  def currMillis: Long = System.currentTimeMillis
+  def currMillis: Long = currentTimeMillis
 
-  def currThread: Thread = Thread.currentThread()
+  def currNanos: Long = nanoTime
+
+  def currThread: Thread = currentThread()
 
   def sleep(howLong: Long): Unit = {
     try Thread.sleep(howLong)
     catch {
-      case in: InterruptedException => error("Sleep Interrupted :: " + in.getMessage)
+      case in: InterruptedException => error(currThread.getName + " Sleep Interrupted :: " + in.getMessage, in)
     }
   }
 
@@ -85,20 +101,23 @@ package object cdm extends Logg {
   def inc(v: Long, step: Long = 1): Long = v + step
 
   def reload(propFile: String = propFile, stream: Option[InputStream] = None): Unit = {
-    val prop = new Properties()
-    stream match {
-      case Some(x) => prop.load(x)
-      case _ => prop.load(Source.fromFile(propFile).reader())
+    synchronized {
+      info(s"Loading Property File :: $propFile")
+      val prop = new Properties()
+      stream match {
+        case Some(x) => prop.load(x)
+        case _ => prop.load(Source.fromFile(propFile).reader())
+      }
+      this.prop = prop.asScala
+      info(s"Env on $host")
+      sys.env.foreach({ case (k, v) => info(s"$k :: $v") })
     }
-    this.prop = prop.asScala
   }
 
   def lookUpProp(key: String): String = {
     if (prop == null) reload()
-    prop.getOrElse(key, EMPTYSTR) match {
-      case EMPTYSTR => throw new CdmException("No property Found for " + key + "  specify property correctly")
-      case x => x
-    }
+    if (!prop.isDefinedAt(key)) throw new CdmException("No property Found for " + key + "  specify property correctly")
+    prop getOrElse(key, EMPTYSTR)
   }
 
   def printConfig(): Unit = {
@@ -116,17 +135,28 @@ package object cdm extends Logg {
   def serialize(data: Serializable): Array[Byte] = ser(data)
 
   @throws[SerializationException]
-  def deSerialize(data: Array[Byte]): Object = des(data)
+  def deSerialize(data: AnyRef): Object = {
+    data match {
+      case x: Array[Byte] => des(x)
+      case x: InputStream => des(x)
+    }
+  }
 
   def registerHook(hook: Thread): Unit = rt addShutdownHook hook
 
 
-  def unregister(hook: Thread): Unit = {
-    try rt removeShutdownHook hook
-    catch {
-      case ist: IllegalStateException =>
+  def unregister(hook: Thread): Boolean = {
+    try {
+      rt removeShutdownHook hook
+      return true
     }
+    catch {
+      case ist: Throwable => error(s"Cannot Remove Shutdown hook :: ${hook.getName}", ist)
+    }
+    false
   }
+
+  def runTime: Runtime = rt
 
   def runnable(action: => Unit): Runnable =
     new Runnable {
@@ -138,7 +168,7 @@ package object cdm extends Logg {
     thread.setDaemon(daemon)
     thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler {
       override def uncaughtException(t: Thread, e: Throwable): Unit =
-        error("Unexpected exception in thread '" + t.getName, e)
+        error(s"Unexpected exception in thread ' ${t.getName}", e)
     })
     thread
   }
@@ -170,18 +200,44 @@ package object cdm extends Logg {
     false
   }
 
-  def tryAndLogErrorMes(fun: => Unit, reporter: (String) => Unit): Boolean = {
+  def tryAndLogErrorMes(fun: => Unit, reporter: (Throwable) => Unit): Boolean = {
     try {
       fun
       return true
     }
     catch {
-      case t: Throwable => reporter(t.getMessage)
+      case t: Throwable => reporter(t)
     }
     false
   }
 
+  def tryAndThrow[T](fun: => T, reporter: (Throwable) => Unit, message: Option[String] = None): T = {
+    try {
+      val out = fun
+      if (null != out) return out
+    }
+    catch {
+      case t: Throwable =>
+        reporter(t)
+        throw new CdmException(message.getOrElse(EMPTYSTR), t)
+    }
+    null.asInstanceOf[T]
+  }
+
+  def tryAndLogErrorMes[T](fun: () => T, reporter: (String, Throwable) => Unit): Option[T] = {
+    try {
+      val out = fun()
+      if (null != out) return Some(out)
+    }
+    catch {
+      case t: Throwable => reporter(s"Cannot Execute Function ${t.getMessage}", t)
+    }
+    None
+  }
+
   def abend(code: Int = -1): Unit = System exit code
+
+  def exists[T](store: Map[T, AnyRef], key: T): Boolean = store isDefinedAt key
 
   private class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)

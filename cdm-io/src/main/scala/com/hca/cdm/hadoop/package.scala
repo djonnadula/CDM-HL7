@@ -1,11 +1,11 @@
 package com.hca.cdm
 
-import java.io.{BufferedOutputStream, OutputStream}
+import java.io._
 import java.net.URI
 import com.hca.cdm.log.Logg
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
-import scala.util.{Success, Try}
+import scala.util.{Failure, Success, Try}
 import scala.util.control.Breaks._
 
 /**
@@ -24,28 +24,16 @@ package object hadoop extends Logg {
   def overSizedHandle(stage: String, config: Configuration, destination: String, data: AnyRef): Unit = {
     try {
       val fs = FileSystem get config
-      val files = Try(fs.listFiles(new Path(new URI(destination)), false)) match {
-        case Success(x) => x
-        case _ => null
-      }
-      var fileToAppend: Path = null
-      if (files != null) breakable {
-        Try(while (files.hasNext) {
-          if (files.next().isFile) {
-            fileToAppend = files.next().getPath
-            break
-          }
-        })
-      }
+      var fileToAppend: Path = getFile(fs, destination, config)
       var writer: OutputStream = null
       if (fileToAppend == null) {
-        fileToAppend = getFile(destination, stage)
+        fileToAppend = creteFileAtPath(destination, stage)
       }
       if (config.getBoolean("hdfs.append.support", false)) {
         writer = new BufferedOutputStream(fs append fileToAppend)
       }
       else {
-        if (fs exists fileToAppend) fileToAppend = getFile(destination, stage)
+        if (fs exists fileToAppend) fileToAppend = creteFileAtPath(destination, stage)
         writer = new BufferedOutputStream(fs create(fileToAppend, false))
       }
       data match {
@@ -53,17 +41,78 @@ package object hadoop extends Logg {
         case x: String => writer write (x getBytes UTF8)
         case _ => writer write (data.toString getBytes UTF8)
       }
+      if (writer != null) {
+        writer flush()
+        writer close()
+      }
+    }
+    catch {
+      case t: Throwable => error(s"Unable to Write Oversize Data to HDFS :: $data At Path :: ${destination.toString}", t)
+    }
+  }
+
+
+  private def creteFileAtPath(destination: String, stage: String): Path = new Path(s"$destination$FS$stage-$currNanos")
+
+
+  def readObject[T](path: String, config: Configuration, cleanUp: Boolean = true): Option[T] = {
+    val fs = FileSystem get config
+    val temp = new Path(new URI(path))
+    info(s"Reading Data from Path $temp")
+    fs.exists(temp) match {
+      case true =>
+        def fun(): T = {
+          var data = null.asInstanceOf[T]
+          val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime)
+          if (status.nonEmpty) {
+            val reader = new BufferedInputStream(fs.open(status.head.getPath))
+            data = deSerialize(reader).asInstanceOf[T]
+            reader close()
+            if (cleanUp) fs.listStatus(temp).filter(_.isFile).foreach(file => fs.delete(file.getPath, false))
+          }
+          data
+        }
+        tryAndLogErrorMes[T](fun, warn(_: String, _: Throwable))
+      case _ => None
+    }
+  }
+
+  def writeObject[T <: Serializable](data: T, name: String, path: String, config: Configuration): Unit = {
+    if (valid(data)) {
+      val fs = FileSystem get config
+      val fileToWrite = getFile(fs, path, config) match {
+        case null => creteFileAtPath(path, name)
+        case x => x
+      }
+      info(s"Writing to File $fileToWrite")
+      val writer = new BufferedOutputStream(fs create(fileToWrite, true))
+      Try(writer write serialize(data)) match {
+        case Success(x) =>
+        case Failure(t) => error(s"Cannot Write Data $data to HDFS at Path :: $path", t)
+      }
       writer flush()
       writer close()
     }
-    catch {
-      case t: Throwable => error("Unable to Write Oversize Data to HDFS :: " + data + " At Path :: " + destination.toString, t)
+  }
+
+  private def getFile(fs: FileSystem, path: String, config: Configuration): Path = {
+    val files = Try(fs.listFiles(new Path(new URI(path)), false)) match {
+      case Success(x) => x
+      case _ => null
     }
+    var fileToAppend: Path = null
+    if (files != null) breakable {
+      Try(while (files.hasNext) {
+        if (files.next().isFile) {
+          fileToAppend = files.next().getPath
+          break
+        }
+      })
+    }
+    fileToAppend
   }
 
-
-  private def getFile(destination: String, stage: String): Path = {
-    new Path(destination + FS + stage + "-" + System.nanoTime())
+  private def deleteFiles(fs: FileSystem, path: Path): Unit = {
+    if (fs isDirectory path) fs delete(path, true)
   }
-
 }

@@ -1,55 +1,51 @@
 package com.hca.cdm.spark
 
 import kafka.serializer.StringDecoder
-import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
-import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
 import org.apache.spark.{SparkConf, SparkContext}
 import com.hca.cdm._
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+import java.lang.Class.{forName => className}
+import scala.language.postfixOps
+import scala.util.{Failure, Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
 object Hl7SparkUtil {
 
+  private lazy val hookManager: Class[_] = {
+    Try(className("org.apache.spark.util.ShutdownHookManager")) match {
+      case Success(manager) =>
+        manager
+      case Failure(t) => null
+    }
+  }
+
   /**
     * Creates Spark Configuration from Config File Provided
     */
-  def getConf(app: String, parHint: String): SparkConf = {
+  def getConf(app: String, parHint: String, kafkaConsumer: Boolean = true): SparkConf = {
+    val conf = new SparkConf()
     val rate = lookUpProp("hl7.batch.rate").toInt
-    new SparkConf()
-      .setAppName(app)
-      .set("spark.default.parallelism", parHint)
-      .setMaster(lookUpProp("hl7.spark.master"))
-      .set(EXECUTOR_MEMORY, lookUpProp("hl7.spark.executor-memory"))
-      .set(EXECUTOR_CORES, parHint)
-      .set("spark.driver-memory", lookUpProp("hl7.spark.driver-memory"))
-      .set("spark.dynamicAllocation.initialExecutors", lookUpProp("hl7.spark.num-executors"))
-      .set("spark.yarn.queue", lookUpProp("hl7.spark.queue"))
-      .set("spark.dynamicAllocation.enabled", lookUpProp("hl7.spark.dynamicAllocation.enabled"))
-      .set("spark.dynamicAllocation.maxExecutors", lookUpProp("hl7.spark.dynamicAllocation.maxExecutors"))
-      .set("spark.dynamicAllocation.minExecutors", lookUpProp("hl7.spark.dynamicAllocation.minExecutors"))
-      .set("spark.driver.maxResultSize", lookUpProp("hl7.spark.driver.maxResultSize"))
-      .set("spark.streaming.receiver.writeAheadLog.enable", "true")
-      .set("spark.streaming.stopGracefullyOnShutdown", "true")
-      .set("spark.streaming.unpersist", "true")
-      .set("spark.streaming.kafka.maxRetries", lookUpProp("h7.spark.kafka.retries"))
+    conf
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
       .set("spark.streaming.backpressure.pid.derived", "0.1")
-      .set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+    if (kafkaConsumer) conf.set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+    conf
   }
 
 
-  def createStreamingContext(batchCycle: Int, conf: SparkConf): StreamingContext = new StreamingContext(conf, Seconds(batchCycle))
+  def createStreamingContext(conf: SparkConf, timeUnit: Duration): StreamingContext = new StreamingContext(conf, timeUnit)
 
   /**
     * Creates Spark Streaming Context
     */
-  def streamingContext(checkpointPath: String, batchCycle: Int, conf: SparkConf, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
+  def streamingContext(checkpointPath: String, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
     val ctx = create(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
     ctx checkpoint checkpointPath
     ctx
@@ -69,10 +65,48 @@ object Hl7SparkUtil {
 
 
   /**
-    * Shutdowns Spark context and Streaming Context Gracefully allowing already Executing taks to be Completed
+    * Shutdowns Streaming Context Gracefully allowing already Executing tasks to be Completed
     */
-  def shutdown(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
+  def shutdownStreaming(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = false, stopGracefully = true)
 
 
+  /**
+    * Shutdowns Spark Context Gracefully allowing already Executing tasks to be Completed
+    */
+  def shutdownContext(sparkCtx: SparkContext): Unit = if (sparkCtx != null) sparkCtx stop
+
+  /**
+    * Shutdowns Spark context and Streaming Context Gracefully allowing already Executing tasks to be Completed
+    */
+  def shutdownEverything(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
+
+
+  def batchCycle(timeUnit: String, cycle: Int): Duration = {
+    timeUnit match {
+      case "seconds" => Seconds(cycle)
+      case "ms" => Milliseconds(cycle)
+      case "minutes" => Minutes(cycle)
+      case _ => Seconds(cycle)
+    }
+  }
+
+  def addHook(fun: () => Unit, runPriority: Int = 100): Unit = {
+    synchronized {
+      if (hookManager != null) {
+        val addShutdownHook = hookManager.getMethod("addShutdownHook", classOf[Int], classOf[() => Unit])
+        addShutdownHook.invoke(hookManager, Int.box(runPriority), hookRunner(fun))
+      }
+      else registerHook(newThread(s"$fun", runnable(fun())))
+    }
+  }
+
+  private def hookRunner(hook: () => Unit): Object = {
+    new (() => Object) {
+      override def apply(): Object = {
+        hook()
+        EMPTYSTR
+      }
+    }
+  }
 }
 

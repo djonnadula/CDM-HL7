@@ -26,7 +26,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   def applyModel(whichSeg: String, model: Model)(data: mapType): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
-    if (modelFilter.isEmpty | !isRequiredType(data, reqMsgType)) return notValid
+    if (modelFilter.isEmpty | (reqMsgType != IPLORU & reqMsgType != ORMORDERS & !isRequiredType(data, reqMsgType))) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
@@ -39,12 +39,12 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 if (out._1) {
                   // Case to Strip Out Fields which require Only One Occurrence
                   adhoc.reqNoAppends.foreach(field =>
-                    if (layout.isDefinedAt(field) && layout(field).contains(repeat)) layout update(field, layout(field).substring(0, layout(field).indexOf(repeat))))
+                    if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).substring(0, layout(field).indexOf(caret))))
                   adhoc.outFormat match {
                     case JSON =>
                       handleCommonSegments(data, layout)
-                      val temp = model.adhocLayout(layout, adhoc.outKeyNames)
-                      if (timeStampReq) temp += timeStampKey -> timeStamp
+                      val temp = model.adhocLayout(layout, adhoc.outKeyNames,adhoc.multiColumnLookUp)
+                      if (timeStampReq) temp += ((timeStampKey, timeStamp))
                       out._2 += (toJson(temp) -> null)
                     case DELIMITED =>
                       handleCommonSegments(data, layout)
@@ -76,8 +76,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                     modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true) match {
                       case true =>
                         handleCommonSegments(data, layout)
-                        layout += segmentSequence -> s"${node._1.substring(0,node._1.indexOf(DOT)).toInt}$EMPTYSTR"
-                        (makeFinal(layout), null)
+                        val out = s"${makeFinal(layout)}$PIPE_DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
+                        (out, null)
                       case _ => (skippedStr, null)
                     }
                   case _ => (EMPTYSTR, null)
@@ -157,7 +157,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   }
 
   private def includeEle(underlying: mutable.LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR): Unit = {
-    if (req == EMPTYSTR & repeat == EMPTYSTR) return
+    if (req == EMPTYSTR && repeat == EMPTYSTR) return
     underlying get key match {
       case Some(x) => x match {
         case EMPTYSTR => underlying update(key, req)
@@ -187,7 +187,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
         case true => node._2 match {
           case str: String => if (underlying isDefinedAt node._1) {
             if (!appendSegment) dataHandler(node._1, str, EMPTYSTR)
-            else dataHandler(node._1, str, repeat)
+            else dataHandler(node._1, str, caret)
             dataExist = true
           }
           case map: mapType =>
@@ -211,12 +211,12 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
           case str: String =>
             if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
               if (!appendSegment) dataHandler(node + model.modelFieldDelim + k, str, EMPTYSTR)
-              else dataHandler(node + model.modelFieldDelim + k, str, repeat)
+              else dataHandler(node + model.modelFieldDelim + k, str, caret)
               dataExist = true
             }
             else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
               if (!appendSegment) dataHandler(node, str, EMPTYSTR)
-              else dataHandler(node, str, repeat)
+              else dataHandler(node, str, caret)
               dataExist = true
             }
           case listType: listType => handleList(listType, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
@@ -233,11 +233,11 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
       v match {
         case str: String =>
           if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
-            dataHandler(node + model.modelFieldDelim + k, str, repeat)
+            dataHandler(node + model.modelFieldDelim + k, str, caret)
             dataExist = true
           }
           else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
-            dataHandler(node, str, repeat)
+            dataHandler(node, str, caret)
             dataExist = true
           }
         case list: listType => handleList(list, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)

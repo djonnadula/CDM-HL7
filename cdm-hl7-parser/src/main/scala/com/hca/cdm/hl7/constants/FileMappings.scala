@@ -15,5 +15,4 @@ object FileMappings {
   lazy val hl7IpeopleMap = "hl7IpeopleMap"
   lazy val hl7NextGenMap = "hl7NextGenMap"
   lazy val hl7MapAlignXWalk = "hl7MapAlignXWalk"
-  lazy val hl7FinalMap = "hl7FinalMap"
 }

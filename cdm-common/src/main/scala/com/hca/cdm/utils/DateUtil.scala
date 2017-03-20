@@ -2,12 +2,11 @@ package com.hca.cdm.utils
 
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, LocalTime, YearMonth}
+import java.time.{LocalDate, LocalDateTime, LocalTime, YearMonth}
 import java.util.Date
-import java.time.LocalDate.now
+import com.hca.cdm.sys_timeZone
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateConstants._
-
 import scala.collection.mutable
 
 /**
@@ -18,7 +17,11 @@ import scala.collection.mutable
 object DateUtil extends Logg {
 
 
-  private lazy val formatter = new SimpleDateFormat(HL7_DEFAULT)
+  private lazy val formatter = {
+    val temp = new SimpleDateFormat(HL7_DEFAULT)
+    temp setTimeZone sys_timeZone
+    temp
+  }
   private lazy val FORMATTERS = new mutable.HashMap[String, DateTimeFormatter]
 
   def currentTimeStamp: String = formatter.format(new Date())
@@ -38,6 +41,13 @@ object DateUtil extends Logg {
     }
     null
   }
+  def dateToString(d: LocalDateTime, format: String): String = {
+    try return d.format(getFormatter(format))
+    catch {
+      case e: Throwable => error("Error during date format conversion", e)
+    }
+    null
+  }
 
 
   def dateFromString(date: String, pattern: String): LocalDate = LocalDate.parse(date, getFormatter(pattern))
@@ -51,6 +61,7 @@ object DateUtil extends Logg {
       formatter = DateTimeFormatter.ofPattern(pattern)
       FORMATTERS += pattern -> formatter
     }
+    formatter withZone sys_timeZone.toZoneId
     formatter
   }
 

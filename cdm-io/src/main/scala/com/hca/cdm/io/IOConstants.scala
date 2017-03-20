@@ -14,15 +14,15 @@ object IOConstants {
 
 
   private val random = new Random
-  val zkHosts: String = lookUpProp("hl7.zkHosts")
-  val kafkaHosts: String = lookUpProp("hl7.kafka.brokers")
+  lazy val zkHosts: String = lookUpProp("hl7.zkHosts")
+  lazy val kafkaHosts: String = lookUpProp("hl7.kafka.brokers")
   val DEFAULT_RETRIES: Int = 30
   val defaultSegmentPartitions: Int = 6
   val defaultHL7Partitions: Int = 6
   val zkSessionTimeout: Int = 6000
   val zkConnectionTimeout: Int = 10000
   val defaultReplication: Int = 2
-  val producerBatch: String = "10000"
+  val producerBatch: String = "25000"
   val producerAck: String = "all"
   val defaultDeSerializer: String = "org.apache.kafka.common.serialization.ByteArrayDeserializer"
   val defaultSerializer: String = "org.apache.kafka.common.serialization.ByteArraySerializer"
@@ -30,13 +30,13 @@ object IOConstants {
   val defaultCompression: String = "none"
   val lz4Compression: String = "lz4"
   val defaultProducerLinger: String = "200"
-  val blockOnbufferFull = Int.MaxValue.toString
+  val blockOnbufferFull = "60000"
   val metadataFetchTimeout: String = "3000"
   val defaultSendRetries: Int = 10
   val defaultHeartBeat: String = "20000"
   val defaultRequestTimeOut: String = "40000"
   val defaultHeartBeatTimeOut: String = "20000"
-  val producerBufferMemory: String = (65 * 1024 * 1024).toString
+  val producerBufferMemory: String = (85 * 1024 * 1024).toString
   val sendBuffer: String = "1048576"
   val receiveBuffer: String = "1048576"
   val checkCRS: String = "false"
@@ -46,7 +46,7 @@ object IOConstants {
   val defaultProducerRetries: String = "30"
   val defaultConsumerSessionTimeOut = "30000"
   val defaultConsumerAutoCommit = "false"
-  val defaultOffsetReset = lookUpProp("hl7.topicReset")
+  lazy val defaultOffsetReset = lookUpProp("hl7.topicReset")
   val fetchBytes: String = (5 * 1024 * 1024).toString
   val fetchMinBytes: String = "100"
   val fetchMinWait: String = "3000"

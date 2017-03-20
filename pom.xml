@@ -7,7 +7,7 @@
     <groupId>com.hca</groupId>
     <artifactId>cdm-hl7</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
     <name>CDM HL7</name>
     <modules>
         <module>cdm-common</module>
@@ -16,7 +16,6 @@
         <module>cdm-scripts</module>
         <module>cdm-jobs</module>
     </modules>
-
 
     <repositories>
         <repository>
@@ -38,9 +37,8 @@
         </repository>
     </repositories>
 
-
     <properties>
-        <project.version>1.0.3-SNAPSHOT</project.version>
+        <cdm.version>1.0.3</cdm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -57,34 +55,40 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
             <version>${scala.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.binary.version}</artifactId>
             <version>2.2.2</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>2.6.0-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
             <version>1.5.6</version>
         </dependency>
+
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
@@ -95,21 +99,38 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.10</artifactId>
             <version>${spark.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming_2.10</artifactId>
             <version>${spark.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming-kafka_2.10</artifactId>
+            <version>${spark.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.10</artifactId>
+            <version>${spark.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.10</artifactId>
             <version>${spark.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -175,7 +196,6 @@
                     <jvmArgs>
                         <jvmArg>-Xms1024m</jvmArg>
                         <jvmArg>-Xmx1024m</jvmArg>
-
                     </jvmArgs>
                     <javacArgs>
                         <javacArg>-source</javacArg>
