@@ -14,6 +14,7 @@ import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import java.lang.System.{getenv => fromEnv}
+import java.util.concurrent.TimeoutException
 
 
 case class MqData(source: String, data: String, msgMeta: MSGMeta)
@@ -123,8 +124,16 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
           error(s"Cannot Write Message into Spark Memory, will Try with Retry Mechanism ${msg.getJMSMessageID}", t)
           val retry = RetryHandler()
           def job(): Unit = self.store(MqData(source, data, meta))
-          if (tryAndLogErrorMes(retry.retryOperation(job),error(_:Throwable))) handleAcks(message, source, meta, tlmAcknowledge)
-          else self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
+          if (tryAndLogErrorMes(retry.retryOperation(job), error(_: Throwable))) handleAcks(message, source, meta, tlmAcknowledge)
+          else {
+            self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
+            t match {
+              case timeOut: TimeoutException =>
+                self.currentConnection.foreach(_.pause())
+                self.restart(s"Cannot Write Message into Spark Memory Due to bad Response Times from HDFS, will replay Message with ID ${msg.getJMSMessageID}, Restarting Receiver ${self.id}", t)
+              case _ =>
+            }
+          }
       }
     }
 
@@ -160,6 +169,8 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
 
 
   }
+
+  private def currentConnection: Option[ConnectionMeta] = if (valid(activeConnection.get())) Some(activeConnection.get()) else None
 
   private case class ExceptionReporter() extends ExceptionListener {
     override def onException(e: JMSException): Unit = {

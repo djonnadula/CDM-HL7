@@ -71,6 +71,7 @@ object HL7Receiver extends Logg with App {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
+    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)

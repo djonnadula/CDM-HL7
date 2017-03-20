@@ -22,7 +22,6 @@ private[cdm] object LoginRenewer extends Logg {
 
   private lazy val app = lookUpProp("hl7.app")
   private lazy val loginRenewer = newDaemonScheduler(s"$app-Login-Renewer")
-  private lazy val sHook = registerHook(newThread(s"$app-Login-Renewer-SHook", runnable(stop())))
   private var hdfsConf: Configuration = _
   private var fs: FileSystem = _
   private var scheduled = false
@@ -138,6 +137,7 @@ private[cdm] object LoginRenewer extends Logg {
       }
     })
   }
+  private def sHook : Unit= registerHook(newThread(s"$app-Login-Renewer-SHook", runnable(stop())))
 
 }
 

@@ -63,7 +63,7 @@ package object hadoop extends Logg {
       case true =>
         def fun(): T = {
           var data = null.asInstanceOf[T]
-          val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime).reverse
+          val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime)
           if (status.nonEmpty) {
             val reader = new BufferedInputStream(fs.open(status.head.getPath))
             data = deSerialize(reader).asInstanceOf[T]

@@ -99,7 +99,7 @@ case "$1" in
         RETVAL=$?
         ;;
     *)
-        echo $"Usage: $NAME start|stop|status"
+        echo $"Usage: $NAME start|stop|status|restart"
         RETVAL=1
 esac
 

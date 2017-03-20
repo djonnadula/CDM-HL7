@@ -1,12 +1,12 @@
 #!/bin/bash
-# /etc/init.d/hl7process
+# /etc/init.d/hl7Receiver
 # version 1.0.0 2016-08-22 (YYYY-MM-DD)
 #
 # chkconfig: - 86 06
 # description:  Starts and stops HCA CDM HL7 Receiver service
 #
 ### BEGIN INIT INFO
-# Provides:          hl7process
+# Provides:          hl7Receiver
 # Required-Stop:     $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
@@ -99,7 +99,7 @@ case "$1" in
         RETVAL=$?
         ;;
     *)
-        echo $"Usage: $NAME start|stop|status"
+        echo $"Usage: $NAME start|stop|status|restart"
         RETVAL=1
 esac
 

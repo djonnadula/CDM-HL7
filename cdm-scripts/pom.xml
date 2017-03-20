@@ -10,6 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
     <name>Scripts Repo</name>
     <artifactId>cdm-scripts</artifactId>
-    <version>${project.version}</version>
+    <version>${cdm.version}</version>
 
 </project>

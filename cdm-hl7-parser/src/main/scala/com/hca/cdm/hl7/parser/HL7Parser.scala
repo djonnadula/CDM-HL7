@@ -226,7 +226,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var segments: Segments = null
     var realignVal = EMPTYSTR
     var versionData: VersionData = null
-    var missingMappings = new TemplateUnknownMapping
+    val missingMappings = new TemplateUnknownMapping
     val segmentsMapping = mapSegments(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_"
       , versionData.srcSystem, versionData.standardMapping, versionData.realignment)(versionData.controlId, missingMappings)
     var i = 0
@@ -301,7 +301,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                                   }
                                 }
                                 if (subSubComponentLayout nonEmpty) subComponentLayout += subComponentData -> subSubComponentLayout
-                                if (realignColStatus & segments.realignColOption == MOVE) {
+                                if (realignColStatus && segments.realignColOption == MOVE) {
                                   componentLayout += componentData -> subComponentLayout
                                   break
                                 }
@@ -388,9 +388,9 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     val controlId = fieldList(9)
     val Match = matcher(controlId, _: String)
     val mapped_index = Match match {
-      case mt_mt6 if mt_mt6(MT_) | mt_mt6(MT6_) =>
+      case mt_mt6 if mt_mt6(MT_) || mt_mt6(MT6_) =>
         if (hl7Version == HL7_2_1) templateData(hl7MEDITECH21Map)
-        else if (hl7Version == HL7_2_4 | hl7Version == HL7_2_5_1) templateData(hl7MEDITECH24Map)
+        else if (hl7Version == HL7_2_4 || hl7Version == HL7_2_5_1) templateData(hl7MEDITECH24Map)
         else templateData(hl7StandardMap)
       case epic if epic(EPIC_) => templateData(hl7EpicMap)
       case ecw if ecw(ECW_) => templateData(hl7eCWMap)

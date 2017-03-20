@@ -39,10 +39,10 @@ class Hl7FlumeMapper extends Logg with Interceptor {
           topic == EMPTYSTR match {
             case true =>
               header put(partitionMapping(0), unknownMapping)
-              error(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Unknown Zone ::  $event")
+              warn(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Unknown Zone ::  $event")
             case _ =>
               header put(partitionMapping(0), topic)
-              error(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Zone as Topic $topic  ::  $event")
+              warn(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Zone as Topic $topic  ::  $event")
           }
           header put(partitionMapping(1), unknownMapping)
           header put(partitionMapping(2), outDateFormat.format(new Date()))

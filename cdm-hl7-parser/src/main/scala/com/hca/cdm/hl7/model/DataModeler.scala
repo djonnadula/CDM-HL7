@@ -157,7 +157,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   }
 
   private def includeEle(underlying: mutable.LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR): Unit = {
-    if (req == EMPTYSTR & repeat == EMPTYSTR) return
+    if (req == EMPTYSTR && repeat == EMPTYSTR) return
     underlying get key match {
       case Some(x) => x match {
         case EMPTYSTR => underlying update(key, req)

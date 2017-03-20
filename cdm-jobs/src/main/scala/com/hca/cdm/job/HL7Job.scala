@@ -295,7 +295,7 @@ object HL7Job extends Logg with App {
             case _ => info(s"Partition was Empty For RDD ${rdd.id} So skipping :: $dataItr")
           }
         })
-        tracker.foreach(_.get())
+        tryAndLogErrorMes(tracker.foreach(_.get()),error(_:Throwable))
         info(s"Processing Completed for RDD :: ${rdd.id} Messages Count :: $messagesInRDD")
       } else info(s"Batch was Empty So Skipping RDD :: ${rdd.id}")
     })
