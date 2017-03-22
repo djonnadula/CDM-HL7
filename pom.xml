@@ -7,7 +7,7 @@
     <groupId>com.hca</groupId>
     <artifactId>cdm-hl7</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <name>CDM HL7</name>
     <modules>
         <module>cdm-common</module>
@@ -40,7 +40,7 @@
 
 
     <properties>
-        <project.version>1.0.3-SNAPSHOT</project.version>
+        <project.version>1.0.4-SNAPSHOT</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>

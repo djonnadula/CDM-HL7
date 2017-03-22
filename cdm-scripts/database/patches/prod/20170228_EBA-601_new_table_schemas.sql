@@ -1,7 +1,7 @@
 use cdm_scri;
 
-DROP TABLE nlp_patient_id_data;
-DROP TABLE nlp_patient_id_data_hist;
+ALTER TABLE hl7.nlp_patient_id_data RENAME TO hl7.nlp_patient_id_data_old;
+ALTER TABLE hl7.scri_patient_id_history RENAME TO hl7.scri_patient_id_history_old;
 
 CREATE EXTERNAL TABLE nlp_patient_id_data (
 	msh_msg_control_id STRING,
@@ -51,34 +51,45 @@ FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-CDI-DELIMITED';
 
-CREATE EXTERNAL TABLE cdm_scri.nlp_patient_id_data_hist (
-	msh_msg_control_id STRING,
-	msh_sending_facility STRING,
-	txa_origination_date_time STRING,
-	txa_transcription_date_time STRING,
-	msh_msg_type_message_code STRING,
-	msh_msg_type_trigger_event STRING,
-	pid_pat_account_num STRING,
-	pid_medical_record_num STRING,
-	pid_medical_record_urn STRING,
-	pid_birth_date_time STRING,
-	pid_pat_name_last_name STRING,
-	pid_pat_name_first_name STRING,
-	pid_sex STRING,
-	pv1_adm_date_time STRING,
-	txa_originator_person_id STRING,
-	txa_originator_last_name STRING,
-	txa_originator_first_name STRING,
-	txa_originator_middle_name STRING,
-	txa_originator_suffix STRING,
-	txa_originator_prefix STRING,
-	txa_originator_degree STRING,
-	txa_filler_order_num STRING,
-	txa_document_type_identifier STRING,
-	txa_document_type_text STRING,
-	txa_document_completion_status STRING,
-	obx_observation_value STRING
-)
+CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history (
+	msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',
+	msh_sending_facility STRING COMMENT 'Mnemonic that is associated to the sending facility of the message',
+	pid_medical_record_num STRING COMMENT 'MRN associated to the message',
+	pid_medical_record_urn STRING COMMENT 'URN associated to the message',
+	pid_pat_account_num STRING COMMENT 'Account Number for the message',
+	txa_origination_date_time STRING COMMENT 'It will have TXA Origination Date Time from MDM message OR OBR requested Date Time from ORU Message ',
+	txa_transcription_date_time STRING COMMENT 'It will have TXA Transcription Date Time from MDM Message OR OBR Observation Date Time from ORU message ',
+	msh_msg_type_message_code STRING COMMENT 'Message Type Code associated with the Health Level 7 (HL7) message.  i.e.: ADT, ORU, RAS, etc.',
+	msh_msg_type_trigger_event STRING COMMENT 'Message Type Trigger Event Code associated with the Health Level 7 (HL7) message.  i.e.: A04, A05, etc.',
+	pid_birth_date_time STRING COMMENT 'Patient Date of Birth',
+	pid_pat_name_last_name STRING COMMENT 'Patient Last Name',
+	pid_pat_name_first_name STRING COMMENT 'Patient First Name',
+	pid_sex STRING COMMENT 'Patient Gender',
+	pv1_adm_date_time STRING COMMENT 'The date and time the patient was admitted in the facility.',
+	pv1_dchg_date_time STRING COMMENT 'The date and time the patient was discharged from the facility.',
+	txa_originator_code_name_person_id STRING COMMENT 'This field contains the person identifier of the individual who originated (i.e., dictated) the document. The document originator may differ from the person responsible for authenticating the document.',
+	txa_originator_code_name_last_name STRING COMMENT 'This field contains the last name of the individual who originated (i.e., dictated) the document.',
+	txa_originator_code_name_first_name STRING COMMENT 'This field contains the first name of the individual who originated (i.e., dictated) the document.',
+	txa_originator_code_name_middle_name STRING COMMENT 'This field contains the middle name of the individual who originated (i.e., dictated) the document.',
+	txa_originator_code_name_suffix STRING COMMENT 'This field contains the name suffix of the individual who originated (i.e., dictated) the document.  i.e.: Junior, Senior, III, etc.',
+	txa_originator_code_name_prefix STRING COMMENT 'This field contains the name salutaion of the individual who originated (i.e., dictated) the document.  i.e.: Mr, Mrs, Ms, etc.',
+	txa_originator_code_name_degree STRING COMMENT 'This field contains the name degree (post nominal letters) of the individual who originated (i.e., dictated) the document.  i.e.: M.B.A, Ph.D, M.D., D.O., etc.',
+	txa_filler_order_num STRING COMMENT 'This field is the order number associated with the filling application. Where a transcription service or similar organization creates the document and uses an internally unique identifier, that number should be inserted in this field',
+	txa_document_type_primary_id STRING COMMENT 'This field contains the unique document type identifier for the type of document (as defined in the transcription system).',
+	txa_document_type_text STRING COMMENT 'This field contains the description of the type of document (as defined in the transcription system).',
+	txa_document_type_name_of_coding_sys STRING COMMENT 'Identifier for the coding system from which the values in the document type is obtained.',
+	txa_document_completion_status STRING COMMENT 'This field identifies the current completion state of the document.  i.e.: Dictated, In Progress, Incomplete, etc.',
+	obx_observation_value STRING COMMENT 'This field contains the value related to the OBX-3-observation identifier of the same segment. Depending upon the observation, the data type may be a number (e.g., respiratory rate), a coded answer (e.g., SNOMED), or a date/time a unit of blood is sent.',
+	pid_pat_social_security_num STRING COMMENT 'The patient assigned Social Security Number used in the United States to track Social Security benefits and is also used for other identification purposes.',
+	pid_pat_address_street_address1 STRING COMMENT 'The patient house number, apartment number, street name, street direction, P.O. Box number, and similar address information.',
+	pid_pat_address_street_address2 STRING COMMENT 'This patient second line of address. In US usage, it qualifies address.  Examples: Suite 555 or Fourth Floor. When referencing an institution, this component specifies the street address.',
+	pid_pat_address_city STRING COMMENT 'The city, or district or place where the patient is located (lives) depending upon the national convention for formatting addresses for postal usage.',
+	pid_pat_address_state_province STRING COMMENT 'The state or province where the patient is located (lives). State or province should be represented by the official postal service codes for that country.',
+	pid_pat_address_zip_postal_code STRING COMMENT 'The zip or postal code where the patient is located (lives). Zip or postal codes should be represented by the official codes for that country.',
+	etl_insert_date_time STRING COMMENT 'The date and time the record was inserted by the Extract Transform and Load (ETL) job.',
+	etl_process_date_time STRING COMMENT 'The date and time the record was merged with data from Synthesis (processed) by the Extract Transform and Load (ETL) job.'
+	)
+COMMENT 'This table holds additional data that is required by the Sarah Canon Research Institute (SCRI) Cancer Patient Identification Cancer Registry application prior to sending the data to Teradata.'
 PARTITIONED BY (
 	 message_type String,
 	 transaction_date String
@@ -86,15 +97,16 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/nlp_patient_id_data_hist';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-SCRIPATIDHIST-DELIMITED';
 
 use hl7;
 
+ALTER TABLE hl7.hl7_audit_data RENAME TO hl7.hl7_audit_data_old;
+ALTER TABLE hl7.hl7_json_data RENAME TO hl7.hl7_json_data_old;
+
 drop table hl7_acc_data;
 drop table hl7_al1_data;
-drop table hl7_all_proc_rejected;
 drop table hl7_arv_data;
-drop table hl7_audit_data;
 drop table hl7_blg_data;
 drop table hl7_cdo_data;
 drop table hl7_con_data;
@@ -109,7 +121,6 @@ drop table hl7_iam_data;
 drop table hl7_in1_data;
 drop table hl7_in2_data;
 drop table hl7_in3_data;
-drop table hl7_json_data;
 drop table hl7_mrg_data;
 drop table hl7_msh_data;
 drop table hl7_nk1_data;
@@ -248,7 +259,7 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=AUDIT';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=AUDIT';
 
 CREATE EXTERNAL TABLE hl7.hl7_json_data(
 	json_data STRING
@@ -259,7 +270,7 @@ PARTITIONED BY (
 )
 WITH SERDEPROPERTIES ('serialization.format'='1')
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=JSON'
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=JSON'
 
 CREATE EXTERNAL TABLE hl7.hl7_raw_data (
 	msg_data STRING
@@ -269,28 +280,7 @@ PARTITIONED BY (
 	transaction_date STRING
 )
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=RAW'
-
-CREATE EXTERNAL TABLE hl7.hl7_all_proc_rejected (
-	process_name String,
-	msg_control_id String,
-	msg_create_date_time String,
-	patient_mrn String,
-	patient_urn String,
-	patient_account_num String,
-	etl_firstinsert_datetime String,
-	reject_reason String,
-	rejected_message_data String,
-	rejected_message_data_extn String
-)
-PARTITIONED BY (
-	 message_type String,
-	 transaction_date String
-)
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '|'
-STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/landing_zone=REJECT' ;
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=RAW'
 
 CREATE EXTERNAL TABLE hl7_abs_data (
 	msh_sending_facility String,
@@ -34387,8 +34377,8 @@ CREATE EXTERNAL TABLE hl7_zer_data (
 	zer_current_status_event String,
 	zer_current_status_event_event_code String,
 	zer_current_status_event_event_desc String,
-	zer_nurse_id String,
-	zer_practitioner_id String,
+	zer_nurse_mnem String,
+	zer_practitioner_mnem String,
 	zer_departure_information String,
 	zer_departure_information_departure_date String,
 	zer_departure_information_disposition String,

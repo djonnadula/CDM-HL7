@@ -86,12 +86,12 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
           case (k: Array[Byte], v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v))
           case (k: Array[Byte], v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v.getBytes(UTF8)))
           case (k: String, v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k.getBytes(UTF8), v))
-          case _ => new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
+          case _ => throw new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
         }
         case _ => data match {
           case v: String => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, v.getBytes(UTF8)))
           case v: Array[Byte] => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, v))
-          case _ => new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
+          case _ => throw new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
 
         }
 

@@ -324,8 +324,14 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                         }
                       }
                       else {
-                        if (componentData == UNKNOWN) moveToUnknown(field)
-                        else if ((field contains delimiters(REPTN_DELIM)) && (!(fieldRepeatItem contains delimiters(CMPNT_DELIM)) || !(fieldRepeatItem contains delimiters(SUBCMPNT_DELIM)))) componentList += (new mutable.LinkedHashMap[String, String] += (componentData -> fieldRepeatItem))
+                        if (componentData == UNKNOWN) {
+                          moveToUnknown(field)
+                        }
+                        else if ((field contains delimiters(REPTN_DELIM)) &&
+                          (!(fieldRepeatItem contains delimiters(CMPNT_DELIM)) ||
+                            !(fieldRepeatItem contains delimiters(SUBCMPNT_DELIM)))) {
+                          componentList += (new mutable.LinkedHashMap[String, String] += (componentData -> fieldRepeatItem))
+                        }
                         else componentLayout += componentData -> field
                       }
                     }
@@ -346,9 +352,11 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
     missingMappings.unknownMappings match {
       case null =>
-        HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")), versionData.hl7Version)
+        HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")),
+          versionData.hl7Version)
       case _ =>
-        HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")), versionData.hl7Version,
+        HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")),
+          versionData.hl7Version,
           s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version} & Msg Control Id ${versionData.controlId}")
     }
   }
@@ -390,7 +398,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       case ip if ip(IP_) => templateData(hl7IpeopleMap)
       case _ => MAP
     }
-    VersionData(controlId, hl7Version, mapped_index, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk))
+    VersionData(controlId, hl7Version, mapped_index, templateData(hl7StandardMap),
+      templateData(hl7MapAlignXWalk))
   }
 
   private def matcher(in: String, seq: String) = in != null & in.contains(seq)
@@ -439,7 +448,9 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           if (mappedColumnData == EMPTYSTR || mappedColumnData.contains(DOT) ||
             (mappedColumnData.length > 2 && mappedColumnData.substring(3) == segmentIndex.substring(3))) {
             mappedColumnData = UNKNOWN
-            if (missingMappings.unknownMappings == null) missingMappings.unknownMappings = new mutable.HashSet[String]
+            if (missingMappings.unknownMappings == null) {
+              missingMappings.unknownMappings = new mutable.HashSet[String]
+            }
             missingMappings.unknownMappings += segmentIndex
           }
           segment.componentData = mappedColumnData

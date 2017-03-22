@@ -14,6 +14,7 @@ object Filters {
     val GTE = Value("GTE")
     val LTE = Value("LTE")
     val CONTAINS = Value("CONTAINS")
+    val STARTSWITH = Value("STARTSWITH")
   }
 
   object Expressions extends Enumeration {

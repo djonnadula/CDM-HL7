@@ -59,12 +59,18 @@ package object model {
     temp
   }
 
-  lazy val MSHMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
-  lazy val PIDMappings = synchronized(commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
+  lazy val MSHMappings = synchronized(
+    commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
+  lazy val PIDMappings = synchronized(
+    commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
 
-  private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id", tranTime: String = "msg_create_date_time",
-                                  mrn: String = "patient_mrn", urn: String = "patient_urn", accntNum: String = "patient_account_num",
-                                  rejectReason: String = "reject_reason", rejectData: String = "rejected_message_data", etlTime: String = "etl_firstinsert_datetime")
+  private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id",
+                                  tranTime: String = "msg_create_date_time",
+                                  mrn: String = "patient_mrn", urn: String = "patient_urn",
+                                  accntNum: String = "patient_account_num",
+                                  rejectReason: String = "reject_reason",
+                                  rejectData: String = "rejected_message_data",
+                                  etlTime: String = "etl_firstinsert_datetime")
 
   private val rejectSchemaMapping = RejectSchema()
   private val rejectSchema = {
@@ -188,7 +194,7 @@ package object model {
     Hl7Segments(msgType, segments flatMap (seg => {
       seg._1 contains "ADHOC" match {
         case true =>
-          val empty = Map.empty[String, String]
+          val empty = new mutable.LinkedHashSet[(String, String)]
           val adhoc = seg._1 split COLON
           if (valid(adhoc, 3)) {
             val filterFile = Try(adhoc(4)) match {
@@ -208,7 +214,7 @@ package object model {
               val outFormSplit = outFormat split AMPERSAND
               outFormat contains JSON.toString match {
                 case true =>
-                  (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFile(outFormSplit(1), COMMA, keyIndex = 0), fieldWithNoAppends), loadFilters(filterFile))
+                  (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends), loadFilters(filterFile))
                 case _ =>
                   (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends), loadFilters(filterFile))
               }
@@ -225,7 +231,9 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: Map[String, String], reqNoAppends: Array[String] = Array.empty[String])
+  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String]) {
+    val multiColumnLookUp = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
+  }
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
@@ -236,7 +244,22 @@ package object model {
 
     def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if ((k ne commonSegkey) & (v ne EMPTYSTR)) EMPTYSTR else v)
 
-    def adhocLayout(layout: mutable.LinkedHashMap[String, String], keyNames: Map[String, String]): mutable.LinkedHashMap[String, String] = layout map { case (k, v) => keyNames(k) -> v }
+    def adhocLayout(layout: mutable.LinkedHashMap[String, String], keyNames: mutable.LinkedHashSet[(String, String)],
+                    multiColumnLookUp: Map[String, Map[String, String]]): mutable.LinkedHashMap[String, String] = {
+      val store = new mutable.LinkedHashMap[String, String]
+      keyNames.foreach { case (k, v) =>
+        if (exists(multiColumnLookUp, v) && !(store isDefinedAt v)) store += v -> getDataFromMultiLocations(multiColumnLookUp(v), layout)
+        else store += v -> layout(k)
+      }
+      store
+    }
+
+    private def getDataFromMultiLocations(possibleLocations: Map[String, String], layout: mutable.LinkedHashMap[String, String]): String = {
+      possibleLocations.foreach(ele => if ((layout isDefinedAt ele._1) && layout(ele._1) != EMPTYSTR) return layout(ele._1))
+      EMPTYSTR
+
+    }
+
 
   }
 
@@ -252,7 +275,9 @@ package object model {
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
+
     val reader = readFile(segments).bufferedReader
+
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
       valid(splits, 3) match {
@@ -289,7 +314,7 @@ package object model {
     val reassignMeta = new mutable.HashMap[String, String]()
     val reassignStruct = new mutable.HashMap[String, mutable.LinkedHashMap[String, Any]]
     val reassignmentMapping = new mutable.HashMap[String, Map[String, String]]
-    Source.fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
+    readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
       case data@ele if data.nonEmpty =>
         val reassignStructTemp = new mutable.LinkedHashMap[String, Any]
         val reassignmentMappingTemp = new mutable.HashMap[String, String]
@@ -318,6 +343,15 @@ package object model {
     readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
       case x@ele if ele.nonEmpty => ele(keyIndex) -> x(keyIndex + 1)
     } toMap
+  }
+
+  def loadFileAsList(file: String, delimitedBy: String = COMMA, keyIndex: Int = 0): mutable.LinkedHashSet[(String, String)] = {
+    val store = new mutable.LinkedHashSet[(String, String)]()
+    readFile(file).getLines().filter(valid(_)).foreach(temp => {
+      val splitD = temp split delimitedBy
+      if (splitD.nonEmpty) store += ((splitD(keyIndex), splitD(keyIndex + 1)))
+    })
+    store
   }
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {

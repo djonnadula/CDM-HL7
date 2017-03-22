@@ -88,7 +88,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
     if (con == null) {
       try {
         info(s"Starting MQ Consumer with App Name $app")
-        con = createConnection(app, jobDesc, mqHosts,mqManager, mqChannel, batchSize, batchInterval)
+        con = createConnection(app, jobDesc, mqHosts, mqManager, mqChannel, batchSize, batchInterval)
       } catch {
         case ex: Exception => error("Consumer Connection Failed. Will Try To make connection based on Number of Re Tries Assigned", ex)
           var tryCount: Int = 1
@@ -118,37 +118,47 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       val meta = metaFromRaw(data)
       Try(self.store(MqData(source, data, meta))) match {
         case Success(x) =>
-          try {
-            tryAndThrow(msg.acknowledge(), error(_: Throwable))
-            if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
-          }
-          catch {
-            case t: Throwable =>
-              self.reportError(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} will try with Retry Policy ", t)
-              var tryCount: Int = 1
-              val retry = RetryHandler()
-              while (retry.tryAgain()) {
-                try {
-                  msg.acknowledge()
-                  info(s"Ack message with Id :: ${msg.getJMSMessageID} succeeded after tryCount $tryCount")
-                  if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
-                  return
-                } catch {
-                  case e: Exception => error(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} for Attempt Made So far " + tryCount, e)
-                    tryCount += 1
-                    if (tryCount == defaultRetries) {
-                      self.reportError(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} After Retries $tryCount", e)
-
-                    }
-                }
-              }
-          }
+          handleAcks(message, source, meta, tlmAcknowledge)
         case Failure(t) =>
-          self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
+          error(s"Cannot Write Message into Spark Memory, will Try with Retry Mechanism ${msg.getJMSMessageID}", t)
+          val retry = RetryHandler()
+          def job(): Unit = self.store(MqData(source, data, meta))
+          if (tryAndLogErrorMes(retry.retryOperation(job),error(_:Throwable))) handleAcks(message, source, meta, tlmAcknowledge)
+          else self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
       }
     }
 
     override def getSource: String = source
+  }
+
+  private def handleAcks(msg: Message, source: String, meta: MSGMeta, tlmAcknowledge: (String) => Unit): Unit = {
+    try {
+      tryAndThrow(msg.acknowledge(), error(_: Throwable))
+      if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
+    }
+    catch {
+      case t: Throwable =>
+        self.reportError(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} will try with Retry Policy ", t)
+        var tryCount: Int = 1
+        val retry = RetryHandler()
+        while (retry.tryAgain()) {
+          try {
+            msg.acknowledge()
+            info(s"Ack message with Id :: ${msg.getJMSMessageID} succeeded after tryCount $tryCount")
+            if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
+            return
+          } catch {
+            case e: Exception => error(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} for Attempt Made So far " + tryCount, e)
+              tryCount += 1
+              if (tryCount == defaultRetries) {
+                self.reportError(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} After Retries $tryCount", e)
+
+              }
+          }
+        }
+    }
+
+
   }
 
   private case class ExceptionReporter() extends ExceptionListener {
