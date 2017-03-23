@@ -110,12 +110,12 @@ object MQAcker {
 
   private def createConnection(createIfNotExist: () => MQAcker): MQAcker = {
     lock.synchronized(
-      connection == null match {
-        case true =>
-          connection = createIfNotExist()
-          info(s"Created Connection for $connection")
-          connection
-        case _ => connection
+      if (connection == null) {
+        connection = createIfNotExist()
+        info(s"Created Connection for $connection")
+        connection
+      } else {
+        connection
       })
   }
 }

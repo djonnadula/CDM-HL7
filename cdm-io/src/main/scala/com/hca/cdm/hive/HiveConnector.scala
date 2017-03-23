@@ -84,9 +84,9 @@ class HiveConnector extends Logg with AutoCloseable {
     implicit class ResultSetStream(rs: ResultSet) {
       def lazyStream: Stream[ResultSet] = {
         new Iterator[ResultSet] {
-          def hasNext = rs.next()
+          def hasNext: Boolean = rs.next()
 
-          def next() = rs
+          def next(): ResultSet = rs
         }.toStream
       }
     }
@@ -94,9 +94,9 @@ class HiveConnector extends Logg with AutoCloseable {
     implicit class ExtractSingleColumn(rs: ResultSet) {
       def asSeq: Seq[String] = {
         new Iterator[String] {
-          def hasNext = rs.next()
+          def hasNext: Boolean = rs.next()
 
-          def next() = rs.getString(1)
+          def next(): String = rs.getString(1)
         }.toSeq
       }
     }

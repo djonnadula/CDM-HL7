@@ -9,8 +9,8 @@ import org.apache.log4j.Logger
   */
 trait Logg {
 
-  protected val loggerName = this.getClass.getName
-  @transient protected lazy val logger = Logger.getLogger(loggerName)
+  protected val loggerName: String = this.getClass.getName
+  @transient protected lazy val logger: Logger = Logger.getLogger(loggerName)
   protected var logIdent: String = _
 
   private def msgWithLogIdent(msg: String) = if (logIdent == null) msg else logIdent + msg

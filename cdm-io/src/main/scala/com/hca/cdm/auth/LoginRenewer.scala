@@ -38,7 +38,7 @@ private[cdm] object LoginRenewer extends Logg {
           fs = FileSystem.get(hdfsConf)
           loginRenewer scheduleWithFixedDelay(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))
           ), startFrom, startFrom, TimeUnit.HOURS)
-          sHook
+          sHook()
           scheduled = true
         }
       }
@@ -55,7 +55,7 @@ private[cdm] object LoginRenewer extends Logg {
   def scheduleGenCredentials(startFrom: Int = 1, credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
     loginRenewer scheduleWithFixedDelay(runnable(tryAndLogErrorMes(genCredentials(credentialsFile, principal, keytab, nns), error(_: Throwable)))
       , startFrom, startFrom, TimeUnit.MINUTES)
-    sHook
+    sHook()
   }
 
   def credentialFile(stagingDir: String, suffix: String = "Credentials"): Path = {
@@ -137,7 +137,7 @@ private[cdm] object LoginRenewer extends Logg {
       }
     })
   }
-  private def sHook : Unit= registerHook(newThread(s"$app-Login-Renewer-SHook", runnable(stop())))
+  private def sHook() : Unit= registerHook(newThread(s"$app-Login-Renewer-SHook", runnable(stop())))
 
 }
 

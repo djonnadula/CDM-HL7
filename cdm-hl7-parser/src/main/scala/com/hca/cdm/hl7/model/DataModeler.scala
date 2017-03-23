@@ -31,29 +31,29 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
       case Some(adhoc) =>
-        filterRec(model.filters.get)(data) match {
-          case true =>
-            layout = model.layoutCopy
-            nodesTraversal(data, model, layout, modelFilter, dataHandler) match {
-              case out =>
-                if (out._1) {
-                  // Case to Strip Out Fields which require Only One Occurrence
-                  adhoc.reqNoAppends.foreach(field =>
-                    if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).substring(0, layout(field).indexOf(caret))))
-                  adhoc.outFormat match {
-                    case JSON =>
-                      handleCommonSegments(data, layout)
-                      val temp = model.adhocLayout(layout, adhoc.outKeyNames,adhoc.multiColumnLookUp)
-                      if (timeStampReq) temp += ((timeStampKey, timeStamp))
-                      out._2 += (toJson(temp) -> null)
-                    case DELIMITED =>
-                      handleCommonSegments(data, layout)
-                      out._2 += (makeFinal(layout) -> null)
-                  }
+        if (filterRec(model.filters.get)(data)) {
+          layout = model.layoutCopy
+          nodesTraversal(data, model, layout, modelFilter, dataHandler) match {
+            case out =>
+              if (out._1) {
+                // Case to Strip Out Fields which require Only One Occurrence
+                adhoc.reqNoAppends.foreach(field =>
+                  if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).substring(0, layout(field).indexOf(caret))))
+                adhoc.outFormat match {
+                  case JSON =>
+                    handleCommonSegments(data, layout)
+                    val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
+                    if (timeStampReq) temp += ((timeStampKey, timeStamp))
+                    out._2 += (toJson(temp) -> null)
+                  case DELIMITED =>
+                    handleCommonSegments(data, layout)
+                    out._2 += (makeFinal(layout) -> null)
                 }
-                out._2
-            }
-          case _ => filtered
+              }
+              out._2
+          }
+        } else {
+          filtered
         }
       case None =>
         model.reqSeg match {
@@ -70,17 +70,17 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
           case _ =>
             data.map(node => {
               try {
-                node._1.substring(node._1.indexOf(DOT) + 1) == model.reqSeg match {
-                  case true =>
-                    layout = model.layoutCopy
-                    modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true) match {
-                      case true =>
-                        handleCommonSegments(data, layout)
-                        val out = s"${makeFinal(layout)}$PIPE_DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
-                        (out, null)
-                      case _ => (skippedStr, null)
-                    }
-                  case _ => (EMPTYSTR, null)
+                if (node._1.substring(node._1.indexOf(DOT) + 1) == model.reqSeg) {
+                  layout = model.layoutCopy
+                  if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
+                    handleCommonSegments(data, layout)
+                    val out = s"${makeFinal(layout)}$PIPE_DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
+                    (out, null)
+                  } else {
+                    (skippedStr, null)
+                  }
+                } else {
+                  (EMPTYSTR, null)
                 }
               }
               catch {
@@ -113,19 +113,18 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     var dataExist = false
     val temp = data.map(node => {
       try {
-        allNodes match {
-          case true =>
-            if (node._1 != commonNodeStr) if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
+        if (allNodes) {
+          if (node._1 != commonNodeStr) if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
+          (EMPTYSTR, null)
+        } else {
+          if (node._1.substring(node._1.indexOf(DOT) + 1) == whichSeg) {
+            if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
+              dataExist = true
+              (EMPTYSTR, null)
+            } else (skippedStr, null)
+          } else {
             (EMPTYSTR, null)
-          case _ =>
-            node._1.substring(node._1.indexOf(DOT) + 1) == whichSeg match {
-              case true => if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
-                dataExist = true
-                (EMPTYSTR, null)
-              } else (skippedStr, null)
-              case _ => (EMPTYSTR, null)
-            }
-
+          }
         }
       }
       catch {
@@ -183,8 +182,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                        (dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
     data.foreach(node => {
-      node._1 != null & node._1 != EMPTYSTR & (filterKeys isDefinedAt node._1) match {
-        case true => node._2 match {
+      if (node._1 != null & node._1 != EMPTYSTR & (filterKeys isDefinedAt node._1)) {
+        node._2 match {
           case str: String => if (underlying isDefinedAt node._1) {
             if (!appendSegment) dataHandler(node._1, str, EMPTYSTR)
             else dataHandler(node._1, str, caret)
@@ -196,7 +195,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
             if (handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
           case any: Any => throw new DataModelException("Got an Unhandled Type into Data Modeler " + logIdent + " :: " + any.getClass + " ?? Not Yet Implemented")
         }
-        case _ =>
+      } else {
+
       }
     })
     dataExist

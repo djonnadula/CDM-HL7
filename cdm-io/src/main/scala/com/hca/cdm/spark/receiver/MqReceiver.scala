@@ -30,11 +30,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   private val mqHosts = lookUpProp("mq.hosts")
   private val mqManager = lookUpProp("mq.manager")
   private val mqChannel = lookUpProp("mq.channel")
-  private val ackQueue = {
-    val tem = lookUpProp("mq.queueResponse")
-    if (tem != EMPTYSTR) Some(tem)
-    else None
-  }
+  private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
   sHook()
@@ -123,7 +119,9 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
         case Failure(t) =>
           error(s"Cannot Write Message into Spark Memory, will Try with Retry Mechanism ${msg.getJMSMessageID}", t)
           val retry = RetryHandler()
+
           def job(): Unit = self.store(MqData(source, data, meta))
+
           if (tryAndLogErrorMes(retry.retryOperation(job), error(_: Throwable))) handleAcks(message, source, meta, tlmAcknowledge)
           else {
             self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)

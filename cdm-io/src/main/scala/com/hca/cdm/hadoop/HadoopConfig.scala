@@ -15,7 +15,7 @@ private[cdm] object HadoopConfig {
     getConfigFiles(configDir).foreach(file => info(file.getAbsolutePath))
     val conf = new Configuration()
     conf.set("hadoop.security.authentication", "Kerberos")
-    if (valid(configDir)) getConfigFiles(configDir).foreach(res => conf.addResource(new File(res.getAbsolutePath).toURI().toURL()))
+    if (valid(configDir)) getConfigFiles(configDir).foreach(res => conf.addResource(new File(res.getAbsolutePath).toURI.toURL))
     conf
   }
 

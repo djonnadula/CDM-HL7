@@ -25,7 +25,7 @@
 # Process name ( For display )
 NAME='CDM-HL7-Receiver'
 # Daemon name, where is the actual executable
-SERVICEDIR='/hadoop/cdm/lib'
+SERVICEDIR='/hadoop/cdm/lib/cdm-hl7-receiver'
 
 SERVICE='hl7process.jar'
 

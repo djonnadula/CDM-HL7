@@ -35,25 +35,24 @@ class Hl7FlumeMapper extends Logg with Interceptor {
     if (header.containsKey(KEY)) {
       header.getOrDefault(KEY, EMPTYSTR) match {
         case EMPTYSTR =>
-          val topic = if (header.containsKey(From_Topic)) header.get(From_Topic) else EMPTYSTR
-          topic == EMPTYSTR match {
-            case true =>
-              header put(partitionMapping(0), unknownMapping)
-              warn(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Unknown Zone ::  $event")
-            case _ =>
-              header put(partitionMapping(0), topic)
-              warn(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Zone as Topic $topic  ::  $event")
+          val topic = header getOrDefault (From_Topic,EMPTYSTR)
+          if (topic == EMPTYSTR) {
+            header put(partitionMapping(0), unknownMapping)
+            warn(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Unknown Zone ::  $event")
+          } else {
+            header put(partitionMapping(0), topic)
+            warn(s"key Should Come As Part of Event, But Key came as Empty . Event header ${event.getHeaders} Cannot Route Message so Moving To Zone as Topic $topic  ::  $event")
           }
           header put(partitionMapping(1), unknownMapping)
           header put(partitionMapping(2), outDateFormat.format(new Date()))
           event setHeaders header
         case key =>
           val split = key split(s"\\$COLON", -1)
-          valid(split, partitionMapping.size) match {
-            case true =>
-              for (index <- split.indices) handlePartitionByIndex(index, split(index), header)(key)
-              event setHeaders header
-            case _ =>
+          if (valid(split, partitionMapping.size)) {
+            for (index <- split.indices) handlePartitionByIndex(index, split(index), header)(key)
+            event setHeaders header
+          } else {
+
           }
       }
     } else error(s"No Key In Event for Routing to appropriate location ${header.toString}")
@@ -68,7 +67,7 @@ class Hl7FlumeMapper extends Logg with Interceptor {
         mapper put(partitionMapping(1), partition)
       case 1 =>
         val split = partition split(s"\\$AMPERSAND", -1)
-        if (valid(split, 1)) split length match {
+        if (valid(split)) split length match {
           case 1 =>
             mapper put(partitionMapping(0), split(0))
           case 2 =>
