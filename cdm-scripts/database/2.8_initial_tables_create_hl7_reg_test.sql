@@ -35100,7 +35100,7 @@ CREATE EXTERNAL TABLE hl7_zmn_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMN';
 
 DROP TABLE hl7_zmp_data;
 
