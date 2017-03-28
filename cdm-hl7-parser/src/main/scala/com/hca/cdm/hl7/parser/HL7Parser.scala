@@ -1,6 +1,7 @@
 package com.hca.cdm.hl7.parser
 
-import com.fasterxml.jackson.databind.{ObjectMapper, SerializationFeature}
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature._
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm
 import com.hca.cdm._
@@ -34,7 +35,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
   private lazy val toJson = {
     val mapper = new ObjectMapper().registerModule(DefaultScalaModule)
-    mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false)
+    mapper.disable(WRITE_NULL_MAP_VALUES)
     mapper.writer.writeValueAsString(_)
   }
   private lazy val EMPTY = Array.empty[String]
