@@ -39,10 +39,10 @@ INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
 "
 
 # pid file for the daemon
-PIDFILE=/var/log/cdm/cdm-hl7-reveiver/run/$NAME.pid
-LOCKFILE=/var/log/cdm/cdm-hl7-reveiver/lock/subsys/$NAME
-OUTFILE=/var/log/cdm/cdm-hl7-reveiver/logs/logfile
-ERRORFILE=/var/log/cdm/cdm-hl7-reveiver/logs/errorlog
+PIDFILE=/var/log/cdm/cdm-hl7-receiver/run/$NAME.pid
+LOCKFILE=/var/log/cdm/cdm-hl7-receiver/lock/subsys/$NAME
+OUTFILE=/var/log/cdm/cdm-hl7-receiver/logs/logfile
+ERRORFILE=/var/log/cdm/cdm-hl7-receiver/logs/errorlog
 
 # Exit if the package is not installed
 if [ ! -e "$SERVICEDIR/$SERVICE" ]; then
