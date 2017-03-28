@@ -2,6 +2,7 @@ package com.hca.cdm.hl7.validation
 
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
+import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.constants.HL7Constants._
 
 /**
@@ -28,7 +29,7 @@ object ValidationUtil {
 
   def hasMultiMSH(data: mapType): Boolean = {
     data.count({ case (node, any) =>
-      node.substring(node.indexOf(".") + 1) == MSH
+      node.substring(node.indexOf(DOT) + 1) == MSH
     }) > 1
   }
 

@@ -15,7 +15,7 @@ import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
-import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, withName => whichHL7, allKnownHL7}
+import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, allKnownHL7, withName => whichHL7}
 import com.hca.cdm.hl7.exception.UnknownMessageTypeException
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
@@ -25,6 +25,7 @@ import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
 import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
 import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
+import com.hca.cdm.mq.publisher.MQAcker
 import com.hca.cdm.notification.TaskState._
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.utils.RetryHandler
@@ -50,6 +51,7 @@ import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
   */
 object HL7Job extends Logg with App {
 
+  self =>
   private val config_file = args(0)
   private val fileSystem = FileSystem.get(new Configuration())
   private val appHomeDir = fileSystem.getHomeDirectory.toString
@@ -92,7 +94,7 @@ object HL7Job extends Logg with App {
   private val adhocAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, adhocStage)(_: String, _: MSGMeta)))
   private val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
   private val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
-    allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1)))
+    allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAckMsg(hl7._1.toString, applicationReceiving, HDFS, _: String)(_: MSGMeta)))
   private val ensureStageCompleted = new AtomicBoolean(false)
   private var runningStage: StageInfo = _
   private val jsonOverSized = OverSizeHandler(jsonStage, lookUpProp("hl7.direct.json"))
@@ -117,6 +119,7 @@ object HL7Job extends Logg with App {
     })
     temp
   }
+  private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
 
   // ******************************************************** Spark Part ***********************************************
   private val checkPoint = lookUpProp("hl7.checkpoint")
@@ -201,105 +204,106 @@ object HL7Job extends Logg with App {
         val auditOut = auditTopic
         val prodConf = kafkaProducerConf
         val hl7TypesMappings = hl7TypesMapping
-        val segmentsAccumulators = this.segmentsAccumulators
-        val parserAccumulators = this.parserAccumulators
-        val maxMessageSize = this.maxMessageSize
-        val jsonOverSized = this.jsonOverSized
-        val segOverSized = this.segOverSized
-        val rejectOverSized = this.rejectOverSized
-        val adhocOverSized = this.adhocOverSized
+        val segmentsAccumulators = self.segmentsAccumulators
+        val parserAccumulators = self.parserAccumulators
+        val maxMessageSize = self.maxMessageSize
+        val jsonOverSized = self.jsonOverSized
+        val segOverSized = self.segOverSized
+        val rejectOverSized = self.rejectOverSized
+        val adhocOverSized = self.adhocOverSized
         val sizeCheck = checkSize(maxMessageSize)(_, _)
         val confFile = config_file
+        val tlmAckQueue = self.ackQueue
+        val appName = self.app
         val tracker = new ListBuffer[FutureAction[Unit]]
         tracker += rdd foreachPartitionAsync (dataItr => {
-          dataItr nonEmpty match {
-            case true =>
-              propFile = confFile
-              val kafkaOut = KProducer(multiDest = true)(prodConf)
-              val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
-              val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
-              val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
-              val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
-              val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-              dataItr foreach (hl7 => {
-                var msgType: HL7 = UNKNOWN
-                try {
-                  msgType = if (hl7._1 != null && hl7._1 != EMPTYSTR) hl7TypesMappings getOrElse(hl7._1 substring(0, hl7._1 indexOf COLON), UNKNOWN) else UNKNOWN
-                  msgType != UNKNOWN match {
-                    case true =>
-                    case _ =>
-                      info("Message Type Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
-                      val delim = if (hl7._2 contains "\r\n") "\r\n" else "\n"
-                      val rawSplit = hl7._2 split delim
-                      val reqMsgType = valid(rawSplit) match {
-                        case true => val temp = PIPER split rawSplit(0)
-                          valid(temp, 9) match {
-                            case true =>
-                              val hl7Type = temp(8) contains caret match {
-                                case true => (temp(8) split("\\" + caret, -1)) (0)
-                                case _ => temp(8)
-                              }
-                              if (valid(hl7Type)) (hl7Type, temp(9))
-                              else (EMPTYSTR, EMPTYSTR)
-                            case _ => (EMPTYSTR, EMPTYSTR)
-                          }
-                        case _ => (EMPTYSTR, EMPTYSTR)
-                      }
-                      if (reqMsgType._1 != EMPTYSTR) msgType = hl7TypesMappings getOrElse(reqMsgType._1, UNKNOWN) match {
-                        case ORU =>
-                          if (valid(reqMsgType._2) && reqMsgType._2.startsWith("IP")) IPLORU else ORU
-                        case any => any
-                      }
-                      if (msgType == UNKNOWN) throw new UnknownMessageTypeException(hl7TypesMappings.keySet.mkString(caret) +
-                        s"Registered Handlers Cannot Deal With Message Came Into Process :: $reqMsgType  for ${hl7._2}")
-                      else info("Able To Find Which Type of HL7 From Message :: " + msgType)
+          if (dataItr nonEmpty) {
+            propFile = confFile
+            val kafkaOut = KProducer()(prodConf)
+            val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
+            val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+            val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
+            val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
+            val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
+            val tlmAckIO = if (tlmAckQueue.isDefined) Some(MQAcker(appName, s"Ack Sender for $appName", tlmAckQueue.get)) else None
+            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckIO isDefined) tlmAckIO.get.sendMessage(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), tlmAckQueue.get)
+            dataItr foreach (hl7 => {
+              var msgType: HL7 = UNKNOWN
+              try {
+                msgType = if (hl7._1 != null && hl7._1 != EMPTYSTR) hl7TypesMappings getOrElse(hl7._1 substring(0, hl7._1 indexOf COLON), UNKNOWN) else UNKNOWN
+                if (msgType == UNKNOWN) {
+                  info("Message Type Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
+                  val delim = if (hl7._2 contains "\r\n") "\r\n" else "\n"
+                  val rawSplit = hl7._2 split delim
+                  val reqMsgType = if (valid(rawSplit)) {
+                    val temp = PIPER split rawSplit(0)
+                    if (valid(temp, 9)) {
+                      val hl7Type = if (temp(8) contains caret) (temp(8) split("\\" + caret, -1)) (0)
+                      else temp(8)
+                      if (valid(hl7Type)) (hl7Type, temp(9))
+                      else (EMPTYSTR, EMPTYSTR)
+                    } else (EMPTYSTR, EMPTYSTR)
+                  } else (EMPTYSTR, EMPTYSTR)
+                  if (reqMsgType._1 != EMPTYSTR) msgType = hl7TypesMappings getOrElse(reqMsgType._1, UNKNOWN) match {
+                    case ORU =>
+                      if (valid(reqMsgType._2) && reqMsgType._2.startsWith("IP")) IPLORU else ORU
+                    case any => any
                   }
-                  val hl7Str = msgType.toString
-                  val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO)(_, _)
-                  Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
-                    case Success(data) => data match {
-                      case Left(out) =>
-                        segHandlerIO(out._2, out._3)
-                        sizeCheck(out._1, parserS(msgType))
-                        if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
-                          tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
-                        }
-                        else {
-                          val msg = rejectMsg(hl7Str, jsonStage, out._3, " Writing Data to OUT Failed ", out._2)
-                          tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Left(out._3))), s"$hl7Str$COLON hl7RejIO-rejectMsg", error(_: Throwable))
-                          error("Sending JSON to Kafka Failed :: " + msg)
-                        }
-                      case Right(t) =>
-                        val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
-                        if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                        tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
-                        debug(msg, t)
-                    }
-                    case Failure(t) =>
+                  if (msgType == UNKNOWN) throw new UnknownMessageTypeException(hl7TypesMappings.keySet.mkString(caret) +
+                    s" Registered Handlers Cannot Deal With Message Came Into Process :: $reqMsgType  for ${hl7._2}")
+                  else info("Able To Find Which Type of HL7 From Message :: " + msgType)
+                }
+                val hl7Str = msgType.toString
+                val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
+                  if (tlmAckIO isDefined) Some(tlmAckIO.get.sendMessage(_: String, tlmAckQueue.get)) else None)(_, _)
+                Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
+                  case Success(data) => data match {
+                    case Left(out) =>
+                      ackTlm(out._3, hl7Str)
+                      segHandlerIO(out._2, out._3)
+                      sizeCheck(out._1, parserS(msgType))
+                      if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
+                        tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
+                      }
+                      else {
+                        val msg = rejectMsg(hl7Str, jsonStage, out._3, " Writing Data to OUT Failed ", out._2)
+                        tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Left(out._3))), s"$hl7Str$COLON hl7RejIO-rejectMsg", error(_: Throwable))
+                        error("Sending JSON to Kafka Failed :: " + msg)
+                      }
+                    case Right(t) =>
+                      ackTlm(metaFromRaw(hl7._2), hl7Str)
                       val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
                       if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
-                      error(msg)
+                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
+                      debug(msg, t)
                   }
-                } catch {
-                  case t: Throwable => error(s" Processing HL7 failed for Message with header ${hl7._1} & body \n ${hl7._2} \n with error message ${t.getMessage}", t)
-                    val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, t.getMessage, t)
+                  case Failure(t) =>
+                    ackTlm(metaFromRaw(hl7._2), hl7Str)
+                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                    tryAndLogThr(hl7RejIO(msg, header(msgType.toString, rejectStage, Right(hl7._2))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+                    tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+                    error(msg)
                 }
-              })
-              this.segmentsAccumulators = segmentsAccumulators
-              segHandlers.values foreach (handler => collectSegmentMetrics(handler metricsRegistry))
-              this.parserAccumulators = parserAccumulators
-              parserS.values foreach (parser => collectParserMetrics(parser metricsRegistry))
-            case _ => info(s"Partition was Empty For RDD ${rdd.id} So skipping :: $dataItr")
-          }
+              } catch {
+                case t: Throwable => error(s" Processing HL7 failed for Message with header ${hl7._1} & body \n ${hl7._2} \n with error message ${t.getMessage}", t)
+                  ackTlm(metaFromRaw(hl7._2), msgType.toString)
+                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, t.getMessage, t)
+                  if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
+                  tryAndLogThr(hl7RejIO(msg, header(msgType.toString, rejectStage, Right(hl7._2))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+              }
+            })
+            self.segmentsAccumulators = segmentsAccumulators
+            segHandlers.values foreach (handler => collectSegmentMetrics(handler metricsRegistry))
+            self.parserAccumulators = parserAccumulators
+            parserS.values foreach (parser => collectParserMetrics(parser metricsRegistry))
+          } else info(s"Partition was Empty For RDD ${rdd.id} So skipping :: $dataItr")
         })
-        tryAndLogErrorMes(tracker.foreach(_.get()),error(_:Throwable))
+        tryAndLogErrorMes(tracker.foreach(_.get()), error(_: Throwable))
         info(s"Processing Completed for RDD :: ${rdd.id} Messages Count :: $messagesInRDD")
       } else info(s"Batch was Empty So Skipping RDD :: ${rdd.id}")
     })
   }
+
 
   /**
     * Starts Spark Streaming
@@ -436,10 +440,10 @@ object HL7Job extends Logg with App {
     */
   private def collectSegmentMetrics(taskMetrics: TrieMap[String, Long], taskUpdate: Boolean = true) = segmentsAccumulators.synchronized {
     val NA = SegmentsState.NOTAPPLICABLE.toString
-    taskMetrics.foreach({ case (k, metric) => if (metric > 0L) taskUpdate match {
-      case true =>
-        if (!(k contains NA)) this.segmentsAccumulators(k) += metric
-      case _ => this.segmentsAccumulators(k).value_=(metric)
+    taskMetrics.foreach({ case (k, metric) => if (metric > 0L) if (taskUpdate) {
+      if (!(k contains NA)) this.segmentsAccumulators(k) += metric
+    } else {
+      this.segmentsAccumulators(k).value_=(metric)
     }
     })
   }
@@ -448,23 +452,23 @@ object HL7Job extends Logg with App {
     * Collects Parser Metrics from Tasks Completed in Driver
     */
   private def collectParserMetrics(taskMetrics: TrieMap[String, Long], taskUpdate: Boolean = true) = parserAccumulators.synchronized {
-    taskMetrics.foreach({ case (k, metric) => if (metric > 0L) taskUpdate match {
-      case true => this.parserAccumulators(k) += metric
-      case _ => this.parserAccumulators(k).value_=(metric)
+    taskMetrics.foreach({ case (k, metric) => if (metric > 0L) if (taskUpdate) {
+      this.parserAccumulators(k) += metric
+    } else {
+      this.parserAccumulators(k).value_=(metric)
     }
     })
   }
 
   def checkForStageToComplete(): Boolean = {
-    ensureStageCompleted.get() match {
-      case true =>
-        true
-      case _ =>
-        val retry = RetryHandler(8, defaultWaitBetweenRetriesMS)
-        while (retry.tryAgain()) {
-          if (ensureStageCompleted.get()) return true
-        }
-        false
+    if (ensureStageCompleted.get()) {
+      true
+    } else {
+      val retry = RetryHandler(8, defaultWaitBetweenRetriesMS)
+      while (retry.tryAgain()) {
+        if (ensureStageCompleted.get()) return true
+      }
+      false
     }
   }
 
@@ -540,9 +544,9 @@ object HL7Job extends Logg with App {
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
-    val timeCheck = timeInterval * 60000L
+    val timeCheck: Long = timeInterval * 60000L
     val lowFrequencyHl7AlertInterval = 5
-    val iscMsgAlertFreq = {
+    val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
       hl7MsgMeta.foreach(hl7 => temp += hl7._1 -> 0)
       temp
@@ -552,24 +556,23 @@ object HL7Job extends Logg with App {
       checkForStageToComplete()
       if (!(runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
         msgTypeFreq.transform({ case (k, v) =>
-          lowFrequencyHL7 isDefinedAt v._1 match {
-            case true =>
-              if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
-                lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
-                v
-              } else {
-                if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-                else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-                lowFrequencyHL7 update(v._1, 0)
-                (v._1, 0L)
-              }
-            case _ =>
-              if (v._2 <= 0) {
-                if (iscMonitoringEnabled) {
-                  IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
-                } else noDataAlert(v._1, k)
-              }
+          if (lowFrequencyHL7 isDefinedAt v._1) {
+            if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
+              lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
+              v
+            } else {
+              if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+              else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+              lowFrequencyHL7 update(v._1, 0)
               (v._1, 0L)
+            }
+          } else {
+            if (v._2 <= 0) {
+              if (iscMonitoringEnabled) {
+                IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
+              } else noDataAlert(v._1, k)
+            }
+            (v._1, 0L)
           }
         })
       }

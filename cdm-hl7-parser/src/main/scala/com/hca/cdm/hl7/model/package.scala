@@ -49,7 +49,7 @@ package object model {
   lazy val EQUAL = "="
   lazy val ESCAPE = "\\"
   lazy val segmentSequence = "segment_sequence"
-  lazy val commonNode = synchronized {
+  lazy val commonNode: mutable.LinkedHashMap[String, String] = synchronized {
     val temp = new mutable.LinkedHashMap[String, String]
     val nodeEle = lookUpProp("common.elements") match {
       case EMPTYSTR => throw new CdmException("No Common Elements found. ")
@@ -59,9 +59,9 @@ package object model {
     temp
   }
 
-  lazy val MSHMappings = synchronized(
+  lazy val MSHMappings: mutable.HashMap[String, Array[(String, String, String, String)]] = synchronized(
     commonSegmentMappings(lookUpProp("common.elements.msh.mappings")))
-  lazy val PIDMappings = synchronized(
+  lazy val PIDMappings: mutable.HashMap[String, Array[(String, String, String, String)]] = synchronized(
     commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
 
   private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id",
@@ -159,16 +159,15 @@ package object model {
   def metaFromRaw(raw: String): MSGMeta = {
     val delim = if (raw contains "\r\n") "\r\n" else "\n"
     val rawSplit = raw split delim
-    valid(rawSplit, 1) match {
-      case true => val msh = rawSplit(0)
-        val tempMsh = PIPER split msh
-        val tempPid = PIPER split findSeg(rawSplit, PID)
-        Try(MSGMeta(tempMsh(9), tempMsh(6), dataAtIndex(tempPid)(3), dataAtIndex(tempPid)(4), dataAtIndex(tempPid)(18, 1), dataAtIndex(tempMsh)(3, 1), dataAtIndex(tempMsh)(8, 1))) match {
-          case Success(me) => me
-          case _ => NONE
-        }
-      case _ => NONE
-    }
+    if (valid(rawSplit)) {
+      val msh = rawSplit(0)
+      val tempMsh = PIPER split msh
+      val tempPid = PIPER split findSeg(rawSplit, PID)
+      Try(MSGMeta(tempMsh(9), tempMsh(6), dataAtIndex(tempPid)(3), dataAtIndex(tempPid)(4), dataAtIndex(tempPid)(18, 1), dataAtIndex(tempMsh)(3, 1), dataAtIndex(tempMsh)(8, 1))) match {
+        case Success(me) => me
+        case _ => NONE
+      }
+    } else NONE
   }
 
   private def dataAtIndex(segment: Array[String], delim: String = "\\" + caret)(index: Int, dataAtIndex: Int = 0): String = {
@@ -192,35 +191,31 @@ package object model {
   def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED): Hl7Segments = {
     import OutFormats._
     Hl7Segments(msgType, segments flatMap (seg => {
-      seg._1 contains "ADHOC" match {
-        case true =>
-          val empty = new mutable.LinkedHashSet[(String, String)]
-          val adhoc = seg._1 split COLON
-          if (valid(adhoc, 3)) {
-            val filterFile = Try(adhoc(4)) match {
-              case Success(x) => x
-              case _ => EMPTYSTR
+      if (seg._1 contains "ADHOC") {
+        val empty = new mutable.LinkedHashSet[(String, String)]
+        val adhoc = seg._1 split COLON
+        if (valid(adhoc, 3)) {
+          def access(index: Int, store: Array[String] = adhoc) = () => store(index)
+
+          val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
+          val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
+          val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
+          val segStruct = adhoc take 2 mkString COLON
+          val outFormats = adhoc(2) split "\\^"
+          val outDest = adhoc(3) split "\\^"
+          var index = -1
+          outFormats.map(outFormat => {
+            index += 1
+            val outFormSplit = outFormat split AMPERSAND
+            if (outFormat contains JSON.toString) {
+              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends,tlmAckApplication), loadFilters(filterFile))
+            } else {
+              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends,tlmAckApplication), loadFilters(filterFile))
             }
-            val fieldWithNoAppends = Try(adhoc(5)) match {
-              case Success(x) => x.split("\\&", -1)
-              case _ => Array.empty[String]
-            }
-            val segStruct = adhoc take 2 mkString COLON
-            val outFormats = adhoc(2) split "\\^"
-            val outDest = adhoc(3) split "\\^"
-            var index = -1
-            outFormats.map(outFormat => {
-              index += 1
-              val outFormSplit = outFormat split AMPERSAND
-              outFormat contains JSON.toString match {
-                case true =>
-                  (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends), loadFilters(filterFile))
-                case _ =>
-                  (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends), loadFilters(filterFile))
-              }
-            }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
-          } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
-        case _ => List(Model(seg._1, seg._2, delimitedBy, modelFieldDelim))
+          }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
+        } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
+      } else {
+        List(Model(seg._1, seg._2, delimitedBy, modelFieldDelim))
       }
     }) groupBy (_.reqSeg))
   }
@@ -231,14 +226,14 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String]) {
-    val multiColumnLookUp = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
+  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String],ackApplication: String = EMPTYSTR) {
+    val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
-    lazy val EMPTY = mutable.LinkedHashMap.empty[String, String]
+    lazy val EMPTY: mutable.LinkedHashMap[String, String] = mutable.LinkedHashMap.empty[String, String]
 
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(reqSeg, segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
 
@@ -264,7 +259,7 @@ package object model {
   }
 
   private[model] sealed trait modelLayout {
-    protected lazy val cachedLayout = getLayout
+    protected lazy val cachedLayout: mutable.LinkedHashMap[String, String] = getLayout
 
     def getLayout: mutable.LinkedHashMap[String, String]
 
@@ -278,9 +273,10 @@ package object model {
     val reader = fromFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
-      valid(splits, 3) match {
-        case true => splits(0) -> (splits(1), splits(2))
-        case _ => EMPTYSTR -> (EMPTYSTR, EMPTYSTR)
+      if (valid(splits, 3)) {
+        splits(0) -> (splits(1), splits(2))
+      } else {
+        EMPTYSTR -> (EMPTYSTR, EMPTYSTR)
       }
     }).takeWhile(_._1 ne EMPTYSTR).groupBy(_._1).map({ case (k, v) => k -> v.map(x => x._2) })
     closeResource(reader)
@@ -380,10 +376,11 @@ package object model {
     (segmentData split(delimitedBy, -1)).filter(_ != EMPTYSTR) foreach (ele => {
       if (ele contains modelFieldDelim) {
         val repeats = ele split ("\\" + modelFieldDelim)
-        repeats.length >= 2 match {
-          case true => val k = repeats.head
-            repeats.tail.foreach(v => temp addBinding(k, v))
-          case _ => temp addBinding(ele, EMPTYSTR)
+        if (repeats.length >= 2) {
+          val k = repeats.head
+          repeats.tail.foreach(v => temp addBinding(k, v))
+        } else {
+          temp addBinding(ele, EMPTYSTR)
         }
       } else temp addBinding(ele, EMPTYSTR)
     })

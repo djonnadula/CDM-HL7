@@ -5,12 +5,14 @@ import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.StreamingContext.{getOrCreate => create}
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.{SparkConf, SparkContext, SparkEnv => sparkEnv}
 import com.hca.cdm._
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import java.lang.Class.{forName => className}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
+import com.hca.cdm.kafka.util.TopicUtil._
+import org.apache.spark.storage.StorageLevel
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -54,14 +56,20 @@ object Hl7SparkUtil {
   /**
     * Creates Spark Context
     */
-  private def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
+  def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
 
 
   /**
     * Creates Streams by polling Data from Kafka
     */
   def stream(sparkStrCtx: StreamingContext, kafkaConsumerProp: Map[String, String], topics: Set[String]): InputDStream[(String, String)] =
-  KConsumer.createDirectStream[String, String, StringDecoder, StringDecoder](sparkStrCtx, kafkaConsumerProp, topics)
+    KConsumer.createDirectStream[String, String, StringDecoder, StringDecoder](sparkStrCtx, kafkaConsumerProp, topics)
+
+  /**
+    * Creates Streams by polling Data from Kafka Receiver
+    */
+  def stream(sparkStrCtx: StreamingContext, kafkaConsumerProp: Map[String, String], topics: Seq[String], dataStorage: StorageLevel = StorageLevel.MEMORY_ONLY): InputDStream[(String, String)] =
+    KConsumer.createStream[String, String, StringDecoder, StringDecoder](sparkStrCtx, kafkaConsumerProp, topicPartitions(topics), dataStorage)
 
 
   /**
@@ -80,6 +88,12 @@ object Hl7SparkUtil {
     */
   def shutdownEverything(sparkStrCtx: StreamingContext): Unit = if (sparkStrCtx != null) sparkStrCtx stop(stopSparkContext = true, stopGracefully = true)
 
+
+  /**
+    *
+    * Call this only After Context initialised
+    */
+  def currentSparkEnv(): sparkEnv = sparkEnv.get
 
   def batchCycle(timeUnit: String, cycle: Int): Duration = {
     timeUnit match {

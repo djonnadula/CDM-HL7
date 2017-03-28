@@ -181,22 +181,26 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   private def modelData(underlying: mutable.LinkedHashMap[String, String], model: Model)(filterKeys: Map[String, mutable.Set[String]], data: mapType)
                        (dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
+
+    def applyData(key: String, data: String = EMPTYSTR): Unit = {
+      if (underlying isDefinedAt key) {
+        if (!appendSegment) dataHandler(key, data, EMPTYSTR)
+        else dataHandler(key, data, caret)
+        dataExist = true
+      }
+    }
+
     data.foreach(node => {
       if (node._1 != null & node._1 != EMPTYSTR & (filterKeys isDefinedAt node._1)) {
         node._2 match {
-          case str: String => if (underlying isDefinedAt node._1) {
-            if (!appendSegment) dataHandler(node._1, str, EMPTYSTR)
-            else dataHandler(node._1, str, caret)
-            dataExist = true
-          }
+          case str: String => applyData(node._1, str)
+          case None => applyData(node._1)
           case map: mapType =>
             if (handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
           case list: listType =>
             if (handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
           case any: Any => throw new DataModelException("Got an Unhandled Type into Data Modeler " + logIdent + " :: " + any.getClass + " ?? Not Yet Implemented")
         }
-      } else {
-
       }
     })
     dataExist
@@ -205,20 +209,25 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   private def handelMap(data: mapType, node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
                        (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
+
+    def applyData(key: String, data: String = EMPTYSTR): Unit = {
+      if (underlying isDefinedAt (node + model.modelFieldDelim + key)) {
+        if (!appendSegment) dataHandler(node + model.modelFieldDelim + key, data, EMPTYSTR)
+        else dataHandler(node + model.modelFieldDelim + key, data, caret)
+        dataExist = true
+      }
+      else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
+        if (!appendSegment) dataHandler(node, data, EMPTYSTR)
+        else dataHandler(node, data, caret)
+        dataExist = true
+      }
+    }
+
     data.foreach({
       case (k, v) =>
         v match {
-          case str: String =>
-            if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
-              if (!appendSegment) dataHandler(node + model.modelFieldDelim + k, str, EMPTYSTR)
-              else dataHandler(node + model.modelFieldDelim + k, str, caret)
-              dataExist = true
-            }
-            else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
-              if (!appendSegment) dataHandler(node, str, EMPTYSTR)
-              else dataHandler(node, str, caret)
-              dataExist = true
-            }
+          case str: String => applyData(k, str)
+          case None => applyData(k)
           case listType: listType => handleList(listType, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
           case map: mapType => handelMap(map, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
         }
@@ -229,17 +238,22 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   private def handleList(data: listType, node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
                         (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
+
+    def applyData(key: String, data: String = EMPTYSTR): Unit = {
+      if (underlying isDefinedAt (node + model.modelFieldDelim + key)) {
+        dataHandler(node + model.modelFieldDelim + key, data, caret)
+        dataExist = true
+      }
+      else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
+        dataHandler(node, data, caret)
+        dataExist = true
+      }
+    }
+
     data.foreach(map => map.foreach({ case (k, v) =>
       v match {
-        case str: String =>
-          if (underlying isDefinedAt (node + model.modelFieldDelim + k)) {
-            dataHandler(node + model.modelFieldDelim + k, str, caret)
-            dataExist = true
-          }
-          else if ((underlying isDefinedAt node) & !isEmpty(node, filterKeys)) {
-            dataHandler(node, str, caret)
-            dataExist = true
-          }
+        case str: String => applyData(k, str)
+        case None => applyData(k)
         case list: listType => handleList(list, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
         case map: mapType => handelMap(map, node + model.modelFieldDelim + k, model)(filterKeys)(underlying, dataHandler, appendSegment)
       }
