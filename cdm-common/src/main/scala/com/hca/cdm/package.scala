@@ -243,7 +243,11 @@ package object cdm extends Logg {
   def exists[T](store: Map[T, AnyRef], key: T): Boolean = store isDefinedAt key
 
   def enabled[T](key: T): Option[T] = {
-    Option(key)
+    key match {
+      case s: String => if (null != s && s != EMPTYSTR) return Some(s.asInstanceOf[T])
+      case any => if (valid(any)) return Some(any.asInstanceOf[T])
+    }
+    None
   }
 
   private class Factory(id: String) extends ThreadFactory {
