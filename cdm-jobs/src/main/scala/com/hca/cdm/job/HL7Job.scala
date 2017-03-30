@@ -153,7 +153,7 @@ object HL7Job extends Logg with App {
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 60, minToSec(monitorInterval), TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), 300, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
@@ -295,7 +295,7 @@ object HL7Job extends Logg with App {
             case _ => info(s"Partition was Empty For RDD ${rdd.id} So skipping :: $dataItr")
           }
         })
-        tryAndLogErrorMes(tracker.foreach(_.get()),error(_:Throwable))
+        tryAndLogErrorMes(tracker.foreach(_.get()), error(_: Throwable))
         info(s"Processing Completed for RDD :: ${rdd.id} Messages Count :: $messagesInRDD")
       } else info(s"Batch was Empty So Skipping RDD :: ${rdd.id}")
     })
@@ -541,7 +541,7 @@ object HL7Job extends Logg with App {
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
     val timeCheck = timeInterval * 60000L
-    val lowFrequencyHl7AlertInterval = 5
+    val lowFrequencyHl7AlertInterval = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq = {
       val temp = new TrieMap[HL7, Int]()
       hl7MsgMeta.foreach(hl7 => temp += hl7._1 -> 0)
