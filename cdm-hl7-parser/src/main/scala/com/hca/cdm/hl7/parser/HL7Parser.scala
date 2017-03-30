@@ -357,7 +357,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       case _ =>
         HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")),
           versionData.hl7Version,
-          s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version} & Msg Control Id ${versionData.controlId}")
+          s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version}")
     }
   }
 
