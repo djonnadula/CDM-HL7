@@ -153,7 +153,7 @@ object HL7Job extends Logg with App {
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), 10, minToSec(monitorInterval), TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 60, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
@@ -550,30 +550,27 @@ object HL7Job extends Logg with App {
 
     override def run(): Unit = {
       checkForStageToComplete()
-      if (!(runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
-        msgTypeFreq.transform({ case (k, v) =>
-          lowFrequencyHL7 isDefinedAt v._1 match {
-            case true =>
-              if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
-                lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
-                v
-              } else {
-                if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-                else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-                lowFrequencyHL7 update(v._1, 0)
-                (v._1, 0L)
-              }
-            case _ =>
-              if (v._2 <= 0) {
-                if (iscMonitoringEnabled) {
-                  IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
-                } else noDataAlert(v._1, k)
-              }
-              (v._1, 0L)
+      msgTypeFreq.transform({ case (k, v) =>
+        if (lowFrequencyHL7 isDefinedAt v._1) {
+          if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
+            lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
+            v
+          } else {
+            if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+            else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+            lowFrequencyHL7 update(v._1, 0)
+            (v._1, 0L)
           }
-        })
-      }
-      else {
+        } else {
+          if (v._2 <= 0) {
+            if (iscMonitoringEnabled) {
+              IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
+            } else noDataAlert(v._1, k)
+          }
+          (v._1, 0L)
+        }
+      })
+      if (runningStage != null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck)) {
         error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +

@@ -137,19 +137,28 @@ package object model {
   }
 
 
-  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true): String = {
-    val rejectSchema = getRejectSchema
-    import rejectSchemaMapping._
-    rejectSchema update(processName, s"$hl7$COLON$stage")
-    rejectSchema update(controlID, meta.controlId)
-    rejectSchema update(tranTime, meta.msgCreateTime)
-    rejectSchema update(mrn, meta.medical_record_num)
-    rejectSchema update(urn, meta.medical_record_urn)
-    rejectSchema update(accntNum, meta.account_num)
-    rejectSchema update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
-    rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
-    rejectSchema update(etlTime, timeStamp)
-    toJson(rejectSchema)
+  import OutFormats._
+
+  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): String = {
+    format match {
+      case JSON =>
+        val rejectSchema = getRejectSchema
+        import rejectSchemaMapping._
+        rejectSchema update(processName, s"$hl7$COLON$stage")
+        rejectSchema update(controlID, meta.controlId)
+        rejectSchema update(tranTime, meta.msgCreateTime)
+        rejectSchema update(mrn, meta.medical_record_num)
+        rejectSchema update(urn, meta.medical_record_urn)
+        rejectSchema update(accntNum, meta.account_num)
+        rejectSchema update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
+        rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
+        rejectSchema update(etlTime, timeStamp)
+        toJson(rejectSchema)
+      case DELIMITED =>
+        hl7 + COLON + stage + PIPE_DELIMITED + meta.controlId + PIPE_DELIMITED + meta.msgCreateTime + PIPE_DELIMITED + meta.medical_record_num +
+          PIPE_DELIMITED + meta.medical_record_urn + PIPE_DELIMITED + meta.account_num + PIPE_DELIMITED + timeStamp + PIPE_DELIMITED +
+          (if (t != null) reason + (t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED + (if (raw ne EMPTYSTR) raw else toJson(data))
+    }
   }
 
   def rejectRawMsg(hl7: String, stage: String = EMPTYSTR, raw: String, reason: String, t: Throwable, stackTrace: Boolean = true): String = {
