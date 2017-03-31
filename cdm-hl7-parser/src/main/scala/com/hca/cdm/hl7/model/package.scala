@@ -156,8 +156,8 @@ package object model {
         toJson(rejectSchema)
       case DELIMITED =>
         s"$hl7$COLON$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}" +
-          s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED" +
-          (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED + (if (raw ne null) raw else toJson(data)) + PIPE_DELIMITED+ timeStamp
+          s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED" + timeStamp + PIPE_DELIMITED +
+          (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED + (if (raw ne null) raw else toJson(data))
     }
   }
 
