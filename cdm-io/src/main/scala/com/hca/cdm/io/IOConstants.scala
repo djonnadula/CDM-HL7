@@ -46,7 +46,7 @@ object IOConstants {
   val defaultProducerRetries: String = "30"
   val defaultConsumerSessionTimeOut = "30000"
   val defaultConsumerAutoCommit = "false"
-  lazy val defaultOffsetReset = lookUpProp("hl7.topicReset")
+  lazy val defaultOffsetReset: String = lookUpProp("hl7.topicReset")
   val fetchBytes: String = (5 * 1024 * 1024).toString
   val fetchMinBytes: String = "100"
   val fetchMinWait: String = "3000"

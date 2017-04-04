@@ -101,7 +101,7 @@ object SegmentsValidation extends Logg with App {
 
   private[this] case class DataSource(source: String, uniqueId: String) {
 
-    val tables = client.tables(source).filter(table => {
+    val tables: Seq[String] = client.tables(source).filter(table => {
       !(table.contains("hl7_all_proc_rejected") | table.contains("hl7_audit_data"))
     })
 
@@ -141,61 +141,60 @@ object SegmentsValidation extends Logg with App {
 
   private[this] def generateReport(data: Map[String, List[ComparedData]]) {
     ListMap(data.toSeq.sortBy(_._1): _*).foreach({ case (segment, results) =>
-      valid(results) match {
-        case true =>
-          results.groupBy(_.message).foreach({ case (message, result) =>
-            message match {
-              case `rowsmatchingForId` =>
-                append(s"<div style=color:#00b258><h4>QA Segments for ${segment.toUpperCase()} Which Match with Regression Source as Follows  </h4>")
-                append("<table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
-                append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Message Type</th>")
-                append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
-                append("</tr>")
-                result.foreach({ column =>
-                  append("<tr>" + tdData + column.messageType + tdDataEnd +
-                    tdData + column.controlId + tdDataEnd +
-                    "</tr>")
-                })
-                append("</table>")
-                append("</div>")
-              case `noTableInReg` =>
-                append(s"<div style=color:#FF4500><h3>No Table Exist for ${segment.toUpperCase} in Regression Data Base</h3><br/>")
-              case `noDataInReg` =>
-                append(s"<div style=color:#FF4500><h3>No Data Exist for ${segment.toUpperCase} & Controld Id's ${result.map(_.controlId).mkString(" :: ")} in Regression Data Base to Compare Against QA</h3><br/>")
-              case `EMPTYSTR` =>
-                if (resultsNotMatched(result)) {
-                  append(s"<div style=color:#708090><h3>Mismatch Results for Segment ${segment.toUpperCase} from QA to Regression Data Base as follows </h3>")
-                  val misMatch = result.filter(_.columnsMisMatching.isDefined)
-                  if (valid(misMatch)) {
-                    append("<h4 style=color:#FF0000> Columns which Don't Match are as follows </h4>")
-                    append("<div><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Attribute</th>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>QA output</th>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Expected Output</th>")
-                    append("</tr>")
-                    misMatch.foreach(row => handleColumnReport(row.columnsMisMatching.get, row.controlId))
-                    append("</table>")
-                    append("</div> ")
-                  }
-                  val dontExist = result.filter(_.columnsDontExist.isDefined)
-                  if (valid(dontExist)) {
-                    append("<div style=color:#FF0000><h4> Columns which Don't Exist in Regression Source as follows  </h4>")
-                    append("<table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Attribute</th>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>QA output</th>")
-                    append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Expected Output</th>")
-                    append("</tr>")
-                    dontExist.foreach(row => handleColumnReport(row.columnsDontExist.get, row.controlId))
-                    append("</table>")
-                    append("</div> ")
-                  }
+      if (valid(results)) {
+        results.groupBy(_.message).foreach({ case (message, result) =>
+          message match {
+            case `rowsmatchingForId` =>
+              append(s"<div style=color:#00b258><h4>QA Segments for ${segment.toUpperCase()} Which Match with Regression Source as Follows  </h4>")
+              append("<table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
+              append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Message Type</th>")
+              append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
+              append("</tr>")
+              result.foreach({ column =>
+                append("<tr>" + tdData + column.messageType + tdDataEnd +
+                  tdData + column.controlId + tdDataEnd +
+                  "</tr>")
+              })
+              append("</table>")
+              append("</div>")
+            case `noTableInReg` =>
+              append(s"<div style=color:#FF4500><h3>No Table Exist for ${segment.toUpperCase} in Regression Data Base</h3><br/>")
+            case `noDataInReg` =>
+              append(s"<div style=color:#FF4500><h3>No Data Exist for ${segment.toUpperCase} & Controld Id's ${result.map(_.controlId).mkString(" :: ")} in Regression Data Base to Compare Against QA</h3><br/>")
+            case `EMPTYSTR` =>
+              if (resultsNotMatched(result)) {
+                append(s"<div style=color:#708090><h3>Mismatch Results for Segment ${segment.toUpperCase} from QA to Regression Data Base as follows </h3>")
+                val misMatch = result.filter(_.columnsMisMatching.isDefined)
+                if (valid(misMatch)) {
+                  append("<h4 style=color:#FF0000> Columns which Don't Match are as follows </h4>")
+                  append("<div><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Attribute</th>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>QA output</th>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Expected Output</th>")
+                  append("</tr>")
+                  misMatch.foreach(row => handleColumnReport(row.columnsMisMatching.get, row.controlId))
+                  append("</table>")
+                  append("</div> ")
                 }
-            }
-          })
-        case _ =>
-          append(s"<div style=color:#0000FF><h3>${segment.toUpperCase} has no Data to Compare </h3></div>")
+                val dontExist = result.filter(_.columnsDontExist.isDefined)
+                if (valid(dontExist)) {
+                  append("<div style=color:#FF0000><h4> Columns which Don't Exist in Regression Source as follows  </h4>")
+                  append("<table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Attribute</th>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>QA output</th>")
+                  append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Expected Output</th>")
+                  append("</tr>")
+                  dontExist.foreach(row => handleColumnReport(row.columnsDontExist.get, row.controlId))
+                  append("</table>")
+                  append("</div> ")
+                }
+              }
+          }
+        })
+      } else {
+        append(s"<div style=color:#0000FF><h3>${segment.toUpperCase} has no Data to Compare </h3></div>")
       }
     })
     mail("{encrypt} Regression Test Results for HL7 Segments Ran on " + dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP), builder.result(), NORMAL, statsReport = true)

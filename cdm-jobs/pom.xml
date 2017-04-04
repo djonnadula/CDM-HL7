@@ -9,26 +9,26 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdm-jobs</artifactId>
-    <version>${project.version}</version>
+    <version>${cdm.version}</version>
     <name>CDM JOBS</name>
 
     <dependencies>
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-common</artifactId>
-            <version>${project.version}</version>
+            <version>${cdm.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-hl7-parser</artifactId>
-            <version>${project.version}</version>
+            <version>${cdm.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-io</artifactId>
-            <version>${project.version}</version>
+            <version>${cdm.version}</version>
         </dependency>
 
         <dependency>
@@ -83,7 +83,7 @@
                         <configuration>
                             <transformers>
                                 <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>reference.conf</resource>
@@ -118,6 +118,7 @@
 
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>

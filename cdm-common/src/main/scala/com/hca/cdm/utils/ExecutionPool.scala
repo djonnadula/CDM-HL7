@@ -1,12 +1,10 @@
 package com.hca.cdm.utils
 
 import java.util.concurrent.{RejectedExecutionHandler, ThreadPoolExecutor, TimeUnit}
-
 import com.hca.cdm._
 import com.hca.cdm.log.Logg
-
 import scala.collection.concurrent.TrieMap
-import scala.concurrent.ExecutionContext
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutor}
 
 /**
   * Created by Devaraj Jonnadula on 9/23/2016.
@@ -28,7 +26,7 @@ class ExecutionPool extends Logg with PoolExecutor {
 
   private def logEx(t: Throwable): Unit = error("Unable to Execute Task " + currThread.getName, t)
 
-  implicit val poolContext = ExecutionContext.fromExecutor(pool, logEx)
+  implicit val poolContext: ExecutionContextExecutor = ExecutionContext.fromExecutor(pool, logEx)
 
   override def shutDown(): Unit = {
     pool.shutdown()

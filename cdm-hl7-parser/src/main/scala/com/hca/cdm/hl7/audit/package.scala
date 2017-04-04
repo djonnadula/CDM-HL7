@@ -16,6 +16,10 @@ package object audit {
 
 
   private lazy val NONE = MSGMeta(EMPTYSTR, EMPTYSTR, EMPTYSTR, EMPTYSTR, EMPTYSTR)
+  private lazy val tlmresponseStates = lookUpProp("tlm.response.state").split(COMMA, -1).filter(valid(_)).map(x => {
+    val temp = x.split(COLON, -1)
+    temp(0) -> temp(1)
+  }).toMap
 
   def msgMeta(data: mutable.LinkedHashMap[String, Any]): MSGMeta = {
     (data.get(MSH_INDEX), data.get(commonNodeStr)) match {
@@ -23,8 +27,8 @@ package object audit {
         (msh, common) match {
           case (mshMap: mapType, cmnMap: mapType) => (cmnMap get msg_control_id, mshMap get msg_create_time,
             cmnMap get medical_record_num, cmnMap get medical_record_urn, cmnMap get account_num, cmnMap get sending_facility) match {
-            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accnum: String), Some(facility: String)) =>
-              return MSGMeta(control, createTime, rnum, urn, accnum, facility, triggerEvent(msh))
+            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accNum: String), Some(facility: String)) =>
+              return MSGMeta(control, createTime, rnum, urn, accNum, facility, triggerEvent(msh))
             case _ =>
           }
           case _ =>
@@ -64,8 +68,16 @@ package object audit {
     }
   }
 
-  def tlmAckMsg(hl7: String, ackingTo: String = "WSMQ", from: String = "HDFS")(meta: MSGMeta): String = {
-    s"$ackingTo$PIPE_DELIMITED${meta.facility}$PIPE_DELIMITED$hl7$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.triggerEvent}$PIPE_DELIMITED$from$PIPE_DELIMITED$timeStamp"
+  def tlmAckMsg(hl7: String, appState: String, ackingTo: String, from: String)(meta: MSGMeta): String = {
+    def reqHl7: String = hl7 match {
+      case "IPLORU" => "ORU"
+      case "ORMORDERS" => "ORM"
+      case other => other
+    }
+
+    def ecwRegions: String = if (meta.facility startsWith "eCW_") meta.facility.substring(4) else meta.facility
+
+    s"$ackingTo$PIPE_DELIMITED$ecwRegions$PIPE_DELIMITED$reqHl7$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.triggerEvent}$PIPE_DELIMITED$from$PIPE_DELIMITED$timeStamp$PIPE_DELIMITED$appState"
   }
 
 
@@ -76,6 +88,5 @@ package object audit {
     }
 
   }
-
 
 }

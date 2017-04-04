@@ -15960,10 +15960,11 @@ CREATE EXTERNAL TABLE hl7_nte_data (
 	nte_comment_source_counter_num_query_text String,
 	nte_comment_source_query_type String,
 	nte_comment String,
-	nte_comment_text String,
+	nte_comment_query_code String,
     nte_comment_query_text String,
     nte_comment_query_element_code String,
     nte_comment_query_response String,
+    nte_comment_query_response_name String,
 	nte_comment_type String,
 	nte_comment_type_primary_id String,
 	nte_comment_type_text String,
@@ -35100,7 +35101,7 @@ CREATE EXTERNAL TABLE hl7_zmn_data (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS TEXTFILE
-LOCATION '/user/hive/warehouse/hl7_reg_test/hl7_all_segment_data';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMN';
 
 DROP TABLE hl7_zmp_data;
 

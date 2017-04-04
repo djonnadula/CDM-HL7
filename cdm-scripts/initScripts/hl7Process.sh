@@ -25,7 +25,7 @@
 # Process name ( For display )
 NAME='CDM-HL7-Process'
 # Daemon name, where is the actual executable
-SERVICEDIR='/hadoop/cdm/lib'
+SERVICEDIR='/hadoop/cdm/lib/cdm-hl7'
 
 SERVICE='hl7process.jar'
 
@@ -99,7 +99,7 @@ case "$1" in
         RETVAL=$?
         ;;
     *)
-        echo $"Usage: $NAME start|stop|status"
+        echo $"Usage: $NAME start|stop|status|restart"
         RETVAL=1
 esac
 

@@ -11,7 +11,7 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-import com.hca.cdm.hl7.constants.HL7Constants.COMMA
+import com.hca.cdm.hl7.constants.HL7Constants.{COMMA, COLON}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.io.Source
@@ -122,13 +122,19 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.gracefulStopTimeout", "400000")
     .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
-  ENV != "PROD" match {
-    case true =>
-      sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
-        .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
-    case _ =>
-      sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
-        .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
+  private lazy val extraConfig = () => lookUpProp("spark.extra.config")
+  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
+    if (valid(conf)) {
+      val actConf = conf.split(COLON)
+      if (valid(actConf, 2)) sparkLauncher.setConf(actConf(0), actConf(1))
+    }
+  })
+  if (ENV != "PROD") {
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+  } else {
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
+      .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
   }
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
@@ -243,14 +249,13 @@ object Hl7Driver extends App with Logg {
   }
 
   private def startIfNeeded(selfStart: Boolean): Unit = {
-    selfStart match {
-      case true =>
-        info(s"Self Start is Requested for $app")
-        handleDriver("restart")
-      case _ =>
-        info(s"No Self Start is Requested So shutting down $app ...")
-        handleDriver("stop")
-        abend(0)
+    if (selfStart) {
+      info(s"Self Start is Requested for $app")
+      handleDriver("restart")
+    } else {
+      info(s"No Self Start is Requested So shutting down $app ...")
+      handleDriver("stop")
+      abend(0)
     }
   }
 

@@ -59,21 +59,22 @@ package object hadoop extends Logg {
     val fs = FileSystem get config
     val temp = new Path(new URI(path))
     info(s"Reading Data from Path $temp")
-    fs.exists(temp) match {
-      case true =>
-        def fun(): T = {
-          var data = null.asInstanceOf[T]
-          val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime).reverse
-          if (status.nonEmpty) {
-            val reader = new BufferedInputStream(fs.open(status.head.getPath))
-            data = deSerialize(reader).asInstanceOf[T]
-            reader close()
-            if (cleanUp) fs.listStatus(temp).filter(_.isFile).foreach(file => fs.delete(file.getPath, false))
-          }
-          data
+    if (fs.exists(temp)) {
+      def fun(): T = {
+        var data = null.asInstanceOf[T]
+        val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime)
+        if (status.nonEmpty) {
+          val reader = new BufferedInputStream(fs.open(status.head.getPath))
+          data = deSerialize(reader).asInstanceOf[T]
+          reader close()
+          if (cleanUp) fs.listStatus(temp).filter(_.isFile).foreach(file => fs.delete(file.getPath, false))
         }
-        tryAndLogErrorMes[T](fun, warn(_: String, _: Throwable))
-      case _ => None
+        data
+      }
+
+      tryAndLogErrorMes[T](fun, warn(_: String, _: Throwable))
+    } else {
+      None
     }
   }
 
