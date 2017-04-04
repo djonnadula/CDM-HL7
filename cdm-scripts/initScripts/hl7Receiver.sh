@@ -1,12 +1,12 @@
 #!/bin/bash
-# /etc/init.d/hl7process
+# /etc/init.d/hl7Receiver
 # version 1.0.0 2016-08-22 (YYYY-MM-DD)
 #
 # chkconfig: - 86 06
 # description:  Starts and stops HCA CDM HL7 Receiver service
 #
 ### BEGIN INIT INFO
-# Provides:          hl7process
+# Provides:          hl7Receiver
 # Required-Stop:     $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
@@ -25,7 +25,7 @@
 # Process name ( For display )
 NAME='CDM-HL7-Receiver'
 # Daemon name, where is the actual executable
-SERVICEDIR='/hadoop/cdm/lib'
+SERVICEDIR='/hadoop/cdm/lib/cdm-hl7-receiver'
 
 SERVICE='hl7process.jar'
 
@@ -39,10 +39,10 @@ INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
 "
 
 # pid file for the daemon
-PIDFILE=/var/log/cdm/cdm-hl7-reveiver/run/$NAME.pid
-LOCKFILE=/var/log/cdm/cdm-hl7-reveiver/lock/subsys/$NAME
-OUTFILE=/var/log/cdm/cdm-hl7-reveiver/logs/logfile
-ERRORFILE=/var/log/cdm/cdm-hl7-reveiver/logs/errorlog
+PIDFILE=/var/log/cdm/cdm-hl7-receiver/run/$NAME.pid
+LOCKFILE=/var/log/cdm/cdm-hl7-receiver/lock/subsys/$NAME
+OUTFILE=/var/log/cdm/cdm-hl7-receiver/logs/logfile
+ERRORFILE=/var/log/cdm/cdm-hl7-receiver/logs/errorlog
 
 # Exit if the package is not installed
 if [ ! -e "$SERVICEDIR/$SERVICE" ]; then
@@ -99,7 +99,7 @@ case "$1" in
         RETVAL=$?
         ;;
     *)
-        echo $"Usage: $NAME start|stop|status"
+        echo $"Usage: $NAME start|stop|status|restart"
         RETVAL=1
 esac
 

@@ -2,6 +2,7 @@ package com.hca.cdm.hl7.validation
 
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
+import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.constants.HL7Constants._
 
 /**
@@ -17,18 +18,18 @@ object ValidationUtil {
   private val invalid = Validation(Right(EMPTYSTR, EMPTYSTR))
 
   def isValidMsg(meta: MSGMeta): Validation = {
-    meta.controlId != EMPTYSTR & meta.facility != EMPTYSTR match {
-      case true => return valid
-      case _ =>
-        if (meta.controlId == EMPTYSTR) return invalidControlId
-        else if (meta.facility == EMPTYSTR) return invalidFacilityMnemonic
+    if (meta.controlId != EMPTYSTR && meta.facility != EMPTYSTR) {
+      return valid
+    } else {
+      if (meta.controlId == EMPTYSTR) return invalidControlId
+      else if (meta.facility == EMPTYSTR) return invalidFacilityMnemonic
     }
     invalid
   }
 
   def hasMultiMSH(data: mapType): Boolean = {
     data.count({ case (node, any) =>
-      node.substring(node.indexOf(".") + 1) == MSH
+      node.substring(node.indexOf(DOT) + 1) == MSH
     }) > 1
   }
 

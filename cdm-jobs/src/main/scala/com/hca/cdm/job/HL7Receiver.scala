@@ -8,7 +8,6 @@ import scala.Int.MaxValue
 import com.hca.cdm._
 import com.hca.cdm.spark.receiver.{MqReceiver => receiver}
 import com.hca.cdm.hadoop.OverSizeHandler
-import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
@@ -24,6 +23,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
+import AuditConstants._
 
 /**
   * Created by Devaraj Jonnadula on 12/14/2016.
@@ -58,7 +58,7 @@ object HL7Receiver extends Logg with App {
   private val hl7QueueMapping = hl7MsgMeta.map(x => x._2.wsmq -> x._1)
   private val hl7KafkaOut = hl7MsgMeta.map(x => x._1 -> x._2.kafka)
   private val hl7Queues = hl7MsgMeta.map(_._2.wsmq).toSet
-  private val tlmAuditor = hl7MsgMeta map (x => x._2.wsmq -> (tlmAckMsg(x._1)(_: MSGMeta)))
+  private val tlmAuditor = hl7MsgMeta map (x => x._2.wsmq -> (tlmAckMsg(x._1, applicationSending, WSMQ, HDFS)(_: MSGMeta)))
   private val rawOverSized = OverSizeHandler(rawStage, lookUpProp("hl7.direct.raw"))
   private val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
   initialise()
@@ -71,6 +71,7 @@ object HL7Receiver extends Logg with App {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
+    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
@@ -109,32 +110,31 @@ object HL7Receiver extends Logg with App {
       val hl7KafkaOut = this.hl7KafkaOut
       val tracker = new ListBuffer[FutureAction[Unit]]
       tracker += rdd foreachPartitionAsync (dataItr => {
-        dataItr nonEmpty match {
-          case true =>
-            propFile = confFile
-            val kafkaOut = KProducer(multiDest = true)(prodConf)
-            val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)
-            val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(MaxValue)
-            val audit = auditMsg(_: String, rawStage)(EMPTYSTR, _: MSGMeta)
-            val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
-            dataItr foreach { mqData =>
-              hl7QueueMapping isDefinedAt mqData.source match {
-                case true =>
-                  val hl7Str = hl7QueueMapping(mqData.source)
-                  if (tryAndLogThr(rawOut(mqData.data, header(hl7Str, rawStage, Left(mqData.msgMeta)), hl7KafkaOut(hl7Str)), s"$hl7Str$COLON$hl7RawIOFun", error(_: Throwable))) {
-                    tryAndLogThr(auditIO(audit(hl7Str, mqData.msgMeta), header(hl7Str, auditHeader, Left(mqData.msgMeta))), s"$hl7Str$COLON$hl7RawAuditIOFun", error(_: Throwable))
-                  }
-                  else {
-                    val msg = rejectMsg(hl7Str, rawStage, mqData.msgMeta, " Writing Data to OUT Failed ", null, null, mqData.data)
-                    tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Left(mqData.msgMeta))), s"$hl7Str$COLON hl7RejIO-rejectMsg", error(_: Throwable))
-                    error(s"Sending Raw to Kafka Failed :: $msg")
-                  }
-                case _ =>
-                  val msg = rejectRawMsg(mqData.source, rawStage, mqData.data, s"Cannot Deal with HL7 Came in $mqData.source . Only Activated these MessageTypes  ${hl7QueueMapping.values.mkString(COMMA)}", null, stackTrace = false)
-                  tryAndLogThr(hl7RejIO(msg, header(mqData.source, rejectStage, Left(mqData.msgMeta))), s"${mqData.source}$COLON rejectRawMsg", error(_: Throwable))
+        if (dataItr nonEmpty) {
+          propFile = confFile
+          val kafkaOut = KProducer()(prodConf)
+          val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)
+          val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(MaxValue)
+          val audit = auditMsg(_: String, rawStage)(EMPTYSTR, _: MSGMeta)
+          val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+          dataItr foreach { mqData =>
+            if (hl7QueueMapping isDefinedAt mqData.source) {
+              val hl7Str = hl7QueueMapping(mqData.source)
+              if (tryAndLogThr(rawOut(mqData.data, header(hl7Str, rawStage, Left(mqData.msgMeta)), hl7KafkaOut(hl7Str)), s"$hl7Str$COLON$hl7RawIOFun", error(_: Throwable))) {
+                tryAndLogThr(auditIO(audit(hl7Str, mqData.msgMeta), header(hl7Str, auditHeader, Left(mqData.msgMeta))), s"$hl7Str$COLON$hl7RawAuditIOFun", error(_: Throwable))
               }
+              else {
+                val msg = rejectMsg(hl7Str, rawStage, mqData.msgMeta, " Writing Data to OUT Failed ", null, null, mqData.data)
+                tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Left(mqData.msgMeta))), s"$hl7Str$COLON hl7RejIO-rejectMsg", error(_: Throwable))
+                error(s"Sending Raw to Kafka Failed :: $msg")
+              }
+            } else {
+              val msg = rejectRawMsg(mqData.source, rawStage, mqData.data, s"Cannot Deal with HL7 Came in $mqData.source . Only Activated these MessageTypes  ${hl7QueueMapping.values.mkString(COMMA)}", null, stackTrace = false)
+              tryAndLogThr(hl7RejIO(msg, header(mqData.source, rejectStage, Left(mqData.msgMeta))), s"${mqData.source}$COLON rejectRawMsg", error(_: Throwable))
             }
-          case _ => info(s"Partition was Empty For RDD So skipping $dataItr for RDD ${rdd.id}")
+          }
+        } else {
+          info(s"Partition was Empty For RDD So skipping $dataItr for RDD ${rdd.id}")
         }
       })
       tracker.foreach(_.get())

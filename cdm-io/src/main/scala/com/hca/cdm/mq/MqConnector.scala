@@ -129,12 +129,11 @@ trait MqConnector extends Logg with AutoCloseable {
 
     @throws[MqException]
     def sendMessage(msg: Message, producer: MessageProducer): Unit = {
-      producer == null match {
-        case false =>
-          debug(s"Sending Message with Id ${msg.getJMSMessageID} to Queue ${producer.getDestination}")
-          producer send(msg, new MQProducerRetryCallBack(producer))
-        case _ =>
-          throw new MqException(s"Cannot Send message $msg to Queue ${producer.getDestination} . Register Destination first before performing this operation by calling createProducer()")
+      if (producer == null) {
+        throw new MqException(s"Cannot Send message $msg to Queue ${producer.getDestination} . Register Destination first before performing this operation by calling createProducer()")
+      } else {
+        debug(s"Sending Message with Id ${msg.getJMSMessageID} to Queue ${producer.getDestination}")
+        producer send(msg, new MQProducerRetryCallBack(producer))
       }
     }
 

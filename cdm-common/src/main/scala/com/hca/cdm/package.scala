@@ -1,6 +1,6 @@
 package com.hca
 
-import java.io.{File, InputStream, Serializable}
+import java.io.{File, InputStream, PrintStream, Serializable}
 import java.lang.Runtime.{getRuntime => rt}
 import java.lang.Thread.UncaughtExceptionHandler
 import java.net.InetAddress
@@ -39,8 +39,8 @@ package object cdm extends Logg {
   lazy val EMPTYSTR = ""
   lazy val AMPERSAND = "&"
   lazy val emptyArray = Array.empty[Any]
-  lazy val FS = File separator
-  lazy val outStream = System out
+  lazy val FS: String = File separator
+  lazy val outStream: PrintStream = System out
   private lazy val random = new Random()
 
 
@@ -160,7 +160,7 @@ package object cdm extends Logg {
 
   def runnable(action: => Unit): Runnable =
     new Runnable {
-      def run() = action
+      def run(): Unit = action
     }
 
   def newThread(name: String, runnable: Runnable, daemon: Boolean = false): Thread = {
@@ -189,12 +189,10 @@ package object cdm extends Logg {
     }
     catch {
       case t: Throwable => reporter(t)
-        notify match {
-          case true =>
-            mail("{encrypt} " + lookUpProp("hl7.app") + " Function Execution Failed due to  " + t.getMessage,
-              " Executing Function Failed for " + whichAction + " due to Exception :: " + t.getClass +
-                " & Stack Trace is as follows \n\n" + t.getStackTrace.mkString("\n") + "\n\n" + EVENT_TIME, state)
-          case _ =>
+        if (notify) {
+          mail("{encrypt} " + lookUpProp("hl7.app") + " Function Execution Failed due to  " + t.getMessage,
+            " Executing Function Failed for " + whichAction + " due to Exception :: " + t.getClass +
+              " & Stack Trace is as follows \n\n" + t.getStackTrace.mkString("\n") + "\n\n" + EVENT_TIME, state)
         }
     }
     false
@@ -235,9 +233,22 @@ package object cdm extends Logg {
     None
   }
 
+  def tryAndReturnDefaultValue[T](fun: () => T, default: T): T = {
+    val temp = tryAndLogErrorMes(fun, debug(_: String, _: Throwable))
+    temp getOrElse default
+  }
+
   def abend(code: Int = -1): Unit = System exit code
 
   def exists[T](store: Map[T, AnyRef], key: T): Boolean = store isDefinedAt key
+
+  def enabled[T](key: T): Option[T] = {
+    key match {
+      case s: String => if (null != s && s != EMPTYSTR) return Some(s.asInstanceOf[T])
+      case any => if (valid(any)) return Some(any.asInstanceOf[T])
+    }
+    None
+  }
 
   private class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)

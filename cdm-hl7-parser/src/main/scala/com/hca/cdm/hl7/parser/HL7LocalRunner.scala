@@ -22,7 +22,8 @@ object HL7LocalRunner extends App with Logg {
 
   configure(currThread.getContextClassLoader.getResource("local-log4j.properties"))
   reload(null,Some(currThread.getContextClassLoader.getResourceAsStream("Hl7LocalConfig.properties")))
-  val msgType = hl7(args(0))
+  val msgType = hl7("ORU")
+    // hl7(args(0))
   private val msgs = EMPTYSTR
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => hl7(mtyp) -> getMsgTypeMeta(hl7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap
@@ -44,7 +45,7 @@ object HL7LocalRunner extends App with Logg {
           info(out._1)
           segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination)(out._2, out._3)
         case Right(t) =>
-          error(t)
+          error(t);
       }
     case Failure(t) =>
       error(t)

@@ -36,11 +36,16 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>hca.repo.cdh</id>
+            <url>http://10.28.98.216:8081/nexus/content/repositories/ClouderaArtifactory/</url>
+        </repository>
     </repositories>
 
 
     <properties>
-        <project.version>1.0.4-SNAPSHOT</project.version>
+        <cdm.version>1.0.4-SNAPSHOT</cdm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -123,6 +128,12 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.10</artifactId>
             <version>${spark.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-flume_2.10</artifactId>
+            <version>1.2.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
