@@ -33,8 +33,9 @@ object HL7LocalRunner extends App with Logg {
   private val segmentsAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentStage)(_: String, _: MSGMeta)))
   private val adhocAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, adhocStage)(_: String, _: MSGMeta)))
   private val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
+  private val tlmAuditor = tlmAckMsg("test", applicationReceiving, HDFS, _: String)(_: MSGMeta)
   private val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
-    allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1)))
+    allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAuditor))
   Try(hl7Parsers(msgType).transformHL7(msgs, reject) rec) match {
     case Success(map) =>
       map match {

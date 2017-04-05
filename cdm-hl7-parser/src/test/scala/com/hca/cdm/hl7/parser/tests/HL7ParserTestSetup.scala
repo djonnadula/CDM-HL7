@@ -32,10 +32,14 @@ class HL7ParserTestSetup(msgType: HL7) {
     val segmentsAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentStage)(_: String, _: MSGMeta)))
     val adhocAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, adhocStage)(_: String, _: MSGMeta)))
     val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
+    private val tlmAuditor = tlmAckMsg("test", applicationReceiving, HDFS, _: String)(_: MSGMeta)
     val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
-        allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1)))
+        allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAuditor))
 
     def parse(message: String): String = {
+        println("msgType: " + msgType)
+        println("message: " + message)
+        println()
         Try(hl7Parsers(msgType).transformHL7(message, reject) rec) match {
             case Success(map) =>
                 map match {
@@ -45,6 +49,7 @@ class HL7ParserTestSetup(msgType: HL7) {
                         out._1
                     case Right(t) =>
                         t.toString
+                    case _ => "other"
                 }
         }
     }
