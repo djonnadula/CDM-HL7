@@ -1,6 +1,3 @@
-
-
-
 package com.hca.cdm.hl7.parser
 
 import com.hca.cdm.Models.MSGMeta
@@ -36,13 +33,14 @@ object HL7LocalRunner extends App with Logg {
   private val segmentsAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentStage)(_: String, _: MSGMeta)))
   private val adhocAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, adhocStage)(_: String, _: MSGMeta)))
   private val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
+  private val tlmAuditor = tlmAckMsg("test", applicationReceiving, HDFS, _: String)(_: MSGMeta)
   private val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
-    allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1)))
+    allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAuditor))
   Try(hl7Parsers(msgType).transformHL7(msgs, reject) rec) match {
     case Success(map) =>
       map match {
         case Left(out) =>
-          info(out._1)
+          info("json: " + out._1)
           segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination)(out._2, out._3)
         case Right(t) =>
           error(t);
@@ -52,19 +50,19 @@ object HL7LocalRunner extends App with Logg {
   }
 
   private def outio(k: String, v: String) = {
-    info(k)
+    info("outio: " + k)
   }
 
   private def reject(k: String, v: String) = {
-    info(k)
+    info("reject: " + k)
   }
 
   private def audit(k: String, v: String) = {
-    info(k)
+    info("audit: " + k)
   }
 
   private def adhocDestination(k: String, v: String, dest: String) = {
-    info(k)
+    info("adhocDestiation: " + k)
   }
 
 }

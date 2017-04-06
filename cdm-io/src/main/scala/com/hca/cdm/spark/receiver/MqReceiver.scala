@@ -177,7 +177,10 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   }
 
   private def sHook(): Unit = {
-    registerHook(newThread(s"$id-$app-SHook", runnable(close())))
+    registerHook(newThread(s"$id-$app-SHook", runnable({
+      close()
+      // self.stop(s"Stopping Receiver with Id $id and WSMQ Client Id $app Consuming Messages from WSMQ Queues ${sources.mkString(";")}")
+    })))
   }
 
 }

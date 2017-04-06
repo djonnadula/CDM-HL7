@@ -1,0 +1,45 @@
+MSH|^~\&|MT_FRNK|FRNK|DBM||20151218115500-0600||ADT^A41|MT_FRNK_ADT_1124574.|D|2.5||KYB|||
+EVN|A41|201512181155|||QBE8554^Hammock^Brittany|20151218
+PID|1||K000002505^^^^MR^FRNK~A00002475^^^^HUB^FRNK|A1-B20151218101601316^^^^URN^FRNK|OSBORN^NORMAN^^^^^L||19840220|M|||^^^^^^P|||||||FR0000000220
+MRG|||FR0000121525
+PV1|1|I|FR.4W^FR.430^A|EL|||DR.ATND01^Attending01^Provider^^^^^^^^^^XX|DR.FAM01^Family01^Provider^^^^^^^^^^XX||OP||||CR|||DR.ADM01^Admitting01^Provider^^^^^^^^^^XX|INO||U|||||||||||||||||||FRNK||ADM|||201512181113
+PV2||SP^Semi Private Room|OVERDOSE||||||||1||||||||||||||EL|||||||||||N
+ROL|1|AD|AT|DR.ATND01^Attending01^Provider^^^^^^^^^^XX
+ROL|2|AD|RP|DR.FAM01^Family01^Provider^^^^^^^^^^XX
+ROL|3|AD|AD|DR.ADM01^Admitting01^Provider^^^^^^^^^^XX
+ROL|4|AD|PP|DR.PCP01^PrimaryCare01^Provider^^^^^^^^^^XX
+OBX|1|TX|1PAO0F010A^Deposit Req?^ADM||N||||||F
+OBX|2|TX|1PAO0F011A^Est Amt Due^ADM||||||||F
+OBX|3|TX|1PAO0F012A^Amt Rec^ADM||||||||F
+OBX|4|TX|1PAO0F014A^Collected by^ADM||||||||F
+OBX|5|TX|1PAO0F016A^Pt Advised of Financial Responsibility   Resources, Refer to^ADM||||||||F
+OBX|6|TX|1PAO0F017A^Discharge Financial Status^ADM||||||||F
+OBX|7|TX|1PAO0F027A^Hold Release Reason^ADM||||||||F
+OBX|8|TX|1PAO0F028A^Hold User ID:^ADM||||||||F
+OBX|9|TX|1PAO0F031A^Amt Req^ADM||||||||F
+OBX|10|TX|1PAO0P010A^Does the Patient Have Temporary Address?^ADM||N||||||F
+OBX|11|TX|1PAO0P011A^Address^ADM||||||||F
+OBX|12|TX|1PAO0P012A^Address^ADM||||||||F
+OBX|13|TX|1PAO0P013A^City^ADM||||||||F
+OBX|14|TX|1PAO0P014A^State^ADM||||||||F
+OBX|15|TX|1PAO0P015A^Zip^ADM||||||||F
+OBX|16|TX|1PAO0P016A^Home PH^ADM||||||||F
+OBX|17|TX|1PAO0P017A^County^ADM||||||||F
+OBX|18|TX|1PAO0P018A^Country^ADM||||||||F
+OBX|19|TX|1PAO0P019A^Temporary Address Until?^ADM||||||||F
+OBX|20|TX|1PAO0P020A^Comment^ADM||||||||F
+OBX|21|TX|1PAO0P050A^Does Patient Have Additional Employment?^ADM||N||||||F
+OBX|22|TX|1PAO0P051A^Name:^ADM||||||||F
+OBX|23|TX|1PAO0P052A^Address^ADM||||||||F
+OBX|24|TX|1PAO0P053A^Address^ADM||||||||F
+OBX|25|TX|1PAO0P054A^City^ADM||||||||F
+OBX|26|TX|1PAO0P055A^State^ADM||||||||F
+OBX|27|TX|1PAO0P056A^Zip^ADM||||||||F
+OBX|28|TX|1PAO0P057A^Work Phone^ADM||||||||F
+OBX|29|TX|1PAO0P058A^Occupation^ADM||||||||F
+OBX|30|TX|1PAO0P059A^Emp Status^ADM||||||||F
+OBX|31|TX|1PAO0P062A^Description^ADM||||||||F
+OBX|32|TX|1REG0R032A^If Yes, Which Facility?^ADM||||||||F
+OBX|33|TX|1REG0R033A^If Other, Which Facility?^ADM||||||||F
+DG1|1||F14.150^COCAINE ABUSE W COCAINE-INDUC PSYCHOTIC DISORDER W DELUSIONS^I10|||Other
+DRG|33

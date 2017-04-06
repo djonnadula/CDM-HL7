@@ -1,0 +1,871 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "FRNK",
+    "msh_msg_control_id": "MT_FRNK_ADT_1118007.",
+    "pid_medical_record_num": "K000002378",
+    "pid_medical_record_urn": "A0-B20151103134433868",
+    "pid_pat_account_num": "FR0000121418"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "MT_FRNK",
+    "msh_sending_facility": "FRNK",
+    "msh_receiving_appl": "DBM",
+    "msh_msg_create_date_time": "20151214090800-0600",
+    "msh_msg_type": {
+      "message_code": "ADT",
+      "trigger_event": "A04"
+    },
+    "msh_msg_control_id": "MT_FRNK_ADT_1118007.",
+    "msh_processing_id": "D",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": "KYB"
+  },
+  "0002.EVN": {
+    "evn_evnt_type": "A04",
+    "evn_recorded_date_time": "201512140908",
+    "evn_oper_id": {
+      "person_id": "QBE8554",
+      "last_name": "Hammock",
+      "first_name": "Brittany"
+    },
+    "evn_evnt_occurred": "201512140859"
+  },
+  "0003.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": [
+      {
+        "identifier_num": "K000002378",
+        "identifier_type_code": "MR",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "206-11-2015",
+        "identifier_type_code": "SS",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "A00002349",
+        "identifier_type_code": "HUB",
+        "assgn_facility": "FRNK"
+      }
+    ],
+    "pid_alt_pat_id": {
+      "identifier_num": "A0-B20151103134433868",
+      "identifier_type_code": "URN",
+      "assgn_facility": "FRNK"
+    },
+    "pid_pat_name": [
+      {
+        "last_name": "Osborn",
+        "first_name": "Harry",
+        "type_code": "L"
+      },
+      {
+        "last_name": "Osborn",
+        "first_name": "Harold",
+        "type_code": "M"
+      }
+    ],
+    "pid_mother_name": "Osborn,Emily",
+    "pid_birth_date_time": "19411029",
+    "pid_sex": "M",
+    "pid_race": "W",
+    "pid_pat_address": {
+      "street_address1": "234 MARVEL",
+      "city": "FRANKLIN",
+      "state_province": "TN",
+      "zip_postal_code": "37064",
+      "address_type": "P",
+      "county_parish_code": "TN187"
+    },
+    "pid_home_phone_num": "(615)555-6309",
+    "pid_business_phone_num": "(502)695-0070",
+    "pid_marital_status": "S",
+    "pid_religion": "NON",
+    "pid_pat_account_num": "FR0000121418",
+    "pid_pat_social_security_num": "206-11-2015"
+  },
+  "0004.NK1": {
+    "nk1_set_id": "1",
+    "nk1_name": {
+      "last_name": "OSBORN",
+      "first_name": "NORMAN"
+    },
+    "nk1_relationship": {
+      "primary_id": "PA",
+      "text": "Parent"
+    },
+    "nk1_address": {
+      "street_address1": "234 MARVEL",
+      "city": "FRANKLIN",
+      "state_province": "TN",
+      "zip_postal_code": "37064",
+      "county_parish_code": "TN187"
+    },
+    "nk1_phone_num": "(615)555-6309",
+    "nk1_contact_role": "NOK"
+  },
+  "0005.NK1": {
+    "nk1_set_id": "2",
+    "nk1_name": {
+      "last_name": "OSBORN",
+      "first_name": "HARRY"
+    },
+    "nk1_relationship": {
+      "primary_id": "PA",
+      "text": "Parent"
+    },
+    "nk1_address": {
+      "street_address1": "234 MARVEL",
+      "city": "FRANKLIN",
+      "state_province": "TN",
+      "zip_postal_code": "37064",
+      "county_parish_code": "TN187"
+    },
+    "nk1_phone_num": "(615)555-6309",
+    "nk1_contact_role": "NOT"
+  },
+  "0006.NK1": {
+    "nk1_set_id": "3",
+    "nk1_name": "AMERWIRE",
+    "nk1_address": {
+      "street_address1": "616 INDUSTRIAL PARK",
+      "city": "FRANKFORT",
+      "state_province": "KY",
+      "zip_postal_code": "40601"
+    },
+    "nk1_business_phone_num": "(502)695-0070",
+    "nk1_contact_role": "EMP",
+    "nk1_organization_name": "AMERICAN WIRE COMPANY FRANKFT",
+    "nk1_job_status": "F"
+  },
+  "0007.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "E",
+    "pv1_assgn_pat_loc": "FR.ER",
+    "pv1_adm_type": "EL",
+    "pv1_attending_doctor": {
+      "person_id": "DR.PCP01",
+      "last_name": "PrimaryCare01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    },
+    "pv1_pat_type": "ER",
+    "pv1_financial_classification": "05",
+    "pv1_servicing_facility": "FRNK",
+    "pv1_account_status": "REG",
+    "pv1_adm_date_time": "201512140859"
+  },
+  "0008.PV2": {
+    "pv2_adm_reason": "KNEE INJURY",
+    "pv2_actual_length_of_inpatient_stay": "1",
+    "pv2_visit_priority_code": "EL",
+    "pv2_newborn_baby_ind": "N",
+    "pv2_mode_of_arrival_code": {
+      "primary_id": "AMB",
+      "text": "Ambulance"
+    }
+  },
+  "0009.ROL": {
+    "rol_role_instance_id": "1",
+    "rol_action_code": "AD",
+    "rol_role_name": "AT",
+    "rol_role_person_name": {
+      "person_id": "DR.PCP01",
+      "last_name": "PrimaryCare01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0010.ROL": {
+    "rol_role_instance_id": "2",
+    "rol_action_code": "AD",
+    "rol_role_name": "PP",
+    "rol_role_person_name": {
+      "person_id": "DR.PCP01",
+      "last_name": "PrimaryCare01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0011.ROL": {
+    "rol_role_instance_id": "3",
+    "rol_action_code": "AD",
+    "rol_role_name": "OP",
+    "rol_role_person_name": {
+      "person_id": "DR.OTH01",
+      "last_name": "Other01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0012.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F010A",
+      "text": "Deposit Req?",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "N",
+    "obx_observation_result_status": "F"
+  },
+  "0013.OBX": {
+    "obx_set_id": "2",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F011A",
+      "text": "Est Amt Due",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0014.OBX": {
+    "obx_set_id": "3",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F012A",
+      "text": "Amt Rec",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0015.OBX": {
+    "obx_set_id": "4",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F014A",
+      "text": "Collected by",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0016.OBX": {
+    "obx_set_id": "5",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F016A",
+      "text": "Pt Advised of Financial Responsibility   Resources, Refer to",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0017.OBX": {
+    "obx_set_id": "6",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F017A",
+      "text": "Discharge Financial Status",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0018.OBX": {
+    "obx_set_id": "7",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F027A",
+      "text": "Hold Release Reason",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0019.OBX": {
+    "obx_set_id": "8",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F028A",
+      "text": "Hold User ID:",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0020.OBX": {
+    "obx_set_id": "9",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0F031A",
+      "text": "Amt Req",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0021.OBX": {
+    "obx_set_id": "10",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0G021A",
+      "text": "Preferred Language",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "ENG",
+    "obx_observation_result_status": "F"
+  },
+  "0022.OBX": {
+    "obx_set_id": "11",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0G022A",
+      "text": "Country",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "US",
+    "obx_observation_result_status": "F"
+  },
+  "0023.OBX": {
+    "obx_set_id": "12",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P010A",
+      "text": "Does the Patient Have Temporary Address?",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "N",
+    "obx_observation_result_status": "F"
+  },
+  "0024.OBX": {
+    "obx_set_id": "13",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P011A",
+      "text": "Address",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0025.OBX": {
+    "obx_set_id": "14",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P012A",
+      "text": "Address",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0026.OBX": {
+    "obx_set_id": "15",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P013A",
+      "text": "City",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0027.OBX": {
+    "obx_set_id": "16",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P014A",
+      "text": "State",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0028.OBX": {
+    "obx_set_id": "17",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P015A",
+      "text": "Zip",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0029.OBX": {
+    "obx_set_id": "18",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P016A",
+      "text": "Home PH",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0030.OBX": {
+    "obx_set_id": "19",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P017A",
+      "text": "County",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0031.OBX": {
+    "obx_set_id": "20",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P018A",
+      "text": "Country",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0032.OBX": {
+    "obx_set_id": "21",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P019A",
+      "text": "Temporary Address Until?",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0033.OBX": {
+    "obx_set_id": "22",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P020A",
+      "text": "Comment",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0034.OBX": {
+    "obx_set_id": "23",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P050A",
+      "text": "Does Patient Have Additional Employment?",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "N",
+    "obx_observation_result_status": "F"
+  },
+  "0035.OBX": {
+    "obx_set_id": "24",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P051A",
+      "text": "Name:",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0036.OBX": {
+    "obx_set_id": "25",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P052A",
+      "text": "Address",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0037.OBX": {
+    "obx_set_id": "26",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P053A",
+      "text": "Address",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0038.OBX": {
+    "obx_set_id": "27",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P054A",
+      "text": "City",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0039.OBX": {
+    "obx_set_id": "28",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P055A",
+      "text": "State",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0040.OBX": {
+    "obx_set_id": "29",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P056A",
+      "text": "Zip",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0041.OBX": {
+    "obx_set_id": "30",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P057A",
+      "text": "Work Phone",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0042.OBX": {
+    "obx_set_id": "31",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P058A",
+      "text": "Occupation",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0043.OBX": {
+    "obx_set_id": "32",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P059A",
+      "text": "Emp Status",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0044.OBX": {
+    "obx_set_id": "33",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P060A",
+      "text": "Preferred Language",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "ENG",
+    "obx_observation_result_status": "F"
+  },
+  "0045.OBX": {
+    "obx_set_id": "34",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P061A",
+      "text": "Country",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "US",
+    "obx_observation_result_status": "F"
+  },
+  "0046.OBX": {
+    "obx_set_id": "35",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1PAO0P062A",
+      "text": "Description",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0047.OBX": {
+    "obx_set_id": "36",
+    "obx_value_type": "CE",
+    "obx_observation_id": {
+      "primary_id": "1REG0M229A",
+      "text": "Ethnicity",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": {
+      "primary_id": "NOTHISPLAT",
+      "text": "Not Hispanic or Latino"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0048.OBX": {
+    "obx_set_id": "37",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1REG0R027A",
+      "text": "Are you currently participating in a research study",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "N",
+    "obx_observation_result_status": "F"
+  },
+  "0049.OBX": {
+    "obx_set_id": "38",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1REG0R032A",
+      "text": "If Yes, Which Facility?",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0050.OBX": {
+    "obx_set_id": "39",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "1REG0R033A",
+      "text": "If Other, Which Facility?",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_result_status": "F"
+  },
+  "0051.OBX": {
+    "obx_set_id": "40",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "E13010001A",
+      "text": "Preferred name",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "Harry",
+    "obx_observation_result_status": "F"
+  },
+  "0052.OBX": {
+    "obx_set_id": "41",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "E13010038A",
+      "text": "Immediate religious, spiritual, or cultural considerations",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "NONE",
+    "obx_observation_result_status": "F"
+  },
+  "0053.OBX": {
+    "obx_set_id": "42",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "E13010042A",
+      "text": "Hearing impaired",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "N",
+    "obx_observation_result_status": "F"
+  },
+  "0054.OBX": {
+    "obx_set_id": "43",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31020118A",
+      "text": "Heart disease",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "Y",
+    "obx_observation_result_status": "F"
+  },
+  "0055.OBX": {
+    "obx_set_id": "44",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31020120A",
+      "text": "Stroke",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "Y",
+    "obx_observation_result_status": "F"
+  },
+  "0056.OBX": {
+    "obx_set_id": "45",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31020122A",
+      "text": "Colon cancer",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "Y",
+    "obx_observation_result_status": "F"
+  },
+  "0057.OBX": {
+    "obx_set_id": "46",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31020124A",
+      "text": "Breast cancer",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "Y",
+    "obx_observation_result_status": "F"
+  },
+  "0058.OBX": {
+    "obx_set_id": "47",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "K31020126A",
+      "text": "Diabetes",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "Y",
+    "obx_observation_result_status": "F"
+  },
+  "0059.OBX": {
+    "obx_set_id": "48",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "N40010012A",
+      "text": "Smokeless tobacco used",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "N",
+    "obx_observation_result_status": "F"
+  },
+  "0060.OBX": {
+    "obx_set_id": "49",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "N40010043A",
+      "text": "Tobacco cessation aids in current use",
+      "name_of_coding_sys": "ADM"
+    },
+    "obx_observation_value": "NONE",
+    "obx_observation_result_status": "F"
+  },
+  "0061.AL1": {
+    "al1_set_id": "1",
+    "al1_allergen_type_code": "DA",
+    "al1_allergen_code": {
+      "primary_id": "F001900526",
+      "text": "Latex, Natural Rubber",
+      "alt_id": "Latex, Natural Rubber",
+      "name_of_alt_coding_sys": "allergy.id"
+    },
+    "al1_allergy_severity_code": "MI",
+    "al1_allergy_reaction_code": "Rash-Hives",
+    "al1_identification_date": "20151211"
+  },
+  "0062.AL1": {
+    "al1_set_id": "2",
+    "al1_allergen_type_code": "DA",
+    "al1_allergen_code": {
+      "primary_id": "F006002380",
+      "text": "naproxen",
+      "alt_id": "naproxen",
+      "name_of_alt_coding_sys": "allergy.id"
+    },
+    "al1_allergy_severity_code": "MO",
+    "al1_allergy_reaction_code": "Rash-Hives",
+    "al1_identification_date": "20151110"
+  },
+  "0063.AL1": {
+    "al1_set_id": "3",
+    "al1_allergen_type_code": "DA",
+    "al1_allergen_code": {
+      "primary_id": "F006002502",
+      "text": "honey",
+      "alt_id": "honey",
+      "name_of_alt_coding_sys": "allergy.id"
+    },
+    "al1_allergy_severity_code": "MI",
+    "al1_allergy_reaction_code": "Swelling",
+    "al1_identification_date": "20151110"
+  },
+  "0064.AL1": {
+    "al1_set_id": "4",
+    "al1_allergen_type_code": "DA",
+    "al1_allergen_code": {
+      "primary_id": "F006006698",
+      "text": "bee venom (honey bee)",
+      "alt_id": "bee venom (honey bee)",
+      "name_of_alt_coding_sys": "allergy.id"
+    },
+    "al1_allergy_severity_code": "SV",
+    "al1_allergy_reaction_code": "Anaphylaxis",
+    "al1_identification_date": "20151110"
+  },
+  "0065.AL1": {
+    "al1_set_id": "5",
+    "al1_allergen_code": "grass",
+    "al1_allergy_severity_code": "MI",
+    "al1_allergy_reaction_code": "Cough",
+    "al1_identification_date": "20151110"
+  },
+  "0066.DG1": {
+    "dg1_set_id": "1",
+    "dg1_diagnosis_code": {
+      "primary_id": "S00.00XA",
+      "text": "UNSPECIFIED SUPERFICIAL INJURY OF SCALP, INITIAL ENCOUNTER",
+      "name_of_coding_sys": "I10"
+    },
+    "dg1_diagnosis_type": "Other"
+  },
+  "0067.DG1": {
+    "dg1_set_id": "2",
+    "dg1_diagnosis_code": {
+      "primary_id": "S83.241A",
+      "text": "OTH TEAR OF MEDIAL MENISCUS, CURRENT INJURY, R KNEE, INIT",
+      "name_of_coding_sys": "I10"
+    },
+    "dg1_diagnosis_type": "Other"
+  },
+  "0068.DRG": {
+    "drg_diagnostic_related_group": "33"
+  },
+  "0069.GT1": {
+    "gt1_set_id": "1",
+    "gt1_guarantor_name": {
+      "last_name": "OSBORN",
+      "first_name": "HARRY"
+    },
+    "gt1_guarantor_address": {
+      "street_address1": "234 MARVEL",
+      "city": "FRANKLIN",
+      "state_province": "TN",
+      "zip_postal_code": "37064"
+    },
+    "gt1_guarantor_home_phone_num": {
+      "formatted_num": "(615)555-6309",
+      "comm_address": "emailline@test.com"
+    },
+    "gt1_guarantor_relationship": "SA",
+    "gt1_guarantor_social_security_num": "206-11-2015",
+    "gt1_guarantor_employer_name": "AMERWIRE",
+    "gt1_guarantor_employer_address": {
+      "street_address1": "616 INDUSTRIAL PARK",
+      "city": "FRANKFORT",
+      "state_province": "KY",
+      "zip_postal_code": "40601"
+    },
+    "gt1_guarantor_employer_phone_num": "(502)695-0070",
+    "gt1_guarantor_employment_status": "F"
+  },
+  "0070.IN1": {
+    "in1_set_id": "1",
+    "in1_insurance_plan_id": "AFLAC",
+    "in1_insurance_company_name": "AMERICAN FAMILY LIFE AFLAC",
+    "in1_insurance_company_address": {
+      "street_address1": "1932 WYNTON RD",
+      "city": "COLUMBUS",
+      "state_province": "GA",
+      "zip_postal_code": "31999"
+    },
+    "in1_insurance_company_phone_num": "(800)992-3522",
+    "in1_group_num": "A123456789",
+    "in1_group_name": "BLUEGRASS COMMUNITY ACTION",
+    "in1_insured_group_employee_name": "AMERWIRE",
+    "in1_plan_eff_from_date": "20151211",
+    "in1_plan_eff_to_date": "20161212",
+    "in1_insured_name": {
+      "last_name": "SELCHOW",
+      "first_name": "NEW"
+    },
+    "in1_insured_relationship_to_patient": "FR",
+    "in1_insured_birth_date": "19411211",
+    "in1_insured_address": {
+      "street_address1": "234 MARVEL",
+      "city": "FRANKLIN",
+      "state_province": "TN",
+      "zip_postal_code": "37064",
+      "address_type": "P"
+    },
+    "in1_policy_num": "18798709",
+    "in1_insured_employment_status": {
+      "primary_id": "F",
+      "text": "Full Time"
+    },
+    "in1_insured_sex": "F",
+    "in1_insured_employer_address": {
+      "city": "FRANKFORT"
+    }
+  },
+  "0071.IN2": {
+    "in2_insured_employee_id": "1",
+    "in2_insured_social_security_num": "098-78-7890",
+    "in2_citizenship": "Y",
+    "in2_ethnic_group": "AI",
+    "in2_marital_status": "D",
+    "in2_insured_phone_num_home": "(615)555-6309"
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "MSLP",
+    "msh_msg_control_id": "EPIC_MSLP_ADT_233594",
+    "pid_medical_record_num": "654321",
+    "pid_medical_record_urn": "2258054",
+    "pid_pat_account_num": "100001419"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "EPIC_MSLP",
+    "msh_sending_facility": "MSLP",
+    "msh_receiving_appl": "DBM",
+    "msh_msg_create_date_time": "20160808170643",
+    "msh_security": "BSV5218",
+    "msh_msg_type": {
+      "message_code": "ADT",
+      "trigger_event": "A03"
+    },
+    "msh_msg_control_id": "EPIC_MSLP_ADT_233594",
+    "msh_processing_id": "D",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": "Epic_MountainQA",
+    "msh_msg_profile_id": "UTA"
+  },
+  "0002.EVN": {
+    "evn_evnt_type": "A03",
+    "evn_recorded_date_time": "20160808170643",
+    "evn_evnt_resn_code": "ADT_EVENT",
+    "evn_oper_id": {
+      "person_id": "BSV5218",
+      "last_name": "FITISEMANU",
+      "first_name": "JENNIFER",
+      "assgn_authr": "MTNUT",
+      "assgn_facility": "MSLP"
+    },
+    "evn_evnt_occurred": "20160808170600"
+  },
+  "0003.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": "654321",
+    "pid_alt_pat_id": "2258054",
+    "pid_pat_name": {
+      "last_name": "LPICU",
+      "first_name": "TESTING",
+      "middle_name": "OR"
+    },
+    "pid_birth_date_time": "19710803",
+    "pid_sex": "F",
+    "pid_pat_address": {
+      "street_address1": "123 LONE PEAK WAY",
+      "country": "USA",
+      "address_type": "P"
+    },
+    "pid_pat_account_num": "100001419",
+    "pid_pat_social_security_num": "423-50-9262",
+    "pid_pat_death_ind": "N"
+  },
+  "0004.ZPD": {
+    "zpd_pregnancy_flag": "N"
+  },
+  "0005.PD1": {
+    "pd1_patient_prim_facility": {
+      "org_name": "LONE PEAK HOSPITAL",
+      "identifier_num": "10002001"
+    }
+  },
+  "0006.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "SA",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "MSLPICU",
+      "room": "LP.M410",
+      "bed": "LP.M410A",
+      "facility": "MSLP"
+    },
+    "pv1_adm_type": "L",
+    "pv1_attending_doctor": [
+      {
+        "person_id": "CAVIA",
+        "last_name": "CAVIN",
+        "first_name": "IAN",
+        "middle_name": "R",
+        "assgn_authr": "PROVID",
+        "identifier_type_code": "PROVID"
+      },
+      {
+        "person_id": "1184647315",
+        "last_name": "CAVIN",
+        "first_name": "IAN",
+        "middle_name": "R",
+        "assgn_authr": "NPI",
+        "identifier_type_code": "NPI"
+      },
+      {
+        "person_id": "IVA9543",
+        "last_name": "CAVIN",
+        "first_name": "IAN",
+        "middle_name": "R",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      }
+    ],
+    "pv1_referring_doctor": [
+      {
+        "person_id": "CAVIA",
+        "last_name": "CAVIN",
+        "first_name": "IAN",
+        "middle_name": "R",
+        "assgn_authr": "PROVID",
+        "identifier_type_code": "PROVID"
+      },
+      {
+        "person_id": "1184647315",
+        "last_name": "CAVIN",
+        "first_name": "IAN",
+        "middle_name": "R",
+        "assgn_authr": "NPI",
+        "identifier_type_code": "NPI"
+      },
+      {
+        "person_id": "IVA9543",
+        "last_name": "CAVIN",
+        "first_name": "IAN",
+        "middle_name": "R",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      }
+    ],
+    "pv1_hospital_service": "SURG",
+    "pv1_adm_source": "2",
+    "pv1_vip_ind": "n",
+    "pv1_admitting_doctor": {
+      "person_id": "1201036187",
+      "last_name": "SURGERY",
+      "first_name": "PHYSICIAN",
+      "assgn_authr": "EPICPROVID",
+      "identifier_type_code": "EPICPROVID"
+    },
+    "pv1_visit_num": "10136570",
+    "pv1_financial_classification": "99",
+    "pv1_dchg_disposition": "01",
+    "pv1_dchgd_to_loc": "HOME",
+    "pv1_account_status": {
+      "primary_id": "Dis",
+      "text": "Conf"
+    },
+    "pv1_adm_date_time": "20160803090145",
+    "pv1_dchg_date_time": "20160808170600",
+    "pv1_alternate_visit_id": "10136570"
+  },
+  "0007.PV2": {
+    "pv2_accommodation_code": "IC",
+    "pv2_expected_adm_date_time": "20160803090500",
+    "pv2_visit_publicity_code": "n",
+    "pv2_visit_protection_ind": "N"
+  },
+  "0008.ZPV": {
+    "zpv_first_inpatient_occurence_date_time": "20160803090145"
+  },
+  "0009.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "DISCHARGEDISP",
+      "text": "DISCHARGE DISPOSITION"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "01",
+    "obx_observation_date_time": "20160803"
+  },
+  "0010.OBX": {
+    "obx_set_id": "2",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "ADMSRCDETAIL",
+      "text": "POINT OF ORIGIN"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "2",
+    "obx_observation_date_time": "20160803"
+  },
+  "0011.OBX": {
+    "obx_set_id": "3",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "ACCSTAT1",
+      "text": "ADT: PATIENT STATUS"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "Dis",
+    "obx_observation_date_time": "20160803"
+  },
+  "0012.OBX": {
+    "obx_set_id": "4",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "ACCSTAT2",
+      "text": "HOSPITAL - ADMIT CONFIRMATION STATUS"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": "Conf",
+    "obx_observation_date_time": "20160803"
+  },
+  "0013.GT1": {
+    "gt1_set_id": "1",
+    "gt1_guarantor_num": "17071",
+    "gt1_guarantor_name": {
+      "last_name": "LPICU",
+      "first_name": "TESTING",
+      "middle_name": "OR"
+    },
+    "gt1_guarantor_address": {
+      "street_address1": "123 LONE PEAK WAY",
+      "country": "USA"
+    },
+    "gt1_guarantor_birth_date_time": "19710803",
+    "gt1_guarantor_sex": "F",
+    "gt1_guarantor_type": "Facility P/F",
+    "gt1_guarantor_relationship": "18",
+    "gt1_guarantor_social_security_num": "423-50-9262",
+    "gt1_guarantor_employer_address": {
+      "country": "USA"
+    }
+  }
+}

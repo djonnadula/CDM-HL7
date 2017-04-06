@@ -14,7 +14,7 @@ import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
 import com.hca.cdm.utils.Filters.FILTER
 import scala.collection.mutable
-import scala.io.Source._
+import scala.io.{BufferedSource, Source}
 import scala.language.postfixOps
 import scala.util.{Success, Try}
 
@@ -270,7 +270,9 @@ package object model {
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
-    val reader = fromFile(segments).bufferedReader()
+
+    val reader = readFile(segments).bufferedReader
+
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
       if (valid(splits, 3)) {
@@ -298,7 +300,7 @@ package object model {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
-        fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
+        readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
           case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
         } toArray
     }
@@ -308,7 +310,7 @@ package object model {
     val reassignMeta = new mutable.HashMap[String, String]()
     val reassignStruct = new mutable.HashMap[String, mutable.LinkedHashMap[String, Any]]
     val reassignmentMapping = new mutable.HashMap[String, Map[String, String]]
-    fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
+    readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
       case data@ele if data.nonEmpty =>
         val reassignStructTemp = new mutable.LinkedHashMap[String, Any]
         val reassignmentMappingTemp = new mutable.HashMap[String, String]
@@ -334,14 +336,14 @@ package object model {
   }
 
   def loadFile(file: String, delimitedBy: String = EQUAL, keyIndex: Int = 0): Map[String, String] = {
-    fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
+    readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) takeWhile (valid(_)) map {
       case x@ele if ele.nonEmpty => ele(keyIndex) -> x(keyIndex + 1)
     } toMap
   }
 
   def loadFileAsList(file: String, delimitedBy: String = COMMA, keyIndex: Int = 0): mutable.LinkedHashSet[(String, String)] = {
     val store = new mutable.LinkedHashSet[(String, String)]()
-    fromFile(file).getLines().filter(valid(_)).foreach(temp => {
+    readFile(file).getLines().filter(valid(_)).foreach(temp => {
       val splitD = temp split delimitedBy
       if (splitD.nonEmpty) store += ((splitD(keyIndex), splitD(keyIndex + 1)))
     })
@@ -350,7 +352,7 @@ package object model {
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
-      val reader = fromFile(file._2).bufferedReader()
+      val reader = readFile(file._2).bufferedReader
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
       })
@@ -401,4 +403,28 @@ package object model {
     layout
   }
 
+  def readFile(file: String): BufferedSource = {
+    if(lookUpProp("hl7.env") == "QA") {
+      val propertyKey = determineTemplatePath(getOS)
+      Source.fromFile(lookUpProp(propertyKey) + FS + file)
+    } else {
+      Source.fromFile(file)
+    }
+  }
+
+  def getOS: String = {
+    System.getProperty("os.name")
+  }
+
+  def determineTemplatePath(os: String): String = {
+    val windows = "hl7.qa.config.windows"
+    val cdhvm = "hl7.qa.config.cdhvm"
+    if (getOS.toLowerCase().contains("windows")) {
+      info("Using Windows path for templates")
+      windows
+    } else {
+      info("Using Linux path for templates.")
+      cdhvm
+    }
+  }
 }
