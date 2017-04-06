@@ -37,6 +37,7 @@ object Hl7SparkUtil {
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
       .set("spark.streaming.backpressure.pid.derived", "0.1")
+      .set("spark.streaming.kafka.maxRetries", "30")
     if (kafkaConsumer) conf.set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
     conf
   }
