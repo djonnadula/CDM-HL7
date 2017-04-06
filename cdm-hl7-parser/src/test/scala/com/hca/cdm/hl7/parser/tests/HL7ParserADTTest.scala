@@ -16,7 +16,6 @@ class HL7ParserADTTest extends FlatSpec {
     hl7TestSetup.loadProperties("Hl7TestConfig.properties")
 
     val messageName1 = "ADT_1"
-    println(messageName1)
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType.toString)
     val res1 = hl7TestSetup.parse(msg1)
     val expected1 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName1, messageType.toString)
@@ -25,7 +24,6 @@ class HL7ParserADTTest extends FlatSpec {
     }
 
     val messageName2 = "ADT_2"
-    println(messageName2)
     val msg2 =  HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType.toString)
     val res2 = hl7TestSetup.parse(msg2)
     val expected2 =  HL7ParserTestUtils.getExpected(testFileBasePath, messageName2, messageType.toString)
@@ -34,7 +32,6 @@ class HL7ParserADTTest extends FlatSpec {
     }
 
     val messageName3 = "ADT_3"
-    println(messageName3)
     val msg3 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName3, messageType.toString)
     val res3 = hl7TestSetup.parse(msg3)
     val expected3 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName3, messageType.toString)
@@ -43,7 +40,6 @@ class HL7ParserADTTest extends FlatSpec {
     }
 
     val messageName4 = "ADT_4"
-    println(messageName4)
     val msg4 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName4, messageType.toString)
     val res4 = hl7TestSetup.parse(msg4)
     val expected4 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName4, messageType.toString)
