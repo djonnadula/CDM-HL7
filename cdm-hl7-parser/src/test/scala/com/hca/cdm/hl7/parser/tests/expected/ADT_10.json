@@ -1,0 +1,147 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "FRNK",
+    "msh_msg_control_id": "MT_FRNK_ADT_1129610.",
+    "pid_medical_record_num": "K000002505",
+    "pid_medical_record_urn": "A1-B20151218101601316",
+    "pid_pat_account_num": "FR0000121533"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "MT_FRNK",
+    "msh_sending_facility": "FRNK",
+    "msh_receiving_appl": "DBM",
+    "msh_msg_create_date_time": "20151221130800-0600",
+    "msh_msg_type": {
+      "message_code": "ADT",
+      "trigger_event": "A40"
+    },
+    "msh_msg_control_id": "MT_FRNK_ADT_1129610.",
+    "msh_processing_id": "D",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": "KYB"
+  },
+  "0002.EVN": {
+    "evn_evnt_type": "A40",
+    "evn_recorded_date_time": "201512211308",
+    "evn_oper_id": {
+      "person_id": "QBE8554",
+      "last_name": "Hammock",
+      "first_name": "Brittany"
+    },
+    "evn_evnt_occurred": "201512211302"
+  },
+  "0003.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": [
+      {
+        "identifier_num": "K000002505",
+        "identifier_type_code": "MR",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "302-21-2015",
+        "identifier_type_code": "SS",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "A00002475",
+        "identifier_type_code": "HUB",
+        "assgn_facility": "FRNK"
+      }
+    ],
+    "pid_alt_pat_id": {
+      "identifier_num": "A1-B20151218101601316",
+      "identifier_type_code": "URN",
+      "assgn_facility": "FRNK"
+    },
+    "pid_pat_name": [
+      {
+        "last_name": "Osborn",
+        "first_name": "Norman",
+        "type_code": "L"
+      },
+      {
+        "last_name": "Goblin",
+        "first_name": "Green",
+        "type_code": "M"
+      }
+    ],
+    "pid_birth_date_time": "19840220",
+    "pid_sex": "M",
+    "pid_pat_address": {
+      "street_address1": "123 Marvel Street",
+      "city": "Franklin",
+      "state_province": "TN",
+      "zip_postal_code": "37064",
+      "address_type": "P",
+      "county_parish_code": "TN187"
+    },
+    "pid_home_phone_num": "(615)555-6261",
+    "pid_business_phone_num": "(502)875-7272",
+    "pid_marital_status": "W",
+    "pid_pat_account_num": "FR0000121533",
+    "pid_pat_social_security_num": "302-21-2015"
+  },
+  "0004.MRG": {
+    "mrg_prior_pat_account_num": {
+      "identifier_num": "K000002506",
+      "identifier_type_code": "MR"
+    }
+  },
+  "0005.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "P",
+    "pv1_assgn_pat_loc": "FR.LAB",
+    "pv1_attending_doctor": {
+      "person_id": "DR.ATND01",
+      "last_name": "Attending01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    },
+    "pv1_pat_type": "POV",
+    "pv1_financial_classification": "05",
+    "pv1_servicing_facility": "FRNK",
+    "pv1_account_status": "PRE",
+    "pv1_adm_date_time": "201512210000"
+  },
+  "0006.PV2": {
+    "pv2_adm_reason": "Labwork",
+    "pv2_newborn_baby_ind": "N"
+  },
+  "0007.ROL": {
+    "rol_role_instance_id": "1",
+    "rol_action_code": "AD",
+    "rol_role_name": "AT",
+    "rol_role_person_name": {
+      "person_id": "DR.ATND01",
+      "last_name": "Attending01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0008.ROL": {
+    "rol_role_instance_id": "2",
+    "rol_action_code": "AD",
+    "rol_role_name": "PP",
+    "rol_role_person_name": {
+      "person_id": "DR.PCP01",
+      "last_name": "PrimaryCare01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0009.DG1": {
+    "dg1_set_id": "1",
+    "dg1_diagnosis_code": {
+      "primary_id": "D64.9",
+      "text": "ANEMIA, UNSPECIFIED",
+      "name_of_coding_sys": "I10"
+    },
+    "dg1_diagnosis_type": "Other"
+  },
+  "0010.DRG": {
+    "drg_diagnostic_related_group": "33"
+  }
+}

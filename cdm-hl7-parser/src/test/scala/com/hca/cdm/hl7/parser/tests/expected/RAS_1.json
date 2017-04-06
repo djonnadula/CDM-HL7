@@ -1,0 +1,113 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCQA1A",
+    "msh_msg_control_id": "IP_COCQ1A_RAS_PHAQ1A.161017.4458",
+    "pid_medical_record_num": "J000424764",
+    "pid_medical_record_urn": "J501375",
+    "pid_pat_account_num": "J00021035867"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "COCQA1A",
+    "msh_sending_facility": "COCQA1A",
+    "msh_receiving_appl": "OV",
+    "msh_receiving_facility": "OV",
+    "msh_msg_create_date_time": "201611090911",
+    "msh_msg_type": {
+      "message_code": "RAS",
+      "trigger_event": "O17"
+    },
+    "msh_msg_control_id": "IP_COCQ1A_RAS_PHAQ1A.161017.4458",
+    "msh_processing_id": "T",
+    "msh_version_id": "2.5",
+    "msh_continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "msh_accept_acknowledgment_type": "ER",
+    "msh_appl_acknowledgment_type": "NE"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": {
+      "identifier_num": "J000424764",
+      "assgn_authr": "COCQA1A",
+      "identifier_type_code": "MRN"
+    },
+    "pid_alt_pat_id": "J501375",
+    "pid_pat_name": {
+      "last_name": "NICK",
+      "first_name": "AMY"
+    },
+    "pid_birth_date_time": "19790222",
+    "pid_sex": "F",
+    "pid_pat_account_num": "J00021035867"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "I",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "J.PSY",
+      "room": "J.104",
+      "bed": "A",
+      "facility": "COCQA1A"
+    },
+    "pv1_adm_type": "EM",
+    "pv1_attending_doctor": {
+      "person_id": "DOCMMW",
+      "last_name": "WILLIAMS",
+      "first_name": "DOCTOR"
+    },
+    "pv1_pat_type": "IN",
+    "pv1_account_status": "ADM"
+  },
+  "0004.ORC": {
+    "orc_order_control": "RE",
+    "orc_placer_order_num": "128412",
+    "orc_filler_order_num": "040241",
+    "orc_order_status": "AC",
+    "orc_qty_timing": {
+      "quantity": "500",
+      "interval": "Q2H",
+      "duration": "Q2H"
+    },
+    "orc_transaction_date_time": "201611090911",
+    "orc_ordering_provider": "DOCMMW",
+    "orc_order_eff_date_time": "201611090845"
+  },
+  "0005.RXA": {
+    "rxa_give_sub_id_counter": "1",
+    "rxa_administration_sub_id_counter": "1",
+    "rxa_administration_start_date_time": "201611090911",
+    "rxa_administration_end_date_time": "201611090845",
+    "rxa_administered_code": {
+      "primary_id": "APTI100S",
+      "text": "TIPRANAVIR/VITAMIN E TPGS 100 MG/ML ML",
+      "name_of_coding_sys": "L",
+      "alt_id": "00597000201",
+      "alt_text": "APTIVUS 100 MG/ML SOLUTION",
+      "name_of_alt_coding_sys": "NDC"
+    },
+    "rxa_administered_amt": "5",
+    "rxa_administered_unit": "MG",
+    "rxa_administered_dosage_form": {
+      "primary_id": "500",
+      "text": "1"
+    },
+    "rxa_administering_provider": "1PDDJX7355",
+    "rxa_indication": {
+      "primary_id": "N",
+      "text": "N"
+    },
+    "rxa_completion_status": "CP",
+    "rxa_action_code": "D",
+    "rxa_pharmacy_order_type": "MED"
+  },
+  "0006.RXR": {
+    "rxr_route": {
+      "primary_id": "PO",
+      "text": "ORAL"
+    }
+  }
+}

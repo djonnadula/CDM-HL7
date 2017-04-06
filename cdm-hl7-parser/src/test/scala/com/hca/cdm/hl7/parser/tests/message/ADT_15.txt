@@ -1,0 +1,140 @@
+MSH|^~\&|MT_FRNK|FRNK|DBM||20151211111300-0600||ADT^A01|MT_FRNK_ADT_1113861.|D|2.5||KYB|||
+EVN|A01|201512111112|||QBE8554^Hammock^Brittany|201512111111
+PID|1||K000002378^^^^MR^FRNK~206-11-2015^^^^SS^FRNK~A00002349^^^^HUB^FRNK|A0-B20151103134433868^^^^URN^FRNK|Osborn^Harry^^^^^L~Osborn^Harold^^^^^M|Osborn,Emily|19411029|M||W|234 MARVEL^^FRANKLIN^TN^37064^^P^^TN187||(615)555-6309|(502)695-0070||S|NON|FR0000121392|206-11-2015
+NK1|1|OSBORN^NORMAN|PA^Parent|234 MARVEL^^FRANKLIN^TN^37064^^^^TN187|(615)555-6309||NOK
+NK1|2|OSBORN^HARRY|PA^Parent|234 MARVEL^^FRANKLIN^TN^37064^^^^TN187|(615)555-6309||NOT
+NK1|3|AMERWIRE||616 INDUSTRIAL PARK^^FRANKFORT^KY^40601||(502)695-0070|EMP||||||AMERICAN WIRE COMPANY FRANKFT|||||||||||||||||||||F
+PV1|1|I|FR.TR^FR.TR4^A|EL|||DR.ATND01^Attending01^Provider^^^^^^^^^^XX|DR.OTH01^Other01^Provider^^^^^^^^^^XX||GP||||CR|||DR.ADM01^Admitting01^Provider^^^^^^^^^^XX|IN||05|||||||||||||||||||FRNK||ADM|||201512111111||||||||DR.FAM01^Family01^Provider^^^^^^^^^^XX
+PV2||P^Private Room|LACERATION OF RIGHT HAND|||||||1|1||||||||||||||EL|||||||||||N||||||71^Full Care in Unit
+ROL|1|AD|AT|DR.ATND01^Attending01^Provider^^^^^^^^^^XX
+ROL|2|AD|RP|DR.OTH01^Other01^Provider^^^^^^^^^^XX
+ROL|3|AD|AD|DR.ADM01^Admitting01^Provider^^^^^^^^^^XX
+ROL|4|AD|FHCP|DR.FAM01^Family01^Provider^^^^^^^^^^XX
+ROL|5|AD|PP|DR.PCP01^PrimaryCare01^Provider^^^^^^^^^^XX
+ROL|6|AD|CP|DR.CONS01^Consulting01^Provider
+OBX|1|TX|1PAO0F010A^Deposit Req?^ADM||N||||||F
+OBX|2|TX|1PAO0F011A^Est Amt Due^ADM||||||||F
+OBX|3|TX|1PAO0F012A^Amt Rec^ADM||||||||F
+OBX|4|TX|1PAO0F014A^Collected by^ADM||||||||F
+OBX|5|TX|1PAO0F016A^Pt Advised of Financial Responsibility   Resources, Refer to^ADM||||||||F
+OBX|6|TX|1PAO0F017A^Discharge Financial Status^ADM||||||||F
+OBX|7|TX|1PAO0F031A^Amt Req^ADM||||||||F
+OBX|8|TX|1PAO0F330A^Electronic Patient Statements^ADM||N||||||F
+OBX|9|TX|1PAO0F331A^Use Guarantor Cell Phone for Text/SMS Messaging^ADM||N||||||F
+OBX|10|CE|1PAO0G010A^Patient Confidential Address/Phone or Guar Temp Address?^ADM||T^Guarantor Temp Address||||||F
+OBX|11|TX|1PAO0G011A^Address^ADM||1 Guarantor Address||||||F
+OBX|12|TX|1PAO0G012A^Address^ADM||||||||F
+OBX|13|TX|1PAO0G013A^City^ADM||Nashville||||||F
+OBX|14|TX|1PAO0G014A^State^ADM||TN||||||F
+OBX|15|TX|1PAO0G015A^Zip^ADM||37203||||||F
+OBX|16|TX|1PAO0G016A^County^ADM||TN037||||||F
+OBX|17|TX|1PAO0G017A^Country^ADM||US||||||F
+OBX|18|TX|1PAO0G018A^Phone^ADM||615-555-6311||||||F
+OBX|19|TX|1PAO0G019A^Temporary Address Until:^ADM||20151211||||||F
+OBX|20|TX|1PAO0G020A^Comment^ADM||||||||F
+OBX|21|TX|1PAO0G021A^Preferred Language^ADM||ENG||||||F
+OBX|22|TX|1PAO0G022A^Country^ADM||US||||||F
+OBX|23|TX|1PAO0G050A^Does Guarantor Have Additional Employment?^ADM||Y||||||F
+OBX|24|TX|1PAO0G051A^Name:^ADM||BLUEGRCA||||||F
+OBX|25|TX|1PAO0G052A^Address^ADM||214 E COURT ST||||||F
+OBX|26|TX|1PAO0G053A^Address^ADM||||||||F
+OBX|27|TX|1PAO0G054A^City^ADM||LAWRENCEBURG||||||F
+OBX|28|TX|1PAO0G055A^State^ADM||KY||||||F
+OBX|29|TX|1PAO0G056A^Zip^ADM||40342||||||F
+OBX|30|TX|1PAO0G057A^Work Phone^ADM||(502)839-7102||||||F
+OBX|31|TX|1PAO0G058A^Guar Occup^ADM||TECh||||||F
+OBX|32|TX|1PAO0G059A^Emp Status^ADM||F||||||F
+OBX|33|TX|1PAO0G060A^Description^ADM||BLUEGRASS COMMUNITY ACTI||||||F
+OBX|34|TX|1PAO0O010A^Do You Wish to Identify Another Guarantor?^ADM||N||||||F
+OBX|35|TX|1PAO0O011A^Name:^ADM||||||||F
+OBX|36|TX|1PAO0O012A^Birthdate^ADM||||||||F
+OBX|37|TX|1PAO0O013A^Sex^ADM||||||||F
+OBX|38|TX|1PAO0O014A^Social Security #^ADM||||||||F
+OBX|39|TX|1PAO0O015A^Relationship to Patient^ADM||||||||F
+OBX|40|TX|1PAO0O016A^Address^ADM||||||||F
+OBX|41|TX|1PAO0O017A^Address^ADM||||||||F
+OBX|42|TX|1PAO0O018A^City^ADM||||||||F
+OBX|43|TX|1PAO0O019A^State^ADM||||||||F
+OBX|44|TX|1PAO0O020A^Zip^ADM||||||||F
+OBX|45|TX|1PAO0O021A^County^ADM||||||||F
+OBX|46|TX|1PAO0O022A^Country^ADM||||||||F
+OBX|47|TX|1PAO0O023A^Home Phone^ADM||||||||F
+OBX|48|TX|1PAO0O025A^Name:^ADM||||||||F
+OBX|49|TX|1PAO0O026A^Address^ADM||||||||F
+OBX|50|TX|1PAO0O027A^Address^ADM||||||||F
+OBX|51|TX|1PAO0O028A^City^ADM||||||||F
+OBX|52|TX|1PAO0O029A^State^ADM||||||||F
+OBX|53|TX|1PAO0O030A^Zip^ADM||||||||F
+OBX|54|TX|1PAO0O031A^Work Phone^ADM||||||||F
+OBX|55|TX|1PAO0O032A^Other Guarantor Occupation^ADM||||||||F
+OBX|56|TX|1PAO0O033A^Emp Status^ADM||||||||F
+OBX|57|TX|1PAO0O034A^Description^ADM||||||||F
+OBX|58|TX|1PAO0P010A^Does the Patient Have Temporary Address?^ADM||Y||||||F
+OBX|59|TX|1PAO0P011A^Address^ADM||1 Temporary Address||||||F
+OBX|60|TX|1PAO0P012A^Address^ADM||||||||F
+OBX|61|TX|1PAO0P013A^City^ADM||City||||||F
+OBX|62|TX|1PAO0P014A^State^ADM||TN||||||F
+OBX|63|TX|1PAO0P015A^Zip^ADM||37203||||||F
+OBX|64|TX|1PAO0P016A^Home PH^ADM||615-555-6309||||||F
+OBX|65|TX|1PAO0P017A^County^ADM||TN037||||||F
+OBX|66|TX|1PAO0P018A^Country^ADM||US||||||F
+OBX|67|TX|1PAO0P019A^Temporary Address Until?^ADM||20151211||||||F
+OBX|68|TX|1PAO0P020A^Comment^ADM||||||||F
+OBX|69|TX|1PAO0P050A^Does Patient Have Additional Employment?^ADM||Y||||||F
+OBX|70|TX|1PAO0P051A^Name:^ADM||ARTS||||||F
+OBX|71|TX|1PAO0P052A^Address^ADM||411 HOLMES STREET||||||F
+OBX|72|TX|1PAO0P053A^Address^ADM||||||||F
+OBX|73|TX|1PAO0P054A^City^ADM||FRANKFORT||||||F
+OBX|74|TX|1PAO0P055A^State^ADM||KY||||||F
+OBX|75|TX|1PAO0P056A^Zip^ADM||40601||||||F
+OBX|76|TX|1PAO0P057A^Work Phone^ADM||(502)223-5754||||||F
+OBX|77|TX|1PAO0P058A^Occupation^ADM||Tech||||||F
+OBX|78|TX|1PAO0P059A^Emp Status^ADM||F||||||F
+OBX|79|TX|1PAO0P060A^Preferred Language^ADM||ENG||||||F
+OBX|80|TX|1PAO0P061A^Country^ADM||US||||||F
+OBX|81|TX|1PAO0P062A^Description^ADM||ARTS ELECTRIC INC FRANKF||||||F
+OBX|82|CE|1REG0M229A^Ethnicity^ADM||NOTHISPLAT^Not Hispanic or Latino||||||F
+OBX|83|TX|1REG0M230A^Additional Race^ADM||W||||||F
+OBX|84|TX|1REG0R020A^Do You Have an Advance Directive?^ADM||Y||||||F
+OBX|85|TX|1REG0R021A^If No, do You Want Information?^ADM||||||||F
+OBX|86|TX|1REG0R022A^If Yes, Have You Provided the Hospital with a Current Copy?^ADM||N||||||F
+OBX|87|TX|1REG0R023A^Do You Have a Durable Power of Attorney for Health Care?^ADM||N||||||F
+OBX|88|TX|1REG0R024A^If No, do You Want Information?^ADM||N||||||F
+OBX|89|TX|1REG0R025A^If Yes, Have You Provided the Hospital with a Current Copy?^ADM||||||||F
+OBX|90|TX|1REG0R027A^Are you currently participating in a research study^ADM||N||||||F
+OBX|91|CE|1REG0R048A^have Ebola^ADM||NO^No||||||F
+OBX|92|TX|E13010001A^Preferred name^ADM||Harry||||||F
+OBX|93|TX|E13010038A^Immediate religious, spiritual, or cultural considerations^ADM||NONE||||||F
+OBX|94|TX|N42010134A^Patient reports prior history of TB or positive TB skin test^ADM||N||||||F
+OBX|95|TX|N42010136A^Patient reports close contact with a person who has TB^ADM||N||||||F
+OBX|96|TX|N42010138A^Close contact with any person having flu-like illness^ADM||N||||||F
+OBX|97|TX|N42010140A^TB Point of entry screen^ADM||NEGATIVE||||||F
+OBX|98|TX|N42010142A^Contagious respiratory infection point of entry screen^ADM||NEGATIVE||||||F
+OBX|99|TX|N42010146A^Fever greater than 37.8 C (100.4 F)^ADM||N||||||F
+OBX|100|TX|N42010147A^Cough (not related to allergy or COPD)^ADM||N||||||F
+OBX|101|TX|N42010170A^Sore throat^ADM||N||||||F
+OBX|102|TX|N42010171A^Night sweats^ADM||N||||||F
+OBX|103|TX|N42010172A^Unexplained weight loss^ADM||N||||||F
+OBX|104|TX|N42010173A^Fatigue (Tiredness)^ADM||N||||||F
+OBX|105|TX|N42010174A^Body aches^ADM||N||||||F
+OBX|106|TX|N42010175A^Rash^ADM||N||||||F
+OBX|107|TX|N42010176A^Nasal congestion (not related to allergies/sinus infection)^ADM||N||||||F
+OBX|108|TX|N42010179A^Travel outside of the US in the past 3 weeks^ADM||N||||||F
+OBX|109|TX|N4201A0100^Is patient present^ADM||Y||||||F
+OBX|110|TX|N4201A0118^Able to perform TB/respiratory point of entry screen^ADM||Y||||||F
+OBX|111|TX|N4201A0120^Reason unable to perform screen^ADM||||||||F
+OBX|112|CE|N4201A0141B^Resided in or traveled to a W African Country^ADM||NO^None||||||F
+OBX|113|CE|N4201A0143A^Had contact with anyone who has been to a W African Country^ADM||NO^No||||||F
+OBX|114|TX|N4201A0148A^Fever greater than 37.8 C (100.4 F)^ADM||N||||||F
+AL1|1|DA|F006002380^naproxen^^naproxen^^allergy.id|MO|Rash-Hives|20151110
+AL1|2|DA|F006002502^honey^^honey^^allergy.id|MI|Swelling|20151110
+AL1|3|DA|F006006698^bee venom (honey bee)^^bee venom (honey bee)^^allergy.id|SV|Anaphylaxis|20151110
+AL1|4||grass|MI|Cough|20151110
+DG1|1||S61.411A^LACERATION WITHOUT FOREIGN BODY OF RIGHT HAND, INIT ENCNTR^I10|||Other
+DRG|33
+GT1|1||OSBORN^HARRY||234 MARVEL^^FRANKLIN^TN^37064|(615)555-6309^^^emailline@test.com|||||SA|206-11-2015||||AMERWIRE|616 INDUSTRIAL PARK^^FRANKFORT^KY^40601|(502)695-0070||F
+IN1|1|AFLAC||AMERICAN FAMILY LIFE AFLAC|1932 WYNTON RD^^COLUMBUS^GA^31999||(800)992-3522|A123456789|BLUEGRASS COMMUNITY ACTION||AMERWIRE|20151211|20161212|123456789||SELCHOW^NEW|FR|19411211|234 MARVEL^^FRANKLIN^TN^37064^^P||||||||||20151211|QBE8554||||||18798709||||||F^Full Time|F|^^FRANKFORT|VERIFIED
+IN2|1|098-78-7890|||||||||||||||||||||||||||||||Y|||||||||AI|D||||||||||||||||||||(615)555-6309
+IN3|1|123456789||||20151211|||20151211|20161215
+UB2|1||71||||11^20151211
+ACC|201512111057|11^Onset of Symptoms or Illness

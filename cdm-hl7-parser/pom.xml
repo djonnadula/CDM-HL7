@@ -5,18 +5,19 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdm-hl7-parser</artifactId>
     <name>CMD-HL7-PARSER</name>
-    <version>${cdm.version}</version>
+    <version>${project.version}</version>
+
     <dependencies>
 
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-common</artifactId>
-            <version>${cdm.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>
