@@ -272,7 +272,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   private def isRequiredType(data: mapType, reqMsgType: HL7): Boolean = {
     data.get(MSH_Segment) match {
       case Some(nextSeg) => nextSeg.asInstanceOf[mapType].get(Message_Type_Segment) match {
-        case Some(seg) => seg.asInstanceOf[mapType].get(Message_Control_Id) match {
+        case Some(seg) => seg.asInstanceOf[mapType].get(Message_Code) match {
           case Some(typ) => typ match {
             case s: String => return hl7(s) == reqMsgType
             case _ =>
