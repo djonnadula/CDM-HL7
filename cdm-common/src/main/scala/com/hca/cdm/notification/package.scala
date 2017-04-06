@@ -15,7 +15,7 @@ package object notification {
   private lazy val SMTP_HOST = lookUpProp("smtp.host")
   private lazy val emailTo = lookUpProp("notificationList").split(",")
   private lazy val emailFrom = lookUpProp("notificationFrom")
-  private lazy val bounhceAddress = lookUpProp("bounceNotifier")
+  private lazy val bounceAddress = lookUpProp("bounceNotifier")
 
   object TaskState extends Enumeration {
     type taskState = Value
@@ -45,7 +45,7 @@ package object notification {
       }
       mail setSentDate new Date()
       mail setHostName SMTP_HOST
-      mail setBounceAddress bounhceAddress
+      mail setBounceAddress bounceAddress
       mail setFrom emailFrom
       if (monitorUnit nonEmpty) {
         monitorUnit foreach (to => mail addTo to)
