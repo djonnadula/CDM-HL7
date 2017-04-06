@@ -93,7 +93,7 @@ package object model {
 
   def jsonHandler(filterNulls: Boolean = true): (Any) => String = {
     val mapper = new ObjectMapper().registerModule(DefaultScalaModule)
-    if (filterNulls) mapper.disable(WRITE_NULL_MAP_VALUES)
+    if (filterNulls) mapper disable WRITE_NULL_MAP_VALUES
     mapper.writer.writeValueAsString(_)
   }
 
@@ -311,8 +311,6 @@ package object model {
       EMPTYSTR
 
     }
-
-
   }
 
   private[model] sealed trait modelLayout {
