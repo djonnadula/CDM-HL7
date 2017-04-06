@@ -33,7 +33,7 @@ class HL7ParserTestSetup(msgType: HL7) {
     val adhocAuditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, adhocStage)(_: String, _: MSGMeta)))
     val allSegmentsInHl7Auditor = hl7MsgMeta map (msgType => msgType._1 -> (auditMsg(msgType._1.toString, segmentsInHL7)(_: String, _: MSGMeta)))
     val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
-        allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1)))
+        allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1),null))
 
     def parse(message: String): String = {
         Try(hl7Parsers(msgType).transformHL7(message, reject) rec) match {
