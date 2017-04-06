@@ -77,30 +77,33 @@ package object HL7ParserTestUtils {
       * Create test file path
       * @param basePath starting path
       * @param fileType ending path
+      * @param messageType HL7 message type
       * @return starting + ending path
       */
-    def testFilePath(basePath: String, fileType: String): String = {
-        basePath + "/" + fileType + "/"
+    def testFilePath(basePath: String, fileType: String, messageType: String): String = {
+        basePath + "/" + fileType + "/" + messageType + "/"
     }
 
     /**
       * Gets the message from the test message folder
       * @param testFileBasePath test message path
       * @param messageName file name
+      * @param messageType HL7 message type
       * @return HL7 message
       */
-    def getMessage(testFileBasePath: String, messageName: String): String = {
-        message(testFilePath(testFileBasePath, "message") + createMessageFileName(messageName))
+    def getMessage(testFileBasePath: String, messageName: String, messageType: String): String = {
+        message(testFilePath(testFileBasePath, "message", messageType) + createMessageFileName(messageName))
     }
 
     /**
       * Gets the json message from the test message expected folder
       * @param testFileBasePath test json message path
       * @param messageName file name
+      * @param messageType HL7 message type
       * @return Json message
       */
-    def getExpected(testFileBasePath: String, messageName: String): String = {
-        expected(testFilePath(testFileBasePath, "expected") + createExpectedFileName(messageName))
+    def getExpected(testFileBasePath: String, messageName: String, messageType: String): String = {
+        expected(testFilePath(testFileBasePath, "expected", messageType) + createExpectedFileName(messageName))
     }
 
     /**

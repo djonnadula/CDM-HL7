@@ -37,9 +37,6 @@ class HL7ParserTestSetup(msgType: HL7) {
         allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAuditor))
 
     def parse(message: String): String = {
-        println("msgType: " + msgType)
-        println("message: " + message)
-        println()
         Try(hl7Parsers(msgType).transformHL7(message, reject) rec) match {
             case Success(map) =>
                 map match {
@@ -49,7 +46,6 @@ class HL7ParserTestSetup(msgType: HL7) {
                         out._1
                     case Right(t) =>
                         t.toString
-                    case _ => "other"
                 }
         }
     }
