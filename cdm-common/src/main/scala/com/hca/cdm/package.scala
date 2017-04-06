@@ -3,7 +3,7 @@ package com.hca
 import java.io.{File, InputStream, PrintStream, Serializable}
 import java.lang.Runtime.{getRuntime => rt}
 import java.lang.Thread.UncaughtExceptionHandler
-import java.net.InetAddress
+import java.net.{InetAddress, URL, URLClassLoader}
 import java.nio.charset.StandardCharsets
 import java.time.{LocalDate, Period, ZoneId}
 import java.util.{Properties, TimeZone}
@@ -120,6 +120,8 @@ package object cdm extends Logg {
     prop getOrElse(key, EMPTYSTR)
   }
 
+  def isConfigDefined(key: String): Boolean = prop isDefinedAt key
+
   def printConfig(): Unit = {
     outStream.println("******************************************************************************************")
     outStream.println("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
@@ -198,13 +200,15 @@ package object cdm extends Logg {
     false
   }
 
-  def tryAndLogErrorMes(fun: => Unit, reporter: (Throwable) => Unit): Boolean = {
+  def tryAndLogErrorMes(fun: => Unit, reporter: (Throwable) => Unit, message: Option[String] = None): Boolean = {
     try {
       fun
       return true
     }
     catch {
-      case t: Throwable => reporter(t)
+      case t: Throwable =>
+        if (message isDefined) error(message.get, t)
+        else reporter(t)
     }
     false
   }
@@ -248,6 +252,11 @@ package object cdm extends Logg {
       case any => if (valid(any)) return Some(any.asInstanceOf[T])
     }
     None
+  }
+
+  def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
+    if(specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
+    currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
 
   private class Factory(id: String) extends ThreadFactory {
