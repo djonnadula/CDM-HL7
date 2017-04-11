@@ -327,16 +327,18 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                         if (componentData == UNKNOWN) {
                           moveToUnknown(field)
                         }
+                        // Fix which caused bug by https://jira.app.medcity.net/j/browse/EBA-609
+                      /*  else if(whichSegment == OBX_SEG && j == 5) componentLayout += componentData -> field
                         else if ((field contains delimiters(REPTN_DELIM)) &&
                           (!(fieldRepeatItem contains delimiters(CMPNT_DELIM)) ||
                             !(fieldRepeatItem contains delimiters(SUBCMPNT_DELIM)))) {
                           componentList += (new mutable.LinkedHashMap[String, String] += (componentData -> fieldRepeatItem))
-                        }
+                        } */
                         else componentLayout += componentData -> field
                       }
                     }
                   }
-                  if (multiFields.length > 1) {
+                  if (componentList nonEmpty) {
                     componentLayout += componentData -> componentList
                   }
                 case _ =>

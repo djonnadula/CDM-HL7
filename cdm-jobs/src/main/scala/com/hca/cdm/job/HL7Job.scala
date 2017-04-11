@@ -550,28 +550,29 @@ object HL7Job extends Logg with App {
 
     override def run(): Unit = {
       checkForStageToComplete()
-      msgTypeFreq.transform({ case (k, v) =>
-        if (lowFrequencyHL7 isDefinedAt v._1) {
-          if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
-            lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
-            v
+      if (!(runningStage!= null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
+        msgTypeFreq.transform({ case (k, v) =>
+          if (lowFrequencyHL7 isDefinedAt v._1) {
+            if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
+              lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
+              v
+            } else {
+              if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+              else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
+              lowFrequencyHL7 update(v._1, 0)
+              (v._1, 0L)
+            }
           } else {
-            if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-            else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-            lowFrequencyHL7 update(v._1, 0)
+            if (v._2 <= 0) {
+              if (iscMonitoringEnabled) {
+                IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
+              } else noDataAlert(v._1, k)
+            }
             (v._1, 0L)
           }
-        } else {
-          if (v._2 <= 0) {
-            if (iscMonitoringEnabled) {
-              IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
-            } else noDataAlert(v._1, k)
-          }
-          (v._1, 0L)
-        }
-      })
-      if (runningStage != null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck)) {
-        error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
+        })
+      }
+      else{  error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
             " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check Immediately" +
