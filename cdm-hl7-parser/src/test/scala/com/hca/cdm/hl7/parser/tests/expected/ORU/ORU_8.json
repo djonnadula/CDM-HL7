@@ -1,7 +1,7 @@
 {
   "0000.COMN": {
     "msh_sending_facility": "COCLE",
-    "msh_msg_control_id": "MT6_COCLE_ORU_LEGTPACS.1.972254",
+    "msh_msg_control_id": "MT_COCLE_ORU_LEGTPACS.1.972254",
     "pid_medical_record_num": "L000063321",
     "pid_medical_record_urn": "L48112",
     "pid_pat_account_num": "L00516899727"
@@ -15,14 +15,14 @@
       "message_code": "ORU",
       "trigger_event": "R01"
     },
-    "msh_msg_control_id": "MT6_COCLE_ORU_LEGTPACS.1.972254",
+    "msh_msg_control_id": "MT_COCLE_ORU_LEGTPACS.1.972254",
     "msh_processing_id": "P",
-    "msh_version_id": "2.4"
+    "msh_version_id": "2.1"
   },
   "0002.PID": {
     "pid_set_id": "1",
-    "pid_pat_id_list": "L000063321",
-    "pid_alt_pat_id": "L48112",
+    "pid_medical_record_num": "L000063321",
+    "pid_medical_record_urn": "L48112",
     "pid_pat_name": {
       "last_name": "JOY",
       "first_name": "TASHA"
@@ -45,7 +45,7 @@
       "middle_name": "D",
       "degree": "MD"
     },
-    "pv1_consulting_doctor": {
+    "pv1_primary_care_doctor": {
       "person_id": ".DNK",
       "last_name": "Know",
       "first_name": "Does",
@@ -79,6 +79,17 @@
     "obr_observation_date_time": "201701231333",
     "obr_observation_end_date_time": "201701231341",
     "obr_ordering_provider": "DOYJA",
+    "obr_placer_first_generic_field": [
+      {
+        "obr_placer_first_generic_field": ".SELF"
+      },
+      {
+        "obr_placer_first_generic_field": "DILER"
+      },
+      {
+        "obr_placer_first_generic_field": "YANWE01"
+      }
+    ],
     "obr_result_status": "F",
     "obr_reason_for_study": {
       "text": "od"
@@ -86,7 +97,9 @@
     "obr_principal_result_interpreter": {
       "name": {
         "person_id": "I.PHY.MTS"
-      }
+      },
+      "eff_from_date_time": "1234566",
+      "eff_to_date_time": "201701231341"
     },
     "obr_scheduled_date_time": "201701231306"
   },

@@ -157,7 +157,7 @@
       "local_number": "875-5240"
     },
     "obr_placer_first_generic_field": {
-      "primary_id": "RAD",
+      "order_category": "RAD",
       "order_number": "20170209-0025"
     },
     "obr_filler_first_generic_field": "DI",
