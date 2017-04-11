@@ -1,0 +1,173 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCAR",
+    "msh_msg_control_id": "MT_COCAR_ORU_ARGTPACS.1.1180582",
+    "pid_medical_record_num": "I000356699",
+    "pid_medical_record_urn": "I279000",
+    "pid_pat_account_num": "I00970395034"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_facility": "COCAR",
+    "msh_msg_create_date_time": "201701130201",
+    "msh_msg_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "msh_msg_control_id": "MT_COCAR_ORU_ARGTPACS.1.1180582",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.1"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_medical_record_num": "I000356699",
+    "pid_medical_record_urn": "I279000",
+    "pid_pat_name": {
+      "last_name": "KIPKER KEPLER",
+      "first_name": "JAKET"
+    },
+    "pid_birth_date_time": "19451105",
+    "pid_sex": "F",
+    "pid_pat_account_num": "I00970395034",
+    "pid_pat_social_security_num": "060-00-5601"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "I",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "DIS",
+      "room": "I.400",
+      "bed": "A"
+    },
+    "pv1_attending_doctor": {
+      "person_id": "TANZA",
+      "last_name": "Tanimu",
+      "first_name": "Zakari",
+      "person_prefix": "MD",
+      "identifier_type_code": "214-217-1900"
+    },
+    "pv1_referring_doctor": {
+      "person_id": ".SELF",
+      "last_name": "REFERRED",
+      "first_name": "SELF"
+    },
+    "pv1_primary_care_doctor": {
+      "person_id": "NOPTH",
+      "last_name": "Nophsker",
+      "first_name": "Theodore",
+      "middle_name": "R",
+      "suffix": "DO"
+    },
+    "pv1_admitting_doctor": {
+      "person_id": "TANZA",
+      "last_name": "Tanimu",
+      "first_name": "Zakari",
+      "suffix": "MD",
+      "check_digit_scheme": "214-217-1900"
+    },
+    "pv1_pat_type": "IN",
+    "pv1_servicing_facility": "COCAR",
+    "pv1_account_status": "DIS",
+    "pv1_consulting_doctor": [
+      {
+        "person_id": "DILER",
+        "last_name": "Dilley",
+        "first_name": "Ermilo",
+        "middle_name": "Duane",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "GRAMI",
+        "last_name": "Graceffo",
+        "first_name": "Michael",
+        "middle_name": "A",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "OSOAY",
+        "last_name": "Osowo",
+        "first_name": "Ayodele",
+        "middle_name": "T",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "YANWE01",
+        "last_name": "Yan",
+        "first_name": "Wei",
+        "person_prefix": "MD"
+      }
+    ]
+  },
+  "0004.ORC": {
+    "orc_order_control": "RE",
+    "orc_order_status": "S",
+    "orc_response_flag": "N",
+    "orc_enterer_location": {
+      "point_of_care": "COCAR",
+      "room": "ARL"
+    }
+  },
+  "0005.OBR": {
+    "obr_set_id": "1",
+    "obr_placer_order_num": "001922764&N&N",
+    "obr_filler_order_num": " - CHEST 1 VIEW PORTABLE",
+    "obr_universal_service_id": {
+      "primary_id": "CHEP",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_sys": "RAD"
+    },
+    "obr_priority": "R",
+    "obr_requested_date_time": "201701030000",
+    "obr_observation_date_time": "201701030747",
+    "obr_observation_end_date_time": "201701030750",
+    "obr_ordering_provider": "DILER",
+    "obr_order_callback_phone_num": "817-465-5881",
+    "obr_placer_first_generic_field": [
+      {
+        "obr_placer_first_generic_field": ".SELF"
+      },
+      {
+        "obr_placer_first_generic_field": "DILER"
+      },
+      {
+        "obr_placer_first_generic_field": "YANWE01"
+      }
+    ],
+    "obr_result_status": "F",
+    "obr_reason_for_study": "copd",
+    "obr_principal_result_interpreter": {
+      "name": {
+        "person_id": "L.PHY.MAS"
+      },
+      "eff_from_date_time": "201701030750"
+    },
+    "obr_scheduled_date_time": "201701030400"
+  },
+  "0006.ZUR": {
+    "zur_set_id": "1",
+    "zur_information": "I772951"
+  },
+  "0007.ZUR": {
+    "zur_set_id": "2",
+    "zur_information": "I001922764"
+  },
+  "0008.ZUR": {
+    "zur_set_id": "3",
+    "zur_information": "FWDCGEWEB02.HCA.CORPAD.NET"
+  },
+  "0009.ZUR": {
+    "zur_set_id": "4",
+    "zur_information": "COCAR"
+  },
+  "0010.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "001922764",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_sys": "CHEP"
+    },
+    "obx_observation_sub_id": "1"
+  }
+}

@@ -223,4 +223,12 @@ class HL7ParserADTTest extends FlatSpec {
     "ADT Message Test 26 (ADT_26)" should "have a match for the parsed output" in {
         assert(res26 === expected26)
     }
+
+    val messageName27 = "ADT_27"
+    val msg27 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName27, messageType.toString)
+    val res27 = hl7TestSetup.parse(msg27)
+    val expected27 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName27, messageType.toString)
+    "ADT Message Test 27 (ADT_27)" should "have a match for the parsed output" in {
+        assert(res27 === expected27)
+    }
 }

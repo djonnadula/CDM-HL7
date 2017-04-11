@@ -1,1 +1,4 @@
 source_system,interface,version,segment_info
+MT,GTPACS,2.1,
+MT,GTMRI,2.1,
+MT,GTRADO,2.1,

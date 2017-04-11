@@ -1,0 +1,119 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCLE",
+    "msh_msg_control_id": "MT6_COCLE_ORU_LEGTPACS.1.972254",
+    "pid_medical_record_num": "L000063321",
+    "pid_medical_record_urn": "L48112",
+    "pid_pat_account_num": "L00516899727"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_facility": "COCLE",
+    "msh_msg_create_date_time": "201701231341",
+    "msh_msg_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "msh_msg_control_id": "MT6_COCLE_ORU_LEGTPACS.1.972254",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.4"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": "L000063321",
+    "pid_alt_pat_id": "L48112",
+    "pid_pat_name": {
+      "last_name": "JOY",
+      "first_name": "TASHA"
+    },
+    "pid_birth_date_time": "19910604",
+    "pid_sex": "F",
+    "pid_pat_account_num": "L00516899727",
+    "pid_pat_social_security_num": "777-77-7777"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "P",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "L.ER"
+    },
+    "pv1_attending_doctor": {
+      "person_id": "DOYJA",
+      "last_name": "Doyle",
+      "first_name": "James",
+      "middle_name": "D",
+      "degree": "MD"
+    },
+    "pv1_consulting_doctor": {
+      "person_id": ".DNK",
+      "last_name": "Know",
+      "first_name": "Does",
+      "middle_name": "Not"
+    },
+    "pv1_admitting_doctor": {},
+    "pv1_pat_type": "ER",
+    "pv1_servicing_facility": "COCLE",
+    "pv1_account_status": "PRE"
+  },
+  "0004.ORC": {
+    "orc_order_control": "RE",
+    "orc_order_status": "S",
+    "orc_response_flag": "N",
+    "orc_enterer_location": {
+      "point_of_care": "COCLE",
+      "room": "LEW"
+    }
+  },
+  "0005.OBR": {
+    "obr_set_id": "1",
+    "obr_placer_order_num": "001834105&N&N",
+    "obr_filler_order_num": " - CHEST 1 VIEW PORTABLE",
+    "obr_universal_service_id": {
+      "primary_id": "CHEP",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_sys": "RAD"
+    },
+    "obr_priority": "S",
+    "obr_requested_date_time": "201701231306",
+    "obr_observation_date_time": "201701231333",
+    "obr_observation_end_date_time": "201701231341",
+    "obr_ordering_provider": "DOYJA",
+    "obr_result_status": "F",
+    "obr_reason_for_study": {
+      "text": "od"
+    },
+    "obr_principal_result_interpreter": {
+      "name": {
+        "person_id": "I.PHY.MTS"
+      }
+    },
+    "obr_scheduled_date_time": "201701231306"
+  },
+  "0006.ZUR": {
+    "zur_set_id": "1",
+    "zur_information": "L48112"
+  },
+  "0007.ZUR": {
+    "zur_set_id": "2",
+    "zur_information": "L001834105"
+  },
+  "0008.ZUR": {
+    "zur_set_id": "3",
+    "zur_information": "FWDCGEWEB02.HCA.CORPAD.NET"
+  },
+  "0009.ZUR": {
+    "zur_set_id": "4",
+    "zur_information": "COCLE"
+  },
+  "0010.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "001834105",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_sys": "CHEP"
+    },
+    "obx_observation_sub_id": "1"
+  }
+}
