@@ -16,7 +16,7 @@
 ### END INIT INFO
 
 # Source function library.
-. /etc/rc.d/init.d/functions
+. /etc/init.d/functions
 
 #
 # Settings
@@ -71,7 +71,7 @@ start() {
 
 stop() {
     echo -n $"Stopping $NAME: "
-    killproc -p ${PIDFILE}${NAME}
+    killproc -p ${PIDFILE} ${NAME}
     RETVAL=$?
     echo
     [ $RETVAL = 0 ] && rm -f ${LOCKFILE} ${PIDFILE}
