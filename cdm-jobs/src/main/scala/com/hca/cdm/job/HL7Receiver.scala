@@ -24,12 +24,14 @@ import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import AuditConstants._
+import com.hca.cdm.job.HL7Receiver.rawOverSized
 
 /**
   * Created by Devaraj Jonnadula on 12/14/2016.
   */
 object HL7Receiver extends Logg with App {
 
+  self =>
   private val config_file = args(0)
   propFile = config_file
   private val fileSystem = FileSystem.get(new Configuration())
@@ -67,12 +69,14 @@ object HL7Receiver extends Logg with App {
   private val checkpointEnable = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
-  if (checkpointEnable) {
-    sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
-    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
-  }
+   if (checkpointEnable) {
+     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
+     sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures","30")
+     sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
+     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
+     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
+   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
   }
@@ -105,9 +109,11 @@ object HL7Receiver extends Logg with App {
       val auditOut = auditTopic
       val prodConf = kafkaProducerConf
       val confFile = config_file
-      val maxMessageSize = this.maxMessageSize
-      val hl7QueueMapping = this.hl7QueueMapping
-      val hl7KafkaOut = this.hl7KafkaOut
+      val maxMessageSize = self.maxMessageSize
+      val hl7QueueMapping = self.hl7QueueMapping
+      val hl7KafkaOut = self.hl7KafkaOut
+      val rawOverSized = self.rawOverSized
+      val rejectOverSized = self.rejectOverSized
       val tracker = new ListBuffer[FutureAction[Unit]]
       tracker += rdd foreachPartitionAsync (dataItr => {
         if (dataItr nonEmpty) {

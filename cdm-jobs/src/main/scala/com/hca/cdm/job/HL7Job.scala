@@ -155,8 +155,8 @@ object HL7Job extends Logg with App {
     parserDriverMetrics = driverParserMetric()
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
-    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), 10, minToSec(monitorInterval), TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 4, 86400, TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 60, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
@@ -191,7 +191,7 @@ object HL7Job extends Logg with App {
           + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
           + range.fromOffset + " To :: " + range.untilOffset)
         messagesInRDD = inc(messagesInRDD, range.count())
-        this.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(this.msgTypeFreq(range.topic)._2, range.count())))
+        self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
       })
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
@@ -545,7 +545,7 @@ object HL7Job extends Logg with App {
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
     val timeCheck: Long = timeInterval * 60000L
-    val lowFrequencyHl7AlertInterval = 5
+    val lowFrequencyHl7AlertInterval: Int = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
       hl7MsgMeta.foreach(hl7 => temp += hl7._1 -> 0)
@@ -554,29 +554,27 @@ object HL7Job extends Logg with App {
 
     override def run(): Unit = {
       checkForStageToComplete()
-      if (!(runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
-        msgTypeFreq.transform({ case (k, v) =>
-          if (lowFrequencyHL7 isDefinedAt v._1) {
-            if (lowFrequencyHL7(v._1) < lowFrequencyHl7AlertInterval) {
-              lowFrequencyHL7 update(v._1, lowFrequencyHL7(v._1) + 1)
-              v
-            } else {
-              if (v._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-              else if (v._2 <= 0) noDataAlert(v._1, k, timeInterval * (lowFrequencyHL7(v._1) + 1))
-              lowFrequencyHL7 update(v._1, 0)
-              (v._1, 0L)
-            }
+      msgTypeFreq.transform({ case (hl7, rate) =>
+        if (lowFrequencyHL7 isDefinedAt rate._1) {
+          if (lowFrequencyHL7(rate._1) < lowFrequencyHl7AlertInterval) {
+            lowFrequencyHL7 update(rate._1, lowFrequencyHL7(rate._1) + 1)
+            rate
           } else {
-            if (v._2 <= 0) {
-              if (iscMonitoringEnabled) {
-                IscAlertCheck(v._1, k, timeInterval * iscAlertInterval)
-              } else noDataAlert(v._1, k)
-            }
-            (v._1, 0L)
+            if (rate._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(rate._1, hl7, timeInterval * (lowFrequencyHL7(rate._1) + 1))
+            else if (rate._2 <= 0) noDataAlert(rate._1, hl7, timeInterval * (lowFrequencyHL7(rate._1) + 1))
+            lowFrequencyHL7 update(rate._1, 0)
+            (rate._1, 0L)
           }
-        })
-      }
-      else {
+        } else {
+          if (rate._2 <= 0) {
+            if (iscMonitoringEnabled) {
+              IscAlertCheck(rate._1, hl7, timeInterval * iscAlertInterval)
+            } else noDataAlert(rate._1, hl7)
+          }
+          (rate._1, 0L)
+        }
+      })
+      if (runningStage != null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck)) {
         error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
@@ -613,6 +611,9 @@ object HL7Job extends Logg with App {
           "\n\n" + EVENT_TIME
         , CRITICAL, statsReport = false, lookUpProp("monitoring.notify.group").split(COMMA))
     }
+
+
+    override def toString = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
   }
 
 }

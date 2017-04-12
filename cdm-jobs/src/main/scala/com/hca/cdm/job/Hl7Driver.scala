@@ -11,12 +11,13 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-import com.hca.cdm.hl7.constants.HL7Constants.{COMMA, COLON}
+import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
+import com.hca.cdm.hl7.model.getJar
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -122,6 +123,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.gracefulStopTimeout", "400000")
     .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
+    .setConf("spark.yarn.user.jar",lookUpProp("hl7.artifact"))
   private lazy val extraConfig = () => lookUpProp("spark.extra.config")
   tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
     if (valid(conf)) {
@@ -136,6 +138,7 @@ object Hl7Driver extends App with Logg {
     sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
       .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
   }
+ // getJar(lookUpProp("hl7.artifact")).foreach(jar => sparkLauncher.setConf("spark.yarn.user.jar",jar))
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
   sparkLauncher addFile configFile.getPath
@@ -236,8 +239,8 @@ object Hl7Driver extends App with Logg {
   }
 
   private def shutDown(): Unit = {
-    tryAndLogErrorMes(job stop(), error(_))
-    tryAndLogErrorMes(job kill(), error(_))
+    tryAndLogErrorMes(job stop(), error(_: Throwable))
+    tryAndLogErrorMes(job kill(), error(_: Throwable))
     Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
       case Success(x) =>
         if (x.waitFor() != 0) {

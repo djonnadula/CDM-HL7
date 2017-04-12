@@ -1,7 +1,7 @@
 package com.hca.cdm.kafka.config
 
 import java.util.{Properties => prop}
-
+import com.hca.cdm.EMPTYSTR
 import com.hca.cdm.io.IOConstants._
 import org.apache.kafka.clients.producer.ProducerConfig._
 
@@ -13,7 +13,7 @@ import org.apache.kafka.clients.producer.ProducerConfig._
 object HL7ProducerConfig {
 
 
-  def createConfig(topicToProduce: String = ""): prop = {
+  def createConfig(topicToProduce: String = EMPTYSTR): prop = {
     val prop = new prop
     prop.put(BUFFER_MEMORY_CONFIG, producerBufferMemory)
     prop.put(COMPRESSION_TYPE_CONFIG, defaultCompression)

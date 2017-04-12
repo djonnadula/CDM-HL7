@@ -27,8 +27,8 @@ package object audit {
         (msh, common) match {
           case (mshMap: mapType, cmnMap: mapType) => (cmnMap get msg_control_id, mshMap get msg_create_time,
             cmnMap get medical_record_num, cmnMap get medical_record_urn, cmnMap get account_num, cmnMap get sending_facility) match {
-            case (Some(control: String), Some(createTime: String), Some(rnum: String), Some(urn: String), Some(accNum: String), Some(facility: String)) =>
-              return MSGMeta(control, createTime, rnum, urn, accNum, facility, triggerEvent(msh))
+            case (Some(control: Any), Some(createTime: Any), Some(rNum: Any), Some(urn: Any), Some(accNum: Any), Some(facility: Any)) =>
+              return MSGMeta(getDefault(control), getDefault(createTime), getDefault(rNum), getDefault(urn), getDefault(accNum), getDefault(facility), triggerEvent(msh))
             case _ =>
           }
           case _ =>
@@ -38,12 +38,18 @@ package object audit {
     NONE
   }
 
+  private def getDefault(data : Any) ={
+    data match {
+      case s :String => s
+      case _ => EMPTYSTR
+    }
+  }
   private def triggerEvent(msh: Any): String = {
     msh match {
       case map: mapType =>
         if (map isDefinedAt msh_msg_type) {
-          val typ = map(msh_msg_type).asInstanceOf[mapType]
-          if (typ isDefinedAt trigger_event) return typ(trigger_event).asInstanceOf[String]
+          val event = map(msh_msg_type).asInstanceOf[mapType]
+          if ((event isDefinedAt trigger_event) && event.get(trigger_event).isDefined) return event(trigger_event).asInstanceOf[String]
         }
       case _ =>
     }

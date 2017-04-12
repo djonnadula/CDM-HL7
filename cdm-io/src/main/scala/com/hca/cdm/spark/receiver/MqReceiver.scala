@@ -24,7 +24,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   */
 class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
-  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_SER) with Logg with MqConnector {
+  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_AND_DISK_2) with Logg with MqConnector {
 
   self =>
   private val mqHosts = lookUpProp("mq.hosts")
@@ -177,10 +177,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   }
 
   private def sHook(): Unit = {
-    registerHook(newThread(s"$id-$app-SHook", runnable({
-      close()
-      // self.stop(s"Stopping Receiver with Id $id and WSMQ Client Id $app Consuming Messages from WSMQ Queues ${sources.mkString(";")}")
-    })))
+    registerHook(newThread(s"$id-$app-SHook", runnable(close())))
   }
 
 }

@@ -21,7 +21,7 @@ object IOConstants {
   val defaultHL7Partitions: Int = 6
   val zkSessionTimeout: Int = 6000
   val zkConnectionTimeout: Int = 10000
-  val defaultReplication: Int = 2
+  val defaultReplication: Int = 3
   val producerBatch: String = "25000"
   val producerAck: String = "all"
   val defaultDeSerializer: String = "org.apache.kafka.common.serialization.ByteArrayDeserializer"

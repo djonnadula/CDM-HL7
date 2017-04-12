@@ -120,7 +120,8 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
           case Right(det) =>
             det match {
               case `notValidStr` => updateMetrics(segment.seg, INVALID)
-                val msg = rejectMsg(hl7, segment.seg, meta, " Invalid Input or Meta Data Required to process Doesn't Exist", data)
+                val msg = rejectMsg(hl7, segment.seg, meta,
+                  s" Invalid Input or Meta Data Required to process Doesn't Exist. Expected message Type $hl7 but Received message ${hl7Type(data)}", data)
                 sizeCheck(msg, segment.seg)
                 tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-$notValidStr", error(_: Throwable))
                 error(s"Invalid Input Came :: $msg")
