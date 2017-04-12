@@ -40,6 +40,7 @@
     },
     "pid_birth_date_time": "19970109",
     "pid_sex": "M",
+    "pid_pat_alias": {},
     "pid_race": "B",
     "pid_pat_address": {
       "street_address1": "999 UNKNOWN ADDRESS",
@@ -139,7 +140,6 @@
     "al1_identification_date": "20170207"
   },
   "0008.ACC": {
-    "acc_accident_date_time": "20170207",
     "acc_accident_code": "11"
   },
   "0009.GT1": {
@@ -173,7 +173,10 @@
     "gt1_guarantor_employment_status": "N"
   },
   "0010.GT1": {
-    "gt1_set_id": "2"
+    "gt1_set_id": "2",
+    "gt1_guarantor_name": {},
+    "gt1_guarantor_address": {},
+    "gt1_guarantor_employer_address": {}
   },
   "0011.IN1": {
     "in1_set_id": "1",

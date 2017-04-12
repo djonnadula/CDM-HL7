@@ -1,0 +1,20 @@
+MSH|^~\&|MEDITECH MIC^^HL7|FRNK^FRNK^L|^^L|^^L|201703301351||ORU^R01^ORU_R01|MT6_FRNK_ORU_15784281.1|P|2.5.1|||||||||PHLabReport-Ack^^2.16.840.1.114222.4.10.3^ISO
+SFT|Medical Information Technology, Inc.|6.07|MEDITECH LABORATORY MODULE|20170329||20170329
+PID|1||K000333880^^^^MR^FRNK~407-39-1716^^^^SS^FRNK~A1-B20170330013349810^^^^PI^FRNK~A00240542^^^^XX^FRNK||HATFIELD^AARON||19900705|M||W^Other Race^HL70005|PO BOX 329^^LOUISA^KY^41230^USA^H||(606)477-2856^PRN^^DHATFIELD316@GMAIL.OCM^^606^4772856|||S||FR0804680353||||U^Unknown^HL70189
+NK1|1|HERNDON^SARAH|SI^Sister|953 BELVIOIR DR^^FRANKFORT^KY^40601|(606)794-5403||NOK
+NK1|2|HATFIELD^DENNIS^R|FA^Father|1299 CLAYTON BRANCH RD^^LOUISA^KY^41230|(606)477-2856||NOT
+NK1|3|DISABLD^DISABLED|||||EMP||||DISABLED|||||||||||||||||||||||N^Not Employed
+PV1|1|I|FR.4N^FR.422^A|EM|||GXI9584^Adegboyega^Olubunmi^^^^MD^^Frankfort Regional Med Center&FRNK&L|SELF^Referred^Self^^^^^^Frankfort Regional Med Center&FRNK&L|CQA9162^April L Key^APRN^^^^^^Frankfort Regional Med Center&FRNK&L~GXI9584^Adegboyega^Olubunmi^^^^MD^^Frankfort Regional Med Center&FRNK&L|MED||||PR|||GXI9584^Adegboyega^Olubunmi^^^^MD^^Frankfort Regional Med Center&FRNK&L|INO||03|||||||||||||||||||FRNK||ADM|||201703300431
+PV2||P^Private Room^LB|FLU ORC|RE|||FR17:B0003636R||N|||201703301351|||GXI9584^Adegboyega^Olubunmi^^^^MD^^Frankfort Regional Med Center&FRNK&L|||||||||Main Lab^L^^^^Main Lab&ML&L^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|^^^^^502^2267565|299 King's Daughters Dr^^FRANKFORT^KY^40601^^B
+OBR|1|01162848^1388734^MIC|FR17:B0003636R^1388734^MIC^L|GS^Gram Stain^LB^GS^Gram Stain^LB|R|201703301052|201703301052|||AL|||FLU|201703301100|SP^Sputum^Sputum^401.700^RESP|GXI9584^Adegboyega^Olubunmi^^^^MD^^Frankfort Regional Med Center&FRNK&L||01162848||BAC|ML^Main Lab|201703301351||MB|A|||CQA9162^April L Key^APRN^^^^^^Frankfort Regional Med Center&FRNK&L
+TQ1|||||||||R
+OBX|1|ST|GS^Gram Stain^LB^GS^Gram Stain^LB|1|GS^Gram stain||||||F|||201703301351|ML^Main Lab^LB||||201703301351||||Main Lab^L^^^^ML&Main Lab&M^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|Carole Hackett
+OBX|2|ST|GS^Gram Stain^LB^GS^Gram Stain^LB|1|2W^Few WBC's (2-5 per field)|||N|||F|||201703301351|ML^Main Lab^LB||||201703301351||||Main Lab^L^^^^ML&Main Lab&M^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|Carole Hackett
+OBX|3|ST|GS^Gram Stain^LB^GS^Gram Stain^LB|1|2 GNB^Few Gram negative bacilli|||N|||F|||201703301351|ML^Main Lab^LB||||201703301351||||Main Lab^L^^^^ML&Main Lab&M^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|Carole Hackett
+OBX|4|ST|GS^Gram Stain^LB^GS^Gram Stain^LB|1|3 GPCCL^Moderate Gram positive cocci in clusters|||N|||F|||201703301351|ML^Main Lab^LB||||201703301351||||Main Lab^L^^^^ML&Main Lab&M^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|Carole Hackett
+OBX|5|ST|GS^Gram Stain^LB^GS^Gram Stain^LB|1|4 GPCPR^Many Gram positive cocci in pairs|||N|||F|||201703301351|ML^Main Lab^LB||||201703301351||||Main Lab^L^^^^ML&Main Lab&M^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|Carole Hackett
+OBX|6|ST|GS^Gram Stain^LB^GS^Gram Stain^LB|1|L10S^< 10 Squamous epithelial cells/field|||N|||F|||201703301351|ML^Main Lab^LB||||201703301351||||Main Lab^L^^^^ML&Main Lab&M^XX|299 Kings Daughters Drive^^Frankfort^KY^40601^^B|Carole Hackett
+SPM|1|01162848^1388734|FR17:B0003636R^1388734|SP^Sputum^LB^UDENT^Source, Unidentified^HL70487^20100809^2.5.1|||MAN^Manual|||||||E^Expectorated^Expectorat|||201703301052|201703301100||||||||2.0|^Sterile Cup
+OBR|2|01162848^1388734^MIC|FR17:B0003636R^1388734^MIC^L|SPUTC^Sputum Culture^LB^SPUTC^Sputum Culture^LB|R|201703301052|201703301052|||AL|||FLU|201703301100|SP^Sputum^Sputum^401.700^RESP|GXI9584^Adegboyega^Olubunmi^^^^MD^^Frankfort Regional Med Center&FRNK&L||01162848||BAC|ML^Main Lab|201703301351||MB|A|||CQA9162^April L Key^APRN^^^^^^Frankfort Regional Med Center&FRNK&L
+TQ1|||||||||R
+SPM|1|01162848^1388734|FR17:B0003636R^1388734|SP^Sputum^LB^UDENT^Source, Unidentified^HL70487^20100809^2.5.1|||MAN^Manual|||||||E^Expectorated^Expectorat|||201703301052|201703301100||||||||2.0|^Sterile Cup
