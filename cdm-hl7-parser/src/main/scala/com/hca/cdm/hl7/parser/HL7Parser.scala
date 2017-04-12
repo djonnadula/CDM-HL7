@@ -84,7 +84,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         }
       case Failure(t) =>
         t match {
-          case x: TemplateInfoException =>
+          case _: TemplateInfoException =>
             updateMetrics(REJECTED)
           case _ =>
             updateMetrics(FAILED)
@@ -270,7 +270,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       case _ =>
                     }
                   } else subComponents = subComp.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
-                  if (subComponents.nonEmpty & subComponents.length > 1) {
+                  if (subComponents.nonEmpty && subComponents.length > 1) {
                     val subComponentLayout = new mutable.LinkedHashMap[String, Any]()
                     subComponents.view.zipWithIndex foreach { case (subSubComp, subSubCmpIndex) =>
                       val tempSegments = segmentMapping(s"$subComponentIndex$DOT${inc(subSubCmpIndex)}")._1
@@ -295,15 +295,10 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
               }
               else {
                 if (fieldMapping == UNKNOWN) moveToUnknown(field)
-                else if ((field contains delimiters(REPTN_DELIM)) &&
-                  (!(fieldRepeatItem contains delimiters(CMPNT_DELIM)) ||
-                    !(fieldRepeatItem contains delimiters(SUBCMPNT_DELIM)))) {
-                  fieldList += (new mutable.LinkedHashMap[String, Any] += (fieldMapping -> getOrNone(fieldRepeatItem)))
-                }
                 else fieldLayout += fieldMapping -> getOrNone(field)
               }
             }
-            if (multiFields.length > 1) {
+            if (fieldList nonEmpty) {
               fieldLayout += fieldMapping -> fieldList
             }
           } else {
@@ -417,6 +412,25 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       case t: Throwable =>
         throw new InvalidTemplateFormatException(s"Template has invalid Format for $segmentIndex & Source System Version $controlVersion & Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
     }
+  }
+
+  private def mkCopy(data: mapType): mapType = {
+    val copy =   data ++: new mutable.LinkedHashMap[String,Any]
+    filterNone(copy)
+    copy
+  }
+
+  private def filterNone(data: mapType): Unit = {
+    def remove(k: String): Unit = data remove k
+
+    data.foreach({ case (k, v) =>
+      v match {
+        case None => remove(k)
+        case map: mapType => filterNone(map)
+        case list: listType => list.foreach(filterNone)
+        case _ =>
+      }
+    })
   }
 
   private def nonEmpty(key: String) = key != null & key != EMPTYSTR
