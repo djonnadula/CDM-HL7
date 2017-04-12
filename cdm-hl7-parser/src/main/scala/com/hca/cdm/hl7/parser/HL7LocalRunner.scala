@@ -21,7 +21,7 @@ object HL7LocalRunner extends App with Logg {
   reload(null,Some(currThread.getContextClassLoader.getResourceAsStream("Hl7LocalConfig.properties")))
   val msgType = hl7("RDE")
     // hl7(args(0))
-  private val msgs ="MSH|^~\\&||COCXG|||201701231800||RDE^O01|MT_COCXG_RDE_XGPHAORD.1.10910266|P|2.2\nPID|||J000466169|J429090|KERR^BURGRTT^ULANE^^^||19499517|||||||||||J00073669669\nPV1|I||J.PACUH^J.801^A||||LAZJE^Lazarus^Jeffrey^J MD\nORC|XO|09069654|||||.STK-MED201701231804ONE^0|||||LAZJE^Lazarus^Jeffrey^J^^^MD\nRXE||COUMOT10^WARFARIN SODIUM 10 MG TABLET|0||MG||CHECK MOST RECENT PT/INR BEFORE GIVING~SE: WELL TOLERATED, MONITOR FOR S/S OF BLEEDING|||1|||AL1123710\nRXR|.ROUTE^Route|||ACUDO-MED^ACUDOSE-MEDICATION\nZRX|B|201701231800"
+  private val msgs ="MSH|^~\\&||COCXG|||201701231800||RDE^O01|MT_COCXG_RDE_XGPHAORD.1.10910266|P|2.2\nPID|||J000466169|J429090|KERR^BURGRTT^ULANE^^^||19499517|||||||||||J00073669669\nPV1|I||J.PACUH^J.801^A||||LAZJE^Lazarus^Jeffrey^J MD"
 
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => hl7(mtyp) -> getMsgTypeMeta(hl7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap

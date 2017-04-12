@@ -47,6 +47,11 @@
       "first_name": "JAIRUS",
       "middle_name": "RUEL"
     },
+    "pid_mother_name": {
+      "last_name": "Natividad",
+      "first_name": "Aillyn",
+      "middle_name": "T"
+    },
     "pid_birth_date_time": "20111123",
     "pid_sex": "M",
     "pid_pat_alias": {
@@ -85,11 +90,6 @@
     "pid_religion": "COC",
     "pid_pat_account_num": "700272816",
     "pid_pat_social_security_num": "777-77-7777",
-    "pid_mother_name": {
-      "last_name": "Natividad",
-      "first_name": "Aillyn",
-      "middle_name": "T"
-    },
     "pid_ethnic_group": "NOT HISPANIC",
     "pid_pat_death_ind": "N"
   },
@@ -277,7 +277,8 @@
     "con_consent_decision_date_time": "20160721110500"
   },
   "0018.AL1": {
-    "al1_set_id": "1"
+    "al1_set_id": "1",
+    "al1_allergen_code": {}
   },
   "0019.DG1": {
     "dg1_set_id": "1",

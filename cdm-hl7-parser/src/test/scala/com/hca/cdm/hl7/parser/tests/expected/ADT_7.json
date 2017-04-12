@@ -45,6 +45,10 @@
       "first_name": "KILLING",
       "middle_name": "ME"
     },
+    "pid_mother_name": {
+      "last_name": "Softly",
+      "first_name": "Jane"
+    },
     "pid_birth_date_time": "20100504",
     "pid_sex": "F",
     "pid_race": "W",
@@ -70,10 +74,6 @@
     "pid_religion": "LDS",
     "pid_pat_account_num": "700004079",
     "pid_pat_social_security_num": "777-77-7777",
-    "pid_mother_name": {
-      "last_name": "Softly",
-      "first_name": "Jane"
-    },
     "pid_ethnic_group": "NOT HISPANIC",
     "pid_pat_death_ind": "N"
   },

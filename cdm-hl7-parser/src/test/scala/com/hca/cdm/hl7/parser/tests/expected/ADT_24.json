@@ -66,21 +66,11 @@
     "pr1_procedure_desc": "MRI CHEST W/DYE",
     "pr1_procedure_date_time": "20160106",
     "pr1_procedure_code_modifier": [
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      }
+      {},
+      {},
+      {},
+      {},
+      {}
     ]
   },
   "0008.PR1": {
@@ -92,21 +82,11 @@
     "pr1_procedure_desc": "CT THORAX W/DYE",
     "pr1_procedure_date_time": "20160106",
     "pr1_procedure_code_modifier": [
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      },
-      {
-        "pr1_procedure_code_modifier": ""
-      }
+      {},
+      {},
+      {},
+      {},
+      {}
     ]
   }
 }
