@@ -253,35 +253,35 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
               if (components.length > 1) {
                 val componentLayout = new mutable.LinkedHashMap[String, Any]()
                 var componentMapping = EMPTYSTR
-                components.view.zipWithIndex foreach { case (subComp, subCompIndex) =>
-                  val subComponentIndex = s"$fieldKey$DOT${inc(subCompIndex)}"
-                  segment = segmentMapping(subComponentIndex)._1
+               components.view.zipWithIndex foreach { case (component, componentIndex) =>
+                  val componentIndexKey = s"$fieldKey$DOT${inc(componentIndex)}"
+                  segment = segmentMapping(componentIndexKey)._1
                   componentMapping = segment.mapping
                   var subComponents: Array[String] = EMPTY
                   if (segment.realignColStatus) {
                     segment.realignColOption match {
                       case MERGE =>
-                        if (segment.realignColValue == EMPTYSTR) segment.realignColValue = subComp
-                        else segment.realignColValue = segment.realignColValue + subComp
+                        if (segment.realignColValue == EMPTYSTR) segment.realignColValue = component
+                        else segment.realignColValue = segment.realignColValue + component
                       case MOVE =>
-                        val subCompRep = subComp.replace(delimiters(CMPNT_DELIM), delimiters(SUBCMPNT_DELIM))
+                        val subCompRep = component.replace(delimiters(CMPNT_DELIM), delimiters(SUBCMPNT_DELIM))
                         componentMapping = segment.realignCompName
                         subComponents = subCompRep.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
                       case _ =>
                     }
-                  } else subComponents = subComp.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
+                  } else subComponents = component.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
                   if (subComponents.nonEmpty && subComponents.length > 1) {
                     val subComponentLayout = new mutable.LinkedHashMap[String, Any]()
-                    subComponents.view.zipWithIndex foreach { case (subSubComp, subSubCmpIndex) =>
-                      val tempSegments = segmentMapping(s"$subComponentIndex$DOT${inc(subSubCmpIndex)}")._1
-                      if (tempSegments.mapping == UNKNOWN) moveToUnknown(subSubComp)
-                      else subComponentLayout += tempSegments.mapping -> getOrNone(subSubComp)
+                    subComponents.view.zipWithIndex foreach { case (subComponent, subComponentIndex) =>
+                      val tempSegments = segmentMapping(s"$componentIndexKey$DOT${inc(subComponentIndex)}")._1
+                      if (tempSegments.mapping == UNKNOWN) moveToUnknown(subComponent)
+                      else subComponentLayout += tempSegments.mapping -> getOrNone(subComponent)
                     }
                     if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
                     if (segment.realignColStatus && segment.realignColOption == MOVE) fieldLayout += fieldMapping -> componentLayout
                   } else {
-                    if (componentMapping == UNKNOWN) moveToUnknown(subComp)
-                    else componentLayout += componentMapping -> getOrNone(subComp)
+                    if (componentMapping == UNKNOWN) moveToUnknown(component)
+                    else componentLayout += componentMapping -> getOrNone(component)
                   }
                 }
                 if (segment.realignColStatus) {
