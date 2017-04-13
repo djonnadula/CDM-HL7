@@ -360,7 +360,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
     def facility = () => fieldList(3)
 
-    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), mapped_index, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk))
+    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), mapped_index, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk), templateData(hl7FacilityMap))
   }
 
   private def matcher(in: String, seq: String) = in != null & in.contains(seq)
