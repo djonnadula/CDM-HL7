@@ -19,6 +19,7 @@ import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, allKnownHL
 import com.hca.cdm.hl7.exception.UnknownMessageTypeException
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
+import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.job.report.StatsReporter
 import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
@@ -282,7 +283,7 @@ object HL7Job extends Logg with App {
                     val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                     tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
-                    error(msg)
+                    if (!t.isInstanceOf[NotValidHl7Exception]) error(msg)
                 }
               } catch {
                 case t: Throwable => error(s" Processing HL7 failed for Message with header ${hl7._1} & body \n ${hl7._2} \n with error message ${t.getMessage}", t)
