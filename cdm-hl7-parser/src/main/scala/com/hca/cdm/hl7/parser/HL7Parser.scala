@@ -250,53 +250,58 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             val multiFields = if (whichSegment == OBX_SEG && inc(fieldIndex) == 5) Array(field) else field.split(ESCAPE + delimiters(REPTN_DELIM), -1)
             val fieldList = new mutable.ListBuffer[Any]
             multiFields foreach { fieldRepeatItem =>
-              val components = fieldRepeatItem.split(ESCAPE + delimiters(CMPNT_DELIM), -1)
-              if (components.length > 1) {
-                val componentLayout = new mutable.LinkedHashMap[String, Any]()
-                var componentMapping = EMPTYSTR
-                components.view.zipWithIndex foreach { case (component, componentIndex) =>
-                  val componentIndexKey = s"$fieldKey$DOT${inc(componentIndex)}"
-                  segment = segmentMapping(componentIndexKey)._1
-                  componentMapping = segment.mapping
-                  var subComponents: Array[String] = EMPTY
+              breakable {
+                val components = fieldRepeatItem.split(ESCAPE + delimiters(CMPNT_DELIM), -1)
+                if (components.length > 1) {
+                  val componentLayout = new mutable.LinkedHashMap[String, Any]()
+                  var componentMapping = EMPTYSTR
+                  components.view.zipWithIndex foreach { case (component, componentIndex) =>
+                    val componentIndexKey = s"$fieldKey$DOT${inc(componentIndex)}"
+                    segment = segmentMapping(componentIndexKey)._1
+                    componentMapping = segment.mapping
+                    var subComponents: Array[String] = EMPTY
+                    if (segment.realignColStatus) {
+                      segment.realignColOption match {
+                        case MERGE =>
+                          if (segment.realignColValue == EMPTYSTR) segment.realignColValue = component
+                          else segment.realignColValue = segment.realignColValue + component
+                        case MOVE =>
+                          val subCompRep = fieldRepeatItem.replace(delimiters(CMPNT_DELIM), delimiters(SUBCMPNT_DELIM))
+                          componentMapping = segment.realignCompName
+                          subComponents = subCompRep.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
+                        case _ =>
+                      }
+                    } else subComponents = component.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
+                    if (subComponents.nonEmpty && subComponents.length > 1) {
+                      val subComponentLayout = new mutable.LinkedHashMap[String, Any]()
+                      subComponents.view.zipWithIndex foreach { case (subComponent, subComponentIndex) =>
+                        val tempSegments = segmentMapping(s"$componentIndexKey$DOT${inc(subComponentIndex)}")._1
+                        if (tempSegments.mapping == UNKNOWN) moveToUnknown(subComponent)
+                        else subComponentLayout += tempSegments.mapping -> getOrNone(subComponent)
+                      }
+                      if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
+                      if (segment.realignColStatus && segment.realignColOption == MOVE) {
+                        fieldLayout += fieldMapping -> componentLayout
+                        break
+                      }
+                    } else {
+                      if (componentMapping == UNKNOWN) moveToUnknown(component)
+                      else componentLayout += componentMapping -> getOrNone(component)
+                    }
+                  }
                   if (segment.realignColStatus) {
-                    segment.realignColOption match {
-                      case MERGE =>
-                        if (segment.realignColValue == EMPTYSTR) segment.realignColValue = component
-                        else segment.realignColValue = segment.realignColValue + component
-                      case MOVE =>
-                        val subCompRep = component.replace(delimiters(CMPNT_DELIM), delimiters(SUBCMPNT_DELIM))
-                        componentMapping = segment.realignCompName
-                        subComponents = subCompRep.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
-                      case _ =>
-                    }
-                  } else subComponents = component.split(ESCAPE + delimiters(SUBCMPNT_DELIM), -1)
-                  if (subComponents.nonEmpty && subComponents.length > 1) {
-                    val subComponentLayout = new mutable.LinkedHashMap[String, Any]()
-                    subComponents.view.zipWithIndex foreach { case (subComponent, subComponentIndex) =>
-                      val tempSegments = segmentMapping(s"$componentIndexKey$DOT${inc(subComponentIndex)}")._1
-                      if (tempSegments.mapping == UNKNOWN) moveToUnknown(subComponent)
-                      else subComponentLayout += tempSegments.mapping -> getOrNone(subComponent)
-                    }
-                    if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
-                    if (segment.realignColStatus && segment.realignColOption == MOVE) fieldLayout += fieldMapping -> componentLayout
+                    if (fieldMapping == UNKNOWN) moveToUnknown(segment.realignColValue)
+                    else fieldLayout += fieldMapping -> componentLayout
+                    segment.realignColValue = EMPTYSTR
                   } else {
-                    if (componentMapping == UNKNOWN) moveToUnknown(component)
-                    else componentLayout += componentMapping -> getOrNone(component)
+                    if (multiFields.length > 1) fieldList += componentLayout
+                    else if (componentLayout nonEmpty) fieldLayout += fieldMapping -> componentLayout
                   }
                 }
-                if (segment.realignColStatus) {
-                  if (fieldMapping == UNKNOWN) moveToUnknown(segment.realignColValue)
-                  else fieldLayout += fieldMapping -> getOrNone(segment.realignColValue)
-                  segment.realignColValue = EMPTYSTR
-                } else {
-                  if (multiFields.length > 1) fieldList += componentLayout
-                  else if (componentLayout nonEmpty) fieldLayout += fieldMapping -> componentLayout
+                else {
+                  if (fieldMapping == UNKNOWN) moveToUnknown(field)
+                  else fieldLayout += fieldMapping -> getOrNone(field)
                 }
-              }
-              else {
-                if (fieldMapping == UNKNOWN) moveToUnknown(field)
-                else fieldLayout += fieldMapping -> getOrNone(field)
               }
             }
             if (fieldList nonEmpty) {
