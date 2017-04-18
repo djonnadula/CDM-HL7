@@ -17909,6 +17909,12 @@ CREATE EXTERNAL TABLE hl7_obx_data (
     obx_observation_sub_id_group String,
     obx_observation_sub_id_sequence String,
     obx_observation_sub_id_identifier String,
+    obx_result_group,
+    obx_result_group_group_code String,
+    obx_result_group_result_code String,
+    obx_result_group_group_name String,
+    obx_result_group_group_long_name String,
+    obx_result_group_test_print_num String,
     etl_firstinsert_datetime String,
 	field_sequence_num String
 )
