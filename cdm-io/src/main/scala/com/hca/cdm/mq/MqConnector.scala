@@ -78,6 +78,13 @@ trait MqConnector extends Logg with AutoCloseable {
     }
 
     @throws[CdmException]
+    def createConsumer(source: String): MessageConsumer = {
+      val consumer = tryAndThrow[MessageConsumer](session.createConsumer(new MQDestination(source)), error(_: Throwable))
+      consumers += source -> consumer
+      consumer
+    }
+
+    @throws[CdmException]
     def addErrorListener(listener: ExceptionListener): Unit = {
       tryAndThrow(connection.setExceptionListener(listener), error(_: Throwable))
       info(s"Listener Added for Exceptions $listener")
