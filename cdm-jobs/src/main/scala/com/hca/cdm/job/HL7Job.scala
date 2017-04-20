@@ -159,7 +159,7 @@ object HL7Job extends Logg with App {
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 60, minToSec(monitorInterval), TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 600, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
