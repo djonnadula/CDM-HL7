@@ -140,7 +140,6 @@
     "al1_identification_date": "20170207"
   },
   "0008.ACC": {
-    "acc_accident_date_time": "20170207",
     "acc_accident_code": "11"
   },
   "0009.GT1": {

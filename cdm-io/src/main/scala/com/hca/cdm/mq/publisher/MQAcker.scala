@@ -10,21 +10,21 @@ import com.hca.cdm.utils.RetryHandler
 /**
   * Created by Devaraj Jonnadula on 3/6/2017.
   */
- class MQAcker(app: String, jobDesc: String, initialQueue: String) extends Logg with MqConnector {
+class MQAcker(app: String, jobDesc: String, initialQueue: String) extends Logg with MqConnector {
 
   self =>
   private lazy val batchSize = 5000
   private lazy val batchInterval = 0
   private lazy val restartInterval = 30000
-  private var activeConnection: ConnectionMeta = _
-  private var producer: MessageProducer = _
+  @volatile private var activeConnection: ConnectionMeta = _
+  @volatile private var producer: MessageProducer = _
   private val mqHosts = lookUpProp("mq.hosts")
   private val mqManager = lookUpProp("mq.manager")
   private val mqChannel = lookUpProp("mq.channel")
   initialise()
 
   @throws(classOf[MqException])
-  def sendMessage(data: String, destination: String): Unit = {
+  def sendMessage(data: String, destination: String): Unit = synchronized{
     if (!isConnectionBroken) self.activeConnection.sendMessage(data, producer)
     else throw new MqException("Cannot Perform Operation. Connection Broken Try later")
 

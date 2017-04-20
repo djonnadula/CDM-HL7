@@ -19,6 +19,7 @@ import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, allKnownHL
 import com.hca.cdm.hl7.exception.UnknownMessageTypeException
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
+import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.job.report.StatsReporter
 import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
@@ -282,7 +283,7 @@ object HL7Job extends Logg with App {
                     val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                     tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
-                    error(msg)
+                    if (!t.isInstanceOf[NotValidHl7Exception]) error(msg)
                 }
               } catch {
                 case t: Throwable => error(s" Processing HL7 failed for Message with header ${hl7._1} & body \n ${hl7._2} \n with error message ${t.getMessage}", t)
@@ -554,27 +555,30 @@ object HL7Job extends Logg with App {
 
     override def run(): Unit = {
       checkForStageToComplete()
-      msgTypeFreq.transform({ case (hl7, rate) =>
-        if (lowFrequencyHL7 isDefinedAt rate._1) {
-          if (lowFrequencyHL7(rate._1) < lowFrequencyHl7AlertInterval) {
-            lowFrequencyHL7 update(rate._1, lowFrequencyHL7(rate._1) + 1)
-            rate
+      if (!(runningStage != null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined &&
+        ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
+        msgTypeFreq.transform({ case (hl7, rate) =>
+          if (lowFrequencyHL7 isDefinedAt rate._1) {
+            if (lowFrequencyHL7(rate._1) < lowFrequencyHl7AlertInterval) {
+              lowFrequencyHL7 update(rate._1, lowFrequencyHL7(rate._1) + 1)
+              rate
+            } else {
+              if (rate._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(rate._1, hl7, timeInterval * (lowFrequencyHL7(rate._1) + 1))
+              else if (rate._2 <= 0) noDataAlert(rate._1, hl7, timeInterval * (lowFrequencyHL7(rate._1) + 1))
+              lowFrequencyHL7 update(rate._1, 0)
+              (rate._1, 0L)
+            }
           } else {
-            if (rate._2 <= 0 && iscMonitoringEnabled) noDataAlertForISC(rate._1, hl7, timeInterval * (lowFrequencyHL7(rate._1) + 1))
-            else if (rate._2 <= 0) noDataAlert(rate._1, hl7, timeInterval * (lowFrequencyHL7(rate._1) + 1))
-            lowFrequencyHL7 update(rate._1, 0)
+            if (rate._2 <= 0) {
+              if (iscMonitoringEnabled) {
+                IscAlertCheck(rate._1, hl7, timeInterval * iscAlertInterval)
+              } else noDataAlert(rate._1, hl7)
+            }
             (rate._1, 0L)
           }
-        } else {
-          if (rate._2 <= 0) {
-            if (iscMonitoringEnabled) {
-              IscAlertCheck(rate._1, hl7, timeInterval * iscAlertInterval)
-            } else noDataAlert(rate._1, hl7)
-          }
-          (rate._1, 0L)
-        }
-      })
-      if (runningStage != null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined && ((currMillis - runningStage.submissionTime.get) >= timeCheck)) {
+        })
+      }
+      else {
         error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +

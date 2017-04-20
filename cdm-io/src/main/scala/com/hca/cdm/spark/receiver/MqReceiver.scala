@@ -114,7 +114,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       val data = msg.getText.replaceAll("[\r\n]+", "\r\n")
       val meta = metaFromRaw(data)
       Try(self.store(MqData(source, data, meta))) match {
-        case Success(x) =>
+        case Success(_) =>
           handleAcks(message, source, meta, tlmAcknowledge)
         case Failure(t) =>
           error(s"Cannot Write Message into Spark Memory, will Try with Retry Mechanism ${msg.getJMSMessageID}", t)
@@ -126,7 +126,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
           else {
             self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
             t match {
-              case timeOut: TimeoutException =>
+              case _: TimeoutException =>
                 self.currentConnection.foreach(_.pause())
                 self.restart(s"Cannot Write Message into Spark Memory Due to bad Response Times from HDFS, will replay Message with ID ${msg.getJMSMessageID}, Restarting Receiver ${self.id}", t)
               case _ =>
