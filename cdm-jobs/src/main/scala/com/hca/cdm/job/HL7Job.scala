@@ -127,13 +127,15 @@ object HL7Job extends Logg with App {
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
   private val hdpConf = hdpUtil.conf
   private val restoreFromChk = new AtomicBoolean(true)
-  private val newCtxIfNotExist = new (() => StreamingContext) {
+
+  private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
       restoreFromChk set false
       ctx
     }
   }
+
   private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   private var credentials: String = _
@@ -156,7 +158,7 @@ object HL7Job extends Logg with App {
     parserDriverMetrics = driverParserMetric()
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
-    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 4, 86400, TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
     monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 60, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
@@ -226,8 +228,9 @@ object HL7Job extends Logg with App {
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-            val tlmAckIO = if (tlmAckQueue.isDefined) Some(MQAcker(appName, s"Ack Sender for $appName", tlmAckQueue.get)) else None
-            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckIO isDefined) tlmAckIO.get.sendMessage(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), tlmAckQueue.get)
+            val tlmAckIO = if (tlmAckQueue.isDefined) Some(MQAcker(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"),
+              lookUpProp("mq.manager"), lookUpProp("mq.channel"))) else None
+            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckIO isDefined) tlmAckIO.get.sendMessage(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta))
             dataItr foreach (hl7 => {
               var msgType: HL7 = UNKNOWN
               try {
@@ -256,7 +259,7 @@ object HL7Job extends Logg with App {
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckIO isDefined) Some(tlmAckIO.get.sendMessage(_: String, tlmAckQueue.get)) else None)(_, _)
+                  if (tlmAckIO isDefined) Some(tlmAckIO.get.sendMessage(_: String)) else None)(_, _)
                 Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
