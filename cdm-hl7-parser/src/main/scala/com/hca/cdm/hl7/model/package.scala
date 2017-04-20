@@ -458,8 +458,7 @@ package object model {
 
   def readFile(file: String): BufferedSource = {
     if (lookUpProp("hl7.env") == "QA") {
-      val propertyKey = determineTemplatePath(getOS)
-      fromFile(lookUpProp(propertyKey) + FS + file)
+      fromFile(lookUpProp(determineTemplatePath(getOS)) + FS + file)
     } else fromFile(file)
   }
 
@@ -468,14 +467,12 @@ package object model {
   }
 
   def determineTemplatePath(os: String): String = {
-    val windows = "hl7.qa.config.windows"
-    val cdhvm = "hl7.qa.config.cdhvm"
     if (getOS.toLowerCase().contains("windows")) {
       info("Using Windows path for templates")
-      windows
+      "hl7.qa.config.windows"
     } else {
       info("Using Linux path for templates.")
-      cdhvm
+      "hl7.qa.config.cdhvm"
     }
   }
 
