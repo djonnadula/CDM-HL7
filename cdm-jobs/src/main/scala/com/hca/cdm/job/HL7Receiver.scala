@@ -67,12 +67,13 @@ object HL7Receiver extends Logg with App {
 
   // ****************** Spark Part ***********************************************
   private val checkpointEnable = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
+  private val walEnabled = lookUpProp("hl7.spark.wal.enable").toBoolean
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
-   if (checkpointEnable) {
+   if (walEnabled) {
      sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
      sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures","30")
-     sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+     //sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
      sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
      sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
      sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
@@ -80,7 +81,7 @@ object HL7Receiver extends Logg with App {
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
   }
-  private val newCtxIfNotExist = new (() => StreamingContext) {
+  private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
       info(s"New Checkpoint Created for $app $ctx")
