@@ -51,7 +51,7 @@ trait MqConnector extends Logg with AutoCloseable {
 
   private def connectionFactory(id: String, jobDesc: String, hosts: String, queueManager: String, channel: String, batchSize: Int, batchInterval: Int) = {
     val temp = new MQConnectionFactory
-    if (valid(id) & id != EMPTYSTR) temp.setAppName(id)
+    if (valid(id) && id != EMPTYSTR) temp.setAppName(id)
     temp.setDescription(jobDesc)
     temp.setConnectionNameList(hosts)
     temp.setFailIfQuiesce(1)
@@ -72,7 +72,7 @@ trait MqConnector extends Logg with AutoCloseable {
     @throws[CdmException]
     def addEventListener(listener: SourceListener): Unit = {
       val consumer = tryAndThrow[MessageConsumer](session.createConsumer(new MQDestination(listener.getSource)), error(_: Throwable))
-      consumers += listener.getSource -> consumer
+      createConsumer(listener.getSource)
       consumer setMessageListener listener
       info(s"Listener Added for Queue ${listener.getSource} with Consumer $consumer")
     }
@@ -80,7 +80,9 @@ trait MqConnector extends Logg with AutoCloseable {
     @throws[CdmException]
     def createConsumer(source: String): MessageConsumer = {
       val consumer = tryAndThrow[MessageConsumer](session.createConsumer(new MQDestination(source)), error(_: Throwable))
+      if(consumers isDefinedAt source) closeResource(consumers(source))
       consumers += source -> consumer
+      info(s"Consumer Created to consume from Queue $source $consumer")
       consumer
     }
 
