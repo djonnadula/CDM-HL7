@@ -17,6 +17,7 @@ import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
+import java.util.concurrent.TimeUnit
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -240,7 +241,7 @@ object Hl7Driver extends App with Logg {
     tryAndLogErrorMes(job kill(), error(_: Throwable))
     Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
       case Success(x) =>
-        if (x.waitFor() != 0) {
+        if (x.waitFor(1,TimeUnit.MINUTES)) {
           info(s"Stopping Job $app From Resource Manager resulted with Status ${getStatus(x.getInputStream)}. Kill Job Manually by yarn application -kill ${job.getAppId}")
         } else info(s"Stopped $app from Resource Manager with Status ${getStatus(x.getInputStream)}")
       case Failure(t) =>
@@ -265,7 +266,7 @@ object Hl7Driver extends App with Logg {
     process inheritIO()
     Try(process start) match {
       case Success(x) =>
-        if (x.waitFor() != 0) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
+        if (x.waitFor(1, TimeUnit.MINUTES)) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
         else info(s"$app Driver Script ${command.toUpperCase} successfully ${Source.fromInputStream(x.getInputStream).getLines().mkString(COMMA)}")
       case Failure(t) =>
         error(s"${command.toUpperCase} Job $app failed. Try Manually by $jobScript $command", t)
