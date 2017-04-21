@@ -37,8 +37,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   private val restartTimeInterval = 30000
   private var consumerPool: ThreadPoolExecutor = _
   private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
-  private lazy val hook = sHook()
-  private var hookInit = false
+  @volatile private var hookInit = false
   private var tlmAckIO: MQAcker = _
   @volatile private var storeCannotHandle = false
 
@@ -64,7 +63,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
 
   private def init(): Unit = {
     if (!hookInit) {
-      hook
+      sHook()
       hookInit = true
     }
     val con = activeConnection.get()
