@@ -62,7 +62,7 @@ start() {
     echo -n $"Starting $NAME: "
     set +e
     cd ${SERVICEDIR} && \
-    nohup $INVOCATION >> $OUTFILE 2>> $ERRORFILE &
+    nohup $INVOCATION >> $OUTFILE 2> $ERRORFILE &
     pgrep -f $CONFIG > $PIDFILE
     RETVAL=$?
     echo
