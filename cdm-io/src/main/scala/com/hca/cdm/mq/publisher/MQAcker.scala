@@ -10,7 +10,7 @@ import com.hca.cdm.utils.RetryHandler
 /**
   * Created by Devaraj Jonnadula on 3/6/2017.
   */
-class MQAcker(app: String, jobDesc: String, initialQueue: String) extends Logg with MqConnector {
+class MQAcker(app: String, jobDesc: String, initialQueue: String)(mqHosts: String, mqManager: String, mqChannel: String) extends Logg with MqConnector {
 
   self =>
   private lazy val batchSize = 5000
@@ -18,26 +18,24 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String) extends Logg w
   private lazy val restartInterval = 30000
   @volatile private var activeConnection: ConnectionMeta = _
   @volatile private var producer: MessageProducer = _
-  private val mqHosts = lookUpProp("mq.hosts")
-  private val mqManager = lookUpProp("mq.manager")
-  private val mqChannel = lookUpProp("mq.channel")
   initialise()
 
+
   @throws(classOf[MqException])
-  def sendMessage(data: String, destination: String): Unit = synchronized{
+  def sendMessage(data: String): Unit = synchronized {
     if (!isConnectionBroken) self.activeConnection.sendMessage(data, producer)
     else throw new MqException("Cannot Perform Operation. Connection Broken Try later")
 
   }
 
-
   @throws(classOf[MqException])
-  def sendMessage(data: Array[Byte], destination: String): Unit = {
-    sendMessage(new String(data, UTF8), destination)
+  def sendMessage(data: Array[Byte]): Unit = {
+    sendMessage(new String(data, UTF8))
   }
 
   @throws(classOf[MqException])
   private def initialise(): Unit = {
+    require(valid(initialQueue) || initialQueue!= EMPTYSTR, s"sCannot Send Acks to Queue Specified $initialQueue")
     handleConnection()
     activeConnection.addErrorListener(new ExceptionReporter)
     producer = activeConnection.createProducer(initialQueue)
@@ -61,9 +59,9 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String) extends Logg w
   }
 
   @throws(classOf[MqException])
-  private def handleConnection(retry: Boolean = false): ConnectionMeta = {
+  private def handleConnection(): ConnectionMeta = {
     info(s"Active Connection $activeConnection")
-    if (!retry && activeConnection == null) {
+    if (activeConnection == null) {
       try {
         info(s"Starting MQ Producer with App Name $app")
         activeConnection = createConnection(app, jobDesc, mqHosts, mqManager, mqChannel, batchSize, batchInterval)
@@ -85,7 +83,7 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String) extends Logg w
   }
 
   private def sHook(): Unit = {
-    registerHook(newThread(s"SHook-${this.getClass.getSimpleName}", runnable(close())))
+    registerHook(newThread(s"SHook-${this.getClass.getSimpleName}$app", runnable(close())))
   }
 
   override def toString = s"MQAcker(mqHosts=$mqHosts, mqManager=$mqManager, mqChannel=$mqChannel, ackQueue=$initialQueue)"
@@ -98,9 +96,9 @@ object MQAcker {
   private var connection: MQAcker = _
 
   @throws(classOf[MqException])
-  def apply(app: String, jobDesc: String, initialQueue: String): MQAcker = {
+  def apply(app: String, jobDesc: String, initialQueue: String)(mqHosts: String, mqManager: String, mqChannel: String): MQAcker = {
     def createIfNotExist = new (() => MQAcker) {
-      override def apply(): MQAcker = new MQAcker(app, jobDesc, initialQueue)
+      override def apply(): MQAcker = new MQAcker(app, jobDesc, initialQueue)(mqHosts, mqManager, mqChannel)
     }
 
     createConnection(createIfNotExist)

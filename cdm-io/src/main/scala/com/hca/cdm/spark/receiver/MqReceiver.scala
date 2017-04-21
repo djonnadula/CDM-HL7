@@ -9,12 +9,14 @@ import org.apache.spark.streaming.receiver.Receiver
 import org.apache.spark.storage.StorageLevel
 import com.hca.cdm.utils.RetryHandler
 import com.hca.cdm._
-import com.hca.cdm.exception.MqException
+import com.hca.cdm.exception.{CdmException, MqException}
 import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
-import java.lang.System.{getenv => fromEnv}
-import java.util.concurrent.TimeoutException
+import java.util.concurrent.{ThreadPoolExecutor, TimeUnit, TimeoutException}
+import com.google.common.base.Throwables
+import com.hca.cdm.mq.publisher.MQAcker
+import scala.collection.mutable
 
 
 case class MqData(source: String, data: String, msgMeta: MSGMeta)
@@ -24,7 +26,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   */
 class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
-  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_AND_DISK_2) with Logg with MqConnector {
+  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_2) with Logg with MqConnector {
 
   self =>
   private val mqHosts = lookUpProp("mq.hosts")
@@ -33,12 +35,17 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
-  sHook()
-
+  private var consumerPool: ThreadPoolExecutor = _
+  private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
+  private lazy val hook = sHook()
+  private var hookInit = false
+  private var tlmAckIO: MQAcker = _
+  @volatile private var storeCannotHandle = false
 
   def getCurrentConnection: ConnectionMeta = activeConnection.get()
 
-  override def onStart(): Unit = {
+  override def onStart(): Unit = synchronized {
+    storeCannotHandle = false
     try {
       val con = handleConsumer()
       if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
@@ -50,32 +57,44 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
     }
   }
 
-  override def onStop(): Unit = {
+  override def onStop(): Unit = synchronized {
     close()
   }
 
 
   private def init(): Unit = {
+    if (!hookInit) {
+      hook
+      hookInit = true
+    }
     val con = activeConnection.get()
     if (con != null) {
-      var prod: MessageProducer = null
-      if (ackQueue isDefined) {
-        prod = con createProducer ackQueue.get
-        info(s"Created Initial Queue ${ackQueue.get} to Send TLM ACKS from Producer $prod")
-      }
+      consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}")
+      if (ackQueue.isDefined) tlmAckIO = MQAcker(app, app, ackQueue.get)(mqHosts,mqManager,mqChannel)
+      info(s"TLM IO Created $tlmAckIO for Queue $ackQueue")
       sources.foreach(queue => {
+        val consumer = con createConsumer queue
         if (ackQueue isDefined) {
-          con addEventListener EventListener(queue, con sendMessage(_: String, prod))
-        } else con addEventListener EventListener(queue, null)
+          consumers += consumer -> EventListener(queue, tlmAckIO.sendMessage(_: String))
+        } else consumers += consumer -> EventListener(queue, null)
       })
       con addErrorListener new ExceptionReporter
+      consumers foreach {
+        consumer => consumerPool submit ConsumeData(consumer._1, consumer._2)
+      }
       con resume()
-
     }
   }
 
   override def close(): Unit = {
-    closeResource(activeConnection.get())
+    consumers foreach {
+      con => closeResource(con._1)
+    }
+    consumers clear()
+    if (valid(consumerPool)) {
+      consumerPool awaitTermination(1, TimeUnit.HOURS)
+      consumerPool shutdown()
+    }
   }
 
   @throws(classOf[MqException])
@@ -118,18 +137,25 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
           handleAcks(message, source, meta, tlmAcknowledge)
         case Failure(t) =>
           error(s"Cannot Write Message into Spark Memory, will Try with Retry Mechanism ${msg.getJMSMessageID}", t)
+          storeCannotHandle = true
           val retry = RetryHandler()
 
           def job(): Unit = self.store(MqData(source, data, meta))
 
-          if (tryAndLogErrorMes(retry.retryOperation(job), error(_: Throwable))) handleAcks(message, source, meta, tlmAcknowledge)
+          if (tryAndLogErrorMes(retry.retryOperation(job), error(_: Throwable))) {
+            handleAcks(message, source, meta, tlmAcknowledge)
+            storeCannotHandle = false
+          }
           else {
             self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
             t match {
               case _: TimeoutException =>
                 self.currentConnection.foreach(_.pause())
-                self.restart(s"Cannot Write Message into Spark Memory Due to bad Response Times from HDFS, will replay Message with ID ${msg.getJMSMessageID}, Restarting Receiver ${self.id}", t)
+                self.stop(s"Cannot Write Message into Spark Memory Due to bad Response Times from HDFS, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", t)
+                throw new CdmException(s"Cannot Write Message into Spark Memory Due to bad Response Times from HDFS, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", t)
               case _ =>
+                self.currentConnection.foreach(_.pause())
+                self.restart(s"Cannot Write Message into Spark Memory Due for Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", t)
             }
           }
       }
@@ -178,6 +204,32 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
 
   private def sHook(): Unit = {
     registerHook(newThread(s"$id-$app-SHook", runnable(close())))
+  }
+
+  private case class ConsumeData(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
+    override def run(): Unit = {
+      while (!self.isStopped()) {
+        if (!storeCannotHandle) {
+          try {
+            consumer receiveNoWait match {
+              case message: Message =>
+                sourceListener onMessage message
+              case _ =>
+            }
+          } catch {
+            case e: Exception =>
+              Throwables.getRootCause(e) match {
+                case interrupted: InterruptedException =>
+                  if (!self.isStopped()) {
+                    error("Interrupted while receiving data from WSQM", interrupted)
+                  }
+                case exception: Exception =>
+                  error("Error while receiving data from WSMQ", exception)
+              }
+          }
+        }
+      }
+    }
   }
 
 }

@@ -41,8 +41,6 @@ object TopicUtil extends Logg {
       if (checkTopicExists(zkUtil, topic)) {
         admin.addPartitions(zkUtil, topic, newPartitions)
         return newPartitions
-      } else {
-
       }
     } catch {
       case e: Exception => throw new CDMKafkaException("Unable to Delete Topic : " + topic, e)
@@ -58,8 +56,6 @@ object TopicUtil extends Logg {
       if (checkTopicExists(zkUtil, topic)) {
         admin.deleteTopic(zkUtil, topic)
         success = true
-      } else {
-
       }
     } catch {
       case e: Exception => throw new CDMKafkaException("Unable to Delete Topic : " + topic, e)
