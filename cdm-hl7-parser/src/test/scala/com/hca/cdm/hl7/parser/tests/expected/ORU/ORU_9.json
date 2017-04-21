@@ -123,22 +123,13 @@
     "obr_observation_end_date_time": "201701030750",
     "obr_ordering_provider": "DILER",
     "obr_order_callback_phone_num": "817-465-5881",
-    "obr_placer_first_generic_field": [
-      {
-        "obr_placer_first_generic_field": ".SELF"
-      },
-      {
-        "obr_placer_first_generic_field": "DILER"
-      },
-      {
-        "obr_placer_first_generic_field": "YANWE01"
-      }
-    ],
+    "obr_placer_first_generic_field": ".SELF~DILER~YANWE01",
     "obr_result_status": "F",
     "obr_reason_for_study": "copd",
     "obr_principal_result_interpreter": {
       "name": {
-        "person_id": "L.PHY.MAS"
+        "person_id": "L.PHY.MAS",
+        "source_table": "201701030750"
       }
     },
     "obr_scheduled_date_time": "201701030400"
@@ -167,6 +158,7 @@
       "text": " - CHEST 1 VIEW PORTABLE",
       "name_of_coding_sys": "CHEP"
     },
-    "obx_observation_sub_id": "1"
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": " ~ MEDICAL CENTER OF ARLINGTON Name: KIPLER KELLER,JANET ~ 3301 MATLOCK ROAD Phys: Dilley,Ermilo Duane MD ~ ARLINGTON,TX 76015 DOB: 11/05/1945 Age: 71 Sex: F~ Acct: I00970395034 Loc: I.400 A ~ PHONE #: 817-472-4873 Exam Date: 01/03/2017 Status: DIS IN ~ FAX #: 469-713-8222 Radiology No: ~ Unit No: I000356699 ~ ~ ~ ~ EXAMS: CPT CODE: 001922764 CHEST 1 VIEW PORTABLE 71010 ~ ~ COMPARISON: 12/31/16 0446 hours ~ ~ CLINICAL INFORMATION: COPD. ~ ~ FINDINGS: ~ ~ Bones are similar and appropriate for age including evidence for a ~ remote vertebroplasty in the upper mid thoracic vertebral body. ~ Mildly enlarged cardiomediastinal silhouette is stable. ~ ~ Lungs display stable emphysematous changes. There is a partially ~ calcified nodule in the right midlung field measuring approximately ~ 10 x 12 mm, unchanged in the interval and probably represents a ~ calcified granuloma in the right lower lobe. Previously described ~ reticular interstitial lung opacities have improved in the interval ~ and most consistent with resolving edema/fluid overload superimposed ~ on previously described pulmonary emphysema and chronic interstitial ~ changes. Blunted costophrenic angles remain similar. ~ ~ IMPRESSION: ~ ~ 1. FINDINGS CONSISTENT WITH RESOLVING EDEMA/INTERSTITIAL PNEUMONITIS ~ SUPERIMPOSED ON CHRONIC CHANGES, AS DESCRIBED ABOVE. ~ ~ 2. STABLE MILD CARDIOMEGALY. ~ ~ 3. EVIDENCE FOR OLD GRANULOMATOUS DISEASE. ~ ~ AFC- 99053 ~ ~ RL-501 ~ ______________________________________ ~ ~ Electronically signed by: M SALAM ~ Date: 01/03/17 ~ Time: 07:50 ~ ~ ~ ** Electronically Signed by M.D. SALAM MAQBOOL ** ~ ** on 01/03/2017 at 0750 ** ~ Reported and signed by: SALAM MAQBOOL, M.D. ~ ~ ~ ~ ~ ~ ~PAGE 1 Signed Report (CONTINUED) ~ ~ MEDICAL CENTER OF ARLINGTON Name: KIPLER KELLER,JANET ~ 3301 MATLOCK ROAD Phys: Dilley,Ermilo Duane MD ~ ARLINGTON,TX 76015 DOB: 11/05/1945 Age: 71 Sex: F~ Acct: I00970395034 Loc: I.400 A ~ PHONE #: 817-472-4873 Exam Date: 01/03/2017 Status: DIS IN ~ FAX #: 469-713-8222 Radiology No: ~ Unit No: I000356699 ~ ~ ~ ~ EXAMS: CPT CODE: 001922764 CHEST 1 VIEW PORTABLE 71010 ~ <CONTINUED> ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~CC: SELF REFERRED; Ermilo Duane Dilley MD; Wei Yan MD ~ ~Dictated Date/Time: 01/03/2017 (0747)~Technologist: MAIN XRAY PORTABLE B; PHONG HO RT(R) ~Transcribed Date/Time: 01/03/2017 (0750)~Transcriptionist: L.PHY.MAS ~Electronic Signature Date/Time: 01/03/2017 (0750)~Printed Date/Time: 01/13/2017 (0201) BATCH NO: N/A ~ ~PAGE 2 Signed Report"
   }
 }

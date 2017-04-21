@@ -4,6 +4,7 @@ import java.io.{BufferedReader, FileReader}
 import java.nio.file.Paths
 
 import com.google.gson.JsonParser
+import com.hca.cdm.hl7.constants.HL7Types.HL7
 
 /**
   * Created by Peter James on 2/27/2017.
@@ -80,8 +81,8 @@ package object HL7ParserTestUtils {
       * @param messageType HL7 message type
       * @return starting + ending path
       */
-    def testFilePath(basePath: String, fileType: String, messageType: String): String = {
-        basePath + "/" + fileType + "/" + messageType + "/"
+    def testFilePath(basePath: String, fileType: String, messageType: HL7): String = {
+        basePath + "/" + fileType + "/" + messageType.toString + "/"
     }
 
     /**
@@ -91,7 +92,7 @@ package object HL7ParserTestUtils {
       * @param messageType HL7 message type
       * @return HL7 message
       */
-    def getMessage(testFileBasePath: String, messageName: String, messageType: String): String = {
+    def getMessage(testFileBasePath: String, messageName: String, messageType: HL7): String = {
         message(testFilePath(testFileBasePath, "message", messageType) + createMessageFileName(messageName))
     }
 
@@ -102,7 +103,7 @@ package object HL7ParserTestUtils {
       * @param messageType HL7 message type
       * @return Json message
       */
-    def getExpected(testFileBasePath: String, messageName: String, messageType: String): String = {
+    def getExpected(testFileBasePath: String, messageName: String, messageType: HL7): String = {
         expected(testFilePath(testFileBasePath, "expected", messageType) + createExpectedFileName(messageName))
     }
 

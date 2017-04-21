@@ -79,17 +79,7 @@
     "obr_observation_date_time": "201701231333",
     "obr_observation_end_date_time": "201701231341",
     "obr_ordering_provider": "DOYJA",
-    "obr_placer_first_generic_field": [
-      {
-        "obr_placer_first_generic_field": ".SELF"
-      },
-      {
-        "obr_placer_first_generic_field": "DILER"
-      },
-      {
-        "obr_placer_first_generic_field": "YANWE01"
-      }
-    ],
+    "obr_placer_first_generic_field": ".SELF~DILER~YANWE01",
     "obr_result_status": "F",
     "obr_reason_for_study": {
       "text": "od"
@@ -127,6 +117,7 @@
       "text": " - CHEST 1 VIEW PORTABLE",
       "name_of_coding_sys": "CHEP"
     },
-    "obx_observation_sub_id": "1"
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": " ~  Medical Center Of Lewisville      Name: JOY,TASHA                     ~  500 W. MAIN ST                    Phys: Doyle,James D   MD            ~  LEWISVILLE, TX 75057              DOB: 06/04/1991   Age: 25       Sex: F~                                    Acct: L00516899727  Loc: L.ER      ~  PHONE #: 972-420-1070             Exam Date: 01/23/2017 Status: PRE ER  ~    FAX #: 972-420-1054             Radiology No:           ~                                Unit No: L000063321    ~ ~ ~ ~  EXAMS:                               REASON FOR EXAM:                 ~001834105 CHEST 1 VIEW PORTABLE      od                                 ~ ~       Exam:  - CHEST 1 VIEW PORTABLE RAD  ~        ~     CLINICAL HISTORY: Overdose  ~        ~     COMPARISON: None.  ~        ~     FINDINGS:   ~        ~     There is no focal infiltrate or pleural effusion in the lungs. There   ~     is mild extra convex scoliosis of the thoracic spine. The   ~     cardiomediastinal silhouette is within normal limits. The trachea is   ~     midline. Paratracheal soft tissues are unremarkable. There is no   ~     pneumothorax or displaced rib fracture.   ~        ~       IMPRESSION: No radiologically significant acute abnormality of the   ~       chest.  ~          ~          ~       Ordering physician: James D Doyle  ~          ~       RL 501  ~          ~          ~       ______________________________________   ~          ~       Electronically signed by: Dr. Martin T. Sigler, MD  ~       Date:     01/23/17  ~       Time:    13:41     ~ ~     ~         ** Electronically Signed by M.D. MARTIN T. SIGLER **  ~         **              on 01/23/2017 at 1341             **  ~                    Reported and signed by: MARTIN T. SIGLER, M.D.    ~ ~      ~ ~ ~ ~CC:                                                                   ~                                                                      ~Dictated Date/Time: 01/23/2017 (1333)~Technologist: MAEGAN THURSTON,MSU RAD STUDEN; NATALIE MAHAN, RT(R)   ~Transcribed Date/Time: 01/23/2017 (1341)~Transcriptionist: I.PHY.MTS                          ~Electronic Signature Date/Time: 01/23/2017 (1341)~Printed Date/Time: 01/23/2017 (1341) BATCH NO: N/A       ~ ~PAGE  1                       Signed Report"
   }
 }

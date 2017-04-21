@@ -16,17 +16,17 @@ class HL7ParserRASTest extends FlatSpec{
     hl7TestSetup.loadProperties("Hl7TestConfig.properties")
 
     val messageName1 = "RAS_1"
-    val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType.toString)
+    val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType)
     val res1 = hl7TestSetup.parse(msg1)
-    val expected1 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName1, messageType.toString)
+    val expected1 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName1, messageType)
     "RAS Message Test 1 (RAS_1)" should "have a match for the parsed output" in {
         assert(res1 === expected1)
     }
 
     val messageName2 = "RAS_2"
-    val msg2 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType.toString)
+    val msg2 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType)
     val res2 = hl7TestSetup.parse(msg2)
-    val expected2 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName2, messageType.toString)
+    val expected2 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName2, messageType)
     "RAS Message Test 2 (RAS_2)" should "have a match for the parsed output" in {
         assert(res2 === expected2)
     }

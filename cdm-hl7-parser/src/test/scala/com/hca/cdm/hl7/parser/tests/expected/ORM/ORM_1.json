@@ -113,14 +113,7 @@
   },
   "0005.ORC": {
     "orc_order_control": "NW",
-    "orc_placer_order_num": [
-      {
-        "orc_placer_order_num": "FR000370672"
-      },
-      {
-        "orc_placer_order_num": "17-8049FRNK"
-      }
-    ],
+    "orc_placer_order_num": "FR000370672~17-8049FRNK",
     "orc_order_status": "L",
     "orc_response_flag": "N",
     "orc_transaction_date_time": "201702090828",
@@ -129,14 +122,7 @@
   },
   "0006.OBR": {
     "obr_set_id": "1",
-    "obr_placer_order_num": [
-      {
-        "obr_placer_order_num": "FR000370672"
-      },
-      {
-        "obr_placer_order_num": "17-8049FRNK"
-      }
-    ],
+    "obr_placer_order_num": "FR000370672~17-8049FRNK",
     "obr_universal_service_id": {
       "primary_id": "RAD",
       "text": "CHE2",

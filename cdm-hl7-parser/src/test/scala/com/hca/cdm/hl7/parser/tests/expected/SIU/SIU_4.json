@@ -124,17 +124,16 @@
       "time_desc": "Procedure End",
       "pacu_date_time": "201701301337"
     },
-    "ztm_case_pacu_3_time": {
-      "time_desc": "Surgeon Leaves Room",
-      "pacu_date_time": "201701301342"
+    "ztm_case_pacu_3_time": "Pt Discharge Phase 1",
+    "ztm_case_pacu_4_time": "Pt PACU Holding Out",
+    "ztm_case_phase2_1_time": {
+      "time_desc": "Pt Arrives Phase 2",
+      "phase2_date_time": "201701301345"
     },
-    "ztm_case_pacu_4_time": {
-      "time_desc": "Pt Leaves Room",
-      "pacu_date_time": "201701301342"
-    },
-    "ztm_case_phase2_1_time": "Pt Arrives PACU",
-    "ztm_case_phase2_2_time": "Anesthesia End",
-    "ztm_unknown": "Pt Discharge Phase 1^Pt PACU Holding Out^Pt Arrives Phase 2^201701301345^Pt Discharge Phase 2^201701301430"
+    "ztm_case_phase2_2_time": {
+      "time_desc": "Pt Discharge Phase 2",
+      "phase2_date_time": "201701301430"
+    }
   },
   "0006.ZPO": {
     "zpo_anesthetic_type": {

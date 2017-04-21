@@ -407,7 +407,7 @@ package object model {
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
-      val reader = fromFile(file._2).bufferedReader()
+      val reader = readFile(file._2).bufferedReader()
 
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
@@ -467,7 +467,7 @@ package object model {
   }
 
   def getOS: String = {
-    sys.env.getOrElse("os.name", EMPTYSTR)
+    System.getProperty("os.name")
   }
 
   def determineTemplatePath(os: String): String = {

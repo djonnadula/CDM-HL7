@@ -21,14 +21,7 @@
   },
   "0002.SCH": {
     "sch_placer_appointment_id": "H00727600505",
-    "sch_filler_appointment_id": [
-      {
-        "sch_filler_appointment_id": "1858814"
-      },
-      {
-        "sch_filler_appointment_id": "452151"
-      }
-    ],
+    "sch_filler_appointment_id": "1858814~452151",
     "sch_event_reason": "BOOK",
     "sch_appointment_type": {
       "primary_id": "HORIDE",
