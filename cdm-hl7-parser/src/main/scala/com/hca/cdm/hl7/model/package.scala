@@ -1,5 +1,7 @@
 package com.hca.cdm.hl7
 
+import java.nio.file.{Path, Paths}
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -16,6 +18,7 @@ import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
+
 import scala.collection.mutable
 import scala.io.BufferedSource
 import scala.io.Source._
@@ -68,6 +71,12 @@ package object model {
   lazy val PIDMappings: mutable.HashMap[String, Array[(String, String, String, String)]] = synchronized(
     commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
+
+  private lazy val templateBuildPath = {
+    val basePath = Paths.get(new java.io.File(".").getCanonicalPath).getParent
+    val templatePath = "cdm-scripts" + FS + "templates"
+    Paths.get(basePath.toString, templatePath)
+  }
 
   def hl7Type(data: mapType): HL7 = {
     Try(data.getOrElse(MSH_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Type_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Code, "UNKNOWN")) match {
@@ -460,26 +469,9 @@ package object model {
   }
 
   def readFile(file: String): BufferedSource = {
-    if (lookUpProp("hl7.env") == "QA") {
-      val propertyKey = determineTemplatePath(getOS)
-      fromFile(lookUpProp(propertyKey) + FS + file)
+    if (lookUpProp("hl7.env") == "BUILD") {
+      fromFile(templateBuildPath.toString + FS + file)
     } else fromFile(file)
-  }
-
-  def getOS: String = {
-    System.getProperty("os.name")
-  }
-
-  def determineTemplatePath(os: String): String = {
-    val windows = "hl7.qa.config.windows"
-    val cdhvm = "hl7.qa.config.cdhvm"
-    if (getOS.toLowerCase().contains("windows")) {
-      info("Using Windows path for templates")
-      windows
-    } else {
-      info("Using Linux path for templates.")
-      cdhvm
-    }
   }
 
 }
