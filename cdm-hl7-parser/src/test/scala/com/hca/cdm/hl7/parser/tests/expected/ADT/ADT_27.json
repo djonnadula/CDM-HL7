@@ -1,0 +1,82 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCCT",
+    "msh_msg_control_id": "MT_COCCT_ADT_TNAGTMRI.1.7133217",
+    "pid_medical_record_num": "M001990632",
+    "pid_medical_record_urn": "M992779",
+    "pid_pat_account_num": "M992779"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_facility": "COCCT",
+    "msh_msg_create_date_time": "201702082050",
+    "msh_msg_type": {
+      "message_code": "ADT",
+      "trigger_event": "A31"
+    },
+    "msh_msg_control_id": "MT_COCCT_ADT_TNAGTMRI.1.7133217",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.1"
+  },
+  "0002.EVN": {
+    "evn_evnt_type": "A31",
+    "evn_recorded_date_time": "201702082050",
+    "evn_evnt_resn_code": "E"
+  },
+  "0003.PID": {
+    "pid_set_id": "1",
+    "pid_medical_record_num": "M001990632",
+    "pid_medical_record_urn": "M992779",
+    "pid_pat_name": {
+      "last_name": "BUTLER",
+      "first_name": "DEARIUS",
+      "middle_name": "LASHAWN"
+    },
+    "pid_mother_name": "RICKEITA MAXINE",
+    "pid_birth_date_time": "20160829",
+    "pid_sex": "M",
+    "pid_pat_alias": {
+      "last_name": "BUTLER",
+      "first_name": "BB-RICKEITA",
+      "middle_name": "MAXINE"
+    },
+    "pid_race": "B",
+    "pid_pat_address": {
+      "street_address1": "702 APT A SOUTH 8TH ST",
+      "city": "NASHVILLE",
+      "state_province": "TN",
+      "zip_postal_code": "37206",
+      "country": "USA",
+      "county_parish_code": "DAVIDS.TN"
+    },
+    "pid_home_phone_num": "615-299-6367",
+    "pid_primary_language": "ENG",
+    "pid_marital_status": "S",
+    "pid_religion": "NON",
+    "pid_pat_account_num": "M992779",
+    "pid_pat_social_security_num": "990-42-4073"
+  },
+  "0004.IN1": {
+    "in1_set_id": "1",
+    "in1_insurance_plan_id": "TC.AMGRP",
+    "in1_insurance_company_name": "TNCARE AMERIGROUP",
+    "in1_insurance_company_address": {
+      "street_address1": "PO BOX 61010",
+      "street_address2": "TN CLAIMS",
+      "city": "VIRGINIA BEACH",
+      "state_province": "VA",
+      "zip_postal_code": "23466-1010"
+    },
+    "in1_insurance_company_phone_num": "800-454-3730",
+    "in1_group_num": "TNMCD000",
+    "in1_plan_eff_from_date": "20160829",
+    "in1_insured_name": {
+      "last_name": "BUTLER",
+      "first_name": "DE'ARIUS",
+      "middle_name": "LASHAWN"
+    },
+    "in1_insured_relationship_to_patient": "01",
+    "in1_policy_num": "722798275"
+  }
+}
