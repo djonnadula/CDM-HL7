@@ -1,6 +1,6 @@
 package com.hca.cdm.mq
 
-import javax.jms.MessageListener
+import javax.jms.{Message, MessageListener}
 
 /**
   * Created by Devaraj Jonnadula on 12/27/2017.
@@ -8,5 +8,7 @@ import javax.jms.MessageListener
 trait SourceListener extends MessageListener{
 
   def getSource : String
+
+  def handleMessage(message: Message): Boolean
 
 }
