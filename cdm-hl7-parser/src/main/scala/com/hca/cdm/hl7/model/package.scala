@@ -1,5 +1,7 @@
 package com.hca.cdm.hl7
 
+import java.nio.file.{Path, Paths}
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -16,6 +18,7 @@ import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
+
 import scala.collection.mutable
 import scala.io.BufferedSource
 import scala.io.Source._
@@ -68,6 +71,12 @@ package object model {
   lazy val PIDMappings: mutable.HashMap[String, Array[(String, String, String, String)]] = synchronized(
     commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
+
+  private lazy val templateBuildPath = {
+    val basePath = Paths.get(new java.io.File(".").getCanonicalPath).getParent
+    val templatePath = "cdm-scripts" + FS + "templates"
+    Paths.get(basePath.toString, templatePath)
+  }
 
   def hl7Type(data: mapType): HL7 = {
     Try(data.getOrElse(MSH_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Type_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Code, "UNKNOWN")) match {
@@ -325,7 +334,9 @@ package object model {
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
+
     val reader = readFile(segments).bufferedReader()
+
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
       if (valid(splits, 3)) {
@@ -363,7 +374,7 @@ package object model {
     val reassignMeta = new mutable.HashMap[String, String]()
     val reassignStruct = new mutable.HashMap[String, mutable.LinkedHashMap[String, Any]]
     val reassignmentMapping = new mutable.HashMap[String, Map[String, String]]
-    fromFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
+    readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split(COMMA, -1)) takeWhile (valid(_)) foreach {
       case data@ele if data.nonEmpty =>
         val reassignStructTemp = new mutable.LinkedHashMap[String, Any]
         val reassignmentMappingTemp = new mutable.HashMap[String, String]
@@ -405,7 +416,8 @@ package object model {
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
-      val reader = fromFile(file._2).bufferedReader()
+      val reader = readFile(file._2).bufferedReader()
+
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
       })
@@ -457,23 +469,9 @@ package object model {
   }
 
   def readFile(file: String): BufferedSource = {
-    if (lookUpProp("hl7.env") == "QA") {
-      fromFile(lookUpProp(determineTemplatePath(getOS)) + FS + file)
+    if (lookUpProp("hl7.env") == "BUILD") {
+      fromFile(templateBuildPath.toString + FS + file)
     } else fromFile(file)
-  }
-
-  def getOS: String = {
-    sys.env.getOrElse("os.name", EMPTYSTR)
-  }
-
-  def determineTemplatePath(os: String): String = {
-    if (getOS.toLowerCase().contains("windows")) {
-      info("Using Windows path for templates")
-      "hl7.qa.config.windows"
-    } else {
-      info("Using Linux path for templates.")
-      "hl7.qa.config.cdhvm"
-    }
   }
 
 }

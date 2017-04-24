@@ -1,0 +1,123 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "COCLE",
+    "msh_msg_control_id": "MT_COCLE_ORU_LEGTPACS.1.972254",
+    "pid_medical_record_num": "L000063321",
+    "pid_medical_record_urn": "L48112",
+    "pid_pat_account_num": "L00516899727"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_facility": "COCLE",
+    "msh_msg_create_date_time": "201701231341",
+    "msh_msg_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "msh_msg_control_id": "MT_COCLE_ORU_LEGTPACS.1.972254",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.1"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_medical_record_num": "L000063321",
+    "pid_medical_record_urn": "L48112",
+    "pid_pat_name": {
+      "last_name": "JOY",
+      "first_name": "TASHA"
+    },
+    "pid_birth_date_time": "19910604",
+    "pid_sex": "F",
+    "pid_pat_account_num": "L00516899727",
+    "pid_pat_social_security_num": "777-77-7777"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "P",
+    "pv1_assgn_pat_loc": {
+      "point_of_care": "L.ER"
+    },
+    "pv1_attending_doctor": {
+      "person_id": "DOYJA",
+      "last_name": "Doyle",
+      "first_name": "James",
+      "middle_name": "D",
+      "degree": "MD"
+    },
+    "pv1_primary_care_doctor": {
+      "person_id": ".DNK",
+      "last_name": "Know",
+      "first_name": "Does",
+      "middle_name": "Not"
+    },
+    "pv1_admitting_doctor": {},
+    "pv1_pat_type": "ER",
+    "pv1_servicing_facility": "COCLE",
+    "pv1_account_status": "PRE"
+  },
+  "0004.ORC": {
+    "orc_order_control": "RE",
+    "orc_order_status": "S",
+    "orc_response_flag": "N",
+    "orc_enterer_location": {
+      "point_of_care": "COCLE",
+      "room": "LEW"
+    }
+  },
+  "0005.OBR": {
+    "obr_set_id": "1",
+    "obr_placer_order_num": "001834105&N&N",
+    "obr_filler_order_num": " - CHEST 1 VIEW PORTABLE",
+    "obr_universal_service_id": {
+      "primary_id": "CHEP",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_sys": "RAD"
+    },
+    "obr_priority": "S",
+    "obr_requested_date_time": "201701231306",
+    "obr_observation_date_time": "201701231333",
+    "obr_observation_end_date_time": "201701231341",
+    "obr_ordering_provider": "DOYJA",
+    "obr_placer_first_generic_field": ".SELF~DILER~YANWE01",
+    "obr_result_status": "F",
+    "obr_reason_for_study": {
+      "text": "od"
+    },
+    "obr_principal_result_interpreter": {
+      "name": {
+        "person_id": "I.PHY.MTS"
+      },
+      "eff_from_date_time": "1234566",
+      "eff_to_date_time": "201701231341"
+    },
+    "obr_scheduled_date_time": "201701231306"
+  },
+  "0006.ZUR": {
+    "zur_set_id": "1",
+    "zur_information": "L48112"
+  },
+  "0007.ZUR": {
+    "zur_set_id": "2",
+    "zur_information": "L001834105"
+  },
+  "0008.ZUR": {
+    "zur_set_id": "3",
+    "zur_information": "FWDCGEWEB02.HCA.CORPAD.NET"
+  },
+  "0009.ZUR": {
+    "zur_set_id": "4",
+    "zur_information": "COCLE"
+  },
+  "0010.OBX": {
+    "obx_set_id": "1",
+    "obx_value_type": "TX",
+    "obx_observation_id": {
+      "primary_id": "001834105",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_sys": "CHEP"
+    },
+    "obx_observation_sub_id": "1",
+    "obx_observation_value": " ~  Medical Center Of Lewisville      Name: JOY,TASHA                     ~  500 W. MAIN ST                    Phys: Doyle,James D   MD            ~  LEWISVILLE, TX 75057              DOB: 06/04/1991   Age: 25       Sex: F~                                    Acct: L00516899727  Loc: L.ER      ~  PHONE #: 972-420-1070             Exam Date: 01/23/2017 Status: PRE ER  ~    FAX #: 972-420-1054             Radiology No:           ~                                Unit No: L000063321    ~ ~ ~ ~  EXAMS:                               REASON FOR EXAM:                 ~001834105 CHEST 1 VIEW PORTABLE      od                                 ~ ~       Exam:  - CHEST 1 VIEW PORTABLE RAD  ~        ~     CLINICAL HISTORY: Overdose  ~        ~     COMPARISON: None.  ~        ~     FINDINGS:   ~        ~     There is no focal infiltrate or pleural effusion in the lungs. There   ~     is mild extra convex scoliosis of the thoracic spine. The   ~     cardiomediastinal silhouette is within normal limits. The trachea is   ~     midline. Paratracheal soft tissues are unremarkable. There is no   ~     pneumothorax or displaced rib fracture.   ~        ~       IMPRESSION: No radiologically significant acute abnormality of the   ~       chest.  ~          ~          ~       Ordering physician: James D Doyle  ~          ~       RL 501  ~          ~          ~       ______________________________________   ~          ~       Electronically signed by: Dr. Martin T. Sigler, MD  ~       Date:     01/23/17  ~       Time:    13:41     ~ ~     ~         ** Electronically Signed by M.D. MARTIN T. SIGLER **  ~         **              on 01/23/2017 at 1341             **  ~                    Reported and signed by: MARTIN T. SIGLER, M.D.    ~ ~      ~ ~ ~ ~CC:                                                                   ~                                                                      ~Dictated Date/Time: 01/23/2017 (1333)~Technologist: MAEGAN THURSTON,MSU RAD STUDEN; NATALIE MAHAN, RT(R)   ~Transcribed Date/Time: 01/23/2017 (1341)~Transcriptionist: I.PHY.MTS                          ~Electronic Signature Date/Time: 01/23/2017 (1341)~Printed Date/Time: 01/23/2017 (1341) BATCH NO: N/A       ~ ~PAGE  1                       Signed Report"
+  }
+}
