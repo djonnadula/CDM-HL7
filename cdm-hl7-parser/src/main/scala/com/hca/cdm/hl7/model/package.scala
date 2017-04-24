@@ -1,7 +1,6 @@
 package com.hca.cdm.hl7
 
-import java.nio.file.{Path, Paths}
-
+import java.nio.file.Paths
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -18,7 +17,6 @@ import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
-
 import scala.collection.mutable
 import scala.io.BufferedSource
 import scala.io.Source._
@@ -334,9 +332,7 @@ package object model {
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
-
     val reader = readFile(segments).bufferedReader()
-
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
       if (valid(splits, 3)) {
@@ -417,7 +413,6 @@ package object model {
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
     loadFile(template).map(file => {
       val reader = readFile(file._2).bufferedReader()
-
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
         splits.head -> splits.tail
       })
@@ -472,6 +467,22 @@ package object model {
     if (lookUpProp("hl7.env") == "BUILD") {
       fromFile(templateBuildPath.toString + FS + file)
     } else fromFile(file)
+  }
+
+  def getOS: String = {
+    sys.env.getOrElse("os.name", EMPTYSTR)
+  }
+
+  def determineTemplatePath(os: String): String = {
+    val windows = "hl7.qa.config.windows"
+    val cdhvm = "hl7.qa.config.cdhvm"
+    if (getOS.toLowerCase().contains("windows")) {
+      info("Using Windows path for templates")
+      windows
+    } else {
+      info("Using Linux path for templates.")
+      cdhvm
+    }
   }
 
 }

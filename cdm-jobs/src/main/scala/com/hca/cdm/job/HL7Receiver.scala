@@ -24,7 +24,7 @@ import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import AuditConstants._
-import com.hca.cdm.job.HL7Receiver.rawOverSized
+import com.hca.cdm.utils.RetryHandler
 
 /**
   * Created by Devaraj Jonnadula on 12/14/2016.
@@ -70,17 +70,18 @@ object HL7Receiver extends Logg with App {
   private val walEnabled = lookUpProp("hl7.spark.wal.enable").toBoolean
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
-   if (walEnabled) {
-     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
-     sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures","30")
-     //sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
-     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
-     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
-     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
-   }
+  if (walEnabled) {
+    sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
+    sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "30")
+    //sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
+    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
+  }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
   }
+
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
@@ -89,6 +90,7 @@ object HL7Receiver extends Logg with App {
       ctx
     }
   }
+
   private val sparkStrCtx: StreamingContext = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   if (!checkpointEnable) runJob(sparkStrCtx)
@@ -159,6 +161,15 @@ object HL7Receiver extends Logg with App {
       sparkStrCtx awaitTermination()
     } catch {
       case t: Throwable => error("Spark Context Starting Failed ", t)
+        val retry = RetryHandler()
+
+        def retryStart(): Unit = {
+          sparkStrCtx start()
+          info(s"Started Spark Streaming Context Execution :: ${new Date()}")
+          sparkStrCtx awaitTermination()
+        }
+
+        tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
     } finally {
       close()
     }

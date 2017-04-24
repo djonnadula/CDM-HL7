@@ -30,7 +30,7 @@ object IOConstants {
   val defaultCompression: String = "none"
   val lz4Compression: String = "lz4"
   val defaultProducerLinger: String = "200"
-  val blockOnbufferFull = "60000"
+  val blockOnbufferFull = "30000"
   val metadataFetchTimeout: String = "3000"
   val defaultSendRetries: Int = 10
   val defaultHeartBeat: String = "20000"

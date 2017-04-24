@@ -318,7 +318,17 @@ object HL7Job extends Logg with App {
       info(s"Started Spark Streaming Context Execution :: ${new Date()}")
       sparkStrCtx awaitTermination()
     } catch {
-      case t: Throwable => error("Spark Context Starting Failed ", t)
+      case t: Throwable => error("Spark Context Starting Failed will try with Retry Policy", t)
+        val retry = RetryHandler()
+
+        def retryStart(): Unit = {
+          sparkStrCtx start()
+          info(s"Started Spark Streaming Context Execution :: ${new Date()}")
+          sparkStrCtx awaitTermination()
+        }
+
+        tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
+
     } finally {
       shutDown()
       close()

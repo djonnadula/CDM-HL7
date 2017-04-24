@@ -160,6 +160,7 @@ trait MqConnector extends Logg with AutoCloseable {
 
     override def close(): Unit = {
       info(s"Trying to Close resources for MQ with Id ${factory.getAppName} :: $connection")
+      connections clear()
       closeResource(session)
       consumers foreach (id => closeResource(id._2))
       producers foreach (closeResource(_))

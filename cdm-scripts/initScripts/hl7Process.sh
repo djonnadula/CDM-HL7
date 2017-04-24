@@ -18,6 +18,7 @@
 # Source function library.
 . /etc/init.d/functions
 
+export JAVA_HOME=/usr/java/latest
 #
 # Settings
 #
@@ -62,7 +63,7 @@ start() {
     echo -n $"Starting $NAME: "
     set +e
     cd ${SERVICEDIR} && \
-    nohup $INVOCATION >> $OUTFILE 2>> $ERRORFILE &
+    nohup $INVOCATION >> $OUTFILE 2> $ERRORFILE &
     pgrep -f $CONFIG > $PIDFILE
     RETVAL=$?
     echo
@@ -103,4 +104,4 @@ case "$1" in
         RETVAL=1
 esac
 
-exit $RETVAL;
+exit $?;
