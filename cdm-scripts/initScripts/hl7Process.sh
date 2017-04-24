@@ -18,6 +18,7 @@
 # Source function library.
 . /etc/init.d/functions
 
+export JAVA_HOME=/usr/java/latest
 #
 # Settings
 #
@@ -103,4 +104,4 @@ case "$1" in
         RETVAL=1
 esac
 
-exit $RETVAL;
+exit $?;

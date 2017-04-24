@@ -18,6 +18,8 @@
 # Source function library.
 . /etc/init.d/functions
 
+export JAVA_HOME=/usr/java/latest
+
 #
 # Settings
 #
