@@ -237,15 +237,17 @@ object Hl7Driver extends App with Logg {
   }
 
   private def shutDown(): Unit = {
-    tryAndLogErrorMes(job stop(), error(_: Throwable))
-    tryAndLogErrorMes(job kill(), error(_: Throwable))
-    Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
-      case Success(x) =>
-        if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) {
-          info(s"Stopping Job $app From Resource Manager resulted with Status ${getStatus(x.getInputStream)}. Kill Job Manually by yarn application -kill ${job.getAppId}")
-        } else info(s"Stopped $app from Resource Manager with Status ${getStatus(x.getInputStream)}")
-      case Failure(t) =>
-        error(s"Stopping Job $app From Resource Manager failed with error ${t.getMessage}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+    if (!job.getState.isFinal) {
+      tryAndLogErrorMes(job stop(), error(_: Throwable))
+      tryAndLogErrorMes(job kill(), error(_: Throwable))
+      Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
+        case Success(x) =>
+          if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) {
+            info(s"Stopping Job $app From Resource Manager resulted with Status ${getStatus(x.getInputStream)}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+          } else info(s"Stopped $app from Resource Manager with Status ${getStatus(x.getInputStream)}")
+        case Failure(t) =>
+          error(s"Stopping Job $app From Resource Manager failed with error ${t.getMessage}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+      }
     }
   }
 
