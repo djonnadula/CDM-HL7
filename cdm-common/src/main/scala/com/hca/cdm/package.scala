@@ -150,6 +150,8 @@ package object cdm extends Logg {
   def unregister(hook: Thread): Boolean = {
     try {
       rt removeShutdownHook hook
+      hook interrupt()
+      hook join()
       return true
     }
     catch {
