@@ -1,0 +1,143 @@
+{
+  "0000.COMN": {
+    "msh_sending_facility": "FRNK",
+    "msh_msg_control_id": "MT6_FRNK_ORU_161609597",
+    "pid_medical_record_num": "K000078104",
+    "pid_medical_record_urn": "K73136",
+    "pid_pat_account_num": "FR0801065749"
+  },
+  "0001.MSH": {
+    "msh_field_separator": "|",
+    "msh_encoding_character": "^~\\&",
+    "msh_sending_appl": "ITS",
+    "msh_sending_facility": "FRNK",
+    "msh_msg_create_date_time": "201704061204",
+    "msh_msg_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "msh_msg_control_id": "MT6_FRNK_ORU_161609597",
+    "msh_processing_id": "P",
+    "msh_version_id": "2.4"
+  },
+  "0002.PID": {
+    "pid_set_id": "1",
+    "pid_pat_id_list": [
+      {
+        "identifier_num": "K000078104",
+        "identifier_type_code": "MR",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "407-39-3773",
+        "identifier_type_code": "SS",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "K73136",
+        "identifier_type_code": "PI",
+        "assgn_facility": "FRNK"
+      },
+      {
+        "identifier_num": "A00176199",
+        "identifier_type_code": "HUB",
+        "assgn_facility": "FRNK"
+      }
+    ],
+    "pid_pat_name": [
+      {
+        "last_name": "MORGAN",
+        "first_name": "LAURA",
+        "middle_name": "E",
+        "type_code": "L"
+      },
+      {
+        "last_name": "VITTETOW",
+        "first_name": "LAURA",
+        "middle_name": "E",
+        "type_code": "M"
+      }
+    ],
+    "pid_mother_name": "REBECCA",
+    "pid_birth_date_time": "19900120",
+    "pid_sex": "F",
+    "pid_race": "W",
+    "pid_pat_address": {
+      "street_address1": "205 OLD PEAKS MILL ROAD",
+      "city": "FRANKFORT",
+      "state_province": "KY",
+      "zip_postal_code": "40601"
+    },
+    "pid_home_phone_num": "(502)545-4300",
+    "pid_marital_status": "S",
+    "pid_religion": "CHR",
+    "pid_pat_account_num": "FR0801065749"
+  },
+  "0003.PV1": {
+    "pv1_set_id": "1",
+    "pv1_pat_classification": "E",
+    "pv1_assgn_pat_loc": "FR.ER",
+    "pv1_adm_type": "EM",
+    "pv1_attending_doctor": {
+      "person_id": "DXU9585",
+      "last_name": "Montalvo",
+      "first_name": "Jaime",
+      "degree": "MD"
+    },
+    "pv1_referring_doctor": {
+      "person_id": "SELF",
+      "last_name": "Referred",
+      "first_name": "Self"
+    },
+    "pv1_adm_source": "PR",
+    "pv1_pat_type": "ER",
+    "pv1_financial_classification": "08",
+    "pv1_dchg_disposition": "HOM",
+    "pv1_servicing_facility": "FRNK",
+    "pv1_account_status": "DEP",
+    "pv1_adm_date_time": "201301231609",
+    "pv1_dchg_date_time": "201301232013"
+  },
+  "0004.OBR": {
+    "obr_set_id": "1",
+    "obr_filler_order_num": "201702FRNK",
+    "obr_requested_date_time": "201301232004",
+    "obr_observation_date_time": "201301232004",
+    "obr_observation_end_date_time": "201301232004",
+    "obr_relevant_clinical_information": "FR",
+    "obr_filler_first_generic_field": "HIM",
+    "obr_lab_site": "ERDC",
+    "obr_result_status": "S",
+    "obr_qty_timing": {
+      "eff_from_date_time": "201301232004"
+    },
+    "obr_principal_result_interpreter": {
+      "name": {
+        "person_id": "DXU9585",
+        "last_name": "Montalvo",
+        "first_name": "Jaime",
+        "degree": "MD",
+        "source_table": "201301232004"
+      }
+    },
+    "obr_transcriptionist": {
+      "name": {
+        "person_id": "DXU9585",
+        "last_name": "Montalvo",
+        "first_name": "Jaime",
+        "middle_name": "E"
+      }
+    }
+  },
+  "0005.ZAP": {
+    "zap_set_id": "1",
+    "zap_other_dictated_by_signed_date_time": {
+      "signed_by_provider_mnemonic": "CIJ9890",
+      "last_name": "Wilkins",
+      "first_name": "Gina",
+      "middle_name": "C",
+      "degree": "MD",
+      "signed_date_and_time": "201301232004"
+    }
+  }
+}
