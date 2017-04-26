@@ -8,9 +8,9 @@ import com.hca.cdm._
 import com.ibm.msg.client.wmq.common.CommonConstants._
 import com.ibm.msg.client.wmq.compat.jms.internal.JMSC._
 import scala.collection.concurrent.TrieMap
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Random, Success, Try}
 import com.ibm.msg.client.jms.JmsConstants._
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 
 /**
@@ -21,6 +21,9 @@ trait MqConnector extends Logg with AutoCloseable {
   private lazy val connections = new TrieMap[String, ConnectionMeta]()
   private lazy val consumers = new TrieMap[String, MessageConsumer]()
   private lazy val producers = new ListBuffer[MessageProducer]
+  private lazy val sessions = new TrieMap[String, MQSession]()
+  private lazy val randomSessions = new ArrayBuffer[MQSession]
+  private lazy val randomSessionSelector = new Random()
   private val CHARSET = 437
   private val ENCODING = 546
 
@@ -29,20 +32,17 @@ trait MqConnector extends Logg with AutoCloseable {
     connections.synchronized {
       if (connections.isDefinedAt(id)) return connections(id)
       var connection: Connection = null
-      var session: MQSession = null
       try {
         val factory = connectionFactory(id, jobDesc, hosts, queueManager, channel, batchSize, batchInterval)
         connection = factory createConnection()
-        session = connection.createSession(false, CLIENT_ACKNOWLEDGE).asInstanceOf[MQSession]
         info(s"Connection Established to WSMQ with Id :: $id ")
-        val meta = ConnectionMeta(factory, connection, session)
+        val meta = ConnectionMeta(factory, connection)
         connections += id -> meta
         meta
       }
       catch {
         case t: Throwable =>
           error("Cannot Establish Connection to WSMQ Trying to re-establish", t)
-          closeResource(session)
           closeResource(connection)
           throw new MqException(t)
       }
@@ -68,10 +68,10 @@ trait MqConnector extends Logg with AutoCloseable {
   }
 
 
-  case class ConnectionMeta(private val factory: MQConnectionFactory, private val connection: Connection, private val session: MQSession) extends AutoCloseable {
+  case class ConnectionMeta(private val factory: MQConnectionFactory, private val connection: Connection) extends AutoCloseable {
     @throws[CdmException]
     def addEventListener(listener: SourceListener): Unit = {
-      val consumer = tryAndThrow[MessageConsumer](session.createConsumer(new MQDestination(listener.getSource)), error(_: Throwable))
+      val consumer = tryAndThrow[MessageConsumer](createSession(listener.getSource).createConsumer(new MQDestination(listener.getSource)), error(_: Throwable))
       createConsumer(listener.getSource)
       consumer setMessageListener listener
       info(s"Listener Added for Queue ${listener.getSource} with Consumer $consumer")
@@ -79,8 +79,8 @@ trait MqConnector extends Logg with AutoCloseable {
 
     @throws[CdmException]
     def createConsumer(source: String): MessageConsumer = {
-      val consumer = tryAndThrow[MessageConsumer](session.createConsumer(new MQDestination(source)), error(_: Throwable))
-      if(consumers isDefinedAt source) closeResource(consumers(source))
+      val consumer = tryAndThrow[MessageConsumer](createSession(source).createConsumer(new MQDestination(source)), error(_: Throwable))
+      if (consumers isDefinedAt source) closeResource(consumers(source))
       consumers += source -> consumer
       info(s"Consumer Created to consume from Queue $source $consumer")
       consumer
@@ -109,7 +109,7 @@ trait MqConnector extends Logg with AutoCloseable {
     @throws[MqException]
     def createProducer(destination: String): MessageProducer = {
       info(s"Creating Producer to Queue $destination")
-      Try(session.createProducer(createQueue(destination))) match {
+      Try(createSession(destination).createProducer(createQueue(destination))) match {
         case Success(x) =>
           producers += x
           x
@@ -120,7 +120,7 @@ trait MqConnector extends Logg with AutoCloseable {
     @throws[MqException]
     private def createQueue(destination: String): MQDestination = {
       info(s"Creating Queue $destination")
-      Try(session.createQueue(s"queue:///$destination").asInstanceOf[MQDestination]) match {
+      Try(createSession(destination).createQueue(s"queue:///$destination").asInstanceOf[MQDestination]) match {
         case Success(x) =>
           x
         case Failure(t) => throw new MqException(t)
@@ -129,7 +129,7 @@ trait MqConnector extends Logg with AutoCloseable {
 
     @throws[CdmException]
     def createMessage(msg: String): Message = {
-      val message = tryAndThrow[Message](session.createTextMessage(msg), error(_: Throwable))
+      val message = tryAndThrow[Message](randomSessions(randomSessionSelector.nextInt(randomSessions.size)).createTextMessage(msg), error(_: Throwable))
       debug(s"Message $msg created For destination ${message.getJMSDestination}")
       message.setIntProperty(JMS_IBM_CHARACTER_SET, CHARSET)
       message.setIntProperty(JMS_IBM_ENCODING, ENCODING)
@@ -158,14 +158,26 @@ trait MqConnector extends Logg with AutoCloseable {
       closeResource(prod)
     }
 
+     def createSession(source: String): MQSession = {
+      if (sessions isDefinedAt source) sessions(source)
+      else {
+        val session = connection.createSession(false, CLIENT_ACKNOWLEDGE).asInstanceOf[MQSession]
+        info(s"Session Created for Source $source $session")
+        sessions += source -> session
+        randomSessions += session
+        session
+      }
+    }
+
     override def close(): Unit = {
       info(s"Trying to Close resources for MQ with Id ${factory.getAppName} :: $connection")
       connections clear()
-      closeResource(session)
       consumers foreach (id => closeResource(id._2))
       producers foreach (closeResource(_))
+      sessions foreach (_._2.close())
       consumers clear()
       producers clear()
+      sessions clear()
       pause()
       closeResource(connection)
       info("All Resources Closed Completely ")

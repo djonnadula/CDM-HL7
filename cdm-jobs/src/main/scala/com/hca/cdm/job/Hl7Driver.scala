@@ -220,7 +220,6 @@ object Hl7Driver extends App with Logg {
               " \n\n" + EVENT_TIME
             , CRITICAL)
           unregister(sHook)
-          sHook.interrupt()
           shutDown()
           startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
         case KILLED =>
@@ -229,7 +228,6 @@ object Hl7Driver extends App with Logg {
             app + " Job is Killed. If job brought down for maintenance please ignore, other wise some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
             , CRITICAL)
           unregister(sHook)
-          sHook.interrupt()
           shutDown()
           handleDriver("stop")
       }

@@ -6,6 +6,8 @@ import com.hca.cdm.exception.MqException
 import com.hca.cdm.log.Logg
 import com.hca.cdm.mq.MqConnector
 import com.hca.cdm.utils.RetryHandler
+import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
 /**
   * Created by Devaraj Jonnadula on 3/6/2017.
@@ -17,7 +19,7 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String)(mqHosts: Strin
   private lazy val batchInterval = 0
   private lazy val restartInterval = 30000
   @volatile private var activeConnection: ConnectionMeta = _
-  @volatile private var producer: MessageProducer = _
+  private var producer: MessageProducer = _
   initialise()
 
 
@@ -35,7 +37,7 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String)(mqHosts: Strin
 
   @throws(classOf[MqException])
   private def initialise(): Unit = {
-    require(valid(initialQueue) || initialQueue!= EMPTYSTR, s"sCannot Send Acks to Queue Specified $initialQueue")
+    require(valid(initialQueue) || initialQueue != EMPTYSTR, s"sCannot Send Acks to Queue Specified $initialQueue")
     handleConnection()
     activeConnection.addErrorListener(new ExceptionReporter)
     producer = activeConnection.createProducer(initialQueue)
@@ -65,6 +67,7 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String)(mqHosts: Strin
       try {
         info(s"Starting MQ Producer with App Name $app")
         activeConnection = createConnection(app, jobDesc, mqHosts, mqManager, mqChannel, batchSize, batchInterval)
+        activeConnection.createSession(initialQueue)
       } catch {
         case ex: Exception => error("Producer Connection Failed. Will Try To make connection based on Number of Re Tries Assigned", ex)
           val retry = RetryHandler()
@@ -93,25 +96,31 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String)(mqHosts: Strin
 object MQAcker {
 
   private val lock = new Object()
-  private var connection: MQAcker = _
+  private lazy val randomConn = new Random
+  private var connection = new ArrayBuffer[MQAcker]
 
   @throws(classOf[MqException])
-  def apply(app: String, jobDesc: String, initialQueue: String)(mqHosts: String, mqManager: String, mqChannel: String): MQAcker = {
+  def apply(app: String, jobDesc: String, initialQueue: String)(mqHosts: String, mqManager: String, mqChannel: String, numberOfIns: Int = 2): Unit = {
     def createIfNotExist = new (() => MQAcker) {
       override def apply(): MQAcker = new MQAcker(app, jobDesc, initialQueue)(mqHosts, mqManager, mqChannel)
     }
 
-    createConnection(createIfNotExist)
+    createConnection(numberOfIns, createIfNotExist)
   }
 
-  private def createConnection(createIfNotExist: () => MQAcker): MQAcker = {
+  private def createConnection(numberOfIns: Int, createIfNotExist: () => MQAcker): Unit = {
     lock.synchronized(
-      if (connection == null) {
-        connection = createIfNotExist()
+      if (connection isEmpty) {
+        for (i <- 0 until numberOfIns) connection += createIfNotExist()
         info(s"Created Connection for $connection")
-        connection
-      } else {
-        connection
       })
+  }
+
+  def ackMessage(msg: String): Unit = {
+    connection(randomConn.nextInt(connection.size)).sendMessage(msg)
+  }
+
+  def ackMessages(msgs: String*): Unit = {
+    msgs foreach ackMessage
   }
 }

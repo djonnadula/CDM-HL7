@@ -228,9 +228,13 @@ object HL7Job extends Logg with App {
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-            val tlmAckIO = if (tlmAckQueue.isDefined) Some(MQAcker(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"),
-              lookUpProp("mq.manager"), lookUpProp("mq.channel"))) else None
-            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckIO isDefined) tlmAckIO.get.sendMessage(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta))
+            var tlmAckIO: (String) => Unit = null
+            if (tlmAckQueue.isDefined) {
+              MQAcker(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"),
+                lookUpProp("mq.channel"), numberOfIns = 3)
+              tlmAckIO = MQAcker.ackMessage(_: String)
+            }
+            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta))
             dataItr foreach (hl7 => {
               var msgType: HL7 = UNKNOWN
               try {
@@ -259,7 +263,7 @@ object HL7Job extends Logg with App {
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckIO isDefined) Some(tlmAckIO.get.sendMessage(_: String)) else None)(_, _)
+                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String)) else None)(_, _)
                 Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
