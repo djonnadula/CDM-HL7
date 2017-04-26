@@ -91,10 +91,15 @@ object HL7Receiver extends Logg with App {
     }
   }
 
-  private val sparkStrCtx: StreamingContext = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
-  sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
-  if (!checkpointEnable) runJob(sparkStrCtx)
+  private var sparkStrCtx: StreamingContext = initContext
   startStreams()
+
+  private def initContext: StreamingContext = {
+    if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
+    sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+    if (!checkpointEnable) runJob(sparkStrCtx)
+    sparkStrCtx
+  }
 
   /**
     * Main Job Execution
@@ -164,6 +169,7 @@ object HL7Receiver extends Logg with App {
         val retry = RetryHandler()
 
         def retryStart(): Unit = {
+          sparkStrCtx = initContext
           sparkStrCtx start()
           info(s"Started Spark Streaming Context Execution :: ${new Date()}")
           sparkStrCtx awaitTermination()

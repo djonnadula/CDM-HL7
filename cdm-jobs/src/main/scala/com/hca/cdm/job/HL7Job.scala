@@ -136,39 +136,41 @@ object HL7Job extends Logg with App {
     }
   }
 
-  private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
+  private var sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   private var credentials: String = _
   initialise(sparkStrCtx)
   startStreams()
 
-  private def initialise(sparkStrCtx: StreamingContext): Unit = {
-    info("Job Initialisation Started on :: " + new Date())
-    modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
-      if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
-    })))
-    createTopic(hl7JsonTopic, segmentPartitions = false)
-    createTopic(segTopic, segmentPartitions = false)
-    createTopic(auditTopic, segmentPartitions = false)
-    createTopic(rejectedTopic, segmentPartitions = false)
-    sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
-    segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)
-    segmentsDriverMetrics = driverSegmentsMetric()
-    parserAccumulators = registerParserMetric(sparkStrCtx)
-    parserDriverMetrics = driverParserMetric()
-    restoreMetrics()
-    monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
-    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 600, minToSec(monitorInterval), TimeUnit.SECONDS)
-    sparkUtil addHook persistParserMetrics
-    sparkUtil addHook persistSegmentMetrics
-    sHook = newThread(s"$app-SparkCtx SHook", runnable({
-      close()
-      shutDown()
-      info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
-    }))
-    registerHook(sHook)
-    sparkStrCtx.sparkContext.getConf.getAll.foreach(x => info(x._1 + " :: " + x._2))
+  private def initialise(sparkStrCtx: StreamingContext, init: Boolean = true): Unit = {
+    if (init) {
+      info("Job Initialisation Started on :: " + new Date())
+      modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
+        if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
+      })))
+      createTopic(hl7JsonTopic, segmentPartitions = false)
+      createTopic(segTopic, segmentPartitions = false)
+      createTopic(auditTopic, segmentPartitions = false)
+      createTopic(rejectedTopic, segmentPartitions = false)
+      sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
+      segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)
+      segmentsDriverMetrics = driverSegmentsMetric()
+      parserAccumulators = registerParserMetric(sparkStrCtx)
+      parserDriverMetrics = driverParserMetric()
+      restoreMetrics()
+      monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
+      monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
+      monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 600, minToSec(monitorInterval), TimeUnit.SECONDS)
+      sparkUtil addHook persistParserMetrics
+      sparkUtil addHook persistSegmentMetrics
+      sHook = newThread(s"$app-SparkCtx SHook", runnable({
+        close()
+        shutDown()
+        info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
+      }))
+      registerHook(sHook)
+      sparkStrCtx.sparkContext.getConf.getAll.foreach(x => info(x._1 + " :: " + x._2))
+    }
     /* if (isSecured) {
        val tempCrd = credentialFile(s"$appHomeDir$FS$stagingDir")
        credentials = tempCrd.getName
@@ -326,6 +328,9 @@ object HL7Job extends Logg with App {
         val retry = RetryHandler()
 
         def retryStart(): Unit = {
+          sparkStrCtx = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
+          sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+          initialise(sparkStrCtx, init = false)
           sparkStrCtx start()
           info(s"Started Spark Streaming Context Execution :: ${new Date()}")
           sparkStrCtx awaitTermination()
