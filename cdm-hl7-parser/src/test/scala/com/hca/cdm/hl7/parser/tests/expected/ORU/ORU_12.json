@@ -108,9 +108,7 @@
     "obr_filler_first_generic_field": "HIM",
     "obr_lab_site": "ERDC",
     "obr_result_status": "S",
-    "obr_qty_timing": {
-      "eff_from_date_time": "201301232004"
-    },
+    "obr_unknown": "201301232004",
     "obr_principal_result_interpreter": {
       "name": {
         "person_id": "DXU9585",

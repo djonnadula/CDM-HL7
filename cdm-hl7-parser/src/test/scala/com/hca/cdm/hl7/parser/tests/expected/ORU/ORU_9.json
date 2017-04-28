@@ -135,20 +135,16 @@
     "obr_scheduled_date_time": "201701030400"
   },
   "0006.ZUR": {
-    "zur_set_id": "1",
-    "zur_information": "I772951"
+    "zur_unknown": "1^I772951"
   },
   "0007.ZUR": {
-    "zur_set_id": "2",
-    "zur_information": "I001922764"
+    "zur_unknown": "2^I001922764"
   },
   "0008.ZUR": {
-    "zur_set_id": "3",
-    "zur_information": "FWDCGEWEB02.HCA.CORPAD.NET"
+    "zur_unknown": "3^FWDCGEWEB02.HCA.CORPAD.NET"
   },
   "0009.ZUR": {
-    "zur_set_id": "4",
-    "zur_information": "COCAR"
+    "zur_unknown": "4^COCAR"
   },
   "0010.OBX": {
     "obx_set_id": "1",

@@ -287,13 +287,7 @@
     "obr_collector_id": "AL",
     "obr_relevant_clinical_information": "FLU",
     "obr_specimen_received_date_time": "201703301100",
-    "obr_specimen_source": {
-      "name_code": "SP",
-      "additives": "Sputum",
-      "free_text": "Sputum",
-      "body_site": "401.700",
-      "site_modfr": "RESP"
-    },
+    "obr_unknown": "SP^Sputum^Sputum^401.700^RESP",
     "obr_ordering_provider": {
       "person_id": "GXI9584",
       "last_name": "Adegboyega",
@@ -340,10 +334,7 @@
       "name_of_alt_coding_sys": "LB"
     },
     "obx_observation_sub_id": "1",
-    "obx_observation_value": {
-      "primary_id": "GS",
-      "text": "Gram stain"
-    },
+    "obx_unknown": "GS^Gram stain",
     "obx_observation_result_status": "F",
     "obx_observation_date_time": "201703301351",
     "obx_producer_id": {
@@ -383,10 +374,7 @@
       "name_of_alt_coding_sys": "LB"
     },
     "obx_observation_sub_id": "1",
-    "obx_observation_value": {
-      "primary_id": "2W",
-      "text": "Few WBC's (2-5 per field)"
-    },
+    "obx_unknown": "2W^Few WBC's (2-5 per field)",
     "obx_interpretation_code": "N",
     "obx_observation_result_status": "F",
     "obx_observation_date_time": "201703301351",
@@ -427,10 +415,7 @@
       "name_of_alt_coding_sys": "LB"
     },
     "obx_observation_sub_id": "1",
-    "obx_observation_value": {
-      "primary_id": "2 GNB",
-      "text": "Few Gram negative bacilli"
-    },
+    "obx_unknown": "2 GNB^Few Gram negative bacilli",
     "obx_interpretation_code": "N",
     "obx_observation_result_status": "F",
     "obx_observation_date_time": "201703301351",
@@ -471,10 +456,7 @@
       "name_of_alt_coding_sys": "LB"
     },
     "obx_observation_sub_id": "1",
-    "obx_observation_value": {
-      "primary_id": "3 GPCCL",
-      "text": "Moderate Gram positive cocci in clusters"
-    },
+    "obx_unknown": "3 GPCCL^Moderate Gram positive cocci in clusters",
     "obx_interpretation_code": "N",
     "obx_observation_result_status": "F",
     "obx_observation_date_time": "201703301351",
@@ -515,10 +497,7 @@
       "name_of_alt_coding_sys": "LB"
     },
     "obx_observation_sub_id": "1",
-    "obx_observation_value": {
-      "primary_id": "4 GPCPR",
-      "text": "Many Gram positive cocci in pairs"
-    },
+    "obx_unknown": "4 GPCPR^Many Gram positive cocci in pairs",
     "obx_interpretation_code": "N",
     "obx_observation_result_status": "F",
     "obx_observation_date_time": "201703301351",
@@ -559,10 +538,7 @@
       "name_of_alt_coding_sys": "LB"
     },
     "obx_observation_sub_id": "1",
-    "obx_observation_value": {
-      "primary_id": "L10S",
-      "text": "< 10 Squamous epithelial cells/field"
-    },
+    "obx_unknown": "L10S^< 10 Squamous epithelial cells/field",
     "obx_interpretation_code": "N",
     "obx_observation_result_status": "F",
     "obx_observation_date_time": "201703301351",
@@ -654,13 +630,7 @@
     "obr_collector_id": "AL",
     "obr_relevant_clinical_information": "FLU",
     "obr_specimen_received_date_time": "201703301100",
-    "obr_specimen_source": {
-      "name_code": "SP",
-      "additives": "Sputum",
-      "free_text": "Sputum",
-      "body_site": "401.700",
-      "site_modfr": "RESP"
-    },
+    "obr_unknown": "SP^Sputum^Sputum^401.700^RESP",
     "obr_ordering_provider": {
       "person_id": "GXI9584",
       "last_name": "Adegboyega",

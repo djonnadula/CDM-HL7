@@ -142,16 +142,8 @@
       "area_city_code": "502",
       "local_number": "875-5240"
     },
-    "obr_placer_first_generic_field": {
-      "order_category": "RAD",
-      "order_number": "20170209-0025"
-    },
+    "obr_unknown": "RAD^20170209-0025^1^^^201702090828^^S",
     "obr_filler_first_generic_field": "DI",
-    "obr_qty_timing": {
-      "quantity": "1",
-      "eff_from_date_time": "201702090828",
-      "priority": "S"
-    },
     "obr_result_copy_to": [
       {
         "person_id": "PZI7367",
@@ -185,9 +177,7 @@
       "primary_id": "1ORD01004A",
       "text": "Reason for Exam"
     },
-    "obx_observation_value": {
-      "text": "cough, soa"
-    }
+    "obx_unknown": "cough, soa"
   },
   "0008.OBX": {
     "obx_set_id": "2",
@@ -204,8 +194,6 @@
       "primary_id": "1ORD01050A",
       "text": "Portable?"
     },
-    "obx_observation_value": {
-      "text": "N"
-    }
+    "obx_unknown": "N"
   }
 }

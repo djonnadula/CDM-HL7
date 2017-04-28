@@ -318,11 +318,7 @@
       "name_of_coding_sys": "EPICCOMP"
     },
     "obx_observation_sub_id": "1",
-    "obx_unknown": "GRAM NEGATIVE BACILLI",
-    "obx_observation_value": {
-      "primary_id": "123004",
-      "text": "GRAM NEGATIVE BACILLI"
-    },
+    "obx_unknown": "123004^GRAM NEGATIVE BACILLI^^^^^^^GRAM NEGATIVE BACILLI",
     "obx_interpretation_code": "AA",
     "obx_observation_result_status": "P",
     "obx_observation_date_time": "20170402110000",
