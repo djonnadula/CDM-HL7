@@ -18,7 +18,6 @@
 # Source function library.
 . /etc/init.d/functions
 
-export JAVA_HOME=/usr/java/latest
 #
 # Settings
 #
@@ -36,7 +35,7 @@ MAXHEAP=512
 JMXPORT=50000
 CONFIG='/hadoop/cdm/cfg/CDMHL7.properties'
 INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
--cp hl7process.jar com.hca.cdm.job.Hl7Driver ${CONFIG} \
+-cp  ${SERVICE}:/opt/cloudera/parcels/CDH/jars/*  com.hca.cdm.job.Hl7Driver ${CONFIG} \
 "
 
 # pid file for the daemon
@@ -54,11 +53,10 @@ fi
 RETVAL=0
 
 start() {
-    if [ -e $LOCKFILE ];
-        then
+    if [ -e "$LOCKFILE" ];then
                 echo "$NAME appears to be running, or has crashed, or was not stopped properly."
                 echo "check $PIDFILE, and remove $LOCKFILE to start again."
-                return 1;
+                exit 1;
     fi
     echo -n $"Starting $NAME: "
     set +e
@@ -67,7 +65,14 @@ start() {
     pgrep -f $CONFIG > $PIDFILE
     RETVAL=$?
     echo
-    [ $RETVAL = 0 ] && touch ${LOCKFILE}
+    [ $RETVAL -eq 0 ] && touch ${LOCKFILE}
+    if [[ "$RETVAL" -eq 1 ]];then
+      failure "Starting" $NAME
+
+    else
+      success "Starting" $NAME
+
+    fi
 }
 
 stop() {
@@ -85,7 +90,7 @@ rh_status() {
 # See how we were called.
 case "$1" in
     start)
-        rh_status >/dev/null 2>&1 && exit 0;
+    rh_status
         start
         ;;
     stop)
@@ -104,4 +109,8 @@ case "$1" in
         RETVAL=1
 esac
 
-exit $?;
+if [[ "$RETVAL" -gt 1 ]];then
+      exit 1
+else
+      exit 0
+fi
