@@ -257,9 +257,11 @@ package object cdm extends Logg {
   }
 
   def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
-    if(specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
+    if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
+
+  def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
   private class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
