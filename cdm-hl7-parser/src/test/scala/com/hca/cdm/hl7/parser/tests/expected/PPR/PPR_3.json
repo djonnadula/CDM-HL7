@@ -1,69 +1,69 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "COCQA1A",
-    "msh_msg_control_id": "IP_COQ1A_PPR_EPSQ1A.161209.8 ",
-    "pid_medical_record_num": "J000425961",
-    "pid_medical_record_urn": "J502566",
-    "pid_pat_account_num": ""
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_PPR_EPSQ1A.161209.8 ",
+    "medical_record_num": "J000425961",
+    "medical_record_urn": "J502566",
+    "patient_account_num": ""
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "COCQA1A",
-    "msh_sending_facility": "COCQA1A",
-    "msh_receiving_appl": "OV",
-    "msh_receiving_facility": "OV",
-    "msh_msg_create_date_time": "201611091511",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201611091511",
+    "message_type": {
       "message_code": "PPR",
       "trigger_event": "PC1"
     },
-    "msh_msg_control_id": "IP_COQ1A_PPR_EPSQ1A.161209.8 ",
-    "msh_processing_id": "T",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": {
+    "message_control_id": "IP_COQ1A_PPR_EPSQ1A.161209.8 ",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
     },
-    "msh_accept_acknowledgment_type": "ER",
-    "msh_appl_acknowledgment_type": "NE"
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
   },
   "0002.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": {
-      "identifier_num": "J000425961",
-      "assgn_authr": "COCQA1A",
-      "identifier_type_code": "MRN"
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000425961",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
     },
-    "pid_alt_pat_id": "J502566",
-    "pid_pat_name": {
-      "last_name": "PARKER",
-      "first_name": "MAY",
-      "middle_name": "R"
+    "alternate_patient_id": "J502566",
+    "patient_name": {
+      "family_name": "PARKER",
+      "given_name": "MAY",
+      "second_and_further_given_names_or_initials_thereof": "R"
     },
-    "pid_birth_date_time": "19620105",
-    "pid_sex": "F"
+    "date_time_of_birth": "19620105",
+    "administrative_sex": "F"
   },
   "0003.PRB": {
-    "prb_action_code": "AD",
-    "prb_action_date_time": {
+    "action_code": "AD",
+    "action_date_time": {
       "date_time": "201611091510",
       "person_id": "1TSQBE8554",
       "provider_id": "DRBRI"
     },
-    "prb_problem_id": {
+    "problem_id": {
       "primary_id": "45007003",
       "text": "Hypotension",
       "name_of_coding_sys": "SNOMED"
     },
-    "prb_problem_instance_id": "J502566-6",
-    "prb_problem_estbl_date_time": {
+    "problem_instance_id": "J502566-6",
+    "problem_estbl_date_time": {
       "date_time": "201611091510",
       "person_id": "1TSQBE8554",
       "provider_id": "DRBRI"
     },
-    "prb_problem_classification": "Active",
-    "prb_problem_persistence": "Active",
-    "prb_problem_onset_date_time": "20161109"
+    "problem_classification": "Active",
+    "problem_persistence": "Active",
+    "problem_date_of_onset": "20161109"
   }
 }

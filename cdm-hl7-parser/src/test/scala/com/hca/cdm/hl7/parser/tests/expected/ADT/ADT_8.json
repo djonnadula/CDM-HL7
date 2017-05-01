@@ -1,249 +1,249 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "AKAR",
-    "msh_msg_control_id": "EPIC_AKAR_ADT_233352",
-    "pid_medical_record_num": "456789465",
-    "pid_medical_record_urn": "2257801",
-    "pid_pat_account_num": "9798798"
+    "sending_facility": "AKAR",
+    "message_control_id": "EPIC_AKAR_ADT_233352",
+    "medical_record_num": "456789465",
+    "medical_record_urn": "2257801",
+    "patient_account_num": "9798798"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "EPIC_AKAR",
-    "msh_sending_facility": "AKAR",
-    "msh_receiving_appl": "DBM",
-    "msh_msg_create_date_time": "20160803130926",
-    "msh_security": "IPRN",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "EPIC_AKAR",
+    "sending_facility": "AKAR",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20160803130926",
+    "security": "IPRN",
+    "message_type": {
       "message_code": "ADT",
       "trigger_event": "A60"
     },
-    "msh_msg_control_id": "EPIC_AKAR_ADT_233352",
-    "msh_processing_id": "D",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": "Epic_MountainQA",
-    "msh_msg_profile_id": "AKA"
+    "message_control_id": "EPIC_AKAR_ADT_233352",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "Epic_MountainQA",
+    "message_profile_id": "AKA"
   },
   "0002.EVN": {
-    "evn_evnt_type": "A60",
-    "evn_recorded_date_time": "20160803130926",
-    "evn_evnt_resn_code": "ALLERGY_TRIGGER",
-    "evn_oper_id": {
+    "event_type_code": "A60",
+    "recorded_date_time": "20160803130926",
+    "event_reason_code": "ALLERGY_TRIGGER",
+    "operator_id": {
       "person_id": "IPRN",
-      "last_name": "INPATIENT",
-      "first_name": "NURSE",
-      "assgn_authr": "MTN A",
-      "assgn_facility": "AKAR"
+      "family_name": "INPATIENT",
+      "given_name": "NURSE",
+      "assigning_authority": "MTN A",
+      "assigning_facility": "AKAR"
     }
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": "456789465",
-    "pid_alt_pat_id": "2257801",
-    "pid_pat_name": {
-      "last_name": "UPGRADE",
-      "first_name": "ALASKA",
-      "middle_name": "ONE"
+    "set_id": "1",
+    "patient_id_list": "456789465",
+    "alternate_patient_id": "2257801",
+    "patient_name": {
+      "family_name": "UPGRADE",
+      "given_name": "ALASKA",
+      "second_and_further_given_names_or_initials_thereof": "ONE"
     },
-    "pid_birth_date_time": "20160606",
-    "pid_sex": "F",
-    "pid_pat_address": {
-      "street_address1": "20 MAIN AVE",
+    "date_time_of_birth": "20160606",
+    "administrative_sex": "F",
+    "patient_address": {
+      "street_address": "20 MAIN AVE",
       "city": "AVENTURA",
-      "state_province": "FL",
-      "zip_postal_code": "33180",
+      "state_or_province": "FL",
+      "zip_or_postal_code": "33180",
       "country": "USA",
       "address_type": "P",
       "county_parish_code": "MIAMI-DADE"
     },
-    "pid_county_code": "MIAMI-DADE",
-    "pid_pat_account_num": "9798798",
-    "pid_pat_social_security_num": "394-92-3456",
-    "pid_pat_death_ind": "N"
+    "county_code": "MIAMI-DADE",
+    "patient_account_num": "9798798",
+    "ssn_num_patient": "394-92-3456",
+    "patient_death_indicator": "N"
   },
   "0004.ZPD": {
-    "zpd_pregnancy_flag": "N"
+    "pregnancy_flag": "N"
   },
   "0005.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "N"
+    "set_id": "1",
+    "patient_class": "N"
   },
   "0006.PV2": {
-    "pv2_visit_protection_ind": "N"
+    "visit_protection_indicator": "N"
   },
   "0007.ZPV": {},
   "0008.IAM": {
-    "iam_set_id": "1",
-    "iam_allergen_type_code": "DRUG INGREDI",
-    "iam_allergen_code_mnemonic_desc": {
-      "primary_id": "BANANA",
+    "set_id": "1",
+    "allergen_type_code": "DRUG INGREDI",
+    "allergen_code_mnemonic_description": {
+      "id": "BANANA",
       "text": "BANANA"
     },
-    "iam_allergy_action_code": "U",
-    "iam_allergy_unique_id": "28214",
-    "iam_allergen_group_code_mnemonic_desc": {
+    "allergy_action_code": "U",
+    "allergy_unique_id": "28214",
+    "allergen_group_code_mnemonic_description": {
       "text": "BANANA"
     },
-    "iam_onset_date": "20160720",
-    "iam_reported_date_time": "20160720071032",
-    "iam_reported_by": [
+    "onset_date": "20160720",
+    "reported_date_time": "20160720071032",
+    "reported_by": [
       {
-        "last_name": "1100199995",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "1100199995",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "NPI",
-        "eff_to_date_time": "NPI"
+        "name_context": "NPI",
+        "expiration_date": "NPI"
       },
       {
-        "last_name": "20001",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "20001",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "PROVID",
-        "eff_to_date_time": "PROVID"
+        "name_context": "PROVID",
+        "expiration_date": "PROVID"
       },
       {
-        "last_name": "ABC1231",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "ABC1231",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "THREEFOUR",
-        "eff_to_date_time": "THREEFOUR"
+        "name_context": "THREEFOUR",
+        "expiration_date": "THREEFOUR"
       }
     ],
-    "iam_statused_at_date_time": "20160803110924"
+    "statused_at_date_time": "20160803110924"
   },
   "0009.IAM": {
-    "iam_set_id": "2",
-    "iam_allergen_type_code": "DRUG INGREDI",
-    "iam_allergen_code_mnemonic_desc": {
-      "primary_id": "BROCCOLI",
+    "set_id": "2",
+    "allergen_type_code": "DRUG INGREDI",
+    "allergen_code_mnemonic_description": {
+      "id": "BROCCOLI",
       "text": "BROCCOLI"
     },
-    "iam_allergy_action_code": "U",
-    "iam_allergy_unique_id": "28296",
-    "iam_allergen_group_code_mnemonic_desc": {
+    "allergy_action_code": "U",
+    "allergy_unique_id": "28296",
+    "allergen_group_code_mnemonic_description": {
       "text": "BROCCOLI"
     },
-    "iam_onset_date": "20160725",
-    "iam_reported_date_time": "20160725081950",
-    "iam_statused_at_date_time": "20160803110924"
+    "onset_date": "20160725",
+    "reported_date_time": "20160725081950",
+    "statused_at_date_time": "20160803110924"
   },
   "0010.IAM": {
-    "iam_set_id": "3",
-    "iam_allergen_type_code": "DRUG INGREDI",
-    "iam_allergen_code_mnemonic_desc": {
-      "primary_id": "CAULIFLOWER",
+    "set_id": "3",
+    "allergen_type_code": "DRUG INGREDI",
+    "allergen_code_mnemonic_description": {
+      "id": "CAULIFLOWER",
       "text": "CAULIFLOWER"
     },
-    "iam_allergy_action_code": "U",
-    "iam_allergy_unique_id": "28297",
-    "iam_allergen_group_code_mnemonic_desc": {
+    "allergy_action_code": "U",
+    "allergy_unique_id": "28297",
+    "allergen_group_code_mnemonic_description": {
       "text": "CAULIFLOWER"
     },
-    "iam_onset_date": "20160725",
-    "iam_reported_date_time": "20160725082036",
-    "iam_statused_at_date_time": "20160803110924"
+    "onset_date": "20160725",
+    "reported_date_time": "20160725082036",
+    "statused_at_date_time": "20160803110924"
   },
   "0011.IAM": {
-    "iam_set_id": "4",
-    "iam_allergen_type_code": "DRUG INGREDI",
-    "iam_allergen_code_mnemonic_desc": {
-      "primary_id": "PEANUTS",
+    "set_id": "4",
+    "allergen_type_code": "DRUG INGREDI",
+    "allergen_code_mnemonic_description": {
+      "id": "PEANUTS",
       "text": "PEANUT"
     },
-    "iam_allergy_action_code": "U",
-    "iam_allergy_unique_id": "28215",
-    "iam_allergen_group_code_mnemonic_desc": {
+    "allergy_action_code": "U",
+    "allergy_unique_id": "28215",
+    "allergen_group_code_mnemonic_description": {
       "text": "PEANUT"
     },
-    "iam_onset_date": "20160720",
-    "iam_reported_date_time": "20160720071040",
-    "iam_reported_by": [
+    "onset_date": "20160720",
+    "reported_date_time": "20160720071040",
+    "reported_by": [
       {
-        "last_name": "1100199995",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "1100199995",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "NPI",
-        "eff_to_date_time": "NPI"
+        "name_context": "NPI",
+        "expiration_date": "NPI"
       },
       {
-        "last_name": "20001",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "20001",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "PROVID",
-        "eff_to_date_time": "PROVID"
+        "name_context": "PROVID",
+        "expiration_date": "PROVID"
       },
       {
-        "last_name": "ABC1231",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "ABC1231",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "THREEFOUR",
-        "eff_to_date_time": "THREEFOUR"
+        "name_context": "THREEFOUR",
+        "expiration_date": "THREEFOUR"
       }
     ],
-    "iam_statused_at_date_time": "20160803110924"
+    "statused_at_date_time": "20160803110924"
   },
   "0012.IAM": {
-    "iam_set_id": "5",
-    "iam_allergen_type_code": "DRUG",
-    "iam_allergen_code_mnemonic_desc": {
-      "primary_id": "SALMON",
+    "set_id": "5",
+    "allergen_type_code": "DRUG",
+    "allergen_code_mnemonic_description": {
+      "id": "SALMON",
       "text": "SALMON OIL-OMEGA-3 FATTY ACIDS"
     },
-    "iam_allergy_action_code": "U",
-    "iam_allergy_unique_id": "28379",
-    "iam_allergen_group_code_mnemonic_desc": {
+    "allergy_action_code": "U",
+    "allergy_unique_id": "28379",
+    "allergen_group_code_mnemonic_description": {
       "text": "SALMON OIL-OMEGA-3 FATTY ACIDS"
     },
-    "iam_onset_date": "20160803",
-    "iam_reported_date_time": "20160803110834",
-    "iam_statused_at_date_time": "20160803110924"
+    "onset_date": "20160803",
+    "reported_date_time": "20160803110834",
+    "statused_at_date_time": "20160803110924"
   },
   "0013.IAM": {
-    "iam_set_id": "6",
-    "iam_allergen_type_code": "DRUG INGREDI",
-    "iam_allergen_code_mnemonic_desc": {
-      "primary_id": "TUNA",
+    "set_id": "6",
+    "allergen_type_code": "DRUG INGREDI",
+    "allergen_code_mnemonic_description": {
+      "id": "TUNA",
       "text": "TUNA OIL"
     },
-    "iam_allergy_action_code": "U",
-    "iam_allergy_unique_id": "28216",
-    "iam_allergen_group_code_mnemonic_desc": {
+    "allergy_action_code": "U",
+    "allergy_unique_id": "28216",
+    "allergen_group_code_mnemonic_description": {
       "text": "TUNA OIL"
     },
-    "iam_onset_date": "20160720",
-    "iam_reported_date_time": "20160720071045",
-    "iam_reported_by": [
+    "onset_date": "20160720",
+    "reported_date_time": "20160720071045",
+    "reported_by": [
       {
-        "last_name": "1100199995",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "1100199995",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "NPI",
-        "eff_to_date_time": "NPI"
+        "name_context": "NPI",
+        "expiration_date": "NPI"
       },
       {
-        "last_name": "20001",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "20001",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "PROVID",
-        "eff_to_date_time": "PROVID"
+        "name_context": "PROVID",
+        "expiration_date": "PROVID"
       },
       {
-        "last_name": "ABC1231",
-        "first_name": "INPATIENT",
-        "middle_name": "ATTENDING",
+        "family_name": "ABC1231",
+        "given_name": "INPATIENT",
+        "second_and_further_given_names_or_initials_thereof": "ATTENDING",
         "suffix": "PHYSICIAN",
-        "context": "THREEFOUR",
-        "eff_to_date_time": "THREEFOUR"
+        "name_context": "THREEFOUR",
+        "expiration_date": "THREEFOUR"
       }
     ],
-    "iam_statused_at_date_time": "20160803110924"
+    "statused_at_date_time": "20160803110924"
   }
 }

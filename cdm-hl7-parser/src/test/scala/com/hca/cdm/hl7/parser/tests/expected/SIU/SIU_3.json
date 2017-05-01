@@ -1,711 +1,711 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "COCGTH",
-    "msh_msg_control_id": "IP_COCGTH_SIU_SCHGTH.170202.8",
-    "pid_medical_record_num": "V000232919",
-    "pid_medical_record_urn": "H449592",
-    "pid_pat_account_num": "V00084571799"
+    "sending_facility": "COCGTH",
+    "message_control_id": "IP_COCGTH_SIU_SCHGTH.170202.8",
+    "medical_record_num": "V000232919",
+    "medical_record_urn": "H449592",
+    "patient_account_num": "V00084571799"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "COCGTH",
-    "msh_sending_facility": "COCGTH",
-    "msh_receiving_appl": "OV",
-    "msh_receiving_facility": "OV",
-    "msh_msg_create_date_time": "201702021308",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCGTH",
+    "sending_facility": "COCGTH",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201702021308",
+    "message_type": {
       "message_code": "SIU",
       "trigger_event": "S18"
     },
-    "msh_msg_control_id": "IP_COCGTH_SIU_SCHGTH.170202.8",
-    "msh_processing_id": "T",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": {
+    "message_control_id": "IP_COCGTH_SIU_SCHGTH.170202.8",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
       "network_id": "TXI",
       "unit_number": "25067"
     }
   },
   "0002.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": {
-      "identifier_num": "V000232919",
-      "assgn_authr": "COCGTH",
-      "identifier_type_code": "MRN"
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "V000232919",
+      "assigning_authority": "COCGTH",
+      "id_type_code": "MRN"
     },
-    "pid_alt_pat_id": "H449592",
-    "pid_pat_name": {
-      "last_name": "MCADAMS",
-      "first_name": "JAMES",
-      "middle_name": "ROBERT"
+    "alternate_patient_id": "H449592",
+    "patient_name": {
+      "family_name": "MCADAMS",
+      "given_name": "JAMES",
+      "second_and_further_given_names_or_initials_thereof": "ROBERT"
     },
-    "pid_birth_date_time": "19461015",
-    "pid_sex": "M",
-    "pid_pat_account_num": "V00084571799"
+    "date_time_of_birth": "19461015",
+    "administrative_sex": "M",
+    "patient_account_num": "V00084571799"
   },
   "0003.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "O",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "O",
+    "assigned_patient_location": {
       "point_of_care": "V.AMB",
       "facility": "COCGTH"
     },
-    "pv1_adm_type": "EL",
-    "pv1_attending_doctor": {
+    "admission_type": "EL",
+    "attending_doctor": {
       "person_id": "DOWB",
-      "last_name": "Downie",
-      "first_name": "Benjamin"
+      "family_name": "Downie",
+      "given_name": "Benjamin"
     },
-    "pv1_pat_type": "SDC",
-    "pv1_account_status": "DEP"
+    "patient_type": "SDC",
+    "account_status": "DEP"
   },
   "0004.SCH": {
-    "sch_unique_case_id": "47289",
-    "sch_unique_appointment_id": "398047",
-    "sch_operation_type": "P",
-    "sch_update_type": "NEW",
-    "sch_patient_doctor": {
+    "unique_case_id": "47289",
+    "unique_appointment_id": "398047",
+    "operation_type": "P",
+    "update_type": "NEW",
+    "patient_doctor": {
       "provider_id": "DOWB",
       "last_name": "Downie",
       "first_name": "Benjamin"
     },
-    "sch_patient_service": "HEM",
-    "sch_patient_facility": "COCGTH",
-    "sch_operating_room": {
+    "patient_service": "HEM",
+    "patient_facility": "COCGTH",
+    "operating_room": {
       "room_id": "V.ACCRM5A",
       "room_desc": "ACC 5A"
     },
-    "sch_principal_surgeon": {
+    "principal_surgeon": {
       "provider_id": "DOWB",
       "last_name": "Downie",
       "first_name": "Benjamin"
     },
-    "sch_operation_date_time": "201701310900",
-    "sch_operation_entered": {
+    "operation_date_time": "201701310900",
+    "operation_entered": {
       "entered_date_time": "201701300739",
       "entered_by": "V.OR.DEC"
     },
-    "sch_operation_scheduled_date_time": "201701310900"
+    "operation_scheduled_date_time": "201701310900"
   },
   "0005.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "PREOP 0021",
-      "alt_text": ":"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "PREOP 0021",
+      "alternate_text": ":"
     },
-    "obx_observation_value": "0850"
+    "obsv_value": "0850"
   },
   "0006.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "K33010003A",
-      "alt_text": "Temperature F:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "K33010003A",
+      "alternate_text": "Temperature F:"
     },
-    "obx_observation_value": "97.8"
+    "obsv_value": "97.8"
   },
   "0007.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "K33010024A",
-      "alt_text": "Blood pressure:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "K33010024A",
+      "alternate_text": "Blood pressure:"
     },
-    "obx_observation_value": "149/81"
+    "obsv_value": "149/81"
   },
   "0008.OBX": {
-    "obx_set_id": "4",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "K33010016A",
-      "alt_text": "Respiratory rate:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "K33010016A",
+      "alternate_text": "Respiratory rate:"
     },
-    "obx_observation_value": "16"
+    "obsv_value": "16"
   },
   "0009.OBX": {
-    "obx_set_id": "5",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "K33010006A",
-      "alt_text": "Pulse:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "K33010006A",
+      "alternate_text": "Pulse:"
     },
-    "obx_observation_value": "75"
+    "obsv_value": "75"
   },
   "0010.OBX": {
-    "obx_set_id": "6",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "L35010001A",
-      "alt_text": "SPO2 %:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "L35010001A",
+      "alternate_text": "SPO2 %:"
     },
-    "obx_observation_value": "100"
+    "obsv_value": "100"
   },
   "0011.OBX": {
-    "obx_set_id": "7",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSTIME1",
-      "alt_text": "Time:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSTIME1",
+      "alternate_text": "Time:"
     },
-    "obx_observation_value": "0850"
+    "obsv_value": "0850"
   },
   "0012.OBX": {
-    "obx_set_id": "8",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSACT1",
-      "alt_text": "Activity:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSACT1",
+      "alternate_text": "Activity:"
     },
-    "obx_observation_value": "2"
+    "obsv_value": "2"
   },
   "0013.OBX": {
-    "obx_set_id": "9",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSRESP1",
-      "alt_text": "Respirations:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSRESP1",
+      "alternate_text": "Respirations:"
     },
-    "obx_observation_value": "2"
+    "obsv_value": "2"
   },
   "0014.OBX": {
-    "obx_set_id": "10",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSCIRC1",
-      "alt_text": "Circulation:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSCIRC1",
+      "alternate_text": "Circulation:"
     },
-    "obx_observation_value": "2"
+    "obsv_value": "2"
   },
   "0015.OBX": {
-    "obx_set_id": "11",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSCONS1",
-      "alt_text": "Consciousness:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSCONS1",
+      "alternate_text": "Consciousness:"
     },
-    "obx_observation_value": "2"
+    "obsv_value": "2"
   },
   "0016.OBX": {
-    "obx_set_id": "12",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSSAT1",
-      "alt_text": "02 Sat:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSSAT1",
+      "alternate_text": "02 Sat:"
     },
-    "obx_observation_value": "2"
+    "obsv_value": "2"
   },
   "0017.OBX": {
-    "obx_set_id": "13",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "ORVSTOTL1",
-      "alt_text": "Total:"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "ORVSTOTL1",
+      "alternate_text": "Total:"
     },
-    "obx_observation_value": "10"
+    "obsv_value": "10"
   },
   "0018.OBX": {
-    "obx_set_id": "14",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0019",
-      "alt_text": "-"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0019",
+      "alternate_text": "-"
     },
-    "obx_observation_value": "N"
+    "obsv_value": "N"
   },
   "0019.OBX": {
-    "obx_set_id": "15",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0020",
-      "alt_text": ":"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0020",
+      "alternate_text": ":"
     },
-    "obx_observation_value": "20170131"
+    "obsv_value": "20170131"
   },
   "0020.OBX": {
-    "obx_set_id": "16",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0021",
-      "alt_text": ":"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0021",
+      "alternate_text": ":"
     },
-    "obx_observation_value": "0903"
+    "obsv_value": "0903"
   },
   "0021.OBX": {
-    "obx_set_id": "17",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0022",
-      "alt_text": ":"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0022",
+      "alternate_text": ":"
     },
-    "obx_observation_value": "RT CHEST"
+    "obsv_value": "RT CHEST"
   },
   "0022.OBX": {
-    "obx_set_id": "18",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0024B",
-      "alt_text": "="
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0024B",
+      "alternate_text": "="
     },
-    "obx_observation_value": "6:Portacath"
+    "obsv_value": "6:Portacath"
   },
   "0023.OBX": {
-    "obx_set_id": "19",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0023",
-      "alt_text": ":"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0023",
+      "alternate_text": ":"
     },
-    "obx_observation_value": "1"
+    "obsv_value": "1"
   },
   "0024.OBX": {
-    "obx_set_id": "20",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "OR PREVSIV V01",
-      "name_of_coding_sys": "Pre-op Vital Signs, IV, NPO",
-      "alt_id": "NIV0025",
-      "alt_text": ":"
+      "name_of_coding_system": "Pre-op Vital Signs, IV, NPO",
+      "alternate_id": "NIV0025",
+      "alternate_text": ":"
     },
-    "obx_observation_value": "20"
+    "obsv_value": "20"
   },
   "0025.OBX": {
-    "obx_set_id": "21",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL701",
-      "alt_text": "Patient's Age Range:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL701",
+      "alternate_text": "Patient's Age Range:"
     },
-    "obx_observation_value": "65+ Years"
+    "obsv_value": "65+ Years"
   },
   "0026.OBX": {
-    "obx_set_id": "22",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL703",
-      "alt_text": "Developmental Delay(s):"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL703",
+      "alternate_text": "Developmental Delay(s):"
     },
-    "obx_observation_value": "N:No"
+    "obsv_value": "N:No"
   },
   "0027.OBX": {
-    "obx_set_id": "23",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": " 65+ Years"
+    "obsv_sub_id": "1",
+    "obsv_value": " 65+ Years"
   },
   "0028.OBX": {
-    "obx_set_id": "24",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "2"
+    "obsv_sub_id": "2"
   },
   "0029.OBX": {
-    "obx_set_id": "25",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "3",
-    "obx_observation_value": "Developmental Milestones Developmental Concerns"
+    "obsv_sub_id": "3",
+    "obsv_value": "Developmental Milestones Developmental Concerns"
   },
   "0030.OBX": {
-    "obx_set_id": "26",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "4",
-    "obx_observation_value": "Able to live independently inability to live alone or function"
+    "obsv_sub_id": "4",
+    "obsv_value": "Able to live independently inability to live alone or function"
   },
   "0031.OBX": {
-    "obx_set_id": "27",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "5",
-    "obx_observation_value": "Able to function independently independently"
+    "obsv_sub_id": "5",
+    "obsv_value": "Able to function independently independently"
   },
   "0032.OBX": {
-    "obx_set_id": "28",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "6"
+    "obsv_sub_id": "6"
   },
   "0033.OBX": {
-    "obx_set_id": "29",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "7",
-    "obx_observation_value": "- Care consideration for Patient - Age >65"
+    "obsv_sub_id": "7",
+    "obsv_value": "- Care consideration for Patient - Age >65"
   },
   "0034.OBX": {
-    "obx_set_id": "30",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "8",
-    "obx_observation_value": "- Identify and provide for presence of coexisting disease status."
+    "obsv_sub_id": "8",
+    "obsv_value": "- Identify and provide for presence of coexisting disease status."
   },
   "0035.OBX": {
-    "obx_set_id": "31",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "9",
-    "obx_observation_value": "- Identify musculoskeletal limitations."
+    "obsv_sub_id": "9",
+    "obsv_value": "- Identify musculoskeletal limitations."
   },
   "0036.OBX": {
-    "obx_set_id": "32",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "10",
-    "obx_observation_value": "- Customize surgical management to the patient's overall functional"
+    "obsv_sub_id": "10",
+    "obsv_value": "- Customize surgical management to the patient's overall functional"
   },
   "0037.OBX": {
-    "obx_set_id": "33",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "11",
-    "obx_observation_value": " needs, health status and psychological condition."
+    "obsv_sub_id": "11",
+    "obsv_value": " needs, health status and psychological condition."
   },
   "0038.OBX": {
-    "obx_set_id": "34",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "34",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "12",
-    "obx_observation_value": "- Allow patient to utilize assistive devices as indicated to"
+    "obsv_sub_id": "12",
+    "obsv_value": "- Allow patient to utilize assistive devices as indicated to"
   },
   "0039.OBX": {
-    "obx_set_id": "35",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "35",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "13",
-    "obx_observation_value": " accommodate sensory changes in visual, auditory, kinesthetic,"
+    "obsv_sub_id": "13",
+    "obsv_value": " accommodate sensory changes in visual, auditory, kinesthetic,"
   },
   "0040.OBX": {
-    "obx_set_id": "36",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "36",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "14",
-    "obx_observation_value": " gustatory,tactile and olfactory."
+    "obsv_sub_id": "14",
+    "obsv_value": " gustatory,tactile and olfactory."
   },
   "0041.OBX": {
-    "obx_set_id": "37",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "37",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "15",
-    "obx_observation_value": "- Implement measures to maintain normothermia."
+    "obsv_sub_id": "15",
+    "obsv_value": "- Implement measures to maintain normothermia."
   },
   "0042.OBX": {
-    "obx_set_id": "38",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "38",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "16",
-    "obx_observation_value": "- Allow time for the patient to assimilate information and to"
+    "obsv_sub_id": "16",
+    "obsv_value": "- Allow time for the patient to assimilate information and to"
   },
   "0043.OBX": {
-    "obx_set_id": "39",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "DX.OP",
+    "set_id": "39",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "DX.OP",
       "text": "hcaORLPOCOR",
-      "name_of_coding_sys": "OR Plan Of Care - Intraop",
-      "alt_id": "hcaORL704",
-      "alt_text": "Growth and Development Care Documentation:"
+      "name_of_coding_system": "OR Plan Of Care - Intraop",
+      "alternate_id": "hcaORL704",
+      "alternate_text": "Growth and Development Care Documentation:"
     },
-    "obx_observation_sub_id": "17",
-    "obx_observation_value": " provide response."
+    "obsv_sub_id": "17",
+    "obsv_value": " provide response."
   },
   "0044.ZTM": {
-    "ztm_case_pre_1_time": "PT ARRIVES OPS",
-    "ztm_case_pre_2_time": "PT READY",
-    "ztm_case_hold_1_time": "PT ARRIVES HOLDING",
-    "ztm_case_hold_2_time": "PT READY",
-    "ztm_case_operating_room_1_time": "ANESTHESIA START",
-    "ztm_case_operating_room_2_time": {
+    "case_pre_1_time": "PT ARRIVES OPS",
+    "case_pre_2_time": "PT READY",
+    "case_hold_1_time": "PT ARRIVES HOLDING",
+    "case_hold_2_time": "PT READY",
+    "case_operating_room_1_time": "ANESTHESIA START",
+    "case_operating_room_2_time": {
       "time_desc": "PT IN ROOM",
       "or_date_time": "201701310850"
     },
-    "ztm_case_operating_room_3_time": "SURGEON IN ROOM",
-    "ztm_case_operating_room_4_time": {
+    "case_operating_room_3_time": "SURGEON IN ROOM",
+    "case_operating_room_4_time": {
       "time_desc": "PROCEDURE START",
       "or_date_time": "201701310903"
     },
-    "ztm_case_operating_room_5_time": {
+    "case_operating_room_5_time": {
       "time_desc": "PROCEDURE END",
       "or_date_time": "201701311140"
     },
-    "ztm_case_operating_room_6_time": "SURGEON LEAVES ROOM",
-    "ztm_case_operating_room_7_time": {
+    "case_operating_room_6_time": "SURGEON LEAVES ROOM",
+    "case_operating_room_7_time": {
       "time_desc": "PT LEAVES ROOM",
       "or_date_time": "201701311148"
     },
-    "ztm_case_pacu_1_time": "PT ARRIVES PACU",
-    "ztm_case_pacu_2_time": "ANESTHESIA ENDS",
-    "ztm_case_pacu_3_time": "PT DISCHARGE PHASE 1",
-    "ztm_case_pacu_4_time": "PT PACU HOLDING OUT",
-    "ztm_case_phase2_1_time": "PT ARRIVES PHASE 2",
-    "ztm_case_phase2_2_time": "PT DISCHARGE PHASE 2"
+    "case_pacu_1_time": "PT ARRIVES PACU",
+    "case_pacu_2_time": "ANESTHESIA ENDS",
+    "case_pacu_3_time": "PT DISCHARGE PHASE 1",
+    "case_pacu_4_time": "PT PACU HOLDING OUT",
+    "case_phase2_1_time": "PT ARRIVES PHASE 2",
+    "case_phase2_2_time": "PT DISCHARGE PHASE 2"
   },
   "0045.ZCP": {
-    "zcp_operation_completed_date_time": "201701311149",
-    "zcp_operation_completed_id": "V.RRX5198 ZPO",
+    "operation_completed_date_time": "201701311149",
+    "operation_completed_id": "V.RRX5198 ZPO",
     "zcp_unknown": "NONE^NONE^COMP^COMPLETED AS PLANNED"
   },
   "0046.ZTF": {
-    "ztf_counter": "1",
-    "ztf_transfer_type": "OR",
-    "ztf_transfer_method": {
+    "counter": "1",
+    "transfer_type": "OR",
+    "transfer_method": {
       "transfer_method_code": "S",
       "transfer_method_desc": "STRETCHER"
     },
-    "ztf_destination": {
+    "destination": {
       "destination_identifier": "HOME",
       "destination_desc": "HOME"
     },
-    "ztf_user": "PT"
+    "user": "PT"
   },
   "0047.ZAO": {
-    "zao_counter": "1",
-    "zao_operation_identifier": {
+    "counter": "1",
+    "operation_identifier": {
       "operation_code": "V.ACINF01",
       "operation_desc": "INFUSION IV NON CHEMO 1 HR",
       "operation_name": "INFUSION IV NON CHEMO 1HR",
       "override_desc": "INFUSION IV ASCORBIC ACID"
     },
-    "zao_procedure_type": "P",
-    "zao_severity": {
+    "procedure_type": "P",
+    "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
     },
-    "zao_surgeon": {
+    "surgeon": {
       "person_id": "DOWB",
       "last_name": "Downie",
       "first_name": "Benjamin"
     },
-    "zao_wound_status": "CL"
+    "wound_status": "CL"
   },
   "0048.ZAO": {
-    "zao_counter": "2",
-    "zao_operation_identifier": {
+    "counter": "2",
+    "operation_identifier": {
       "operation_code": "V.ACINF02",
       "operation_desc": "INFUSION IV NON CHEMO 2ND HR",
       "operation_name": "INFUSION IV NON CHEMO 2ND HR"
     },
-    "zao_procedure_type": "S",
-    "zao_severity": {
+    "procedure_type": "S",
+    "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
     },
-    "zao_surgeon": {
+    "surgeon": {
       "person_id": "DOWB",
       "last_name": "Downie",
       "first_name": "Benjamin"
     },
-    "zao_wound_status": "CL"
+    "wound_status": "CL"
   },
   "0049.ZPP": {
-    "zpp_counter": "1",
-    "zpp_operation_identifier": {
+    "counter": "1",
+    "operation_identifier": {
       "operation_code": "V.ACINF01",
       "operation_desc": "INFUSION IV NON CHEMO 1 HR",
       "operation_name": "INFUSION IV NON CHEMO 1HR"
     },
-    "zpp_procedure_type": "P",
-    "zpp_severity": {
+    "procedure_type": "P",
+    "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
     },
-    "zpp_surgeon": {
+    "surgeon": {
       "person_id": "DOWB",
       "last_name": "Downie",
       "first_name": "Benjamin"
     }
   },
   "0050.ZPP": {
-    "zpp_counter": "2",
-    "zpp_operation_identifier": {
+    "counter": "2",
+    "operation_identifier": {
       "operation_code": "V.ACINF02",
       "operation_desc": "INFUSION IV NON CHEMO 2ND HR",
       "operation_name": "INFUSION IV NON CHEMO 2ND HR"
     },
-    "zpp_procedure_type": "S",
-    "zpp_severity": {
+    "procedure_type": "S",
+    "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
     },
-    "zpp_surgeon": {
+    "surgeon": {
       "person_id": "DOWB",
       "last_name": "Downie",
       "first_name": "Benjamin"
     }
   },
   "0051.ZST": {
-    "zst_counter": "1",
+    "counter": "1",
     "zst_unknown": "STFANT^Anesthesiologist"
   },
   "0052.ZTX": {
-    "ztx_counter": "1",
-    "ztx_type_of_text_comment_values": "PRE",
-    "ztx_text_line": "PROSTATE CANCER"
+    "counter": "1",
+    "type_of_text_comment_values": "PRE",
+    "text_line": "PROSTATE CANCER"
   },
   "0053.ZTX": {
-    "ztx_counter": "2",
-    "ztx_type_of_text_comment_values": "PST",
-    "ztx_text_line": "PROSTATE CANCER"
+    "counter": "2",
+    "type_of_text_comment_values": "PST",
+    "text_line": "PROSTATE CANCER"
   }
 }

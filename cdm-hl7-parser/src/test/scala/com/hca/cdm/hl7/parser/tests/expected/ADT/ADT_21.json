@@ -1,186 +1,186 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "AKAR",
-    "msh_msg_control_id": "EPIC_AKAR_ADT_233532",
-    "pid_medical_record_num": "56456",
-    "pid_medical_record_urn": "2257991",
-    "pid_pat_account_num": "700003948"
+    "sending_facility": "AKAR",
+    "message_control_id": "EPIC_AKAR_ADT_233532",
+    "medical_record_num": "56456",
+    "medical_record_urn": "2257991",
+    "patient_account_num": "700003948"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "EPIC_AKAR",
-    "msh_sending_facility": "AKAR",
-    "msh_receiving_appl": "DBM",
-    "msh_msg_create_date_time": "20160808121745",
-    "msh_security": "IPUCCNA",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "EPIC_AKAR",
+    "sending_facility": "AKAR",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20160808121745",
+    "security": "IPUCCNA",
+    "message_type": {
       "message_code": "ADT",
       "trigger_event": "A06"
     },
-    "msh_msg_control_id": "EPIC_AKAR_ADT_233532",
-    "msh_processing_id": "D",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": "Epic_MountainQA",
-    "msh_msg_profile_id": "AKA"
+    "message_control_id": "EPIC_AKAR_ADT_233532",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "Epic_MountainQA",
+    "message_profile_id": "AKA"
   },
   "0002.EVN": {
-    "evn_evnt_type": "A06",
-    "evn_recorded_date_time": "20160808121745",
-    "evn_evnt_resn_code": "ADT_EVENT",
-    "evn_oper_id": {
+    "event_type_code": "A06",
+    "recorded_date_time": "20160808121745",
+    "event_reason_code": "ADT_EVENT",
+    "operator_id": {
       "person_id": "IPUCCNA",
-      "last_name": "INPATIENT",
-      "first_name": "UNIT",
-      "middle_name": "CLERK AND CNA",
-      "assgn_authr": "MTN A",
-      "assgn_facility": "AKAR"
+      "family_name": "INPATIENT",
+      "given_name": "UNIT",
+      "second_and_further_given_names_or_initials_thereof": "CLERK AND CNA",
+      "assigning_authority": "MTN A",
+      "assigning_facility": "AKAR"
     },
-    "evn_evnt_occurred": "20160808121700"
+    "event_occured": "20160808121700"
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": "56456",
-    "pid_alt_pat_id": "2257991",
-    "pid_pat_name": {
-      "last_name": "WILLYWONKA",
-      "first_name": "TESTF"
+    "set_id": "1",
+    "patient_id_list": "56456",
+    "alternate_patient_id": "2257991",
+    "patient_name": {
+      "family_name": "WILLYWONKA",
+      "given_name": "TESTF"
     },
-    "pid_birth_date_time": "19910721",
-    "pid_sex": "F",
-    "pid_pat_address": {
+    "date_time_of_birth": "19910721",
+    "administrative_sex": "F",
+    "patient_address": {
       "country": "USA",
       "address_type": "P"
     },
-    "pid_pat_account_num": "700003948",
-    "pid_pat_social_security_num": "586-99-6898",
-    "pid_pat_death_ind": "N"
+    "patient_account_num": "700003948",
+    "ssn_num_patient": "586-99-6898",
+    "patient_death_indicator": "N"
   },
   "0004.ZPD": {
-    "zpd_pregnancy_flag": "N"
+    "pregnancy_flag": "N"
   },
   "0005.PD1": {
-    "pd1_patient_prim_facility": {
-      "org_name": "ALASKA REGIONAL HOSPITAL",
-      "identifier_num": "40001001"
+    "patient_primary_facility": {
+      "organization_name": "ALASKA REGIONAL HOSPITAL",
+      "id_num": "40001001"
     }
   },
   "0006.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "I",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
       "point_of_care": "AKAROB",
       "room": "L.OBG341",
       "bed": "L.OBG341A",
       "facility": "AKAR"
     },
-    "pv1_adm_type": "L",
-    "pv1_prior_pat_loc": {
+    "admission_type": "L",
+    "prior_patient_location": {
       "point_of_care": "AKAROB",
       "room": "L.OBG341",
       "bed": "L.OBG341A",
       "facility": "AKAR"
     },
-    "pv1_attending_doctor": [
+    "attending_doctor": [
       {
         "person_id": "1396841920",
-        "last_name": "ADAMS",
-        "first_name": "PETER",
-        "middle_name": "B",
-        "assgn_authr": "NPI",
-        "identifier_type_code": "NPI"
+        "family_name": "ADAMS",
+        "given_name": "PETER",
+        "second_and_further_given_names_or_initials_thereof": "B",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
       },
       {
         "person_id": "BMO9308",
-        "last_name": "ADAMS",
-        "first_name": "PETER",
-        "middle_name": "B",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "ADAMS",
+        "given_name": "PETER",
+        "second_and_further_given_names_or_initials_thereof": "B",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       }
     ],
-    "pv1_admitting_doctor": [
+    "admitting_doctor": [
       {
         "person_id": "1396841920",
-        "last_name": "ADAMS",
-        "first_name": "PETER",
-        "middle_name": "B",
-        "assgn_authr": "NPI",
-        "identifier_type_code": "NPI"
+        "family_name": "ADAMS",
+        "given_name": "PETER",
+        "second_and_further_given_names_or_initials_thereof": "B",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
       },
       {
         "person_id": "BMO9308",
-        "last_name": "ADAMS",
-        "first_name": "PETER",
-        "middle_name": "B",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "ADAMS",
+        "given_name": "PETER",
+        "second_and_further_given_names_or_initials_thereof": "B",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       },
       {
         "person_id": "1201031324",
-        "last_name": "ADAMS",
-        "first_name": "PETER",
-        "middle_name": "B",
-        "assgn_authr": "EPICPROVID",
-        "identifier_type_code": "EPICPROVID"
+        "family_name": "ADAMS",
+        "given_name": "PETER",
+        "second_and_further_given_names_or_initials_thereof": "B",
+        "assigning_authority": "EPICPROVID",
+        "id_type_code": "EPICPROVID"
       }
     ],
-    "pv1_visit_num": "10133603",
-    "pv1_financial_classification": "99",
-    "pv1_account_status": {
-      "primary_id": "Adm",
+    "visit_num": "10133603",
+    "financial_class": "99",
+    "account_status": {
+      "id": "Adm",
       "text": "Conf"
     },
-    "pv1_adm_date_time": "20160808121700",
-    "pv1_alternate_visit_id": "10133603"
+    "admit_date_time": "20160808121700",
+    "alternate_visit_id": "10133603"
   },
   "0007.PV2": {
-    "pv2_accommodation_code": "LD",
-    "pv2_visit_protection_ind": "N"
+    "accommodation_code": "LD",
+    "visit_protection_indicator": "N"
   },
   "0008.ZPV": {
-    "zpv_first_inpatient_occurence_date_time": "20160808121700",
-    "zpv_first_outpatient_occurence_date_time": "20160721092800"
+    "first_inpatient_occurence_date_time": "20160808121700",
+    "first_outpatient_occurence_date_time": "20160721092800"
   },
   "0009.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "ACCSTAT1",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT1",
       "text": "ADT: PATIENT STATUS"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Adm",
-    "obx_observation_date_time": "20160721"
+    "obsv_sub_id": "1",
+    "obsv_value": "Adm",
+    "date_time_of_the_obsv": "20160721"
   },
   "0010.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "ACCSTAT2",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT2",
       "text": "HOSPITAL - ADMIT CONFIRMATION STATUS"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Conf",
-    "obx_observation_date_time": "20160721"
+    "obsv_sub_id": "1",
+    "obsv_value": "Conf",
+    "date_time_of_the_obsv": "20160721"
   },
   "0011.GT1": {
-    "gt1_set_id": "1",
-    "gt1_guarantor_num": "17003",
-    "gt1_guarantor_name": {
-      "last_name": "WILLYWONKA",
-      "first_name": "TESTF"
+    "set_id": "1",
+    "guarantor_num": "17003",
+    "guarantor_name": {
+      "family_name": "WILLYWONKA",
+      "given_name": "TESTF"
     },
-    "gt1_guarantor_address": {
+    "guarantor_address": {
       "country": "USA"
     },
-    "gt1_guarantor_birth_date_time": "19910721",
-    "gt1_guarantor_sex": "F",
-    "gt1_guarantor_type": "Facility P/F",
-    "gt1_guarantor_relationship": "18",
-    "gt1_guarantor_social_security_num": "586-99-6898"
+    "guarantor_date_time_of_birth": "19910721",
+    "guarantor_administrative_sex": "F",
+    "guarantor_type": "Facility P/F",
+    "guarantor_relationship": "18",
+    "guarantor_ssn": "586-99-6898"
   },
   "0012.ZG1": {
-    "zg1_fpl_effective_from_date": "ZG1"
+    "fpl_effective_from_date": "ZG1"
   }
 }

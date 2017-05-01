@@ -1,4 +1,4 @@
-IN1.37,in1_bill_type,,
-PV1.4.1,pv1_adm_type,visit_type,
-PV1.4.2,pv1_adm_type,reason_for_visit,
-PV1.10,pv1_pat_type,,
+IN1.37,bill_type,,
+PV1.4.1,adm_type,visit_type,
+PV1.4.2,adm_type,reason_for_visit,
+PV1.10,pat_type,,

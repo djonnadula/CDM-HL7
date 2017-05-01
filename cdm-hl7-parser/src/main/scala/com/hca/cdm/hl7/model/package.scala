@@ -31,13 +31,13 @@ import scala.util.{Failure, Success, Try}
 package object model {
 
   lazy val MSH_Segment = "0001.MSH"
-  lazy val Message_Type_Segment = "msh_msg_type"
+  lazy val Message_Type_Segment = "message_type"
   lazy val Message_Code = "message_code"
-  lazy val Message_Version = "msh_version_id"
-  lazy val Control_Id_key = "msh_msg_control_id"
-  lazy val sending_Facility = "msh_sending_facility"
+  lazy val Message_Version = "version_id"
+  lazy val Control_Id_key = "message_control_id"
+  lazy val sending_Facility = "sending_facility"
   lazy val Msg_Type_Hier = Seq(MSH_Segment, Message_Type_Segment, Message_Code)
-  lazy val Observation_Col = "obx_observation_value"
+  lazy val Observation_Col = "obsv_value"
   lazy val MSH_INDEX = "0001.MSH"
   lazy val commonNodeStr = "0000.COMN"
   lazy val OBX_SEG = "OBX"
@@ -83,10 +83,10 @@ package object model {
     }
   }
 
-  private case class RejectSchema(processName: String = "process_name", controlID: String = "msg_control_id",
+  private case class RejectSchema(processName: String = "process_name", controlID: String = "message_control_id",
                                   tranTime: String = "msg_create_date_time",
                                   mrn: String = "patient_mrn", urn: String = "patient_urn",
-                                  accntNum: String = "patient_account_num",
+                                  accntNum: String = "patient_account_number",
                                   rejectReason: String = "reject_reason",
                                   rejectData: String = "rejected_message_data",
                                   etlTime: String = "etl_firstinsert_datetime")

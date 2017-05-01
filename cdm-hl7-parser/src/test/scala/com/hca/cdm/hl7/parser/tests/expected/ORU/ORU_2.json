@@ -1,713 +1,713 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "COCQA1A",
-    "msh_msg_control_id": "IP_COQ1A_ORU_NURQA.151016.9563",
-    "pid_medical_record_num": "J000323127",
-    "pid_medical_record_urn": "J323404",
-    "pid_pat_account_num": "J00021007192"
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_ORU_NURQA.151016.9563",
+    "medical_record_num": "J000323127",
+    "medical_record_urn": "J323404",
+    "patient_account_num": "J00021007192"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "COCQA1A",
-    "msh_sending_facility": "COCQA1A",
-    "msh_receiving_appl": "OV",
-    "msh_receiving_facility": "OV",
-    "msh_msg_create_date_time": "201610271045",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201610271045",
+    "message_type": {
       "message_code": "ORU",
       "trigger_event": "R01"
     },
-    "msh_msg_control_id": "IP_COQ1A_ORU_NURQA.151016.9563",
-    "msh_processing_id": "T",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": {
+    "message_control_id": "IP_COQ1A_ORU_NURQA.151016.9563",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
     },
-    "msh_accept_acknowledgment_type": "ER",
-    "msh_appl_acknowledgment_type": "NE"
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
   },
   "0002.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": {
-      "identifier_num": "J000323127",
-      "assgn_authr": "COCQA1A",
-      "identifier_type_code": "MRN"
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000323127",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
     },
-    "pid_alt_pat_id": "J323404",
-    "pid_pat_name": {
-      "last_name": "PK",
-      "first_name": "SHERRY"
+    "alternate_patient_id": "J323404",
+    "patient_name": {
+      "family_name": "PK",
+      "given_name": "SHERRY"
     },
-    "pid_birth_date_time": "19370919",
-    "pid_sex": "F",
-    "pid_pat_account_num": "J00021007192"
+    "date_time_of_birth": "19370919",
+    "administrative_sex": "F",
+    "patient_account_num": "J00021007192"
   },
   "0003.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "I",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
       "point_of_care": "J.JLW",
       "room": "J.JLW",
       "bed": "23",
       "facility": "COCQA1A"
     },
-    "pv1_adm_type": "UR",
-    "pv1_attending_doctor": {
+    "admission_type": "UR",
+    "attending_doctor": {
       "person_id": "DR.PK1",
-      "last_name": "PK1",
-      "first_name": "Docter"
+      "family_name": "PK1",
+      "given_name": "Docter"
     },
-    "pv1_pat_type": "IN",
-    "pv1_account_status": "ADM"
+    "patient_type": "IN",
+    "account_status": "ADM"
   },
   "0004.ORC": {
-    "orc_order_control": "NEW",
-    "orc_filler_order_num": "J00021007192-909090-1-20161027-1021-1"
+    "order_control": "NEW",
+    "filler_order_num": "J00021007192-909090-1-20161027-1021-1"
   },
   "0005.OBR": {
-    "obr_set_id": "1",
-    "obr_placer_order_num": "909090",
-    "obr_filler_order_num": "J00021007192-909090-1-20161027-1021-1",
-    "obr_universal_service_id": {
-      "primary_id": "909090",
+    "set_id": "1",
+    "placer_order_num": "909090",
+    "filler_order_num": "J00021007192-909090-1-20161027-1021-1",
+    "universal_service_id": {
+      "id": "909090",
       "text": "SLG TEST INTERVENTION"
     },
-    "obr_priority": "3",
-    "obr_observation_date_time": "201610271021",
-    "obr_specimen_received_date_time": "201610271043",
-    "obr_ordering_provider": "1TSDLP6532",
-    "obr_placer_first_generic_field": "HCAEBPSYBHDCPOA"
+    "priority": "3",
+    "obsv_date_time_num": "201610271021",
+    "specimen_received_date_time": "201610271043",
+    "ordering_provider": "1TSDLP6532",
+    "placer_field_1": "HCAEBPSYBHDCPOA"
   },
   "0006.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "HCAEBDL1",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL1",
       "text": "          -"
     },
-    "obx_observation_value": "- BH DISCHARGE PSYCHIATRIC NURSING - -",
-    "obx_observation_result_status": "N"
+    "obsv_value": "- BH DISCHARGE PSYCHIATRIC NURSING - -",
+    "obsv_result_status": "N"
   },
   "0007.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001515A",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001515A",
       "text": "Type of discharge:"
     },
-    "obx_observation_value": "Pt request:Patient request",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Pt request:Patient request",
+    "obsv_result_status": "N"
   },
   "0008.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001514A",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001514A",
       "text": "Patient current observed behavior:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "djfkal;fj",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "djfkal;fj",
+    "obsv_result_status": "N"
   },
   "0009.OBX": {
-    "obx_set_id": "4",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010016A",
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010016A",
       "text": "Are you currently having thoughts and/or making plans about suicide:"
     },
-    "obx_observation_value": "Unabass:Unable to assess",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Unabass:Unable to assess",
+    "obsv_result_status": "N"
   },
   "0010.OBX": {
-    "obx_set_id": "5",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010010A",
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010010A",
       "text": "Recent homicidal thoughts:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0011.OBX": {
-    "obx_set_id": "6",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010011A",
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010011A",
       "text": "Homicidal thoughts comment:"
     },
-    "obx_observation_value": "i want to kill",
-    "obx_observation_result_status": "N"
+    "obsv_value": "i want to kill",
+    "obsv_result_status": "N"
   },
   "0012.OBX": {
-    "obx_set_id": "7",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001506A",
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001506A",
       "text": "Patient complains of violence ideation:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0013.OBX": {
-    "obx_set_id": "8",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001507A",
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001507A",
       "text": "Violence ideation comments:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "fdjkal;",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "fdjkal;",
+    "obsv_result_status": "N"
   },
   "0014.OBX": {
-    "obx_set_id": "9",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001508A",
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001508A",
       "text": "Patient complains of auditory hallucination:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0015.OBX": {
-    "obx_set_id": "10",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001509A",
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001509A",
       "text": "Auditory hallucination comments:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "my dog is talking to me",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "my dog is talking to me",
+    "obsv_result_status": "N"
   },
   "0016.OBX": {
-    "obx_set_id": "11",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001510A",
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001510A",
       "text": "Patient complains of visual hallucination:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0017.OBX": {
-    "obx_set_id": "12",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001511A",
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001511A",
       "text": "Visual hallucination comments:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "worms",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "worms",
+    "obsv_result_status": "N"
   },
   "0018.OBX": {
-    "obx_set_id": "13",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001512A",
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001512A",
       "text": "If yes to any of the above, was doctor notified:"
     },
-    "obx_observation_value": "No:No",
-    "obx_observation_result_status": "N"
+    "obsv_value": "No:No",
+    "obsv_result_status": "N"
   },
   "0019.OBX": {
-    "obx_set_id": "14",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "HCAEBDL2",
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL2",
       "text": "          -"
     },
-    "obx_observation_value": "- ANTIPSYCHOTIC MEDICATION UPON DISCHARGE - -",
-    "obx_observation_result_status": "N"
+    "obsv_value": "- ANTIPSYCHOTIC MEDICATION UPON DISCHARGE - -",
+    "obsv_result_status": "N"
   },
   "0020.OBX": {
-    "obx_set_id": "15",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001629A",
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001629A",
       "text": "Discharged on Antipsychotic medications:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0021.OBX": {
-    "obx_set_id": "16",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001630A",
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001630A",
       "text": "Discharged on multiple Antipsychotic medications:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0022.OBX": {
-    "obx_set_id": "17",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001631A",
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001631A",
       "text": "Justification for use of multiple antipsychotic medications:"
     },
-    "obx_observation_value": "CrossTaper:Clozapine w/ augmentation",
-    "obx_observation_result_status": "N"
+    "obsv_value": "CrossTaper:Clozapine w/ augmentation",
+    "obsv_result_status": "N"
   },
   "0023.OBX": {
-    "obx_set_id": "18",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001632A",
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001632A",
       "text": "List medications to be increased and tapered off and planned schedule:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "This field is only accessible if Clozapine w/augmentation is",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "This field is only accessible if Clozapine w/augmentation is",
+    "obsv_result_status": "N"
   },
   "0024.OBX": {
-    "obx_set_id": "19",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001632A",
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001632A",
       "text": "List medications to be increased and tapered off and planned schedule:"
     },
-    "obx_observation_sub_id": "2",
-    "obx_observation_value": "chosen in the previous query",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "2",
+    "obsv_value": "chosen in the previous query",
+    "obsv_result_status": "N"
   },
   "0025.OBX": {
-    "obx_set_id": "20",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001633A",
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001633A",
       "text": "Justification comment:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "If planned taper or failed trials are chosen, then the next ",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "If planned taper or failed trials are chosen, then the next ",
+    "obsv_result_status": "N"
   },
   "0026.OBX": {
-    "obx_set_id": "21",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001633A",
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001633A",
       "text": "Justification comment:"
     },
-    "obx_observation_sub_id": "2",
-    "obx_observation_value": "accessible field is this comment field.",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "2",
+    "obsv_value": "accessible field is this comment field.",
+    "obsv_result_status": "N"
   },
   "0027.OBX": {
-    "obx_set_id": "22",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001518A",
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001518A",
       "text": "Diet:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Regular:Regular, no modifications",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "Regular:Regular, no modifications",
+    "obsv_result_status": "N"
   },
   "0028.OBX": {
-    "obx_set_id": "23",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001518A",
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001518A",
       "text": "Diet:"
     },
-    "obx_observation_sub_id": "2",
-    "obx_observation_value": "Cardiac:Cardiac",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "2",
+    "obsv_value": "Cardiac:Cardiac",
+    "obsv_result_status": "N"
   },
   "0029.OBX": {
-    "obx_set_id": "24",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001518A",
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001518A",
       "text": "Diet:"
     },
-    "obx_observation_sub_id": "3",
-    "obx_observation_value": "ADA:American Diabetic Assn",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "3",
+    "obsv_value": "ADA:American Diabetic Assn",
+    "obsv_result_status": "N"
   },
   "0030.OBX": {
-    "obx_set_id": "25",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001518A",
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001518A",
       "text": "Diet:"
     },
-    "obx_observation_sub_id": "4",
-    "obx_observation_value": "atkins",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "4",
+    "obsv_value": "atkins",
+    "obsv_result_status": "N"
   },
   "0031.OBX": {
-    "obx_set_id": "26",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001519A",
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001519A",
       "text": "TB test needs to be read:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0032.OBX": {
-    "obx_set_id": "27",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001520A",
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001520A",
       "text": "TB test follow up information given:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0033.OBX": {
-    "obx_set_id": "28",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001521A",
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001521A",
       "text": "Diet or TB test Comments:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "no pine nuts",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "no pine nuts",
+    "obsv_result_status": "N"
   },
   "0034.OBX": {
-    "obx_set_id": "29",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001522A",
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001522A",
       "text": "Needs assistance with ambulation:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0035.OBX": {
-    "obx_set_id": "30",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001523A",
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001523A",
       "text": "Needs assistance with ADL:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0036.OBX": {
-    "obx_set_id": "31",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001524A",
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001524A",
       "text": "Activity level:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Resumenml:Resume normal activities",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "Resumenml:Resume normal activities",
+    "obsv_result_status": "N"
   },
   "0037.OBX": {
-    "obx_set_id": "32",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001525A",
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001525A",
       "text": "Neurologic/musculoskeletal problems (CVA, FX, Sprains, Strains):"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0038.OBX": {
-    "obx_set_id": "33",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001526A",
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001526A",
       "text": "Functional issues requiring follow up with primary physician:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0039.OBX": {
-    "obx_set_id": "34",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001527A",
+    "set_id": "34",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001527A",
       "text": "Functional comment:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "see your doc",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "see your doc",
+    "obsv_result_status": "N"
   },
   "0040.OBX": {
-    "obx_set_id": "35",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001528A",
+    "set_id": "35",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001528A",
       "text": "Meds reconciled at discharge and completed list provided to patient:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0041.OBX": {
-    "obx_set_id": "36",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "HCAEBDL3",
+    "set_id": "36",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL3",
       "text": "          -"
     },
-    "obx_observation_value": "- PERSONAL SAFETY PLAN - -",
-    "obx_observation_result_status": "N"
+    "obsv_value": "- PERSONAL SAFETY PLAN - -",
+    "obsv_result_status": "N"
   },
   "0042.OBX": {
-    "obx_set_id": "37",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001147A",
+    "set_id": "37",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001147A",
       "text": "Complete personal safety plan:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0043.OBX": {
-    "obx_set_id": "38",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010013A",
+    "set_id": "38",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010013A",
       "text": "Possession/access to weapons:"
     },
-    "obx_observation_value": "Yes:Yes",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
   },
   "0044.OBX": {
-    "obx_set_id": "39",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010014A",
+    "set_id": "39",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010014A",
       "text": "Type of weapon:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "FRYING PAN",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "FRYING PAN",
+    "obsv_result_status": "N"
   },
   "0045.OBX": {
-    "obx_set_id": "40",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010036A",
+    "set_id": "40",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010036A",
       "text": "Where are weapons stored:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "CLOSET",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "CLOSET",
+    "obsv_result_status": "N"
   },
   "0046.OBX": {
-    "obx_set_id": "41",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010037A",
+    "set_id": "41",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010037A",
       "text": "Who will secure weapons:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "MR. ROGERS",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "MR. ROGERS",
+    "obsv_result_status": "N"
   },
   "0047.OBX": {
-    "obx_set_id": "42",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010038A",
+    "set_id": "42",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010038A",
       "text": "Describe contacts made to secure weapons:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "spoke to mr. rogers",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "spoke to mr. rogers",
+    "obsv_result_status": "N"
   },
   "0048.OBX": {
-    "obx_set_id": "43",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010034A",
+    "set_id": "43",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010034A",
       "text": "Targeted person for homicidal thoughts:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "DONALD TRUMP",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "DONALD TRUMP",
+    "obsv_result_status": "N"
   },
   "0049.OBX": {
-    "obx_set_id": "44",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "M10010035A",
+    "set_id": "44",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "M10010035A",
       "text": "Targeted person notified per facility policy:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "YES",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "YES",
+    "obsv_result_status": "N"
   },
   "0050.OBX": {
-    "obx_set_id": "45",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH000400A",
+    "set_id": "45",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH000400A",
       "text": "Contact information:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "FDAFDAFDSA",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "FDAFDAFDSA",
+    "obsv_result_status": "N"
   },
   "0051.OBX": {
-    "obx_set_id": "46",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001700A",
+    "set_id": "46",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001700A",
       "text": "Major procedures or tests performed during inpatient stay:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Metabolic:Metabolic screen",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "Metabolic:Metabolic screen",
+    "obsv_result_status": "N"
   },
   "0052.OBX": {
-    "obx_set_id": "47",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001700A",
+    "set_id": "47",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001700A",
       "text": "Major procedures or tests performed during inpatient stay:"
     },
-    "obx_observation_sub_id": "2",
-    "obx_observation_value": "Lab work:Lab work",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "2",
+    "obsv_value": "Lab work:Lab work",
+    "obsv_result_status": "N"
   },
   "0053.OBX": {
-    "obx_set_id": "48",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001703A",
+    "set_id": "48",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001703A",
       "text": "Was patient screened for metabolic disorders:"
     },
-    "obx_observation_value": "No:No",
-    "obx_observation_result_status": "N"
+    "obsv_value": "No:No",
+    "obsv_result_status": "N"
   },
   "0054.OBX": {
-    "obx_set_id": "49",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001704A",
+    "set_id": "49",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001704A",
       "text": "Summary of tests, screens, and procedure results:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "FJKDAL;FJKDLA;JFKLD;ASJFKLD;ASJFKL;DJASKFL;DJASKL;FJKDLAS;JF",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "FJKDAL;FJKDLA;JFKLD;ASJFKLD;ASJFKL;DJASKFL;DJASKL;FJKDLAS;JF",
+    "obsv_result_status": "N"
   },
   "0055.OBX": {
-    "obx_set_id": "50",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001704A",
+    "set_id": "50",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001704A",
       "text": "Summary of tests, screens, and procedure results:"
     },
-    "obx_observation_sub_id": "2",
-    "obx_observation_value": "FJKDLA;FJDKL;ASJFKDL;ASJFKLD;JASKLF;DJKASL;FJDKL;ASJFKDL;ASJ",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "2",
+    "obsv_value": "FJKDLA;FJDKL;ASJFKDL;ASJFKLD;JASKLF;DJKASL;FJDKL;ASJFKDL;ASJ",
+    "obsv_result_status": "N"
   },
   "0056.OBX": {
-    "obx_set_id": "51",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001704A",
+    "set_id": "51",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001704A",
       "text": "Summary of tests, screens, and procedure results:"
     },
-    "obx_observation_sub_id": "3",
-    "obx_observation_value": "FJDKAL;DFJKLD;JKFL;DJKAL;FJDKLSA;JFKDL;ASJKFLD;JASKLFJDKLSA;",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "3",
+    "obsv_value": "FJDKAL;DFJKLD;JKFL;DJKAL;FJDKLSA;JFKDL;ASJKFLD;JASKLFJDKLSA;",
+    "obsv_result_status": "N"
   },
   "0057.OBX": {
-    "obx_set_id": "52",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001705A",
+    "set_id": "52",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001705A",
       "text": "Studies pending at discharge:"
     },
-    "obx_observation_value": "No:No",
-    "obx_observation_result_status": "N"
+    "obsv_value": "No:No",
+    "obsv_result_status": "N"
   },
   "0058.OBX": {
-    "obx_set_id": "53",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001706A",
+    "set_id": "53",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001706A",
       "text": "Comments regarding pending studies:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "this field is accessible regardless of the response to the",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "this field is accessible regardless of the response to the",
+    "obsv_result_status": "N"
   },
   "0059.OBX": {
-    "obx_set_id": "54",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001706A",
+    "set_id": "54",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001706A",
       "text": "Comments regarding pending studies:"
     },
-    "obx_observation_sub_id": "2",
-    "obx_observation_value": "previous question",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "2",
+    "obsv_value": "previous question",
+    "obsv_result_status": "N"
   },
   "0060.OBX": {
-    "obx_set_id": "55",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "hcaMU204",
+    "set_id": "55",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaMU204",
       "text": "Smoking status for patients 13 years old or older:"
     },
-    "obx_observation_value": "3:Former Smoker",
-    "obx_observation_result_status": "N"
+    "obsv_value": "3:Former Smoker",
+    "obsv_result_status": "N"
   },
   "0061.OBX": {
-    "obx_set_id": "56",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "HCAEBDL4",
+    "set_id": "56",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL4",
       "text": "          -"
     },
-    "obx_observation_value": "- ALCOHOL BRIEF COUNSELING - -",
-    "obx_observation_result_status": "N"
+    "obsv_value": "- ALCOHOL BRIEF COUNSELING - -",
+    "obsv_result_status": "N"
   },
   "0062.OBX": {
-    "obx_set_id": "57",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1BH001684A",
+    "set_id": "57",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1BH001684A",
       "text": "Were all components of alcohol brief counseling intervention addressed:"
     },
-    "obx_observation_value": "No:No",
-    "obx_observation_result_status": "N"
+    "obsv_value": "No:No",
+    "obsv_result_status": "N"
   },
   "0063.OBX": {
-    "obx_set_id": "58",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "G19100010A",
+    "set_id": "58",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "G19100010A",
       "text": "Legal directives:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "None:None",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "None:None",
+    "obsv_result_status": "N"
   },
   "0064.OBX": {
-    "obx_set_id": "59",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "G19100004A",
+    "set_id": "59",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "G19100004A",
       "text": "In absence of advance directives, patient:"
     },
-    "obx_observation_value": "Execute:Wishes to execute AD",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Execute:Wishes to execute AD",
+    "obsv_result_status": "N"
   },
   "0065.OBX": {
-    "obx_set_id": "60",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "G19100008A",
+    "set_id": "60",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "G19100008A",
       "text": "Conservator/guardian:"
     },
-    "obx_observation_value": "No:No",
-    "obx_observation_result_status": "N"
+    "obsv_value": "No:No",
+    "obsv_result_status": "N"
   }
 }

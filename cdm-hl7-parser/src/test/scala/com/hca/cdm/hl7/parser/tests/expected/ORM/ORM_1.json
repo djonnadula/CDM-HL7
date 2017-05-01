@@ -1,199 +1,211 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "FRNK",
-    "msh_msg_control_id": "MT6_FRNK_ORM_156056082",
-    "pid_medical_record_num": "K000100072",
-    "pid_medical_record_urn": "K147672",
-    "pid_pat_account_num": "FR0804565133"
+    "sending_facility": "FRNK",
+    "message_control_id": "MT6_FRNK_ORM_156056082",
+    "medical_record_num": "K000100072",
+    "medical_record_urn": "K147672",
+    "patient_account_num": "FR0804565133"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "MT_FRNK",
-    "msh_sending_facility": "FRNK",
-    "msh_receiving_appl": "DBM",
-    "msh_msg_create_date_time": "201702090828",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "date_time_of_message": "201702090828",
+    "message_type": {
       "message_code": "ORM",
       "trigger_event": "O01"
     },
-    "msh_msg_control_id": "MT6_FRNK_ORM_156056082",
-    "msh_processing_id": "P",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": "KYB"
+    "message_control_id": "MT6_FRNK_ORM_156056082",
+    "processing_id": "P",
+    "version_id": "2.5.1",
+    "continuation_pointer": "KYB"
   },
   "0002.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id": "A00009619",
-    "pid_pat_id_list": [
+    "set_id": "1",
+    "patient_id": "A00009619",
+    "patient_id_list": [
       {
-        "identifier_num": "K000100072",
-        "identifier_type_code": "MR",
-        "assgn_facility": "FRNK"
+        "id_num": "K000100072",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "400-96-5317",
-        "identifier_type_code": "SS",
-        "assgn_facility": "FRNK"
+        "id_num": "400-96-5317",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "K147602",
-        "identifier_type_code": "PI",
-        "assgn_facility": "FRNK"
+        "id_num": "K147602",
+        "id_type_code": "PI",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "A00008619",
-        "identifier_type_code": "HUB",
-        "assgn_facility": "FRNK"
+        "id_num": "A00008619",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
       }
     ],
-    "pid_alt_pat_id": "K147672",
-    "pid_pat_name": [
+    "alternate_patient_id": "K147672",
+    "patient_name": [
       {
-        "last_name": "SMALLEEBURK",
-        "first_name": "GWANDOLYN",
-        "middle_name": "MCCALL",
-        "type_code": "L"
+        "family_name": "SMALLEEBURK",
+        "given_name": "GWANDOLYN",
+        "second_and_further_given_names_or_initials_thereof": "MCCALL",
+        "name_type_code": "L"
       },
       {
-        "last_name": "SMALLENBURG",
-        "first_name": "GWENOOLYN",
-        "middle_name": "J",
-        "type_code": "M"
+        "family_name": "SMALLENBURG",
+        "given_name": "GWENOOLYN",
+        "second_and_further_given_names_or_initials_thereof": "J",
+        "name_type_code": "M"
       }
     ],
-    "pid_mother_name": "CUROL",
-    "pid_birth_date_time": "19600210",
-    "pid_sex": "F",
-    "pid_race": "W",
-    "pid_pat_address": {
-      "street_address1": "122 IMKEUIQQ AVE",
+    "mother_maiden_name": "CUROL",
+    "date_time_of_birth": "19600210",
+    "administrative_sex": "F",
+    "race": "W",
+    "patient_address": {
+      "street_address": "122 IMKEUIQQ AVE",
       "city": "FRANKFORT",
-      "state_province": "KY",
-      "zip_postal_code": "49601"
+      "state_or_province": "KY",
+      "zip_or_postal_code": "49601"
     },
-    "pid_home_phone_num": "(502)220-6988",
-    "pid_marital_status": "M",
-    "pid_religion": "BAP",
-    "pid_pat_account_num": "FR0804565133"
+    "phone_num_home": "(502)220-6988",
+    "marital_status": "M",
+    "religion": "BAP",
+    "patient_account_num": "FR0804565133"
   },
   "0003.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "E",
-    "pv1_assgn_pat_loc": "FR.ER",
-    "pv1_adm_type": "EM",
-    "pv1_attending_doctor": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": "FR.ER",
+    "admission_type": "EM",
+    "attending_doctor": {
       "person_id": "PZI7367",
-      "last_name": "Walker",
-      "first_name": "Forest",
+      "family_name": "Walker",
+      "given_name": "Forest",
       "degree": "MD"
     },
-    "pv1_referring_doctor": {
+    "referring_doctor": {
       "person_id": "SELF",
-      "last_name": "Referred",
-      "first_name": "Self"
+      "family_name": "Referred",
+      "given_name": "Self"
     },
-    "pv1_adm_source": "PR",
-    "pv1_pat_type": "ER",
-    "pv1_financial_classification": "13",
-    "pv1_servicing_facility": "FRNK",
-    "pv1_account_status": "REG",
-    "pv1_adm_date_time": "201702090633"
+    "admit_source": "PR",
+    "patient_type": "ER",
+    "financial_class": "13",
+    "servicing_facility": "FRNK",
+    "account_status": "REG",
+    "admit_date_time": "201702090633"
   },
   "0004.AL1": {
-    "al1_set_id": "1",
-    "al1_allergen_type_code": "DA",
-    "al1_allergen_code": {
-      "primary_id": "F001900388",
+    "set_id": "1",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F001900388",
       "text": "No Known Allergies",
-      "alt_id": "No Known Allergies",
-      "name_of_alt_coding_sys": "allergy.id"
+      "alternate_id": "No Known Allergies",
+      "name_of_alternate_coding_system": "allergy.id"
     },
-    "al1_identification_date": "20170209"
+    "identification_date": "20170209"
   },
   "0005.ORC": {
-    "orc_order_control": "NW",
-    "orc_placer_order_num": "FR000370672~17-8049FRNK",
-    "orc_order_status": "L",
-    "orc_response_flag": "N",
-    "orc_transaction_date_time": "201702090828",
-    "orc_entered_by": "PZI7367",
-    "orc_enterer_location": "FR.ER"
+    "order_control": "NW",
+    "placer_order_num": "FR000370672~17-8049FRNK",
+    "order_status": "L",
+    "response_flag": "N",
+    "date_time_of_transaction": "201702090828",
+    "entered_by": "PZI7367",
+    "enterer_location": "FR.ER"
   },
   "0006.OBR": {
-    "obr_set_id": "1",
-    "obr_placer_order_num": "FR000370672~17-8049FRNK",
-    "obr_universal_service_id": {
-      "primary_id": "RAD",
+    "set_id": "1",
+    "placer_order_num": "FR000370672~17-8049FRNK",
+    "universal_service_id": {
+      "id": "RAD",
       "text": "CHE2",
-      "name_of_coding_sys": "Chest 2 View"
+      "name_of_coding_system": "Chest 2 View"
     },
-    "obr_requested_date_time": "201702090828",
-    "obr_relevant_clinical_information": "FR",
-    "obr_ordering_provider": {
+    "requested_date_time": "201702090828",
+    "relevant_clinical_information": "FR",
+    "ordering_provider": {
       "person_id": "PZI7367",
-      "last_name": "Walker",
-      "first_name": "Forest",
+      "family_name": "Walker",
+      "given_name": "Forest",
       "degree": "MD"
     },
-    "obr_order_callback_phone_num": {
-      "formatted_num": "(502)875-5240",
-      "equipment_type": "PH",
+    "order_callback_phone_num": {
+      "telephone_num": "(502)875-5240",
+      "telecommunication_equipment_type": "PH",
       "area_city_code": "502",
-      "local_number": "875-5240"
+      "local_num": "875-5240"
     },
-    "obr_unknown": "RAD^20170209-0025^1^^^201702090828^^S",
-    "obr_filler_first_generic_field": "DI",
-    "obr_result_copy_to": [
+    "placer_field_1": {
+      "order_category": "RAD",
+      "order_number": "20170209-0025"
+    },
+    "filler_field_1": "DI",
+    "quantity_timing": {
+      "quantity": "1",
+      "eff_from_date_time": "201702090828",
+      "priority": "S"
+    },
+    "result_copies_to": [
       {
         "person_id": "PZI7367",
-        "last_name": "Walker",
-        "first_name": "Forest",
+        "family_name": "Walker",
+        "given_name": "Forest",
         "degree": "MD"
       },
       {
         "person_id": "JBC4496",
-        "last_name": "Haddix",
-        "first_name": "Allen",
-        "middle_name": "C",
+        "family_name": "Haddix",
+        "given_name": "Allen",
+        "second_and_further_given_names_or_initials_thereof": "C",
         "degree": "MD"
       },
       {
         "person_id": "SELF",
-        "last_name": "Referred",
-        "first_name": "Self"
+        "family_name": "Referred",
+        "given_name": "Self"
       }
     ],
-    "obr_reason_for_study": {
-      "primary_id": "1ORD01004A",
+    "reason_for_study": {
+      "id": "1ORD01004A",
       "text": "cough, soa"
     },
-    "obr_principal_result_interpreter": "PZI7367"
+    "principal_result_interpreter": "PZI7367"
   },
   "0007.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1ORD01004A",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1ORD01004A",
       "text": "Reason for Exam"
     },
-    "obx_unknown": "cough, soa"
+    "obsv_value": {
+      "text": "cough, soa"
+    }
   },
   "0008.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1ORD01005A",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1ORD01005A",
       "text": "Comment"
     }
   },
   "0009.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1ORD01050A",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1ORD01050A",
       "text": "Portable?"
     },
-    "obx_unknown": "N"
+    "obsv_value": {
+      "text": "N"
+    }
   }
 }

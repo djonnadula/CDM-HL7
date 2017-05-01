@@ -129,8 +129,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     val mshNode = findReqSegment(data, MSH)
     val pidNode = findReqSegment(data, PID)
     val commonNode = data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]]
-    MSHMappings.foreach(key => handleIndexes(mshNode, data, MSHMappings(key._1), key._1, commonNode))
-    PIDMappings.foreach(key => handleIndexes(pidNode, data, PIDMappings(key._1), key._1, commonNode))
+    MSHMappings.foreach(key => {
+      handleIndexes(mshNode, data, MSHMappings(key._1), key._1, commonNode)
+    })
+    PIDMappings.foreach(key => {
+      handleIndexes(pidNode, data, PIDMappings(key._1), key._1, commonNode)
+    })
   }
 
   private def handleIndexes(segIndex: String, data: mapType, path: Array[(String, String, String, String)], whichKey: String, nodeToUpdate: mutable.LinkedHashMap[String, String]) = {
