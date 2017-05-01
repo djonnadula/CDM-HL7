@@ -34,7 +34,7 @@ object HL7Constants {
   lazy val PIPER: Regex = "\\|".r
   lazy val COMMAR: Regex = ",".r
   lazy val COMMA = ","
-  lazy val PIPE_DELIMITED = "|"
+  lazy val PIPE_DELIMITED_STR = "|"
   lazy val COLON = ":"
   lazy val UNKNOWN = "unknown"
   lazy val underScore = "_"

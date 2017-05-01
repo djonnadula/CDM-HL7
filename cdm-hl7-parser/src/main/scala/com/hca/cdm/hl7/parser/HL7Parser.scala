@@ -10,6 +10,8 @@ import com.hca.cdm.hl7.constants.FileMappings._
 import com.hca.cdm.hl7.exception.{InvalidHl7FormatException, InvalidTemplateFormatException, TemplateInfoException}
 import com.hca.cdm.hl7.model.HL7State._
 import com.hca.cdm.hl7.model._
+import com.hca.cdm.hl7.overrides.OverrideHandle
+import com.hca.cdm.hl7.overrides.overrides.Interface_GtMriOverride
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.hl7.validation.ValidationUtil.{hasMultiMSH => msgHasmultiMSH, isValidMsg => metRequirement}
 import com.hca.cdm.log.Logg
@@ -55,6 +57,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
     Try(transform(hl7Message split delim)) match {
       case Success(parsed) =>
+        handleGtMriOverride(parsed.data)
         handleCommonSegments(parsed.data)
         val meta = msgMeta(parsed.data)
         if (parsed.missingMappings != EMPTYSTR) {
@@ -200,6 +203,15 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
   }
 
+  private def handleGtMriOverride(data: mapType, handle: OverrideHandle = new Interface_GtMriOverride): Unit = {
+    val mshNode = findReqSegment(data, MSH)
+    if (!handle.isInterfaceSpecific(data(mshNode).asInstanceOf[mapType].getOrElse(Control_Id_key, EMPTYSTR).asInstanceOf[String])) return
+    val pidNode = findReqSegment(data, PID)
+    if (!(handle.mappings.map(key => findData(data(pidNode), key._2)).toSet.size > 1)) {
+      handle.applyOverride(data(pidNode).asInstanceOf[mapType])
+    }
+  }
+
   private case class Segment(var mapping: String = EMPTYSTR, var realignColStatus: Boolean = false, var realignColValue: String = EMPTYSTR,
                              var realignFieldName: String = EMPTYSTR, var realignCompName: String = EMPTYSTR, var realignSubCompName: String = EMPTYSTR, var realignColOption: String = EMPTYSTR)
 
@@ -215,12 +227,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     dataLayout += commonNodeStr -> commonNode.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
     val delimiters = new mutable.HashMap[String, String]()
     if (!(rawSplit(0) startsWith MSH)) throw new InvalidHl7FormatException(s"Expecting First Segment in HL7 as MSH but found :: ${rawSplit(0)}")
-    delimiters.put(FIELD_DELIM, if (rawSplit(0).charAt(3) + EMPTYSTR == PIPE_DELIMITED) "|" else (rawSplit(0).charAt(3) + EMPTYSTR).trim)
+    delimiters.put(FIELD_DELIM, if (rawSplit(0).charAt(3) + EMPTYSTR == PIPE_DELIMITED_STR) "|" else (rawSplit(0).charAt(3) + EMPTYSTR).trim)
     delimiters.put(CMPNT_DELIM, if (rawSplit(0).charAt(4) + EMPTYSTR == caret) "^" else (rawSplit(0).charAt(4) + EMPTYSTR).trim)
     delimiters.put(REPTN_DELIM, (rawSplit(0).charAt(5) + EMPTYSTR).trim)
     delimiters.put(ESC_DELIM, if (rawSplit(0).charAt(6) + EMPTYSTR == ESCAPE) ESCAPE else (rawSplit(0).charAt(6) + EMPTYSTR).trim)
     delimiters.put(SUBCMPNT_DELIM, (rawSplit(0).charAt(7) + EMPTYSTR).trim)
-    delimiters.put(TRUNC_DELIM, if (rawSplit(0).charAt(8) + EMPTYSTR != PIPE_DELIMITED) (rawSplit(0).charAt(8) + EMPTYSTR).trim else "//")
+    delimiters.put(TRUNC_DELIM, if (rawSplit(0).charAt(8) + EMPTYSTR != PIPE_DELIMITED_STR) (rawSplit(0).charAt(8) + EMPTYSTR).trim else "//")
     var segment: Segment = null
     var versionData: VersionData = null
     val missingMappings = new TemplateUnknownMapping
