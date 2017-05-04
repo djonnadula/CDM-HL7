@@ -23,7 +23,7 @@ import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
-import scala.util.Random
+import scala.util.{Random, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -76,6 +76,9 @@ package object cdm extends Logg {
     })
   }
 
+  def getJar(fromLoc: String): Option[String] = {
+    Try(fromLoc.substring(fromLoc.lastIndexOf(FS) + 1)).toOption
+  }
 
   def closeResource(res: AutoCloseable): Unit = if (res != null) res.close()
 

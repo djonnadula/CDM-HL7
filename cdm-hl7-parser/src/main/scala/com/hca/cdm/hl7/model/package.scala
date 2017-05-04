@@ -104,9 +104,6 @@ package object model {
     mapper.writer.writeValueAsString(_)
   }
 
-  def getJar(fromLoc: String): Option[String] = {
-    Try(fromLoc.substring(fromLoc.lastIndexOf(FS) + 1)).toOption
-  }
 
   private def getRejectSchema = rejectSchema.clone().transform((k, v) => EMPTYSTR)
 
@@ -471,14 +468,12 @@ package object model {
 
 
   def determineTemplatePath(os: String): String = {
-    val windows = "hl7.qa.config.windows"
-    val cdhvm = "hl7.qa.config.cdhvm"
     if (getOS.toLowerCase().contains("windows")) {
       info("Using Windows path for templates")
-      windows
+      "hl7.qa.config.windows"
     } else {
       info("Using Linux path for templates.")
-      cdhvm
+      "hl7.qa.config.cdhvm"
     }
   }
 
