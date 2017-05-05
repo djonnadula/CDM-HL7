@@ -1,0 +1,19 @@
+environment:
+  - 'production'
+  - 'reg_test'
+
+environments:
+  production:
+    db_name: 'hl7'
+    db_path: 'hl7'
+  qa:
+    db_name: 'hl7_qa'
+    db_path: 'hl7_qa'
+  dev:
+    db_name: 'hl7'
+    db_path: 'hl7.db/dev'
+  reg_test:
+    db_name: 'hl7_reg_test'
+    db_path: 'hl7_reg_test'
+
+add_drop_tables: true

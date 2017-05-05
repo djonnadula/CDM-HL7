@@ -304,7 +304,10 @@
   },
   "0017.ZST": {
     "counter": "1",
-    "zst_unknown": "STFANT^Anesthesiologist",
+    "staff_type": {
+      "type_code": "STFANT",
+      "type_description": "Anesthesiologist"
+    },
     "staff_identifier": {
       "person_id": "ETTMA",
       "last_name": "Ettinger",
@@ -319,7 +322,28 @@
   },
   "0018.ZST": {
     "counter": "2",
-    "zst_unknown": "STFP^Pre-op Staff",
+    "staff_type": {
+      "type_code": "STFANT",
+      "type_description": "Anesthesiologist"
+    },
+    "staff_identifier": {
+      "person_id": "ETTMA",
+      "last_name": "Ettinger",
+      "first_name": "Mark"
+    },
+    "in_out_range": {
+      "sequence_num": "1",
+      "range_date": "20170130",
+      "range_in_time": "1415",
+      "range_out_time": "1718"
+    }
+  },
+  "0018.ZST": {
+    "counter": "2",
+    "staff_type": {
+      "type_code": "STFP",
+      "type_description": "Pre-op Staff"
+    },
     "staff_identifier": {
       "person_id": "HCFR.EV",
       "last_name": "VARGAS",
@@ -328,7 +352,10 @@
   },
   "0019.ZST": {
     "counter": "3",
-    "zst_unknown": "STF2^Circulator/ RN",
+    "staff_type": {
+      "type_code": "STF2",
+      "type_description": "Circulator/ RN"
+    },
     "staff_identifier": {
       "person_id": "BFOR.BXM",
       "last_name": "MCCULLOUGH",
@@ -343,7 +370,10 @@
   },
   "0020.ZST": {
     "counter": "4",
-    "zst_unknown": "STF3^Scrub/ Tech",
+    "staff_type": {
+      "type_code": "STF3",
+      "type_description": "Scrub/ Tech"
+    },
     "staff_identifier": {
       "person_id": "BFOR.AXH",
       "last_name": "HADDAD",
@@ -358,7 +388,10 @@
   },
   "0021.ZST": {
     "counter": "5",
-    "zst_unknown": "STF3^Scrub/ Tech",
+    "staff_type": {
+      "type_code": "STF3",
+      "type_description": "Scrub/ Tech"
+    },
     "staff_identifier": {
       "person_id": "BFOR.TXG",
       "last_name": "GODFREY",
@@ -373,7 +406,10 @@
   },
   "0022.ZST": {
     "counter": "6",
-    "zst_unknown": "STF6^Vendor/ HCIR",
+    "staff_type": {
+      "type_code": "STF6",
+      "type_description": "Vendor/ HCIR"
+    },
     "staff_identifier": "CHAD ANDRUS",
     "comment": "ZIMMER/BIOMET REP",
     "in_out_range": {
@@ -385,7 +421,10 @@
   },
   "0023.ZST": {
     "counter": "7",
-    "zst_unknown": "STF6^Vendor/ HCIR",
+    "staff_type": {
+      "type_code": "STF6",
+      "type_description": "Vendor/ HCIR"
+    },
     "staff_identifier": "JOHN MATYE",
     "comment": "S\\T\\N REP",
     "in_out_range": {
@@ -397,7 +436,10 @@
   },
   "0024.ZST": {
     "counter": "8",
-    "zst_unknown": "STF6^Vendor/ HCIR",
+    "staff_type": {
+      "type_code": "STF6",
+      "type_description": "Vendor/ HCIR"
+    },
     "staff_identifier": "JON BURKHART",
     "comment": "ARTHREX REP",
     "in_out_range": {
@@ -408,7 +450,10 @@
   },
   "0025.ZST": {
     "counter": "9",
-    "zst_unknown": "STFR^Post-op Staff",
+    "staff_type": {
+      "type_code": "STFR",
+      "type_description": "Post-op Staff"
+    },
     "staff_identifier": {
       "person_id": "BFPAC.SXB",
       "last_name": "BOWES",
@@ -417,7 +462,10 @@
   },
   "0026.ZST": {
     "counter": "10",
-    "zst_unknown": "STFR^Post-op Staff",
+    "staff_type": {
+      "type_code": "STFR",
+      "type_description": "Post-op Staff"
+    },
     "staff_identifier": "BRUBAKER, ELEANOR"
   },
   "0027.ZRX": {

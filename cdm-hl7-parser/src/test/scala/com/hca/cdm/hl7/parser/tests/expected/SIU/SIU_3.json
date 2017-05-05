@@ -696,7 +696,10 @@
   },
   "0051.ZST": {
     "counter": "1",
-    "zst_unknown": "STFANT^Anesthesiologist"
+    "staff_type": {
+      "type_code": "STFANT",
+      "type_description": "Anesthesiologist"
+    }
   },
   "0052.ZTX": {
     "counter": "1",
