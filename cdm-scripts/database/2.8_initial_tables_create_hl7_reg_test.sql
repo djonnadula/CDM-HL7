@@ -35648,6 +35648,8 @@ CREATE EXTERNAL TABLE hl7_zst_data (
 	pid_pat_account_num String,
 	zst_counter String,
 	zst_staff_type String,
+	zst_staff_type_type_code String,
+    zst_staff_type_type_description String,
 	zst_staff_identifier String,
 	zst_staff_identifier_person_id String,
 	zst_staff_identifier_last_name String,
