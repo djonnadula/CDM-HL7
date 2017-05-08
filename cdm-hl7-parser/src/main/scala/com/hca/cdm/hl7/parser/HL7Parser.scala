@@ -11,7 +11,7 @@ import com.hca.cdm.hl7.exception.{InvalidHl7FormatException, InvalidTemplateForm
 import com.hca.cdm.hl7.model.HL7State._
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.overrides.OverrideHandle
-import com.hca.cdm.hl7.overrides.overrides.Interface_GtMriOverride
+import com.hca.cdm.hl7.overrides.overrides._
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.hl7.validation.ValidationUtil.{hasMultiMSH => msgHasmultiMSH, isValidMsg => metRequirement}
 import com.hca.cdm.log.Logg
@@ -203,7 +203,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
   }
 
-  private def handleGtMriOverride(data: mapType, handle: OverrideHandle = new Interface_GtMriOverride): Unit = {
+  private def handleGtMriOverride(data: mapType, handle: OverrideHandle = Interface_GtMriOverride()): Unit = {
     val mshNode = findReqSegment(data, MSH)
     if (!handle.isInterfaceSpecific(data(mshNode).asInstanceOf[mapType].getOrElse(Control_Id_key, EMPTYSTR).asInstanceOf[String])) return
     val pidNode = findReqSegment(data, PID)

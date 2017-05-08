@@ -22,7 +22,8 @@ abstract class OverrideHandle {
 
 package object overrides {
 
-  case class Interface_GtMriOverride() extends OverrideHandle {
+  class Interface_GtMriOverride extends OverrideHandle {
+
     lazy val GT_MRI_MAPPINGS: mutable.HashMap[String, Array[(String, String, String, String)]] = synchronized(
       commonSegmentMappings(lookUpProp("interface.gtmri.mappings")))
 
@@ -37,6 +38,29 @@ package object overrides {
     override def mappings: mutable.HashMap[String, Array[(String, String, String, String)]] = GT_MRI_MAPPINGS
 
     override def isInterfaceSpecific(key: String): Boolean = Gt_MRI_RegEx(key)
+  }
+
+  object Interface_GtMriOverride {
+    private var instance: Interface_GtMriOverride = _
+    private val lock = new Object()
+
+    def apply(): Interface_GtMriOverride = {
+      def createIfNotExist = new (() => Interface_GtMriOverride) {
+        override def apply(): Interface_GtMriOverride = new Interface_GtMriOverride
+      }
+
+      createInstance(createIfNotExist)
+    }
+
+    private def createInstance(createIfNotExist: () => Interface_GtMriOverride): Interface_GtMriOverride = {
+      lock.synchronized(
+        if (instance == null) {
+          instance = createIfNotExist()
+          instance
+        } else {
+          instance
+        })
+    }
   }
 
 }
