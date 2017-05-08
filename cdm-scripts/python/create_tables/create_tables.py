@@ -3,6 +3,9 @@ import yaml
 
 
 def read_props():
+    """
+    Read yaml properties file
+    """
     yaml_props = {}
     with open("create_tables_props.yml", 'r') as stream:
         try:
@@ -51,6 +54,9 @@ def hl7_table_suffix(db_path, message_type):
 
 
 def use_query():
+    """
+    Use query
+    """
     return 'USE hl7;\n'
 
 
@@ -71,6 +77,11 @@ def create_table_names(field1, field2, field3):
 
 
 def clean_comps(comps):
+    """
+    Create the table column name format
+    :param comps: array of components to join
+    :return: formatted column name
+    """
     joiner = '_'
     column_name = ''
     if len(comps) < 2:
@@ -82,6 +93,9 @@ def clean_comps(comps):
 
 
 def common_columns():
+    """
+    String of common columns that all tables have
+    """
     return '\n\tsending_facility STRING,' \
            '\n\tmessage_control_id STRING,' \
            '\n\tmedical_record_num STRING,' \
@@ -90,6 +104,13 @@ def common_columns():
 
 
 def write_tables(env, add_drop_tables, db_name, db_path):
+    """
+    Create the table column name format
+    :param env: environment for file name
+    :param add_drop_tables: boolean that defines whether write drop tables or not
+    :param db_name: database name from yaml properties
+    :param db_path: database location path from yaml properties
+    """
     f = open('create_impala_tables_{0}.sql'.format(env), 'w')
     with open('..\\..\\templates\\segments.txt', 'rU') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
@@ -114,7 +135,9 @@ def write_tables(env, add_drop_tables, db_name, db_path):
 
 
 def main():
-
+    """
+    Main program logic
+    """
     yaml_props = read_props()
     # print yaml_props
     environment = yaml_props.get('environment')
