@@ -169,7 +169,6 @@ object HL7Receiver extends Logg with App {
         val retry = RetryHandler()
 
         def retryStart(): Unit = {
-          sparkStrCtx = initContext
           sparkStrCtx start()
           info(s"Started Spark Streaming Context Execution :: ${new Date()}")
           sparkStrCtx awaitTermination()
