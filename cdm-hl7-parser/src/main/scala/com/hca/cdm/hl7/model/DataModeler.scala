@@ -45,7 +45,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                     val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
                     if (timeStampReq) temp += ((timeStampKey, timeStamp))
                     out._2 += (toJson(temp) -> null)
-                  case PIPE_DELIMITED =>
+                  case DELIMITED =>
                     handleCommonSegments(data, layout)
                     out._2 += (makeFinal(layout) -> null)
                 }
@@ -74,7 +74,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   layout = model.layoutCopy
                   if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                     handleCommonSegments(data, layout)
-                    val out = s"${makeFinal(layout)}$PIPE_DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
+                    val out = s"${makeFinal(layout)}$DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
                     (out, null)
                   } else {
                     (skippedStr, null)

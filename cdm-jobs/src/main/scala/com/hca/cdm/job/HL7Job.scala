@@ -168,7 +168,6 @@ object HL7Job extends Logg with App {
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
     registerHook(sHook)
-    sparkStrCtx.sparkContext.getConf.getAll.foreach(x => info(x._1 + " :: " + x._2))
     /* if (isSecured) {
        val tempCrd = credentialFile(s"$appHomeDir$FS$stagingDir")
        credentials = tempCrd.getName
@@ -230,8 +229,7 @@ object HL7Job extends Logg with App {
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
             var tlmAckIO: (String) => Unit = null
             if (tlmAckQueue.isDefined) {
-              TLMAcknowledger(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"),
-                lookUpProp("mq.channel"), numberOfIns = 2)
+              TLMAcknowledger(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"),numberOfIns = 2)
               tlmAckIO = TLMAcknowledger.ackMessage(_: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta))

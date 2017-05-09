@@ -12,12 +12,13 @@ import java.lang.Class.{forName => className}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import com.hca.cdm.kafka.util.TopicUtil._
+import com.hca.cdm.log.Logg
 import org.apache.spark.storage.StorageLevel
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-object Hl7SparkUtil {
+object Hl7SparkUtil extends Logg{
 
   private lazy val hookManager: Class[_] = {
     Try(className("org.apache.spark.util.ShutdownHookManager")) match {
@@ -51,6 +52,7 @@ object Hl7SparkUtil {
   def streamingContext(checkpointPath: String, newCtxIfNotExist: () => StreamingContext): StreamingContext = {
     val ctx = create(checkpointPath, newCtxIfNotExist, hdpUtil.conf, createOnError = false)
     ctx checkpoint checkpointPath
+    ctx.sparkContext.getConf.getAll.foreach(x => info(x._1 + " :: " + x._2))
     ctx
   }
 
