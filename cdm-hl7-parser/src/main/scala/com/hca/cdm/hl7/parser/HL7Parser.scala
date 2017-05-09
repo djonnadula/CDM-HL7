@@ -362,6 +362,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def getVersionData(fieldList: Array[String], templateData: Map[String, Map[String, Array[String]]]): VersionData = {
     val hl7Version = fieldList(11)
     val controlId = fieldList(9)
+    require((controlId != EMPTYSTR) || (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
     val mapped_index = Match match {
       case mt_mt6 if mt_mt6(MT_) || mt_mt6(MT6_) =>
