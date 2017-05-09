@@ -71,7 +71,7 @@ package object model {
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
 
   private lazy val templateBuildPath = {
-    val basePath = Paths.get(new java.io.File(".").getCanonicalPath).getParent
+    val basePath = Paths.get(new java.io.File(".").getAbsolutePath).getParent
     val templatePath = "cdm-scripts" + FS + "templates"
     Paths.get(basePath.toString, templatePath)
   }
@@ -165,7 +165,7 @@ package object model {
 
     type OutFormat = Value
     val JSON = Value("JSON")
-    val PIPE_DELIMITED = Value("PIPE_DELIMITED")
+    val DELIMITED = Value("DELIMITED")
     val AVRO = Value("AVRO")
 
   }
@@ -177,7 +177,7 @@ package object model {
 
   import OutFormats._
 
-  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = PIPE_DELIMITED): String = {
+  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): String = {
     format match {
       case JSON =>
         val rejectSchema = getRejectSchema
@@ -192,7 +192,7 @@ package object model {
         rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
         rejectSchema update(etlTime, timeStamp)
         toJson(rejectSchema)
-      case PIPE_DELIMITED =>
+      case DELIMITED =>
         s"$hl7$COLON$stage$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.medical_record_num}" +
           s"$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR" + timeStamp + PIPE_DELIMITED_STR +
           (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED_STR + (if (raw ne null) raw else toJson(data))
@@ -271,7 +271,7 @@ package object model {
             if (outFormat contains JSON.toString) {
               (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(PIPE_DELIMITED, outDest(index), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
