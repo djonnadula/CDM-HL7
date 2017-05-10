@@ -134,6 +134,8 @@ CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history (
 	pid_pat_address_city STRING COMMENT 'The city, or district or place where the patient is located (lives) depending upon the national convention for formatting addresses for postal usage.',
 	pid_pat_address_state_province STRING COMMENT 'The state or province where the patient is located (lives). State or province should be represented by the official postal service codes for that country.',
 	pid_pat_address_zip_postal_code STRING COMMENT 'The zip or postal code where the patient is located (lives). Zip or postal codes should be represented by the official codes for that country.',
+    pid_pat_id_list_identifier_num STRING,
+    pid_pat_id_list_identifier_type_code STRING,
 	etl_insert_date_time STRING COMMENT 'The date and time the record was inserted by the Extract Transform and Load (ETL) job.',
 	etl_process_date_time STRING COMMENT 'The date and time the record was merged with data from Synthesis (processed) by the Extract Transform and Load (ETL) job.'
 	)

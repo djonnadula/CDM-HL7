@@ -23,7 +23,7 @@ import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
-import scala.util.Random
+import scala.util.{Random, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -76,6 +76,9 @@ package object cdm extends Logg {
     })
   }
 
+  def getJar(fromLoc: String): Option[String] = {
+    Try(fromLoc.substring(fromLoc.lastIndexOf(FS) + 1)).toOption
+  }
 
   def closeResource(res: AutoCloseable): Unit = if (res != null) res.close()
 
@@ -257,9 +260,11 @@ package object cdm extends Logg {
   }
 
   def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
-    if(specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
+    if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
+
+  def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
   private class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)

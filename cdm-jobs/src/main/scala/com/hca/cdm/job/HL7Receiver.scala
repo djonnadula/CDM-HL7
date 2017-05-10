@@ -73,7 +73,7 @@ object HL7Receiver extends Logg with App {
   if (walEnabled) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
     sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "30")
-    //sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+    // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
@@ -95,7 +95,7 @@ object HL7Receiver extends Logg with App {
   startStreams()
 
   private def initContext: StreamingContext = {
-    if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
+    sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx

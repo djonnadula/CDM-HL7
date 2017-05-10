@@ -104,9 +104,6 @@ package object model {
     mapper.writer.writeValueAsString(_)
   }
 
-  def getJar(fromLoc: String): Option[String] = {
-    Try(fromLoc.substring(fromLoc.lastIndexOf(FS) + 1)).toOption
-  }
 
   private def getRejectSchema = rejectSchema.clone().transform((k, v) => EMPTYSTR)
 
@@ -117,7 +114,7 @@ package object model {
   }
 
 
-  private def commonSegmentMappings(mappingData: String) = {
+  def commonSegmentMappings(mappingData: String): mutable.HashMap[String, Array[(String, String, String, String)]] = {
     val temp = new mutable.HashMap[String, Array[(String, String, String, String)]]
     val nodeEle = mappingData match {
       case EMPTYSTR => throw new CdmException("No Common Elements Sub Components Mappings found. ")
@@ -126,8 +123,8 @@ package object model {
     nodeEle.foreach(ele => {
       val subComp = ele.split(COMMA, -1)
       temp += subComp.head -> subComp.map(x => {
-        if (x contains PIPE_DELIMITED) {
-          val split = x split("\\" + PIPE_DELIMITED, -1)
+        if (x contains PIPE_DELIMITED_STR) {
+          val split = x split("\\" + PIPE_DELIMITED_STR, -1)
           val temp = split(1)
           if (temp contains AMPERSAND) {
             val subCompSplit = temp split("\\" + AMPERSAND, -1)
@@ -168,7 +165,7 @@ package object model {
 
     type OutFormat = Value
     val JSON = Value("JSON")
-    val DELIMITED = Value("DELIMITED")
+    val PIPE_DELIMITED = Value("PIPE_DELIMITED")
     val AVRO = Value("AVRO")
 
   }
@@ -180,7 +177,7 @@ package object model {
 
   import OutFormats._
 
-  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): String = {
+  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = PIPE_DELIMITED): String = {
     format match {
       case JSON =>
         val rejectSchema = getRejectSchema
@@ -195,10 +192,10 @@ package object model {
         rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
         rejectSchema update(etlTime, timeStamp)
         toJson(rejectSchema)
-      case DELIMITED =>
-        s"$hl7$COLON$stage$PIPE_DELIMITED${meta.controlId}$PIPE_DELIMITED${meta.msgCreateTime}$PIPE_DELIMITED${meta.medical_record_num}" +
-          s"$PIPE_DELIMITED${meta.medical_record_urn}$PIPE_DELIMITED${meta.account_num}$PIPE_DELIMITED" + timeStamp + PIPE_DELIMITED +
-          (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED + (if (raw ne null) raw else toJson(data))
+      case PIPE_DELIMITED =>
+        s"$hl7$COLON$stage$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.medical_record_num}" +
+          s"$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR" + timeStamp + PIPE_DELIMITED_STR +
+          (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED_STR + (if (raw ne null) raw else toJson(data))
       case AVRO =>
         import rejectSchemaMapping._
         val rejectSchema = RejectAvroSchema.avroRejectRecord
@@ -252,7 +249,7 @@ package object model {
     temp
   }
 
-  def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED): Hl7Segments = {
+  def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR): Hl7Segments = {
     import OutFormats._
     Hl7Segments(msgType, segments flatMap (seg => {
       if (seg._1 contains "ADHOC") {
@@ -274,7 +271,7 @@ package object model {
             if (outFormat contains JSON.toString) {
               (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(PIPE_DELIMITED, outDest(index), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -294,7 +291,7 @@ package object model {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
-  case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED,
+  case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
     lazy val EMPTY: mutable.LinkedHashMap[String, String] = mutable.LinkedHashMap.empty[String, String]
@@ -468,9 +465,4 @@ package object model {
       fromFile(templateBuildPath.toString + FS + file)
     } else fromFile(file)
   }
-
-  def getOS: String = {
-    sys.env.getOrElse("os.name", EMPTYSTR)
-  }
-
 }
