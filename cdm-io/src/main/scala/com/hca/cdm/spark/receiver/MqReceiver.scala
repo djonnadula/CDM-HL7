@@ -151,7 +151,10 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
             exception = ex
         }
       }
-      if (!persisted) self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", exception)
+      if (!persisted) {
+        self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", exception)
+        self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", exception)
+      }
       persisted
     }
 
