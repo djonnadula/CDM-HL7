@@ -107,11 +107,15 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    sparkStrCtx.union(numberOfReceivers.map(id => {
-      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
-      info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
-      stream
-    })) foreachRDD (rdd => {
+    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+    else {
+      sparkStrCtx.union(numberOfReceivers.map(id => {
+        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+        info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
+        stream
+      }))
+    }
+    stream foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
       val rejectOut = rejectedTopic
       val auditOut = auditTopic
