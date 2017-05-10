@@ -4,7 +4,7 @@
     "message_control_id": "MT_COCCT_ADT_TNAGTMRI.1.7133217",
     "medical_record_num": "M001990632",
     "medical_record_urn": "M992779",
-    "patient_account_num": "M992779"
+    "patient_account_num": ""
   },
   "0001.MSH": {
     "field_separator": "|",
@@ -54,7 +54,6 @@
     "primary_language": "ENG",
     "marital_status": "S",
     "religion": "NON",
-    "patient_account_num": "M992779",
     "ssn_num_patient": "990-42-4073"
   },
   "0004.IN1": {

@@ -1,4 +1,4 @@
-﻿ABS.1,discharge_care_provider,,
+ABS.1,discharge_care_provider,,
 ABS.1.1,discharge_care_provider,person_id,
 ABS.1.2,discharge_care_provider,family_name,
 ABS.1.2.1,discharge_care_provider,family_name,surname
