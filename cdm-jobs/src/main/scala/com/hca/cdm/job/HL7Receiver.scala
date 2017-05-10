@@ -73,7 +73,7 @@ object HL7Receiver extends Logg with App {
   if (walEnabled) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
     sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "30")
-    //sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+    // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
@@ -95,7 +95,7 @@ object HL7Receiver extends Logg with App {
   startStreams()
 
   private def initContext: StreamingContext = {
-    if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
+    sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
@@ -107,11 +107,15 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    sparkStrCtx.union(numberOfReceivers.map(id => {
-      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
-      info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
-      stream
-    })) foreachRDD (rdd => {
+    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+    else {
+      sparkStrCtx.union(numberOfReceivers.map(id => {
+        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+        info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
+        stream
+      }))
+    }
+    stream foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
       val rejectOut = rejectedTopic
       val auditOut = auditTopic
@@ -169,7 +173,6 @@ object HL7Receiver extends Logg with App {
         val retry = RetryHandler()
 
         def retryStart(): Unit = {
-          sparkStrCtx = initContext
           sparkStrCtx start()
           info(s"Started Spark Streaming Context Execution :: ${new Date()}")
           sparkStrCtx awaitTermination()

@@ -26,7 +26,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   def applyModel(whichSeg: String, model: Model)(data: mapType): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
-    if (modelFilter.isEmpty | (reqMsgType != IPLORU & reqMsgType != ORMORDERS & !isRequiredType(data, reqMsgType))) return notValid
+    if (modelFilter.isEmpty | (reqMsgType != IPLORU && reqMsgType != ORMORDERS && !isRequiredType(data, reqMsgType))) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
@@ -74,7 +74,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   layout = model.layoutCopy
                   if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                     handleCommonSegments(data, layout)
-                    val out = s"${makeFinal(layout)}$PIPE_DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
+                    val out = s"${makeFinal(layout)}$DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
                     (out, null)
                   } else {
                     (skippedStr, null)
