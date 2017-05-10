@@ -1,224 +1,224 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "COCBR",
-    "msh_msg_control_id": "MT_COCBR_SIU_BRSCHO.1.536374",
-    "pid_medical_record_num": "H000981833",
-    "pid_medical_record_urn": "798564",
-    "pid_pat_account_num": "H00727600505"
+    "sending_facility": "COCBR",
+    "message_control_id": "MT_COCBR_SIU_BRSCHO.1.536374",
+    "medical_record_num": "H000981833",
+    "medical_record_urn": "798564",
+    "patient_account_num": "H00727600505"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_facility": "COCBR",
-    "msh_msg_create_date_time": "201702021437",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCBR",
+    "date_time_of_message": "201702021437",
+    "message_type": {
       "message_code": "SIU",
       "trigger_event": "S12"
     },
-    "msh_msg_control_id": "MT_COCBR_SIU_BRSCHO.1.536374",
-    "msh_processing_id": "P",
-    "msh_version_id": "2.4"
+    "message_control_id": "MT_COCBR_SIU_BRSCHO.1.536374",
+    "processing_id": "P",
+    "version_id": "2.4"
   },
   "0002.SCH": {
-    "sch_placer_appointment_id": "H00727600505",
-    "sch_filler_appointment_id": "1858814~452151",
-    "sch_event_reason": "BOOK",
-    "sch_appointment_type": {
-      "primary_id": "HORIDE",
-      "name_of_coding_sys": "ORM"
+    "placer_appointment_id": "H00727600505",
+    "filler_appointment_id": "1858814~452151",
+    "event_reason": "BOOK",
+    "appointment_type": {
+      "id": "HORIDE",
+      "name_of_coding_system": "ORM"
     },
-    "sch_appointment_duration": "95",
-    "sch_appointment_duration_unit": "MIN",
-    "sch_appointment_timing_qty": "201702021700",
-    "sch_entered_by_location": "BOOKED"
+    "appointment_duration": "95",
+    "appointment_duration_units": "MIN",
+    "appointment_timing_quantity": "201702021700",
+    "entered_by_location": "BOOKED"
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": [
+    "set_id": "1",
+    "patient_id_list": [
       {
-        "identifier_num": "H000981833",
-        "identifier_type_code": "MR"
+        "id_num": "H000981833",
+        "id_type_code": "MR"
       },
       {
-        "identifier_num": "717-80-7281",
-        "identifier_type_code": "SS"
+        "id_num": "717-80-7281",
+        "id_type_code": "SS"
       },
       {
-        "identifier_num": "H906812",
-        "identifier_type_code": "PI"
+        "id_num": "H906812",
+        "id_type_code": "PI"
       }
     ],
-    "pid_alt_pat_id": "798564",
-    "pid_pat_name": {
-      "last_name": "GARCIA",
-      "first_name": "JORGE"
+    "alternate_patient_id": "798564",
+    "patient_name": {
+      "family_name": "GARCIA",
+      "given_name": "JORGE"
     },
-    "pid_birth_date_time": "19850118",
-    "pid_sex": "M",
-    "pid_race": "W",
-    "pid_pat_address": {
-      "street_address1": "4807 N MELTON AVE",
-      "street_address2": "APT 228",
+    "date_time_of_birth": "19850118",
+    "administrative_sex": "M",
+    "race": "W",
+    "patient_address": {
+      "street_address": "4807 N MELTON AVE",
+      "other_designation": "APT 228",
       "city": "TAMPA",
-      "state_province": "FL",
-      "zip_postal_code": "33614",
+      "state_or_province": "FL",
+      "zip_or_postal_code": "33614",
       "country": "USA",
       "county_parish_code": "HILL"
     },
-    "pid_home_phone_num": "(352)942-0217",
-    "pid_marital_status": "S",
-    "pid_religion": "NON",
-    "pid_pat_account_num": "H00727600505"
+    "phone_num_home": "(352)942-0217",
+    "marital_status": "S",
+    "religion": "NON",
+    "patient_account_num": "H00727600505"
   },
   "0004.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "E",
-    "pv1_assgn_pat_loc": "H.EDX",
-    "pv1_adm_type": "EM",
-    "pv1_prior_pat_loc": "H.ED",
-    "pv1_attending_doctor": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": "H.EDX",
+    "admission_type": "EM",
+    "prior_patient_location": "H.ED",
+    "attending_doctor": {
       "person_id": "METLU",
-      "last_name": "Metzker",
-      "first_name": "Luke",
+      "family_name": "Metzker",
+      "given_name": "Luke",
       "degree": "DO"
     },
-    "pv1_referring_doctor": {
+    "referring_doctor": {
       "person_id": ".SELF",
-      "last_name": "Referred",
-      "first_name": "Self"
+      "family_name": "Referred",
+      "given_name": "Self"
     },
-    "pv1_consulting_doctor": {
+    "consulting_doctor": {
       "person_id": ".NO PCP",
-      "last_name": "Physician",
-      "first_name": "No",
-      "middle_name": "Primary or Family"
+      "family_name": "Physician",
+      "given_name": "No",
+      "second_and_further_given_names_or_initials_thereof": "Primary or Family"
     },
-    "pv1_hospital_service": "ERS",
-    "pv1_adm_source": "PR",
-    "pv1_ambulatory_status": "WI",
-    "pv1_pat_type": "ER",
-    "pv1_visit_num": "INJURY - ACCIDENT",
-    "pv1_financial_classification": "04WC",
-    "pv1_servicing_facility": "COCBR",
-    "pv1_bed_status": "INJURY - ACCIDENT",
-    "pv1_account_status": "REG",
-    "pv1_adm_date_time": "201702021305"
+    "hospital_service": "ERS",
+    "admit_source": "PR",
+    "ambulatory_status": "WI",
+    "patient_type": "ER",
+    "visit_num": "INJURY - ACCIDENT",
+    "financial_class": "04WC",
+    "servicing_facility": "COCBR",
+    "bed_status": "INJURY - ACCIDENT",
+    "account_status": "REG",
+    "admit_date_time": "201702021305"
   },
   "0005.AL1": {
-    "al1_set_id": "1",
-    "al1_allergen_type_code": "DA",
-    "al1_allergen_code": {
-      "primary_id": "F001900388",
+    "set_id": "1",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F001900388",
       "text": "No Known Allergies",
-      "name_of_coding_sys": "No Known Allergies"
+      "name_of_coding_system": "No Known Allergies"
     },
-    "al1_allergy_severity_code": "U",
-    "al1_identification_date": "20170202"
+    "allergy_severity_code": "U",
+    "identification_date": "20170202"
   },
   "0006.RGS": {
-    "rgs_set_id": "1",
-    "rgs_resource_group_id": {
-      "primary_id": "HORALL",
+    "set_id": "1",
+    "resource_group_id": {
+      "id": "HORALL",
       "text": "ALL OPERATING ROOMS"
     }
   },
   "0007.RGS": {
-    "rgs_set_id": "2",
-    "rgs_resource_group_id": {
-      "primary_id": "HORBASIC",
+    "set_id": "2",
+    "resource_group_id": {
+      "id": "HORBASIC",
       "text": "BASIC EQUIPMENT"
     }
   },
   "0008.RGS": {
-    "rgs_set_id": "3",
-    "rgs_resource_group_id": {
-      "primary_id": "HORPHYSIC",
+    "set_id": "3",
+    "resource_group_id": {
+      "id": "HORPHYSIC",
       "text": "PHYSICIAN"
     }
   },
   "0009.RGS": {
-    "rgs_set_id": "4",
-    "rgs_resource_group_id": {
-      "primary_id": "HORTOURN",
+    "set_id": "4",
+    "resource_group_id": {
+      "id": "HORTOURN",
       "text": "TOURNIQUETS"
     }
   },
   "0010.AIG": {
-    "aig_set_id": "1",
-    "aig_resource_id": {
-      "primary_id": "HOR17",
+    "set_id": "1",
+    "resource_id": {
+      "id": "HOR17",
       "text": "OR 17"
     },
-    "aig_resource_group": "HORALL",
-    "aig_start_date_time": "201702021700",
-    "aig_duration": "95"
+    "resource_group": "HORALL",
+    "start_date_time": "201702021700",
+    "duration": "95"
   },
   "0011.AIG": {
-    "aig_set_id": "2",
-    "aig_resource_id": {
-      "primary_id": "HORBASIC",
+    "set_id": "2",
+    "resource_id": {
+      "id": "HORBASIC",
       "text": "BASIC EQUIPMENT"
     },
-    "aig_resource_group": "HORBASIC",
-    "aig_start_date_time": "201702021700",
-    "aig_duration": "95"
+    "resource_group": "HORBASIC",
+    "start_date_time": "201702021700",
+    "duration": "95"
   },
   "0012.AIG": {
-    "aig_set_id": "3",
-    "aig_resource_id": {
-      "primary_id": "HORTOURN",
+    "set_id": "3",
+    "resource_id": {
+      "id": "HORTOURN",
       "text": "TOURNIQUET"
     },
-    "aig_resource_group": "HORTOURN",
-    "aig_start_date_time": "201702021700",
-    "aig_duration": "95"
+    "resource_group": "HORTOURN",
+    "start_date_time": "201702021700",
+    "duration": "95"
   },
   "0013.AIG": {
-    "aig_set_id": "4",
-    "aig_resource_id": {
-      "primary_id": "HORBANSU",
+    "set_id": "4",
+    "resource_id": {
+      "id": "HORBANSU",
       "text": "BANDARUPALLI, SUNIL"
     },
-    "aig_resource_group": "HORPHYSIC",
-    "aig_start_date_time": "201702021700",
-    "aig_duration": "95"
+    "resource_group": "HORPHYSIC",
+    "start_date_time": "201702021700",
+    "duration": "95"
   },
   "0014.AIG": {
-    "aig_set_id": "5",
-    "aig_resource_id": {
-      "primary_id": "HORSHAANJ",
+    "set_id": "5",
+    "resource_id": {
+      "id": "HORSHAANJ",
       "text": "SHAH, ANJAN"
     },
-    "aig_resource_group": "HORPHYSIC",
-    "aig_start_date_time": "201702021700",
-    "aig_duration": "95"
+    "resource_group": "HORPHYSIC",
+    "start_date_time": "201702021700",
+    "duration": "95"
   },
   "0015.AIS": {
-    "ais_set_id": "1",
-    "ais_universal_service_id": {
-      "primary_id": "HORIDE",
+    "set_id": "1",
+    "universal_service_id": {
+      "id": "HORIDE",
       "text": "INCISION DRAINAGE EXTREMITY"
     },
-    "ais_start_date_time": "201702021700",
-    "ais_duration": "75",
-    "ais_duration_unit": "min",
-    "ais_placer_supplemental_service_information": "BOOKED"
+    "start_date_time": "201702021700",
+    "duration": "75",
+    "duration_units": "min",
+    "placer_supplemental_service_information": "BOOKED"
   },
   "0016.AIL": {
-    "ail_set_id": "1",
-    "ail_location_resource_id": "H.OS",
-    "ail_location_type": "HORIDE"
+    "set_id": "1",
+    "location_resource_id": "H.OS",
+    "location_type": "HORIDE"
   },
   "0017.AIP": {
-    "aip_set_id": "1",
-    "aip_personnel_resource_id": {
+    "set_id": "1",
+    "personnel_resource_id": {
       "person_id": "SHAANJ",
-      "last_name": "Shah",
-      "first_name": "Anjan",
-      "middle_name": "R",
+      "family_name": "Shah",
+      "given_name": "Anjan",
+      "second_and_further_given_names_or_initials_thereof": "R",
       "degree": "MD"
     },
-    "aip_duration": "95"
+    "duration": "95"
   },
   "0018.ZAI": {
     "zai_unknown": "GEN^GENERAL^BANSU^Bandarupalli^Sunil^R^^^MD"

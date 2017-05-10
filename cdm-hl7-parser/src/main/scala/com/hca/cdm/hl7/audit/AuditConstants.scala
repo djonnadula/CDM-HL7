@@ -7,13 +7,13 @@ package com.hca.cdm.hl7.audit
   */
 object AuditConstants {
 
-  lazy val msg_control_id = "msh_msg_control_id"
-  lazy val msg_create_time = "msh_msg_create_date_time"
-  lazy val medical_record_num = "pid_medical_record_num"
-  lazy val medical_record_urn = "pid_medical_record_urn"
-  lazy val account_num = "pid_pat_account_num"
-  lazy val sending_facility = "msh_sending_facility"
-  lazy val msh_msg_type = "msh_msg_type"
+  lazy val msg_control_id = "message_control_id"
+  lazy val msg_create_time = "date_time_of_message"
+  lazy val medical_record_num = "medical_record_num"
+  lazy val medical_record_urn = "medical_record_urn"
+  lazy val account_num = "patient_account_num"
+  lazy val sending_facility = "sending_facility"
+  lazy val msh_msg_type = "message_type"
   lazy val trigger_event = "trigger_event"
   lazy val rawStage = "RAW"
   lazy val jsonStage = "JSON"

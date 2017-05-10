@@ -1,129 +1,129 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "FRNK",
-    "msh_msg_control_id": "MT6_FRNK_ADT_137522262",
-    "pid_medical_record_num": "K000329379",
-    "pid_medical_record_urn": "41354134351354856",
-    "pid_pat_account_num": "FR0804087476"
+    "sending_facility": "FRNK",
+    "message_control_id": "MT6_FRNK_ADT_137522262",
+    "medical_record_num": "K000329379",
+    "medical_record_urn": "41354134351354856",
+    "patient_account_num": "FR0804087476"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "ADM",
-    "msh_sending_facility": "FRNK",
-    "msh_msg_create_date_time": "201607211519",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "ADM",
+    "sending_facility": "FRNK",
+    "date_time_of_message": "201607211519",
+    "message_type": {
       "message_code": "ADT",
       "trigger_event": "A05"
     },
-    "msh_msg_control_id": "MT6_FRNK_ADT_137522262",
-    "msh_processing_id": "P",
-    "msh_version_id": "2.4"
+    "message_control_id": "MT6_FRNK_ADT_137522262",
+    "processing_id": "P",
+    "version_id": "2.4"
   },
   "0002.EVN": {
-    "evn_recorded_date_time": "201607211519",
-    "evn_oper_id": {
+    "recorded_date_time": "201607211519",
+    "operator_id": {
       "person_id": "SHZ2579",
-      "last_name": "Gaines",
-      "first_name": "Angel",
-      "middle_name": "M"
+      "family_name": "Gaines",
+      "given_name": "Angel",
+      "second_and_further_given_names_or_initials_thereof": "M"
     },
-    "evn_evnt_occurred": "201607221100"
+    "event_occured": "201607221100"
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": [
+    "set_id": "1",
+    "patient_id_list": [
       {
-        "identifier_num": "K000329379",
-        "identifier_type_code": "MR",
-        "assgn_facility": "FRNK"
+        "id_num": "K000329379",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "403-98-0839",
-        "identifier_type_code": "SS",
-        "assgn_facility": "FRNK"
+        "id_num": "403-98-0839",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "A1-B20160721141913229",
-        "identifier_type_code": "PI",
-        "assgn_facility": "FRNK"
+        "id_num": "A1-B20160721141913229",
+        "id_type_code": "PI",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "A00236041",
-        "identifier_type_code": "HUB",
-        "assgn_facility": "FRNK"
+        "id_num": "A00236041",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
       }
     ],
-    "pid_alt_pat_id": "41354134351354856",
-    "pid_pat_name": {
-      "last_name": "BROOKS",
-      "first_name": "LYNN",
-      "type_code": "L"
+    "alternate_patient_id": "41354134351354856",
+    "patient_name": {
+      "family_name": "BROOKS",
+      "given_name": "LYNN",
+      "name_type_code": "L"
     },
-    "pid_birth_date_time": "19741229",
-    "pid_sex": "F",
-    "pid_pat_address": {
+    "date_time_of_birth": "19741229",
+    "administrative_sex": "F",
+    "patient_address": {
       "address_type": "P"
     },
-    "pid_home_phone_num": "(502)750-2382",
-    "pid_pat_account_num": "FR0804087476",
-    "pid_pat_social_security_num": "403-98-0839"
+    "phone_num_home": "(502)750-2382",
+    "patient_account_num": "FR0804087476",
+    "ssn_num_patient": "403-98-0839"
   },
   "0004.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "P",
-    "pv1_assgn_pat_loc": "FR.SURG",
-    "pv1_attending_doctor": {
+    "set_id": "1",
+    "patient_class": "P",
+    "assigned_patient_location": "FR.SURG",
+    "attending_doctor": {
       "person_id": "GHM1617",
-      "last_name": "Vallance",
-      "first_name": "Steven",
-      "middle_name": "R.",
-      "identifier_type_code": "XX"
+      "family_name": "Vallance",
+      "given_name": "Steven",
+      "second_and_further_given_names_or_initials_thereof": "R.",
+      "id_type_code": "XX"
     },
-    "pv1_pat_type": "SDC",
-    "pv1_financial_classification": "08",
-    "pv1_servicing_facility": "FRNK",
-    "pv1_account_status": "PRE",
-    "pv1_adm_date_time": "201607221100"
+    "patient_type": "SDC",
+    "financial_class": "08",
+    "servicing_facility": "FRNK",
+    "account_status": "PRE",
+    "admit_date_time": "201607221100"
   },
   "0005.PV2": {
-    "pv2_adm_reason": "GALL STONES",
-    "pv2_newborn_baby_ind": "N"
+    "admit_reason": "GALL STONES",
+    "newborn_baby_indicator": "N"
   },
   "0006.ROL": {
-    "rol_role_instance_id": "1",
-    "rol_action_code": "AD",
-    "rol_role_name": "AT",
-    "rol_role_person_name": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
       "person_id": "GHM1617",
-      "last_name": "Vallance",
-      "first_name": "Steven",
-      "middle_name": "R.",
-      "identifier_type_code": "XX"
+      "family_name": "Vallance",
+      "given_name": "Steven",
+      "second_and_further_given_names_or_initials_thereof": "R.",
+      "id_type_code": "XX"
     }
   },
   "0007.DRG": {
-    "drg_diagnostic_related_group": "33"
+    "diagnostic_related_group": "33"
   },
   "0008.IN1": {
-    "in1_set_id": "1",
-    "in1_insurance_plan_id": "BAPTISHLTH",
-    "in1_insurance_company_name": "BAPTIST HEALTH NETWORK",
-    "in1_insured_name": {
-      "last_name": "BROOKS",
-      "first_name": "LYNN"
+    "set_id": "1",
+    "health_plan_id": "BAPTISHLTH",
+    "insurance_company_name": "BAPTIST HEALTH NETWORK",
+    "name_of_insured": {
+      "family_name": "BROOKS",
+      "given_name": "LYNN"
     },
-    "in1_insured_relationship_to_patient": "SA",
-    "in1_insured_birth_date": "19741229",
-    "in1_insured_address": {
+    "insured_relationship_to_patient": "SA",
+    "insured_date_of_birth": "19741229",
+    "insured_address": {
       "address_type": "P"
     },
-    "in1_policy_num": "403980839",
-    "in1_insured_sex": "F"
+    "policy_num": "403980839",
+    "insured_administrative_sex": "F"
   },
   "0009.IN2": {
-    "in2_set_id": "1",
-    "in2_insured_social_security_num": "403-98-0839",
-    "in2_insured_phone_num_home": "(502)750-2382"
+    "set_id": "1",
+    "insured_social_security_num": "403-98-0839",
+    "insured_phone_num_home": "(502)750-2382"
   }
 }

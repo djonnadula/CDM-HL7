@@ -14,6 +14,7 @@ import scala.concurrent.{Await, Future => async}
 import scala.util.{Failure, Success, Try}
 import AuditConstants._
 import com.hca.cdm.Models.MSGMeta
+import scala.collection.mutable.ListBuffer
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -61,6 +62,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   private def runModel(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
                        adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit = {
+    val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[String] else null
     segRef map (seg => seg -> run(seg, data)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
       case Success(tranCompleted) =>
         tranCompleted.trans match {
@@ -78,12 +80,12 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                   val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
                   // This Check Added After Discussing this Log is not Required as of now So commenting.
                   sizeCheck(msg, segment.seg)
-                  tryAndLogThr(rejectIO(msg, hl7 + COLON + segment.seg), hl7 + COLON + segment.seg + "-rejectIO-filteredSegment", error(_: Throwable))
+                  tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
                   debug(s"Segment Filtered :: $msg")
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
-                    if (segment.tlmAckApplication != EMPTYSTR) tlmAckIO.foreach(ackTlm => ackTlm(tlmAuditor(segment.tlmAckApplication, meta)))
+                    if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) tlmAckMessages += tlmAuditor(segment.tlmAckApplication, meta)
                     if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest), s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                       if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                         s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
@@ -139,7 +141,10 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
     }
     if (segRef.nonEmpty) tryAndLogThr(auditIO(segmentsInHl7Auditor(segmentsInMsg(allSegmentsForHl7, data), meta), header(hl7, auditHeader, Left(meta))),
       s"$hl7$COLON nonAdhocSegments-auditIO-segmentsInHl7Auditor", error(_: Throwable))
-    tlmAckIO.foreach(ackTlm => ackTlm(tlmAuditor(segmentsInHL7, meta)))
+    if (tlmAckIO isDefined) {
+      tlmAckMessages.foreach(tlmAckIO.get)
+      tlmAckIO.get(tlmAuditor(segmentsInHL7, meta))
+    }
   }
 
   private def run(segment: Segment, data: mapType) =

@@ -1,503 +1,503 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "FRNK",
-    "msh_msg_control_id": "MT_FRNK_ADT_1124574.",
-    "pid_medical_record_num": "K000002505",
-    "pid_medical_record_urn": "A1-B20151218101601316",
-    "pid_pat_account_num": "FR0000000220"
+    "sending_facility": "FRNK",
+    "message_control_id": "MT_FRNK_ADT_1124574.",
+    "medical_record_num": "K000002505",
+    "medical_record_urn": "A1-B20151218101601316",
+    "patient_account_num": "FR0000000220"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "MT_FRNK",
-    "msh_sending_facility": "FRNK",
-    "msh_receiving_appl": "DBM",
-    "msh_msg_create_date_time": "20151218115500-0600",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20151218115500-0600",
+    "message_type": {
       "message_code": "ADT",
       "trigger_event": "A41"
     },
-    "msh_msg_control_id": "MT_FRNK_ADT_1124574.",
-    "msh_processing_id": "D",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": "KYB"
+    "message_control_id": "MT_FRNK_ADT_1124574.",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "KYB"
   },
   "0002.EVN": {
-    "evn_evnt_type": "A41",
-    "evn_recorded_date_time": "201512181155",
-    "evn_oper_id": {
+    "event_type_code": "A41",
+    "recorded_date_time": "201512181155",
+    "operator_id": {
       "person_id": "QBE8554",
-      "last_name": "Hammock",
-      "first_name": "Brittany"
+      "family_name": "Hammock",
+      "given_name": "Brittany"
     },
-    "evn_evnt_occurred": "20151218"
+    "event_occured": "20151218"
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": [
+    "set_id": "1",
+    "patient_id_list": [
       {
-        "identifier_num": "K000002505",
-        "identifier_type_code": "MR",
-        "assgn_facility": "FRNK"
+        "id_num": "K000002505",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "A00002475",
-        "identifier_type_code": "HUB",
-        "assgn_facility": "FRNK"
+        "id_num": "A00002475",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
       }
     ],
-    "pid_alt_pat_id": {
+    "alternate_patient_id": {
       "identifier_num": "A1-B20151218101601316",
       "identifier_type_code": "URN",
       "assgn_facility": "FRNK"
     },
-    "pid_pat_name": {
-      "last_name": "OSBORN",
-      "first_name": "NORMAN",
-      "type_code": "L"
+    "patient_name": {
+      "family_name": "OSBORN",
+      "given_name": "NORMAN",
+      "name_type_code": "L"
     },
-    "pid_birth_date_time": "19840220",
-    "pid_sex": "M",
-    "pid_pat_address": {
+    "date_time_of_birth": "19840220",
+    "administrative_sex": "M",
+    "patient_address": {
       "address_type": "P"
     },
-    "pid_pat_account_num": "FR0000000220"
+    "patient_account_num": "FR0000000220"
   },
   "0004.MRG": {
-    "mrg_prior_pat_account_num": "FR0000121525"
+    "prior_patient_account_num": "FR0000121525"
   },
   "0005.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "I",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
       "point_of_care": "FR.4W",
       "room": "FR.430",
       "bed": "A"
     },
-    "pv1_adm_type": "EL",
-    "pv1_attending_doctor": {
+    "admission_type": "EL",
+    "attending_doctor": {
       "person_id": "DR.ATND01",
-      "last_name": "Attending01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     },
-    "pv1_referring_doctor": {
+    "referring_doctor": {
       "person_id": "DR.FAM01",
-      "last_name": "Family01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Family01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     },
-    "pv1_hospital_service": "OP",
-    "pv1_adm_source": "CR",
-    "pv1_admitting_doctor": {
+    "hospital_service": "OP",
+    "admit_source": "CR",
+    "admitting_doctor": {
       "person_id": "DR.ADM01",
-      "last_name": "Admitting01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Admitting01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     },
-    "pv1_pat_type": "INO",
-    "pv1_financial_classification": "U",
-    "pv1_servicing_facility": "FRNK",
-    "pv1_account_status": "ADM",
-    "pv1_adm_date_time": "201512181113"
+    "patient_type": "INO",
+    "financial_class": "U",
+    "servicing_facility": "FRNK",
+    "account_status": "ADM",
+    "admit_date_time": "201512181113"
   },
   "0006.PV2": {
-    "pv2_accommodation_code": {
-      "primary_id": "SP",
+    "accommodation_code": {
+      "id": "SP",
       "text": "Semi Private Room"
     },
-    "pv2_adm_reason": "OVERDOSE",
-    "pv2_actual_length_of_inpatient_stay": "1",
-    "pv2_visit_priority_code": "EL",
-    "pv2_newborn_baby_ind": "N"
+    "admit_reason": "OVERDOSE",
+    "actual_length_of_inpatient_stay": "1",
+    "visit_priority_code": "EL",
+    "newborn_baby_indicator": "N"
   },
   "0007.ROL": {
-    "rol_role_instance_id": "1",
-    "rol_action_code": "AD",
-    "rol_role_name": "AT",
-    "rol_role_person_name": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
       "person_id": "DR.ATND01",
-      "last_name": "Attending01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     }
   },
   "0008.ROL": {
-    "rol_role_instance_id": "2",
-    "rol_action_code": "AD",
-    "rol_role_name": "RP",
-    "rol_role_person_name": {
+    "role_instance_id": "2",
+    "action_code": "AD",
+    "role_rol": "RP",
+    "role_person": {
       "person_id": "DR.FAM01",
-      "last_name": "Family01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Family01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     }
   },
   "0009.ROL": {
-    "rol_role_instance_id": "3",
-    "rol_action_code": "AD",
-    "rol_role_name": "AD",
-    "rol_role_person_name": {
+    "role_instance_id": "3",
+    "action_code": "AD",
+    "role_rol": "AD",
+    "role_person": {
       "person_id": "DR.ADM01",
-      "last_name": "Admitting01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Admitting01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     }
   },
   "0010.ROL": {
-    "rol_role_instance_id": "4",
-    "rol_action_code": "AD",
-    "rol_role_name": "PP",
-    "rol_role_person_name": {
+    "role_instance_id": "4",
+    "action_code": "AD",
+    "role_rol": "PP",
+    "role_person": {
       "person_id": "DR.PCP01",
-      "last_name": "PrimaryCare01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     }
   },
   "0011.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F010A",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F010A",
       "text": "Deposit Req?",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_value": "N",
-    "obx_observation_result_status": "F"
+    "obsv_value": "N",
+    "obsv_result_status": "F"
   },
   "0012.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F011A",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F011A",
       "text": "Est Amt Due",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0013.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F012A",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F012A",
       "text": "Amt Rec",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0014.OBX": {
-    "obx_set_id": "4",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F014A",
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F014A",
       "text": "Collected by",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0015.OBX": {
-    "obx_set_id": "5",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F016A",
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F016A",
       "text": "Pt Advised of Financial Responsibility   Resources, Refer to",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0016.OBX": {
-    "obx_set_id": "6",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F017A",
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F017A",
       "text": "Discharge Financial Status",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0017.OBX": {
-    "obx_set_id": "7",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F027A",
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F027A",
       "text": "Hold Release Reason",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0018.OBX": {
-    "obx_set_id": "8",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F028A",
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F028A",
       "text": "Hold User ID:",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0019.OBX": {
-    "obx_set_id": "9",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0F031A",
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F031A",
       "text": "Amt Req",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0020.OBX": {
-    "obx_set_id": "10",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P010A",
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P010A",
       "text": "Does the Patient Have Temporary Address?",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_value": "N",
-    "obx_observation_result_status": "F"
+    "obsv_value": "N",
+    "obsv_result_status": "F"
   },
   "0021.OBX": {
-    "obx_set_id": "11",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P011A",
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P011A",
       "text": "Address",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0022.OBX": {
-    "obx_set_id": "12",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P012A",
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P012A",
       "text": "Address",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0023.OBX": {
-    "obx_set_id": "13",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P013A",
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P013A",
       "text": "City",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0024.OBX": {
-    "obx_set_id": "14",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P014A",
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P014A",
       "text": "State",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0025.OBX": {
-    "obx_set_id": "15",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P015A",
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P015A",
       "text": "Zip",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0026.OBX": {
-    "obx_set_id": "16",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P016A",
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P016A",
       "text": "Home PH",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0027.OBX": {
-    "obx_set_id": "17",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P017A",
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P017A",
       "text": "County",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0028.OBX": {
-    "obx_set_id": "18",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P018A",
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P018A",
       "text": "Country",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0029.OBX": {
-    "obx_set_id": "19",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P019A",
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P019A",
       "text": "Temporary Address Until?",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0030.OBX": {
-    "obx_set_id": "20",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P020A",
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P020A",
       "text": "Comment",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0031.OBX": {
-    "obx_set_id": "21",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P050A",
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P050A",
       "text": "Does Patient Have Additional Employment?",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_value": "N",
-    "obx_observation_result_status": "F"
+    "obsv_value": "N",
+    "obsv_result_status": "F"
   },
   "0032.OBX": {
-    "obx_set_id": "22",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P051A",
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P051A",
       "text": "Name:",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0033.OBX": {
-    "obx_set_id": "23",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P052A",
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P052A",
       "text": "Address",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0034.OBX": {
-    "obx_set_id": "24",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P053A",
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P053A",
       "text": "Address",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0035.OBX": {
-    "obx_set_id": "25",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P054A",
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P054A",
       "text": "City",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0036.OBX": {
-    "obx_set_id": "26",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P055A",
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P055A",
       "text": "State",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0037.OBX": {
-    "obx_set_id": "27",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P056A",
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P056A",
       "text": "Zip",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0038.OBX": {
-    "obx_set_id": "28",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P057A",
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P057A",
       "text": "Work Phone",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0039.OBX": {
-    "obx_set_id": "29",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P058A",
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P058A",
       "text": "Occupation",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0040.OBX": {
-    "obx_set_id": "30",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P059A",
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P059A",
       "text": "Emp Status",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0041.OBX": {
-    "obx_set_id": "31",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1PAO0P062A",
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P062A",
       "text": "Description",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0042.OBX": {
-    "obx_set_id": "32",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1REG0R032A",
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R032A",
       "text": "If Yes, Which Facility?",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0043.OBX": {
-    "obx_set_id": "33",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "1REG0R033A",
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R033A",
       "text": "If Other, Which Facility?",
-      "name_of_coding_sys": "ADM"
+      "name_of_coding_system": "ADM"
     },
-    "obx_observation_result_status": "F"
+    "obsv_result_status": "F"
   },
   "0044.DG1": {
-    "dg1_set_id": "1",
-    "dg1_diagnosis_code": {
-      "primary_id": "F14.150",
+    "set_id": "1",
+    "diagnosis_code": {
+      "id": "F14.150",
       "text": "COCAINE ABUSE W COCAINE-INDUC PSYCHOTIC DISORDER W DELUSIONS",
-      "name_of_coding_sys": "I10"
+      "name_of_coding_system": "I10"
     },
-    "dg1_diagnosis_type": "Other"
+    "diagnosis_type": "Other"
   },
   "0045.DRG": {
-    "drg_diagnostic_related_group": "33"
+    "diagnostic_related_group": "33"
   }
 }

@@ -1,316 +1,319 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "COCFPA",
-    "msh_msg_control_id": "IP_COCFPA_SIU_SCHFPA.170131.2",
-    "pid_medical_record_num": "BF00024737",
-    "pid_medical_record_urn": "J23339",
-    "pid_pat_account_num": "BF8000037874"
+    "sending_facility": "COCFPA",
+    "message_control_id": "IP_COCFPA_SIU_SCHFPA.170131.2",
+    "medical_record_num": "BF00024737",
+    "medical_record_urn": "J23339",
+    "patient_account_num": "BF8000037874"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "COCFPA",
-    "msh_sending_facility": "COCFPA",
-    "msh_receiving_appl": "OV",
-    "msh_receiving_facility": "OV",
-    "msh_msg_create_date_time": "201701311003",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCFPA",
+    "sending_facility": "COCFPA",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201701311003",
+    "message_type": {
       "message_code": "SIU",
       "trigger_event": "S18"
     },
-    "msh_msg_control_id": "IP_COCFPA_SIU_SCHFPA.170131.2",
-    "msh_processing_id": "T",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": {
+    "message_control_id": "IP_COCFPA_SIU_SCHFPA.170131.2",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
       "network_id": "TXG",
       "unit_number": "26790"
     }
   },
   "0002.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": {
-      "identifier_num": "BF00024737",
-      "assgn_authr": "COCFPA",
-      "identifier_type_code": "MRN"
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "BF00024737",
+      "assigning_authority": "COCFPA",
+      "id_type_code": "MRN"
     },
-    "pid_alt_pat_id": "J23339",
-    "pid_pat_name": {
-      "last_name": "CARLTON",
-      "first_name": "DEBORAH",
-      "middle_name": "L"
+    "alternate_patient_id": "J23339",
+    "patient_name": {
+      "family_name": "CARLTON",
+      "given_name": "DEBORAH",
+      "second_and_further_given_names_or_initials_thereof": "L"
     },
-    "pid_birth_date_time": "19500408",
-    "pid_sex": "F",
-    "pid_pat_account_num": "BF8000037874"
+    "date_time_of_birth": "19500408",
+    "administrative_sex": "F",
+    "patient_account_num": "BF8000037874"
   },
   "0003.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "I",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
       "point_of_care": "BF.MST",
       "room": "BF.303",
       "bed": "A",
       "facility": "COCFPA"
     },
-    "pv1_adm_type": "EL",
-    "pv1_attending_doctor": {
+    "admission_type": "EL",
+    "attending_doctor": {
       "person_id": "ROBWI03",
-      "last_name": "Robertson",
-      "first_name": "William"
+      "family_name": "Robertson",
+      "given_name": "William"
     },
-    "pv1_pat_type": "IN",
-    "pv1_account_status": "ADM"
+    "patient_type": "IN",
+    "account_status": "ADM"
   },
   "0004.SCH": {
-    "sch_unique_case_id": "1749",
-    "sch_unique_appointment_id": "3134",
-    "sch_operation_type": "P",
-    "sch_update_type": "NEW",
-    "sch_patient_doctor": {
+    "unique_case_id": "1749",
+    "unique_appointment_id": "3134",
+    "operation_type": "P",
+    "update_type": "NEW",
+    "patient_doctor": {
       "provider_id": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "sch_patient_service": "ORT",
-    "sch_patient_facility": "COCFPA",
-    "sch_operating_room": {
+    "patient_service": "ORT",
+    "patient_facility": "COCFPA",
+    "operating_room": {
       "room_id": "OR 07",
       "room_desc": "OR ROOM 07"
     },
-    "sch_principal_surgeon": {
+    "principal_surgeon": {
       "provider_id": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "sch_principal_anesthesiologist": {
+    "principal_anesthesiologist": {
       "provider_id": "ETTMA",
       "last_name": "Ettinger",
       "first_name": "Mark"
     },
-    "sch_operation_date_time": "201701301400",
-    "sch_operation_entered": {
+    "operation_date_time": "201701301400",
+    "operation_entered": {
       "entered_date_time": "201701251001",
       "entered_by": "BFSCH.KR"
     },
-    "sch_operation_scheduled_date_time": "201701301400"
+    "operation_scheduled_date_time": "201701301400"
   },
   "0005.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "hcaORLDRAINSb",
-      "name_of_coding_sys": "Drains and Packs",
-      "alt_id": "hcaORL277",
-      "alt_text": "Drain 1:"
+      "name_of_coding_system": "Drains and Packs",
+      "alternate_id": "hcaORL277",
+      "alternate_text": "Drain 1:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "H:Hemovac"
+    "obsv_sub_id": "1",
+    "obsv_value": "H:Hemovac"
   },
   "0006.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "hcaORLDRAINSb",
-      "name_of_coding_sys": "Drains and Packs",
-      "alt_id": "hcaORL153",
-      "alt_text": "Drain 1 on arrival:"
+      "name_of_coding_system": "Drains and Packs",
+      "alternate_id": "hcaORL153",
+      "alternate_text": "Drain 1 on arrival:"
     },
-    "obx_observation_value": "N:No"
+    "obsv_value": "N:No"
   },
   "0007.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "hcaORLDRAINSb",
-      "name_of_coding_sys": "Drains and Packs",
-      "alt_id": "hcaORL154",
-      "alt_text": "Drain 1 size:"
+      "name_of_coding_system": "Drains and Packs",
+      "alternate_id": "hcaORL154",
+      "alternate_text": "Drain 1 size:"
     },
-    "obx_observation_value": "MEDIUM"
+    "obsv_value": "MEDIUM"
   },
   "0008.OBX": {
-    "obx_set_id": "4",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "CASE.OP",
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "CASE.OP",
       "text": "hcaORLDRAINSb",
-      "name_of_coding_sys": "Drains and Packs",
-      "alt_id": "hcaORL278",
-      "alt_text": "Drain 1 location:"
+      "name_of_coding_system": "Drains and Packs",
+      "alternate_id": "hcaORL278",
+      "alternate_text": "Drain 1 location:"
     },
-    "obx_observation_value": "OPSITE"
+    "obsv_value": "OPSITE"
   },
   "0009.ZTM": {
-    "ztm_case_pre_1_time": {
+    "case_pre_1_time": {
       "time_desc": "PT ARRIVES OPS",
       "pre_date_time": "201701301200"
     },
-    "ztm_case_pre_2_time": {
+    "case_pre_2_time": {
       "time_desc": "PT READY",
       "pre_date_time": "201701301314"
     },
-    "ztm_case_hold_1_time": "PT ARRIVES HOLDING",
-    "ztm_case_hold_2_time": "PT READY",
-    "ztm_case_operating_room_1_time": {
+    "case_hold_1_time": "PT ARRIVES HOLDING",
+    "case_hold_2_time": "PT READY",
+    "case_operating_room_1_time": {
       "time_desc": "ANESTHESIA START",
       "or_date_time": "201701301415"
     },
-    "ztm_case_operating_room_2_time": {
+    "case_operating_room_2_time": {
       "time_desc": "PT IN ROOM",
       "or_date_time": "201701301415",
       "delay_code": "SURG03",
       "delay_desc": "SURGEON-LATE",
       "delay_duration_min": "15"
     },
-    "ztm_case_operating_room_3_time": {
+    "case_operating_room_3_time": {
       "time_desc": "SURGEON IN ROOM",
       "or_date_time": "201701301415"
     },
-    "ztm_case_operating_room_4_time": {
+    "case_operating_room_4_time": {
       "time_desc": "PROCEDURE START",
       "or_date_time": "201701301514"
     },
-    "ztm_case_operating_room_5_time": {
+    "case_operating_room_5_time": {
       "time_desc": "PROCEDURE END",
       "or_date_time": "201701301712"
     },
-    "ztm_case_operating_room_6_time": {
+    "case_operating_room_6_time": {
       "time_desc": "SURGEON LEAVES ROOM",
       "or_date_time": "201701301718"
     },
-    "ztm_case_operating_room_7_time": {
+    "case_operating_room_7_time": {
       "time_desc": "PT LEAVES ROOM",
       "or_date_time": "201701301718"
     },
-    "ztm_case_pacu_1_time": {
+    "case_pacu_1_time": {
       "time_desc": "PT ARRIVES PACU",
       "pacu_date_time": "201701301719"
     },
-    "ztm_case_pacu_2_time": {
+    "case_pacu_2_time": {
       "time_desc": "ANESTHESIA END",
       "pacu_date_time": "201701301725"
     },
-    "ztm_case_pacu_3_time": {
+    "case_pacu_3_time": {
       "time_desc": "PT DISCHARGE PHASE 1",
       "pacu_date_time": "201701301920"
     },
-    "ztm_case_pacu_4_time": "PT PACU HOLDING OUT",
-    "ztm_case_phase2_1_time": "PT ARRIVES PHASE 2",
-    "ztm_case_phase2_2_time": "PT DISCHARGE PHASE 2"
+    "case_pacu_4_time": "PT PACU HOLDING OUT",
+    "case_phase2_1_time": "PT ARRIVES PHASE 2",
+    "case_phase2_2_time": "PT DISCHARGE PHASE 2"
   },
   "0010.ZCP": {
-    "zcp_operation_completed_date_time": "201701301728",
-    "zcp_operation_completed_id": "BFOR.BXM",
-    "zcp_pre_completed_date_time": "201701301259",
-    "zcp_pre_completed_id": "HCFR.EV",
-    "zcp_pacu_completed_date_time": "201701301920",
-    "zcp_pacu_completed_id": "BFPAC.SXB"
+    "operation_completed_date_time": "201701301728",
+    "operation_completed_id": "BFOR.BXM",
+    "pre_completed_date_time": "201701301259",
+    "pre_completed_id": "HCFR.EV",
+    "pacu_completed_date_time": "201701301920",
+    "pacu_completed_id": "BFPAC.SXB"
   },
   "0011.ZPO": {
-    "zpo_anesthetic_type": {
+    "anesthetic_type": {
       "type_code": "GEN",
       "type_desc": "General Anesthesia"
     },
-    "zpo_anesthetic_pre_op_asa": {
+    "anesthetic_pre_op_asa": {
       "asa_code": "3",
       "asa_desc": "Severe Systemic Disease"
     },
-    "zpo_surgery_outcome": {
+    "surgery_outcome": {
       "outcome_code": "CO",
       "outcome_desc": "Completed"
     }
   },
   "0012.ZTF": {
-    "ztf_counter": "1",
-    "ztf_transfer_type": "PRE",
-    "ztf_transfer_method": {
+    "counter": "1",
+    "transfer_type": "PRE",
+    "transfer_method": {
       "transfer_method_code": "S",
       "transfer_method_desc": "STRETCHER"
     },
-    "ztf_destination": {
+    "destination": {
       "destination_identifier": "PACU14",
       "destination_desc": "PACU SLOT 14"
     }
   },
   "0013.ZTF": {
-    "ztf_counter": "2",
-    "ztf_transfer_type": "OR",
-    "ztf_transfer_method": {
+    "counter": "2",
+    "transfer_type": "OR",
+    "transfer_method": {
       "transfer_method_code": "B",
       "transfer_method_desc": "PATIENT BED"
     },
-    "ztf_destination": {
+    "destination": {
       "destination_identifier": "PACU",
       "destination_desc": "POST ANESTHESIA CARE UNIT"
     },
-    "ztf_user": "PACU RN"
+    "user": "PACU RN"
   },
   "0014.ZTF": {
-    "ztf_counter": "3",
-    "ztf_transfer_type": "PACU",
-    "ztf_transfer_method": {
+    "counter": "3",
+    "transfer_type": "PACU",
+    "transfer_method": {
       "transfer_method_code": "B",
       "transfer_method_desc": "PATIENT BED"
     },
-    "ztf_destination": {
+    "destination": {
       "destination_identifier": "3",
       "destination_desc": "3RD FLOOR"
     },
-    "ztf_user": "CARTER, KINEA"
+    "user": "CARTER, KINEA"
   },
   "0015.ZAO": {
-    "zao_counter": "1",
-    "zao_operation_identifier": {
+    "counter": "1",
+    "operation_identifier": {
       "operation_code": "BF.BNSHAP",
       "operation_desc": "ARTHROPLASTY,SHOULDER",
       "operation_name": "ARTHROPLASTY, SHOULDER",
       "override_desc": "LEFT SHOULDER REVERSE TOTAL ARTHROPLASTY"
     },
-    "zao_procedure_type": "P",
-    "zao_laterality": "L",
-    "zao_severity": {
+    "procedure_type": "P",
+    "laterality": "L",
+    "severity": {
       "severity_code": "LEVEL2",
       "severity_desc": "LEVEL 2"
     },
-    "zao_surgeon": {
+    "surgeon": {
       "person_id": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zao_wound_status": "CL",
-    "zao_duration": "TEST"
+    "wound_status": "CL",
+    "duration": "TEST"
   },
   "0016.ZPP": {
-    "zpp_counter": "1",
-    "zpp_operation_identifier": {
+    "counter": "1",
+    "operation_identifier": {
       "operation_code": "BF.BNSHAP",
       "operation_desc": "ARTHROPLASTY,SHOULDER",
       "operation_name": "ARTHROPLASTY, SHOULDER"
     },
-    "zpp_procedure_type": "P",
-    "zpp_laterality": "L",
-    "zpp_severity": {
+    "procedure_type": "P",
+    "laterality": "L",
+    "severity": {
       "severity_code": "LEVEL2",
       "severity_desc": "LEVEL 2"
     },
-    "zpp_surgeon": {
+    "surgeon": {
       "person_id": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     }
   },
   "0017.ZST": {
-    "zst_counter": "1",
-    "zst_unknown": "STFANT^Anesthesiologist",
-    "zst_staff_identifier": {
+    "counter": "1",
+    "staff_type": {
+      "type_code": "STFANT",
+      "type_description": "Anesthesiologist"
+    },
+    "staff_identifier": {
       "person_id": "ETTMA",
       "last_name": "Ettinger",
       "first_name": "Mark"
     },
-    "zst_in_out_range": {
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1415",
@@ -318,23 +321,47 @@
     }
   },
   "0018.ZST": {
-    "zst_counter": "2",
-    "zst_unknown": "STFP^Pre-op Staff",
-    "zst_staff_identifier": {
+    "counter": "2",
+    "staff_type": {
+      "type_code": "STFANT",
+      "type_description": "Anesthesiologist"
+    },
+    "staff_identifier": {
+      "person_id": "ETTMA",
+      "last_name": "Ettinger",
+      "first_name": "Mark"
+    },
+    "in_out_range": {
+      "sequence_num": "1",
+      "range_date": "20170130",
+      "range_in_time": "1415",
+      "range_out_time": "1718"
+    }
+  },
+  "0018.ZST": {
+    "counter": "2",
+    "staff_type": {
+      "type_code": "STFP",
+      "type_description": "Pre-op Staff"
+    },
+    "staff_identifier": {
       "person_id": "HCFR.EV",
       "last_name": "VARGAS",
       "first_name": "ERIKA"
     }
   },
   "0019.ZST": {
-    "zst_counter": "3",
-    "zst_unknown": "STF2^Circulator/ RN",
-    "zst_staff_identifier": {
+    "counter": "3",
+    "staff_type": {
+      "type_code": "STF2",
+      "type_description": "Circulator/ RN"
+    },
+    "staff_identifier": {
       "person_id": "BFOR.BXM",
       "last_name": "MCCULLOUGH",
       "first_name": "BRIAN"
     },
-    "zst_in_out_range": {
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1415",
@@ -342,14 +369,17 @@
     }
   },
   "0020.ZST": {
-    "zst_counter": "4",
-    "zst_unknown": "STF3^Scrub/ Tech",
-    "zst_staff_identifier": {
+    "counter": "4",
+    "staff_type": {
+      "type_code": "STF3",
+      "type_description": "Scrub/ Tech"
+    },
+    "staff_identifier": {
       "person_id": "BFOR.AXH",
       "last_name": "HADDAD",
       "first_name": "APRIL"
     },
-    "zst_in_out_range": {
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1442",
@@ -357,14 +387,17 @@
     }
   },
   "0021.ZST": {
-    "zst_counter": "5",
-    "zst_unknown": "STF3^Scrub/ Tech",
-    "zst_staff_identifier": {
+    "counter": "5",
+    "staff_type": {
+      "type_code": "STF3",
+      "type_description": "Scrub/ Tech"
+    },
+    "staff_identifier": {
       "person_id": "BFOR.TXG",
       "last_name": "GODFREY",
       "first_name": "TOBY"
     },
-    "zst_in_out_range": {
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1415",
@@ -372,11 +405,14 @@
     }
   },
   "0022.ZST": {
-    "zst_counter": "6",
-    "zst_unknown": "STF6^Vendor/ HCIR",
-    "zst_staff_identifier": "CHAD ANDRUS",
-    "zst_comment": "ZIMMER/BIOMET REP",
-    "zst_in_out_range": {
+    "counter": "6",
+    "staff_type": {
+      "type_code": "STF6",
+      "type_description": "Vendor/ HCIR"
+    },
+    "staff_identifier": "CHAD ANDRUS",
+    "comment": "ZIMMER/BIOMET REP",
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1415",
@@ -384,11 +420,14 @@
     }
   },
   "0023.ZST": {
-    "zst_counter": "7",
-    "zst_unknown": "STF6^Vendor/ HCIR",
-    "zst_staff_identifier": "JOHN MATYE",
-    "zst_comment": "S\\T\\N REP",
-    "zst_in_out_range": {
+    "counter": "7",
+    "staff_type": {
+      "type_code": "STF6",
+      "type_description": "Vendor/ HCIR"
+    },
+    "staff_identifier": "JOHN MATYE",
+    "comment": "S\\T\\N REP",
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1415",
@@ -396,1437 +435,1446 @@
     }
   },
   "0024.ZST": {
-    "zst_counter": "8",
-    "zst_unknown": "STF6^Vendor/ HCIR",
-    "zst_staff_identifier": "JON BURKHART",
-    "zst_comment": "ARTHREX REP",
-    "zst_in_out_range": {
+    "counter": "8",
+    "staff_type": {
+      "type_code": "STF6",
+      "type_description": "Vendor/ HCIR"
+    },
+    "staff_identifier": "JON BURKHART",
+    "comment": "ARTHREX REP",
+    "in_out_range": {
       "sequence_num": "1",
       "range_date": "20170130",
       "range_in_time": "1415"
     }
   },
   "0025.ZST": {
-    "zst_counter": "9",
-    "zst_unknown": "STFR^Post-op Staff",
-    "zst_staff_identifier": {
+    "counter": "9",
+    "staff_type": {
+      "type_code": "STFR",
+      "type_description": "Post-op Staff"
+    },
+    "staff_identifier": {
       "person_id": "BFPAC.SXB",
       "last_name": "BOWES",
       "first_name": "SARAH"
     }
   },
   "0026.ZST": {
-    "zst_counter": "10",
-    "zst_unknown": "STFR^Post-op Staff",
-    "zst_staff_identifier": "BRUBAKER, ELEANOR"
+    "counter": "10",
+    "staff_type": {
+      "type_code": "STFR",
+      "type_description": "Post-op Staff"
+    },
+    "staff_identifier": "BRUBAKER, ELEANOR"
   },
   "0027.ZRX": {
-    "zrx_counter": "1",
-    "zrx_medication_type": "MED",
-    "zrx_medication": "0.9% NACL BOTTLE",
-    "zrx_date_time": "201701301525",
-    "zrx_dose": "1000",
-    "zrx_route": {
+    "counter": "1",
+    "medication_type": "MED",
+    "medication": "0.9% NACL BOTTLE",
+    "date_time": "201701301525",
+    "dose": "1000",
+    "route": {
       "route_code": "IRR",
       "route_name": "IRRIGATION WOUND"
     },
-    "zrx_site": {
+    "site": {
       "site_code": "DELTOIDLEF",
       "site_name": "DELTOID, LEFT"
     },
-    "zrx_user": "IPHY.WJR"
+    "user": "IPHY.WJR"
   },
   "0028.ZRX": {
-    "zrx_counter": "2",
-    "zrx_medication_type": "MED",
-    "zrx_medication": "0.9% NACL BAG",
-    "zrx_date_time": "201701301530",
-    "zrx_dose": "3000",
-    "zrx_route": {
+    "counter": "2",
+    "medication_type": "MED",
+    "medication": "0.9% NACL BAG",
+    "date_time": "201701301530",
+    "dose": "3000",
+    "route": {
       "route_code": "IRR",
       "route_name": "IRRIGATION WOUND"
     },
-    "zrx_site": {
+    "site": {
       "site_code": "DELTOIDLEF",
       "site_name": "DELTOID, LEFT"
     },
-    "zrx_user": "IPHY.WJR"
+    "user": "IPHY.WJR"
   },
   "0029.ZRX": {
-    "zrx_counter": "3",
-    "zrx_medication_type": "MED",
-    "zrx_medication": {
+    "counter": "3",
+    "medication_type": "MED",
+    "medication": {
       "medication_code": "SENSOR8",
       "medication_name": "SENSORCAINE/EPI 0.5% 30ML"
     },
-    "zrx_date_time": "201701301700",
-    "zrx_dose": "30",
-    "zrx_route": {
+    "date_time": "201701301700",
+    "dose": "30",
+    "route": {
       "route_code": "INJ",
       "route_name": "INJECTION"
     },
-    "zrx_site": {
+    "site": {
       "site_code": "OPSITE",
       "site_name": "OPERATIVE WOUND SITE"
     },
-    "zrx_user": "IPHY.WJR"
+    "user": "IPHY.WJR"
   },
   "0030.ZIV": {
-    "ziv_counter": "1",
-    "ziv_type": "PACU",
-    "ziv_med_info": {
+    "counter": "1",
+    "type": "PACU",
+    "med_info": {
       "iv_code": "LR",
       "iv_description": "LR"
     },
-    "ziv_date_time": "201701301810",
-    "ziv_site": {
+    "date_time": "201701301810",
+    "site": {
       "site_mnemonic": "ARM RIGHT",
       "site_name": "ARM RIGHT"
     },
-    "ziv_volume": "2100",
-    "ziv_begin": "3000",
-    "ziv_end_ltc": "900",
-    "ziv_user": "BFPAC.SXB"
+    "volume": "2100",
+    "begin": "3000",
+    "end_ltc": "900",
+    "user": "BFPAC.SXB"
   },
   "0031.ZIT": {
-    "zit_counter": "1",
-    "zit_inventory": {
+    "counter": "1",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "CA",
       "inventory_type_name": "Cautery and Supplies (CA)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "300120",
       "item_dictionary_description": "PADS GROUNDING",
       "item_dictionary_alternate_description": "PADS GROUNDING REGULAR   E7507"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0032.ZIT": {
-    "zit_counter": "2",
-    "zit_inventory": {
+    "counter": "2",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DG",
       "inventory_type_name": "Dressing (DG)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "026968",
       "item_dictionary_description": "SPONGE DRSG CRTY GZE L4INXW4IN",
       "item_dictionary_alternate_description": "DRESSING GZE 4X4 12PL NON21426"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0033.ZIT": {
-    "zit_counter": "3",
-    "zit_inventory": {
+    "counter": "3",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DG",
       "inventory_type_name": "Dressing (DG)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "047179",
       "item_dictionary_description": "DRESSING ABD PAD 8 X 7 1/2",
       "item_dictionary_alternate_description": "DRESSING ABD PAD      NON21453"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0034.ZIT": {
-    "zit_counter": "4",
-    "zit_inventory": {
+    "counter": "4",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DP",
       "inventory_type_name": "Drapes (DP)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "089675",
       "item_dictionary_description": "DRAPE SURG 100X60IN SHLDR FLD",
       "item_dictionary_alternate_description": "DRAPE SHLDR ARTH 100X60  89492"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0035.ZIT": {
-    "zit_counter": "5",
-    "zit_inventory": {
+    "counter": "5",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DP",
       "inventory_type_name": "Drapes (DP)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "227852",
       "item_dictionary_description": "DRAPE SURG 77X53IN .75 REINF F",
       "item_dictionary_alternate_description": "DRAPE 3/4 FAN 53X77' DYNJP2416"
     },
-    "zit_item_quantity": "3"
+    "item_quantity": "3"
   },
   "0036.ZIT": {
-    "zit_counter": "6",
-    "zit_inventory": {
+    "counter": "6",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DP",
       "inventory_type_name": "Drapes (DP)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "227860",
       "item_dictionary_description": "DRAPE SURG REINF ADHES STRP SP",
       "item_dictionary_alternate_description": "DRAPE SPLIT SHEET    DYNJP2498"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0037.ZIT": {
-    "zit_counter": "7",
-    "zit_inventory": {
+    "counter": "7",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DP",
       "inventory_type_name": "Drapes (DP)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "227863",
       "item_dictionary_description": "COVER MAYO STAND XL STRL",
       "item_dictionary_alternate_description": "COVER MAYO STAND XL STRL"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0038.ZIT": {
-    "zit_counter": "8",
-    "zit_inventory": {
+    "counter": "8",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DP",
       "inventory_type_name": "Drapes (DP)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "365898",
       "item_dictionary_description": "DRAPE IOBAN 6651",
       "item_dictionary_alternate_description": "DRAPE STERI IOBAN 3M    6651EZ"
     },
-    "zit_item_quantity": "3"
+    "item_quantity": "3"
   },
   "0039.ZIT": {
-    "zit_counter": "9",
-    "zit_inventory": {
+    "counter": "9",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "DR",
       "inventory_type_name": "Drains (DR)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "341493",
       "item_dictionary_description": "HEMOVAC MEDIUM 0043610",
       "item_dictionary_alternate_description": "DRAIN HEMOVAC MEDIUM   0043610"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0040.ZIT": {
-    "zit_counter": "10",
-    "zit_inventory": {
+    "counter": "10",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "GL",
       "inventory_type_name": "Gloves, Gowns \\T\\ Sleeves (GL)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "412264",
       "item_dictionary_description": "GLOVE BIOGEL SURGEON SIZE 8 30",
       "item_dictionary_alternate_description": "GLOVE BIOGEL 8.0         30480"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0041.ZIT": {
-    "zit_counter": "11",
-    "zit_inventory": {
+    "counter": "11",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "GL",
       "inventory_type_name": "Gloves, Gowns \\T\\ Sleeves (GL)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "412312",
       "item_dictionary_description": "GLOVE INDICATOR PF BIOGEL SZ 8",
       "item_dictionary_alternate_description": "GLOVE BIOGEL INDICATE 8  31280"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0042.ZIT": {
-    "zit_counter": "12",
-    "zit_inventory": {
+    "counter": "12",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "GL",
       "inventory_type_name": "Gloves, Gowns \\T\\ Sleeves (GL)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "510396",
       "item_dictionary_description": "*GLOVES, 8 1/2 ORTHO",
       "item_dictionary_alternate_description": "GLOVE ORTHO 8.5         2D7286"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0043.ZIT": {
-    "zit_counter": "13",
-    "zit_inventory": {
+    "counter": "13",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "GL",
       "inventory_type_name": "Gloves, Gowns \\T\\ Sleeves (GL)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "817854",
       "item_dictionary_description": "GOWN SURG XL XLNG IMPRV BRTHBL",
       "item_dictionary_alternate_description": "XL EXTRA LONG GOWN  DYNJP2302P"
     },
-    "zit_item_quantity": "3"
+    "item_quantity": "3"
   },
   "0044.ZIT": {
-    "zit_counter": "14",
-    "zit_inventory": {
+    "counter": "14",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "GL",
       "inventory_type_name": "Gloves, Gowns \\T\\ Sleeves (GL)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "817855",
       "item_dictionary_description": "GOWN SURG 2XL IMPRV BRTHBL NS",
       "item_dictionary_alternate_description": "GOWN SURG XL XLNG   DYNJP2303P"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0045.ZIT": {
-    "zit_counter": "15",
-    "zit_inventory": {
+    "counter": "15",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "GS",
       "inventory_type_name": "General Surgery Supplies (GS)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "090977",
       "item_dictionary_description": "HANDPIECE INTPLS SUC COAX HFLO",
       "item_dictionary_alternate_description": "HNDPCE INTPLS COAX  0210114100"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0046.ZIT": {
-    "zit_counter": "16",
-    "zit_inventory": {
+    "counter": "16",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "026883",
       "item_dictionary_description": "TIP SUC YNKR FLNG RGD CLR STRL",
       "item_dictionary_alternate_description": "YANKAUER TIP SUCTION DYND50140"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0047.ZIT": {
-    "zit_counter": "17",
-    "zit_inventory": {
+    "counter": "17",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "037831",
       "item_dictionary_description": "BLADE SAW 90X18X1.27MM S6 SGTL",
       "item_dictionary_alternate_description": "BLADE 18.0X90.X1.27 6118127090"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0048.ZIT": {
-    "zit_counter": "18",
-    "zit_inventory": {
+    "counter": "18",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "213073",
       "item_dictionary_description": "GLV SRG PLISPRN 8 BGL ULTRATOU",
       "item_dictionary_alternate_description": "GLOVE ULTRATOUCH BIO 8   41180"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0049.ZIT": {
-    "zit_counter": "19",
-    "zit_inventory": {
+    "counter": "19",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "227840",
       "item_dictionary_description": "DRAPE SURG 90X44IN CVR FNFLD R",
       "item_dictionary_alternate_description": "TABLE COVER 44X90 STERILE"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0050.ZIT": {
-    "zit_counter": "20",
-    "zit_inventory": {
+    "counter": "20",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "448709",
       "item_dictionary_description": "TIP LNG INTPLS FMCNL COAX PLS",
       "item_dictionary_alternate_description": "TIP LONG FEMORAL    0210007000"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0051.ZIT": {
-    "zit_counter": "21",
-    "zit_inventory": {
+    "counter": "21",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "508170",
       "item_dictionary_description": "SPONGE LAB 18X18 STERILE 5PK",
       "item_dictionary_alternate_description": "SPONGE LAP          MDHT241518"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0052.ZIT": {
-    "zit_counter": "22",
-    "zit_inventory": {
+    "counter": "22",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "537164",
       "item_dictionary_description": "GLOVE SURG 8 LTX ORTH PF BEAD",
       "item_dictionary_alternate_description": "GLOVE SURG 8       07072D7295I"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0053.ZIT": {
-    "zit_counter": "23",
-    "zit_inventory": {
+    "counter": "23",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "727751",
       "item_dictionary_description": "COVER LIGHT HANDLE RIGID 1/PK",
       "item_dictionary_alternate_description": "LIGHT HNDL CVR RIGID  DYNJLHH1"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0054.ZIT": {
-    "zit_counter": "24",
-    "zit_inventory": {
+    "counter": "24",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "894369",
       "item_dictionary_description": "GLOVES SRG 8 BGL PI INDCTR UND",
       "item_dictionary_alternate_description": "GLOVE PI INDICAT BIO 8   41680"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0055.ZIT": {
-    "zit_counter": "25",
-    "zit_inventory": {
+    "counter": "25",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MISCITEM",
       "inventory_type_name": "MISC ITEM"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "225772",
       "item_dictionary_description": "DRESSING WRP COBAN L6.5YDXW4IN",
       "item_dictionary_alternate_description": "DRESSING COBAN 4' X 5YD  2084S"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0056.ZIT": {
-    "zit_counter": "26",
-    "zit_inventory": {
+    "counter": "26",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MISCITEM",
       "inventory_type_name": "MISC ITEM"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "300016",
       "item_dictionary_description": "PENCIL ELECT-SWITCH",
       "item_dictionary_alternate_description": "ESU HAND CONTROL PENCIL E2515H"
     },
-    "zit_item_quantity": "1",
-    "zit_item_quantity_out": "1"
+    "item_quantity": "1",
+    "item_quantity_out": "1"
   },
   "0057.ZIT": {
-    "zit_counter": "27",
-    "zit_inventory": {
+    "counter": "27",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "PK",
       "inventory_type_name": "Packs, Trays, Kits (PK)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "447434",
       "item_dictionary_description": "TRAY HUMERAL W/LOCK RING SHLDR",
       "item_dictionary_alternate_description": "TRAY HUMERAL W/LOCK RING SHLDR"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0058.ZIT": {
-    "zit_counter": "28",
-    "zit_inventory": {
+    "counter": "28",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "PK",
       "inventory_type_name": "Packs, Trays, Kits (PK)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "588803",
       "item_dictionary_description": "PACK TOTAL JOINT",
       "item_dictionary_alternate_description": "PACK TOTAL JOINT     DYNJS0830"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0059.ZIT": {
-    "zit_counter": "29",
-    "zit_inventory": {
+    "counter": "29",
+    "inventory": {
       "inventory_mnemonic": "SUP",
       "inventory_name": "SUPPLIES"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "ST",
       "inventory_type_name": "Staplers (ST)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "361733",
       "item_dictionary_description": "STPLR PROXIMATE*RH WIDE SKIN",
       "item_dictionary_alternate_description": "SKIN STAPLER WIDE ROTATNG HEAD"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0060.ZIT": {
-    "zit_counter": "30",
-    "zit_inventory": {
+    "counter": "30",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "MI",
       "inventory_type_name": "Miscellaneous (MI)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "108995",
       "item_dictionary_description": "SUTURE FIBERWIRE #2",
       "item_dictionary_alternate_description": "SUTURE FIBERWIRE #2 BL AR-7200"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0061.ZIT": {
-    "zit_counter": "31",
-    "zit_inventory": {
+    "counter": "31",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "SU",
       "inventory_type_name": "Suture (SU)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "359923",
       "item_dictionary_description": "SUTURE #5 ETHIBOND V-37",
       "item_dictionary_alternate_description": "SUT ETHIBOND 5 V-37 30'  MB66G"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0062.ZIT": {
-    "zit_counter": "32",
-    "zit_inventory": {
+    "counter": "32",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "SU",
       "inventory_type_name": "Suture (SU)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "360484",
       "item_dictionary_description": "SUTURE VCL 2-0 CT1 18IN CR BRA",
       "item_dictionary_alternate_description": "SUT-VICRYL 2-0 CT-1 J739 J739D"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0063.ZIT": {
-    "zit_counter": "33",
-    "zit_inventory": {
+    "counter": "33",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "SU",
       "inventory_type_name": "Suture (SU)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "360765",
       "item_dictionary_description": "SUTURE VICRYL 0 CT-1 CR/8 J840",
       "item_dictionary_alternate_description": "SUT #0 VICRYL CT-1 CR/8  J840D"
     },
-    "zit_item_quantity": "2"
+    "item_quantity": "2"
   },
   "0064.ZIT": {
-    "zit_counter": "34",
-    "zit_inventory": {
+    "counter": "34",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "SU",
       "inventory_type_name": "Suture (SU)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "360966",
       "item_dictionary_description": "SUTURE ETHILON 3-0 PS-2 1669H",
       "item_dictionary_alternate_description": "SUTURE 3-0 ETHILON PS-2  1669H"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0065.ZIT": {
-    "zit_counter": "35",
-    "zit_inventory": {
+    "counter": "35",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "SU",
       "inventory_type_name": "Suture (SU)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "538065",
       "item_dictionary_description": "SUTURE CT-1 0 27 CT VCRPL ABAC",
       "item_dictionary_alternate_description": "SUT-VICRYL+ 0 CT-1 27' VCP260H"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0066.ZIT": {
-    "zit_counter": "36",
-    "zit_inventory": {
+    "counter": "36",
+    "inventory": {
       "inventory_mnemonic": "SUT",
       "inventory_name": "SUTURE"
     },
-    "zit_inventory_type": {
+    "inventory_type": {
       "inventory_type_mnemonic": "SU",
       "inventory_type_name": "Suture (SU)"
     },
-    "zit_item": {
+    "item": {
       "item_mnemonic": "648967",
       "item_dictionary_description": "SUTURE ABSRB 2-0 CT-2 L27IN AN",
       "item_dictionary_alternate_description": "SUT-VICRYL+ 2-0 CT2 27' VCP269"
     },
-    "zit_item_quantity": "1"
+    "item_quantity": "1"
   },
   "0067.ZM0": {
-    "zm0_counter": "1",
-    "zm0_implant_inventory": {
+    "counter": "1",
+    "implant_inventory": {
       "inventory_mnemonic": "IMP",
       "inventory_name": "IMPLANTS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "OR",
       "type_name": "Orthopedic Supplies (OR)"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "687520",
       "item_dictionary_description": "STEM HUM 14MM PRIM CMPRH MINI",
       "item_dictionary_alternate_description": "STEM HUM 14MM PRIM CMPRH MINI"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0068.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "113634",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20251221",
-    "zm1_lot_number": "405590",
-    "zm1_implant_site": "OPSITE",
-    "zm1_implant_size": "14X83MM"
+    "catalog_number": "113634",
+    "count": "1",
+    "expiration_date": "20251221",
+    "lot_number": "405590",
+    "implant_site": "OPSITE",
+    "implant_size": "14X83MM"
   },
   "0069.ZM0": {
-    "zm0_counter": "2",
-    "zm0_implant_inventory": {
+    "counter": "2",
+    "implant_inventory": {
       "inventory_mnemonic": "IMP",
       "inventory_name": "IMPLANTS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "PA",
       "type_name": "Plates (PA)"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "548550",
       "item_dictionary_description": "BASEPLATE TIB CMPRH 25MM MINI",
       "item_dictionary_alternate_description": "BASEPLATE TIB CMPRH 25MM MINI"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0070.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "010000589",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20270114",
-    "zm1_lot_number": "953690",
-    "zm1_implant_site": "OPSITE",
-    "zm1_implant_size": "25MM"
+    "catalog_number": "010000589",
+    "count": "1",
+    "expiration_date": "20270114",
+    "lot_number": "953690",
+    "implant_site": "OPSITE",
+    "implant_size": "25MM"
   },
   "0071.ZM0": {
-    "zm0_counter": "3",
-    "zm0_implant_inventory": {
+    "counter": "3",
+    "implant_inventory": {
       "inventory_mnemonic": "IMP",
       "inventory_name": "IMPLANTS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "SC",
       "type_name": "Screws (SC)"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "214957",
       "item_dictionary_description": "SCREW LCK 4.75MMX25MM SS CMPR",
       "item_dictionary_alternate_description": "SCREW LCK 4.75MMX25MM SS CMPR"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0072.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "180552",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20261212",
-    "zm1_lot_number": "330550",
-    "zm1_implant_site": "OPSITE",
-    "zm1_implant_size": "4.75X25MM",
-    "zm1_opened_by_user": "BFOR.BXM",
-    "zm1_opened_date": "20170130",
-    "zm1_opened_time": "0027",
-    "zm1_prepped_by": "BFOR.TXG",
-    "zm1_prepped_date": "20170130",
-    "zm1_prepped_time": "0027"
+    "catalog_number": "180552",
+    "count": "1",
+    "expiration_date": "20261212",
+    "lot_number": "330550",
+    "implant_site": "OPSITE",
+    "implant_size": "4.75X25MM",
+    "opened_by_user": "BFOR.BXM",
+    "opened_date": "20170130",
+    "opened_time": "0027",
+    "prepped_by": "BFOR.TXG",
+    "prepped_date": "20170130",
+    "prepped_time": "0027"
   },
   "0073.ZM0": {
-    "zm0_counter": "4",
-    "zm0_implant_inventory": {
+    "counter": "4",
+    "implant_inventory": {
       "inventory_mnemonic": "MISC",
       "inventory_name": "MISC ITEMS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "MISCITEM",
       "type_name": "MISC ITEM"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "1",
       "item_override_description": "GLENOSPHERE             115310",
       "item_dictionary_description": "MISCELLANEOUS IMPLANT 1"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0074.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "115310",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20270117",
-    "zm1_lot_number": "700000",
-    "zm1_implant_site": "OPSITE",
-    "zm1_implant_size": "36MM",
-    "zm1_opened_by_user": "BFOR.BXM",
-    "zm1_opened_date": "20170130",
-    "zm1_opened_time": "0027",
-    "zm1_prepped_by": "BFOR.TXG",
-    "zm1_prepped_date": "20170130",
-    "zm1_prepped_time": "0027"
+    "catalog_number": "115310",
+    "count": "1",
+    "expiration_date": "20270117",
+    "lot_number": "700000",
+    "implant_site": "OPSITE",
+    "implant_size": "36MM",
+    "opened_by_user": "BFOR.BXM",
+    "opened_date": "20170130",
+    "opened_time": "0027",
+    "prepped_by": "BFOR.TXG",
+    "prepped_date": "20170130",
+    "prepped_time": "0027"
   },
   "0075.ZM0": {
-    "zm0_counter": "5",
-    "zm0_implant_inventory": {
+    "counter": "5",
+    "implant_inventory": {
       "inventory_mnemonic": "MISC",
       "inventory_name": "MISC ITEMS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "MISCITEM",
       "type_name": "MISC ITEM"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "3",
       "item_override_description": "NON LOCK SCREW          180559",
       "item_dictionary_description": "MISCELLANEOUS IMPLANT 3"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0076.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "180559",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20280331",
-    "zm1_lot_number": "664910",
-    "zm1_implant_size": "3.5MM X 2.5MM"
+    "catalog_number": "180559",
+    "count": "1",
+    "expiration_date": "20280331",
+    "lot_number": "664910",
+    "implant_size": "3.5MM X 2.5MM"
   },
   "0077.ZM0": {
-    "zm0_counter": "6",
-    "zm0_implant_inventory": {
+    "counter": "6",
+    "implant_inventory": {
       "inventory_mnemonic": "MISC",
       "inventory_name": "MISC ITEMS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "MISCITEM",
       "type_name": "MISC ITEM"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "4",
       "item_override_description": "NON LOCK SCREW          180559",
       "item_dictionary_description": "MISCELLANEOUS IMPLANT 4"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0078.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "180559",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20260610",
-    "zm1_lot_number": "488600",
-    "zm1_implant_size": "3.5MM X 25MM"
+    "catalog_number": "180559",
+    "count": "1",
+    "expiration_date": "20260610",
+    "lot_number": "488600",
+    "implant_size": "3.5MM X 25MM"
   },
   "0079.ZM0": {
-    "zm0_counter": "7",
-    "zm0_implant_inventory": {
+    "counter": "7",
+    "implant_inventory": {
       "inventory_mnemonic": "MISC",
       "inventory_name": "MISC ITEMS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "MISCITEM",
       "type_name": "MISC ITEM"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "5",
       "item_override_description": "HUMERAL TRAY LOCK RING  115370",
       "item_dictionary_description": "MISCELLANEOUS IMPLANT 5"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0080.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "115370",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20261220",
-    "zm1_lot_number": "672670",
-    "zm1_implant_size": "44MM"
+    "catalog_number": "115370",
+    "count": "1",
+    "expiration_date": "20261220",
+    "lot_number": "672670",
+    "implant_size": "44MM"
   },
   "0081.ZM0": {
-    "zm0_counter": "8",
-    "zm0_implant_inventory": {
+    "counter": "8",
+    "implant_inventory": {
       "inventory_mnemonic": "MISC",
       "inventory_name": "MISC ITEMS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "MISCITEM",
       "type_name": "MISC ITEM"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "6",
       "item_override_description": "CENTRAL SCREW           115395",
       "item_dictionary_description": "MISCELLANEOUS IMPLANT 6"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0082.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "115395",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20261215",
-    "zm1_lot_number": "485360",
-    "zm1_implant_size": "6.5MM X 25MM"
+    "catalog_number": "115395",
+    "count": "1",
+    "expiration_date": "20261215",
+    "lot_number": "485360",
+    "implant_size": "6.5MM X 25MM"
   },
   "0083.ZM0": {
-    "zm0_counter": "9",
-    "zm0_implant_inventory": {
+    "counter": "9",
+    "implant_inventory": {
       "inventory_mnemonic": "MISC",
       "inventory_name": "MISC ITEMS"
     },
-    "zm0_implant_type": {
+    "implant_type": {
       "type_mnemonic": "MISCITEM",
       "type_name": "MISC ITEM"
     },
-    "zm0_implant_item": {
+    "implant_item": {
       "item_mnemonic": "9",
       "item_override_description": "HUMERAL BEARING      XL-115363",
       "item_dictionary_description": "MISCELLANEOUS IMPLANT 9"
     },
-    "zm0_implant_quantity": "1"
+    "implant_quantity": "1"
   },
   "0084.ZM1": {
-    "zm1_counter": "1",
-    "zm1_implant_manufacturer": {
+    "counter": "1",
+    "implant_manufacturer": {
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
-    "zm1_implant_surgeon": {
+    "implant_surgeon": {
       "surgeon_mnemonic": "ROBWI03",
       "last_name": "Robertson",
       "first_name": "William"
     },
-    "zm1_catalog_number": "XL-115363",
-    "zm1_count": "1",
-    "zm1_expiration_date": "20220107",
-    "zm1_lot_number": "488780",
-    "zm1_implant_size": "36MM"
+    "catalog_number": "XL-115363",
+    "count": "1",
+    "expiration_date": "20220107",
+    "lot_number": "488780",
+    "implant_size": "36MM"
   },
   "0085.ZOU": {
-    "zou_counter": "1",
-    "zou_type": "PACU",
-    "zou_output": "BLOOD",
-    "zou_output_date_time": "201701301830",
-    "zou_output_site": {
+    "counter": "1",
+    "type": "PACU",
+    "output": "BLOOD",
+    "output_date_time": "201701301830",
+    "output_site": {
       "site_mnemonic": "HEM",
       "site_name": "HEMOVAC"
     },
-    "zou_output_type": {
+    "output_type": {
       "output_type_mnemonic": "BLD",
       "output_type_name": "BLOOD"
     },
-    "zou_output_volume": "15",
-    "zou_output_user": "BFPAC.SXB"
+    "output_volume": "15",
+    "output_user": "BFPAC.SXB"
   },
   "0086.ZOU": {
-    "zou_counter": "2",
-    "zou_type": "PACU",
-    "zou_output": "URINECLEAY",
-    "zou_output_date_time": "201701301830",
-    "zou_output_site": {
+    "counter": "2",
+    "type": "PACU",
+    "output": "URINECLEAY",
+    "output_date_time": "201701301830",
+    "output_site": {
       "site_mnemonic": "BLADDER",
       "site_name": "BLADDER"
     },
-    "zou_output_type": {
+    "output_type": {
       "output_type_mnemonic": "URN",
       "output_type_name": "URINE"
     },
-    "zou_output_volume": "350",
-    "zou_output_user": "BFPAC.SXB"
+    "output_volume": "350",
+    "output_user": "BFPAC.SXB"
   },
   "0087.ZDV": {
-    "zdv_counter": "1",
-    "zdv_device": {
+    "counter": "1",
+    "device": {
       "device_mnemonic": "ARMBOARDR",
       "device_description": "ARMBOARD RIGHT"
     },
-    "zdv_device_comment": {
-      "zdv_device_comment_1": "TENET BEACH CHAIR POSITIONER",
-      "zdv_device_comment_2": "SPYDER ARM POSITIONER LEFT ARM"
+    "device_comment": {
+      "device_comment_1": "TENET BEACH CHAIR POSITIONER",
+      "device_comment_2": "SPYDER ARM POSITIONER LEFT ARM"
     }
   },
   "0088.ZDV": {
-    "zdv_counter": "2",
-    "zdv_device": {
+    "counter": "2",
+    "device": {
       "device_mnemonic": "BEACHCHAIR",
       "device_description": "BEACH CHAIR POSITIONER"
     }
   },
   "0089.ZDV": {
-    "zdv_counter": "3",
-    "zdv_device": {
+    "counter": "3",
+    "device": {
       "device_mnemonic": "BEDSKYTRON",
       "device_description": "SKYTRON 3500 BED"
     }
   },
   "0090.ZDV": {
-    "zdv_counter": "4",
-    "zdv_device": {
+    "counter": "4",
+    "device": {
       "device_mnemonic": "BLANKET",
       "device_description": "BLANKET(S)"
     }
   },
   "0091.ZDV": {
-    "zdv_counter": "5",
-    "zdv_device": {
+    "counter": "5",
+    "device": {
       "device_mnemonic": "DRAWSHEET",
       "device_description": "DRAWSHEET"
     }
   },
   "0092.ZDV": {
-    "zdv_counter": "6",
-    "zdv_device": {
+    "counter": "6",
+    "device": {
       "device_mnemonic": "SAFETYSTTH",
       "device_description": "SAFETY STRAP THIGHS"
     }
   },
   "0093.ZEQ": {
-    "zeq_counter": "1",
-    "zeq_equipment": {
+    "counter": "1",
+    "equipment": {
       "equipment_mnemonic": "BF.ORPOS",
       "equipment_description": "POSITION \\T\\ DEVICES"
     }
   },
   "0094.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "1",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "1",
+    "observation_identifier": {
       "equipment_query_mnemonic": "JCAORCCM07",
       "query_text": "Knee-"
     },
-    "ze1_observation_value": "B:Bilateral"
+    "observation_value": "B:Bilateral"
   },
   "0095.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "2",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "2",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORABV07",
       "query_text": "Exp Date:"
     },
-    "ze1_observation_value": "20181011"
+    "observation_value": "20181011"
   },
   "0096.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "3",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "3",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORABV10",
       "query_text": "Coag:"
     },
-    "ze1_observation_value": "30"
+    "observation_value": "30"
   },
   "0097.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "4",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "4",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORABV11",
       "query_text": "Cut:"
     },
-    "ze1_observation_value": "30"
+    "observation_value": "30"
   },
   "0098.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "5",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "5",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORABV19",
       "query_text": "Cautery notes:"
     },
-    "ze1_observation_value": "CAUTERY PAD PLACED HIGH ON LEFT LATERAL THIGH DUE TO BILAT KNEE IMPLANTS"
+    "observation_value": "CAUTERY PAD PLACED HIGH ON LEFT LATERAL THIGH DUE TO BILAT KNEE IMPLANTS"
   },
   "0099.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "6",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "6",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORABV32",
       "query_text": "Pad Lot #:"
     },
-    "ze1_observation_value": "62840163X"
+    "observation_value": "62840163X"
   },
   "0100.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "7",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "7",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORAPT06",
       "query_text": "Pt position="
     },
-    "ze1_observation_value": "SUPINESITT"
+    "observation_value": "SUPINESITT"
   },
   "0101.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "8",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "8",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORASC02",
       "query_text": "Unit #:"
     },
-    "ze1_observation_value": "404137487"
+    "observation_value": "404137487"
   },
   "0102.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "9",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "9",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORAWM24",
       "query_text": "Comments:"
     },
-    "ze1_observation_value": "WARM BLANKETS X4 INTR OP PER ANESTHESIA"
+    "observation_value": "WARM BLANKETS X4 INTR OP PER ANESTHESIA"
   },
   "0103.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "10",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "10",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORCBV20",
       "query_text": "Pad Location="
     },
-    "ze1_observation_value": "THIGHL"
+    "observation_value": "THIGHL"
   },
   "0104.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "11",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "11",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORCBV31",
       "query_text": "Applied by-"
     },
-    "ze1_observation_value": "BFOR.BXM"
+    "observation_value": "BFOR.BXM"
   },
   "0105.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "12",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "12",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaOREI01",
       "query_text": "Intermittent Pneumatic Device Notes:"
     },
-    "ze1_observation_value": "ON AND RUNNING PRIOR TO INDUCTION"
+    "observation_value": "ON AND RUNNING PRIOR TO INDUCTION"
   },
   "0106.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "13",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "13",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORESC03",
       "query_text": "Pressure Setting:"
     },
-    "ze1_observation_value": "40"
+    "observation_value": "40"
   },
   "0107.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "14",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "14",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORKPOS1",
       "query_text": "First position time-"
     },
-    "ze1_observation_value": "1420"
+    "observation_value": "1420"
   },
   "0108.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "15",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "15",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORKPT13",
       "query_text": "Comments-"
     },
-    "ze1_observation_sub_id": "1",
-    "ze1_observation_value": "RIGHT ARM IN PADDED ARM HOLDER, LEFT ARM"
+    "observation_sub_id": "1",
+    "observation_value": "RIGHT ARM IN PADDED ARM HOLDER, LEFT ARM"
   },
   "0109.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "16",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "16",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORKPT13",
       "query_text": "Comments-"
     },
-    "ze1_observation_sub_id": "2",
-    "ze1_observation_value": "IN PADDED SPYDER ARM POSITONER"
+    "observation_sub_id": "2",
+    "observation_value": "IN PADDED SPYDER ARM POSITONER"
   },
   "0110.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "17",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "17",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORL226",
       "query_text": "Reusable pad on table:"
     },
-    "ze1_observation_value": "N:No"
+    "observation_value": "N:No"
   },
   "0111.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "18",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "18",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORL227",
       "query_text": "Site hair removed:"
     },
-    "ze1_observation_value": "N:No"
+    "observation_value": "N:No"
   },
   "0112.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "19",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "19",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORL604",
       "query_text": "Cautery Unit #-"
     },
-    "ze1_observation_value": "0726"
+    "observation_value": "0726"
   },
   "0113.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "20",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "20",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORL607",
       "query_text": "Transferred to OR bed by:"
     },
-    "ze1_observation_value": "S:BY SELF"
+    "observation_value": "S:BY SELF"
   },
   "0114.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "21",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "21",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORL608",
       "query_text": "Arm position-"
     },
-    "ze1_observation_value": "AAP:ARMS ARMBOARDS \\T\\ PADDED"
+    "observation_value": "AAP:ARMS ARMBOARDS \\T\\ PADDED"
   },
   "0115.ZE1": {
-    "ze1_id": "1",
-    "ze1_counter": "22",
-    "ze1_observation_identifier": {
+    "id": "1",
+    "counter": "22",
+    "observation_identifier": {
       "equipment_query_mnemonic": "hcaORL609",
       "query_text": "Safety strap-"
     },
-    "ze1_observation_value": "AT:ACROSS ANTERIOR THIGHS"
+    "observation_value": "AT:ACROSS ANTERIOR THIGHS"
   },
   "0116.ZPS": {
-    "zps_counter": "1",
-    "zps_position": {
+    "counter": "1",
+    "position": {
       "position_mnemonic": "SUPINESITT",
       "position_description": "SUPINE, SITTING"
     }
   },
   "0117.ZTX": {
-    "ztx_counter": "1",
-    "ztx_type_of_text_comment_values": "DRE",
-    "ztx_text_line": "XEROFORM, 4X4'S, ABD'S, MEDIPORE TAPE, SHOULDER"
+    "counter": "1",
+    "type_of_text_comment_values": "DRE",
+    "text_line": "XEROFORM, 4X4'S, ABD'S, MEDIPORE TAPE, SHOULDER"
   },
   "0118.ZTX": {
-    "ztx_counter": "2",
-    "ztx_type_of_text_comment_values": "DRE",
-    "ztx_text_line": "IMMOBILIZER"
+    "counter": "2",
+    "type_of_text_comment_values": "DRE",
+    "text_line": "IMMOBILIZER"
   },
   "0119.ZTX": {
-    "ztx_counter": "3",
-    "ztx_type_of_text_comment_values": "PRE",
-    "ztx_text_line": "LEFT SHOULDER ROTATOR CUFF ARTHROPATHY AND RHEUMATOID ARTHRITIS"
+    "counter": "3",
+    "type_of_text_comment_values": "PRE",
+    "text_line": "LEFT SHOULDER ROTATOR CUFF ARTHROPATHY AND RHEUMATOID ARTHRITIS"
   },
   "0120.ZTX": {
-    "ztx_counter": "4",
-    "ztx_type_of_text_comment_values": "PST",
-    "ztx_text_line": "LEFT SHOULDER ROTATOR CUFF ARTHROPATHY AND RHEUMATOID ARTHRITIS"
+    "counter": "4",
+    "type_of_text_comment_values": "PST",
+    "text_line": "LEFT SHOULDER ROTATOR CUFF ARTHROPATHY AND RHEUMATOID ARTHRITIS"
   },
   "0121.ZPA": {
-    "zpa_counter": "1",
-    "zpa_par_date_time": "201701301719",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "1",
+    "par_date_time": "201701301719",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0122.ZPA": {
-    "zpa_counter": "2",
-    "zpa_par_date_time": "201701301729",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "2",
+    "par_date_time": "201701301729",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0123.ZPA": {
-    "zpa_counter": "3",
-    "zpa_par_date_time": "201701301734",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "3",
+    "par_date_time": "201701301734",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0124.ZPA": {
-    "zpa_counter": "4",
-    "zpa_par_date_time": "201701301750",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "4",
+    "par_date_time": "201701301750",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0125.ZPA": {
-    "zpa_counter": "5",
-    "zpa_par_date_time": "201701301800",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "5",
+    "par_date_time": "201701301800",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0126.ZPA": {
-    "zpa_counter": "6",
-    "zpa_par_date_time": "201701301825",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "6",
+    "par_date_time": "201701301825",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0127.ZPA": {
-    "zpa_counter": "7",
-    "zpa_par_date_time": "201701301850",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "7",
+    "par_date_time": "201701301850",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0128.ZPA": {
-    "zpa_counter": "8",
-    "zpa_par_date_time": "201701301905",
-    "zpa_par_user_mnemonic": "BFPAC.SXB",
-    "zpa_activity_par": "2",
-    "zpa_respiration_par": "2",
-    "zpa_circulation_par": "2",
-    "zpa_consciousness_par": "2",
-    "zpa_color_par": "1",
-    "zpa_total_par": "9"
+    "counter": "8",
+    "par_date_time": "201701301905",
+    "par_user_mnemonic": "BFPAC.SXB",
+    "activity_par": "2",
+    "respiration_par": "2",
+    "circulation_par": "2",
+    "consciousness_par": "2",
+    "color_par": "1",
+    "total_par": "9"
   },
   "0129.ZCX": {
-    "zcx_counter": "1",
-    "zcx_complication_type": "OP",
-    "zcx_complication": {
+    "counter": "1",
+    "complication_type": "OP",
+    "complication": {
       "complication_mnemonic": "N",
       "complication_description": "No Complications"
     }

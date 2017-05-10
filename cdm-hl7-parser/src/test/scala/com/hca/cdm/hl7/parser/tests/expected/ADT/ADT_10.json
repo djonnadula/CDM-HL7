@@ -1,147 +1,147 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "FRNK",
-    "msh_msg_control_id": "MT_FRNK_ADT_1129610.",
-    "pid_medical_record_num": "K000002505",
-    "pid_medical_record_urn": "A1-B20151218101601316",
-    "pid_pat_account_num": "FR0000121533"
+    "sending_facility": "FRNK",
+    "message_control_id": "MT_FRNK_ADT_1129610.",
+    "medical_record_num": "K000002505",
+    "medical_record_urn": "A1-B20151218101601316",
+    "patient_account_num": "FR0000121533"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "MT_FRNK",
-    "msh_sending_facility": "FRNK",
-    "msh_receiving_appl": "DBM",
-    "msh_msg_create_date_time": "20151221130800-0600",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20151221130800-0600",
+    "message_type": {
       "message_code": "ADT",
       "trigger_event": "A40"
     },
-    "msh_msg_control_id": "MT_FRNK_ADT_1129610.",
-    "msh_processing_id": "D",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": "KYB"
+    "message_control_id": "MT_FRNK_ADT_1129610.",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "KYB"
   },
   "0002.EVN": {
-    "evn_evnt_type": "A40",
-    "evn_recorded_date_time": "201512211308",
-    "evn_oper_id": {
+    "event_type_code": "A40",
+    "recorded_date_time": "201512211308",
+    "operator_id": {
       "person_id": "QBE8554",
-      "last_name": "Hammock",
-      "first_name": "Brittany"
+      "family_name": "Hammock",
+      "given_name": "Brittany"
     },
-    "evn_evnt_occurred": "201512211302"
+    "event_occured": "201512211302"
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": [
+    "set_id": "1",
+    "patient_id_list": [
       {
-        "identifier_num": "K000002505",
-        "identifier_type_code": "MR",
-        "assgn_facility": "FRNK"
+        "id_num": "K000002505",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "302-21-2015",
-        "identifier_type_code": "SS",
-        "assgn_facility": "FRNK"
+        "id_num": "302-21-2015",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
       },
       {
-        "identifier_num": "A00002475",
-        "identifier_type_code": "HUB",
-        "assgn_facility": "FRNK"
+        "id_num": "A00002475",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
       }
     ],
-    "pid_alt_pat_id": {
+    "alternate_patient_id": {
       "identifier_num": "A1-B20151218101601316",
       "identifier_type_code": "URN",
       "assgn_facility": "FRNK"
     },
-    "pid_pat_name": [
+    "patient_name": [
       {
-        "last_name": "Osborn",
-        "first_name": "Norman",
-        "type_code": "L"
+        "family_name": "Osborn",
+        "given_name": "Norman",
+        "name_type_code": "L"
       },
       {
-        "last_name": "Goblin",
-        "first_name": "Green",
-        "type_code": "M"
+        "family_name": "Goblin",
+        "given_name": "Green",
+        "name_type_code": "M"
       }
     ],
-    "pid_birth_date_time": "19840220",
-    "pid_sex": "M",
-    "pid_pat_address": {
-      "street_address1": "123 Marvel Street",
+    "date_time_of_birth": "19840220",
+    "administrative_sex": "M",
+    "patient_address": {
+      "street_address": "123 Marvel Street",
       "city": "Franklin",
-      "state_province": "TN",
-      "zip_postal_code": "37064",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064",
       "address_type": "P",
       "county_parish_code": "TN187"
     },
-    "pid_home_phone_num": "(615)555-6261",
-    "pid_business_phone_num": "(502)875-7272",
-    "pid_marital_status": "W",
-    "pid_pat_account_num": "FR0000121533",
-    "pid_pat_social_security_num": "302-21-2015"
+    "phone_num_home": "(615)555-6261",
+    "phone_num_business": "(502)875-7272",
+    "marital_status": "W",
+    "patient_account_num": "FR0000121533",
+    "ssn_num_patient": "302-21-2015"
   },
   "0004.MRG": {
-    "mrg_prior_pat_account_num": {
-      "identifier_num": "K000002506",
-      "identifier_type_code": "MR"
+    "prior_patient_account_num": {
+      "id_num": "K000002506",
+      "id_type_code": "MR"
     }
   },
   "0005.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "P",
-    "pv1_assgn_pat_loc": "FR.LAB",
-    "pv1_attending_doctor": {
+    "set_id": "1",
+    "patient_class": "P",
+    "assigned_patient_location": "FR.LAB",
+    "attending_doctor": {
       "person_id": "DR.ATND01",
-      "last_name": "Attending01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     },
-    "pv1_pat_type": "POV",
-    "pv1_financial_classification": "05",
-    "pv1_servicing_facility": "FRNK",
-    "pv1_account_status": "PRE",
-    "pv1_adm_date_time": "201512210000"
+    "patient_type": "POV",
+    "financial_class": "05",
+    "servicing_facility": "FRNK",
+    "account_status": "PRE",
+    "admit_date_time": "201512210000"
   },
   "0006.PV2": {
-    "pv2_adm_reason": "Labwork",
-    "pv2_newborn_baby_ind": "N"
+    "admit_reason": "Labwork",
+    "newborn_baby_indicator": "N"
   },
   "0007.ROL": {
-    "rol_role_instance_id": "1",
-    "rol_action_code": "AD",
-    "rol_role_name": "AT",
-    "rol_role_person_name": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
       "person_id": "DR.ATND01",
-      "last_name": "Attending01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     }
   },
   "0008.ROL": {
-    "rol_role_instance_id": "2",
-    "rol_action_code": "AD",
-    "rol_role_name": "PP",
-    "rol_role_person_name": {
+    "role_instance_id": "2",
+    "action_code": "AD",
+    "role_rol": "PP",
+    "role_person": {
       "person_id": "DR.PCP01",
-      "last_name": "PrimaryCare01",
-      "first_name": "Provider",
-      "identifier_type_code": "XX"
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
     }
   },
   "0009.DG1": {
-    "dg1_set_id": "1",
-    "dg1_diagnosis_code": {
-      "primary_id": "D64.9",
+    "set_id": "1",
+    "diagnosis_code": {
+      "id": "D64.9",
       "text": "ANEMIA, UNSPECIFIED",
-      "name_of_coding_sys": "I10"
+      "name_of_coding_system": "I10"
     },
-    "dg1_diagnosis_type": "Other"
+    "diagnosis_type": "Other"
   },
   "0010.DRG": {
-    "drg_diagnostic_related_group": "33"
+    "diagnostic_related_group": "33"
   }
 }

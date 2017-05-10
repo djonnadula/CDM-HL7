@@ -1,92 +1,92 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "AKAR",
-    "msh_msg_control_id": "EPIC_AKAR_ADT_233494",
-    "pid_medical_record_num": "123546",
-    "pid_medical_record_urn": "2258067",
-    "pid_pat_account_num": "700004079"
+    "sending_facility": "AKAR",
+    "message_control_id": "EPIC_AKAR_ADT_233494",
+    "medical_record_num": "123546",
+    "medical_record_urn": "2258067",
+    "patient_account_num": "700004079"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "EPIC_AKAR",
-    "msh_sending_facility": "AKAR",
-    "msh_receiving_appl": "DBM",
-    "msh_msg_create_date_time": "20160808071746",
-    "msh_security": "QLA7968",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "EPIC_AKAR",
+    "sending_facility": "AKAR",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20160808071746",
+    "security": "QLA7968",
+    "message_type": {
       "message_code": "ADT",
       "trigger_event": "A01"
     },
-    "msh_msg_control_id": "EPIC_AKAR_ADT_233494",
-    "msh_processing_id": "D",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": "Epic_MountainQA",
-    "msh_msg_profile_id": "AKA"
+    "message_control_id": "EPIC_AKAR_ADT_233494",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "Epic_MountainQA",
+    "message_profile_id": "AKA"
   },
   "0002.EVN": {
-    "evn_evnt_type": "A01",
-    "evn_recorded_date_time": "20160808071746",
-    "evn_evnt_resn_code": "ADT_EVENT",
-    "evn_oper_id": {
+    "event_type_code": "A01",
+    "recorded_date_time": "20160808071746",
+    "event_reason_code": "ADT_EVENT",
+    "operator_id": {
       "person_id": "QLA7968",
-      "last_name": "GARRETT",
-      "first_name": "BRYAN",
-      "assgn_authr": "MTN A",
-      "assgn_facility": "AKAR"
+      "family_name": "GARRETT",
+      "given_name": "BRYAN",
+      "assigning_authority": "MTN A",
+      "assigning_facility": "AKAR"
     },
-    "evn_evnt_occurred": "20160808071600"
+    "event_occured": "20160808071600"
   },
   "0003.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": "123546",
-    "pid_alt_pat_id": "2258067",
-    "pid_pat_name": {
-      "last_name": "SOFTLY",
-      "first_name": "KILLING",
-      "middle_name": "ME"
+    "set_id": "1",
+    "patient_id_list": "123546",
+    "alternate_patient_id": "2258067",
+    "patient_name": {
+      "family_name": "SOFTLY",
+      "given_name": "KILLING",
+      "second_and_further_given_names_or_initials_thereof": "ME"
     },
-    "pid_mother_name": {
-      "last_name": "Softly",
-      "first_name": "Jane"
-    },
-    "pid_birth_date_time": "20100504",
-    "pid_sex": "F",
-    "pid_race": "W",
-    "pid_pat_address": {
-      "street_address1": "32 GRIZZLEY LN",
+    "date_time_of_birth": "20100504",
+    "administrative_sex": "F",
+    "race": "W",
+    "patient_address": {
+      "street_address": "32 GRIZZLEY LN",
       "city": "ANCHORAGE",
-      "state_province": "AK",
-      "zip_postal_code": "99508",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
       "country": "USA",
       "address_type": "P",
       "county_parish_code": "ANCHORAGE"
     },
-    "pid_county_code": "ANCHORAGE",
-    "pid_home_phone_num": {
-      "formatted_num": "(801)252-3201",
-      "use_code": "P",
-      "equipment_type": "H",
+    "county_code": "ANCHORAGE",
+    "phone_num_home": {
+      "telephone_num": "(801)252-3201",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H",
       "area_city_code": "801",
-      "local_number": "2523201"
+      "local_num": "2523201"
     },
-    "pid_primary_language": "ENGLISH",
-    "pid_marital_status": "S",
-    "pid_religion": "LDS",
-    "pid_pat_account_num": "700004079",
-    "pid_pat_social_security_num": "777-77-7777",
-    "pid_ethnic_group": "NOT HISPANIC",
-    "pid_pat_death_ind": "N"
+    "primary_language": "ENGLISH",
+    "marital_status": "S",
+    "religion": "LDS",
+    "patient_account_num": "700004079",
+    "ssn_num_patient": "777-77-7777",
+    "mother_name": {
+      "last_name": "Softly",
+      "first_name": "Jane"
+    },
+    "ethnic_group": "NOT HISPANIC",
+    "patient_death_indicator": "N"
   },
   "0004.ZPD": {
-    "zpd_pregnancy_flag": "N"
+    "pregnancy_flag": "N"
   },
   "0005.PD1": {
-    "pd1_patient_prim_facility": {
-      "org_name": "ALASKA REGIONAL HOSPITAL",
-      "identifier_num": "40001001"
+    "patient_primary_facility": {
+      "organization_name": "ALASKA REGIONAL HOSPITAL",
+      "id_num": "40001001"
     },
-    "pd1_prim_care_provider": [
+    "patient_primary_care_provider_name_and_id_num": [
       {
         "person_id": "1477536316",
         "last_name": "CHURCH",
@@ -104,206 +104,206 @@
     ]
   },
   "0006.NK1": {
-    "nk1_set_id": "1",
-    "nk1_name": {
-      "last_name": "SOFTLY",
-      "first_name": "JANE"
+    "set_id": "1",
+    "name": {
+      "family_name": "SOFTLY",
+      "given_name": "JANE"
     },
-    "nk1_relationship": "19",
-    "nk1_address": {
-      "street_address1": "32 Grizzley Ln",
+    "relationship": "19",
+    "address": {
+      "street_address": "32 Grizzley Ln",
       "city": "ANCHORAGE",
-      "state_province": "AK",
-      "zip_postal_code": "99508",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
       "country": "USA"
     },
-    "nk1_phone_num": {
-      "formatted_num": "(801)252-3201",
-      "equipment_type": "H",
+    "phone_num": {
+      "telephone_num": "(801)252-3201",
+      "telecommunication_equipment_type": "H",
       "area_city_code": "801",
-      "local_number": "2523201"
+      "local_num": "2523201"
     },
-    "nk1_contact_role": "EC"
+    "contact_role": "EC"
   },
   "0007.NK1": {
-    "nk1_set_id": "2",
-    "nk1_address": {
+    "set_id": "2",
+    "address": {
       "country": "USA"
     },
-    "nk1_contact_role": "EMP",
-    "nk1_organization_name": "NONE",
-    "nk1_asoc_party_id": "50696",
-    "nk1_job_status": "N"
+    "contact_role": "EMP",
+    "organization_name": "NONE",
+    "next_of_kin_associated_party_ids": "50696",
+    "job_status": "N"
   },
   "0008.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "I",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
       "point_of_care": "AKARPED",
       "room": "L.PED359",
       "bed": "L.PED359A",
       "facility": "AKAR"
     },
-    "pv1_adm_type": "L",
-    "pv1_attending_doctor": [
+    "admission_type": "L",
+    "attending_doctor": [
       {
         "person_id": "1100199995",
-        "last_name": "INPATIENT",
-        "first_name": "ATTENDING",
-        "middle_name": "PHYSICIAN",
-        "assgn_authr": "NPI",
-        "identifier_type_code": "NPI"
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
       },
       {
         "person_id": "20001",
-        "last_name": "INPATIENT",
-        "first_name": "ATTENDING",
-        "middle_name": "PHYSICIAN",
-        "assgn_authr": "PROVID",
-        "identifier_type_code": "PROVID"
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
       },
       {
         "person_id": "ABC1231",
-        "last_name": "INPATIENT",
-        "first_name": "ATTENDING",
-        "middle_name": "PHYSICIAN",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       }
     ],
-    "pv1_referring_doctor": [
+    "referring_doctor": [
       {
         "person_id": "1477536316",
-        "last_name": "CHURCH",
-        "first_name": "EMILY",
-        "assgn_authr": "NPI",
-        "identifier_type_code": "NPI"
+        "family_name": "CHURCH",
+        "given_name": "EMILY",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
       },
       {
         "person_id": "KCE9863",
-        "last_name": "CHURCH",
-        "first_name": "EMILY",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "CHURCH",
+        "given_name": "EMILY",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       }
     ],
-    "pv1_hospital_service": "PED",
-    "pv1_adm_source": "2",
-    "pv1_vip_ind": "n",
-    "pv1_admitting_doctor": [
+    "hospital_service": "PED",
+    "admit_source": "2",
+    "vip_indicator": "n",
+    "admitting_doctor": [
       {
         "person_id": "1100199995",
-        "last_name": "INPATIENT",
-        "first_name": "ATTENDING",
-        "middle_name": "PHYSICIAN",
-        "assgn_authr": "NPI",
-        "identifier_type_code": "NPI"
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
       },
       {
         "person_id": "20001",
-        "last_name": "INPATIENT",
-        "first_name": "ATTENDING",
-        "middle_name": "PHYSICIAN",
-        "assgn_authr": "PROVID",
-        "identifier_type_code": "PROVID"
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
       },
       {
         "person_id": "ABC1231",
-        "last_name": "INPATIENT",
-        "first_name": "ATTENDING",
-        "middle_name": "PHYSICIAN",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       }
     ],
-    "pv1_visit_num": "10138614",
-    "pv1_financial_classification": "99",
-    "pv1_account_status": {
-      "primary_id": "Adm",
+    "visit_num": "10138614",
+    "financial_class": "99",
+    "account_status": {
+      "id": "Adm",
       "text": "Conf"
     },
-    "pv1_adm_date_time": "20160808071600",
-    "pv1_alternate_visit_id": "10138614"
+    "admit_date_time": "20160808071600",
+    "alternate_visit_id": "10138614"
   },
   "0009.PV2": {
-    "pv2_accommodation_code": "PD",
-    "pv2_expected_adm_date_time": "20160808071500",
-    "pv2_visit_publicity_code": "n",
-    "pv2_visit_protection_ind": "N"
+    "accommodation_code": "PD",
+    "expected_admit_date_time": "20160808071500",
+    "visit_publicity_code": "n",
+    "visit_protection_indicator": "N"
   },
   "0010.ZPV": {
-    "zpv_first_inpatient_occurence_date_time": "20160808071600"
+    "first_inpatient_occurence_date_time": "20160808071600"
   },
   "0011.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "ADMSRCDETAIL",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ADMSRCDETAIL",
       "text": "POINT OF ORIGIN"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "2",
-    "obx_observation_date_time": "20160808"
+    "obsv_sub_id": "1",
+    "obsv_value": "2",
+    "date_time_of_the_obsv": "20160808"
   },
   "0012.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "ACCSTAT1",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT1",
       "text": "ADT: PATIENT STATUS"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Adm",
-    "obx_observation_date_time": "20160808"
+    "obsv_sub_id": "1",
+    "obsv_value": "Adm",
+    "date_time_of_the_obsv": "20160808"
   },
   "0013.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "ACCSTAT2",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT2",
       "text": "HOSPITAL - ADMIT CONFIRMATION STATUS"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Conf",
-    "obx_observation_date_time": "20160808"
+    "obsv_sub_id": "1",
+    "obsv_value": "Conf",
+    "date_time_of_the_obsv": "20160808"
   },
   "0014.CON": {
-    "con_set_id": "1",
-    "con_consent_type": "REV.CONSENT",
-    "con_consent_status": "RECEIVED",
-    "con_consent_decision_date_time": "20160808071700"
+    "set_id": "1",
+    "consent_type": "REV.CONSENT",
+    "consent_status": "RECEIVED",
+    "consent_decision_date_time": "20160808071700"
   },
   "0015.GT1": {
-    "gt1_set_id": "1",
-    "gt1_guarantor_num": "17087",
-    "gt1_guarantor_name": {
-      "last_name": "SOFTLY",
-      "first_name": "JANE"
+    "set_id": "1",
+    "guarantor_num": "17087",
+    "guarantor_name": {
+      "family_name": "SOFTLY",
+      "given_name": "JANE"
     },
-    "gt1_guarantor_address": {
-      "street_address1": "32 GRIZZLEY LN",
+    "guarantor_address": {
+      "street_address": "32 GRIZZLEY LN",
       "city": "ANCHORAGE",
-      "state_province": "AK",
-      "zip_postal_code": "99508",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
       "country": "USA",
       "county_parish_code": "ANCHORAGE"
     },
-    "gt1_guarantor_home_phone_num": {
-      "formatted_num": "(801)252-3201",
+    "guarantor_phone_num_home": {
+      "telephone_num": "(801)252-3201",
       "area_city_code": "801",
-      "local_number": "2523201"
+      "local_num": "2523201"
     },
-    "gt1_guarantor_birth_date_time": "19820509",
-    "gt1_guarantor_sex": "F",
-    "gt1_guarantor_type": "Facility P/F",
-    "gt1_guarantor_relationship": "19",
-    "gt1_guarantor_employer_name": "EBAY",
-    "gt1_guarantor_employer_address": {
+    "guarantor_date_time_of_birth": "19820509",
+    "guarantor_administrative_sex": "F",
+    "guarantor_type": "Facility P/F",
+    "guarantor_relationship": "19",
+    "guarantor_employer_name": "EBAY",
+    "guarantor_employer_address": {
       "country": "USA"
     },
-    "gt1_guarantor_employment_status": "F"
+    "guarantor_employment_status": "F"
   },
   "0016.ZG1": {
-    "zg1_fpl_effective_from_date": "ZG1"
+    "fpl_effective_from_date": "ZG1"
   }
 }

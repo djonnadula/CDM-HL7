@@ -1,234 +1,234 @@
 {
   "0000.COMN": {
-    "msh_sending_facility": "COCQA1A",
-    "msh_msg_control_id": "IP_COQ1A_ORU_NURQA.156596.9593",
-    "pid_medical_record_num": "J000425826",
-    "pid_medical_record_urn": "J502433",
-    "pid_pat_account_num": "J00021032502"
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_ORU_NURQA.156596.9593",
+    "medical_record_num": "J000425826",
+    "medical_record_urn": "J502433",
+    "patient_account_num": "J00021032502"
   },
   "0001.MSH": {
-    "msh_field_separator": "|",
-    "msh_encoding_character": "^~\\&",
-    "msh_sending_appl": "COCQA1A",
-    "msh_sending_facility": "COCQA1A",
-    "msh_receiving_appl": "OV",
-    "msh_receiving_facility": "OV",
-    "msh_msg_create_date_time": "201610261830",
-    "msh_msg_type": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201610261830",
+    "message_type": {
       "message_code": "ORU",
       "trigger_event": "R01"
     },
-    "msh_msg_control_id": "IP_COQ1A_ORU_NURQA.156596.9593",
-    "msh_processing_id": "T",
-    "msh_version_id": "2.5",
-    "msh_continuation_pointer": {
+    "message_control_id": "IP_COQ1A_ORU_NURQA.156596.9593",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
     },
-    "msh_accept_acknowledgment_type": "ER",
-    "msh_appl_acknowledgment_type": "NE"
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
   },
   "0002.PID": {
-    "pid_set_id": "1",
-    "pid_pat_id_list": {
-      "identifier_num": "J000425826",
-      "assgn_authr": "COCQA1A",
-      "identifier_type_code": "MRN"
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000425826",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
     },
-    "pid_alt_pat_id": "J502433",
-    "pid_pat_name": {
-      "last_name": "BRITTANY",
-      "first_name": "PATIENTVIEW3"
+    "alternate_patient_id": "J502433",
+    "patient_name": {
+      "family_name": "BRITTANY",
+      "given_name": "PATIENTVIEW3"
     },
-    "pid_birth_date_time": "19890102",
-    "pid_sex": "F",
-    "pid_pat_account_num": "J00021032502"
+    "date_time_of_birth": "19890102",
+    "administrative_sex": "F",
+    "patient_account_num": "J00021032502"
   },
   "0003.PV1": {
-    "pv1_set_id": "1",
-    "pv1_pat_classification": "I",
-    "pv1_assgn_pat_loc": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
       "point_of_care": "J.BRITUANY",
       "room": "J.BRITUANY",
       "bed": "2",
       "facility": "COCQA1A"
     },
-    "pv1_adm_type": "CO",
-    "pv1_attending_doctor": "DR.Hamur",
-    "pv1_referring_doctor": {
-      "last_name": "BRITUANY",
-      "first_name": "Hamur"
+    "admission_type": "CO",
+    "attending_doctor": "DR.Hamur",
+    "referring_doctor": {
+      "family_name": "BRITUANY",
+      "given_name": "Hamur"
     },
-    "pv1_visit_num": "IN",
-    "pv1_pending_loc": "ADM"
+    "visit_num": "IN",
+    "pending_location": "ADM"
   },
   "0004.ORC": {
-    "orc_order_control": "NEW",
-    "orc_filler_order_num": "J00021032502-1010101-1-20161026-1826-1"
+    "order_control": "NEW",
+    "filler_order_num": "J00021032502-1010101-1-20161026-1826-1"
   },
   "0005.OBR": {
-    "obr_set_id": "1",
-    "obr_placer_order_num": "1010101",
-    "obr_filler_order_num": "J00021032502-1010101-1-20161026-1826-1",
-    "obr_universal_service_id": {
-      "primary_id": "1010101",
+    "set_id": "1",
+    "placer_order_num": "1010101",
+    "filler_order_num": "J00021032502-1010101-1-20161026-1826-1",
+    "universal_service_id": {
+      "id": "1010101",
       "text": "test screens",
-      "alt_text": "SEPSIS SCREENING V.D"
+      "alternate_text": "SEPSIS SCREENING V.D"
     },
-    "obr_observation_date_time": "201610261826",
-    "obr_specimen_received_date_time": "201610261829",
-    "obr_ordering_provider": "1TSOQS9103",
-    "obr_placer_first_generic_field": "PATIENTVIEWTEST"
+    "obsv_date_time_num": "201610261826",
+    "specimen_received_date_time": "201610261829",
+    "ordering_provider": "1TSOQS9103",
+    "placer_field_1": "PATIENTVIEWTEST"
   },
   "0006.OBX": {
-    "obx_set_id": "1",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "T59100004A",
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "T59100004A",
       "text": "Dialysis cath placement date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0007.OBX": {
-    "obx_set_id": "2",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "T59100005A",
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "T59100005A",
       "text": "Dialysis cath placement time:"
     },
-    "obx_observation_value": "1827",
-    "obx_observation_result_status": "N"
+    "obsv_value": "1827",
+    "obsv_result_status": "N"
   },
   "0008.OBX": {
-    "obx_set_id": "3",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "T59100016A",
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "T59100016A",
       "text": "Removal date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0009.OBX": {
-    "obx_set_id": "4",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "T59100017A",
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "T59100017A",
       "text": "Removal time:"
     },
-    "obx_observation_value": "1827",
-    "obx_observation_result_status": "N"
+    "obsv_value": "1827",
+    "obsv_result_status": "N"
   },
   "0010.OBX": {
-    "obx_set_id": "5",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "hcaVAC0004",
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaVAC0004",
       "text": "Estimated influenza vaccine admin date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0011.OBX": {
-    "obx_set_id": "6",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "hcaVAC0022",
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaVAC0022",
       "text": "Estimated pneumococcal PCV13 vaccine admin date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0012.OBX": {
-    "obx_set_id": "7",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "hcaVAC0023",
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaVAC0023",
       "text": "Estimated pneumococcal PPSV23 vaccine admin date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0013.OBX": {
-    "obx_set_id": "8",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "hcaVAC0024",
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaVAC0024",
       "text": "Estimated pneumococcal vaccine admin date type unknown:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0014.OBX": {
-    "obx_set_id": "9",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "N33000012A",
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N33000012A",
       "text": "Isolation status:"
     },
-    "obx_observation_sub_id": "1",
-    "obx_observation_value": "Airborne:Airborne",
-    "obx_observation_result_status": "N"
+    "obsv_sub_id": "1",
+    "obsv_value": "Airborne:Airborne",
+    "obsv_result_status": "N"
   },
   "0015.OBX": {
-    "obx_set_id": "10",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "N42010500A",
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010500A",
       "text": "MRSA results:"
     },
-    "obx_observation_value": "pv test on 10/25/16",
-    "obx_observation_result_status": "N"
+    "obsv_value": "pv test on 10/25/16",
+    "obsv_result_status": "N"
   },
   "0016.OBX": {
-    "obx_set_id": "11",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "L36000006A",
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L36000006A",
       "text": "Intubation date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0017.OBX": {
-    "obx_set_id": "12",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "L36000037A",
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L36000037A",
       "text": "Extubation removal date:"
     },
-    "obx_observation_value": "20161026",
-    "obx_observation_result_status": "N"
+    "obsv_value": "20161026",
+    "obsv_result_status": "N"
   },
   "0018.OBX": {
-    "obx_set_id": "13",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "hcaMU204",
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaMU204",
       "text": "Smoking status for patients 13 years old or older:"
     },
-    "obx_observation_value": "1:Current every day smoker",
-    "obx_observation_result_status": "N"
+    "obsv_value": "1:Current every day smoker",
+    "obsv_result_status": "N"
   },
   "0019.OBX": {
-    "obx_set_id": "14",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "K31100010A",
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31100010A",
       "text": "Diabetes:"
     },
-    "obx_observation_value": "History:History of",
-    "obx_observation_result_status": "N"
+    "obsv_value": "History:History of",
+    "obsv_result_status": "N"
   },
   "0020.OBX": {
-    "obx_set_id": "15",
-    "obx_value_type": "TX",
-    "obx_observation_id": {
-      "primary_id": "N33600013A",
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N33600013A",
       "text": "Is patient at high risk for falls:"
     },
-    "obx_observation_value": "Y",
-    "obx_observation_result_status": "N"
+    "obsv_value": "Y",
+    "obsv_result_status": "N"
   }
 }
