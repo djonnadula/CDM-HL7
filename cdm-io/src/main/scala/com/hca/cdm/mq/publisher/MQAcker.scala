@@ -31,6 +31,12 @@ class MQAcker(app: String, jobDesc: String, initialQueue: String)(mqHosts: Strin
   }
 
   @throws(classOf[MqException])
+  def sendMessages(msgs: Traversable[String]): Unit = synchronized {
+    if (!isConnectionBroken) msgs.foreach(msg => self.activeConnection.sendMessage(msg, producer))
+    else throw new MqException("Cannot Perform Operation. Connection Broken Try later")
+  }
+
+  @throws(classOf[MqException])
   def sendMessage(data: Array[Byte]): Unit = {
     sendMessage(new String(data, UTF8))
   }
@@ -97,10 +103,12 @@ object MQAcker {
 
   private val lock = new Object()
   private lazy val randomConn = new Random
-  private var connection = new ArrayBuffer[MQAcker]
+  private var maxCon : Int = 1
+  private var connections = new ArrayBuffer[MQAcker]
 
   @throws(classOf[MqException])
-  def apply(app: String, jobDesc: String, initialQueue: String)(mqHosts: String, mqManager: String, mqChannel: String, numberOfIns: Int = 2): Unit = {
+  def apply(app: String, jobDesc: String, initialQueue: String)(mqHosts: String, mqManager: String, mqChannel: String, numberOfIns: Int = 1): Unit = {
+    maxCon = numberOfIns
     def createIfNotExist = new (() => MQAcker) {
       override def apply(): MQAcker = new MQAcker(app, jobDesc, initialQueue)(mqHosts, mqManager, mqChannel)
     }
@@ -110,17 +118,19 @@ object MQAcker {
 
   private def createConnection(numberOfIns: Int, createIfNotExist: () => MQAcker): Unit = {
     lock.synchronized(
-      if (connection isEmpty) {
-        for (i <- 0 until numberOfIns) connection += createIfNotExist()
-        info(s"Created Connection for $connection")
+      if (connections isEmpty) {
+        for (i <- 0 until numberOfIns) connections += createIfNotExist()
+        info(s"Created Connection for $connections")
       })
   }
 
   def ackMessage(msg: String): Unit = {
-    connection(randomConn.nextInt(connection.size)).sendMessage(msg)
+    if(maxCon == 1) connections.head.sendMessage(msg)
+    else connections(randomConn.nextInt(connections.size)).sendMessage(msg)
   }
 
-  def ackMessages(msgs: String*): Unit = {
-    msgs foreach ackMessage
+  def ackMessages(msgs: Traversable[String]): Unit = {
+    if(maxCon == 1) connections.head.sendMessages(msgs)
+    else connections(randomConn.nextInt(connections.size)).sendMessages(msgs)
   }
 }

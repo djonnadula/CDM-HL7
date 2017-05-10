@@ -45,7 +45,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                     val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
                     if (timeStampReq) temp += ((timeStampKey, timeStamp))
                     out._2 += (toJson(temp) -> null)
-                  case PIPE_DELIMITED =>
+                  case DELIMITED =>
                     handleCommonSegments(data, layout)
                     out._2 += (makeFinal(layout) -> null)
                 }
