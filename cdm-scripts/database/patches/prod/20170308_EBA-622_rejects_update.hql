@@ -24,4 +24,4 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT
   'org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat'
 LOCATION
-  'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=REJECT'
+  'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=REJECT';

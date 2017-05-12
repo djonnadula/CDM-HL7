@@ -44,7 +44,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     " To track these scenarios log was recorded in Rejects Topic detailing more on this and which mappings don't exist.</p>")
 
   override def run(): Unit = {
-    val from = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(2), DATE_WITH_TIMESTAMP)
+    val from = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(1), DATE_WITH_TIMESTAMP)
     job.checkForStageToComplete()
     val parserMetrics = job.parserMetrics
     val segmentMetrics = job.segmentMetrics
@@ -57,7 +57,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     val segmentsGrp = segmentMetrics.groupBy(x => x._1.substring(0, x._1.indexOf(COLON))).map {
       case (hl7, segments) => hl7 -> segments.filterNot { case (segState, metric) => segState.substring(segState.lastIndexOf(COLON) + 1) == NOTAPPLICABLE.toString && metric <= processedHl7(hl7) - 100 }
     }
-    val to = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(1), DATE_WITH_TIMESTAMP)
+    val to = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP)
     append("</div></div>")
     val parserTable = "<div style=color:#0000FF><h3>Hl7 Messages " + parserGrp.keys.toSeq.sortBy(msg => msg).mkString(";") + " Processed from Dates between " + from + " to " + to + " Stats as Follows</h3>" +
       "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
@@ -73,7 +73,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     tableData(parserGrp)
     append("</table> </div>")
     append("</div> </div>")
-    val segmentsTable = "<div style=color:#0000FF><h3>Segments for Hl7 Messages " + parserGrp.keys.mkString(";") + " Processed from Dates between " + from + " to " + to +
+    val segmentsTable = "<div style=color:#0000FF><h3>Segments for Hl7 Messages " + parserGrp.keys.toSeq.sortBy(msg => msg).mkString(";") + " Processed from Dates between " + from + " to " + to +
       " Stats as follows</h3>" +
       "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "<thead><tr>" +

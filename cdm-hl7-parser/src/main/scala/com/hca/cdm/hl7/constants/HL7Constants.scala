@@ -36,6 +36,7 @@ object HL7Constants {
   lazy val PIPE_DELIMITED = "|"
   lazy val COLON = ":"
   lazy val UNKNOWN = "unknown"
+  lazy val underScore = "_"
   type mapType = mutable.LinkedHashMap[String, Any]
   type listType = mutable.ListBuffer[mutable.LinkedHashMap[String, Any]]
 
