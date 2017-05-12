@@ -71,7 +71,7 @@ package object model {
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
 
   private lazy val templateBuildPath = {
-    val basePath = Paths.get(new java.io.File(".").getAbsolutePath).getParent
+    val basePath = Paths.get(new java.io.File(".").getAbsolutePath).getParent.getParent
     val templatePath = "cdm-scripts" + FS + "templates"
     Paths.get(basePath.toString, templatePath)
   }

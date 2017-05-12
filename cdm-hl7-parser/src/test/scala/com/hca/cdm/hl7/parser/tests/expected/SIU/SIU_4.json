@@ -100,47 +100,47 @@
     },
     "case_hold_1_time": "Pt Arrives Holding",
     "case_hold_2_time": "Anesth. Pre-op Comp",
-    "case_anesthesia_1_time": "Pt Ready",
-    "case_operating_room_3_time": "Anesthesia Start",
-    "case_operating_room_4_time": {
+    "case_hold_3_time": "Pt Ready",
+    "case_operating_room_1_time": "Anesthesia Start",
+    "case_operating_room_2_time": {
       "time_desc": "Pt In Room",
       "or_date_time": "201701301304"
     },
-    "case_operating_room_5_time": {
+    "case_operating_room_3_time": {
       "time_desc": "Surgeon In Room",
       "or_date_time": "201701301320"
     },
-    "case_operating_room_6_time": {
+    "case_operating_room_4_time": {
       "time_desc": "Pt Positioned",
       "or_date_time": "201701301320"
     },
-    "case_operating_room_7_time": {
+    "case_operating_room_5_time": {
       "time_desc": "Procedure Start",
       "or_date_time": "201701301327"
     },
-    "case_operating_room_8_time": "Incision",
-    "case_pacu_1_time": "Pt Re-Positioned",
-    "case_pacu_2_time": {
+    "case_operating_room_6_time": "Incision",
+    "case_operating_room_7_time": "Pt Re-Positioned",
+    "case_operating_room_8_time": {
       "time_desc": "Procedure End",
-      "pacu_date_time": "201701301337"
+      "or_date_time": "201701301337"
     },
-    "case_pacu_3_time": {
+    "case_operating_room_9_time": {
       "time_desc": "Surgeon Leaves Room",
-      "pacu_date_time": "201701301342"
+      "or_date_time": "201701301342"
     },
-    "case_pacu_4_time": {
+    "case_operating_room_10_time": {
       "time_desc": "Pt Leaves Room",
-      "pacu_date_time": "201701301342"
+      "or_date_time": "201701301342"
     },
-    "case_phase2_1_time": "Pt Arrives PACU",
-    "case_phase2_2_time": "Anesthesia End",
-    "ztm_case_pacu_3_time": "Pt Discharge Phase 1",
-    "ztm_case_pacu_4_time": "Pt PACU Holding Out",
-    "ztm_case_phase2_1_time": {
+    "case_pacu_1_time": "Pt Arrives PACU",
+    "case_pacu_2_time": "Anesthesia End",
+    "case_pacu_3_time": "Pt Discharge Phase 1",
+    "case_pacu_4_time": "Pt PACU Holding Out",
+    "case_phase2_1_time": {
       "time_desc": "Pt Arrives Phase 2",
       "phase2_date_time": "201701301345"
     },
-    "ztm_case_phase2_2_time": {
+    "case_phase2_2_time": {
       "time_desc": "Pt Discharge Phase 2",
       "phase2_date_time": "201701301430"
     }
