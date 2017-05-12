@@ -108,6 +108,8 @@ object HL7Receiver extends Logg with App {
       val maxMessageSize = this.maxMessageSize
       val hl7QueueMapping = this.hl7QueueMapping
       val hl7KafkaOut = this.hl7KafkaOut
+      val rawOverSized = this.rawOverSized
+      val rejectOverSized = this.rejectOverSized
       val tracker = new ListBuffer[FutureAction[Unit]]
       tracker += rdd foreachPartitionAsync (dataItr => {
         dataItr nonEmpty match {
