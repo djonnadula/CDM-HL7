@@ -103,6 +103,8 @@ package object cdm extends Logg {
 
   def inc(v: Long, step: Long = 1): Long = v + step
 
+  def dec(v: Long, step: Long = 1): Long = v - step
+
   def reload(propFile: String = propFile, stream: Option[InputStream] = None): Unit = {
     synchronized {
       info(s"Loading Property File :: $propFile")
