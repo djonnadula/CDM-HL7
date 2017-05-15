@@ -75,8 +75,8 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
 
   private def handleData(data: AnyRef, header: Any, topic: String, sizeThreshold: Int, overSizeHandler: OverSizeHandler): Unit = {
-    if (valid(data) & valid(topic) & !topic.trim.isEmpty) {
-      if (!IOCanHandle(data, sizeThreshold) & overSizeHandler != null) {
+    if (valid(data) && valid(topic) && !topic.trim.isEmpty) {
+      if (!IOCanHandle(data, sizeThreshold) && overSizeHandler != null) {
         info("Record cannot be deal with this handler :: " + getClass + "  So Delivering to OversizeHandler :: " + overSizeHandler)
         overSizeHandler handle data
         return
