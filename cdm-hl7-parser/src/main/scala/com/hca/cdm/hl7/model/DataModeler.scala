@@ -74,7 +74,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   layout = model.layoutCopy
                   if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                     handleCommonSegments(data, layout)
-                    val out = s"${makeFinal(layout)}$DELIMITED${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
+                    val out = s"${makeFinal(layout)}$PIPE_DELIMITED_STR${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
                     (out, null)
                   } else {
                     (skippedStr, null)
