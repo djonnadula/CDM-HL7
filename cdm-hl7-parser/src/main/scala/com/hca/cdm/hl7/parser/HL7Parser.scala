@@ -365,10 +365,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
     val mapped_index = Match match {
-      case mt_mt6 if mt_mt6(MT_) || mt_mt6(MT6_) =>
-        if (hl7Version == HL7_2_1) templateData(hl7MEDITECH21Map)
-        else if (hl7Version == HL7_2_4 || hl7Version == HL7_2_5_1) templateData(hl7MEDITECH24Map)
-        else templateData(hl7StandardMap)
+      case mt5 if mt5(MT_) => templateData(hl7MEDITECH5Map)
+      case mt6 if mt6(MT6_) => templateData(hl7MEDITECH6Map)
       case epic if epic(EPIC_) => templateData(hl7EpicMap)
       case ecw if ecw(ECW_) => templateData(hl7eCWMap)
       case ng if ng(NG_) => templateData(hl7NextGenMap)

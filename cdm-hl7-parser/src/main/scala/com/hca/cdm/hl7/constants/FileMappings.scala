@@ -8,8 +8,8 @@ package com.hca.cdm.hl7.constants
 object FileMappings {
 
   lazy val hl7StandardMap = "hl7StandardMap"
-  lazy val hl7MEDITECH21Map = "hl7MEDITECH21Map"
-  lazy val hl7MEDITECH24Map = "hl7MEDITECH24Map"
+  lazy val hl7MEDITECH5Map = "hl7MEDITECH5Map"
+  lazy val hl7MEDITECH6Map = "hl7MEDITECH6Map"
   lazy val hl7EpicMap = "hl7EpicMap"
   lazy val hl7eCWMap = "hl7eCWMap"
   lazy val hl7IpeopleMap = "hl7IpeopleMap"
