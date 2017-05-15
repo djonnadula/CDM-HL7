@@ -1,0 +1,121 @@
+MSH|^~\&||COCRX|||201609260821||MDM^T04|MT_COCRX_MDM_RXDPTO.1.2763995|P|2.1|||||
+PID|1||G000639972|G537076|GLASSER^ALICE^SIBLEY|MARGARET|19250919|F|^^^^^^M|W|5147 CHESEBRO RD^# 215^AGOURA^CA^91301|LA|(818)852-7217|(999)999-9999||W|NON|G00219630286|300-14-0692
+PV1|1|I|G.3TELE^G.3106^A|EM|||ROSMO^Rostami^Mohammadreza^^^^MD^^^^^^XX|.SELF^REFERRED^SELF^^^^^^^^^^XX|UNDEFINED^AAZAMI^HESSAM^^^^^^^^^^XX|MED||||PR|||ROSMO^Rostami^Mohammadreza^^^^MD^^^^^^XX|IN||12||||||||||||||||HOM|||COCRX||DIS|||201609012359|201609061632|||||||SIMGI^Simoni^Gilbert^^^^MD^^^^^^XX
+TXA||OP^OPERATIVE REPORT|201609260821|201609031135||201609030000|201609031238||SIMGI^Simoni^Gilbert^^^^MD||R.NUANCE^TRANSCRIPTON^NUANCE|G.HI20160903-0071^3429344GHI|||G.HI|OP|Signed|||||SIMGI^Simoni^Gilbert^^^^MD^^^^^^^^201609031135
+OBX|1|TX||H| 
+OBX|2|TX||H|                              HCA LOS ROBLES HOSPITAL
+OBX|3|TX||H|                                AND MEDICAL CENTER
+OBX|4|TX||H|                              THOUSAND OAKS, CA 91360
+OBX|5|TX||H| 
+OBX|6|TX||H|                              REPORT NAME: OPERATIVE REPORT              
+OBX|7|TX||H| 
+OBX|8|TX||H|PATIENT'S NAME: GLASSER,ALICE SIBLEY                UNIT NO: G000639972
+OBX|9|TX||H|DOB: 09/19/25  SEX/AGE: F  /90                   ACCOUNT NO: G00219630286
+OBX|10|TX||H|ATTENDING PHYS: Rostami,Mohammadreza MD             PT TYPE: DIS IN  
+OBX|11|TX||H|ADMISSION DATE: 09/01/16                           LOCATION: G.3TELE   
+OBX|12|TX||H|DISCHARGE DATE: 09/06/16
+OBX|13|TX||X| 
+OBX|14|TX||X| 
+OBX|15|TX|||DICTATED BY:             Gilbert Simoni, MD 
+OBX|16|TX|||DATE OF SURGERY:         09/03/2016   
+OBX|17|TX|||SURGEON:                 Gilbert Simoni, MD  
+OBX|18|TX||| 
+OBX|19|TX|||ENDOSCOPY AND COLONOSCOPY REPORT
+OBX|20|TX||| 
+OBX|21|TX|||INDICATION FOR PROCEDURE:
+OBX|22|TX|||GI bleed and anemia as well as abnormal CT of the abdomen.
+OBX|23|TX||| 
+OBX|24|TX|||ANESTHESIOLOGIST:
+OBX|25|TX|||Richard Hoberman, MD
+OBX|26|TX||| 
+OBX|27|TX|||AMERICAN SOCIETY OF ANESTHESIOLOGISTS:
+OBX|28|TX|||Class 3.
+OBX|29|TX||| 
+OBX|30|TX|||TYPE OF ANESTHESIA:
+OBX|31|TX|||Propofol.
+OBX|32|TX||| 
+OBX|33|TX|||SPECIMEN REMOVED:
+OBX|34|TX|||None.
+OBX|35|TX||| 
+OBX|36|TX|||ESTIMATED BLOOD LOSS:
+OBX|37|TX|||Minimal
+OBX|38|TX||| 
+OBX|39|TX|||PREOPERATIVE DIAGNOSES:
+OBX|40|TX|||Gastrointestinal bleed and abnormal CT of abdomen.
+OBX|41|TX||| 
+OBX|42|TX|||POSTOPERATIVE DIAGNOSES:
+OBX|43|TX|||Gastrointestinal bleed and abnormal CT of abdomen plus diverticulosis and blood
+OBX|44|TX|||in the terminal ileum.
+OBX|45|TX||| 
+OBX|46|TX|||DESCRIPTION OF PROCEDURE:
+OBX|47|TX|||After informed consent was obtained, risks and benefits of the procedure as well
+OBX|48|TX|||as possible complications including but not limited to perforation, bleeding,
+OBX|49|TX|||infection, possible need for immediate surgical intervention, prolonged
+OBX|50|TX|||hospitalization, cardiopulmonary arrest and death were discussed with the
+OBX|51|TX|||patient.  The patient was brought into the procedure room.  Informed consent was
+OBX|52|TX|||confirmed.  The patient was reidentified appropriately and was placed in usual
+OBX|53|TX|||position for an endoscopy.  Once achieved comfortable level of sedation an
+OBX|54|TX|||Olympus endoscope was advanced through the mouth, through the esophagus, past
+OBX|55|TX|||the GE junction into the stomach, past the pyloric channel, first and second
+OBX|56|TX|||portions of the duodenum, and into the third portion of the duodenum.  Upon
+OBX|57|TX||T| 
+OBX|58|TX||T|PATIENT NAME: GLASSER,ALICE SIBLEY                ACCOUNT #: G00219630286
+OBX|59|TX||X| 
+OBX|60|TX||H|                              
+OBX|61|TX||H|                    
+OBX|62|TX||H|                         
+OBX|63|TX||X| 
+OBX|64|TX||X| 
+OBX|65|TX|||evaluation of upper, middle and lower portion of the esophagus, no significant
+OBX|66|TX|||abnormalities were noted.  Upon entering the stomach, no bleeding or bleeding
+OBX|67|TX|||ulcers were noted.  Retroflexion showed a normal lesser curvature of stomach as
+OBX|68|TX|||well as fundus and cardia.  Upon reaching the antrum, normal incisura and antrum
+OBX|69|TX|||with adequate pyloric channel was noted without any gastric outlet obstruction. 
+OBX|70|TX|||First, second and third portions of the duodenum were all within normal limits,
+OBX|71|TX|||without any intrinsic or extrinsic compression or inflammatory changes. 
+OBX|72|TX|||Subsequently, the endoscope was withdrawn, procedure terminated.  The patient
+OBX|73|TX|||tolerated the procedure well.  The patient was then turned around.  This time,
+OBX|74|TX|||an Olympus colonoscope was advanced through the rectum throughout the
+OBX|75|TX|||rectosigmoid, sigmoid, descending, transverse, ascending into the cecum and into
+OBX|76|TX|||the last 20 cm of the terminal ileum.  There were blood clots as well as maroon
+OBX|77|TX|||color stool throughout the colon.  There was fresh blood noted in the terminal
+OBX|78|TX|||ileum.  Extensive diverticulosis were noted throughout the colon without any
+OBX|79|TX|||evidence of diverticulitis and no overt bleeding from the diverticula. 
+OBX|80|TX|||Retroflexion in the rectum showed internal hemorrhoids, which were not bleeding.
+OBX|81|TX||| The colonoscope was then withdrawn, procedure terminated.  The patient
+OBX|82|TX|||tolerated the procedure well.  No immediate complications were encountered.
+OBX|83|TX||| 
+OBX|84|TX|||IMPRESSION:
+OBX|85|TX|||1.  For endoscopy, essentially normal endoscopy.
+OBX|86|TX|||2.  For colonoscopy, blood and blood clots all the way to the terminal ileum,
+OBX|87|TX|||extensive diverticulosis, and internal and external hemorrhoids.
+OBX|88|TX||| 
+OBX|89|TX|||PLAN:
+OBX|90|TX|||At this time would be to stay on a clear liquid diet for the time being.  We
+OBX|91|TX|||will obtain a Meckel scan and if normal, will obtain a small bowel series.  If
+OBX|92|TX|||patient continues to have anemia or bleeding, we will need a wireless capsule
+OBX|93|TX|||endoscopy which is not available here, we would have to have that done as an
+OBX|94|TX|||outpatient in my office upon discharge.
+OBX|95|TX||| 
+OBX|96|TX|||Dictated By: Gilbert Simoni, MD
+OBX|97|TX||| 
+OBX|98|TX|||DD: 09/03/2016 11:35:37
+OBX|99|TX|||DT: 09/03/2016 12:38:42 
+OBX|100|TX|||Document ID:  3429344 / Confirmation#: 226537 
+OBX|101|TX|||Authenticated by Gilbert Simoni On 09/26/2016 10:13:34 AM 
+OBX|102|TX||X| 
+OBX|103|TX||X| 
+OBX|104|TX||X| 
+OBX|105|TX||X| 
+OBX|106|TX||X| 
+OBX|107|TX||X|Electronically Signed by Gilbert Simoni, MD for Gilbert Simoni, MD on 09/26/16 a
+OBX|108|TX||X| 
+OBX|109|TX||X| 
+OBX|110|TX||X| 
+OBX|111|TX||X| 
+OBX|112|TX||X| 
+OBX|113|TX||X| 
+OBX|114|TX||X| 
+OBX|115|TX||X| 
+OBX|116|TX||T| 
+OBX|117|TX||T|PATIENT NAME: GLASSER,ALICE SIBLEY                ACCOUNT #: G00219630286

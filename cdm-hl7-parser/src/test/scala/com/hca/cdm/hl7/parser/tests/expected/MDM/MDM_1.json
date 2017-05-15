@@ -1,0 +1,134 @@
+{
+  "0000.COMN": {
+    "sending_facility": "HHAH",
+    "message_control_id": "EPIC_HHAH_MDM_7F774_1E2FB7_0_FAC1",
+    "medical_record_num": "2000116569",
+    "medical_record_urn": "Y000145173",
+    "patient_account_num": ""
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "HHAH",
+    "date_time_of_message": "20161002171105",
+    "security": "HZE9211",
+    "message_type": {
+      "message_code": "MDM",
+      "trigger_event": "T08"
+    },
+    "message_control_id": "EPIC_HHAH_MDM_7F774_1E2FB7_0_FAC1",
+    "processing_id": "P",
+    "version_id": "2.3",
+    "continuation_pointer": "Epic_CWDV"
+  },
+  "0002.EVN": {
+    "event_type_code": "T08",
+    "recorded_date_time": "20161002171059",
+    "event_reason_code": "UPDATE_NOTE",
+    "operator_id": {
+      "person_id": "HZE9211",
+      "family_name": "MCMINN",
+      "given_name": "THOMAS",
+      "assigning_authority": "AH",
+      "assigning_facility": "HHAH"
+    }
+  },
+  "0003.PID": {
+    "patient_id": {
+      "identifier_num": "Q6487",
+      "assgn_authr": "CWTTXIURN",
+      "identifier_type_code": "CWTTXIURN"
+    },
+    "patient_id_list": {
+      "id_num": "2000116569",
+      "assigning_authority": "EPIC",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": [
+      {
+        "identifier_num": "Y000145173",
+        "assgn_authr": "HHOA",
+        "identifier_type_code": "HHOA"
+      },
+      {
+        "identifier_num": "L001263882",
+        "assgn_authr": "SDMC",
+        "identifier_type_code": "SDMC"
+      },
+      {
+        "identifier_num": "Q6487",
+        "assgn_authr": "CWTTXIURN",
+        "identifier_type_code": "CWTTXIURN"
+      }
+    ],
+    "patient_name": {
+      "family_name": "CHRISTENSEN",
+      "given_name": "JIMMIE",
+      "second_and_further_given_names_or_initials_thereof": "L"
+    },
+    "date_time_of_birth": "19311218",
+    "administrative_sex": "M",
+    "patient_alias": [
+      {
+        "last_name": "CHRISTENSEN",
+        "first_name": "JIMMIE",
+        "middle_name": "L"
+      },
+      {
+        "last_name": "CHRISTENSEN",
+        "first_name": "JIMMIE",
+        "middle_name": "LEE"
+      }
+    ],
+    "race": "W",
+    "patient_address": {
+      "street_address": "PO BOX 10",
+      "city": "ELGIN",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "78621",
+      "country": "USA",
+      "address_type": "P"
+    },
+    "phone_num_home": {
+      "telephone_num": "(512)281-4439",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H"
+    },
+    "primary_language": "ENGLISH",
+    "marital_status": "M",
+    "ssn_num_patient": "460-48-6918",
+    "ethnic_group": "NOT HISPANIC",
+    "patient_death_indicator": "N"
+  },
+  "0004.PD1": {
+    "patient_primary_facility": {
+      "organization_name": "AUSTIN HEART HHO",
+      "id_num": "90000001"
+    }
+  },
+  "0005.PV1": {
+    "patient_class": "O",
+    "assigned_patient_location": {
+      "point_of_care": "AHHHMO",
+      "facility": "HHAH"
+    },
+    "attending_doctor": [
+      {
+        "person_id": "MCMT",
+        "family_name": "MCMINN",
+        "given_name": "THOMAS",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "HZE9211",
+        "family_name": "MCMINN",
+        "given_name": "THOMAS",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "visit_num": "23756799",
+    "discharge_date_time": "20160928120300"
+  }
+}

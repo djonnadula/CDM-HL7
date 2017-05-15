@@ -1,0 +1,129 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCPL",
+    "message_control_id": "MT_COCPL_MDM_PLDPTO.1.4624050",
+    "medical_record_num": "E001152466",
+    "medical_record_urn": "E911535",
+    "patient_account_num": "E00989482939"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCPL",
+    "date_time_of_message": "201703301204",
+    "message_type": {
+      "message_code": "MDM",
+      "trigger_event": "T11"
+    },
+    "message_control_id": "MT_COCPL_MDM_PLDPTO.1.4624050",
+    "processing_id": "P",
+    "version_id": "2.1"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "medical_record_num": "E001152466",
+    "medical_record_urn": "E911535",
+    "patient_name": {
+      "family_name": "NAMRATHA",
+      "given_name": "MEDARAMETLA"
+    },
+    "date_time_of_birth": "19920715",
+    "administrative_sex": "F",
+    "patient_alias": {
+      "type_code": "M"
+    },
+    "race": "U",
+    "patient_address": {
+      "street_address": "UNKNOWN",
+      "city": ".",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "."
+    },
+    "phone_num_home": "636-577-2406",
+    "marital_status": "U",
+    "religion": "UNK",
+    "patient_account_num": "E00989482939"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": "E.2LD",
+    "admission_type": "EL",
+    "attending_doctor": {
+      "person_id": "GUDMA",
+      "family_name": "Gudipaty",
+      "given_name": "Madhuri",
+      "degree": "MD",
+      "id_type_code": "XX"
+    },
+    "referring_doctor": {
+      "person_id": "GUDMA",
+      "family_name": "Gudipaty",
+      "given_name": "Madhuri",
+      "degree": "MD",
+      "id_type_code": "XX"
+    },
+    "primary_care_doctor": {
+      "person_id": ".NO PCP",
+      "last_name": "Physician",
+      "first_name": "No",
+      "middle_name": "Primary or Family",
+      "identifier_type_code": "XX"
+    },
+    "hospital_service": "LD",
+    "admit_source": "CR",
+    "admitting_doctor": {
+      "person_id": "GUDMA",
+      "family_name": "Gudipaty",
+      "given_name": "Madhuri",
+      "degree": "MD",
+      "id_type_code": "XX"
+    },
+    "patient_type": "IN",
+    "financial_class": "99",
+    "servicing_facility": "COCPL",
+    "account_status": "CAN",
+    "admit_date_time": "201703272100",
+    "consulting_doctor": {
+      "person_id": "GUDMA",
+      "last_name": "Gudipaty",
+      "first_name": "Madhuri",
+      "degree": "MD",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0004.TXA": {
+    "document_type": {
+      "id": "HP",
+      "text": "History and Physical"
+    },
+    "document_content_presentation": "201703261049",
+    "activity_date_time": "201703241224",
+    "origination_date_time": "201703270000",
+    "transcription_date_time": "201703241455",
+    "originator_code_name": {
+      "person_id": "GUDMA",
+      "family_name": "Gudipaty",
+      "given_name": "Madhuri",
+      "degree": "MD"
+    },
+    "transcriptionist_code_name": {
+      "person_id": "E.TRANS",
+      "family_name": "TRANSCRIPTION"
+    },
+    "unique_document_num": {
+      "entity_id": "E.MR20170326-0066",
+      "namespace_id": "1146162ESC"
+    },
+    "filler_order_num": "E.MR",
+    "unique_document_file_name": "HP",
+    "document_completion_status": "Cancel",
+    "authentication_person_time_stamp": {
+      "person_id": "GUDMA",
+      "family_name": "Gudipaty",
+      "given_name": "Madhuri",
+      "degree": "MD",
+      "date_time_action_performed": "201703241224"
+    }
+  }
+}
