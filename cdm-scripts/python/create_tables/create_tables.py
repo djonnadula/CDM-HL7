@@ -15,13 +15,13 @@ def read_props():
     return yaml_props
 
 
-def hl7_drop_table(segment):
+def hl7_drop_table(segment, db_name):
     """
     Drop table template
     :param segment: hl7 segment name
     :return: drop table statement string
     """
-    return '\nDROP TABLE hl7_{0}_data;\n'.format(segment.lower())
+    return '\nDROP TABLE {1}.hl7_{0}_data;\n'.format(segment.lower(), db_name)
 
 
 def hl7_table_prefix(segment, environment):
@@ -123,7 +123,7 @@ def write_tables(env, add_drop_tables, db_name, db_path):
             else:
                 # print segment_name
                 if add_drop_tables:
-                    f.write(hl7_drop_table(segment_name))
+                    f.write(hl7_drop_table(segment_name, db_name))
                 f.write(hl7_table_prefix(segment_name, db_name))
                 f.write(common_columns())
                 for element in components.split('^'):

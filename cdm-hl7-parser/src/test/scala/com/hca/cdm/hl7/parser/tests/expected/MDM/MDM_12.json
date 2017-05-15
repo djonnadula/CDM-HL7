@@ -1,0 +1,492 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCPN",
+    "message_control_id": "MT_COCPN_MDM_PNDPTO.1.8996496",
+    "medical_record_num": "E002758860",
+    "medical_record_urn": "E2125753",
+    "patient_account_num": "E00656255190"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCPN",
+    "date_time_of_message": "201609261021",
+    "message_type": {
+      "message_code": "MDM",
+      "trigger_event": "T02"
+    },
+    "message_control_id": "MT_COCPN_MDM_PNDPTO.1.8996496",
+    "processing_id": "P",
+    "version_id": "2.1"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "medical_record_num": "E002758860",
+    "medical_record_urn": "E2125753",
+    "patient_name": {
+      "family_name": "ROWLEY",
+      "given_name": "MICHELLE",
+      "second_and_further_given_names_or_initials_thereof": "R"
+    },
+    "mother_maiden_name": "NMN",
+    "date_time_of_birth": "19710807",
+    "administrative_sex": "F",
+    "patient_alias": [
+      {
+        "last_name": "CULP",
+        "first_name": "MICHELLE",
+        "type_code": "M"
+      },
+      {
+        "last_name": "ROWLEY",
+        "first_name": "MICHELLE",
+        "type_code": "A"
+      }
+    ],
+    "race": "W",
+    "patient_address": {
+      "street_address": "20349 E 1110 ROAD",
+      "city": "ELK CITY",
+      "state_or_province": "OK",
+      "zip_or_postal_code": "73644"
+    },
+    "county_code": "005",
+    "phone_num_home": "580-374-1206",
+    "phone_num_business": "999-999-9999",
+    "marital_status": "M",
+    "religion": "NON",
+    "patient_account_num": "E00656255190",
+    "ssn_num_patient": "440-88-6557"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "E.ICUM",
+      "room": "E.2068",
+      "bed": "A"
+    },
+    "admission_type": "EM",
+    "attending_doctor": {
+      "person_id": "LEVDA",
+      "family_name": "Levin",
+      "given_name": "David",
+      "second_and_further_given_names_or_initials_thereof": "C",
+      "degree": "MD",
+      "id_type_code": "XX"
+    },
+    "referring_doctor": {
+      "person_id": ".SELF",
+      "family_name": "Referred",
+      "given_name": "Self",
+      "id_type_code": "XX"
+    },
+    "primary_care_doctor": {
+      "person_id": ".NO PCP",
+      "last_name": "Physician",
+      "first_name": "No",
+      "middle_name": "Primary or Family",
+      "identifier_type_code": "XX"
+    },
+    "hospital_service": "P",
+    "admit_source": "PR",
+    "admitting_doctor": {
+      "person_id": "LEVDA",
+      "family_name": "Levin",
+      "given_name": "David",
+      "second_and_further_given_names_or_initials_thereof": "C",
+      "degree": "MD",
+      "id_type_code": "XX"
+    },
+    "patient_type": "IN",
+    "financial_class": "99",
+    "servicing_facility": "COCPN",
+    "account_status": "ADM",
+    "admit_date_time": "201609251056"
+  },
+  "0004.TXA": {
+    "document_type": {
+      "id": "EKG",
+      "text": "EKG REPORT FOR MUSE"
+    },
+    "document_content_presentation": "201609261021",
+    "activity_date_time": "201609250919",
+    "origination_date_time": "201609250919",
+    "originator_code_name": {
+      "person_id": "LAZRA",
+      "family_name": "Lazzara",
+      "given_name": "Ralph",
+      "degree": "MD"
+    },
+    "transcriptionist_code_name": {
+      "person_id": "EVEN.MUSE",
+      "family_name": "VENDOR",
+      "given_name": "MUSE"
+    },
+    "unique_document_num": {
+      "entity_id": "E.EKG20160926-0009",
+      "namespace_id": "MUSE460478"
+    },
+    "filler_order_num": "E.EKG",
+    "unique_document_file_name": "EKG",
+    "document_completion_status": "Signed",
+    "authentication_person_time_stamp": {
+      "person_id": "LAZRA",
+      "family_name": "Lazzara",
+      "given_name": "Ralph",
+      "degree": "MD",
+      "date_time_action_performed": "201609250919"
+    }
+  },
+  "0005.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "                               OU MEDICAL CENTER"
+  },
+  "0006.OBX": {
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "                              1200 Everett Drive"
+  },
+  "0007.OBX": {
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "                           Oklahoma City, OK  73104"
+  },
+  "0008.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": " "
+  },
+  "0009.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "            Name: ROWLEY,MICHELLE R             "
+  },
+  "0010.OBX": {
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "  Account Number: E00656255190"
+  },
+  "0011.OBX": {
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "     Unit Number: E002758860"
+  },
+  "0012.OBX": {
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value":"            Room: E.2068    "
+  },
+  "0013.OBX": {
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "   Date Of Birth: 08/07/71"
+  },
+  "0014.OBX": {
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "Attending Doctor: Levin MD,David C              "
+  },
+  "0015.OBX": {
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_sub_id": "H",
+    "obsv_value": "            Date: 09/25/16"
+  },
+  "0016.OBX": {
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": "Test Performed on 09/25/2016  09:19:26 AM"
+  },
+  "0017.OBX": {
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": "Test Reason : Chest Pain"
+  },
+  "0018.OBX": {
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_value": "Blood Pressure : ***/*** mmHG"
+  },
+  "0019.OBX": {
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_value": "Vent. Rate : 101 BPM     Atrial Rate : 101 BPM"
+  },
+  "0020.OBX": {
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_value": "   P-R Int : 166 ms          QRS Dur : 082 ms"
+  },
+  "0021.OBX": {
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_value": "    QT Int : 344 ms       P-R-T Axes : 037 059 016 degrees"
+  },
+  "0022.OBX": {
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_value": "   QTc Int : 446 ms"
+  },
+  "0023.OBX": {
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_value": " "
+  },
+  "0024.OBX": {
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_value": "Sinus tachycardia"
+  },
+  "0025.OBX": {
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_value": "Nonspecific T wave abnormality"
+  },
+  "0026.OBX": {
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_value": "Abnormal ECG"
+  },
+  "0027.OBX": {
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_value": " "
+  },
+  "0028.OBX": {
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_value": "Confirmed by LAZZARA MD, RALPH (28) on 9/26/2016 10:21:16 AM"
+  },
+  "0029.OBX": {
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_value": " "
+  },
+  "0030.OBX": {
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_value": "Referred By: David Levin           Electronically signed by:RALPH LAZZARA MD"
+  },
+  "0031.OBX": {
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0032.OBX": {
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0033.OBX": {
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0034.OBX": {
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": "Electronically Signed by Ralph Lazzara, MD for Ralph Lazzara, MD on 09/26/16 at "
+  },
+  "0035.OBX": {
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0036.OBX": {
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0037.OBX": {
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0038.OBX": {
+    "set_id": "34",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0039.OBX": {
+    "set_id": "35",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0040.OBX": {
+    "set_id": "36",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0041.OBX": {
+    "set_id": "37",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0042.OBX": {
+    "set_id": "38",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0043.OBX": {
+    "set_id": "39",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0044.OBX": {
+    "set_id": "40",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0045.OBX": {
+    "set_id": "41",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0046.OBX": {
+    "set_id": "42",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0047.OBX": {
+    "set_id": "43",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0048.OBX": {
+    "set_id": "44",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0049.OBX": {
+    "set_id": "45",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0050.OBX": {
+    "set_id": "46",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0051.OBX": {
+    "set_id": "47",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0052.OBX": {
+    "set_id": "48",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0053.OBX": {
+    "set_id": "49",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0054.OBX": {
+    "set_id": "50",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0055.OBX": {
+    "set_id": "51",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0056.OBX": {
+    "set_id": "52",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0057.OBX": {
+    "set_id": "53",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0058.OBX": {
+    "set_id": "54",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0059.OBX": {
+    "set_id": "55",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0060.OBX": {
+    "set_id": "56",
+    "value_type": "TX",
+    "obsv_sub_id": "X",
+    "obsv_value": " "
+  },
+  "0061.OBX": {
+    "set_id": "57",
+    "value_type": "TX",
+    "obsv_sub_id": "T",
+    "obsv_value": " "
+  },
+  "0062.OBX": {
+    "set_id": "58",
+    "value_type": "TX",
+    "obsv_sub_id": "T",
+    "obsv_value": "PATIENT NAME:  ROWLEY,MICHELLE R             ACCOUNT #:  E00656255190"
+  },
+  "0063.ZUR": {
+    "set_id": "1",
+    "information": "E2125753"
+  },
+  "0064.ZUR": {
+    "set_id": "2",
+    "information": "Sun Sep 25+09:19:26 2016"
+  },
+  "0065.ZUR": {
+    "set_id": "3",
+    "information": "OUMCWPAPPMSE02"
+  },
+  "0066.ZUR": {
+    "set_id": "4",
+    "information": "Server1"
+  }
+}

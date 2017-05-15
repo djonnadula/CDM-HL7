@@ -1,6 +1,8 @@
 environment:
   - 'production'
   - 'reg_test'
+  - 'qa'
+  - 'dev'
 
 environments:
   production:
