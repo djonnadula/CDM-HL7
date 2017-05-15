@@ -407,15 +407,15 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         val srcSystemValues = lookUp(srcSystemMapping, segmentIndex)
         val facilityOverRideValues = lookUp(facilityOverRides, s"$facilityControlVersion$segmentIndex")
         mappedColumnData = EMPTYSTR
-        if (srcSystemValues nonEmpty) {
-          if (mappingExist(2, srcSystemValues) && nonEmpty(srcSystemValues(2))) mappedColumnData = srcSystemValues(2)
-          else if (mappingExist(1, srcSystemValues) && nonEmpty(srcSystemValues(1))) mappedColumnData = srcSystemValues(1)
-          else if (mappingExist(0, srcSystemValues) && nonEmpty(srcSystemValues(0))) mappedColumnData = srcSystemValues(0)
-        }
-        else if (facilityOverRideValues nonEmpty) {
+        if (facilityOverRideValues nonEmpty) {
           if (mappingExist(2, facilityOverRideValues) && nonEmpty(facilityOverRideValues(2))) mappedColumnData = facilityOverRideValues(2)
           else if (mappingExist(1, facilityOverRideValues) && nonEmpty(facilityOverRideValues(1))) mappedColumnData = facilityOverRideValues(1)
           else if (mappingExist(0, facilityOverRideValues) && nonEmpty(facilityOverRideValues(0))) mappedColumnData = facilityOverRideValues(0)
+        }
+        else if (srcSystemValues nonEmpty) {
+          if (mappingExist(2, srcSystemValues) && nonEmpty(srcSystemValues(2))) mappedColumnData = srcSystemValues(2)
+          else if (mappingExist(1, srcSystemValues) && nonEmpty(srcSystemValues(1))) mappedColumnData = srcSystemValues(1)
+          else if (mappingExist(0, srcSystemValues) && nonEmpty(srcSystemValues(0))) mappedColumnData = srcSystemValues(0)
         }
         else if (standardMappedValues nonEmpty) {
           if (mappingExist(5, standardMappedValues) && nonEmpty(standardMappedValues(5))) mappedColumnData = standardMappedValues(5)
