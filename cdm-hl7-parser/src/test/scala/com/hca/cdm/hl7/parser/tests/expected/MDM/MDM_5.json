@@ -24,8 +24,8 @@
   },
   "0002.PID": {
     "set_id": "1",
-    "patient_id_list": "J000423598",
-    "alternate_patient_id": "J500217",
+    "medical_record_num": "J000423598",
+    "medical_record_urn": "J500217",
     "patient_name": {
       "family_name": "Jones",
       "given_name": "Jessica",
@@ -66,11 +66,11 @@
       "given_name": "DOCTOR",
       "id_type_code": "XX"
     },
-    "consulting_doctor": {
+    "primary_care_doctor": {
       "person_id": "DRBRI",
-      "family_name": "DOCTOR",
-      "given_name": "BRITTANY",
-      "id_type_code": "XX"
+      "last_name": "DOCTOR",
+      "first_name": "BRITTANY",
+      "identifier_type_code": "XX"
     },
     "admit_source": "test",
     "vip_indicator": "Y",
@@ -81,7 +81,7 @@
     "account_status": "DEP",
     "admit_date_time": "201601190932",
     "discharge_date_time": "201601191455",
-    "other_healthcare_provider": {
+    "consulting_doctor": {
       "person_id": "DR.ADAM",
       "last_name": "SAUNDERS",
       "first_name": "ADAM",

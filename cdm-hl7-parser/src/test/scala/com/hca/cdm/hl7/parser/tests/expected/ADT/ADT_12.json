@@ -1,7 +1,7 @@
 {
   "0000.COMN": {
     "sending_facility": "FRNK",
-    "message_control_id": "MT_FRNK_ADT_1129645.",
+    "message_control_id": "MT6_FRNK_ADT_1129645.",
     "medical_record_num": "K000002378",
     "medical_record_urn": "A0-B20151103134433868",
     "patient_account_num": "FR0000121392"
@@ -9,7 +9,7 @@
   "0001.MSH": {
     "field_separator": "|",
     "encoding_characters": "^~\\&",
-    "sending_application": "MT_FRNK",
+    "sending_application": "MT6_FRNK",
     "sending_facility": "FRNK",
     "receiving_application": "DBM",
     "date_time_of_message": "20151221132800-0600",
@@ -17,7 +17,7 @@
       "message_code": "ADT",
       "trigger_event": "A44"
     },
-    "message_control_id": "MT_FRNK_ADT_1129645.",
+    "message_control_id": "MT6_FRNK_ADT_1129645.",
     "processing_id": "D",
     "version_id": "2.5",
     "continuation_pointer": "KYB"
@@ -125,7 +125,7 @@
     "account_status": "DIS",
     "admit_date_time": "201512111111",
     "discharge_date_time": "201512111634",
-    "other_healthcare_provider": {
+    "primary_care_doctor": {
       "person_id": "DR.FAM01",
       "last_name": "Family01",
       "first_name": "Provider",

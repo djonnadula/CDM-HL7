@@ -1,7 +1,7 @@
 {
   "0000.COMN": {
     "sending_facility": "FRNK",
-    "message_control_id": "MT_FRNK_ADT_1129567.",
+    "message_control_id": "MT6_FRNK_ADT_1129567.",
     "medical_record_num": "K000002505",
     "medical_record_urn": "A1-B20151218101601316",
     "patient_account_num": "FR0000000220"
@@ -9,7 +9,7 @@
   "0001.MSH": {
     "field_separator": "|",
     "encoding_characters": "^~\\&",
-    "sending_application": "MT_FRNK",
+    "sending_application": "MT6_FRNK",
     "sending_facility": "FRNK",
     "receiving_application": "DBM",
     "date_time_of_message": "20151221124600-0600",
@@ -17,7 +17,7 @@
       "message_code": "ADT",
       "trigger_event": "A13"
     },
-    "message_control_id": "MT_FRNK_ADT_1129567.",
+    "message_control_id": "MT6_FRNK_ADT_1129567.",
     "processing_id": "D",
     "version_id": "2.5",
     "continuation_pointer": "KYB"
