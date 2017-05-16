@@ -1,4 +1,5 @@
 import csv
+import sets
 
 """
 Script to create the segments.txt which is used for HL7 data parsing
@@ -61,11 +62,11 @@ def main():
     listy = []
     # List of template files for parsing
     file_names = ['hl7MapStandard2.8.2.csv', 'hl7MapEcw2.3.1.csv', 'hl7MapEpic2.3.csv', 'hl7MapIpeople2.5.csv',
-                  'hl7MapMEDITECH2.1.csv', 'hl7MapMEDITECH2.4.csv', 'hl7MapNextGen2.3.csv']
+                  'hl7MapMEDITECH5.csv', 'hl7MapMEDITECH6.csv', 'hl7MapNextGen2.3.csv']
 
     # Add a 1 or 2 to filenames and create a dictionary so that they are easy to sort
     for filename in file_names:
-        with open('..\\templates\\' + filename, 'rU') as csvFile:
+        with open('..\\..\\templates\\' + filename, 'rU') as csvFile:
             reader = unicode_csv_reader(csvFile, delimiter=',')
             reslist = list(reader)
             if filename == 'hl7MapStandard2.8.2.csv':
@@ -89,12 +90,16 @@ def main():
     # Sort data such that the hl7MapStandard2.8.2.csv is always first
     sorted_listy = sorted(listy, key=lambda x: (x[1], x[0]))
 
+    final_set = set()
     # Main program logic - writes the formatted lines to segments.txt
     for index in sorted_listy:
         segment_name = index[1]
         field = index[3]
         component = index[4]
         sub_component = index[5]
+
+        if segment_name == 'GT1':
+            print segment_name, field, component, sub_component
         if current_segment != segment_name:
             if current_segment != '':
                 f.write(cur_message_type + ',' + final_string + '\n')

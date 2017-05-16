@@ -1,6 +1,6 @@
 import csv
 import yaml
-
+import datetime
 
 def read_props():
     """
@@ -21,7 +21,10 @@ def hl7_drop_table(segment, db_name):
     :param segment: hl7 segment name
     :return: drop table statement string
     """
-    return '\nDROP TABLE {1}.hl7_{0}_data;\n'.format(segment.lower(), db_name)
+    if segment == 'BUI' or segment == 'DON' or segment == 'DPS':
+        return ''
+    else:
+        return '\nDROP TABLE {1}.hl7_{0}_data;\n'.format(segment.lower(), db_name)
 
 
 def hl7_table_prefix(segment, environment):
@@ -39,18 +42,20 @@ def hl7_table_suffix(db_path, message_type):
     :param db: hive database name
     :return: create table statement suffix string
     """
-    return '\tetl_firstinsert_datetime STRING,\n' \
-           '\tfield_sequence_num STRING\n' \
-           ')\n' \
-           'PARTITIONED BY (\n' \
-           '\tmessage_type STRING,\n' \
-           '\ttransaction_date STRING\n' \
-           ')' \
+    return '\tetl_firstinsert_datetime STRING,' \
+           '\n\tfield_sequence_num STRING' \
+           '\n)' \
+           '\nPARTITIONED BY (' \
+           '\n\tmessage_type STRING,' \
+           '\n\ttransaction_date STRING' \
+           '\n)' \
+           '\nCOMMENT \'Table updated on {2}\'' \
            '\nROW FORMAT DELIMITED' \
            '\nFIELDS TERMINATED BY \'|\'' \
            '\nSTORED AS SEQUENCEFILE' \
            '\nLOCATION \'/user/hive/warehouse/{0}/landing_zone=SEGMENTS/hl7_segment={1}\';\n'.format(db_path.lower(),
-                                                                                                         message_type)
+                                                                                                         message_type,
+                                                                                                     datetime.datetime.now().strftime("%Y-%m-%d"))
 
 
 def use_query():
@@ -58,22 +63,6 @@ def use_query():
     Use query
     """
     return 'USE hl7;\n'
-
-
-def create_table_names(field1, field2, field3):
-    """
-    Creates the table name based on how many subcomponents are present
-    :param field1: segment
-    :param field2: component
-    :param field3: subcomponent
-    :return: formatted table name
-    """
-    if field2 == 'None' or field2 == '':
-        return '\t{0} STRING,\n'.format(field1)
-    elif field3 == 'None' or field3 == '':
-        return '\t{0}_{1} STRING,\n'.format(field1, field2)
-    else:
-        return '\t{0}_{1}_{2} STRING,\n'.format(field1, field2, field3)
 
 
 def clean_comps(comps):
@@ -88,6 +77,8 @@ def clean_comps(comps):
         column_name = comps[0]
     elif len(comps) >= 2:
         column_name = joiner.join(comps)
+    if column_name == 'comment' or column_name == 'transaction_date':
+        column_name = '_' + column_name
     res = '\t{0} STRING,\n'.format(column_name)
     return res
 
@@ -111,7 +102,7 @@ def write_tables(env, add_drop_tables, db_name, db_path):
     :param db_name: database name from yaml properties
     :param db_path: database location path from yaml properties
     """
-    f = open('create_impala_tables_{0}.sql'.format(env), 'w')
+    f = open('sql/create_impala_tables_{0}.sql'.format(env), 'w')
     with open('..\\..\\templates\\segments.txt', 'rU') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
