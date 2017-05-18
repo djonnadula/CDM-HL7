@@ -37,6 +37,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   private var consumerPool: ThreadPoolExecutor = _
   private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
   @volatile private var hookInit = false
+  @volatile private var pauseConsuming = false
 
 
   def getCurrentConnection: ConnectionMeta = activeConnection.get()
@@ -136,24 +137,22 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       val msg = message.asInstanceOf[TextMessage]
       val data = msg.getText.replaceAll("[\r\n]+", "\r\n")
       val meta = metaFromRaw(data)
-      var count = 0
       var persisted = false
-      var exception: Exception = null
-      while (!persisted && count <= 3) {
-        try {
-          self.store(MqData(source, data, meta))
-          handleAcks(message, source, meta, tlmAcknowledge)
-          persisted = true
-        } catch {
-          case ex: Exception =>
-            error(s"Cannot Store message to Spark Storage ${msg.getJMSMessageID}", ex)
-            count += 1
-            exception = ex
-        }
+      var th: Throwable = null
+      try {
+        self.store(MqData(source, data, meta))
+        handleAcks(message, source, meta, tlmAcknowledge)
+        persisted = true
+        if (self.pauseConsuming) self.pauseConsuming = false
+      } catch {
+        case t: Throwable =>
+          error(s"Cannot Store message to Spark Storage ${msg.getJMSMessageID}", t)
+          th = t
+          self.pauseConsuming = true
       }
       if (!persisted) {
-        self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", exception)
-        self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", exception)
+        self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
+        self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
       }
       persisted
     }
@@ -213,7 +212,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
 
     override def run(): Unit = {
       while (!self.isStopped()) {
-        if (storeReceived) {
+        if (storeReceived && !self.pauseConsuming) {
           try {
             consumer receiveNoWait match {
               case message: Message =>
