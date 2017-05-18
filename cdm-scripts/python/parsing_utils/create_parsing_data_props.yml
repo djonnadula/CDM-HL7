@@ -19,3 +19,7 @@ environments:
     db_path: 'hl7_reg_test'
 
 add_drop_tables: true
+
+segment_file_name: 'segments.txt'
+
+template_path: '..\\..\\templates\\'

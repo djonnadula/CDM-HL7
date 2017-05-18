@@ -533,7 +533,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -860,7 +860,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -883,7 +883,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1094,7 +1094,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1279,7 +1279,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1491,7 +1491,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1693,7 +1693,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1983,7 +1983,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2171,7 +2171,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2314,7 +2314,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2437,7 +2437,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3232,7 +3232,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3328,7 +3328,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3943,7 +3943,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3997,7 +3997,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4067,7 +4067,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4179,7 +4179,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4611,7 +4611,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5260,7 +5260,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5285,7 +5285,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5779,7 +5779,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5945,7 +5945,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6212,7 +6212,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6286,7 +6286,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6800,7 +6800,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7277,7 +7277,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7324,7 +7324,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7394,7 +7394,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7466,7 +7466,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7735,7 +7735,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7805,7 +7805,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8355,7 +8355,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8424,7 +8424,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8789,7 +8789,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8862,7 +8862,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8976,7 +8976,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9408,7 +9408,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9481,7 +9481,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10260,7 +10260,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10353,7 +10353,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10894,7 +10894,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10918,7 +10918,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10947,7 +10947,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10997,7 +10997,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11045,7 +11045,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11302,7 +11302,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11351,7 +11351,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11448,7 +11448,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11670,7 +11670,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11848,7 +11848,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12698,7 +12698,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12752,7 +12752,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12770,7 +12770,7 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_ft1 (
 	set_id STRING,
 	transaction_id STRING,
 	transaction_batch_id STRING,
-	transaction_date STRING,
+	_transaction_date STRING,
 	transaction_date_range_start_date_time STRING,
 	transaction_date_range_end_date_time STRING,
 	transaction_posting_date STRING,
@@ -14011,7 +14011,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14035,7 +14035,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14305,7 +14305,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14450,7 +14450,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14774,7 +14774,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -16442,79 +16442,28 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_gt1 (
 	vip_indicator_second_alternate_coding_system_oid STRING,
 	vip_indicator_second_alternate_value_set_oid STRING,
 	vip_indicator_second_alternate_value_set_version_id STRING,
-	guarantor_employer_name STRING,
-	guarantor_employer_name_last_name STRING,
-	guarantor_employer_name_last_name_surname STRING,
-	guarantor_employer_name_last_name_own_surname_prefix STRING,
-	guarantor_employer_name_last_name_own_surname STRING,
-	guarantor_employer_name_last_name_surname_prefix_from_partner STRING,
-	guarantor_employer_name_last_name_surname_from_partner STRING,
-	guarantor_employer_name_first_name STRING,
-	guarantor_employer_name_middle_name STRING,
-	guarantor_employer_name_suffix STRING,
-	guarantor_employer_name_person_prefix STRING,
-	guarantor_employer_name_degree STRING,
-	guarantor_employer_name_type_code STRING,
-	guarantor_employer_name_rep_code STRING,
-	guarantor_employer_name_context STRING,
-	guarantor_employer_name_context_primary_id STRING,
-	guarantor_employer_name_context_text STRING,
-	guarantor_employer_name_context_name_of_coding_sys STRING,
-	guarantor_employer_name_context_alt_id STRING,
-	guarantor_employer_name_context_alt_text STRING,
-	guarantor_employer_name_context_name_of_alt_coding_sys STRING,
-	guarantor_employer_name_context_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_alt_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_original_text STRING,
-	guarantor_employer_name_context_second_alt_id STRING,
-	guarantor_employer_name_context_second_alt_text STRING,
-	guarantor_employer_name_context_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_name_context_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_coding_sys_oid STRING,
-	guarantor_employer_name_context_value_set_oid STRING,
-	guarantor_employer_name_context_value_set_ver_id STRING,
-	guarantor_employer_name_context_alt_coding_sys_oid STRING,
-	guarantor_employer_name_context_alt_value_set_oid STRING,
-	guarantor_employer_name_context_alt_value_set_ver_id STRING,
-	guarantor_employer_name_context_second_alt_coding_sys_oid STRING,
-	guarantor_employer_name_context_second_alt_value_set_oid STRING,
-	guarantor_employer_name_context_second_alt_value_set_ver_id STRING,
-	guarantor_employer_name_validity_range STRING,
-	guarantor_employer_name_validity_range_eff_from_date_time STRING,
-	guarantor_employer_name_validity_range_eff_to_date_time STRING,
-	guarantor_employer_name_assembly_order STRING,
-	guarantor_employer_name_eff_from_date_time STRING,
-	guarantor_employer_name_eff_to_date_time STRING,
-	guarantor_employer_name_prof_suffix STRING,
-	guarantor_employer_name_called_by STRING,
-	guarantor_employer_address STRING,
+	guarantor_employer_name_name_validity_range_eff_from_date_time STRING,
+	guarantor_employer_name_name_validity_range_eff_to_date_time STRING,
 	guarantor_employer_address_street_address1 STRING,
 	guarantor_employer_address_street_address1_street_mailing_address STRING,
 	guarantor_employer_address_street_address1_street_name STRING,
 	guarantor_employer_address_street_address1_dwelling_num STRING,
 	guarantor_employer_address_street_address2 STRING,
-	guarantor_employer_address_city STRING,
 	guarantor_employer_address_state_province STRING,
 	guarantor_employer_address_zip_postal_code STRING,
-	guarantor_employer_address_country STRING,
-	guarantor_employer_address_address_type STRING,
 	guarantor_employer_address_other_geo_designation STRING,
-	guarantor_employer_address_county_parish_code STRING,
 	guarantor_employer_address_county_parish_code_primary_id STRING,
-	guarantor_employer_address_county_parish_code_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_alt_id STRING,
 	guarantor_employer_address_county_parish_code_alt_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_coding_sys_ver_id STRING,
 	guarantor_employer_address_county_parish_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_county_parish_code_original_text STRING,
 	guarantor_employer_address_county_parish_code_second_alt_id STRING,
 	guarantor_employer_address_county_parish_code_second_alt_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_county_parish_code_coding_sys_oid STRING,
-	guarantor_employer_address_county_parish_code_value_set_oid STRING,
 	guarantor_employer_address_county_parish_code_value_set_ver_id STRING,
 	guarantor_employer_address_county_parish_code_alt_coding_sys_oid STRING,
 	guarantor_employer_address_county_parish_code_alt_value_set_oid STRING,
@@ -16522,22 +16471,18 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_gt1 (
 	guarantor_employer_address_county_parish_code_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_county_parish_code_second_alt_value_set_oid STRING,
 	guarantor_employer_address_county_parish_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_census_tract STRING,
 	guarantor_employer_address_census_tract_primary_id STRING,
-	guarantor_employer_address_census_tract_text STRING,
 	guarantor_employer_address_census_tract_name_of_coding_sys STRING,
 	guarantor_employer_address_census_tract_alt_id STRING,
 	guarantor_employer_address_census_tract_alt_text STRING,
 	guarantor_employer_address_census_tract_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_census_tract_coding_sys_ver_id STRING,
 	guarantor_employer_address_census_tract_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_census_tract_original_text STRING,
 	guarantor_employer_address_census_tract_second_alt_id STRING,
 	guarantor_employer_address_census_tract_second_alt_text STRING,
 	guarantor_employer_address_census_tract_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_census_tract_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_census_tract_coding_sys_oid STRING,
-	guarantor_employer_address_census_tract_value_set_oid STRING,
 	guarantor_employer_address_census_tract_value_set_ver_id STRING,
 	guarantor_employer_address_census_tract_alt_coding_sys_oid STRING,
 	guarantor_employer_address_census_tract_alt_value_set_oid STRING,
@@ -16574,29 +16519,22 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_gt1 (
 	guarantor_employer_address_expr_reason_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_expr_reason_second_alt_value_set_oid STRING,
 	guarantor_employer_address_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_temporary_indicator STRING,
 	guarantor_employer_address_bad_indicator STRING,
 	guarantor_employer_address_bad_address_indicatorgt1_guarantor_employer_address_bad_address_indicator STRING,
-	guarantor_employer_address_address_usage STRING,
-	guarantor_employer_address_addressee STRING,
 	guarantor_employer_address_address_comment STRING,
 	guarantor_employer_address_pref_order STRING,
-	guarantor_employer_address_protection_code STRING,
 	guarantor_employer_address_protection_code_primary_id STRING,
-	guarantor_employer_address_protection_code_text STRING,
 	guarantor_employer_address_protection_code_name_of_coding_sys STRING,
 	guarantor_employer_address_protection_code_alt_id STRING,
 	guarantor_employer_address_protection_code_alt_text STRING,
 	guarantor_employer_address_protection_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_protection_code_coding_sys_ver_id STRING,
 	guarantor_employer_address_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_protection_code_original_text STRING,
 	guarantor_employer_address_protection_code_second_alt_id STRING,
 	guarantor_employer_address_protection_code_second_alt_text STRING,
 	guarantor_employer_address_protection_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_protection_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_protection_code_coding_sys_oid STRING,
-	guarantor_employer_address_protection_code_value_set_oid STRING,
 	guarantor_employer_address_protection_code_value_set_ver_id STRING,
 	guarantor_employer_address_protection_code_alt_coding_sys_oid STRING,
 	guarantor_employer_address_protection_code_alt_value_set_oid STRING,
@@ -16604,23 +16542,11 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_gt1 (
 	guarantor_employer_address_protection_code_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_protection_code_second_alt_value_set_oid STRING,
 	guarantor_employer_address_protection_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_address_id STRING,
-	guarantor_employer_address_address_id_entity_id STRING,
-	guarantor_employer_address_address_id_namespace_id STRING,
-	guarantor_employer_address_address_id_universal_id STRING,
-	guarantor_employer_address_address_id_universal_id_type STRING,
-	guarantor_employer_phone_num STRING,
 	guarantor_employer_phone_num_formatted_num STRING,
 	guarantor_employer_phone_num_use_code STRING,
 	guarantor_employer_phone_num_equipment_type STRING,
 	guarantor_employer_phone_num_comm_address STRING,
-	guarantor_employer_phone_num_country_code STRING,
-	guarantor_employer_phone_num_area_city_code STRING,
 	guarantor_employer_phone_num_local_number STRING,
-	guarantor_employer_phone_num_extension STRING,
-	guarantor_employer_phone_num_any_text STRING,
-	guarantor_employer_phone_num_extension_prefix STRING,
-	guarantor_employer_phone_num_speed_dial_code STRING,
 	guarantor_employer_phone_num_unformatted_num STRING,
 	guarantor_employer_phone_num_eff_from_date STRING,
 	guarantor_employer_phone_num_eff_to_date STRING,
@@ -16647,22 +16573,18 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_gt1 (
 	guarantor_employer_phone_num_expr_reason_second_alt_coding_sys_oid STRING,
 	guarantor_employer_phone_num_expr_reason_second_alt_value_set_oid STRING,
 	guarantor_employer_phone_num_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_protection_code STRING,
 	guarantor_employer_phone_num_protection_code_primary_id STRING,
-	guarantor_employer_phone_num_protection_code_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_alt_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_coding_sys_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_original_text STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_id STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_coding_sys_oid STRING,
-	guarantor_employer_phone_num_protection_code_value_set_oid STRING,
 	guarantor_employer_phone_num_protection_code_value_set_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_coding_sys_oid STRING,
 	guarantor_employer_phone_num_protection_code_alt_value_set_oid STRING,
@@ -16684,7 +16606,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17650,7 +17572,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17742,7 +17664,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17957,7 +17879,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -18035,7 +17957,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -19492,7 +19414,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -21430,7 +21352,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22383,7 +22305,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22693,7 +22615,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22810,7 +22732,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22904,7 +22826,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22973,7 +22895,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -23598,7 +23520,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24390,7 +24312,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24764,7 +24686,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24856,7 +24778,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24984,7 +24906,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25095,7 +25017,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25349,7 +25271,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25730,7 +25652,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25894,7 +25816,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25947,7 +25869,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25997,7 +25919,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26150,7 +26072,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26203,7 +26125,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26523,17 +26445,8 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_mrg (
 	prior_external_pat_id_identifier_num STRING,
 	prior_external_pat_id_sa STRING,
 	prior_external_pat_id_assgn_authr STRING,
-	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
 	prior_internal_pat_id_identifier_check_digit STRING,
 	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_assgn_authr STRING,
-	prior_internal_pat_id_identifier_type_code STRING,
-	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
-	prior_internal_pat_id_identifier_check_digit STRING,
-	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_assgn_authr STRING,
 	prior_internal_pat_id_identifier_type_code STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
@@ -26542,7 +26455,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26572,7 +26485,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26784,7 +26697,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_msh (
 	receiving_network_address_namespace_id STRING,
 	receiving_network_address_universal_id STRING,
 	receiving_network_address_universal_id_type STRING,
-	continuation_pointer STRING,
 	continuation_pointer_network_id STRING,
 	continuation_pointer_unit_number STRING,
 	etl_firstinsert_datetime STRING,
@@ -26794,7 +26706,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26817,7 +26729,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26887,7 +26799,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28290,7 +28202,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28372,7 +28284,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28437,7 +28349,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28474,7 +28386,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28655,7 +28567,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -29792,7 +29704,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_obr (
 	parent_order_filler_assigned_id_namespace_id STRING,
 	parent_order_filler_assigned_id_universal_id STRING,
 	parent_order_filler_assigned_id_universal_id_type STRING,
-	principal_result_interpreter STRING,
 	principal_result_interpreter_n_a STRING,
 	principal_result_interpreter_identifier_type_code STRING,
 	placer_first_generic_field_primary_id STRING,
@@ -29801,7 +29712,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_obr (
 	lab_site STRING,
 	lab_site_mnem STRING,
 	lab_site_name STRING,
-	principal_result_interpreter STRING,
 	principal_result_interpreter_person_id STRING,
 	principal_result_interpreter_last_name STRING,
 	principal_result_interpreter_first_name STRING,
@@ -29814,7 +29724,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_obr (
 	principal_result_interpreter_name_type_code STRING,
 	principal_result_interpreter_identifier_check_digit STRING,
 	principal_result_interpreter_check_digit_scheme STRING,
-	principal_result_interpreter_identifier_type_code STRING,
 	principal_result_interpreter_assgn_facility STRING,
 	principal_result_interpreter_name_rep_code STRING,
 	principal_result_interpreter_context STRING,
@@ -29827,7 +29736,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_obr (
 	principal_result_interpreter_assgn_agency_dept STRING,
 	principal_result_interpreter_security_check STRING,
 	principal_result_interpreter_security_check_scheme STRING,
-	technician STRING,
 	technician_person_id STRING,
 	technician_last_name STRING,
 	technician_first_name STRING,
@@ -29835,7 +29743,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_obr (
 	technician_suffix STRING,
 	technician_person_prefix STRING,
 	technician_degree STRING,
-	transcriptionist STRING,
 	transcriptionist_person_id STRING,
 	transcriptionist_last_name STRING,
 	transcriptionist_first_name STRING,
@@ -29850,7 +29757,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30560,7 +30467,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30630,7 +30537,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30699,7 +30606,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31491,7 +31398,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_om1 (
 	taxonomic_classification_code_second_alternate_coding_system_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_version_id STRING,
-	other_names STRING,
 	replacement_producer_service_test_obsv_id STRING,
 	replacement_producer_service_test_obsv_id_id STRING,
 	replacement_producer_service_test_obsv_id_text STRING,
@@ -31565,7 +31471,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_om1 (
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_coding_system_oid STRING,
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_value_set_oid STRING,
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_value_set_version_id STRING,
-	typical_turn_around_time STRING,
 	typical_turn_around_time_quantity STRING,
 	typical_turn_around_time_units STRING,
 	typical_turn_around_time_units_id STRING,
@@ -31623,7 +31528,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31814,7 +31719,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31953,7 +31858,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32179,7 +32084,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32226,7 +32131,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32251,7 +32156,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32656,7 +32561,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32783,7 +32688,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34125,7 +34030,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_orc (
 	order_workflow_profile_second_alternate_value_set_oid STRING,
 	order_workflow_profile_second_alternate_value_set_version_id STRING,
 	placer_group_num_entity_id STRING,
-	placer_group_num_filler_assigned_id STRING,
 	placer_group_num_universal_id STRING,
 	placer_group_num_universal_id_type STRING,
 	etl_firstinsert_datetime STRING,
@@ -34135,7 +34039,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34388,7 +34292,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34708,7 +34612,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34838,7 +34742,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34978,7 +34882,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35245,7 +35149,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35817,7 +35721,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36156,7 +36060,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36345,7 +36249,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36806,7 +36710,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -37195,7 +37099,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38220,7 +38124,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38376,7 +38280,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38812,7 +38716,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39044,7 +38948,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39355,7 +39259,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39582,7 +39486,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39963,14 +39867,10 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_prb (
 	mood_code_second_alternate_coding_system_oid STRING,
 	mood_code_second_alternate_value_set_oid STRING,
 	mood_code_second_alternate_value_set_version_id STRING,
-	action_code STRING,
-	action_date_time STRING,
 	action_date_time_date_time STRING,
 	action_date_time_person_id STRING,
 	action_date_time_provider_id STRING,
-	problem_id STRING,
 	problem_id_primary_id STRING,
-	problem_id_text STRING,
 	problem_id_name_of_coding_sys STRING,
 	problem_id_alt_text STRING,
 	problem_estbl_date_time STRING,
@@ -39984,7 +39884,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40214,7 +40114,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40870,7 +40770,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41448,7 +41348,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41514,7 +41414,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41622,7 +41522,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42516,7 +42416,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42581,7 +42481,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42680,7 +42580,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -44286,19 +44186,12 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_pv1 (
 	primary_care_doctor_security_check_scheme STRING,
 	mode_of_arrival STRING,
 	reason_for_visit STRING,
-	consulting_doctor STRING,
-	consulting_doctor_person_id STRING,
 	consulting_doctor_last_name STRING,
 	consulting_doctor_first_name STRING,
 	consulting_doctor_middle_name STRING,
-	consulting_doctor_suffix STRING,
 	consulting_doctor_person_prefix STRING,
-	consulting_doctor_degree STRING,
-	consulting_doctor_source_table STRING,
 	consulting_doctor_assgn_authr STRING,
-	consulting_doctor_name_type_code STRING,
 	consulting_doctor_identifier_check_digit STRING,
-	consulting_doctor_check_digit_scheme STRING,
 	consulting_doctor_identifier_type_code STRING,
 	consulting_doctor_assgn_facility STRING,
 	consulting_doctor_name_rep_code STRING,
@@ -44310,34 +44203,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_pv1 (
 	consulting_doctor_prof_suffix STRING,
 	consulting_doctor_assgn_jurisdiction STRING,
 	consulting_doctor_assgn_agency_dept STRING,
-	consulting_doctor_security_check STRING,
-	consulting_doctor_security_check_scheme STRING,
-	primary_care_doctor STRING,
-	primary_care_doctor_person_id STRING,
-	primary_care_doctor_last_name STRING,
-	primary_care_doctor_first_name STRING,
-	primary_care_doctor_middle_name STRING,
-	primary_care_doctor_suffix STRING,
-	primary_care_doctor_person_prefix STRING,
-	primary_care_doctor_degree STRING,
-	primary_care_doctor_source_table STRING,
-	primary_care_doctor_assgn_authr STRING,
-	primary_care_doctor_name_type_code STRING,
-	primary_care_doctor_identifier_check_digit STRING,
-	primary_care_doctor_check_digit_scheme STRING,
-	primary_care_doctor_identifier_type_code STRING,
-	primary_care_doctor_assgn_facility STRING,
-	primary_care_doctor_name_rep_code STRING,
-	primary_care_doctor_context STRING,
-	primary_care_doctor_validity_range STRING,
-	primary_care_doctor_assembly_order STRING,
-	primary_care_doctor_eff_from_date_time STRING,
-	primary_care_doctor_eff_to_date_time STRING,
-	primary_care_doctor_prof_suffix STRING,
-	primary_care_doctor_assgn_jurisdiction STRING,
-	primary_care_doctor_assgn_agency_dept STRING,
-	primary_care_doctor_security_check STRING,
-	primary_care_doctor_security_check_scheme STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -44345,7 +44210,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45077,7 +44942,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45370,7 +45235,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45420,7 +45285,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45466,7 +45331,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45513,7 +45378,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45547,7 +45412,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45579,7 +45444,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45648,7 +45513,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45725,7 +45590,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45752,7 +45617,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45775,7 +45640,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46225,7 +46090,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46740,7 +46605,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46766,7 +46631,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46813,7 +46678,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46882,7 +46747,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47437,7 +47302,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47510,7 +47375,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47736,7 +47601,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48289,7 +48154,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48454,7 +48319,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49159,7 +49024,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -50192,7 +50057,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -50809,7 +50674,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -51797,7 +51662,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -51957,7 +51822,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -52247,7 +52112,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -52797,7 +52662,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53820,7 +53685,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -54990,7 +54855,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55112,7 +54977,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55193,7 +55058,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55260,7 +55125,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55284,7 +55149,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55308,7 +55173,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55482,7 +55347,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55552,7 +55417,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55591,7 +55456,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56220,7 +56085,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57081,7 +56946,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57195,7 +57060,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57344,7 +57209,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57434,7 +57299,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57667,7 +57532,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57735,7 +57600,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58588,7 +58453,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58643,7 +58508,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58688,7 +58553,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58848,7 +58713,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58877,7 +58742,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58908,7 +58773,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59086,7 +58951,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59143,7 +59008,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59182,7 +59047,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59214,7 +59079,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59239,7 +59104,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59266,7 +59131,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59300,7 +59165,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59319,10 +59184,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_zcn (
 	collection_note_date_time STRING,
 	collection_note_user STRING,
 	collection_note_text STRING,
-	set_id STRING,
-	collection_note_date_time STRING,
-	collection_note_user STRING,
-	collection_note_text STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -59330,7 +59191,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59362,7 +59223,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59395,7 +59256,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59437,7 +59298,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59464,7 +59325,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59491,7 +59352,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59530,7 +59391,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59560,7 +59421,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59589,7 +59450,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59618,7 +59479,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59644,7 +59505,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59717,7 +59578,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59741,7 +59602,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59767,7 +59628,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59791,7 +59652,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59821,7 +59682,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59883,7 +59744,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59924,7 +59785,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59960,7 +59821,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60000,7 +59861,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60036,7 +59897,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60094,7 +59955,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60118,7 +59979,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60237,7 +60098,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60261,7 +60122,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60295,7 +60156,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60326,7 +60187,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60357,7 +60218,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60386,7 +60247,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60417,7 +60278,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60455,7 +60316,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60481,7 +60342,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60539,7 +60400,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60566,7 +60427,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60612,7 +60473,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60641,7 +60502,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60666,7 +60527,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60702,7 +60563,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60726,7 +60587,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60760,7 +60621,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60914,7 +60775,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60939,7 +60800,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60956,8 +60817,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_zur (
 	unknown STRING,
 	set_id STRING,
 	information STRING,
-	set_id STRING,
-	information STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -60965,7 +60824,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60993,7 +60852,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE

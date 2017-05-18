@@ -1,7 +1,7 @@
 
-DROP TABLE hl7.hl7_abs_data;
+DROP TABLE hl7_reg_test.hl7_abs_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_abs (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_abs (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -533,15 +533,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ABS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ABS';
 
-DROP TABLE hl7.hl7_acc_data;
+DROP TABLE hl7_reg_test.hl7_acc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_acc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_acc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -860,15 +860,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ACC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ACC';
 
-DROP TABLE hl7.hl7_add_data;
+DROP TABLE hl7_reg_test.hl7_add_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_add (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_add (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -883,15 +883,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ADD';
 
-DROP TABLE hl7.hl7_adj_data;
+DROP TABLE hl7_reg_test.hl7_adj_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_adj (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_adj (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1094,15 +1094,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADJ';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ADJ';
 
-DROP TABLE hl7.hl7_aff_data;
+DROP TABLE hl7_reg_test.hl7_aff_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_aff (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_aff (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1279,15 +1279,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AFF';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AFF';
 
-DROP TABLE hl7.hl7_aig_data;
+DROP TABLE hl7_reg_test.hl7_aig_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_aig (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_aig (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1491,15 +1491,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIG';
 
-DROP TABLE hl7.hl7_ail_data;
+DROP TABLE hl7_reg_test.hl7_ail_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ail (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ail (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1693,15 +1693,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIL';
 
-DROP TABLE hl7.hl7_aip_data;
+DROP TABLE hl7_reg_test.hl7_aip_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_aip (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_aip (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1983,15 +1983,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIP';
 
-DROP TABLE hl7.hl7_ais_data;
+DROP TABLE hl7_reg_test.hl7_ais_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ais (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ais (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2171,15 +2171,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AIS';
 
-DROP TABLE hl7.hl7_al1_data;
+DROP TABLE hl7_reg_test.hl7_al1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_al1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_al1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2314,15 +2314,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AL1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AL1';
 
-DROP TABLE hl7.hl7_apr_data;
+DROP TABLE hl7_reg_test.hl7_apr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_apr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_apr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2437,15 +2437,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=APR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=APR';
 
-DROP TABLE hl7.hl7_arq_data;
+DROP TABLE hl7_reg_test.hl7_arq_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_arq (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_arq (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3232,15 +3232,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARQ';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ARQ';
 
-DROP TABLE hl7.hl7_arv_data;
+DROP TABLE hl7_reg_test.hl7_arv_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_arv (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_arv (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3328,15 +3328,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARV';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ARV';
 
-DROP TABLE hl7.hl7_aut_data;
+DROP TABLE hl7_reg_test.hl7_aut_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_aut (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_aut (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3943,15 +3943,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AUT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=AUT';
 
-DROP TABLE hl7.hl7_bhs_data;
+DROP TABLE hl7_reg_test.hl7_bhs_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_bhs (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_bhs (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3997,15 +3997,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BHS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BHS';
 
-DROP TABLE hl7.hl7_blc_data;
+DROP TABLE hl7_reg_test.hl7_blc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_blc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_blc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4067,15 +4067,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BLC';
 
-DROP TABLE hl7.hl7_blg_data;
+DROP TABLE hl7_reg_test.hl7_blg_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_blg (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_blg (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4179,15 +4179,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BLG';
 
-DROP TABLE hl7.hl7_bpo_data;
+DROP TABLE hl7_reg_test.hl7_bpo_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_bpo (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_bpo (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4611,15 +4611,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPO';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BPO';
 
-DROP TABLE hl7.hl7_bpx_data;
+DROP TABLE hl7_reg_test.hl7_bpx_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_bpx (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_bpx (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5260,15 +5260,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BPX';
 
-DROP TABLE hl7.hl7_bts_data;
+DROP TABLE hl7_reg_test.hl7_bts_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_bts (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_bts (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5285,15 +5285,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BTS';
 
-DROP TABLE hl7.hl7_btx_data;
+DROP TABLE hl7_reg_test.hl7_btx_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_btx (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_btx (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5779,15 +5779,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BTX';
 
-DROP TABLE hl7.hl7_bui_data;
+DROP TABLE hl7_reg_test.hl7_bui_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_bui (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_bui (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5945,15 +5945,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BUI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=BUI';
 
-DROP TABLE hl7.hl7_cdm_data;
+DROP TABLE hl7_reg_test.hl7_cdm_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cdm (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cdm (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6212,15 +6212,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDM';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CDM';
 
-DROP TABLE hl7.hl7_cdo_data;
+DROP TABLE hl7_reg_test.hl7_cdo_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cdo (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cdo (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6286,15 +6286,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDO';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CDO';
 
-DROP TABLE hl7.hl7_cer_data;
+DROP TABLE hl7_reg_test.hl7_cer_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cer (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cer (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6800,15 +6800,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CER';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CER';
 
-DROP TABLE hl7.hl7_cm0_data;
+DROP TABLE hl7_reg_test.hl7_cm0_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cm0 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cm0 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7277,15 +7277,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM0';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CM0';
 
-DROP TABLE hl7.hl7_cm1_data;
+DROP TABLE hl7_reg_test.hl7_cm1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cm1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cm1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7324,15 +7324,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CM1';
 
-DROP TABLE hl7.hl7_cm2_data;
+DROP TABLE hl7_reg_test.hl7_cm2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cm2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cm2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7394,15 +7394,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CM2';
 
-DROP TABLE hl7.hl7_cns_data;
+DROP TABLE hl7_reg_test.hl7_cns_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cns (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cns (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7466,15 +7466,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CNS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CNS';
 
-DROP TABLE hl7.hl7_con_data;
+DROP TABLE hl7_reg_test.hl7_con_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_con (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_con (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7735,15 +7735,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CON';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CON';
 
-DROP TABLE hl7.hl7_csp_data;
+DROP TABLE hl7_reg_test.hl7_csp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_csp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_csp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7805,15 +7805,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CSP';
 
-DROP TABLE hl7.hl7_csr_data;
+DROP TABLE hl7_reg_test.hl7_csr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_csr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_csr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8355,15 +8355,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CSR';
 
-DROP TABLE hl7.hl7_css_data;
+DROP TABLE hl7_reg_test.hl7_css_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_css (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_css (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8424,15 +8424,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CSS';
 
-DROP TABLE hl7.hl7_ctd_data;
+DROP TABLE hl7_reg_test.hl7_ctd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ctd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ctd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8789,15 +8789,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CTD';
 
-DROP TABLE hl7.hl7_cti_data;
+DROP TABLE hl7_reg_test.hl7_cti_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_cti (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_cti (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8862,15 +8862,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=CTI';
 
-DROP TABLE hl7.hl7_db1_data;
+DROP TABLE hl7_reg_test.hl7_db1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_db1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_db1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8976,15 +8976,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DB1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DB1';
 
-DROP TABLE hl7.hl7_dg1_data;
+DROP TABLE hl7_reg_test.hl7_dg1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_dg1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_dg1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -9408,15 +9408,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DG1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DG1';
 
-DROP TABLE hl7.hl7_dmi_data;
+DROP TABLE hl7_reg_test.hl7_dmi_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_dmi (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_dmi (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -9481,15 +9481,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DMI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DMI';
 
-DROP TABLE hl7.hl7_don_data;
+DROP TABLE hl7_reg_test.hl7_don_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_don (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_don (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10260,15 +10260,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DON';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DON';
 
-DROP TABLE hl7.hl7_dps_data;
+DROP TABLE hl7_reg_test.hl7_dps_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_dps (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_dps (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10353,15 +10353,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DPS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DPS';
 
-DROP TABLE hl7.hl7_drg_data;
+DROP TABLE hl7_reg_test.hl7_drg_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_drg (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_drg (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10894,15 +10894,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DRG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DRG';
 
-DROP TABLE hl7.hl7_dsc_data;
+DROP TABLE hl7_reg_test.hl7_dsc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_dsc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_dsc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10918,15 +10918,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DSC';
 
-DROP TABLE hl7.hl7_dsp_data;
+DROP TABLE hl7_reg_test.hl7_dsp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_dsp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_dsp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10947,15 +10947,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=DSP';
 
-DROP TABLE hl7.hl7_ecd_data;
+DROP TABLE hl7_reg_test.hl7_ecd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ecd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ecd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10997,15 +10997,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ECD';
 
-DROP TABLE hl7.hl7_ecr_data;
+DROP TABLE hl7_reg_test.hl7_ecr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ecr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ecr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11045,15 +11045,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ECR';
 
-DROP TABLE hl7.hl7_edu_data;
+DROP TABLE hl7_reg_test.hl7_edu_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_edu (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_edu (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11302,15 +11302,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EDU';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EDU';
 
-DROP TABLE hl7.hl7_eqp_data;
+DROP TABLE hl7_reg_test.hl7_eqp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_eqp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_eqp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11351,15 +11351,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EQP';
 
-DROP TABLE hl7.hl7_equ_data;
+DROP TABLE hl7_reg_test.hl7_equ_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_equ (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_equ (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11448,15 +11448,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQU';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EQU';
 
-DROP TABLE hl7.hl7_err_data;
+DROP TABLE hl7_reg_test.hl7_err_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_err (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_err (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11670,15 +11670,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ERR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ERR';
 
-DROP TABLE hl7.hl7_evn_data;
+DROP TABLE hl7_reg_test.hl7_evn_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_evn (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_evn (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11848,15 +11848,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EVN';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=EVN';
 
-DROP TABLE hl7.hl7_fac_data;
+DROP TABLE hl7_reg_test.hl7_fac_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_fac (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_fac (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -12698,15 +12698,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FAC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FAC';
 
-DROP TABLE hl7.hl7_fhs_data;
+DROP TABLE hl7_reg_test.hl7_fhs_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_fhs (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_fhs (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -12752,15 +12752,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FHS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FHS';
 
-DROP TABLE hl7.hl7_ft1_data;
+DROP TABLE hl7_reg_test.hl7_ft1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ft1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ft1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -12770,7 +12770,7 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	set_id STRING,
 	transaction_id STRING,
 	transaction_batch_id STRING,
-	transaction_date STRING,
+	_transaction_date STRING,
 	transaction_date_range_start_date_time STRING,
 	transaction_date_range_end_date_time STRING,
 	transaction_posting_date STRING,
@@ -14011,15 +14011,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FT1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FT1';
 
-DROP TABLE hl7.hl7_fts_data;
+DROP TABLE hl7_reg_test.hl7_fts_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_fts (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_fts (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14035,15 +14035,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FTS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=FTS';
 
-DROP TABLE hl7.hl7_gol_data;
+DROP TABLE hl7_reg_test.hl7_gol_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_gol (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_gol (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14305,15 +14305,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GOL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GOL';
 
-DROP TABLE hl7.hl7_gp1_data;
+DROP TABLE hl7_reg_test.hl7_gp1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_gp1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_gp1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14450,15 +14450,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GP1';
 
-DROP TABLE hl7.hl7_gp2_data;
+DROP TABLE hl7_reg_test.hl7_gp2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_gp2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_gp2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14774,15 +14774,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GP2';
 
-DROP TABLE hl7.hl7_gt1_data;
+DROP TABLE hl7_reg_test.hl7_gt1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_gt1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_gt1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -16442,79 +16442,28 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	vip_indicator_second_alternate_coding_system_oid STRING,
 	vip_indicator_second_alternate_value_set_oid STRING,
 	vip_indicator_second_alternate_value_set_version_id STRING,
-	guarantor_employer_name STRING,
-	guarantor_employer_name_last_name STRING,
-	guarantor_employer_name_last_name_surname STRING,
-	guarantor_employer_name_last_name_own_surname_prefix STRING,
-	guarantor_employer_name_last_name_own_surname STRING,
-	guarantor_employer_name_last_name_surname_prefix_from_partner STRING,
-	guarantor_employer_name_last_name_surname_from_partner STRING,
-	guarantor_employer_name_first_name STRING,
-	guarantor_employer_name_middle_name STRING,
-	guarantor_employer_name_suffix STRING,
-	guarantor_employer_name_person_prefix STRING,
-	guarantor_employer_name_degree STRING,
-	guarantor_employer_name_type_code STRING,
-	guarantor_employer_name_rep_code STRING,
-	guarantor_employer_name_context STRING,
-	guarantor_employer_name_context_primary_id STRING,
-	guarantor_employer_name_context_text STRING,
-	guarantor_employer_name_context_name_of_coding_sys STRING,
-	guarantor_employer_name_context_alt_id STRING,
-	guarantor_employer_name_context_alt_text STRING,
-	guarantor_employer_name_context_name_of_alt_coding_sys STRING,
-	guarantor_employer_name_context_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_alt_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_original_text STRING,
-	guarantor_employer_name_context_second_alt_id STRING,
-	guarantor_employer_name_context_second_alt_text STRING,
-	guarantor_employer_name_context_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_name_context_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_coding_sys_oid STRING,
-	guarantor_employer_name_context_value_set_oid STRING,
-	guarantor_employer_name_context_value_set_ver_id STRING,
-	guarantor_employer_name_context_alt_coding_sys_oid STRING,
-	guarantor_employer_name_context_alt_value_set_oid STRING,
-	guarantor_employer_name_context_alt_value_set_ver_id STRING,
-	guarantor_employer_name_context_second_alt_coding_sys_oid STRING,
-	guarantor_employer_name_context_second_alt_value_set_oid STRING,
-	guarantor_employer_name_context_second_alt_value_set_ver_id STRING,
-	guarantor_employer_name_validity_range STRING,
-	guarantor_employer_name_validity_range_eff_from_date_time STRING,
-	guarantor_employer_name_validity_range_eff_to_date_time STRING,
-	guarantor_employer_name_assembly_order STRING,
-	guarantor_employer_name_eff_from_date_time STRING,
-	guarantor_employer_name_eff_to_date_time STRING,
-	guarantor_employer_name_prof_suffix STRING,
-	guarantor_employer_name_called_by STRING,
-	guarantor_employer_address STRING,
+	guarantor_employer_name_name_validity_range_eff_from_date_time STRING,
+	guarantor_employer_name_name_validity_range_eff_to_date_time STRING,
 	guarantor_employer_address_street_address1 STRING,
 	guarantor_employer_address_street_address1_street_mailing_address STRING,
 	guarantor_employer_address_street_address1_street_name STRING,
 	guarantor_employer_address_street_address1_dwelling_num STRING,
 	guarantor_employer_address_street_address2 STRING,
-	guarantor_employer_address_city STRING,
 	guarantor_employer_address_state_province STRING,
 	guarantor_employer_address_zip_postal_code STRING,
-	guarantor_employer_address_country STRING,
-	guarantor_employer_address_address_type STRING,
 	guarantor_employer_address_other_geo_designation STRING,
-	guarantor_employer_address_county_parish_code STRING,
 	guarantor_employer_address_county_parish_code_primary_id STRING,
-	guarantor_employer_address_county_parish_code_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_alt_id STRING,
 	guarantor_employer_address_county_parish_code_alt_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_coding_sys_ver_id STRING,
 	guarantor_employer_address_county_parish_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_county_parish_code_original_text STRING,
 	guarantor_employer_address_county_parish_code_second_alt_id STRING,
 	guarantor_employer_address_county_parish_code_second_alt_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_county_parish_code_coding_sys_oid STRING,
-	guarantor_employer_address_county_parish_code_value_set_oid STRING,
 	guarantor_employer_address_county_parish_code_value_set_ver_id STRING,
 	guarantor_employer_address_county_parish_code_alt_coding_sys_oid STRING,
 	guarantor_employer_address_county_parish_code_alt_value_set_oid STRING,
@@ -16522,22 +16471,18 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_county_parish_code_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_county_parish_code_second_alt_value_set_oid STRING,
 	guarantor_employer_address_county_parish_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_census_tract STRING,
 	guarantor_employer_address_census_tract_primary_id STRING,
-	guarantor_employer_address_census_tract_text STRING,
 	guarantor_employer_address_census_tract_name_of_coding_sys STRING,
 	guarantor_employer_address_census_tract_alt_id STRING,
 	guarantor_employer_address_census_tract_alt_text STRING,
 	guarantor_employer_address_census_tract_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_census_tract_coding_sys_ver_id STRING,
 	guarantor_employer_address_census_tract_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_census_tract_original_text STRING,
 	guarantor_employer_address_census_tract_second_alt_id STRING,
 	guarantor_employer_address_census_tract_second_alt_text STRING,
 	guarantor_employer_address_census_tract_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_census_tract_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_census_tract_coding_sys_oid STRING,
-	guarantor_employer_address_census_tract_value_set_oid STRING,
 	guarantor_employer_address_census_tract_value_set_ver_id STRING,
 	guarantor_employer_address_census_tract_alt_coding_sys_oid STRING,
 	guarantor_employer_address_census_tract_alt_value_set_oid STRING,
@@ -16574,29 +16519,22 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_expr_reason_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_expr_reason_second_alt_value_set_oid STRING,
 	guarantor_employer_address_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_temporary_indicator STRING,
 	guarantor_employer_address_bad_indicator STRING,
 	guarantor_employer_address_bad_address_indicatorgt1_guarantor_employer_address_bad_address_indicator STRING,
-	guarantor_employer_address_address_usage STRING,
-	guarantor_employer_address_addressee STRING,
 	guarantor_employer_address_address_comment STRING,
 	guarantor_employer_address_pref_order STRING,
-	guarantor_employer_address_protection_code STRING,
 	guarantor_employer_address_protection_code_primary_id STRING,
-	guarantor_employer_address_protection_code_text STRING,
 	guarantor_employer_address_protection_code_name_of_coding_sys STRING,
 	guarantor_employer_address_protection_code_alt_id STRING,
 	guarantor_employer_address_protection_code_alt_text STRING,
 	guarantor_employer_address_protection_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_protection_code_coding_sys_ver_id STRING,
 	guarantor_employer_address_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_protection_code_original_text STRING,
 	guarantor_employer_address_protection_code_second_alt_id STRING,
 	guarantor_employer_address_protection_code_second_alt_text STRING,
 	guarantor_employer_address_protection_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_protection_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_protection_code_coding_sys_oid STRING,
-	guarantor_employer_address_protection_code_value_set_oid STRING,
 	guarantor_employer_address_protection_code_value_set_ver_id STRING,
 	guarantor_employer_address_protection_code_alt_coding_sys_oid STRING,
 	guarantor_employer_address_protection_code_alt_value_set_oid STRING,
@@ -16604,23 +16542,11 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_protection_code_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_protection_code_second_alt_value_set_oid STRING,
 	guarantor_employer_address_protection_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_address_id STRING,
-	guarantor_employer_address_address_id_entity_id STRING,
-	guarantor_employer_address_address_id_namespace_id STRING,
-	guarantor_employer_address_address_id_universal_id STRING,
-	guarantor_employer_address_address_id_universal_id_type STRING,
-	guarantor_employer_phone_num STRING,
 	guarantor_employer_phone_num_formatted_num STRING,
 	guarantor_employer_phone_num_use_code STRING,
 	guarantor_employer_phone_num_equipment_type STRING,
 	guarantor_employer_phone_num_comm_address STRING,
-	guarantor_employer_phone_num_country_code STRING,
-	guarantor_employer_phone_num_area_city_code STRING,
 	guarantor_employer_phone_num_local_number STRING,
-	guarantor_employer_phone_num_extension STRING,
-	guarantor_employer_phone_num_any_text STRING,
-	guarantor_employer_phone_num_extension_prefix STRING,
-	guarantor_employer_phone_num_speed_dial_code STRING,
 	guarantor_employer_phone_num_unformatted_num STRING,
 	guarantor_employer_phone_num_eff_from_date STRING,
 	guarantor_employer_phone_num_eff_to_date STRING,
@@ -16647,22 +16573,18 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_phone_num_expr_reason_second_alt_coding_sys_oid STRING,
 	guarantor_employer_phone_num_expr_reason_second_alt_value_set_oid STRING,
 	guarantor_employer_phone_num_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_protection_code STRING,
 	guarantor_employer_phone_num_protection_code_primary_id STRING,
-	guarantor_employer_phone_num_protection_code_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_alt_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_coding_sys_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_original_text STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_id STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_coding_sys_oid STRING,
-	guarantor_employer_phone_num_protection_code_value_set_oid STRING,
 	guarantor_employer_phone_num_protection_code_value_set_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_coding_sys_oid STRING,
 	guarantor_employer_phone_num_protection_code_alt_value_set_oid STRING,
@@ -16684,15 +16606,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GT1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=GT1';
 
-DROP TABLE hl7.hl7_iam_data;
+DROP TABLE hl7_reg_test.hl7_iam_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_iam (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_iam (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -17650,15 +17572,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAM';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IAM';
 
-DROP TABLE hl7.hl7_iar_data;
+DROP TABLE hl7_reg_test.hl7_iar_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_iar (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_iar (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -17742,15 +17664,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IAR';
 
-DROP TABLE hl7.hl7_iim_data;
+DROP TABLE hl7_reg_test.hl7_iim_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_iim (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_iim (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -17957,15 +17879,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IIM';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IIM';
 
-DROP TABLE hl7.hl7_ilt_data;
+DROP TABLE hl7_reg_test.hl7_ilt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ilt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ilt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -18035,15 +17957,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ILT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ILT';
 
-DROP TABLE hl7.hl7_in1_data;
+DROP TABLE hl7_reg_test.hl7_in1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_in1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_in1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -19492,15 +19414,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IN1';
 
-DROP TABLE hl7.hl7_in2_data;
+DROP TABLE hl7_reg_test.hl7_in2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_in2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_in2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -21430,15 +21352,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IN2';
 
-DROP TABLE hl7.hl7_in3_data;
+DROP TABLE hl7_reg_test.hl7_in3_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_in3 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_in3 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22383,15 +22305,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN3';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IN3';
 
-DROP TABLE hl7.hl7_inv_data;
+DROP TABLE hl7_reg_test.hl7_inv_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_inv (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_inv (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22693,15 +22615,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=INV';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=INV';
 
-DROP TABLE hl7.hl7_ipc_data;
+DROP TABLE hl7_reg_test.hl7_ipc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ipc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ipc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22810,15 +22732,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IPC';
 
-DROP TABLE hl7.hl7_ipr_data;
+DROP TABLE hl7_reg_test.hl7_ipr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ipr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ipr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22904,15 +22826,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IPR';
 
-DROP TABLE hl7.hl7_isd_data;
+DROP TABLE hl7_reg_test.hl7_isd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_isd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_isd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22973,15 +22895,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ISD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ISD';
 
-DROP TABLE hl7.hl7_itm_data;
+DROP TABLE hl7_reg_test.hl7_itm_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_itm (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_itm (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -23598,15 +23520,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ITM';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ITM';
 
-DROP TABLE hl7.hl7_ivc_data;
+DROP TABLE hl7_reg_test.hl7_ivc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ivc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ivc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24390,15 +24312,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IVC';
 
-DROP TABLE hl7.hl7_ivt_data;
+DROP TABLE hl7_reg_test.hl7_ivt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ivt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ivt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24764,15 +24686,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=IVT';
 
-DROP TABLE hl7.hl7_lan_data;
+DROP TABLE hl7_reg_test.hl7_lan_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_lan (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_lan (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24856,15 +24778,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LAN';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LAN';
 
-DROP TABLE hl7.hl7_lcc_data;
+DROP TABLE hl7_reg_test.hl7_lcc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_lcc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_lcc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24984,15 +24906,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LCC';
 
-DROP TABLE hl7.hl7_lch_data;
+DROP TABLE hl7_reg_test.hl7_lch_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_lch (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_lch (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25095,15 +25017,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCH';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LCH';
 
-DROP TABLE hl7.hl7_ldp_data;
+DROP TABLE hl7_reg_test.hl7_ldp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ldp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ldp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25349,15 +25271,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LDP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LDP';
 
-DROP TABLE hl7.hl7_loc_data;
+DROP TABLE hl7_reg_test.hl7_loc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_loc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_loc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25730,15 +25652,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LOC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LOC';
 
-DROP TABLE hl7.hl7_lrl_data;
+DROP TABLE hl7_reg_test.hl7_lrl_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_lrl (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_lrl (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25894,15 +25816,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LRL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=LRL';
 
-DROP TABLE hl7.hl7_mcp_data;
+DROP TABLE hl7_reg_test.hl7_mcp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_mcp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_mcp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25947,15 +25869,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MCP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MCP';
 
-DROP TABLE hl7.hl7_mfa_data;
+DROP TABLE hl7_reg_test.hl7_mfa_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_mfa (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_mfa (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25997,15 +25919,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MFA';
 
-DROP TABLE hl7.hl7_mfe_data;
+DROP TABLE hl7_reg_test.hl7_mfe_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_mfe (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_mfe (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26150,15 +26072,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFE';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MFE';
 
-DROP TABLE hl7.hl7_mfi_data;
+DROP TABLE hl7_reg_test.hl7_mfi_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_mfi (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_mfi (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26203,15 +26125,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MFI';
 
-DROP TABLE hl7.hl7_mrg_data;
+DROP TABLE hl7_reg_test.hl7_mrg_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_mrg (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_mrg (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26523,17 +26445,8 @@ CREATE EXTERNAL TABLE hl7.hl7_mrg (
 	prior_external_pat_id_identifier_num STRING,
 	prior_external_pat_id_sa STRING,
 	prior_external_pat_id_assgn_authr STRING,
-	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
 	prior_internal_pat_id_identifier_check_digit STRING,
 	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_assgn_authr STRING,
-	prior_internal_pat_id_identifier_type_code STRING,
-	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
-	prior_internal_pat_id_identifier_check_digit STRING,
-	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_assgn_authr STRING,
 	prior_internal_pat_id_identifier_type_code STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
@@ -26542,15 +26455,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MRG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MRG';
 
-DROP TABLE hl7.hl7_msa_data;
+DROP TABLE hl7_reg_test.hl7_msa_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_msa (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_msa (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26572,15 +26485,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MSA';
 
-DROP TABLE hl7.hl7_msh_data;
+DROP TABLE hl7_reg_test.hl7_msh_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_msh (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_msh (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26784,7 +26697,6 @@ CREATE EXTERNAL TABLE hl7.hl7_msh (
 	receiving_network_address_namespace_id STRING,
 	receiving_network_address_universal_id STRING,
 	receiving_network_address_universal_id_type STRING,
-	continuation_pointer STRING,
 	continuation_pointer_network_id STRING,
 	continuation_pointer_unit_number STRING,
 	etl_firstinsert_datetime STRING,
@@ -26794,15 +26706,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSH';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=MSH';
 
-DROP TABLE hl7.hl7_nck_data;
+DROP TABLE hl7_reg_test.hl7_nck_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_nck (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_nck (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26817,15 +26729,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NCK';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NCK';
 
-DROP TABLE hl7.hl7_nds_data;
+DROP TABLE hl7_reg_test.hl7_nds_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_nds (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_nds (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26887,15 +26799,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NDS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NDS';
 
-DROP TABLE hl7.hl7_nk1_data;
+DROP TABLE hl7_reg_test.hl7_nk1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_nk1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_nk1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28290,15 +28202,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NK1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NK1';
 
-DROP TABLE hl7.hl7_npu_data;
+DROP TABLE hl7_reg_test.hl7_npu_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_npu (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_npu (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28372,15 +28284,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NPU';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NPU';
 
-DROP TABLE hl7.hl7_nsc_data;
+DROP TABLE hl7_reg_test.hl7_nsc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_nsc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_nsc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28437,15 +28349,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NSC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NSC';
 
-DROP TABLE hl7.hl7_nst_data;
+DROP TABLE hl7_reg_test.hl7_nst_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_nst (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_nst (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28474,15 +28386,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NST';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NST';
 
-DROP TABLE hl7.hl7_nte_data;
+DROP TABLE hl7_reg_test.hl7_nte_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_nte (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_nte (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28655,15 +28567,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NTE';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=NTE';
 
-DROP TABLE hl7.hl7_obr_data;
+DROP TABLE hl7_reg_test.hl7_obr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_obr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_obr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -29792,7 +29704,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	parent_order_filler_assigned_id_namespace_id STRING,
 	parent_order_filler_assigned_id_universal_id STRING,
 	parent_order_filler_assigned_id_universal_id_type STRING,
-	principal_result_interpreter STRING,
 	principal_result_interpreter_n_a STRING,
 	principal_result_interpreter_identifier_type_code STRING,
 	placer_first_generic_field_primary_id STRING,
@@ -29801,7 +29712,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	lab_site STRING,
 	lab_site_mnem STRING,
 	lab_site_name STRING,
-	principal_result_interpreter STRING,
 	principal_result_interpreter_person_id STRING,
 	principal_result_interpreter_last_name STRING,
 	principal_result_interpreter_first_name STRING,
@@ -29814,7 +29724,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	principal_result_interpreter_name_type_code STRING,
 	principal_result_interpreter_identifier_check_digit STRING,
 	principal_result_interpreter_check_digit_scheme STRING,
-	principal_result_interpreter_identifier_type_code STRING,
 	principal_result_interpreter_assgn_facility STRING,
 	principal_result_interpreter_name_rep_code STRING,
 	principal_result_interpreter_context STRING,
@@ -29827,7 +29736,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	principal_result_interpreter_assgn_agency_dept STRING,
 	principal_result_interpreter_security_check STRING,
 	principal_result_interpreter_security_check_scheme STRING,
-	technician STRING,
 	technician_person_id STRING,
 	technician_last_name STRING,
 	technician_first_name STRING,
@@ -29835,7 +29743,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	technician_suffix STRING,
 	technician_person_prefix STRING,
 	technician_degree STRING,
-	transcriptionist STRING,
 	transcriptionist_person_id STRING,
 	transcriptionist_last_name STRING,
 	transcriptionist_first_name STRING,
@@ -29850,15 +29757,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OBR';
 
-DROP TABLE hl7.hl7_obx_data;
+DROP TABLE hl7_reg_test.hl7_obx_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_obx (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_obx (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -30560,15 +30467,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OBX';
 
-DROP TABLE hl7.hl7_ods_data;
+DROP TABLE hl7_reg_test.hl7_ods_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ods (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ods (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -30630,15 +30537,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ODS';
 
-DROP TABLE hl7.hl7_odt_data;
+DROP TABLE hl7_reg_test.hl7_odt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_odt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_odt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -30699,15 +30606,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ODT';
 
-DROP TABLE hl7.hl7_om1_data;
+DROP TABLE hl7_reg_test.hl7_om1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -31491,7 +31398,6 @@ CREATE EXTERNAL TABLE hl7.hl7_om1 (
 	taxonomic_classification_code_second_alternate_coding_system_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_version_id STRING,
-	other_names STRING,
 	replacement_producer_service_test_obsv_id STRING,
 	replacement_producer_service_test_obsv_id_id STRING,
 	replacement_producer_service_test_obsv_id_text STRING,
@@ -31565,7 +31471,6 @@ CREATE EXTERNAL TABLE hl7.hl7_om1 (
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_coding_system_oid STRING,
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_value_set_oid STRING,
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_value_set_version_id STRING,
-	typical_turn_around_time STRING,
 	typical_turn_around_time_quantity STRING,
 	typical_turn_around_time_units STRING,
 	typical_turn_around_time_units_id STRING,
@@ -31623,15 +31528,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM1';
 
-DROP TABLE hl7.hl7_om2_data;
+DROP TABLE hl7_reg_test.hl7_om2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -31814,15 +31719,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM2';
 
-DROP TABLE hl7.hl7_om3_data;
+DROP TABLE hl7_reg_test.hl7_om3_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om3 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om3 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -31953,15 +31858,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM3';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM3';
 
-DROP TABLE hl7.hl7_om4_data;
+DROP TABLE hl7_reg_test.hl7_om4_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om4 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om4 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32179,15 +32084,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM4';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM4';
 
-DROP TABLE hl7.hl7_om5_data;
+DROP TABLE hl7_reg_test.hl7_om5_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om5 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om5 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32226,15 +32131,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM5';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM5';
 
-DROP TABLE hl7.hl7_om6_data;
+DROP TABLE hl7_reg_test.hl7_om6_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om6 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om6 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32251,15 +32156,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM6';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM6';
 
-DROP TABLE hl7.hl7_om7_data;
+DROP TABLE hl7_reg_test.hl7_om7_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_om7 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_om7 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32656,15 +32561,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM7';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OM7';
 
-DROP TABLE hl7.hl7_omc_data;
+DROP TABLE hl7_reg_test.hl7_omc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_omc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_omc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32783,15 +32688,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OMC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OMC';
 
-DROP TABLE hl7.hl7_orc_data;
+DROP TABLE hl7_reg_test.hl7_orc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_orc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_orc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34125,7 +34030,6 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	order_workflow_profile_second_alternate_value_set_oid STRING,
 	order_workflow_profile_second_alternate_value_set_version_id STRING,
 	placer_group_num_entity_id STRING,
-	placer_group_num_filler_assigned_id STRING,
 	placer_group_num_universal_id STRING,
 	placer_group_num_universal_id_type STRING,
 	etl_firstinsert_datetime STRING,
@@ -34135,15 +34039,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ORC';
 
-DROP TABLE hl7.hl7_org_data;
+DROP TABLE hl7_reg_test.hl7_org_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_org (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_org (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34388,15 +34292,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ORG';
 
-DROP TABLE hl7.hl7_ovr_data;
+DROP TABLE hl7_reg_test.hl7_ovr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ovr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ovr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34708,15 +34612,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OVR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=OVR';
 
-DROP TABLE hl7.hl7_pac_data;
+DROP TABLE hl7_reg_test.hl7_pac_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pac (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pac (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34838,15 +34742,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PAC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PAC';
 
-DROP TABLE hl7.hl7_pce_data;
+DROP TABLE hl7_reg_test.hl7_pce_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pce (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pce (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34978,15 +34882,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCE';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PCE';
 
-DROP TABLE hl7.hl7_pcr_data;
+DROP TABLE hl7_reg_test.hl7_pcr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pcr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pcr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -35245,15 +35149,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PCR';
 
-DROP TABLE hl7.hl7_pd1_data;
+DROP TABLE hl7_reg_test.hl7_pd1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pd1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pd1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -35817,15 +35721,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PD1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PD1';
 
-DROP TABLE hl7.hl7_pda_data;
+DROP TABLE hl7_reg_test.hl7_pda_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pda (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pda (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -36156,15 +36060,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PDA';
 
-DROP TABLE hl7.hl7_pdc_data;
+DROP TABLE hl7_reg_test.hl7_pdc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pdc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pdc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -36345,15 +36249,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PDC';
 
-DROP TABLE hl7.hl7_peo_data;
+DROP TABLE hl7_reg_test.hl7_peo_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_peo (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_peo (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -36806,15 +36710,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PEO';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PEO';
 
-DROP TABLE hl7.hl7_pes_data;
+DROP TABLE hl7_reg_test.hl7_pes_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pes (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pes (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -37195,15 +37099,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PES';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PES';
 
-DROP TABLE hl7.hl7_pid_data;
+DROP TABLE hl7_reg_test.hl7_pid_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pid (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pid (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -38220,15 +38124,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PID';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PID';
 
-DROP TABLE hl7.hl7_pkg_data;
+DROP TABLE hl7_reg_test.hl7_pkg_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pkg (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pkg (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -38376,15 +38280,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PKG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PKG';
 
-DROP TABLE hl7.hl7_pm1_data;
+DROP TABLE hl7_reg_test.hl7_pm1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pm1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pm1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -38812,15 +38716,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PM1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PM1';
 
-DROP TABLE hl7.hl7_pmt_data;
+DROP TABLE hl7_reg_test.hl7_pmt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pmt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pmt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39044,15 +38948,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PMT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PMT';
 
-DROP TABLE hl7.hl7_pr1_data;
+DROP TABLE hl7_reg_test.hl7_pr1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pr1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pr1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39355,15 +39259,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PR1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PR1';
 
-DROP TABLE hl7.hl7_pra_data;
+DROP TABLE hl7_reg_test.hl7_pra_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pra (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pra (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39582,15 +39486,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRA';
 
-DROP TABLE hl7.hl7_prb_data;
+DROP TABLE hl7_reg_test.hl7_prb_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_prb (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_prb (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39963,14 +39867,10 @@ CREATE EXTERNAL TABLE hl7.hl7_prb (
 	mood_code_second_alternate_coding_system_oid STRING,
 	mood_code_second_alternate_value_set_oid STRING,
 	mood_code_second_alternate_value_set_version_id STRING,
-	action_code STRING,
-	action_date_time STRING,
 	action_date_time_date_time STRING,
 	action_date_time_person_id STRING,
 	action_date_time_provider_id STRING,
-	problem_id STRING,
 	problem_id_primary_id STRING,
-	problem_id_text STRING,
 	problem_id_name_of_coding_sys STRING,
 	problem_id_alt_text STRING,
 	problem_estbl_date_time STRING,
@@ -39984,15 +39884,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRB';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRB';
 
-DROP TABLE hl7.hl7_prc_data;
+DROP TABLE hl7_reg_test.hl7_prc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_prc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_prc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -40214,15 +40114,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRC';
 
-DROP TABLE hl7.hl7_prd_data;
+DROP TABLE hl7_reg_test.hl7_prd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_prd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_prd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -40870,15 +40770,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRD';
 
-DROP TABLE hl7.hl7_prt_data;
+DROP TABLE hl7_reg_test.hl7_prt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_prt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_prt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -41448,15 +41348,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PRT';
 
-DROP TABLE hl7.hl7_psg_data;
+DROP TABLE hl7_reg_test.hl7_psg_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_psg (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_psg (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -41514,15 +41414,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSG';
 
-DROP TABLE hl7.hl7_psh_data;
+DROP TABLE hl7_reg_test.hl7_psh_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_psh (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_psh (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -41622,15 +41522,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSH';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSH';
 
-DROP TABLE hl7.hl7_psl_data;
+DROP TABLE hl7_reg_test.hl7_psl_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_psl (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_psl (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -42516,15 +42416,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSL';
 
-DROP TABLE hl7.hl7_pss_data;
+DROP TABLE hl7_reg_test.hl7_pss_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pss (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pss (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -42581,15 +42481,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PSS';
 
-DROP TABLE hl7.hl7_pth_data;
+DROP TABLE hl7_reg_test.hl7_pth_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pth (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pth (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -42680,15 +42580,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PTH';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PTH';
 
-DROP TABLE hl7.hl7_pv1_data;
+DROP TABLE hl7_reg_test.hl7_pv1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pv1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pv1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -44286,19 +44186,12 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	primary_care_doctor_security_check_scheme STRING,
 	mode_of_arrival STRING,
 	reason_for_visit STRING,
-	consulting_doctor STRING,
-	consulting_doctor_person_id STRING,
 	consulting_doctor_last_name STRING,
 	consulting_doctor_first_name STRING,
 	consulting_doctor_middle_name STRING,
-	consulting_doctor_suffix STRING,
 	consulting_doctor_person_prefix STRING,
-	consulting_doctor_degree STRING,
-	consulting_doctor_source_table STRING,
 	consulting_doctor_assgn_authr STRING,
-	consulting_doctor_name_type_code STRING,
 	consulting_doctor_identifier_check_digit STRING,
-	consulting_doctor_check_digit_scheme STRING,
 	consulting_doctor_identifier_type_code STRING,
 	consulting_doctor_assgn_facility STRING,
 	consulting_doctor_name_rep_code STRING,
@@ -44310,34 +44203,6 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	consulting_doctor_prof_suffix STRING,
 	consulting_doctor_assgn_jurisdiction STRING,
 	consulting_doctor_assgn_agency_dept STRING,
-	consulting_doctor_security_check STRING,
-	consulting_doctor_security_check_scheme STRING,
-	primary_care_doctor STRING,
-	primary_care_doctor_person_id STRING,
-	primary_care_doctor_last_name STRING,
-	primary_care_doctor_first_name STRING,
-	primary_care_doctor_middle_name STRING,
-	primary_care_doctor_suffix STRING,
-	primary_care_doctor_person_prefix STRING,
-	primary_care_doctor_degree STRING,
-	primary_care_doctor_source_table STRING,
-	primary_care_doctor_assgn_authr STRING,
-	primary_care_doctor_name_type_code STRING,
-	primary_care_doctor_identifier_check_digit STRING,
-	primary_care_doctor_check_digit_scheme STRING,
-	primary_care_doctor_identifier_type_code STRING,
-	primary_care_doctor_assgn_facility STRING,
-	primary_care_doctor_name_rep_code STRING,
-	primary_care_doctor_context STRING,
-	primary_care_doctor_validity_range STRING,
-	primary_care_doctor_assembly_order STRING,
-	primary_care_doctor_eff_from_date_time STRING,
-	primary_care_doctor_eff_to_date_time STRING,
-	primary_care_doctor_prof_suffix STRING,
-	primary_care_doctor_assgn_jurisdiction STRING,
-	primary_care_doctor_assgn_agency_dept STRING,
-	primary_care_doctor_security_check STRING,
-	primary_care_doctor_security_check_scheme STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -44345,15 +44210,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PV1';
 
-DROP TABLE hl7.hl7_pv2_data;
+DROP TABLE hl7_reg_test.hl7_pv2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pv2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pv2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45077,15 +44942,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PV2';
 
-DROP TABLE hl7.hl7_pye_data;
+DROP TABLE hl7_reg_test.hl7_pye_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_pye (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_pye (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45370,15 +45235,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PYE';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=PYE';
 
-DROP TABLE hl7.hl7_qak_data;
+DROP TABLE hl7_reg_test.hl7_qak_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_qak (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_qak (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45420,15 +45285,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QAK';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QAK';
 
-DROP TABLE hl7.hl7_qid_data;
+DROP TABLE hl7_reg_test.hl7_qid_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_qid (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_qid (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45466,15 +45331,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QID';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QID';
 
-DROP TABLE hl7.hl7_qpd_data;
+DROP TABLE hl7_reg_test.hl7_qpd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_qpd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_qpd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45513,15 +45378,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QPD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QPD';
 
-DROP TABLE hl7.hl7_qrd_data;
+DROP TABLE hl7_reg_test.hl7_qrd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_qrd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_qrd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45547,15 +45412,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QRD';
 
-DROP TABLE hl7.hl7_qrf_data;
+DROP TABLE hl7_reg_test.hl7_qrf_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_qrf (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_qrf (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45579,15 +45444,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRF';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QRF';
 
-DROP TABLE hl7.hl7_qri_data;
+DROP TABLE hl7_reg_test.hl7_qri_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_qri (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_qri (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45648,15 +45513,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=QRI';
 
-DROP TABLE hl7.hl7_rcp_data;
+DROP TABLE hl7_reg_test.hl7_rcp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rcp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rcp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45725,15 +45590,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RCP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RCP';
 
-DROP TABLE hl7.hl7_rdf_data;
+DROP TABLE hl7_reg_test.hl7_rdf_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rdf (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rdf (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45752,15 +45617,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDF';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RDF';
 
-DROP TABLE hl7.hl7_rdt_data;
+DROP TABLE hl7_reg_test.hl7_rdt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rdt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rdt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45775,15 +45640,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RDT';
 
-DROP TABLE hl7.hl7_rel_data;
+DROP TABLE hl7_reg_test.hl7_rel_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rel (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rel (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46225,15 +46090,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=REL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=REL';
 
-DROP TABLE hl7.hl7_rf1_data;
+DROP TABLE hl7_reg_test.hl7_rf1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rf1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rf1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46740,15 +46605,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RF1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RF1';
 
-DROP TABLE hl7.hl7_rfi_data;
+DROP TABLE hl7_reg_test.hl7_rfi_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rfi (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rfi (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46766,15 +46631,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RFI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RFI';
 
-DROP TABLE hl7.hl7_rgs_data;
+DROP TABLE hl7_reg_test.hl7_rgs_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rgs (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rgs (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46813,15 +46678,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RGS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RGS';
 
-DROP TABLE hl7.hl7_rmi_data;
+DROP TABLE hl7_reg_test.hl7_rmi_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rmi (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rmi (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46882,15 +46747,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RMI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RMI';
 
-DROP TABLE hl7.hl7_rol_data;
+DROP TABLE hl7_reg_test.hl7_rol_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rol (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rol (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -47437,15 +47302,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ROL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ROL';
 
-DROP TABLE hl7.hl7_rq1_data;
+DROP TABLE hl7_reg_test.hl7_rq1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rq1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rq1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -47510,15 +47375,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQ1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RQ1';
 
-DROP TABLE hl7.hl7_rqd_data;
+DROP TABLE hl7_reg_test.hl7_rqd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rqd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rqd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -47736,15 +47601,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RQD';
 
-DROP TABLE hl7.hl7_rxa_data;
+DROP TABLE hl7_reg_test.hl7_rxa_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxa (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxa (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -48289,15 +48154,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXA';
 
-DROP TABLE hl7.hl7_rxc_data;
+DROP TABLE hl7_reg_test.hl7_rxc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -48454,15 +48319,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXC';
 
-DROP TABLE hl7.hl7_rxd_data;
+DROP TABLE hl7_reg_test.hl7_rxd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -49159,15 +49024,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXD';
 
-DROP TABLE hl7.hl7_rxe_data;
+DROP TABLE hl7_reg_test.hl7_rxe_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxe (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxe (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -50192,15 +50057,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXE';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXE';
 
-DROP TABLE hl7.hl7_rxg_data;
+DROP TABLE hl7_reg_test.hl7_rxg_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxg (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxg (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -50809,15 +50674,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXG';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXG';
 
-DROP TABLE hl7.hl7_rxo_data;
+DROP TABLE hl7_reg_test.hl7_rxo_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxo (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxo (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -51797,15 +51662,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXO';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXO';
 
-DROP TABLE hl7.hl7_rxr_data;
+DROP TABLE hl7_reg_test.hl7_rxr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -51957,15 +51822,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXR';
 
-DROP TABLE hl7.hl7_rxv_data;
+DROP TABLE hl7_reg_test.hl7_rxv_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_rxv (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_rxv (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -52247,15 +52112,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXV';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=RXV';
 
-DROP TABLE hl7.hl7_sac_data;
+DROP TABLE hl7_reg_test.hl7_sac_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sac (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sac (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -52797,15 +52662,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SAC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SAC';
 
-DROP TABLE hl7.hl7_scd_data;
+DROP TABLE hl7_reg_test.hl7_scd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_scd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_scd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -53820,15 +53685,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SCD';
 
-DROP TABLE hl7.hl7_sch_data;
+DROP TABLE hl7_reg_test.hl7_sch_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sch (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sch (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -54990,15 +54855,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCH';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SCH';
 
-DROP TABLE hl7.hl7_scp_data;
+DROP TABLE hl7_reg_test.hl7_scp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_scp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_scp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55112,15 +54977,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SCP';
 
-DROP TABLE hl7.hl7_sdd_data;
+DROP TABLE hl7_reg_test.hl7_sdd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sdd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sdd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55193,15 +55058,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SDD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SDD';
 
-DROP TABLE hl7.hl7_sft_data;
+DROP TABLE hl7_reg_test.hl7_sft_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sft (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sft (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55260,15 +55125,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SFT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SFT';
 
-DROP TABLE hl7.hl7_sgh_data;
+DROP TABLE hl7_reg_test.hl7_sgh_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sgh (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sgh (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55284,15 +55149,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGH';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SGH';
 
-DROP TABLE hl7.hl7_sgt_data;
+DROP TABLE hl7_reg_test.hl7_sgt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sgt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sgt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55308,15 +55173,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SGT';
 
-DROP TABLE hl7.hl7_shp_data;
+DROP TABLE hl7_reg_test.hl7_shp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_shp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_shp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55482,15 +55347,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SHP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SHP';
 
-DROP TABLE hl7.hl7_sid_data;
+DROP TABLE hl7_reg_test.hl7_sid_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_sid (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_sid (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55552,15 +55417,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SID';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SID';
 
-DROP TABLE hl7.hl7_slt_data;
+DROP TABLE hl7_reg_test.hl7_slt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_slt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_slt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55591,15 +55456,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SLT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SLT';
 
-DROP TABLE hl7.hl7_spm_data;
+DROP TABLE hl7_reg_test.hl7_spm_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_spm (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_spm (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -56220,15 +56085,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SPM';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=SPM';
 
-DROP TABLE hl7.hl7_stf_data;
+DROP TABLE hl7_reg_test.hl7_stf_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_stf (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_stf (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57081,15 +56946,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STF';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=STF';
 
-DROP TABLE hl7.hl7_stz_data;
+DROP TABLE hl7_reg_test.hl7_stz_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_stz (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_stz (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57195,15 +57060,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STZ';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=STZ';
 
-DROP TABLE hl7.hl7_tcc_data;
+DROP TABLE hl7_reg_test.hl7_tcc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_tcc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_tcc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57344,15 +57209,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TCC';
 
-DROP TABLE hl7.hl7_tcd_data;
+DROP TABLE hl7_reg_test.hl7_tcd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_tcd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_tcd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57434,15 +57299,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TCD';
 
-DROP TABLE hl7.hl7_tq1_data;
+DROP TABLE hl7_reg_test.hl7_tq1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_tq1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_tq1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57667,15 +57532,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TQ1';
 
-DROP TABLE hl7.hl7_tq2_data;
+DROP TABLE hl7_reg_test.hl7_tq2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_tq2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_tq2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57735,15 +57600,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TQ2';
 
-DROP TABLE hl7.hl7_txa_data;
+DROP TABLE hl7_reg_test.hl7_txa_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_txa (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_txa (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58588,15 +58453,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TXA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=TXA';
 
-DROP TABLE hl7.hl7_uac_data;
+DROP TABLE hl7_reg_test.hl7_uac_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_uac (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_uac (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58643,15 +58508,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UAC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=UAC';
 
-DROP TABLE hl7.hl7_ub1_data;
+DROP TABLE hl7_reg_test.hl7_ub1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ub1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ub1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58688,15 +58553,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=UB1';
 
-DROP TABLE hl7.hl7_ub2_data;
+DROP TABLE hl7_reg_test.hl7_ub2_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ub2 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ub2 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58848,15 +58713,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB2';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=UB2';
 
-DROP TABLE hl7.hl7_urd_data;
+DROP TABLE hl7_reg_test.hl7_urd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_urd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_urd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58877,15 +58742,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=URD';
 
-DROP TABLE hl7.hl7_urs_data;
+DROP TABLE hl7_reg_test.hl7_urs_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_urs (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_urs (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58908,15 +58773,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=URS';
 
-DROP TABLE hl7.hl7_var_data;
+DROP TABLE hl7_reg_test.hl7_var_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_var (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_var (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59086,15 +58951,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VAR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=VAR';
 
-DROP TABLE hl7.hl7_vnd_data;
+DROP TABLE hl7_reg_test.hl7_vnd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_vnd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_vnd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59143,15 +59008,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VND';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=VND';
 
-DROP TABLE hl7.hl7_zao_data;
+DROP TABLE hl7_reg_test.hl7_zao_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zao (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zao (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59182,15 +59047,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAO';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZAO';
 
-DROP TABLE hl7.hl7_zap_data;
+DROP TABLE hl7_reg_test.hl7_zap_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zap (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zap (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59214,15 +59079,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZAP';
 
-DROP TABLE hl7.hl7_zbt_data;
+DROP TABLE hl7_reg_test.hl7_zbt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zbt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zbt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59239,15 +59104,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZBT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZBT';
 
-DROP TABLE hl7.hl7_zcd_data;
+DROP TABLE hl7_reg_test.hl7_zcd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zcd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zcd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59266,15 +59131,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCD';
 
-DROP TABLE hl7.hl7_zcl_data;
+DROP TABLE hl7_reg_test.hl7_zcl_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zcl (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zcl (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59300,25 +59165,21 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCL';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCL';
 
-DROP TABLE hl7.hl7_zcn_data;
+DROP TABLE hl7_reg_test.hl7_zcn_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zcn (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zcn (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	set_id STRING,
-	collection_note_date_time STRING,
-	collection_note_user STRING,
-	collection_note_text STRING,
 	set_id STRING,
 	collection_note_date_time STRING,
 	collection_note_user STRING,
@@ -59330,15 +59191,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCN';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCN';
 
-DROP TABLE hl7.hl7_zcp_data;
+DROP TABLE hl7_reg_test.hl7_zcp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zcp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zcp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59362,15 +59223,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCP';
 
-DROP TABLE hl7.hl7_zcs_data;
+DROP TABLE hl7_reg_test.hl7_zcs_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zcs (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zcs (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59395,15 +59256,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCS';
 
-DROP TABLE hl7.hl7_zct_data;
+DROP TABLE hl7_reg_test.hl7_zct_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zct (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zct (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59437,15 +59298,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCT';
 
-DROP TABLE hl7.hl7_zcx_data;
+DROP TABLE hl7_reg_test.hl7_zcx_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zcx (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zcx (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59464,15 +59325,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZCX';
 
-DROP TABLE hl7.hl7_zds_data;
+DROP TABLE hl7_reg_test.hl7_zds_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zds (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zds (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59491,15 +59352,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDS';
 
-DROP TABLE hl7.hl7_zdt_data;
+DROP TABLE hl7_reg_test.hl7_zdt_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zdt (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zdt (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59530,15 +59391,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDT';
 
-DROP TABLE hl7.hl7_zdu_data;
+DROP TABLE hl7_reg_test.hl7_zdu_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zdu (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zdu (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59560,15 +59421,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDU';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDU';
 
-DROP TABLE hl7.hl7_zdv_data;
+DROP TABLE hl7_reg_test.hl7_zdv_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zdv (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zdv (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59589,15 +59450,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDV';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZDV';
 
-DROP TABLE hl7.hl7_ze1_data;
+DROP TABLE hl7_reg_test.hl7_ze1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ze1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ze1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59618,15 +59479,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZE1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZE1';
 
-DROP TABLE hl7.hl7_zeq_data;
+DROP TABLE hl7_reg_test.hl7_zeq_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zeq (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zeq (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59644,15 +59505,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEQ';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZEQ';
 
-DROP TABLE hl7.hl7_zer_data;
+DROP TABLE hl7_reg_test.hl7_zer_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zer (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zer (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59717,15 +59578,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZER';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZER';
 
-DROP TABLE hl7.hl7_zex_data;
+DROP TABLE hl7_reg_test.hl7_zex_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zex (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zex (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59741,15 +59602,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZEX';
 
-DROP TABLE hl7.hl7_zg1_data;
+DROP TABLE hl7_reg_test.hl7_zg1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zg1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zg1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59767,15 +59628,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZG1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZG1';
 
-DROP TABLE hl7.hl7_zid_data;
+DROP TABLE hl7_reg_test.hl7_zid_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zid (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zid (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59791,15 +59652,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZID';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZID';
 
-DROP TABLE hl7.hl7_zif_data;
+DROP TABLE hl7_reg_test.hl7_zif_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zif (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zif (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59821,15 +59682,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIF';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIF';
 
-DROP TABLE hl7.hl7_zin_data;
+DROP TABLE hl7_reg_test.hl7_zin_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zin (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zin (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59883,15 +59744,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIN';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIN';
 
-DROP TABLE hl7.hl7_zip_data;
+DROP TABLE hl7_reg_test.hl7_zip_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zip (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zip (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59924,15 +59785,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIP';
 
-DROP TABLE hl7.hl7_zit_data;
+DROP TABLE hl7_reg_test.hl7_zit_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zit (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zit (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59960,15 +59821,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIT';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIT';
 
-DROP TABLE hl7.hl7_ziv_data;
+DROP TABLE hl7_reg_test.hl7_ziv_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ziv (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ziv (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60000,15 +59861,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIV';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZIV';
 
-DROP TABLE hl7.hl7_zm0_data;
+DROP TABLE hl7_reg_test.hl7_zm0_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zm0 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zm0 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60036,15 +59897,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM0';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZM0';
 
-DROP TABLE hl7.hl7_zm1_data;
+DROP TABLE hl7_reg_test.hl7_zm1_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zm1 (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zm1 (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60094,15 +59955,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM1';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZM1';
 
-DROP TABLE hl7.hl7_zmn_data;
+DROP TABLE hl7_reg_test.hl7_zmn_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zmn (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zmn (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60118,15 +59979,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMN';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMN';
 
-DROP TABLE hl7.hl7_zmp_data;
+DROP TABLE hl7_reg_test.hl7_zmp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zmp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zmp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60237,15 +60098,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMP';
 
-DROP TABLE hl7.hl7_zmr_data;
+DROP TABLE hl7_reg_test.hl7_zmr_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zmr (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zmr (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60261,15 +60122,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZMR';
 
-DROP TABLE hl7.hl7_zou_data;
+DROP TABLE hl7_reg_test.hl7_zou_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zou (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zou (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60295,15 +60156,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZOU';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZOU';
 
-DROP TABLE hl7.hl7_zpa_data;
+DROP TABLE hl7_reg_test.hl7_zpa_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zpa (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zpa (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60326,15 +60187,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPA';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPA';
 
-DROP TABLE hl7.hl7_zpd_data;
+DROP TABLE hl7_reg_test.hl7_zpd_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zpd (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zpd (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60357,15 +60218,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPD';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPD';
 
-DROP TABLE hl7.hl7_zpe_data;
+DROP TABLE hl7_reg_test.hl7_zpe_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zpe (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zpe (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60386,15 +60247,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPE';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPE';
 
-DROP TABLE hl7.hl7_zpo_data;
+DROP TABLE hl7_reg_test.hl7_zpo_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zpo (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zpo (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60417,15 +60278,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPO';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPO';
 
-DROP TABLE hl7.hl7_zpp_data;
+DROP TABLE hl7_reg_test.hl7_zpp_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zpp (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zpp (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60455,15 +60316,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPP';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPP';
 
-DROP TABLE hl7.hl7_zps_data;
+DROP TABLE hl7_reg_test.hl7_zps_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zps (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zps (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60481,15 +60342,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPS';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPS';
 
-DROP TABLE hl7.hl7_zpv_data;
+DROP TABLE hl7_reg_test.hl7_zpv_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zpv (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zpv (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60539,15 +60400,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPV';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZPV';
 
-DROP TABLE hl7.hl7_zrq_data;
+DROP TABLE hl7_reg_test.hl7_zrq_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zrq (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zrq (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60566,15 +60427,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRQ';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZRQ';
 
-DROP TABLE hl7.hl7_zrx_data;
+DROP TABLE hl7_reg_test.hl7_zrx_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zrx (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zrx (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60612,15 +60473,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZRX';
 
-DROP TABLE hl7.hl7_zsc_data;
+DROP TABLE hl7_reg_test.hl7_zsc_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zsc (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zsc (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60641,15 +60502,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSC';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZSC';
 
-DROP TABLE hl7.hl7_zsi_data;
+DROP TABLE hl7_reg_test.hl7_zsi_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zsi (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zsi (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60666,15 +60527,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSI';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZSI';
 
-DROP TABLE hl7.hl7_zst_data;
+DROP TABLE hl7_reg_test.hl7_zst_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zst (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zst (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60702,15 +60563,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZST';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZST';
 
-DROP TABLE hl7.hl7_zsu_data;
+DROP TABLE hl7_reg_test.hl7_zsu_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zsu (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zsu (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60726,15 +60587,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSU';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZSU';
 
-DROP TABLE hl7.hl7_ztf_data;
+DROP TABLE hl7_reg_test.hl7_ztf_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ztf (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ztf (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60760,15 +60621,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTF';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZTF';
 
-DROP TABLE hl7.hl7_ztm_data;
+DROP TABLE hl7_reg_test.hl7_ztm_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ztm (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ztm (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60914,15 +60775,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTM';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZTM';
 
-DROP TABLE hl7.hl7_ztx_data;
+DROP TABLE hl7_reg_test.hl7_ztx_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_ztx (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_ztx (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60939,23 +60800,21 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTX';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZTX';
 
-DROP TABLE hl7.hl7_zur_data;
+DROP TABLE hl7_reg_test.hl7_zur_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zur (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zur (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	set_id STRING,
-	information STRING,
 	set_id STRING,
 	information STRING,
 	etl_firstinsert_datetime STRING,
@@ -60965,15 +60824,15 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZUR';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZUR';
 
-DROP TABLE hl7.hl7_zvn_data;
+DROP TABLE hl7_reg_test.hl7_zvn_data;
 
-CREATE EXTERNAL TABLE hl7.hl7_zvn (
+CREATE EXTERNAL TABLE hl7_reg_test.hl7_zvn (
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60993,8 +60852,8 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZVN';
+LOCATION '/user/hive/warehouse/hl7_reg_test/landing_zone=SEGMENTS/hl7_segment=ZVN';

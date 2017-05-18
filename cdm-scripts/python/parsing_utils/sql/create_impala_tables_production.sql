@@ -533,11 +533,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ABS';
 
 DROP TABLE hl7.hl7_acc_data;
 
@@ -860,11 +860,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ACC';
 
 DROP TABLE hl7.hl7_add_data;
 
@@ -883,11 +883,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADD';
 
 DROP TABLE hl7.hl7_adj_data;
 
@@ -1094,11 +1094,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADJ';
 
 DROP TABLE hl7.hl7_aff_data;
 
@@ -1279,11 +1279,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AFF';
 
 DROP TABLE hl7.hl7_aig_data;
 
@@ -1491,11 +1491,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIG';
 
 DROP TABLE hl7.hl7_ail_data;
 
@@ -1693,11 +1693,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIL';
 
 DROP TABLE hl7.hl7_aip_data;
 
@@ -1983,11 +1983,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIP';
 
 DROP TABLE hl7.hl7_ais_data;
 
@@ -2171,11 +2171,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIS';
 
 DROP TABLE hl7.hl7_al1_data;
 
@@ -2314,11 +2314,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AL1';
 
 DROP TABLE hl7.hl7_apr_data;
 
@@ -2437,11 +2437,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=APR';
 
 DROP TABLE hl7.hl7_arq_data;
 
@@ -3232,11 +3232,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARQ';
 
 DROP TABLE hl7.hl7_arv_data;
 
@@ -3328,11 +3328,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARV';
 
 DROP TABLE hl7.hl7_aut_data;
 
@@ -3943,11 +3943,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AUT';
 
 DROP TABLE hl7.hl7_bhs_data;
 
@@ -3997,11 +3997,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BHS';
 
 DROP TABLE hl7.hl7_blc_data;
 
@@ -4067,11 +4067,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLC';
 
 DROP TABLE hl7.hl7_blg_data;
 
@@ -4179,11 +4179,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLG';
 
 DROP TABLE hl7.hl7_bpo_data;
 
@@ -4611,11 +4611,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPO';
 
 DROP TABLE hl7.hl7_bpx_data;
 
@@ -5260,11 +5260,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPX';
 
 DROP TABLE hl7.hl7_bts_data;
 
@@ -5285,11 +5285,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTS';
 
 DROP TABLE hl7.hl7_btx_data;
 
@@ -5779,11 +5779,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTX';
 
 DROP TABLE hl7.hl7_bui_data;
 
@@ -5945,11 +5945,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BUI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BUI';
 
 DROP TABLE hl7.hl7_cdm_data;
 
@@ -6212,11 +6212,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDM';
 
 DROP TABLE hl7.hl7_cdo_data;
 
@@ -6286,11 +6286,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDO';
 
 DROP TABLE hl7.hl7_cer_data;
 
@@ -6800,11 +6800,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CER';
 
 DROP TABLE hl7.hl7_cm0_data;
 
@@ -7277,11 +7277,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM0';
 
 DROP TABLE hl7.hl7_cm1_data;
 
@@ -7324,11 +7324,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM1';
 
 DROP TABLE hl7.hl7_cm2_data;
 
@@ -7394,11 +7394,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM2';
 
 DROP TABLE hl7.hl7_cns_data;
 
@@ -7466,11 +7466,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CNS';
 
 DROP TABLE hl7.hl7_con_data;
 
@@ -7735,11 +7735,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CON';
 
 DROP TABLE hl7.hl7_csp_data;
 
@@ -7805,11 +7805,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSP';
 
 DROP TABLE hl7.hl7_csr_data;
 
@@ -8355,11 +8355,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSR';
 
 DROP TABLE hl7.hl7_css_data;
 
@@ -8424,11 +8424,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSS';
 
 DROP TABLE hl7.hl7_ctd_data;
 
@@ -8789,11 +8789,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTD';
 
 DROP TABLE hl7.hl7_cti_data;
 
@@ -8862,11 +8862,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTI';
 
 DROP TABLE hl7.hl7_db1_data;
 
@@ -8976,11 +8976,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DB1';
 
 DROP TABLE hl7.hl7_dg1_data;
 
@@ -9408,11 +9408,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DG1';
 
 DROP TABLE hl7.hl7_dmi_data;
 
@@ -9481,11 +9481,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DMI';
 
 DROP TABLE hl7.hl7_don_data;
 
@@ -10260,11 +10260,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DON';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DON';
 
 DROP TABLE hl7.hl7_dps_data;
 
@@ -10353,11 +10353,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DPS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DPS';
 
 DROP TABLE hl7.hl7_drg_data;
 
@@ -10894,11 +10894,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DRG';
 
 DROP TABLE hl7.hl7_dsc_data;
 
@@ -10918,11 +10918,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSC';
 
 DROP TABLE hl7.hl7_dsp_data;
 
@@ -10947,11 +10947,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSP';
 
 DROP TABLE hl7.hl7_ecd_data;
 
@@ -10997,11 +10997,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECD';
 
 DROP TABLE hl7.hl7_ecr_data;
 
@@ -11045,11 +11045,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECR';
 
 DROP TABLE hl7.hl7_edu_data;
 
@@ -11302,11 +11302,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EDU';
 
 DROP TABLE hl7.hl7_eqp_data;
 
@@ -11351,11 +11351,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQP';
 
 DROP TABLE hl7.hl7_equ_data;
 
@@ -11448,11 +11448,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQU';
 
 DROP TABLE hl7.hl7_err_data;
 
@@ -11670,11 +11670,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ERR';
 
 DROP TABLE hl7.hl7_evn_data;
 
@@ -11848,11 +11848,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EVN';
 
 DROP TABLE hl7.hl7_fac_data;
 
@@ -12698,11 +12698,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FAC';
 
 DROP TABLE hl7.hl7_fhs_data;
 
@@ -12752,11 +12752,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FHS';
 
 DROP TABLE hl7.hl7_ft1_data;
 
@@ -12770,7 +12770,7 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	set_id STRING,
 	transaction_id STRING,
 	transaction_batch_id STRING,
-	transaction_date STRING,
+	_transaction_date STRING,
 	transaction_date_range_start_date_time STRING,
 	transaction_date_range_end_date_time STRING,
 	transaction_posting_date STRING,
@@ -14011,11 +14011,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FT1';
 
 DROP TABLE hl7.hl7_fts_data;
 
@@ -14035,11 +14035,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FTS';
 
 DROP TABLE hl7.hl7_gol_data;
 
@@ -14305,11 +14305,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GOL';
 
 DROP TABLE hl7.hl7_gp1_data;
 
@@ -14450,11 +14450,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP1';
 
 DROP TABLE hl7.hl7_gp2_data;
 
@@ -14774,11 +14774,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP2';
 
 DROP TABLE hl7.hl7_gt1_data;
 
@@ -16442,79 +16442,28 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	vip_indicator_second_alternate_coding_system_oid STRING,
 	vip_indicator_second_alternate_value_set_oid STRING,
 	vip_indicator_second_alternate_value_set_version_id STRING,
-	guarantor_employer_name STRING,
-	guarantor_employer_name_last_name STRING,
-	guarantor_employer_name_last_name_surname STRING,
-	guarantor_employer_name_last_name_own_surname_prefix STRING,
-	guarantor_employer_name_last_name_own_surname STRING,
-	guarantor_employer_name_last_name_surname_prefix_from_partner STRING,
-	guarantor_employer_name_last_name_surname_from_partner STRING,
-	guarantor_employer_name_first_name STRING,
-	guarantor_employer_name_middle_name STRING,
-	guarantor_employer_name_suffix STRING,
-	guarantor_employer_name_person_prefix STRING,
-	guarantor_employer_name_degree STRING,
-	guarantor_employer_name_type_code STRING,
-	guarantor_employer_name_rep_code STRING,
-	guarantor_employer_name_context STRING,
-	guarantor_employer_name_context_primary_id STRING,
-	guarantor_employer_name_context_text STRING,
-	guarantor_employer_name_context_name_of_coding_sys STRING,
-	guarantor_employer_name_context_alt_id STRING,
-	guarantor_employer_name_context_alt_text STRING,
-	guarantor_employer_name_context_name_of_alt_coding_sys STRING,
-	guarantor_employer_name_context_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_alt_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_original_text STRING,
-	guarantor_employer_name_context_second_alt_id STRING,
-	guarantor_employer_name_context_second_alt_text STRING,
-	guarantor_employer_name_context_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_name_context_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_name_context_coding_sys_oid STRING,
-	guarantor_employer_name_context_value_set_oid STRING,
-	guarantor_employer_name_context_value_set_ver_id STRING,
-	guarantor_employer_name_context_alt_coding_sys_oid STRING,
-	guarantor_employer_name_context_alt_value_set_oid STRING,
-	guarantor_employer_name_context_alt_value_set_ver_id STRING,
-	guarantor_employer_name_context_second_alt_coding_sys_oid STRING,
-	guarantor_employer_name_context_second_alt_value_set_oid STRING,
-	guarantor_employer_name_context_second_alt_value_set_ver_id STRING,
-	guarantor_employer_name_validity_range STRING,
-	guarantor_employer_name_validity_range_eff_from_date_time STRING,
-	guarantor_employer_name_validity_range_eff_to_date_time STRING,
-	guarantor_employer_name_assembly_order STRING,
-	guarantor_employer_name_eff_from_date_time STRING,
-	guarantor_employer_name_eff_to_date_time STRING,
-	guarantor_employer_name_prof_suffix STRING,
-	guarantor_employer_name_called_by STRING,
-	guarantor_employer_address STRING,
+	guarantor_employer_name_name_validity_range_eff_from_date_time STRING,
+	guarantor_employer_name_name_validity_range_eff_to_date_time STRING,
 	guarantor_employer_address_street_address1 STRING,
 	guarantor_employer_address_street_address1_street_mailing_address STRING,
 	guarantor_employer_address_street_address1_street_name STRING,
 	guarantor_employer_address_street_address1_dwelling_num STRING,
 	guarantor_employer_address_street_address2 STRING,
-	guarantor_employer_address_city STRING,
 	guarantor_employer_address_state_province STRING,
 	guarantor_employer_address_zip_postal_code STRING,
-	guarantor_employer_address_country STRING,
-	guarantor_employer_address_address_type STRING,
 	guarantor_employer_address_other_geo_designation STRING,
-	guarantor_employer_address_county_parish_code STRING,
 	guarantor_employer_address_county_parish_code_primary_id STRING,
-	guarantor_employer_address_county_parish_code_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_alt_id STRING,
 	guarantor_employer_address_county_parish_code_alt_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_coding_sys_ver_id STRING,
 	guarantor_employer_address_county_parish_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_county_parish_code_original_text STRING,
 	guarantor_employer_address_county_parish_code_second_alt_id STRING,
 	guarantor_employer_address_county_parish_code_second_alt_text STRING,
 	guarantor_employer_address_county_parish_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_county_parish_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_county_parish_code_coding_sys_oid STRING,
-	guarantor_employer_address_county_parish_code_value_set_oid STRING,
 	guarantor_employer_address_county_parish_code_value_set_ver_id STRING,
 	guarantor_employer_address_county_parish_code_alt_coding_sys_oid STRING,
 	guarantor_employer_address_county_parish_code_alt_value_set_oid STRING,
@@ -16522,22 +16471,18 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_county_parish_code_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_county_parish_code_second_alt_value_set_oid STRING,
 	guarantor_employer_address_county_parish_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_census_tract STRING,
 	guarantor_employer_address_census_tract_primary_id STRING,
-	guarantor_employer_address_census_tract_text STRING,
 	guarantor_employer_address_census_tract_name_of_coding_sys STRING,
 	guarantor_employer_address_census_tract_alt_id STRING,
 	guarantor_employer_address_census_tract_alt_text STRING,
 	guarantor_employer_address_census_tract_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_census_tract_coding_sys_ver_id STRING,
 	guarantor_employer_address_census_tract_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_census_tract_original_text STRING,
 	guarantor_employer_address_census_tract_second_alt_id STRING,
 	guarantor_employer_address_census_tract_second_alt_text STRING,
 	guarantor_employer_address_census_tract_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_census_tract_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_census_tract_coding_sys_oid STRING,
-	guarantor_employer_address_census_tract_value_set_oid STRING,
 	guarantor_employer_address_census_tract_value_set_ver_id STRING,
 	guarantor_employer_address_census_tract_alt_coding_sys_oid STRING,
 	guarantor_employer_address_census_tract_alt_value_set_oid STRING,
@@ -16574,29 +16519,22 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_expr_reason_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_expr_reason_second_alt_value_set_oid STRING,
 	guarantor_employer_address_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_temporary_indicator STRING,
 	guarantor_employer_address_bad_indicator STRING,
 	guarantor_employer_address_bad_address_indicatorgt1_guarantor_employer_address_bad_address_indicator STRING,
-	guarantor_employer_address_address_usage STRING,
-	guarantor_employer_address_addressee STRING,
 	guarantor_employer_address_address_comment STRING,
 	guarantor_employer_address_pref_order STRING,
-	guarantor_employer_address_protection_code STRING,
 	guarantor_employer_address_protection_code_primary_id STRING,
-	guarantor_employer_address_protection_code_text STRING,
 	guarantor_employer_address_protection_code_name_of_coding_sys STRING,
 	guarantor_employer_address_protection_code_alt_id STRING,
 	guarantor_employer_address_protection_code_alt_text STRING,
 	guarantor_employer_address_protection_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_address_protection_code_coding_sys_ver_id STRING,
 	guarantor_employer_address_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_protection_code_original_text STRING,
 	guarantor_employer_address_protection_code_second_alt_id STRING,
 	guarantor_employer_address_protection_code_second_alt_text STRING,
 	guarantor_employer_address_protection_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_address_protection_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_address_protection_code_coding_sys_oid STRING,
-	guarantor_employer_address_protection_code_value_set_oid STRING,
 	guarantor_employer_address_protection_code_value_set_ver_id STRING,
 	guarantor_employer_address_protection_code_alt_coding_sys_oid STRING,
 	guarantor_employer_address_protection_code_alt_value_set_oid STRING,
@@ -16604,23 +16542,11 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_protection_code_second_alt_coding_sys_oid STRING,
 	guarantor_employer_address_protection_code_second_alt_value_set_oid STRING,
 	guarantor_employer_address_protection_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_address_id STRING,
-	guarantor_employer_address_address_id_entity_id STRING,
-	guarantor_employer_address_address_id_namespace_id STRING,
-	guarantor_employer_address_address_id_universal_id STRING,
-	guarantor_employer_address_address_id_universal_id_type STRING,
-	guarantor_employer_phone_num STRING,
 	guarantor_employer_phone_num_formatted_num STRING,
 	guarantor_employer_phone_num_use_code STRING,
 	guarantor_employer_phone_num_equipment_type STRING,
 	guarantor_employer_phone_num_comm_address STRING,
-	guarantor_employer_phone_num_country_code STRING,
-	guarantor_employer_phone_num_area_city_code STRING,
 	guarantor_employer_phone_num_local_number STRING,
-	guarantor_employer_phone_num_extension STRING,
-	guarantor_employer_phone_num_any_text STRING,
-	guarantor_employer_phone_num_extension_prefix STRING,
-	guarantor_employer_phone_num_speed_dial_code STRING,
 	guarantor_employer_phone_num_unformatted_num STRING,
 	guarantor_employer_phone_num_eff_from_date STRING,
 	guarantor_employer_phone_num_eff_to_date STRING,
@@ -16647,22 +16573,18 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_phone_num_expr_reason_second_alt_coding_sys_oid STRING,
 	guarantor_employer_phone_num_expr_reason_second_alt_value_set_oid STRING,
 	guarantor_employer_phone_num_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_protection_code STRING,
 	guarantor_employer_phone_num_protection_code_primary_id STRING,
-	guarantor_employer_phone_num_protection_code_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_alt_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_alt_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_coding_sys_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_original_text STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_id STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_text STRING,
 	guarantor_employer_phone_num_protection_code_name_of_second_alt_coding_sys STRING,
 	guarantor_employer_phone_num_protection_code_second_alt_coding_sys_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_coding_sys_oid STRING,
-	guarantor_employer_phone_num_protection_code_value_set_oid STRING,
 	guarantor_employer_phone_num_protection_code_value_set_ver_id STRING,
 	guarantor_employer_phone_num_protection_code_alt_coding_sys_oid STRING,
 	guarantor_employer_phone_num_protection_code_alt_value_set_oid STRING,
@@ -16684,11 +16606,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GT1';
 
 DROP TABLE hl7.hl7_iam_data;
 
@@ -17650,11 +17572,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAM';
 
 DROP TABLE hl7.hl7_iar_data;
 
@@ -17742,11 +17664,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAR';
 
 DROP TABLE hl7.hl7_iim_data;
 
@@ -17957,11 +17879,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IIM';
 
 DROP TABLE hl7.hl7_ilt_data;
 
@@ -18035,11 +17957,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ILT';
 
 DROP TABLE hl7.hl7_in1_data;
 
@@ -19492,11 +19414,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN1';
 
 DROP TABLE hl7.hl7_in2_data;
 
@@ -21430,11 +21352,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN2';
 
 DROP TABLE hl7.hl7_in3_data;
 
@@ -22383,11 +22305,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN3';
 
 DROP TABLE hl7.hl7_inv_data;
 
@@ -22693,11 +22615,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=INV';
 
 DROP TABLE hl7.hl7_ipc_data;
 
@@ -22810,11 +22732,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPC';
 
 DROP TABLE hl7.hl7_ipr_data;
 
@@ -22904,11 +22826,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPR';
 
 DROP TABLE hl7.hl7_isd_data;
 
@@ -22973,11 +22895,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ISD';
 
 DROP TABLE hl7.hl7_itm_data;
 
@@ -23598,11 +23520,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ITM';
 
 DROP TABLE hl7.hl7_ivc_data;
 
@@ -24390,11 +24312,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVC';
 
 DROP TABLE hl7.hl7_ivt_data;
 
@@ -24764,11 +24686,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVT';
 
 DROP TABLE hl7.hl7_lan_data;
 
@@ -24856,11 +24778,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LAN';
 
 DROP TABLE hl7.hl7_lcc_data;
 
@@ -24984,11 +24906,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCC';
 
 DROP TABLE hl7.hl7_lch_data;
 
@@ -25095,11 +25017,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCH';
 
 DROP TABLE hl7.hl7_ldp_data;
 
@@ -25349,11 +25271,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LDP';
 
 DROP TABLE hl7.hl7_loc_data;
 
@@ -25730,11 +25652,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LOC';
 
 DROP TABLE hl7.hl7_lrl_data;
 
@@ -25894,11 +25816,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LRL';
 
 DROP TABLE hl7.hl7_mcp_data;
 
@@ -25947,11 +25869,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MCP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MCP';
 
 DROP TABLE hl7.hl7_mfa_data;
 
@@ -25997,11 +25919,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFA';
 
 DROP TABLE hl7.hl7_mfe_data;
 
@@ -26150,11 +26072,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFE';
 
 DROP TABLE hl7.hl7_mfi_data;
 
@@ -26203,11 +26125,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFI';
 
 DROP TABLE hl7.hl7_mrg_data;
 
@@ -26523,17 +26445,8 @@ CREATE EXTERNAL TABLE hl7.hl7_mrg (
 	prior_external_pat_id_identifier_num STRING,
 	prior_external_pat_id_sa STRING,
 	prior_external_pat_id_assgn_authr STRING,
-	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
 	prior_internal_pat_id_identifier_check_digit STRING,
 	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_assgn_authr STRING,
-	prior_internal_pat_id_identifier_type_code STRING,
-	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
-	prior_internal_pat_id_identifier_check_digit STRING,
-	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_assgn_authr STRING,
 	prior_internal_pat_id_identifier_type_code STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
@@ -26542,11 +26455,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MRG';
 
 DROP TABLE hl7.hl7_msa_data;
 
@@ -26572,11 +26485,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSA';
 
 DROP TABLE hl7.hl7_msh_data;
 
@@ -26784,7 +26697,6 @@ CREATE EXTERNAL TABLE hl7.hl7_msh (
 	receiving_network_address_namespace_id STRING,
 	receiving_network_address_universal_id STRING,
 	receiving_network_address_universal_id_type STRING,
-	continuation_pointer STRING,
 	continuation_pointer_network_id STRING,
 	continuation_pointer_unit_number STRING,
 	etl_firstinsert_datetime STRING,
@@ -26794,11 +26706,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSH';
 
 DROP TABLE hl7.hl7_nck_data;
 
@@ -26817,11 +26729,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NCK';
 
 DROP TABLE hl7.hl7_nds_data;
 
@@ -26887,11 +26799,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NDS';
 
 DROP TABLE hl7.hl7_nk1_data;
 
@@ -28290,11 +28202,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NK1';
 
 DROP TABLE hl7.hl7_npu_data;
 
@@ -28372,11 +28284,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NPU';
 
 DROP TABLE hl7.hl7_nsc_data;
 
@@ -28437,11 +28349,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NSC';
 
 DROP TABLE hl7.hl7_nst_data;
 
@@ -28474,11 +28386,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NST';
 
 DROP TABLE hl7.hl7_nte_data;
 
@@ -28655,11 +28567,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NTE';
 
 DROP TABLE hl7.hl7_obr_data;
 
@@ -29792,7 +29704,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	parent_order_filler_assigned_id_namespace_id STRING,
 	parent_order_filler_assigned_id_universal_id STRING,
 	parent_order_filler_assigned_id_universal_id_type STRING,
-	principal_result_interpreter STRING,
 	principal_result_interpreter_n_a STRING,
 	principal_result_interpreter_identifier_type_code STRING,
 	placer_first_generic_field_primary_id STRING,
@@ -29801,7 +29712,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	lab_site STRING,
 	lab_site_mnem STRING,
 	lab_site_name STRING,
-	principal_result_interpreter STRING,
 	principal_result_interpreter_person_id STRING,
 	principal_result_interpreter_last_name STRING,
 	principal_result_interpreter_first_name STRING,
@@ -29814,7 +29724,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	principal_result_interpreter_name_type_code STRING,
 	principal_result_interpreter_identifier_check_digit STRING,
 	principal_result_interpreter_check_digit_scheme STRING,
-	principal_result_interpreter_identifier_type_code STRING,
 	principal_result_interpreter_assgn_facility STRING,
 	principal_result_interpreter_name_rep_code STRING,
 	principal_result_interpreter_context STRING,
@@ -29827,7 +29736,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	principal_result_interpreter_assgn_agency_dept STRING,
 	principal_result_interpreter_security_check STRING,
 	principal_result_interpreter_security_check_scheme STRING,
-	technician STRING,
 	technician_person_id STRING,
 	technician_last_name STRING,
 	technician_first_name STRING,
@@ -29835,7 +29743,6 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	technician_suffix STRING,
 	technician_person_prefix STRING,
 	technician_degree STRING,
-	transcriptionist STRING,
 	transcriptionist_person_id STRING,
 	transcriptionist_last_name STRING,
 	transcriptionist_first_name STRING,
@@ -29850,11 +29757,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBR';
 
 DROP TABLE hl7.hl7_obx_data;
 
@@ -30560,11 +30467,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBX';
 
 DROP TABLE hl7.hl7_ods_data;
 
@@ -30630,11 +30537,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODS';
 
 DROP TABLE hl7.hl7_odt_data;
 
@@ -30699,11 +30606,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODT';
 
 DROP TABLE hl7.hl7_om1_data;
 
@@ -31491,7 +31398,6 @@ CREATE EXTERNAL TABLE hl7.hl7_om1 (
 	taxonomic_classification_code_second_alternate_coding_system_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_version_id STRING,
-	other_names STRING,
 	replacement_producer_service_test_obsv_id STRING,
 	replacement_producer_service_test_obsv_id_id STRING,
 	replacement_producer_service_test_obsv_id_text STRING,
@@ -31565,7 +31471,6 @@ CREATE EXTERNAL TABLE hl7.hl7_om1 (
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_coding_system_oid STRING,
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_value_set_oid STRING,
 	obsv_id_associated_with_producer_service_test_obsv_id_second_alternate_value_set_version_id STRING,
-	typical_turn_around_time STRING,
 	typical_turn_around_time_quantity STRING,
 	typical_turn_around_time_units STRING,
 	typical_turn_around_time_units_id STRING,
@@ -31623,11 +31528,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM1';
 
 DROP TABLE hl7.hl7_om2_data;
 
@@ -31814,11 +31719,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM2';
 
 DROP TABLE hl7.hl7_om3_data;
 
@@ -31953,11 +31858,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM3';
 
 DROP TABLE hl7.hl7_om4_data;
 
@@ -32179,11 +32084,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM4';
 
 DROP TABLE hl7.hl7_om5_data;
 
@@ -32226,11 +32131,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM5';
 
 DROP TABLE hl7.hl7_om6_data;
 
@@ -32251,11 +32156,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM6';
 
 DROP TABLE hl7.hl7_om7_data;
 
@@ -32656,11 +32561,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM7';
 
 DROP TABLE hl7.hl7_omc_data;
 
@@ -32783,11 +32688,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OMC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OMC';
 
 DROP TABLE hl7.hl7_orc_data;
 
@@ -34125,7 +34030,6 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	order_workflow_profile_second_alternate_value_set_oid STRING,
 	order_workflow_profile_second_alternate_value_set_version_id STRING,
 	placer_group_num_entity_id STRING,
-	placer_group_num_filler_assigned_id STRING,
 	placer_group_num_universal_id STRING,
 	placer_group_num_universal_id_type STRING,
 	etl_firstinsert_datetime STRING,
@@ -34135,11 +34039,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORC';
 
 DROP TABLE hl7.hl7_org_data;
 
@@ -34388,11 +34292,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORG';
 
 DROP TABLE hl7.hl7_ovr_data;
 
@@ -34708,11 +34612,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OVR';
 
 DROP TABLE hl7.hl7_pac_data;
 
@@ -34838,11 +34742,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PAC';
 
 DROP TABLE hl7.hl7_pce_data;
 
@@ -34978,11 +34882,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCE';
 
 DROP TABLE hl7.hl7_pcr_data;
 
@@ -35245,11 +35149,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCR';
 
 DROP TABLE hl7.hl7_pd1_data;
 
@@ -35817,11 +35721,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PD1';
 
 DROP TABLE hl7.hl7_pda_data;
 
@@ -36156,11 +36060,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDA';
 
 DROP TABLE hl7.hl7_pdc_data;
 
@@ -36345,11 +36249,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDC';
 
 DROP TABLE hl7.hl7_peo_data;
 
@@ -36806,11 +36710,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PEO';
 
 DROP TABLE hl7.hl7_pes_data;
 
@@ -37195,11 +37099,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PES';
 
 DROP TABLE hl7.hl7_pid_data;
 
@@ -38220,11 +38124,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PID';
 
 DROP TABLE hl7.hl7_pkg_data;
 
@@ -38376,11 +38280,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PKG';
 
 DROP TABLE hl7.hl7_pm1_data;
 
@@ -38812,11 +38716,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PM1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PM1';
 
 DROP TABLE hl7.hl7_pmt_data;
 
@@ -39044,11 +38948,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PMT';
 
 DROP TABLE hl7.hl7_pr1_data;
 
@@ -39355,11 +39259,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PR1';
 
 DROP TABLE hl7.hl7_pra_data;
 
@@ -39582,11 +39486,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRA';
 
 DROP TABLE hl7.hl7_prb_data;
 
@@ -39963,14 +39867,10 @@ CREATE EXTERNAL TABLE hl7.hl7_prb (
 	mood_code_second_alternate_coding_system_oid STRING,
 	mood_code_second_alternate_value_set_oid STRING,
 	mood_code_second_alternate_value_set_version_id STRING,
-	action_code STRING,
-	action_date_time STRING,
 	action_date_time_date_time STRING,
 	action_date_time_person_id STRING,
 	action_date_time_provider_id STRING,
-	problem_id STRING,
 	problem_id_primary_id STRING,
-	problem_id_text STRING,
 	problem_id_name_of_coding_sys STRING,
 	problem_id_alt_text STRING,
 	problem_estbl_date_time STRING,
@@ -39984,11 +39884,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRB';
 
 DROP TABLE hl7.hl7_prc_data;
 
@@ -40214,11 +40114,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRC';
 
 DROP TABLE hl7.hl7_prd_data;
 
@@ -40870,11 +40770,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRD';
 
 DROP TABLE hl7.hl7_prt_data;
 
@@ -41448,11 +41348,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRT';
 
 DROP TABLE hl7.hl7_psg_data;
 
@@ -41514,11 +41414,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSG';
 
 DROP TABLE hl7.hl7_psh_data;
 
@@ -41622,11 +41522,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSH';
 
 DROP TABLE hl7.hl7_psl_data;
 
@@ -42516,11 +42416,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSL';
 
 DROP TABLE hl7.hl7_pss_data;
 
@@ -42581,11 +42481,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSS';
 
 DROP TABLE hl7.hl7_pth_data;
 
@@ -42680,11 +42580,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PTH';
 
 DROP TABLE hl7.hl7_pv1_data;
 
@@ -44286,19 +44186,12 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	primary_care_doctor_security_check_scheme STRING,
 	mode_of_arrival STRING,
 	reason_for_visit STRING,
-	consulting_doctor STRING,
-	consulting_doctor_person_id STRING,
 	consulting_doctor_last_name STRING,
 	consulting_doctor_first_name STRING,
 	consulting_doctor_middle_name STRING,
-	consulting_doctor_suffix STRING,
 	consulting_doctor_person_prefix STRING,
-	consulting_doctor_degree STRING,
-	consulting_doctor_source_table STRING,
 	consulting_doctor_assgn_authr STRING,
-	consulting_doctor_name_type_code STRING,
 	consulting_doctor_identifier_check_digit STRING,
-	consulting_doctor_check_digit_scheme STRING,
 	consulting_doctor_identifier_type_code STRING,
 	consulting_doctor_assgn_facility STRING,
 	consulting_doctor_name_rep_code STRING,
@@ -44310,34 +44203,6 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	consulting_doctor_prof_suffix STRING,
 	consulting_doctor_assgn_jurisdiction STRING,
 	consulting_doctor_assgn_agency_dept STRING,
-	consulting_doctor_security_check STRING,
-	consulting_doctor_security_check_scheme STRING,
-	primary_care_doctor STRING,
-	primary_care_doctor_person_id STRING,
-	primary_care_doctor_last_name STRING,
-	primary_care_doctor_first_name STRING,
-	primary_care_doctor_middle_name STRING,
-	primary_care_doctor_suffix STRING,
-	primary_care_doctor_person_prefix STRING,
-	primary_care_doctor_degree STRING,
-	primary_care_doctor_source_table STRING,
-	primary_care_doctor_assgn_authr STRING,
-	primary_care_doctor_name_type_code STRING,
-	primary_care_doctor_identifier_check_digit STRING,
-	primary_care_doctor_check_digit_scheme STRING,
-	primary_care_doctor_identifier_type_code STRING,
-	primary_care_doctor_assgn_facility STRING,
-	primary_care_doctor_name_rep_code STRING,
-	primary_care_doctor_context STRING,
-	primary_care_doctor_validity_range STRING,
-	primary_care_doctor_assembly_order STRING,
-	primary_care_doctor_eff_from_date_time STRING,
-	primary_care_doctor_eff_to_date_time STRING,
-	primary_care_doctor_prof_suffix STRING,
-	primary_care_doctor_assgn_jurisdiction STRING,
-	primary_care_doctor_assgn_agency_dept STRING,
-	primary_care_doctor_security_check STRING,
-	primary_care_doctor_security_check_scheme STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -44345,11 +44210,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV1';
 
 DROP TABLE hl7.hl7_pv2_data;
 
@@ -45077,11 +44942,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV2';
 
 DROP TABLE hl7.hl7_pye_data;
 
@@ -45370,11 +45235,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PYE';
 
 DROP TABLE hl7.hl7_qak_data;
 
@@ -45420,11 +45285,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QAK';
 
 DROP TABLE hl7.hl7_qid_data;
 
@@ -45466,11 +45331,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QID';
 
 DROP TABLE hl7.hl7_qpd_data;
 
@@ -45513,11 +45378,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QPD';
 
 DROP TABLE hl7.hl7_qrd_data;
 
@@ -45547,11 +45412,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRD';
 
 DROP TABLE hl7.hl7_qrf_data;
 
@@ -45579,11 +45444,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRF';
 
 DROP TABLE hl7.hl7_qri_data;
 
@@ -45648,11 +45513,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRI';
 
 DROP TABLE hl7.hl7_rcp_data;
 
@@ -45725,11 +45590,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RCP';
 
 DROP TABLE hl7.hl7_rdf_data;
 
@@ -45752,11 +45617,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDF';
 
 DROP TABLE hl7.hl7_rdt_data;
 
@@ -45775,11 +45640,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDT';
 
 DROP TABLE hl7.hl7_rel_data;
 
@@ -46225,11 +46090,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=REL';
 
 DROP TABLE hl7.hl7_rf1_data;
 
@@ -46740,11 +46605,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RF1';
 
 DROP TABLE hl7.hl7_rfi_data;
 
@@ -46766,11 +46631,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RFI';
 
 DROP TABLE hl7.hl7_rgs_data;
 
@@ -46813,11 +46678,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RGS';
 
 DROP TABLE hl7.hl7_rmi_data;
 
@@ -46882,11 +46747,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RMI';
 
 DROP TABLE hl7.hl7_rol_data;
 
@@ -47437,11 +47302,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ROL';
 
 DROP TABLE hl7.hl7_rq1_data;
 
@@ -47510,11 +47375,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQ1';
 
 DROP TABLE hl7.hl7_rqd_data;
 
@@ -47736,11 +47601,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQD';
 
 DROP TABLE hl7.hl7_rxa_data;
 
@@ -48289,11 +48154,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXA';
 
 DROP TABLE hl7.hl7_rxc_data;
 
@@ -48454,11 +48319,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXC';
 
 DROP TABLE hl7.hl7_rxd_data;
 
@@ -49159,11 +49024,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXD';
 
 DROP TABLE hl7.hl7_rxe_data;
 
@@ -50192,11 +50057,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXE';
 
 DROP TABLE hl7.hl7_rxg_data;
 
@@ -50809,11 +50674,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXG';
 
 DROP TABLE hl7.hl7_rxo_data;
 
@@ -51797,11 +51662,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXO';
 
 DROP TABLE hl7.hl7_rxr_data;
 
@@ -51957,11 +51822,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXR';
 
 DROP TABLE hl7.hl7_rxv_data;
 
@@ -52247,11 +52112,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXV';
 
 DROP TABLE hl7.hl7_sac_data;
 
@@ -52797,11 +52662,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SAC';
 
 DROP TABLE hl7.hl7_scd_data;
 
@@ -53820,11 +53685,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCD';
 
 DROP TABLE hl7.hl7_sch_data;
 
@@ -54990,11 +54855,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCH';
 
 DROP TABLE hl7.hl7_scp_data;
 
@@ -55112,11 +54977,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCP';
 
 DROP TABLE hl7.hl7_sdd_data;
 
@@ -55193,11 +55058,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SDD';
 
 DROP TABLE hl7.hl7_sft_data;
 
@@ -55260,11 +55125,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SFT';
 
 DROP TABLE hl7.hl7_sgh_data;
 
@@ -55284,11 +55149,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGH';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGH';
 
 DROP TABLE hl7.hl7_sgt_data;
 
@@ -55308,11 +55173,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGT';
 
 DROP TABLE hl7.hl7_shp_data;
 
@@ -55482,11 +55347,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SHP';
 
 DROP TABLE hl7.hl7_sid_data;
 
@@ -55552,11 +55417,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SID';
 
 DROP TABLE hl7.hl7_slt_data;
 
@@ -55591,11 +55456,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SLT';
 
 DROP TABLE hl7.hl7_spm_data;
 
@@ -56220,11 +56085,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SPM';
 
 DROP TABLE hl7.hl7_stf_data;
 
@@ -57081,11 +56946,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STF';
 
 DROP TABLE hl7.hl7_stz_data;
 
@@ -57195,11 +57060,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STZ';
 
 DROP TABLE hl7.hl7_tcc_data;
 
@@ -57344,11 +57209,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCC';
 
 DROP TABLE hl7.hl7_tcd_data;
 
@@ -57434,11 +57299,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCD';
 
 DROP TABLE hl7.hl7_tq1_data;
 
@@ -57667,11 +57532,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ1';
 
 DROP TABLE hl7.hl7_tq2_data;
 
@@ -57735,11 +57600,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ2';
 
 DROP TABLE hl7.hl7_txa_data;
 
@@ -58588,11 +58453,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TXA';
 
 DROP TABLE hl7.hl7_uac_data;
 
@@ -58643,11 +58508,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UAC';
 
 DROP TABLE hl7.hl7_ub1_data;
 
@@ -58688,11 +58553,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB1';
 
 DROP TABLE hl7.hl7_ub2_data;
 
@@ -58848,11 +58713,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB2';
 
 DROP TABLE hl7.hl7_urd_data;
 
@@ -58877,11 +58742,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URD';
 
 DROP TABLE hl7.hl7_urs_data;
 
@@ -58908,11 +58773,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URS';
 
 DROP TABLE hl7.hl7_var_data;
 
@@ -59086,11 +58951,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VAR';
 
 DROP TABLE hl7.hl7_vnd_data;
 
@@ -59143,11 +59008,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VND';
 
 DROP TABLE hl7.hl7_zao_data;
 
@@ -59182,11 +59047,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAO';
 
 DROP TABLE hl7.hl7_zap_data;
 
@@ -59214,11 +59079,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAP';
 
 DROP TABLE hl7.hl7_zbt_data;
 
@@ -59239,11 +59104,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZBT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZBT';
 
 DROP TABLE hl7.hl7_zcd_data;
 
@@ -59266,11 +59131,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCD';
 
 DROP TABLE hl7.hl7_zcl_data;
 
@@ -59300,11 +59165,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCL';
 
 DROP TABLE hl7.hl7_zcn_data;
 
@@ -59319,10 +59184,6 @@ CREATE EXTERNAL TABLE hl7.hl7_zcn (
 	collection_note_date_time STRING,
 	collection_note_user STRING,
 	collection_note_text STRING,
-	set_id STRING,
-	collection_note_date_time STRING,
-	collection_note_user STRING,
-	collection_note_text STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -59330,11 +59191,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCN';
 
 DROP TABLE hl7.hl7_zcp_data;
 
@@ -59362,11 +59223,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCP';
 
 DROP TABLE hl7.hl7_zcs_data;
 
@@ -59395,11 +59256,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCS';
 
 DROP TABLE hl7.hl7_zct_data;
 
@@ -59437,11 +59298,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCT';
 
 DROP TABLE hl7.hl7_zcx_data;
 
@@ -59464,11 +59325,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCX';
 
 DROP TABLE hl7.hl7_zds_data;
 
@@ -59491,11 +59352,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDS';
 
 DROP TABLE hl7.hl7_zdt_data;
 
@@ -59530,11 +59391,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDT';
 
 DROP TABLE hl7.hl7_zdu_data;
 
@@ -59560,11 +59421,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDU';
 
 DROP TABLE hl7.hl7_zdv_data;
 
@@ -59589,11 +59450,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDV';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDV';
 
 DROP TABLE hl7.hl7_ze1_data;
 
@@ -59618,11 +59479,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZE1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZE1';
 
 DROP TABLE hl7.hl7_zeq_data;
 
@@ -59644,11 +59505,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEQ';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEQ';
 
 DROP TABLE hl7.hl7_zer_data;
 
@@ -59717,11 +59578,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZER';
 
 DROP TABLE hl7.hl7_zex_data;
 
@@ -59741,11 +59602,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEX';
 
 DROP TABLE hl7.hl7_zg1_data;
 
@@ -59767,11 +59628,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZG1';
 
 DROP TABLE hl7.hl7_zid_data;
 
@@ -59791,11 +59652,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZID';
 
 DROP TABLE hl7.hl7_zif_data;
 
@@ -59821,11 +59682,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIF';
 
 DROP TABLE hl7.hl7_zin_data;
 
@@ -59883,11 +59744,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIN';
 
 DROP TABLE hl7.hl7_zip_data;
 
@@ -59924,11 +59785,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIP';
 
 DROP TABLE hl7.hl7_zit_data;
 
@@ -59960,11 +59821,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIT';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIT';
 
 DROP TABLE hl7.hl7_ziv_data;
 
@@ -60000,11 +59861,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIV';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIV';
 
 DROP TABLE hl7.hl7_zm0_data;
 
@@ -60036,11 +59897,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM0';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM0';
 
 DROP TABLE hl7.hl7_zm1_data;
 
@@ -60094,11 +59955,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM1';
 
 DROP TABLE hl7.hl7_zmn_data;
 
@@ -60118,11 +59979,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMN';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMN';
 
 DROP TABLE hl7.hl7_zmp_data;
 
@@ -60237,11 +60098,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMP';
 
 DROP TABLE hl7.hl7_zmr_data;
 
@@ -60261,11 +60122,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMR';
 
 DROP TABLE hl7.hl7_zou_data;
 
@@ -60295,11 +60156,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZOU';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZOU';
 
 DROP TABLE hl7.hl7_zpa_data;
 
@@ -60326,11 +60187,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPA';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPA';
 
 DROP TABLE hl7.hl7_zpd_data;
 
@@ -60357,11 +60218,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPD';
 
 DROP TABLE hl7.hl7_zpe_data;
 
@@ -60386,11 +60247,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPE';
 
 DROP TABLE hl7.hl7_zpo_data;
 
@@ -60417,11 +60278,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPO';
 
 DROP TABLE hl7.hl7_zpp_data;
 
@@ -60455,11 +60316,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPP';
 
 DROP TABLE hl7.hl7_zps_data;
 
@@ -60481,11 +60342,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPS';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPS';
 
 DROP TABLE hl7.hl7_zpv_data;
 
@@ -60539,11 +60400,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPV';
 
 DROP TABLE hl7.hl7_zrq_data;
 
@@ -60566,11 +60427,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRQ';
 
 DROP TABLE hl7.hl7_zrx_data;
 
@@ -60612,11 +60473,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRX';
 
 DROP TABLE hl7.hl7_zsc_data;
 
@@ -60641,11 +60502,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSC';
 
 DROP TABLE hl7.hl7_zsi_data;
 
@@ -60666,11 +60527,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSI';
 
 DROP TABLE hl7.hl7_zst_data;
 
@@ -60702,11 +60563,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZST';
 
 DROP TABLE hl7.hl7_zsu_data;
 
@@ -60726,11 +60587,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSU';
 
 DROP TABLE hl7.hl7_ztf_data;
 
@@ -60760,11 +60621,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTF';
 
 DROP TABLE hl7.hl7_ztm_data;
 
@@ -60914,11 +60775,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTM';
 
 DROP TABLE hl7.hl7_ztx_data;
 
@@ -60939,11 +60800,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTX';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTX';
 
 DROP TABLE hl7.hl7_zur_data;
 
@@ -60956,8 +60817,6 @@ CREATE EXTERNAL TABLE hl7.hl7_zur (
 	unknown STRING,
 	set_id STRING,
 	information STRING,
-	set_id STRING,
-	information STRING,
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING
 )
@@ -60965,11 +60824,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZUR';
 
 DROP TABLE hl7.hl7_zvn_data;
 
@@ -60993,8 +60852,8 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-16'
+COMMENT 'Table updated on 2017-05-17'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZVN';
+LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZVN';
