@@ -34,7 +34,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
   private lazy val toJson = jsonHandler()
   private lazy val EMPTY = Array.empty[String]
-  private lazy val MAP = Map.empty[String, Array[String]]
+  private lazy val NONE = Map.empty[String, Array[String]]
   private val metrics = new TrieMap[String, Long]
   private val hl7 = msgType.toString
   HL7State.values.foreach(state => metrics += s"$hl7$COLON${state.toString}" -> 0L)
@@ -215,8 +215,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private case class Segment(var mapping: String = EMPTYSTR, var realignColStatus: Boolean = false, var realignColValue: String = EMPTYSTR,
                              var realignFieldName: String = EMPTYSTR, var realignCompName: String = EMPTYSTR, var realignSubCompName: String = EMPTYSTR, var realignColOption: String = EMPTYSTR)
 
-  private case class VersionData(var controlId: String = EMPTYSTR, var hl7Version: String = EMPTYSTR, facility: String = EMPTYSTR, var srcSystem: Map[String, Array[String]] = MAP,
-                                 var standardMapping: Map[String, Array[String]] = MAP, var realignment: Map[String, Array[String]] = MAP, var facilityOverRides: Map[String, Array[String]] = MAP)
+  private case class VersionData(var controlId: String = EMPTYSTR, var hl7Version: String = EMPTYSTR, facility: String = EMPTYSTR, var srcSystem: Map[String, Array[String]] = NONE,
+                                 var standardMapping: Map[String, Array[String]] = NONE, var realignment: Map[String, Array[String]] = NONE, var facilityOverRides: Map[String, Array[String]] = NONE)
 
   private case class HL7Parsed(data: mapType, sourceSystem: String, srcVersion: String, var missingMappings: String = EMPTYSTR)
 
@@ -252,7 +252,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         if (msgSegment.length > 4) fields = msgSegment.substring(4, msgSegment.length).split(ESCAPE + delimiters(FIELD_DELIM))
         else fields = msgSegment.split(ESCAPE + delimiters(FIELD_DELIM))
       }
-      val moveToUnknown = moveUnknown(fieldLayout, unknownKey(whichSegment), _: String)
+      val moveToUnknown = moveUnknown(fieldLayout, unknownKey, _: String)
       if (valid(fields)) {
         fields.view.zipWithIndex foreach { case (field, fieldIndex) =>
           val fieldKey = s"$whichSegment$DOT${inc(fieldIndex)}"
@@ -357,6 +357,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   private def unknownKey(segment: String): String = s"${segment.toLowerCase}_$UNKNOWN"
 
+  private def unknownKey: String = UNKNOWN
+
   private def inc(v: Int, step: Int = 1) = v + step
 
   private def getVersionData(fieldList: Array[String], templateData: Map[String, Map[String, Array[String]]]): VersionData = {
@@ -368,12 +370,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       case mt_mt6 if mt_mt6(MT_) || mt_mt6(MT6_) =>
         if (hl7Version == HL7_2_1) templateData(hl7MEDITECH21Map)
         else if (hl7Version == HL7_2_4 || hl7Version == HL7_2_5_1) templateData(hl7MEDITECH24Map)
-        else templateData(hl7StandardMap)
+        else NONE
       case epic if epic(EPIC_) => templateData(hl7EpicMap)
       case ecw if ecw(ECW_) => templateData(hl7eCWMap)
       case ng if ng(NG_) => templateData(hl7NextGenMap)
       case ip if ip(IP_) => templateData(hl7IpeopleMap)
-      case _ => MAP
+      case _ => NONE
     }
 
     def facility = () => fieldList(3)
