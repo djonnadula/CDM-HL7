@@ -199,7 +199,7 @@ package object cdm extends Logg {
     catch {
       case t: Throwable => reporter(t)
         if (notify) {
-          mail("{encrypt} " + lookUpProp("hl7.app") + " Function Execution Failed due to  " + t.getMessage,
+          mail("{encrypt} " + lookUpProp("hl7.app") + " Function Execution Failed due to  " + (if (t.getCause != null) t.getCause.getMessage else t.getMessage),
             " Executing Function Failed for " + whichAction + " due to Exception :: " + t.getClass +
               " & Stack Trace is as follows \n\n" + t.getStackTrace.mkString("\n") + "\n\n" + EVENT_TIME, state)
         }
@@ -268,7 +268,7 @@ package object cdm extends Logg {
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
-  private class Factory(id: String) extends ThreadFactory {
+  private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
 
     override def newThread(r: Runnable): Thread = {
