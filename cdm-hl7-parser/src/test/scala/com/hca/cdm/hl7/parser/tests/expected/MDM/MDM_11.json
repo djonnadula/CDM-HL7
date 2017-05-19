@@ -72,11 +72,11 @@
     },
     "primary_care_doctor": {
       "person_id": "HUBMA",
-      "last_name": "Hubsher",
-      "first_name": "Mason",
-      "middle_name": "I",
+      "family_name": "Hubsher",
+      "given_name": "Mason",
+      "second_and_further_given_names_or_initials_thereof": "I",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     },
     "hospital_service": "ICU",
     "admit_source": "PR",
@@ -95,11 +95,11 @@
     "admit_date_time": "201609140926",
     "consulting_doctor": {
       "person_id": "SHANAG",
-      "last_name": "Sharma",
-      "first_name": "Nagaraja",
-      "middle_name": "D",
+      "family_name": "Sharma",
+      "given_name": "Nagaraja",
+      "second_and_further_given_names_or_initials_thereof": "D",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     }
   },
   "0004.TXA": {
@@ -276,7 +276,8 @@
   "0031.OBX": {
     "set_id": "27",
     "value_type": "TX",
-    "obsv_value": "                    Pulse                    63  09/26 0756"},
+    "obsv_value": "                    Pulse                    63  09/26 0756"
+  },
   "0032.OBX": {
     "set_id": "28",
     "value_type": "TX",

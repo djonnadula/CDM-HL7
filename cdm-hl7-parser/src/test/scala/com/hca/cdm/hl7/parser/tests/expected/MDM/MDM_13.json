@@ -74,9 +74,9 @@
     },
     "primary_care_doctor": {
       "person_id": "UNDEFINED",
-      "last_name": "AAZAMI",
-      "first_name": "HESSAM",
-      "identifier_type_code": "XX"
+      "family_name": "AAZAMI",
+      "given_name": "HESSAM",
+      "id_type_code": "XX"
     },
     "hospital_service": "MED",
     "admit_source": "PR",
@@ -96,10 +96,10 @@
     "discharge_date_time": "201609061632",
     "consulting_doctor": {
       "person_id": "SIMGI",
-      "last_name": "Simoni",
-      "first_name": "Gilbert",
+      "family_name": "Simoni",
+      "given_name": "Gilbert",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     }
   },
   "0004.TXA": {

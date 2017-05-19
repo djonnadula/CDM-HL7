@@ -1,0 +1,97 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCYS",
+    "message_control_id": "MT_COCYS_RDE_YSPHAORD.1.17845521",
+    "medical_record_num": "K001011921",
+    "medical_record_urn": "K758388",
+    "patient_account_num": "K85417001471"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCYS",
+    "date_time_of_message": "201705180709",
+    "message_type": {
+      "message_code": "RDE",
+      "trigger_event": "O01"
+    },
+    "message_control_id": "MT_COCYS_RDE_YSPHAORD.1.17845521",
+    "processing_id": "P",
+    "version_id": "2.2"
+  },
+  "0002.PID": {
+    "medical_record_num": "K001011921",
+    "medical_record_urn": "K758388",
+    "patient_name": {
+      "family_name": "BERNATE",
+      "given_name": "RACHEL",
+      "second_and_further_given_names_or_initials_thereof": "WIDDOWSON"
+    },
+    "date_time_of_birth": "19750606",
+    "patient_account_num": "K85417001471"
+  },
+  "0003.PV1": {
+    "set_id": "O",
+    "assigned_patient_location": {
+      "point_of_care": "K.SD"
+    },
+    "attending_doctor": {
+      "person_id": "SHEER",
+      "family_name": "Shea",
+      "given_name": "Eric",
+      "second_and_further_given_names_or_initials_thereof": "L  DO"
+    }
+  },
+  "0004.ORC": {
+    "order_control": "NW",
+    "placer_order_num": "11652761",
+    "quantity_timing": {
+      "interval": ".Q13H20M",
+      "eff_from_date_time": "201705180707",
+      "eff_to_date_time": "201705182359",
+      "priority": "SCH",
+      "condition": "0"
+    },
+    "ordering_provider": {
+      "person_id": "SHEER",
+      "family_name": "Shea",
+      "given_name": "Eric",
+      "second_and_further_given_names_or_initials_thereof": "L",
+      "degree": "DO"
+    }
+  },
+  "0005.RXE": {
+    "give_code": {
+      "id": "LACTIL1005",
+      "text": "RINGERS SOLUTION,LACTATED 1,000 ML BOT"
+    },
+    "give_units": "ML",
+    "provider_administration_instructions": "** PACU ORDER **",
+    "ordering_provider_dea_num": "BS9330844"
+  },
+  "0006.RXR": {
+    "route": {
+      "id": "IV",
+      "text": "INTRAVENOUS"
+    },
+    "administration_method": {
+      "id": "IDUR",
+      "text": "DURATION DEPENDENT IV'S"
+    }
+  },
+  "0007.RXC": {
+    "rx_component_type": "B",
+    "component_code": {
+      "id": "LACTIL1005",
+      "text": "RINGERS SOLUTION,LACTATED 1,000 ML BOT"
+    },
+    "component_amt": "1000",
+    "component_units": "ML",
+    "component_strength": "1000",
+    "component_strength_units": "ML"
+  },
+  "0008.ZRX": {
+    "dispense_code": "O",
+    "cycle_date_time": "201705180707"
+  }
+}

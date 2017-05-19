@@ -26,7 +26,9 @@ class SegmentUtils:
                      'ADT,ADHOC:SCRIINAVIGATE:JSON&scri_inagivate_key_names.csv:HL7CDMSCRIINAVIGATEADT:scri_inagivate_filters.csv,message_control_id^patient_account_num^patient_address|street_address^patient_address|other_designation^patient_address|city^patient_address|country^patient_address|county_parish_code|text^date_time_of_birth^patient_e_mail_address^phone_num_home|communication_address^phone_num_home|telecommunication_use_code^sending_facility^sending_application^patient_name|given_name^insurance_company_name^primary_language^patient_name|family_name^patient_name|second_and_further_given_names_or_initials_thereof^medical_record_num^address|street_address^address|other_designation^business_phone_num^address|city^address|country^address|zip_or_postal_code^name^phone_num^relationship^address|state_or_province^address|zip_or_postal_code^phone_num_home^race^date_time_of_message^administrative_sex^ssn_num_patient^patient_address|state_or_province^medical_record_urn^patient_address|zip_or_postal_code\n'
 
     file_names = ['hl7MapStandard2.8.2.csv', 'hl7MapEcw2.3.1.csv', 'hl7MapEpic2.3.csv', 'hl7MapIpeople2.5.csv',
-                  'hl7MapMEDITECH5.csv', 'hl7MapMEDITECH6.csv', 'hl7MapNextGen2.3.csv']
+                  'hl7MapMT6_2.4.csv', 'hl7MapMT6_2.5.1.csv', 'hl7MapMT6_2.5.csv', 'hl7MapMT_2.1.csv',
+                  'hl7MapMT_2.2.csv', 'hl7MapMT_2.4.csv', 'hl7MapMT_2.5.1.csv', 'hl7MapMT_2.5.csv',
+                  'hl7MapNextGen2.3.csv']
 
     @staticmethod
     def get_parent_directory(directory):

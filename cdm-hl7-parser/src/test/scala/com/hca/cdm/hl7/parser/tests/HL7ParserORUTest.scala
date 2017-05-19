@@ -110,4 +110,12 @@ class HL7ParserORUTest extends FlatSpec{
     "ORU Message Test 12 (ORU_12)" should "have a match for the parsed output" in {
         assert(res12 === expected12)
     }
+
+    val messageName13 = "ORU_13"
+    val msg13 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName13, messageType)
+    val res13 = hl7TestSetup.parse(msg13)
+    val expected13 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName13, messageType)
+    "ORU Message Test 13 (ORU_13)" should "have a match for the parsed output" in {
+        assert(res13 === expected13)
+    }
 }

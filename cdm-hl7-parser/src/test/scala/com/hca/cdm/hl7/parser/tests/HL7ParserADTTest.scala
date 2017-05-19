@@ -23,6 +23,7 @@ class HL7ParserADTTest extends FlatSpec {
         assert(res1 === expected1)
     }
 
+    // MT 2.5 test
     val messageName2 = "ADT_2"
     val msg2 =  HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType)
     val res2 = hl7TestSetup.parse(msg2)
@@ -229,5 +230,32 @@ class HL7ParserADTTest extends FlatSpec {
     val expected27 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName27, messageType)
     "ADT Message Test 27 (ADT_27)" should "have a match for the parsed output" in {
         assert(res27 === expected27)
+    }
+
+    //EPIC.2.3 MRG 4.3 && 4.2
+    val messageName28 = "ADT_28"
+    val msg28 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName28, messageType)
+    val res28 = hl7TestSetup.parse(msg28)
+    val expected28 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName28, messageType)
+    "ADT Message Test 28 (ADT_28)" should "have a match for the parsed output" in {
+        assert(res28 === expected28)
+    }
+
+    //MT.2.1 Test
+    val messageName29 = "ADT_29"
+    val msg29 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName29, messageType)
+    val res29 = hl7TestSetup.parse(msg29)
+    val expected29 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName29, messageType)
+    "ADT Message Test 29 (ADT_29)" should "have a match for the parsed output" in {
+        assert(res29 === expected29)
+    }
+
+    //MT.2.4 Test
+    val messageName30 = "ADT_30"
+    val msg30 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName30, messageType)
+    val res30 = hl7TestSetup.parse(msg30)
+    val expected30 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName30, messageType)
+    "ADT Message Test 30 (ADT_30)" should "have a match for the parsed output" in {
+        assert(res30 === expected30)
     }
 }

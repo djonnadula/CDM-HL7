@@ -1,0 +1,178 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCJM",
+    "message_control_id": "MT_COCJM_SIU_JMSCHO.1.1255322",
+    "medical_record_num": "J000297863",
+    "medical_record_urn": "J162689",
+    "patient_account_num": "J00220953536 "
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCJM",
+    "date_time_of_message": "201703040007",
+    "message_type": {
+      "message_code": "SIU",
+      "trigger_event": "S26"
+    },
+    "message_control_id": "MT_COCJM_SIU_JMSCHO.1.1255322",
+    "processing_id": "P",
+    "version_id": "2.4",
+    "country_code": " "
+  },
+  "0002.SCH": {
+    "placer_appointment_id": "J00220953536",
+    "filler_appointment_id": "21201178~21201178",
+    "event_reason": "NO SHOW",
+    "appointment_type": {
+      "id": "J.PAT",
+      "name_of_coding_system": "CWS"
+    },
+    "appointment_duration": "30",
+    "appointment_duration_units": "MIN",
+    "appointment_timing_quantity": "201702241130",
+    "entered_by_location": "NO SHOW "
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": [
+      {
+        "id_num": "J000297863",
+        "id_type_code": "MR"
+      },
+      {
+        "id_num": "999-99-9999",
+        "id_type_code": "SS"
+      },
+      {
+        "id_num": "J162689",
+        "id_type_code": "PI"
+      }
+    ],
+    "patient_name": {
+      "family_name": "SPYDER",
+      "given_name": "WALKABOUT",
+      "second_and_further_given_names_or_initials_thereof": "JOKER"
+    },
+    "date_time_of_birth": "19410702",
+    "administrative_sex": "F",
+    "race": "OTHER",
+    "patient_address": {
+      "street_address": "4 BORUNLUND DR",
+      "city": "FRISSON",
+      "state_or_province": "FL",
+      "zip_or_postal_code": "32207",
+      "country": "USA",
+      "county_parish_code": "DUVAL"
+    },
+    "phone_num_home": "(904)636-6650",
+    "marital_status": "W",
+    "religion": "BAP",
+    "patient_account_num": "J00220953536 "
+  },
+  "0004.PV1": {
+    "set_id": "1",
+    "patient_class": "P",
+    "assigned_patient_location": "J.OR",
+    "admission_type": "EL",
+    "attending_doctor": {
+      "person_id": "POPPI",
+      "family_name": "Jillian",
+      "given_name": "Georgoia",
+      "degree": "MD"
+    },
+    "referring_doctor": {
+      "person_id": "POPPI",
+      "family_name": "Jillian",
+      "given_name": "Georgoia",
+      "degree": "MD"
+    },
+    "primary_care_doctor": {
+      "person_id": "WABAS",
+      "family_name": "Robun",
+      "given_name": "Washington",
+      "second_and_further_given_names_or_initials_thereof": "G",
+      "degree": "MD"
+    },
+    "hospital_service": "SURG",
+    "admit_source": "CR",
+    "patient_type": "SDC",
+    "visit_num": "RECTOCELE",
+    "financial_class": "12",
+    "servicing_facility": "COCJM",
+    "reason_for_visit": "RECTOCELE",
+    "account_status": "PRE",
+    "admit_date_time": "201702270800 "
+  },
+  "0005.AL1": {
+    "set_id": "1",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F001900388",
+      "text": "No Known Allergies",
+      "name_of_coding_system": "NO KNOWN ALLERGIES"
+    },
+    "allergy_severity_code": "U",
+    "identification_date": "20160415 "
+  },
+  "0006.AL1": {
+    "set_id": "2",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F001900590",
+      "text": "No Known Drug Allergies",
+      "name_of_coding_system": "NO KNOWN DRUG ALLERGIES"
+    },
+    "allergy_severity_code": "U",
+    "identification_date": "20160415 "
+  },
+  "0007.NTE": {
+    "set_id": "1",
+    "comment": "DX: N81.6 "
+  },
+  "0008.NTE": {
+    "set_id": "2",
+    "comment": "CHECKED INPT ONLY LIST-GC NTE",
+    "comment_type": "3",
+    "entered_date_time": "PAT:  PT HAS APPT W/ DR. Jillian 11/20/17 @ 1100.  WILL BRING PPWK. "
+  },
+  "0009.RGS": {
+    "set_id": "1",
+    "resource_group_id": {
+      "id": "J.PAT",
+      "text": "PREOP APPOINTMENT "
+    }
+  },
+  "0010.AIG": {
+    "set_id": "1",
+    "resource_id": {
+      "id": "J.PAT",
+      "text": "PREOP APPOINTMENT"
+    },
+    "resource_group": "J.PAT",
+    "start_date_time": "201702241130",
+    "duration": "30 "
+  },
+  "0011.AIS": {
+    "set_id": "1",
+    "start_date_time": "201702241130",
+    "duration": "30",
+    "duration_units": "min",
+    "placer_supplemental_service_information": "NO SHOW "
+  },
+  "0012.AIL": {
+    "set_id": "1",
+    "location_resource_id": "J.PAT",
+    "location_type": "J.PAT "
+  },
+  "0013.AIP": {
+    "set_id": "1",
+    "personnel_resource_id": {
+      "person_id": "POPPI",
+      "family_name": "Jillian",
+      "given_name": "Georgoia",
+      "degree": "MD"
+    },
+    "duration": "30\t"
+  }
+}

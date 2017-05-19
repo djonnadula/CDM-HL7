@@ -1,4 +1,4 @@
 IN1.37,bill_type,,
-PV1.4.1,adm_type,visit_type,
-PV1.4.2,adm_type,reason_for_visit,
-PV1.10,pat_type,,
+PV1.4.1,admission_type,visit_type,
+PV1.4.2,admission_type,reason_for_visit,
+PV1.10,patient_type,,

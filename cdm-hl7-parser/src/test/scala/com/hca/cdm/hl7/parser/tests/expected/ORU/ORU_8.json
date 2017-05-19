@@ -47,9 +47,9 @@
     },
     "primary_care_doctor": {
       "person_id": ".DNK",
-      "last_name": "Know",
-      "first_name": "Does",
-      "middle_name": "Not"
+      "family_name": "Know",
+      "given_name": "Does",
+      "second_and_further_given_names_or_initials_thereof": "Not"
     },
     "admitting_doctor": {},
     "patient_type": "ER",

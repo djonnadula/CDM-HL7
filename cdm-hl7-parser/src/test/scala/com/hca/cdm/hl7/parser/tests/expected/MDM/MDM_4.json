@@ -24,8 +24,8 @@
   },
   "0002.PID": {
     "set_id": "1",
-    "medical_record_num": "J000423598",
-    "medical_record_urn": "J500217",
+    "patient_id_list": "J000423598",
+    "alternate_patient_id": "J500217",
     "patient_name": {
       "family_name": "Jones",
       "given_name": "Jessica",
@@ -72,9 +72,9 @@
     },
     "primary_care_doctor": {
       "person_id": "DRBRI",
-      "last_name": "DOCTOR",
-      "first_name": "BRITTANY",
-      "identifier_type_code": "XX"
+      "family_name": "DOCTOR",
+      "given_name": "BRITTANY",
+      "id_type_code": "XX"
     },
     "hospital_service": "IM",
     "admit_source": "ER",

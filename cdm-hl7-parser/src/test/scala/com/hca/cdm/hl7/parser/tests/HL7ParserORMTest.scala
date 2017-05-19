@@ -22,4 +22,12 @@ class HL7ParserORMTest extends FlatSpec{
     "ORM Message Test 1 (ORM_1)" should "have a match for the parsed output" in {
         assert(res1 === expected1)
     }
+
+    val messageName2 = "ORM_2"
+    val msg2 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType)
+    val res2 = hl7TestSetup.parse(msg2)
+    val expected2 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName2, messageType)
+    "ORM Message Test 2 (ORM_2)" should "have a match for the parsed output" in {
+        assert(res2 === expected2)
+    }
 }

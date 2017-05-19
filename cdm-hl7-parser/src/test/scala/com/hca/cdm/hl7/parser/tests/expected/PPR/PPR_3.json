@@ -52,12 +52,12 @@
       "provider_id": "DRBRI"
     },
     "problem_id": {
-      "primary_id": "45007003",
+      "id": "45007003",
       "text": "Hypotension",
-      "name_of_coding_sys": "SNOMED"
+      "name_of_coding_system": "SNOMED"
     },
     "problem_instance_id": "J502566-6",
-    "problem_estbl_date_time": {
+    "problem_established_date_time": {
       "date_time": "201611091510",
       "person_id": "1TSQBE8554",
       "provider_id": "DRBRI"

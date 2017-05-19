@@ -72,10 +72,10 @@
     },
     "primary_care_doctor": {
       "person_id": ".DNK",
-      "last_name": "KNOW",
-      "first_name": "DOES",
-      "middle_name": "NOT",
-      "identifier_type_code": "XX"
+      "family_name": "KNOW",
+      "given_name": "DOES",
+      "second_and_further_given_names_or_initials_thereof": "NOT",
+      "id_type_code": "XX"
     },
     "hospital_service": "MEDI",
     "admit_source": "CR",
@@ -94,11 +94,11 @@
     "admit_date_time": "201609241952",
     "consulting_doctor": {
       "person_id": "GENMP",
-      "last_name": "Gentile",
-      "first_name": "Mark",
-      "middle_name": "P",
+      "family_name": "Gentile",
+      "given_name": "Mark",
+      "second_and_further_given_names_or_initials_thereof": "P",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     }
   },
   "0004.TXA": {

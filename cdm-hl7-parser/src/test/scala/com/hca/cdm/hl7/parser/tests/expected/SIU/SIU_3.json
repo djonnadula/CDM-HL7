@@ -603,10 +603,19 @@
   },
   "0045.ZCP": {
     "operation_completed_date_time": "201701311149",
-    "operation_completed_id": "V.RRX5198 ZPO",
-    "zcp_unknown": "NONE^NONE^COMP^COMPLETED AS PLANNED"
+    "operation_completed_id": "V.RRX5198"
   },
-  "0046.ZTF": {
+  "0046.ZPO": {
+    "anesthetic_type": {
+      "type_code": "NONE",
+      "type_desc": "NONE"
+    },
+    "surgery_outcome": {
+      "outcome_code": "COMP",
+      "outcome_desc": "COMPLETED AS PLANNED"
+    }
+  },
+  "0047.ZTF": {
     "counter": "1",
     "transfer_type": "OR",
     "transfer_method": {
@@ -619,7 +628,7 @@
     },
     "user": "PT"
   },
-  "0047.ZAO": {
+  "0048.ZAO": {
     "counter": "1",
     "operation_identifier": {
       "operation_code": "V.ACINF01",
@@ -639,7 +648,7 @@
     },
     "wound_status": "CL"
   },
-  "0048.ZAO": {
+  "0049.ZAO": {
     "counter": "2",
     "operation_identifier": {
       "operation_code": "V.ACINF02",
@@ -658,7 +667,7 @@
     },
     "wound_status": "CL"
   },
-  "0049.ZPP": {
+  "0050.ZPP": {
     "counter": "1",
     "operation_identifier": {
       "operation_code": "V.ACINF01",
@@ -676,7 +685,7 @@
       "first_name": "Benjamin"
     }
   },
-  "0050.ZPP": {
+  "0051.ZPP": {
     "counter": "2",
     "operation_identifier": {
       "operation_code": "V.ACINF02",
@@ -694,19 +703,19 @@
       "first_name": "Benjamin"
     }
   },
-  "0051.ZST": {
+  "0052.ZST": {
     "counter": "1",
     "staff_type": {
       "type_code": "STFANT",
       "type_description": "Anesthesiologist"
     }
   },
-  "0052.ZTX": {
+  "0053.ZTX": {
     "counter": "1",
     "type_of_text_comment_values": "PRE",
     "text_line": "PROSTATE CANCER"
   },
-  "0053.ZTX": {
+  "0054.ZTX": {
     "counter": "2",
     "type_of_text_comment_values": "PST",
     "text_line": "PROSTATE CANCER"

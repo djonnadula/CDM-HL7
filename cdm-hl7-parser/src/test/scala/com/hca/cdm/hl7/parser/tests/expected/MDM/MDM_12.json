@@ -83,10 +83,10 @@
     },
     "primary_care_doctor": {
       "person_id": ".NO PCP",
-      "last_name": "Physician",
-      "first_name": "No",
-      "middle_name": "Primary or Family",
-      "identifier_type_code": "XX"
+      "family_name": "Physician",
+      "given_name": "No",
+      "second_and_further_given_names_or_initials_thereof": "Primary or Family",
+      "id_type_code": "XX"
     },
     "hospital_service": "P",
     "admit_source": "PR",
@@ -184,7 +184,7 @@
     "set_id": "8",
     "value_type": "TX",
     "obsv_sub_id": "H",
-    "obsv_value":"            Room: E.2068    "
+    "obsv_value": "            Room: E.2068    "
   },
   "0013.OBX": {
     "set_id": "9",

@@ -2,7 +2,7 @@
   "0000.COMN": {
     "sending_facility": "COCBR",
     "message_control_id": "MT_COCBR_SIU_BRSCHO.1.536374",
-    "medical_record_num": "",
+    "medical_record_num": "H000981833",
     "medical_record_urn": "798564",
     "patient_account_num": "H00727600505"
   },
@@ -34,7 +34,7 @@
   },
   "0003.PID": {
     "set_id": "1",
-    "medical_record_num": [
+    "patient_id_list": [
       {
         "id_num": "H000981833",
         "id_type_code": "MR"
@@ -48,7 +48,7 @@
         "id_type_code": "PI"
       }
     ],
-    "medical_record_urn": "798564",
+    "alternate_patient_id": "798564",
     "patient_name": {
       "family_name": "GARCIA",
       "given_name": "JORGE"
@@ -89,9 +89,9 @@
     },
     "primary_care_doctor": {
       "person_id": ".NO PCP",
-      "last_name": "Physician",
-      "first_name": "No",
-      "middle_name": "Primary or Family"
+      "family_name": "Physician",
+      "given_name": "No",
+      "second_and_further_given_names_or_initials_thereof": "Primary or Family"
     },
     "hospital_service": "ERS",
     "admit_source": "PR",

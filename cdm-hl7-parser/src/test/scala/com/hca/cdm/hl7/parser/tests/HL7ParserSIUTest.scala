@@ -23,6 +23,7 @@ class HL7ParserSIUTest extends FlatSpec{
         assert(res1 === expected1)
     }
 
+    // MT.2.4 Test
     val messageName2 = "SIU_2"
     val msg2 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType)
     val res2 = hl7TestSetup.parse(msg2)
@@ -39,6 +40,7 @@ class HL7ParserSIUTest extends FlatSpec{
         assert(res3 === expected3)
     }
 
+    // IP FRNK 2.5 Facility Overrides Test
     val messageName4 = "SIU_4"
     val msg4 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName4, messageType)
     val res4 = hl7TestSetup.parse(msg4)
@@ -53,6 +55,15 @@ class HL7ParserSIUTest extends FlatSpec{
     val expected5 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName5, messageType)
     "SIU Message Test 5 (SIU_5)" should "have a match for the parsed output" in {
         assert(res5 === expected5)
+    }
+
+    // MT.2.5 Test
+    val messageName6 = "SIU_6"
+    val msg6 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName6, messageType)
+    val res6 = hl7TestSetup.parse(msg6)
+    val expected6 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName6, messageType)
+    "SIU Message Test 6 (SIU_6)" should "have a match for the parsed output" in {
+        assert(res6 === expected6)
     }
 
 }

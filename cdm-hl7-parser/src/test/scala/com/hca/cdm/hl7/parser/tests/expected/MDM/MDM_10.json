@@ -75,11 +75,11 @@
     },
     "primary_care_doctor": {
       "person_id": "NYSGE",
-      "last_name": "Nystrom",
-      "first_name": "Gerald",
-      "middle_name": "A",
+      "family_name": "Nystrom",
+      "given_name": "Gerald",
+      "second_and_further_given_names_or_initials_thereof": "A",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     },
     "hospital_service": "NIC",
     "admit_source": "TFR",
@@ -98,11 +98,11 @@
     "admit_date_time": "201609190454",
     "consulting_doctor": {
       "person_id": "EHRST",
-      "last_name": "Ehrett",
-      "first_name": "Stuart",
-      "middle_name": "W",
+      "family_name": "Ehrett",
+      "given_name": "Stuart",
+      "second_and_further_given_names_or_initials_thereof": "W",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     }
   },
   "0004.TXA": {

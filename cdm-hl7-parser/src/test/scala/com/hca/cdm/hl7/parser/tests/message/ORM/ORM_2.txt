@@ -1,0 +1,8 @@
+MSH|^~\&||COCBR|||201705160000||ORM^O01|MT_COCBR_ORM_BROEO.1.17377700|P|2.1|||||
+PID|1||H000962893|H890237|LOVEE^ARRIBA||19630426|M||W|30 MURDLER PLOOP^^PLANTUBUS CITY^AK^12345|||(999)999-9999||S|NON|H00728054711|123-23-5555
+PV1|1|I|H.A4PCU^H.A401^1|EM|||CALRIA^Calata^Ria^^^^MD^^^^^^XX|.SELF^Referred^Self^^^^^^^^^^XX|KAHRA^Kahn^Randy^M^^^MD^^^^^^XX|MEDTELE||||PR|||CALRIA^Calata^Ria^^^^MD^^^^^^XX|IN||15|||||||||||||||||||COCBR||ADM|||201705152228||||||||.SELF^Referred^Self^^^^^^^^^^XX
+ORC|NW|||||N|||201705152359|HSK1||||||||BRHDME1W011B.2
+OBR|1|20170515-0365||CONS^PHA^PHARMACY CONSULT||201705152359||||||ACOEISO^Precautions:||||SHISAN^Kagathur^Santosh^PGY1^^^MD|||||||||||^^^^^S
+NTE|1|P|BRPHACON^Select Pharmacy Consult^V^Vancomycin Rx to Dose^Pharmacy Consults Brandon
+NTE|2|P|HOECAMP^Test to be performed at?^^BR
+ZMN|

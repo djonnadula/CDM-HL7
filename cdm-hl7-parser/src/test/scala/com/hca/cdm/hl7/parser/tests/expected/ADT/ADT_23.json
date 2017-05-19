@@ -87,9 +87,9 @@
     "patient_account_num": "700272816",
     "ssn_num_patient": "777-77-7777",
     "mother_name": {
-      "last_name": "Natividad",
-      "first_name": "Aillyn",
-      "middle_name": "T"
+      "family_name": "Natividad",
+      "given_name": "Aillyn",
+      "second_and_further_given_names_or_initials_thereof": "T"
     },
     "ethnic_group": "NOT HISPANIC",
     "patient_death_indicator": "N"
