@@ -170,7 +170,6 @@ object HL7Receiver extends Logg with App {
       sparkStrCtx awaitTermination()
     } catch {
       case t: Throwable =>
-        error(t)
         if (!t.isInstanceOf[InterruptedException]) {
           error("Spark Context Starting Failed ", t)
           val retry = RetryHandler()

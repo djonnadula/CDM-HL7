@@ -321,7 +321,6 @@ object HL7Job extends Logg with App {
       sparkStrCtx awaitTermination()
     } catch {
       case t: Throwable =>
-        error(t)
         if (!t.isInstanceOf[InterruptedException]) {
           error("Spark Context Starting Failed will try with Retry Policy", t)
           val retry = RetryHandler()
