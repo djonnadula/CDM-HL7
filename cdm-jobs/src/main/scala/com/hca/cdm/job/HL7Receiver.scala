@@ -169,16 +169,20 @@ object HL7Receiver extends Logg with App {
       info(s"Started Spark Streaming Context Execution :: ${new Date()}")
       sparkStrCtx awaitTermination()
     } catch {
-      case t: Throwable => error("Spark Context Starting Failed ", t)
-        val retry = RetryHandler()
+      case t: Throwable =>
+        error(t)
+        if (!t.isInstanceOf[InterruptedException]) {
+          error("Spark Context Starting Failed ", t)
+          val retry = RetryHandler()
 
-        def retryStart(): Unit = {
-          sparkStrCtx start()
-          info(s"Started Spark Streaming Context Execution :: ${new Date()}")
-          sparkStrCtx awaitTermination()
+          def retryStart(): Unit = {
+            sparkStrCtx start()
+            info(s"Started Spark Streaming Context Execution :: ${new Date()}")
+            sparkStrCtx awaitTermination()
+          }
+
+          tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
         }
-
-        tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
     } finally {
       close()
     }

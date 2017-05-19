@@ -229,7 +229,7 @@ object HL7Job extends Logg with App {
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
             var tlmAckIO: (String) => Unit = null
             if (tlmAckQueue.isDefined) {
-              TLMAcknowledger(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"),numberOfIns = 2)
+              TLMAcknowledger(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 3)
               tlmAckIO = TLMAcknowledger.ackMessage(_: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta))
@@ -320,17 +320,20 @@ object HL7Job extends Logg with App {
       info(s"Started Spark Streaming Context Execution :: ${new Date()}")
       sparkStrCtx awaitTermination()
     } catch {
-      case t: Throwable => error("Spark Context Starting Failed will try with Retry Policy", t)
-        val retry = RetryHandler()
+      case t: Throwable =>
+        error(t)
+        if (!t.isInstanceOf[InterruptedException]) {
+          error("Spark Context Starting Failed will try with Retry Policy", t)
+          val retry = RetryHandler()
 
-        def retryStart(): Unit = {
-          sparkStrCtx start()
-          info(s"Started Spark Streaming Context Execution :: ${new Date()}")
-          sparkStrCtx awaitTermination()
+          def retryStart(): Unit = {
+            sparkStrCtx start()
+            info(s"Started Spark Streaming Context Execution :: ${new Date()}")
+            sparkStrCtx awaitTermination()
+          }
+
+          tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
         }
-
-        tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
-
     } finally {
       shutDown()
       close()
