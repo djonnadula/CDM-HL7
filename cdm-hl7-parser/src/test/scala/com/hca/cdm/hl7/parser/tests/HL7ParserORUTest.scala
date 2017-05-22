@@ -118,4 +118,13 @@ class HL7ParserORUTest extends FlatSpec{
     "ORU Message Test 13 (ORU_13)" should "have a match for the parsed output" in {
         assert(res13 === expected13)
     }
+
+    // EPIC 2.1 OBR.33, OBR.34, OBR.35 test
+    val messageName14 = "ORU_14"
+    val msg14 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName14, messageType)
+    val res14 = hl7TestSetup.parse(msg14)
+    val expected14 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName14, messageType)
+    "ORU Message Test 14 (ORU_14)" should "have a match for the parsed output" in {
+        assert(res14 === expected14)
+    }
 }
