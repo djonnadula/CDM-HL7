@@ -133,7 +133,6 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   private case class EventListener(source: String, tlmAcknowledge: (String) => Unit) extends SourceListener {
 
     override def handleMessage(message: Message): Boolean = {
-      if (message == null) return true
       val msg = message.asInstanceOf[TextMessage]
       val data = msg.getText.replaceAll("[\r\n]+", "\r\n")
       val meta = metaFromRaw(data)
@@ -141,9 +140,8 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       var th: Throwable = null
       try {
         self.store(MqData(source, data, meta))
-        handleAcks(message, source, meta, tlmAcknowledge)
         persisted = true
-        if (self.pauseConsuming) self.pauseConsuming = false
+        // if (self.pauseConsuming) self.pauseConsuming = false
       } catch {
         case t: Throwable =>
           error(s"Cannot Store message to Spark Storage ${msg.getJMSMessageID}", t)
@@ -153,7 +151,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       if (!persisted) {
         self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
         self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
-      }
+      } else handleAcks(message, source, meta, tlmAcknowledge)
       persisted
     }
 
@@ -213,22 +211,9 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
     override def run(): Unit = {
       while (!self.isStopped()) {
         if (storeReceived && !self.pauseConsuming) {
-          try {
-            consumer receiveNoWait match {
-              case message: Message =>
-                storeReceived = sourceListener handleMessage message
-              case null =>
-            }
-          } catch {
-            case e: Exception =>
-              Throwables.getRootCause(e) match {
-                case interrupted: InterruptedException =>
-                  if (!self.isStopped()) {
-                    error("Interrupted while receiving data from WSQM", interrupted)
-                  }
-                case exception: Exception =>
-                  error("Error while receiving data from WSMQ", exception)
-              }
+          val msg = consumer.receiveNoWait
+          if (valid(msg)) {
+            storeReceived = sourceListener handleMessage msg
           }
         } else {
           if (currMillis - timeOut >= 50000) {
@@ -236,7 +221,6 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
             timeOut = currMillis
           }
         }
-
       }
     }
   }
