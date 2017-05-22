@@ -65,12 +65,16 @@ object HL7Receiver extends Logg with App {
 
   // ****************** Spark Part ***********************************************
   private val checkpointEnable = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
+  private val walEnabled = lookUpProp("hl7.spark.wal.enable").toBoolean
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
-  if (checkpointEnable) {
+  if (walEnabled) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
+    sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "30")
+    // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+    // Not Supported in Current Env Enable hdfs.append.support
+    // sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
+    // sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
@@ -95,11 +99,16 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    sparkStrCtx.union(numberOfReceivers.map(id => {
-      val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
-      info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
-      stream
-    })) foreachRDD (rdd => {
+    val stream = if (numberOfReceivers.size == 1)
+      sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+    else {
+      sparkStrCtx.union(numberOfReceivers.map(id => {
+        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+        info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
+        stream
+      }))
+    }
+    stream foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
       val rejectOut = rejectedTopic
       val auditOut = auditTopic

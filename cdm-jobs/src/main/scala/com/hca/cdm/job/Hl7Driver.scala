@@ -11,12 +11,13 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-import com.hca.cdm.hl7.constants.HL7Constants.COMMA
+import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
+import java.util.concurrent.TimeUnit
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -36,7 +37,6 @@ object Hl7Driver extends App with Logg {
       console("**************************HCA CDM HL7 Processing System Initiated ************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
-      configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
     case _ =>
       console("******************************************************************************************")
       console("***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **********************")
@@ -123,13 +123,19 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.gracefulStopTimeout", "400000")
     .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
-  ENV != "PROD" match {
-    case true =>
-      sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
-        .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
-    case _ =>
-      sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
-        .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
+  private lazy val extraConfig = () => lookUpProp("spark.extra.config")
+  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
+    if (valid(conf)) {
+      val actConf = conf.split(COLON)
+      if (valid(actConf, 2)) sparkLauncher.setConf(actConf(0), actConf(1))
+    }
+  })
+  if (ENV != "PROD") {
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+  } else {
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
+      .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
   }
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
@@ -210,11 +216,10 @@ object Hl7Driver extends App with Logg {
           error(s"$app Job ${jobHandle.getState} ... with Job ID ::  ${jobHandle.getAppId}")
           mail("{encrypt} " + app + " Job ID " + job.getAppId + " Current State " + jobHandle.getState,
             app + " Job in Critical State. This Should Not Happen for this Application. Some one has to Check What is happening with Job ID :: " + job.getAppId +
-              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s".Self Start is Requested. Will Make an Attempt To Start $app" else s".Self Start is not Enabled for $app . Exiting Job.") +
+              "\n" + (if (lookUpProp("hl7.selfStart") toBoolean) s".\nSelf Start is Requested. Will Make an Attempt To Start $app" else s".Self Start is not Enabled for $app . Exiting Job.") +
               " \n\n" + EVENT_TIME
             , CRITICAL)
           unregister(sHook)
-          sHook.interrupt()
           shutDown()
           startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
         case KILLED =>
@@ -223,7 +228,6 @@ object Hl7Driver extends App with Logg {
             app + " Job is Killed. If job brought down for maintenance please ignore, other wise some one has to Check What is happening with Job ID :: " + job.getAppId + " \n\n" + EVENT_TIME
             , CRITICAL)
           unregister(sHook)
-          sHook.interrupt()
           shutDown()
           handleDriver("stop")
       }
@@ -231,27 +235,28 @@ object Hl7Driver extends App with Logg {
   }
 
   private def shutDown(): Unit = {
-    tryAndLogErrorMes(job stop(), error(_: Throwable))
-    tryAndLogErrorMes(job kill(), error(_: Throwable))
-    Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
-      case Success(x) =>
-        if (x.waitFor() != 0) {
-          info(s"Stopping Job $app From Resource Manager resulted with Status ${getStatus(x.getInputStream)}. Kill Job Manually by yarn application -kill ${job.getAppId}")
-        } else info(s"Stopped $app from Resource Manager with Status ${getStatus(x.getInputStream)}")
-      case Failure(t) =>
-        error(s"Stopping Job $app From Resource Manager failed with error ${t.getMessage}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+    if (!job.getState.isFinal) {
+      tryAndLogErrorMes(job stop(), error(_: Throwable))
+      tryAndLogErrorMes(job kill(), error(_: Throwable))
+      Try(runTime.exec(s"yarn application -kill ${job.getAppId}")) match {
+        case Success(x) =>
+          if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) {
+            info(s"Stopping Job $app From Resource Manager resulted with Status ${getStatus(x.getInputStream)}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+          } else info(s"Stopped $app from Resource Manager with Status ${getStatus(x.getInputStream)}")
+        case Failure(t) =>
+          error(s"Stopping Job $app From Resource Manager failed with error ${t.getMessage}. Kill Job Manually by yarn application -kill ${job.getAppId}")
+      }
     }
   }
 
   private def startIfNeeded(selfStart: Boolean): Unit = {
-    selfStart match {
-      case true =>
-        info(s"Self Start is Requested for $app")
-        handleDriver("restart")
-      case _ =>
-        info(s"No Self Start is Requested So shutting down $app ...")
-        handleDriver("stop")
-        abend(0)
+    if (selfStart) {
+      info(s"Self Start is Requested for $app")
+      handleDriver("restart")
+    } else {
+      info(s"No Self Start is Requested So shutting down $app ...")
+      handleDriver("stop")
+      abend(0)
     }
   }
 
@@ -261,7 +266,7 @@ object Hl7Driver extends App with Logg {
     process inheritIO()
     Try(process start) match {
       case Success(x) =>
-        if (x.waitFor() != 0) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
+        if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
         else info(s"$app Driver Script ${command.toUpperCase} successfully ${Source.fromInputStream(x.getInputStream).getLines().mkString(COMMA)}")
       case Failure(t) =>
         error(s"${command.toUpperCase} Job $app failed. Try Manually by $jobScript $command", t)
