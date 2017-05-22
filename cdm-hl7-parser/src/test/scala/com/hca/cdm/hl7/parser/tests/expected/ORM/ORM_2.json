@@ -2,7 +2,7 @@
   "0000.COMN": {
     "sending_facility": "COCBR",
     "message_control_id": "MT_COCBR_ORM_BROEO.1.17377700",
-    "medical_record_num": "H000962893",
+    "medical_record_num": "H154123134",
     "medical_record_urn": "H890237",
     "patient_account_num": "H00728054711"
   },
@@ -21,7 +21,7 @@
   },
   "0002.PID": {
     "set_id": "1",
-    "medical_record_num": "H000962893",
+    "medical_record_num": "H154123134",
     "medical_record_urn": "H890237",
     "patient_name": {
       "family_name": "LOVEE",
@@ -40,7 +40,7 @@
     "marital_status": "S",
     "religion": "NON",
     "patient_account_num": "H00728054711",
-    "ssn_num_patient": "123-23-5555"
+    "ssn_num_patient": "999-99-9999"
   },
   "0003.PV1": {
     "set_id": "1",

@@ -247,45 +247,32 @@
     "reason_for_study": {
       "text": "screening"
     },
-    "principal_result_interpreter": [
-      {
-        "name": "WEIPA",
-        "start_date_time": "WEISS",
-        "end_date_time": "PAUL",
-        "point_of_care": "N",
-        "patient_location_type": "PROVID",
-        "identifier_type_code": "PROVID"
-      },
-      {
-        "name": "BAZ9276",
-        "start_date_time": "WEISS",
-        "end_date_time": "PAUL",
-        "point_of_care": "N",
-        "patient_location_type": "THREEFOUR",
+    "principal_result_interpreter": {
+      "name": {
+        "id_num": "BAZ9276",
+        "family_name": "WEISS",
+        "given_name": "PAUL",
+        "second_and_further_given_names_or_initials_thereof": "N",
+        "assigning_authority_namespace_id": "THREEFOUR",
         "identifier_type_code": "THREEFOUR"
       }
-    ],
-    "obr_unknown": "PROVID^^THREEFOUR",
-    "assistant_result_interpreter": [
-      {
-        "name": "NAAJO",
-        "start_date_time": "ZANTER",
-        "end_date_time": "RAGNOTHOR",
-        "point_of_care": "P",
-        "patient_location_type": "PROVID"
-      },
-      {
-        "name": "ADT1039",
-        "start_date_time": "ZANTER",
-        "end_date_time": "RAGNOTHOR",
-        "point_of_care": "P",
-        "patient_location_type": "THREEFOUR"
+    },
+    "assistant_result_interpreter": {
+      "name": {
+        "id_num": "ADT1039",
+        "family_name": "ZANTER",
+        "given_name": "RAGNOTHOR",
+        "second_and_further_given_names_or_initials_thereof": "P",
+        "assigning_authority_namespace_id": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
       }
-    ],
+    },
     "technician": {
-      "name": "XBT0000",
-      "start_date_time": "LIBERY",
-      "end_date_time": "JUSTICE"
+      "name": {
+        "id_num": "XBT0000",
+        "family_name": "LIBERY",
+        "given_name": "JUSTICE"
+      }
     },
     "scheduled_date_time": "20170508100000",
     "procedure_code": {
