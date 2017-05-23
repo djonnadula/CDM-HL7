@@ -366,12 +366,23 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     val controlId = fieldList(9)
     require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
-    val mapped_index = Match match {
-      case mt_mt6 if mt_mt6(MT_) || mt_mt6(MT6_) =>
-        if (hl7Version == HL7_2_1) templateData(hl7MEDITECH21Map)
-        else if (hl7Version == HL7_2_4 || hl7Version == HL7_2_5_1) templateData(hl7MEDITECH24Map)
+    val sourceSystem = Match match {
+      case mt if mt(MT6_) =>
+        if (hl7Version == HL7_2_4) templateData(hl7MT6_2_4Map)
+        else if (hl7Version == HL7_2_5_1) templateData(hl7MT6_2_5_1Map)
+        else if (hl7Version == HL7_2_5) templateData(hl7MT6_2_5Map)
         else NONE
-      case epic if epic(EPIC_) => templateData(hl7EpicMap)
+      case mt6 if mt6(MT6_) =>
+        if (hl7Version == HL7_2_1) templateData(hl7MT_2_1Map)
+        else if (hl7Version == HL7_2_2) templateData(hl7MT_2_2Map)
+        else if (hl7Version == HL7_2_4) templateData(hl7MT_2_4Map)
+        else if (hl7Version == HL7_2_5) templateData(hl7MT_2_5Map)
+        else NONE
+      case epic if epic(EPIC_) =>
+        if (hl7Version == HL7_2_1) templateData(hl7Epic_2_1Map)
+        else if (hl7Version == HL7_2_3) templateData(hl7Epic_2_3Map)
+        else if (hl7Version == HL7_2_3_1) templateData(hl7Epic_2_3_1Map)
+        else NONE
       case ecw if ecw(ECW_) => templateData(hl7eCWMap)
       case ng if ng(NG_) => templateData(hl7NextGenMap)
       case ip if ip(IP_) => templateData(hl7IpeopleMap)
@@ -380,7 +391,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
     def facility = () => fieldList(3)
 
-    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), mapped_index, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk), templateData(hl7FacilityMap))
+    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), sourceSystem, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk), templateData(hl7FacilityMap))
   }
 
   private def matcher(in: String, seq: String) = in != null & in.startsWith(seq)
