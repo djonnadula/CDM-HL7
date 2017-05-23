@@ -54,6 +54,8 @@ class RetryHandler(val defaultRetries: Int = 30, private val waitBetweenTries: L
     false
   }
 
+  def triesMadeSoFar(): Int = TRIED_COUNT
+
 }
 
 object RetryHandler {

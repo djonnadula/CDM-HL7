@@ -1,9 +1,9 @@
 package com.hca
 
-import java.io.{File, InputStream, Serializable}
+import java.io.{File, InputStream, PrintStream, Serializable}
 import java.lang.Runtime.{getRuntime => rt}
 import java.lang.Thread.UncaughtExceptionHandler
-import java.net.InetAddress
+import java.net.{InetAddress, URL, URLClassLoader}
 import java.nio.charset.StandardCharsets
 import java.time.{LocalDate, Period, ZoneId}
 import java.util.{Properties, TimeZone}
@@ -23,7 +23,7 @@ import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
-import scala.util.Random
+import scala.util.{Random, Try}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -39,8 +39,8 @@ package object cdm extends Logg {
   lazy val EMPTYSTR = ""
   lazy val AMPERSAND = "&"
   lazy val emptyArray = Array.empty[Any]
-  lazy val FS = File separator
-  lazy val outStream = System out
+  lazy val FS: String = File separator
+  lazy val outStream: PrintStream = System out
   private lazy val random = new Random()
 
 
@@ -76,6 +76,9 @@ package object cdm extends Logg {
     })
   }
 
+  def getJar(fromLoc: String): Option[String] = {
+    Try(fromLoc.substring(fromLoc.lastIndexOf(FS) + 1)).toOption
+  }
 
   def closeResource(res: AutoCloseable): Unit = if (res != null) res.close()
 
@@ -100,6 +103,8 @@ package object cdm extends Logg {
 
   def inc(v: Long, step: Long = 1): Long = v + step
 
+  def dec(v: Long, step: Long = 1): Long = v - step
+
   def reload(propFile: String = propFile, stream: Option[InputStream] = None): Unit = {
     synchronized {
       info(s"Loading Property File :: $propFile")
@@ -119,6 +124,8 @@ package object cdm extends Logg {
     if (!prop.isDefinedAt(key)) throw new CdmException("No property Found for " + key + "  specify property correctly")
     prop getOrElse(key, EMPTYSTR)
   }
+
+  def isConfigDefined(key: String): Boolean = prop isDefinedAt key
 
   def printConfig(): Unit = {
     outStream.println("******************************************************************************************")
@@ -148,6 +155,8 @@ package object cdm extends Logg {
   def unregister(hook: Thread): Boolean = {
     try {
       rt removeShutdownHook hook
+      hook interrupt()
+      hook join()
       return true
     }
     catch {
@@ -160,7 +169,7 @@ package object cdm extends Logg {
 
   def runnable(action: => Unit): Runnable =
     new Runnable {
-      def run() = action
+      def run(): Unit = action
     }
 
   def newThread(name: String, runnable: Runnable, daemon: Boolean = false): Thread = {
@@ -182,31 +191,31 @@ package object cdm extends Logg {
     newSingleThreadScheduledExecutor(new Factory(id))
   }
 
-  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = true, state: taskState = CRITICAL): Boolean = {
+  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = false, state: taskState = CRITICAL): Boolean = {
     try {
       fun
       return true
     }
     catch {
       case t: Throwable => reporter(t)
-        notify match {
-          case true =>
-            mail("{encrypt} " + lookUpProp("hl7.app") + " Function Execution Failed due to  " + t.getMessage,
-              " Executing Function Failed for " + whichAction + " due to Exception :: " + t.getClass +
-                " & Stack Trace is as follows \n\n" + t.getStackTrace.mkString("\n") + "\n\n" + EVENT_TIME, state)
-          case _ =>
+        if (notify) {
+          mail("{encrypt} " + lookUpProp("hl7.app") + " Function Execution Failed due to  " + (if (t.getCause != null) t.getCause.getMessage else t.getMessage),
+            " Executing Function Failed for " + whichAction + " due to Exception :: " + t.getClass +
+              " & Stack Trace is as follows \n\n" + t.getStackTrace.mkString("\n") + "\n\n" + EVENT_TIME, state)
         }
     }
     false
   }
 
-  def tryAndLogErrorMes(fun: => Unit, reporter: (Throwable) => Unit): Boolean = {
+  def tryAndLogErrorMes(fun: => Unit, reporter: (Throwable) => Unit, message: Option[String] = None): Boolean = {
     try {
       fun
       return true
     }
     catch {
-      case t: Throwable => reporter(t)
+      case t: Throwable =>
+        if (message isDefined) error(message.get, t)
+        else reporter(t)
     }
     false
   }
@@ -235,11 +244,31 @@ package object cdm extends Logg {
     None
   }
 
+  def tryAndReturnDefaultValue[T](fun: () => T, default: T): T = {
+    val temp = tryAndLogErrorMes(fun, debug(_: String, _: Throwable))
+    temp getOrElse default
+  }
+
   def abend(code: Int = -1): Unit = System exit code
 
   def exists[T](store: Map[T, AnyRef], key: T): Boolean = store isDefinedAt key
 
-  private class Factory(id: String) extends ThreadFactory {
+  def enabled[T](key: T): Option[T] = {
+    key match {
+      case s: String => if (null != s && s != EMPTYSTR) return Some(s.asInstanceOf[T])
+      case any => if (valid(any)) return Some(any.asInstanceOf[T])
+    }
+    None
+  }
+
+  def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
+    if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
+    currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
+  }
+
+  def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
+
+  private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
 
     override def newThread(r: Runnable): Thread = {
