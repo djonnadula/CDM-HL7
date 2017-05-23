@@ -319,9 +319,9 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "123004",
+      "id": "123004",
       "text": "GRAM NEGATIVE BACILLI",
-      "data_5": "GRAM NEGATIVE BACILLI"
+      "original_text": "GRAM NEGATIVE BACILLI"
     },
     "interpretation_codes": "AA",
     "obsv_result_status": "P",

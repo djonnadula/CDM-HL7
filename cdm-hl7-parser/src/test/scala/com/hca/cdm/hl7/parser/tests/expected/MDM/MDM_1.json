@@ -35,9 +35,9 @@
   },
   "0003.PID": {
     "patient_id": {
-      "identifier_num": "Q6487",
-      "assgn_authr": "CWTTXIURN",
-      "identifier_type_code": "CWTTXIURN"
+      "id_num": "Q6487",
+      "assigning_authority": "CWTTXIURN",
+      "id_type_code": "CWTTXIURN"
     },
     "patient_id_list": {
       "id_num": "2000116569",
@@ -46,19 +46,19 @@
     },
     "alternate_patient_id": [
       {
-        "identifier_num": "Y000145173",
-        "assgn_authr": "HHOA",
-        "identifier_type_code": "HHOA"
+        "id_num": "Y000145173",
+        "assigning_authority": "HHOA",
+        "id_type_code": "HHOA"
       },
       {
-        "identifier_num": "L001263882",
-        "assgn_authr": "SDMC",
-        "identifier_type_code": "SDMC"
+        "id_num": "L001263882",
+        "assigning_authority": "SDMC",
+        "id_type_code": "SDMC"
       },
       {
-        "identifier_num": "Q6487",
-        "assgn_authr": "CWTTXIURN",
-        "identifier_type_code": "CWTTXIURN"
+        "id_num": "Q6487",
+        "assigning_authority": "CWTTXIURN",
+        "id_type_code": "CWTTXIURN"
       }
     ],
     "patient_name": {
@@ -70,14 +70,14 @@
     "administrative_sex": "M",
     "patient_alias": [
       {
-        "last_name": "MARRKEN",
-        "first_name": "LONNARD",
-        "middle_name": "L"
+        "family_name": "MARRKEN",
+        "given_name": "LONNARD",
+        "second_and_further_given_names_or_initials_thereof": "L"
       },
       {
-        "last_name": "MARRKEN",
-        "first_name": "LONNARD",
-        "middle_name": "LEE"
+        "family_name": "MARRKEN",
+        "given_name": "LONNARD",
+        "second_and_further_given_names_or_initials_thereof": "LEE"
       }
     ],
     "race": "W",

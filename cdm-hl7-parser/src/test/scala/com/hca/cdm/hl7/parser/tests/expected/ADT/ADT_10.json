@@ -52,9 +52,9 @@
       }
     ],
     "alternate_patient_id": {
-      "identifier_num": "A1-B20151218101601316",
-      "identifier_type_code": "URN",
-      "assgn_facility": "FRNK"
+      "id_num": "A1-B20151218101601316",
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
     },
     "patient_name": [
       {

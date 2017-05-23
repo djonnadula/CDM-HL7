@@ -32,9 +32,9 @@
       "id_type_code": "MRN"
     },
     "alternate_patient_id": {
-      "identifier_num": "L000238869",
-      "assgn_authr": "AKARP",
-      "identifier_type_code": "AKARP"
+      "id_num": "L000238869",
+      "assigning_authority": "AKARP",
+      "id_type_code": "AKARP"
     },
     "patient_name": {
       "family_name": "MCDONAL",
@@ -44,9 +44,9 @@
     "date_time_of_birth": "19540222",
     "administrative_sex": "M",
     "patient_alias": {
-      "last_name": "MCDONAL",
-      "first_name": "SHABOOYA",
-      "middle_name": "C"
+      "family_name": "MCDONAL",
+      "given_name": "SHABOOYA",
+      "second_and_further_given_names_or_initials_thereof": "C"
     },
     "race": "2106-3",
     "patient_address": {
@@ -95,7 +95,7 @@
     },
     "filler_order_num": "1787589",
     "quantity_timing": {
-      "eff_from_date_time": "20170516231500"
+      "start_date_time": "20170516231500"
     },
     "date_time_of_transaction": "20170516230200",
     "entered_by": {

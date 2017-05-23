@@ -149,7 +149,7 @@
     "filler_field_1": "DI",
     "quantity_timing": {
       "quantity": "1",
-      "eff_from_date_time": "201412120828",
+      "start_date_time": "201412120828",
       "priority": "S"
     },
     "result_copies_to": [

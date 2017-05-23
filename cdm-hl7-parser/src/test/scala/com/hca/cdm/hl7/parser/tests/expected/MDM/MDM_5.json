@@ -35,10 +35,10 @@
     "date_time_of_birth": "20031230",
     "administrative_sex": "F",
     "patient_alias": {
-      "last_name": "CAGE",
-      "first_name": "JESSICA",
-      "middle_name": "CAMPBELL JONES",
-      "type_code": "M"
+      "family_name": "CAGE",
+      "given_name": "JESSICA",
+      "second_and_further_given_names_or_initials_thereof": "CAMPBELL JONES",
+      "name_type_code": "M"
     },
     "race": "U",
     "patient_address": {

@@ -73,11 +73,11 @@
   "0004.PD1": {
     "patient_primary_care_provider_name_and_id_num": {
       "person_id": "VFK2116",
-      "last_name": "KROPP",
-      "first_name": "LAWRENCE",
-      "middle_name": "A",
-      "assgn_authr": "THREEFOUR",
-      "identifier_type_code": "THREEFOUR"
+      "family_name": "KROPP",
+      "given_name": "LAWRENCE",
+      "second_and_further_given_names_or_initials_thereof": "A",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR"
     }
   },
   "0005.PV1": {

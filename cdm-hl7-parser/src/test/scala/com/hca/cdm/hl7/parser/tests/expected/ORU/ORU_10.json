@@ -268,11 +268,11 @@
     "relevant_clinical_information": "FLU",
     "specimen_received_date_time": "201602131100",
     "specimen_source": {
-      "name_code": "SP",
+      "specimen_source_name_or_code": "SP",
       "additives": "Sputum",
-      "free_text": "Sputum",
+      "specimen_collection_method": "Sputum",
       "body_site": "401.700",
-      "site_modfr": "RESP"
+      "site_modifier": "RESP"
     },
     "ordering_provider": {
       "person_id": "BSI0553",
@@ -321,7 +321,7 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "GS",
+      "id": "GS",
       "text": "Gram stain"
     },
     "obsv_result_status": "F",
@@ -364,7 +364,7 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "2W",
+      "id": "2W",
       "text": "Few WBC's (2-5 per field)"
     },
     "interpretation_codes": "N",
@@ -408,7 +408,7 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "2 GNB",
+      "id": "2 GNB",
       "text": "Few Gram negative bacilli"
     },
     "interpretation_codes": "N",
@@ -452,7 +452,7 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "3 GPCCL",
+      "id": "3 GPCCL",
       "text": "Moderate Gram positive cocci in clusters"
     },
     "interpretation_codes": "N",
@@ -496,7 +496,7 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "4 GPCPR",
+      "id": "4 GPCPR",
       "text": "Many Gram positive cocci in pairs"
     },
     "interpretation_codes": "N",
@@ -540,7 +540,7 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": {
-      "primary_id": "L10S",
+      "id": "L10S",
       "text": "< 10 Squamous epithelial cells/field"
     },
     "interpretation_codes": "N",
@@ -635,11 +635,11 @@
     "relevant_clinical_information": "FLU",
     "specimen_received_date_time": "201602131100",
     "specimen_source": {
-      "name_code": "SP",
+      "specimen_source_name_or_code": "SP",
       "additives": "Sputum",
-      "free_text": "Sputum",
+      "specimen_collection_method": "Sputum",
       "body_site": "401.700",
-      "site_modfr": "RESP"
+      "site_modifier": "RESP"
     },
     "ordering_provider": {
       "person_id": "BSI0553",

@@ -37,9 +37,9 @@
   "0003.PID": {
     "set_id": "1",
     "patient_id": {
-      "identifier_num": "W109878",
-      "assgn_authr": "SLCURN",
-      "identifier_type_code": "SLCURN"
+      "id_num": "W109878",
+      "assigning_authority": "SLCURN",
+      "id_type_code": "SLCURN"
     },
     "patient_id_list": {
       "id_num": "1000619675",
@@ -47,9 +47,9 @@
       "id_type_code": "MRN"
     },
     "alternate_patient_id": {
-      "identifier_num": "W000201984",
-      "assgn_authr": "SMHP",
-      "identifier_type_code": "SMHP"
+      "id_num": "W000201984",
+      "assigning_authority": "SMHP",
+      "id_type_code": "SMHP"
     },
     "patient_name": {
       "family_name": "BLACK",
@@ -60,18 +60,18 @@
     "administrative_sex": "M",
     "patient_alias": [
       {
-        "last_name": "BLACK",
-        "first_name": "PHIL"
+        "family_name": "BLACK",
+        "given_name": "PHIL"
       },
       {
-        "last_name": "BLACK",
-        "first_name": "PHIL",
-        "middle_name": "E"
+        "family_name": "BLACK",
+        "given_name": "PHIL",
+        "second_and_further_given_names_or_initials_thereof": "E"
       },
       {
-        "last_name": "BLACK",
-        "first_name": "CHARBOIL",
-        "middle_name": "RECKTOPOID"
+        "family_name": "BLACK",
+        "given_name": "CHARBOIL",
+        "second_and_further_given_names_or_initials_thereof": "RECKTOPOID"
       }
     ],
     "race": "W",

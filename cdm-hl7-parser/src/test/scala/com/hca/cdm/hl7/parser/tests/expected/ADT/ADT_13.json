@@ -52,9 +52,9 @@
       }
     ],
     "alternate_patient_id": {
-      "identifier_num": "A0-B20151103134433868",
-      "identifier_type_code": "URN",
-      "assgn_facility": "FRNK"
+      "id_num": "A0-B20151103134433868",
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
     },
     "patient_name": [
       {
@@ -1121,7 +1121,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NOTHISPLAT",
+      "id": "NOTHISPLAT",
       "text": "Not Hispanic or Latino"
     },
     "obsv_result_status": "F"
@@ -1285,7 +1285,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "STANDING",
+      "id": "STANDING",
       "text": "Standing scale"
     },
     "obsv_result_status": "F"
@@ -1310,7 +1310,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "MEASURE",
+      "id": "MEASURE",
       "text": "Measured"
     },
     "obsv_result_status": "F"
@@ -1412,7 +1412,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "O",
+      "id": "O",
       "text": "Oral"
     },
     "obsv_result_status": "F"
@@ -1437,7 +1437,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "MONITOR",
+      "id": "MONITOR",
       "text": "Monitor"
     },
     "obsv_result_status": "F"
@@ -1462,7 +1462,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "O",
+      "id": "O",
       "text": "Observed"
     },
     "obsv_result_status": "F"
@@ -1487,7 +1487,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "AR",
+      "id": "AR",
       "text": "Right arm"
     },
     "obsv_result_status": "F"
@@ -1501,7 +1501,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "MANUAL",
+      "id": "MANUAL",
       "text": "Manual cuff"
     },
     "obsv_result_status": "F"
@@ -1755,7 +1755,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "EMERGENT",
+      "id": "EMERGENT",
       "text": "Emergent situation"
     },
     "obsv_result_status": "F"
@@ -1780,7 +1780,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NO",
+      "id": "NO",
       "text": "No"
     },
     "obsv_result_status": "F"

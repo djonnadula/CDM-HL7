@@ -37,9 +37,9 @@
     "date_time_of_birth": "20140203",
     "administrative_sex": "M",
     "patient_alias": {
-      "last_name": "SHOWALTER",
-      "first_name": "BB-URBANA",
-      "middle_name": "FREDDY"
+      "family_name": "SHOWALTER",
+      "given_name": "BB-URBANA",
+      "second_and_further_given_names_or_initials_thereof": "FREDDY"
     },
     "race": "B",
     "patient_address": {

@@ -109,7 +109,7 @@
     "lab_site": "ERDC",
     "result_status": "S",
     "quantity_timing": {
-      "eff_from_date_time": "201301232004"
+      "start_date_time": "201301232004"
     },
     "principal_result_interpreter": {
       "name": {

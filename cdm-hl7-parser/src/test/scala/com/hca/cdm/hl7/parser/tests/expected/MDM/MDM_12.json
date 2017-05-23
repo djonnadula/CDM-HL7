@@ -33,14 +33,14 @@
     "administrative_sex": "F",
     "patient_alias": [
       {
-        "last_name": "CULP",
-        "first_name": "STEVEN",
-        "type_code": "M"
+        "family_name": "CULP",
+        "given_name": "STEVEN",
+        "name_type_code": "M"
       },
       {
-        "last_name": "GERRARD",
-        "first_name": "STEVEN",
-        "type_code": "A"
+        "family_name": "GERRARD",
+        "given_name": "STEVEN",
+        "name_type_code": "A"
       }
     ],
     "race": "W",

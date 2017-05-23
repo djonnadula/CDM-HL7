@@ -27,9 +27,9 @@
   "0002.PID": {
     "set_id": "1",
     "patient_id": {
-      "identifier_num": "W58115",
-      "assgn_authr": "SLCURN",
-      "identifier_type_code": "SLCURN"
+      "id_num": "W58115",
+      "assigning_authority": "SLCURN",
+      "id_type_code": "SLCURN"
     },
     "patient_id_list": {
       "id_num": "1000770489",
@@ -38,14 +38,14 @@
     },
     "alternate_patient_id": [
       {
-        "identifier_num": "D000005496",
-        "assgn_authr": "MCC",
-        "identifier_type_code": "MCC"
+        "id_num": "D000005496",
+        "assigning_authority": "MCC",
+        "id_type_code": "MCC"
       },
       {
-        "identifier_num": "W000148001",
-        "assgn_authr": "SMHP",
-        "identifier_type_code": "SMHP"
+        "id_num": "W000148001",
+        "assigning_authority": "SMHP",
+        "id_type_code": "SMHP"
       }
     ],
     "patient_name": {
@@ -55,8 +55,8 @@
     "date_time_of_birth": "19640903",
     "administrative_sex": "M",
     "patient_alias": {
-      "last_name": "GETTYS",
-      "first_name": "JIM"
+      "family_name": "GETTYS",
+      "given_name": "JIM"
     },
     "race": "W",
     "patient_address": {
@@ -88,17 +88,17 @@
     "patient_primary_care_provider_name_and_id_num": [
       {
         "person_id": "FTR1234",
-        "last_name": "FORGMEYE",
-        "first_name": "EXCALBUR",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "FORGMEYE",
+        "given_name": "EXCALBUR",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       },
       {
         "person_id": "WINJE",
-        "last_name": "FORGMEYE",
-        "first_name": "EXCALBUR",
-        "assgn_authr": "PROVID",
-        "identifier_type_code": "PROVID"
+        "family_name": "FORGMEYE",
+        "given_name": "EXCALBUR",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
       }
     ],
     "immunization_registry_status": " "
@@ -219,8 +219,8 @@
     },
     "order_status": "FA",
     "quantity_timing": {
-      "eff_from_date_time": "20170415131247",
-      "eff_to_date_time": "20170415133206",
+      "start_date_time": "20170415131247",
+      "end_date_time": "20170415133206",
       "priority": "R"
     },
     "date_time_of_transaction": "20170419101009",
@@ -298,8 +298,8 @@
     "diagnostic_service_section_id": "MR",
     "result_status": "FA",
     "quantity_timing": {
-      "eff_from_date_time": "20170415131247",
-      "eff_to_date_time": "20170415133206",
+      "start_date_time": "20170415131247",
+      "end_date_time": "20170415133206",
       "priority": "R"
     },
     "reason_for_study": {

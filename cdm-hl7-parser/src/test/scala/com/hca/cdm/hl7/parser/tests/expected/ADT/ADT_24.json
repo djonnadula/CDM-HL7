@@ -29,9 +29,9 @@
   "0003.PID": {
     "patient_id_list": "894546879",
     "alternate_patient_id": {
-      "identifier_num": "A1-B20151231084340697",
-      "assgn_authr": "KYB",
-      "identifier_type_code": "URN"
+      "id_num": "A1-B20151231084340697",
+      "assigning_authority": "KYB",
+      "id_type_code": "URN"
     },
     "patient_name": {
       "family_name": "Cage"

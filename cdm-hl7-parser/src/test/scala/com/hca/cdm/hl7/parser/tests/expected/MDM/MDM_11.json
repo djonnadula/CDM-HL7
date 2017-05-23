@@ -30,7 +30,7 @@
     "date_time_of_birth": "19500101",
     "administrative_sex": "F",
     "patient_alias": {
-      "type_code": "M"
+      "name_type_code": "M"
     },
     "race": "W",
     "patient_address": {

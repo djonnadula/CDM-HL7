@@ -36,9 +36,9 @@
   },
   "0003.PID": {
     "patient_id": {
-      "identifier_num": "H579625",
-      "assgn_authr": "CWTTXIURN",
-      "identifier_type_code": "CWTTXIURN"
+      "id_num": "H579625",
+      "assigning_authority": "CWTTXIURN",
+      "id_type_code": "CWTTXIURN"
     },
     "patient_id_list": {
       "id_num": "2000524369",
@@ -47,14 +47,14 @@
     },
     "alternate_patient_id": [
       {
-        "identifier_num": "L151243123",
-        "assgn_authr": "SDMC",
-        "identifier_type_code": "SDMC"
+        "id_num": "L151243123",
+        "assigning_authority": "SDMC",
+        "id_type_code": "SDMC"
       },
       {
-        "identifier_num": "H579625",
-        "assgn_authr": "CWTTXIURN",
-        "identifier_type_code": "CWTTXIURN"
+        "id_num": "H579625",
+        "assigning_authority": "CWTTXIURN",
+        "id_type_code": "CWTTXIURN"
       }
     ],
     "patient_name": {
@@ -66,13 +66,13 @@
     "administrative_sex": "F",
     "patient_alias": [
       {
-        "last_name": "RHONDA",
-        "first_name": "RODMAN"
+        "family_name": "RHONDA",
+        "given_name": "RODMAN"
       },
       {
-        "last_name": "RHONDA",
-        "first_name": "RODMAN",
-        "middle_name": "R"
+        "family_name": "RHONDA",
+        "given_name": "RODMAN",
+        "second_and_further_given_names_or_initials_thereof": "R"
       }
     ],
     "race": "W",

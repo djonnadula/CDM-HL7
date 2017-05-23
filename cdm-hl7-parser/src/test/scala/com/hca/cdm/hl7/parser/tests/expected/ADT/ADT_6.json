@@ -52,9 +52,9 @@
       }
     ],
     "alternate_patient_id": {
-      "identifier_num": "A0-B20151103134433868",
-      "identifier_type_code": "URN",
-      "assgn_facility": "FRNK"
+      "id_num": "A0-B20151103134433868",
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
     },
     "patient_name": [
       {
@@ -473,7 +473,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NOTHISPLAT",
+      "id": "NOTHISPLAT",
       "text": "Not Hispanic or Latino"
     },
     "obsv_result_status": "F"

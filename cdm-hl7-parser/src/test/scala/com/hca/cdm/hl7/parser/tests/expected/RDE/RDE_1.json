@@ -47,8 +47,8 @@
     "placer_order_num": "11652761",
     "quantity_timing": {
       "interval": ".Q13H20M",
-      "eff_from_date_time": "201504870707",
-      "eff_to_date_time": "201504872359",
+      "start_date_time": "201504870707",
+      "end_date_time": "201504872359",
       "priority": "SCH",
       "condition": "0"
     },

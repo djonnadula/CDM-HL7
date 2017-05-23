@@ -89,17 +89,17 @@
     "patient_primary_care_provider_name_and_id_num": [
       {
         "person_id": "1477536316",
-        "last_name": "CHURCH",
-        "first_name": "EMILY",
-        "assgn_authr": "NPI",
-        "identifier_type_code": "NPI"
+        "family_name": "CHURCH",
+        "given_name": "EMILY",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
       },
       {
         "person_id": "KCE9863",
-        "last_name": "CHURCH",
-        "first_name": "EMILY",
-        "assgn_authr": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+        "family_name": "CHURCH",
+        "given_name": "EMILY",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
       }
     ]
   },
