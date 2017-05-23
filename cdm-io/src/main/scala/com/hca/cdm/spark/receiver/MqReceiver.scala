@@ -12,11 +12,14 @@ import com.hca.cdm._
 import com.hca.cdm.exception.MqException
 import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
-import java.util.concurrent.{ThreadPoolExecutor, TimeUnit}
-import com.google.common.base.Throwables
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit._
 import com.hca.cdm.mq.publisher.MQAcker
 import scala.collection.mutable
-
+import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Future => async}
+import scala.concurrent.Await._
 
 case class MqData(source: String, data: String, msgMeta: MSGMeta)
 
@@ -25,7 +28,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   */
 class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
-  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY_2) with Logg with MqConnector {
+  extends Receiver[MqData](storageLevel = StorageLevel.DISK_ONLY) with Logg with MqConnector {
 
   self =>
   private val mqHosts = lookUpProp("mq.hosts")
@@ -81,7 +84,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       })
       con addErrorListener new ExceptionReporter
       consumers foreach {
-        consumer => consumerPool submit ConsumeData(consumer._1, consumer._2)
+        consumer => consumerPool submit new ConsumeData(consumer._1, consumer._2)
       }
       con resume()
     }
@@ -94,7 +97,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
     }
     consumers clear()
     if (valid(consumerPool)) {
-      consumerPool awaitTermination(1, TimeUnit.HOURS)
+      consumerPool awaitTermination(1, HOURS)
       consumerPool shutdown()
     }
     currentConnection foreach (closeResource(_))
@@ -139,8 +142,10 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       var persisted = false
       var th: Throwable = null
       try {
-        self.store(MqData(source, data, meta))
-        persisted = true
+        result(async {
+          self.store(MqData(source, data, meta))
+          persisted = true
+        }(executionContext), Duration(3, MINUTES))
         // if (self.pauseConsuming) self.pauseConsuming = false
       } catch {
         case t: Throwable =>
@@ -151,7 +156,12 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       if (!persisted) {
         self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
         self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
-      } else handleAcks(message, source, meta, tlmAcknowledge)
+      } else {
+        tryAndLogThr(result(async {
+          handleAcks(message, source, meta, tlmAcknowledge)
+          persisted = true
+        }(executionContext), Duration(45, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
+      }
       persisted
     }
 
@@ -204,7 +214,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
     registerHook(newThread(s"$id-$app-SHook", runnable(close())))
   }
 
-  private case class ConsumeData(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
+  private class ConsumeData(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
     var storeReceived = true
     var timeOut: Long = currMillis
 
