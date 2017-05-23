@@ -16574,7 +16574,8 @@ CREATE EXTERNAL TABLE hl7_reg_test.hl7_gt1 (
 	guarantor_employer_address_street_address1_street_name STRING,
 	guarantor_employer_address_street_address1_dwelling_num STRING,
 	guarantor_employer_address_address_validity_range_eff_from_date_time STRING,
-	guarantor_employer_address_address_validity_range_eff_to_date_time STRING
+	guarantor_employer_address_address_validity_range_eff_to_date_time STRING,
+	_unknown STRING
 
 )
 PARTITIONED BY (

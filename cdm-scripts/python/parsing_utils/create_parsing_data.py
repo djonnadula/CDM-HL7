@@ -50,16 +50,8 @@ def main():
 
     # let's remove duplicates, but keep order
     final_set = OrderedSet()
-    test_set = OrderedSet()
-    dictomor = []
     for sorted_tup in sorted_segments:
         final_set.add((sorted_tup.segment_name, sorted_tup.field, sorted_tup.component, sorted_tup.sub_component))
-        dictomor.append([sorted_tup.source_file,
-                         test_set.add((sorted_tup.segment_name, sorted_tup.field, sorted_tup.component,
-                                       sorted_tup.sub_component))])
-
-    # for i in dictomor:
-    #     print i
 
     # Main program logic - writes the formatted lines to segments.txt
     f = open(segment_file_name, 'w')
@@ -82,7 +74,6 @@ def main():
             new_string = SegmentUtils.add_prefix_underscore(new_string)
 
         if new_string in static_dict:
-            print new_string
             continue
         else:
             if final_string == '':
