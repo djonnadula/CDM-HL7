@@ -367,12 +367,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
     val sourceSystem = Match match {
-      case mt if mt(MT6_) =>
+      case mt6 if mt6(MT6_) =>
         if (hl7Version == HL7_2_4) templateData(hl7MT6_2_4Map)
         else if (hl7Version == HL7_2_5_1) templateData(hl7MT6_2_5_1Map)
         else if (hl7Version == HL7_2_5) templateData(hl7MT6_2_5Map)
         else NONE
-      case mt6 if mt6(MT6_) =>
+      case mt if mt(MT_) =>
         if (hl7Version == HL7_2_1) templateData(hl7MT_2_1Map)
         else if (hl7Version == HL7_2_2) templateData(hl7MT_2_2Map)
         else if (hl7Version == HL7_2_4) templateData(hl7MT_2_4Map)
