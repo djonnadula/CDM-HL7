@@ -235,7 +235,6 @@ GT1.17.17.2,guarantor_employer_phone_num,shared_telecommunication_id,namespace_i
 GT1.17.17.3,guarantor_employer_phone_num,shared_telecommunication_id,universal_id
 GT1.17.17.4,guarantor_employer_phone_num,shared_telecommunication_id,universal_id_type
 GT1.17.18,guarantor_employer_phone_num,preference_order,
-GT1.18,unknown,,
 MRG.1,prior_internal_pat_id,,
 MRG.1.1,prior_internal_pat_id,id_num,
 MRG.1.2,prior_internal_pat_id,id_check_digit,

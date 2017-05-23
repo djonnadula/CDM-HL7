@@ -27,8 +27,7 @@ class SegmentUtils:
 
     file_names = ['hl7MapStandard2.8.2.csv', 'hl7MapEcw2.3.1.csv', 'hl7MapEpic2.3.csv', 'hl7MapIpeople2.5.csv',
                   'hl7MapMT6_2.4.csv', 'hl7MapMT6_2.5.1.csv', 'hl7MapMT6_2.5.csv', 'hl7MapMT_2.1.csv',
-                  'hl7MapMT_2.2.csv', 'hl7MapMT_2.4.csv', 'hl7MapMT_2.5.1.csv', 'hl7MapMT_2.5.csv',
-                  'hl7MapNextGen2.3.csv']
+                  'hl7MapMT_2.2.csv', 'hl7MapMT_2.4.csv', 'hl7MapMT_2.5.csv', 'hl7MapNextGen2.3.csv']
 
     @staticmethod
     def get_parent_directory(directory):
@@ -77,3 +76,12 @@ class SegmentUtils:
         csv_reader = csv.reader(utf8_data, dialect=dialect, **kwargs)
         for row in csv_reader:
             yield [unicode(cell, 'utf-8-sig') for cell in row]
+
+    @staticmethod
+    def add_prefix_underscore(string):
+        dup_dict = {'comment', 'transaction_date', 'message_control_id', 'location'}
+        if string in dup_dict:
+            return '_' + string
+        else:
+            return string
+

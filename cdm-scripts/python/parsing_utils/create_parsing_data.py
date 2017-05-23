@@ -21,6 +21,8 @@ def main():
     current_segment = ''
     templates_dict = {}
     segments_list = []
+    static_dict = {'etl_firstinsert_datetime', 'field_sequence_num', 'sending_facility', 'message_control_id',
+                   'medical_record_num', 'medical_record_urn', 'patient_account_num', 'message_type'}
 
     '''
     Segments.txt Logic
@@ -56,8 +58,8 @@ def main():
                          test_set.add((sorted_tup.segment_name, sorted_tup.field, sorted_tup.component,
                                        sorted_tup.sub_component))])
 
-    for i in dictomor:
-        print i
+    # for i in dictomor:
+    #     print i
 
     # Main program logic - writes the formatted lines to segments.txt
     f = open(segment_file_name, 'w')
@@ -66,6 +68,11 @@ def main():
         field = i[1]
         component = i[2]
         sub_component = i[3]
+        if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
+            or segment_name == 'SAC' or segment_name == 'ZER':
+            field = SegmentUtils.add_prefix_underscore(field)
+            component = SegmentUtils.add_prefix_underscore(component)
+            sub_component = SegmentUtils.add_prefix_underscore(sub_component)
         if current_segment != segment_name:
             if current_segment != '':
                 f.write(cur_message_type + ',' + final_string + '\n')
@@ -74,10 +81,14 @@ def main():
             current_segment = segment_name
             final_string = ''
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
-        if final_string == '':
-            final_string = '{0},unknown^{1}'.format(str(current_segment).upper(), new_string)
+        if new_string in static_dict:
+            print new_string
+            continue
         else:
-            final_string = '{0}^{1}'.format(final_string, new_string)
+            if final_string == '':
+                final_string = '{0},unknown^{1}'.format(str(current_segment).upper(), new_string)
+            else:
+                final_string = '{0}^{1}'.format(final_string, new_string)
 
     f.write(cur_message_type + ',' + final_string + '\n')
     f.close()
@@ -101,20 +112,20 @@ def main():
                 if all_string != 'ALL':
                     continue
                 else:
+                    comp_split = components.split('^')
+                    size = len(comp_split)
                     # print segment_name
                     if add_drop_tables:
                         f.write(TableUtils.hl7_drop_table(segment_name, db_name))
                     f.write(TableUtils.hl7_table_prefix(segment_name, db_name))
                     f.write(TableUtils.common_columns)
-                    for element in components.split('^'):
+                    for element in comp_split:
+                        size -= 1
                         comps = element.split('|')
-                        cleaned_comps = TableUtils.clean_comps(comps)
+                        cleaned_comps = TableUtils.clean_comps(comps, size)
                         f.write(cleaned_comps)
                     f.write(TableUtils.hl7_table_suffix(db_path, segment_name))
         f.close()
-
-        # for x in final_set:
-        #     print x
 
 
 # Have a main because I'm a Java programmer

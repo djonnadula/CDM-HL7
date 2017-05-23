@@ -10,7 +10,9 @@ class TableUtils:
     def __init__(self):
         pass
 
-    common_columns = '\n\tsending_facility STRING,' \
+    common_columns = '\n\tetl_firstinsert_datetime STRING,' \
+                     '\n\tfield_sequence_num STRING,' \
+                     '\n\tsending_facility STRING,' \
                      '\n\tmessage_control_id STRING,' \
                      '\n\tmedical_record_num STRING,' \
                      '\n\tmedical_record_urn STRING,' \
@@ -60,9 +62,7 @@ class TableUtils:
         :param message_type: HL7 message type
         :return: create table statement suffix string
         """
-        return '\tetl_firstinsert_datetime STRING,' \
-               '\n\tfield_sequence_num STRING' \
-               '\n)' \
+        return '\n)' \
                '\nPARTITIONED BY (' \
                '\n\tmessage_type STRING,' \
                '\n\ttransaction_date STRING' \
@@ -77,7 +77,7 @@ class TableUtils:
             datetime.datetime.now().strftime("%Y-%m-%d"))
 
     @staticmethod
-    def clean_comps(comps):
+    def clean_comps(comps, index):
         """
         Create the table column name format
         :param comps: array of components to join
@@ -89,9 +89,10 @@ class TableUtils:
             column_name = comps[0]
         elif len(comps) >= 2:
             column_name = joiner.join(comps)
-        if column_name == 'comment' or column_name == 'transaction_date':
-            column_name = '_' + column_name
-        res = '\t{0} STRING,\n'.format(column_name)
+        if index == 0:
+            res = '\t{0} STRING\n'.format(column_name)
+        else:
+            res = '\t{0} STRING,\n'.format(column_name)
         return res
 
     @staticmethod

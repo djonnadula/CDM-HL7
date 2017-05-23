@@ -2,6 +2,8 @@
 DROP TABLE hl7.hl7_abs_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_abs (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -81,6 +83,8 @@ CREATE EXTERNAL TABLE hl7.hl7_abs (
 	discharge_care_provider_name_context_second_alternate_value_set_oid STRING,
 	discharge_care_provider_name_context_second_alternate_value_set_version_id STRING,
 	discharge_care_provider_name_validity_range STRING,
+	discharge_care_provider_name_validity_range_range_start_date_time STRING,
+	discharge_care_provider_name_validity_range_range_end_date_time STRING,
 	discharge_care_provider_name_assembly_order STRING,
 	discharge_care_provider_effective_date STRING,
 	discharge_care_provider_expiration_date STRING,
@@ -253,6 +257,8 @@ CREATE EXTERNAL TABLE hl7.hl7_abs (
 	attested_by_name_context_second_alternate_value_set_oid STRING,
 	attested_by_name_context_second_alternate_value_set_version_id STRING,
 	attested_by_name_validity_range STRING,
+	attested_by_name_validity_range_range_start_date_time STRING,
+	attested_by_name_validity_range_range_end_date_time STRING,
 	attested_by_name_assembly_order STRING,
 	attested_by_effective_date STRING,
 	attested_by_expiration_date STRING,
@@ -402,6 +408,8 @@ CREATE EXTERNAL TABLE hl7.hl7_abs (
 	abstracted_by_name_context_second_alternate_value_set_oid STRING,
 	abstracted_by_name_context_second_alternate_value_set_version_id STRING,
 	abstracted_by_name_validity_range STRING,
+	abstracted_by_name_validity_range_range_start_date_time STRING,
+	abstracted_by_name_validity_range_range_end_date_time STRING,
 	abstracted_by_name_assembly_order STRING,
 	abstracted_by_effective_date STRING,
 	abstracted_by_expiration_date STRING,
@@ -525,15 +533,14 @@ CREATE EXTERNAL TABLE hl7.hl7_abs (
 	newborn_code_second_alternate_coding_system_oid STRING,
 	newborn_code_second_alternate_value_set_oid STRING,
 	newborn_code_second_alternate_value_set_version_id STRING,
-	stillborn_indicator STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	stillborn_indicator STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -542,6 +549,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ABS'
 DROP TABLE hl7.hl7_acc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_acc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -671,6 +680,8 @@ CREATE EXTERNAL TABLE hl7.hl7_acc (
 	entered_by_name_context_second_alternate_value_set_oid STRING,
 	entered_by_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_name_validity_range STRING,
+	entered_by_name_validity_range_range_start_date_time STRING,
+	entered_by_name_validity_range_range_end_date_time STRING,
 	entered_by_name_assembly_order STRING,
 	entered_by_effective_date STRING,
 	entered_by_expiration_date STRING,
@@ -786,6 +797,8 @@ CREATE EXTERNAL TABLE hl7.hl7_acc (
 	accident_address_census_tract_second_alternate_value_set_version_id STRING,
 	accident_address_address_representation_code STRING,
 	accident_address_address_validity_range STRING,
+	accident_address_address_validity_range_range_start_date_time STRING,
+	accident_address_address_validity_range_range_end_date_time STRING,
 	accident_address_effective_date STRING,
 	accident_address_expiration_date STRING,
 	accident_address_expiration_reason STRING,
@@ -852,15 +865,14 @@ CREATE EXTERNAL TABLE hl7.hl7_acc (
 	accident_id_universal_id STRING,
 	accident_id_universal_id_type STRING,
 	_accident_date_time STRING,
-	_n_a STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	_n_a STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -869,21 +881,22 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ACC'
 DROP TABLE hl7.hl7_add_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_add (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	addendum_continuation_pointer STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	addendum_continuation_pointer STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -892,6 +905,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADD'
 DROP TABLE hl7.hl7_adj_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_adj (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1086,15 +1101,14 @@ CREATE EXTERNAL TABLE hl7.hl7_adj (
 	responsible_organization_assigning_facility_universal_id STRING,
 	responsible_organization_assigning_facility_universal_id_type STRING,
 	responsible_organization_name_representation_code STRING,
-	responsible_organization_organization_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	responsible_organization_organization_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1103,6 +1117,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ADJ'
 DROP TABLE hl7.hl7_aff_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_aff (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1209,6 +1225,8 @@ CREATE EXTERNAL TABLE hl7.hl7_aff (
 	professional_organization_address_census_tract_second_alternate_value_set_version_id STRING,
 	professional_organization_address_address_representation_code STRING,
 	professional_organization_address_address_validity_range STRING,
+	professional_organization_address_address_validity_range_range_start_date_time STRING,
+	professional_organization_address_address_validity_range_range_end_date_time STRING,
 	professional_organization_address_effective_date STRING,
 	professional_organization_address_expiration_date STRING,
 	professional_organization_address_expiration_reason STRING,
@@ -1271,15 +1289,14 @@ CREATE EXTERNAL TABLE hl7.hl7_aff (
 	professional_organization_affiliation_date_range STRING,
 	professional_organization_affiliation_date_range_range_start_date_time STRING,
 	professional_organization_affiliation_date_range_range_end_date_time STRING,
-	professional_affiliation_additional_information STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	professional_affiliation_additional_information STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1288,6 +1305,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AFF'
 DROP TABLE hl7.hl7_aig_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_aig (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1483,15 +1502,14 @@ CREATE EXTERNAL TABLE hl7.hl7_aig (
 	filler_status_code_alternate_value_set_version_id STRING,
 	filler_status_code_second_alternate_coding_system_oid STRING,
 	filler_status_code_second_alternate_value_set_oid STRING,
-	filler_status_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filler_status_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1500,6 +1518,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIG'
 DROP TABLE hl7.hl7_ail_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ail (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1685,15 +1705,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ail (
 	filler_status_code_alternate_value_set_version_id STRING,
 	filler_status_code_second_alternate_coding_system_oid STRING,
 	filler_status_code_second_alternate_value_set_oid STRING,
-	filler_status_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filler_status_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1702,6 +1721,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIL'
 DROP TABLE hl7.hl7_aip_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_aip (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -1783,6 +1804,8 @@ CREATE EXTERNAL TABLE hl7.hl7_aip (
 	personnel_resource_id_name_context_second_alternate_value_set_oid STRING,
 	personnel_resource_id_name_context_second_alternate_value_set_version_id STRING,
 	personnel_resource_id_name_validity_range STRING,
+	personnel_resource_id_name_validity_range_range_start_date_time STRING,
+	personnel_resource_id_name_validity_range_range_end_date_time STRING,
 	personnel_resource_id_name_assembly_order STRING,
 	personnel_resource_id_effective_date STRING,
 	personnel_resource_id_expiration_date STRING,
@@ -1975,15 +1998,14 @@ CREATE EXTERNAL TABLE hl7.hl7_aip (
 	filler_status_code_alternate_value_set_version_id STRING,
 	filler_status_code_second_alternate_coding_system_oid STRING,
 	filler_status_code_second_alternate_value_set_oid STRING,
-	filler_status_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filler_status_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1992,6 +2014,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIP'
 DROP TABLE hl7.hl7_ais_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ais (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2163,15 +2187,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ais (
 	filler_supplemental_service_information_alternate_value_set_version_id STRING,
 	filler_supplemental_service_information_second_alternate_coding_system_oid STRING,
 	filler_supplemental_service_information_second_alternate_value_set_oid STRING,
-	filler_supplemental_service_information_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filler_supplemental_service_information_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2180,6 +2203,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AIS'
 DROP TABLE hl7.hl7_al1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_al1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2258,31 +2283,6 @@ CREATE EXTERNAL TABLE hl7.hl7_al1 (
 	allergy_severity_code_second_alternate_value_set_version_id STRING,
 	allergy_reaction_code STRING,
 	identification_date STRING,
-	clin_sys_override_7 STRING,
-	clin_sys_override_8 STRING,
-	clin_sys_override_9 STRING,
-	clin_sys_override_9_primary_id STRING,
-	clin_sys_override_9_text STRING,
-	clin_sys_override_9_name_of_coding_sys STRING,
-	clin_sys_override_9_alt_id STRING,
-	clin_sys_override_9_alt_text STRING,
-	clin_sys_override_9_name_of_alt_coding_sys STRING,
-	clin_sys_override_9_coding_sys_ver_id STRING,
-	clin_sys_override_9_alt_coding_sys_ver_id STRING,
-	clin_sys_override_9_original_text STRING,
-	clin_sys_override_9_second_alt_id STRING,
-	clin_sys_override_9_second_alt_text STRING,
-	clin_sys_override_9_name_of_second_alt_coding_sys STRING,
-	clin_sys_override_9_second_alt_coding_sys_ver_id STRING,
-	clin_sys_override_9_coding_sys_oid STRING,
-	clin_sys_override_9_value_set_oid STRING,
-	clin_sys_override_9_value_set_ver_id STRING,
-	clin_sys_override_9_alt_coding_sys_oid STRING,
-	clin_sys_override_9_alt_value_set_oid STRING,
-	clin_sys_override_9_alt_value_set_ver_id STRING,
-	clin_sys_override_9_second_alt_coding_sys_oid STRING,
-	clin_sys_override_9_second_alt_value_set_oid STRING,
-	clin_sys_override_9_second_alt_value_set_ver_id STRING,
 	sensitivity_causative_agent_cd STRING,
 	sensitivity_causative_agent_cd_primary_id STRING,
 	sensitivity_causative_agent_cd_text STRING,
@@ -2306,15 +2306,14 @@ CREATE EXTERNAL TABLE hl7.hl7_al1 (
 	sensitivity_causative_agent_cd_second_alt_coding_sys_oid STRING,
 	sensitivity_causative_agent_cd_second_alt_value_set_oid STRING,
 	sensitivity_causative_agent_cd_second_alt_value_set_ver_id STRING,
-	identification_date_identification_date STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	identification_date_identification_date STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2323,6 +2322,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AL1'
 DROP TABLE hl7.hl7_apr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_apr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2429,15 +2430,14 @@ CREATE EXTERNAL TABLE hl7.hl7_apr (
 	filler_override_criteria_parameter_class_second_alternate_coding_system_oid STRING,
 	filler_override_criteria_parameter_class_second_alternate_value_set_oid STRING,
 	filler_override_criteria_parameter_class_second_alternate_value_set_version_id STRING,
-	filler_override_criteria_parameter_value STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filler_override_criteria_parameter_value STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2446,6 +2446,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=APR'
 DROP TABLE hl7.hl7_arq_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_arq (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -2596,28 +2598,6 @@ CREATE EXTERNAL TABLE hl7.hl7_arq (
 	priority STRING,
 	repeating_interval STRING,
 	repeating_interval_repeat_pattern STRING,
-	repeating_interval_repeat_pattern_id STRING,
-	repeating_interval_repeat_pattern_text STRING,
-	repeating_interval_repeat_pattern_name_of_coding_system STRING,
-	repeating_interval_repeat_pattern_alternate_id STRING,
-	repeating_interval_repeat_pattern_alternate_text STRING,
-	repeating_interval_repeat_pattern_name_of_alternate_coding_system STRING,
-	repeating_interval_repeat_pattern_coding_system_version_id STRING,
-	repeating_interval_repeat_pattern_alternate_coding_system_version_id STRING,
-	repeating_interval_repeat_pattern_original_text STRING,
-	repeating_interval_repeat_pattern_second_alternate_id STRING,
-	repeating_interval_repeat_pattern_second_alternate_text STRING,
-	repeating_interval_repeat_pattern_name_of_second_alternate_coding_system STRING,
-	repeating_interval_repeat_pattern_second_alternate_coding_system_version_id STRING,
-	repeating_interval_repeat_pattern_coding_system_oid STRING,
-	repeating_interval_repeat_pattern_value_set_oid STRING,
-	repeating_interval_repeat_pattern_value_set_version_id STRING,
-	repeating_interval_repeat_pattern_alternate_coding_system_oid STRING,
-	repeating_interval_repeat_pattern_alternate_value_set_oid STRING,
-	repeating_interval_repeat_pattern_alternate_value_set_version_id STRING,
-	repeating_interval_repeat_pattern_second_alternate_coding_system_oid STRING,
-	repeating_interval_repeat_pattern_second_alternate_value_set_oid STRING,
-	repeating_interval_repeat_pattern_second_alternate_value_set_version_id STRING,
 	repeating_interval_explicit_time_interval STRING,
 	repeating_interval_duration STRING,
 	placer_contact_person STRING,
@@ -2693,6 +2673,8 @@ CREATE EXTERNAL TABLE hl7.hl7_arq (
 	placer_contact_person_name_context_second_alternate_value_set_oid STRING,
 	placer_contact_person_name_context_second_alternate_value_set_version_id STRING,
 	placer_contact_person_name_validity_range STRING,
+	placer_contact_person_name_validity_range_range_start_date_time STRING,
+	placer_contact_person_name_validity_range_range_end_date_time STRING,
 	placer_contact_person_name_assembly_order STRING,
 	placer_contact_person_effective_date STRING,
 	placer_contact_person_expiration_date STRING,
@@ -2876,6 +2858,8 @@ CREATE EXTERNAL TABLE hl7.hl7_arq (
 	placer_contact_address_census_tract_second_alternate_value_set_version_id STRING,
 	placer_contact_address_address_representation_code STRING,
 	placer_contact_address_address_validity_range STRING,
+	placer_contact_address_address_validity_range_range_start_date_time STRING,
+	placer_contact_address_address_validity_range_range_end_date_time STRING,
 	placer_contact_address_effective_date STRING,
 	placer_contact_address_expiration_date STRING,
 	placer_contact_address_expiration_reason STRING,
@@ -3045,6 +3029,8 @@ CREATE EXTERNAL TABLE hl7.hl7_arq (
 	entered_by_person_name_context_second_alternate_value_set_oid STRING,
 	entered_by_person_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_person_name_validity_range STRING,
+	entered_by_person_name_validity_range_range_start_date_time STRING,
+	entered_by_person_name_validity_range_range_end_date_time STRING,
 	entered_by_person_name_assembly_order STRING,
 	entered_by_person_effective_date STRING,
 	entered_by_person_expiration_date STRING,
@@ -3224,15 +3210,14 @@ CREATE EXTERNAL TABLE hl7.hl7_arq (
 	filler_order_num_entity_id STRING,
 	filler_order_num_namespace_id STRING,
 	filler_order_num_universal_id STRING,
-	filler_order_num_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filler_order_num_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3241,6 +3226,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARQ'
 DROP TABLE hl7.hl7_arv_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_arv (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3320,15 +3307,14 @@ CREATE EXTERNAL TABLE hl7.hl7_arv (
 	special_access_restriction_instructions STRING,
 	access_restriction_date_range STRING,
 	access_restriction_date_range_range_start_date_time STRING,
-	access_restriction_date_range_range_end_date_time STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	access_restriction_date_range_range_end_date_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3337,6 +3323,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ARV'
 DROP TABLE hl7.hl7_aut_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_aut (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3809,6 +3797,8 @@ CREATE EXTERNAL TABLE hl7.hl7_aut (
 	authorized_health_professional_name_context_second_alternate_value_set_oid STRING,
 	authorized_health_professional_name_context_second_alternate_value_set_version_id STRING,
 	authorized_health_professional_name_validity_range STRING,
+	authorized_health_professional_name_validity_range_range_start_date_time STRING,
+	authorized_health_professional_name_validity_range_range_end_date_time STRING,
 	authorized_health_professional_name_assembly_order STRING,
 	authorized_health_professional_effective_date STRING,
 	authorized_health_professional_expiration_date STRING,
@@ -3934,16 +3924,15 @@ CREATE EXTERNAL TABLE hl7.hl7_aut (
 	source_phone_shared_telecommunication_id_universal_id STRING,
 	source_phone_shared_telecommunication_id_universal_id_type STRING,
 	source_phone_preference_order STRING,
-	_comment STRING,
-	action_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	comment STRING,
+	action_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3952,6 +3941,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=AUT'
 DROP TABLE hl7.hl7_bhs_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_bhs (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -3989,15 +3980,14 @@ CREATE EXTERNAL TABLE hl7.hl7_bhs (
 	batch_receiving_network_address STRING,
 	batch_receiving_network_address_namespace_id STRING,
 	batch_receiving_network_address_universal_id STRING,
-	batch_receiving_network_address_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	batch_receiving_network_address_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4006,6 +3996,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BHS'
 DROP TABLE hl7.hl7_blc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_blc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4059,15 +4051,14 @@ CREATE EXTERNAL TABLE hl7.hl7_blc (
 	blood_amt_units_alternate_value_set_version_id STRING,
 	blood_amt_units_second_alternate_coding_system_oid STRING,
 	blood_amt_units_second_alternate_value_set_oid STRING,
-	blood_amt_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	blood_amt_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4076,6 +4067,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLC'
 DROP TABLE hl7.hl7_blg_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_blg (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4171,15 +4164,14 @@ CREATE EXTERNAL TABLE hl7.hl7_blg (
 	charge_type_reason_alternate_value_set_version_id STRING,
 	charge_type_reason_second_alternate_coding_system_oid STRING,
 	charge_type_reason_second_alternate_value_set_oid STRING,
-	charge_type_reason_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	charge_type_reason_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4188,6 +4180,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BLG'
 DROP TABLE hl7.hl7_bpo_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_bpo (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4364,6 +4358,8 @@ CREATE EXTERNAL TABLE hl7.hl7_bpo (
 	bp_intended_dispense_from_address_census_tract_second_alternate_value_set_version_id STRING,
 	bp_intended_dispense_from_address_address_representation_code STRING,
 	bp_intended_dispense_from_address_address_validity_range STRING,
+	bp_intended_dispense_from_address_address_validity_range_range_start_date_time STRING,
+	bp_intended_dispense_from_address_address_validity_range_range_end_date_time STRING,
 	bp_intended_dispense_from_address_effective_date STRING,
 	bp_intended_dispense_from_address_expiration_date STRING,
 	bp_intended_dispense_from_address_expiration_reason STRING,
@@ -4521,6 +4517,8 @@ CREATE EXTERNAL TABLE hl7.hl7_bpo (
 	bp_requested_dispense_to_address_census_tract_second_alternate_value_set_version_id STRING,
 	bp_requested_dispense_to_address_address_representation_code STRING,
 	bp_requested_dispense_to_address_address_validity_range STRING,
+	bp_requested_dispense_to_address_address_validity_range_range_start_date_time STRING,
+	bp_requested_dispense_to_address_address_validity_range_range_end_date_time STRING,
 	bp_requested_dispense_to_address_effective_date STRING,
 	bp_requested_dispense_to_address_expiration_date STRING,
 	bp_requested_dispense_to_address_expiration_reason STRING,
@@ -4603,15 +4601,14 @@ CREATE EXTERNAL TABLE hl7.hl7_bpo (
 	bp_indication_for_use_second_alternate_coding_system_oid STRING,
 	bp_indication_for_use_second_alternate_value_set_oid STRING,
 	bp_indication_for_use_second_alternate_value_set_version_id STRING,
-	bp_informed_consent_indicator STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bp_informed_consent_indicator STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4620,6 +4617,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPO'
 DROP TABLE hl7.hl7_bpx_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_bpx (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -4944,6 +4943,8 @@ CREATE EXTERNAL TABLE hl7.hl7_bpx (
 	bp_actual_dispensed_to_address_census_tract_second_alternate_value_set_version_id STRING,
 	bp_actual_dispensed_to_address_address_representation_code STRING,
 	bp_actual_dispensed_to_address_address_validity_range STRING,
+	bp_actual_dispensed_to_address_address_validity_range_range_start_date_time STRING,
+	bp_actual_dispensed_to_address_address_validity_range_range_end_date_time STRING,
 	bp_actual_dispensed_to_address_effective_date STRING,
 	bp_actual_dispensed_to_address_expiration_date STRING,
 	bp_actual_dispensed_to_address_expiration_reason STRING,
@@ -5076,6 +5077,8 @@ CREATE EXTERNAL TABLE hl7.hl7_bpx (
 	bp_dispensed_to_receiver_name_context_second_alternate_value_set_oid STRING,
 	bp_dispensed_to_receiver_name_context_second_alternate_value_set_version_id STRING,
 	bp_dispensed_to_receiver_name_validity_range STRING,
+	bp_dispensed_to_receiver_name_validity_range_range_start_date_time STRING,
+	bp_dispensed_to_receiver_name_validity_range_range_end_date_time STRING,
 	bp_dispensed_to_receiver_name_assembly_order STRING,
 	bp_dispensed_to_receiver_effective_date STRING,
 	bp_dispensed_to_receiver_expiration_date STRING,
@@ -5201,6 +5204,8 @@ CREATE EXTERNAL TABLE hl7.hl7_bpx (
 	bp_dispensing_individual_name_context_second_alternate_value_set_oid STRING,
 	bp_dispensing_individual_name_context_second_alternate_value_set_version_id STRING,
 	bp_dispensing_individual_name_validity_range STRING,
+	bp_dispensing_individual_name_validity_range_range_start_date_time STRING,
+	bp_dispensing_individual_name_validity_range_range_end_date_time STRING,
 	bp_dispensing_individual_name_assembly_order STRING,
 	bp_dispensing_individual_effective_date STRING,
 	bp_dispensing_individual_expiration_date STRING,
@@ -5252,15 +5257,14 @@ CREATE EXTERNAL TABLE hl7.hl7_bpx (
 	bp_dispensing_individual_assigning_agency_or_department_second_alternate_value_set_oid STRING,
 	bp_dispensing_individual_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	bp_dispensing_individual_security_check STRING,
-	bp_dispensing_individual_security_check_scheme STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bp_dispensing_individual_security_check_scheme STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5269,6 +5273,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BPX'
 DROP TABLE hl7.hl7_bts_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_bts (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5277,15 +5283,14 @@ CREATE EXTERNAL TABLE hl7.hl7_bts (
 	unknown STRING,
 	batch_message_count STRING,
 	batch_comment STRING,
-	batch_totals STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	batch_totals STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5294,6 +5299,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTS'
 DROP TABLE hl7.hl7_btx_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_btx (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5542,6 +5549,8 @@ CREATE EXTERNAL TABLE hl7.hl7_btx (
 	bp_transfusion_administrator_name_context_second_alternate_value_set_oid STRING,
 	bp_transfusion_administrator_name_context_second_alternate_value_set_version_id STRING,
 	bp_transfusion_administrator_name_validity_range STRING,
+	bp_transfusion_administrator_name_validity_range_range_start_date_time STRING,
+	bp_transfusion_administrator_name_validity_range_range_end_date_time STRING,
 	bp_transfusion_administrator_name_assembly_order STRING,
 	bp_transfusion_administrator_effective_date STRING,
 	bp_transfusion_administrator_expiration_date STRING,
@@ -5667,6 +5676,8 @@ CREATE EXTERNAL TABLE hl7.hl7_btx (
 	bp_transfusion_verifier_name_context_second_alternate_value_set_oid STRING,
 	bp_transfusion_verifier_name_context_second_alternate_value_set_version_id STRING,
 	bp_transfusion_verifier_name_validity_range STRING,
+	bp_transfusion_verifier_name_validity_range_range_start_date_time STRING,
+	bp_transfusion_verifier_name_validity_range_range_end_date_time STRING,
 	bp_transfusion_verifier_name_assembly_order STRING,
 	bp_transfusion_verifier_effective_date STRING,
 	bp_transfusion_verifier_expiration_date STRING,
@@ -5771,15 +5782,14 @@ CREATE EXTERNAL TABLE hl7.hl7_btx (
 	bp_unique_id_entity_id STRING,
 	bp_unique_id_namespace_id STRING,
 	bp_unique_id_universal_id STRING,
-	bp_unique_id_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bp_unique_id_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5788,6 +5798,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BTX'
 DROP TABLE hl7.hl7_bui_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_bui (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -5937,15 +5949,14 @@ CREATE EXTERNAL TABLE hl7.hl7_bui (
 	transport_temperature_units_alternate_value_set_version_id STRING,
 	transport_temperature_units_second_alternate_coding_system_oid STRING,
 	transport_temperature_units_second_alternate_value_set_oid STRING,
-	transport_temperature_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	transport_temperature_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5954,6 +5965,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=BUI'
 DROP TABLE hl7.hl7_cdm_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cdm (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6204,15 +6217,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cdm (
 	contract_organization_assigning_facility_universal_id_type STRING,
 	contract_organization_name_representation_code STRING,
 	contract_organization_organization_id STRING,
-	room_fee_indicator STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	room_fee_indicator STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6221,6 +6233,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDM'
 DROP TABLE hl7.hl7_cdo_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cdo (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6278,15 +6292,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cdo (
 	cumulative_dosage_limit_time_interval_units_alternate_value_set_version_id STRING,
 	cumulative_dosage_limit_time_interval_units_second_alternate_coding_system_oid STRING,
 	cumulative_dosage_limit_time_interval_units_second_alternate_value_set_oid STRING,
-	cumulative_dosage_limit_time_interval_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	cumulative_dosage_limit_time_interval_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6295,6 +6308,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CDO'
 DROP TABLE hl7.hl7_cer_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cer (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6416,6 +6431,8 @@ CREATE EXTERNAL TABLE hl7.hl7_cer (
 	issuing_authority_name_context_second_alternate_value_set_oid STRING,
 	issuing_authority_name_context_second_alternate_value_set_version_id STRING,
 	issuing_authority_name_validity_range STRING,
+	issuing_authority_name_validity_range_range_start_date_time STRING,
+	issuing_authority_name_validity_range_range_end_date_time STRING,
 	issuing_authority_name_assembly_order STRING,
 	issuing_authority_effective_date STRING,
 	issuing_authority_expiration_date STRING,
@@ -6792,15 +6809,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cer (
 	certificate_status_code_alternate_value_set_version_id STRING,
 	certificate_status_code_second_alternate_coding_system_oid STRING,
 	certificate_status_code_second_alternate_value_set_oid STRING,
-	certificate_status_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	certificate_status_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6809,6 +6825,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CER'
 DROP TABLE hl7.hl7_cm0_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cm0 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -6900,6 +6918,8 @@ CREATE EXTERNAL TABLE hl7.hl7_cm0 (
 	chairman_of_study_name_context_second_alternate_value_set_oid STRING,
 	chairman_of_study_name_context_second_alternate_value_set_version_id STRING,
 	chairman_of_study_name_validity_range STRING,
+	chairman_of_study_name_validity_range_range_start_date_time STRING,
+	chairman_of_study_name_validity_range_range_end_date_time STRING,
 	chairman_of_study_name_assembly_order STRING,
 	chairman_of_study_effective_date STRING,
 	chairman_of_study_expiration_date STRING,
@@ -7028,6 +7048,8 @@ CREATE EXTERNAL TABLE hl7.hl7_cm0 (
 	contact_for_study_name_context_second_alternate_value_set_oid STRING,
 	contact_for_study_name_context_second_alternate_value_set_version_id STRING,
 	contact_for_study_name_validity_range STRING,
+	contact_for_study_name_validity_range_range_start_date_time STRING,
+	contact_for_study_name_validity_range_range_end_date_time STRING,
 	contact_for_study_name_assembly_order STRING,
 	contact_for_study_effective_date STRING,
 	contact_for_study_expiration_date STRING,
@@ -7211,6 +7233,8 @@ CREATE EXTERNAL TABLE hl7.hl7_cm0 (
 	contact_address_census_tract_second_alternate_value_set_version_id STRING,
 	contact_address_address_representation_code STRING,
 	contact_address_address_validity_range STRING,
+	contact_address_address_validity_range_range_start_date_time STRING,
+	contact_address_address_validity_range_range_end_date_time STRING,
 	contact_address_effective_date STRING,
 	contact_address_expiration_date STRING,
 	contact_address_expiration_reason STRING,
@@ -7269,15 +7293,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cm0 (
 	contact_address_address_id_entity_id STRING,
 	contact_address_address_id_namespace_id STRING,
 	contact_address_address_id_universal_id STRING,
-	contact_address_address_id_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	contact_address_address_id_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7286,6 +7309,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM0'
 DROP TABLE hl7.hl7_cm1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cm1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7316,15 +7341,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cm1 (
 	study_phase_id_second_alternate_coding_system_oid STRING,
 	study_phase_id_second_alternate_value_set_oid STRING,
 	study_phase_id_second_alternate_value_set_version_id STRING,
-	description_of_study_phase STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	description_of_study_phase STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7333,6 +7357,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM1'
 DROP TABLE hl7.hl7_cm2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cm2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7386,15 +7412,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cm2 (
 	events_scheduled_this_time_point_alternate_value_set_version_id STRING,
 	events_scheduled_this_time_point_second_alternate_coding_system_oid STRING,
 	events_scheduled_this_time_point_second_alternate_value_set_oid STRING,
-	events_scheduled_this_time_point_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	events_scheduled_this_time_point_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7403,6 +7428,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CM2'
 DROP TABLE hl7.hl7_cns_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cns (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7458,15 +7485,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cns (
 	ending_notification_code_alternate_value_set_version_id STRING,
 	ending_notification_code_second_alternate_coding_system_oid STRING,
 	ending_notification_code_second_alternate_value_set_oid STRING,
-	ending_notification_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	ending_notification_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7475,6 +7501,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CNS'
 DROP TABLE hl7.hl7_con_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_con (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7700,6 +7728,8 @@ CREATE EXTERNAL TABLE hl7.hl7_con (
 	consenter_id_name_context_second_alternate_value_set_oid STRING,
 	consenter_id_name_context_second_alternate_value_set_version_id STRING,
 	consenter_id_name_validity_range STRING,
+	consenter_id_name_validity_range_range_start_date_time STRING,
+	consenter_id_name_validity_range_range_end_date_time STRING,
 	consenter_id_name_assembly_order STRING,
 	consenter_id_effective_date STRING,
 	consenter_id_expiration_date STRING,
@@ -7727,15 +7757,14 @@ CREATE EXTERNAL TABLE hl7.hl7_con (
 	relationship_to_subject_alternate_value_set_version_id STRING,
 	relationship_to_subject_second_alternate_coding_system_oid STRING,
 	relationship_to_subject_second_alternate_value_set_oid STRING,
-	relationship_to_subject_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	relationship_to_subject_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7744,6 +7773,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CON'
 DROP TABLE hl7.hl7_csp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_csp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -7797,15 +7828,14 @@ CREATE EXTERNAL TABLE hl7.hl7_csp (
 	study_phase_evaluability_alternate_value_set_version_id STRING,
 	study_phase_evaluability_second_alternate_coding_system_oid STRING,
 	study_phase_evaluability_second_alternate_value_set_oid STRING,
-	study_phase_evaluability_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	study_phase_evaluability_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7814,6 +7844,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSP'
 DROP TABLE hl7.hl7_csr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_csr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8053,6 +8085,8 @@ CREATE EXTERNAL TABLE hl7.hl7_csr (
 	person_performing_study_registration_name_context_second_alternate_value_set_oid STRING,
 	person_performing_study_registration_name_context_second_alternate_value_set_version_id STRING,
 	person_performing_study_registration_name_validity_range STRING,
+	person_performing_study_registration_name_validity_range_range_start_date_time STRING,
+	person_performing_study_registration_name_validity_range_range_end_date_time STRING,
 	person_performing_study_registration_name_assembly_order STRING,
 	person_performing_study_registration_effective_date STRING,
 	person_performing_study_registration_expiration_date STRING,
@@ -8178,6 +8212,8 @@ CREATE EXTERNAL TABLE hl7.hl7_csr (
 	study_authorizing_provider_name_context_second_alternate_value_set_oid STRING,
 	study_authorizing_provider_name_context_second_alternate_value_set_version_id STRING,
 	study_authorizing_provider_name_validity_range STRING,
+	study_authorizing_provider_name_validity_range_range_start_date_time STRING,
+	study_authorizing_provider_name_validity_range_range_end_date_time STRING,
 	study_authorizing_provider_name_assembly_order STRING,
 	study_authorizing_provider_effective_date STRING,
 	study_authorizing_provider_expiration_date STRING,
@@ -8347,15 +8383,14 @@ CREATE EXTERNAL TABLE hl7.hl7_csr (
 	reason_ended_study_alternate_value_set_version_id STRING,
 	reason_ended_study_second_alternate_coding_system_oid STRING,
 	reason_ended_study_second_alternate_value_set_oid STRING,
-	reason_ended_study_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	reason_ended_study_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8364,6 +8399,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSR'
 DROP TABLE hl7.hl7_css_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_css (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8416,15 +8453,14 @@ CREATE EXTERNAL TABLE hl7.hl7_css (
 	study_quality_control_codes_alternate_value_set_version_id STRING,
 	study_quality_control_codes_second_alternate_coding_system_oid STRING,
 	study_quality_control_codes_second_alternate_value_set_oid STRING,
-	study_quality_control_codes_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	study_quality_control_codes_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8433,6 +8469,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CSS'
 DROP TABLE hl7.hl7_ctd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ctd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8500,6 +8538,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ctd (
 	contact_name_name_context_second_alternate_value_set_oid STRING,
 	contact_name_name_context_second_alternate_value_set_version_id STRING,
 	contact_name_name_validity_range STRING,
+	contact_name_name_validity_range_range_start_date_time STRING,
+	contact_name_name_validity_range_range_end_date_time STRING,
 	contact_name_name_assembly_order STRING,
 	contact_name_effective_date STRING,
 	contact_name_expiration_date STRING,
@@ -8565,6 +8605,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ctd (
 	contact_address_census_tract_second_alternate_value_set_version_id STRING,
 	contact_address_address_representation_code STRING,
 	contact_address_address_validity_range STRING,
+	contact_address_address_validity_range_range_start_date_time STRING,
+	contact_address_address_validity_range_range_end_date_time STRING,
 	contact_address_effective_date STRING,
 	contact_address_expiration_date STRING,
 	contact_address_expiration_reason STRING,
@@ -8781,15 +8823,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ctd (
 	contact_ids_type_of_id_num_second_alternate_value_set_oid STRING,
 	contact_ids_type_of_id_num_second_alternate_value_set_version_id STRING,
 	contact_ids_state_other_qualifying_information STRING,
-	contact_ids_expiration_date STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	contact_ids_expiration_date STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8798,6 +8839,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTD'
 DROP TABLE hl7.hl7_cti_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_cti (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8854,15 +8897,14 @@ CREATE EXTERNAL TABLE hl7.hl7_cti (
 	study_scheduled_time_point_alternate_value_set_version_id STRING,
 	study_scheduled_time_point_second_alternate_coding_system_oid STRING,
 	study_scheduled_time_point_second_alternate_value_set_oid STRING,
-	study_scheduled_time_point_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	study_scheduled_time_point_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8871,6 +8913,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=CTI'
 DROP TABLE hl7.hl7_db1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_db1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -8968,15 +9012,14 @@ CREATE EXTERNAL TABLE hl7.hl7_db1 (
 	disability_start_date STRING,
 	disability_end_date STRING,
 	disability_return_to_work_date STRING,
-	disability_unable_to_work_date STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	disability_unable_to_work_date STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8985,6 +9028,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DB1'
 DROP TABLE hl7.hl7_dg1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_dg1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -9241,6 +9286,8 @@ CREATE EXTERNAL TABLE hl7.hl7_dg1 (
 	diagnosing_clinician_name_context_second_alternate_value_set_oid STRING,
 	diagnosing_clinician_name_context_second_alternate_value_set_version_id STRING,
 	diagnosing_clinician_name_validity_range STRING,
+	diagnosing_clinician_name_validity_range_range_start_date_time STRING,
+	diagnosing_clinician_name_validity_range_range_end_date_time STRING,
 	diagnosing_clinician_name_assembly_order STRING,
 	diagnosing_clinician_effective_date STRING,
 	diagnosing_clinician_expiration_date STRING,
@@ -9400,15 +9447,14 @@ CREATE EXTERNAL TABLE hl7.hl7_dg1 (
 	present_on_admission_poa_indicator_second_alternate_value_set_oid STRING,
 	present_on_admission_poa_indicator_second_alternate_value_set_version_id STRING,
 	bill_amt STRING,
-	total_charge_amt STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	total_charge_amt STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9417,6 +9463,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DG1'
 DROP TABLE hl7.hl7_dmi_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_dmi (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -9473,15 +9521,14 @@ CREATE EXTERNAL TABLE hl7.hl7_dmi (
 	lower_and_upper_trim_points_low_value STRING,
 	lower_and_upper_trim_points_high_value STRING,
 	average_length_of_stay STRING,
-	relative_weight STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	relative_weight STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9490,6 +9537,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DMI'
 DROP TABLE hl7.hl7_don_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_don (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -9729,6 +9778,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	intended_recipient_name_name_context_second_alternate_value_set_oid STRING,
 	intended_recipient_name_name_context_second_alternate_value_set_version_id STRING,
 	intended_recipient_name_name_validity_range STRING,
+	intended_recipient_name_name_validity_range_range_start_date_time STRING,
+	intended_recipient_name_name_validity_range_range_end_date_time STRING,
 	intended_recipient_name_name_assembly_order STRING,
 	intended_recipient_name_effective_date STRING,
 	intended_recipient_name_expiration_date STRING,
@@ -9813,6 +9864,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	intended_recipient_ordering_provider_name_context_second_alternate_value_set_oid STRING,
 	intended_recipient_ordering_provider_name_context_second_alternate_value_set_version_id STRING,
 	intended_recipient_ordering_provider_name_validity_range STRING,
+	intended_recipient_ordering_provider_name_validity_range_range_start_date_time STRING,
+	intended_recipient_ordering_provider_name_validity_range_range_end_date_time STRING,
 	intended_recipient_ordering_provider_name_assembly_order STRING,
 	intended_recipient_ordering_provider_effective_date STRING,
 	intended_recipient_ordering_provider_expiration_date STRING,
@@ -9902,6 +9955,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	bleed_start_phlebotomist_name_context_second_alternate_value_set_oid STRING,
 	bleed_start_phlebotomist_name_context_second_alternate_value_set_version_id STRING,
 	bleed_start_phlebotomist_name_validity_range STRING,
+	bleed_start_phlebotomist_name_validity_range_range_start_date_time STRING,
+	bleed_start_phlebotomist_name_validity_range_range_end_date_time STRING,
 	bleed_start_phlebotomist_name_assembly_order STRING,
 	bleed_start_phlebotomist_effective_date STRING,
 	bleed_start_phlebotomist_expiration_date STRING,
@@ -9945,6 +10000,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	bleed_end_phlebotomist_name_context_second_alternate_value_set_oid STRING,
 	bleed_end_phlebotomist_name_context_second_alternate_value_set_version_id STRING,
 	bleed_end_phlebotomist_name_validity_range STRING,
+	bleed_end_phlebotomist_name_validity_range_range_start_date_time STRING,
+	bleed_end_phlebotomist_name_validity_range_range_end_date_time STRING,
 	bleed_end_phlebotomist_name_assembly_order STRING,
 	bleed_end_phlebotomist_effective_date STRING,
 	bleed_end_phlebotomist_expiration_date STRING,
@@ -9991,6 +10048,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	final_review_staff_id_name_context_second_alternate_value_set_oid STRING,
 	final_review_staff_id_name_context_second_alternate_value_set_version_id STRING,
 	final_review_staff_id_name_validity_range STRING,
+	final_review_staff_id_name_validity_range_range_start_date_time STRING,
+	final_review_staff_id_name_validity_range_range_end_date_time STRING,
 	final_review_staff_id_name_assembly_order STRING,
 	final_review_staff_id_effective_date STRING,
 	final_review_staff_id_expiration_date STRING,
@@ -10076,6 +10135,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	donation_accept_staff_name_context_second_alternate_value_set_oid STRING,
 	donation_accept_staff_name_context_second_alternate_value_set_version_id STRING,
 	donation_accept_staff_name_validity_range STRING,
+	donation_accept_staff_name_validity_range_range_start_date_time STRING,
+	donation_accept_staff_name_validity_range_range_end_date_time STRING,
 	donation_accept_staff_name_assembly_order STRING,
 	donation_accept_staff_effective_date STRING,
 	donation_accept_staff_expiration_date STRING,
@@ -10201,6 +10262,8 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	donation_material_review_staff_name_context_second_alternate_value_set_oid STRING,
 	donation_material_review_staff_name_context_second_alternate_value_set_version_id STRING,
 	donation_material_review_staff_name_validity_range STRING,
+	donation_material_review_staff_name_validity_range_range_start_date_time STRING,
+	donation_material_review_staff_name_validity_range_range_end_date_time STRING,
 	donation_material_review_staff_name_assembly_order STRING,
 	donation_material_review_staff_effective_date STRING,
 	donation_material_review_staff_expiration_date STRING,
@@ -10252,15 +10315,14 @@ CREATE EXTERNAL TABLE hl7.hl7_don (
 	donation_material_review_staff_assigning_agency_or_department_second_alternate_value_set_oid STRING,
 	donation_material_review_staff_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	donation_material_review_staff_security_check STRING,
-	donation_material_review_staff_security_check_scheme STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	donation_material_review_staff_security_check_scheme STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10269,6 +10331,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DON'
 DROP TABLE hl7.hl7_dps_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_dps (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10345,15 +10409,14 @@ CREATE EXTERNAL TABLE hl7.hl7_dps (
 	type_of_limitation_alternate_value_set_version_id STRING,
 	type_of_limitation_second_alternate_coding_system_oid STRING,
 	type_of_limitation_second_alternate_value_set_oid STRING,
-	type_of_limitation_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	type_of_limitation_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10362,6 +10425,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DPS'
 DROP TABLE hl7.hl7_drg_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_drg (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10587,6 +10652,8 @@ CREATE EXTERNAL TABLE hl7.hl7_drg (
 	name_of_coder_name_context_second_alternate_value_set_oid STRING,
 	name_of_coder_name_context_second_alternate_value_set_version_id STRING,
 	name_of_coder_name_validity_range STRING,
+	name_of_coder_name_validity_range_range_start_date_time STRING,
+	name_of_coder_name_validity_range_range_end_date_time STRING,
 	name_of_coder_name_assembly_order STRING,
 	name_of_coder_effective_date STRING,
 	name_of_coder_expiration_date STRING,
@@ -10886,15 +10953,14 @@ CREATE EXTERNAL TABLE hl7.hl7_drg (
 	status_admission_alternate_value_set_version_id STRING,
 	status_admission_second_alternate_coding_system_oid STRING,
 	status_admission_second_alternate_value_set_oid STRING,
-	status_admission_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	status_admission_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10903,6 +10969,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DRG'
 DROP TABLE hl7.hl7_dsc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_dsc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10910,15 +10978,14 @@ CREATE EXTERNAL TABLE hl7.hl7_dsc (
 	patient_account_num STRING,
 	unknown STRING,
 	continuation_pointer STRING,
-	continuation_style STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	continuation_style STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10927,6 +10994,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSC'
 DROP TABLE hl7.hl7_dsp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_dsp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10939,15 +11008,14 @@ CREATE EXTERNAL TABLE hl7.hl7_dsp (
 	data_line_text_data STRING,
 	logical_break_point STRING,
 	result_id STRING,
-	result_id_text_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	result_id_text_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10956,6 +11024,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=DSP'
 DROP TABLE hl7.hl7_ecd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ecd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -10988,16 +11058,63 @@ CREATE EXTERNAL TABLE hl7.hl7_ecd (
 	remote_control_command_second_alternate_value_set_version_id STRING,
 	response_required STRING,
 	requested_completion_time STRING,
+	requested_completion_time_quantity STRING,
+	requested_completion_time_interval STRING,
+	requested_completion_time_interval_repeat_pattern STRING,
+	requested_completion_time_interval_explicit_time_interval STRING,
+	requested_completion_time_duration STRING,
+	requested_completion_time_start_date_time STRING,
+	requested_completion_time_end_date_time STRING,
+	requested_completion_time_priority STRING,
+	requested_completion_time_condition STRING,
+	requested_completion_time_text STRING,
+	requested_completion_time_text_text_data STRING,
+	requested_completion_time_conjunction STRING,
+	requested_completion_time_order_sequencing STRING,
+	requested_completion_time_order_sequencing_sequence_results_flag STRING,
+	requested_completion_time_order_sequencing_placer_order_num_entity_id STRING,
+	requested_completion_time_order_sequencing_placer_order_num_namespace_id STRING,
+	requested_completion_time_order_sequencing_filler_order_num_entity_id STRING,
+	requested_completion_time_order_sequencing_filler_order_num_namespace_id STRING,
+	requested_completion_time_order_sequencing_sequence_condition_value STRING,
+	requested_completion_time_order_sequencing_maximum_num_of_repeats STRING,
+	requested_completion_time_order_sequencing_placer_order_num_universal_id STRING,
+	requested_completion_time_order_sequencing_placer_order_num_universal_id_type STRING,
+	requested_completion_time_order_sequencing_filler_order_num_universal_id STRING,
+	requested_completion_time_order_sequencing_filler_order_num_universal_id_type STRING,
+	requested_completion_time_occurrence_duration STRING,
+	requested_completion_time_occurrence_duration_id STRING,
+	requested_completion_time_occurrence_duration_text STRING,
+	requested_completion_time_occurrence_duration_name_of_coding_system STRING,
+	requested_completion_time_occurrence_duration_alternate_id STRING,
+	requested_completion_time_occurrence_duration_alternate_text STRING,
+	requested_completion_time_occurrence_duration_name_of_alternate_coding_system STRING,
+	requested_completion_time_occurrence_duration_coding_system_version_id STRING,
+	requested_completion_time_occurrence_duration_alternate_coding_system_version_id STRING,
+	requested_completion_time_occurrence_duration_original_text STRING,
+	requested_completion_time_occurrence_duration_second_alternate_id STRING,
+	requested_completion_time_occurrence_duration_second_alternate_text STRING,
+	requested_completion_time_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	requested_completion_time_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	requested_completion_time_occurrence_duration_coding_system_oid STRING,
+	requested_completion_time_occurrence_duration_value_set_oid STRING,
+	requested_completion_time_occurrence_duration_value_set_version_id STRING,
+	requested_completion_time_occurrence_duration_alternate_coding_system_oid STRING,
+	requested_completion_time_occurrence_duration_alternate_value_set_oid STRING,
+	requested_completion_time_occurrence_duration_alternate_value_set_version_id STRING,
+	requested_completion_time_occurrence_duration_second_alternate_coding_system_oid STRING,
+	requested_completion_time_occurrence_duration_second_alternate_value_set_oid STRING,
+	requested_completion_time_occurrence_duration_second_alternate_value_set_version_id STRING,
+	requested_completion_time_total_occurrences STRING,
 	parameters STRING,
-	parameters_text_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	parameters_text_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11006,6 +11123,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECD'
 DROP TABLE hl7.hl7_ecr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ecr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11037,15 +11156,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ecr (
 	command_response_second_alternate_value_set_version_id STRING,
 	date_time_completed STRING,
 	command_response_parameters STRING,
-	command_response_parameters_text_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	command_response_parameters_text_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11054,6 +11172,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ECR'
 DROP TABLE hl7.hl7_edu_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_edu (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11213,6 +11333,8 @@ CREATE EXTERNAL TABLE hl7.hl7_edu (
 	school_address_census_tract_second_alternate_value_set_version_id STRING,
 	school_address_address_representation_code STRING,
 	school_address_address_validity_range STRING,
+	school_address_address_validity_range_range_start_date_time STRING,
+	school_address_address_validity_range_range_end_date_time STRING,
 	school_address_effective_date STRING,
 	school_address_expiration_date STRING,
 	school_address_expiration_reason STRING,
@@ -11294,15 +11416,14 @@ CREATE EXTERNAL TABLE hl7.hl7_edu (
 	major_field_of_study_alternate_value_set_version_id STRING,
 	major_field_of_study_second_alternate_coding_system_oid STRING,
 	major_field_of_study_second_alternate_value_set_oid STRING,
-	major_field_of_study_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	major_field_of_study_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11311,6 +11432,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EDU'
 DROP TABLE hl7.hl7_eqp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_eqp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11343,15 +11466,14 @@ CREATE EXTERNAL TABLE hl7.hl7_eqp (
 	file_name STRING,
 	start_date_time STRING,
 	end_date_time STRING,
-	transaction_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	transaction_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11360,6 +11482,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQP'
 DROP TABLE hl7.hl7_equ_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_equ (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11440,15 +11564,14 @@ CREATE EXTERNAL TABLE hl7.hl7_equ (
 	alert_level_alternate_value_set_version_id STRING,
 	alert_level_second_alternate_coding_system_oid STRING,
 	alert_level_second_alternate_value_set_oid STRING,
-	alert_level_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	alert_level_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11457,6 +11580,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EQU'
 DROP TABLE hl7.hl7_err_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_err (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11464,6 +11589,32 @@ CREATE EXTERNAL TABLE hl7.hl7_err (
 	patient_account_num STRING,
 	unknown STRING,
 	error_code_and_location STRING,
+	error_code_and_location_segment_id STRING,
+	error_code_and_location_segment_sequence STRING,
+	error_code_and_location_field_position STRING,
+	error_code_and_location_code_identifying_error STRING,
+	error_code_and_location_code_identifying_error_id STRING,
+	error_code_and_location_code_identifying_error_text STRING,
+	error_code_and_location_code_identifying_error_name_of_coding_system STRING,
+	error_code_and_location_code_identifying_error_alternate_id STRING,
+	error_code_and_location_code_identifying_error_alternate_text STRING,
+	error_code_and_location_code_identifying_error_name_of_alternate_coding_system STRING,
+	error_code_and_location_code_identifying_error_coding_system_version_id STRING,
+	error_code_and_location_code_identifying_error_alternate_coding_system_version_id STRING,
+	error_code_and_location_code_identifying_error_original_text STRING,
+	error_code_and_location_code_identifying_error_second_alternate_id STRING,
+	error_code_and_location_code_identifying_error_second_alternate_text STRING,
+	error_code_and_location_code_identifying_error_name_of_second_alternate_coding_system STRING,
+	error_code_and_location_code_identifying_error_second_alternate_coding_system_version_id STRING,
+	error_code_and_location_code_identifying_error_coding_system_oid STRING,
+	error_code_and_location_code_identifying_error_value_set_oid STRING,
+	error_code_and_location_code_identifying_error_value_set_version_id STRING,
+	error_code_and_location_code_identifying_error_alternate_coding_system_oid STRING,
+	error_code_and_location_code_identifying_error_alternate_value_set_oid STRING,
+	error_code_and_location_code_identifying_error_alternate_value_set_version_id STRING,
+	error_code_and_location_code_identifying_error_second_alternate_coding_system_oid STRING,
+	error_code_and_location_code_identifying_error_second_alternate_value_set_oid STRING,
+	error_code_and_location_code_identifying_error_second_alternate_value_set_version_id STRING,
 	error_location STRING,
 	error_location_segment_id STRING,
 	error_location_segment_sequence STRING,
@@ -11662,15 +11813,14 @@ CREATE EXTERNAL TABLE hl7.hl7_err (
 	help_desk_contact_point_shared_telecommunication_id_namespace_id STRING,
 	help_desk_contact_point_shared_telecommunication_id_universal_id STRING,
 	help_desk_contact_point_shared_telecommunication_id_universal_id_type STRING,
-	help_desk_contact_point_preference_order STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	help_desk_contact_point_preference_order STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11679,6 +11829,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ERR'
 DROP TABLE hl7.hl7_evn_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_evn (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11784,6 +11936,8 @@ CREATE EXTERNAL TABLE hl7.hl7_evn (
 	operator_id_name_context_second_alternate_value_set_oid STRING,
 	operator_id_name_context_second_alternate_value_set_version_id STRING,
 	operator_id_name_validity_range STRING,
+	operator_id_name_validity_range_range_start_date_time STRING,
+	operator_id_name_validity_range_range_end_date_time STRING,
 	operator_id_name_assembly_order STRING,
 	operator_id_effective_date STRING,
 	operator_id_expiration_date STRING,
@@ -11840,15 +11994,14 @@ CREATE EXTERNAL TABLE hl7.hl7_evn (
 	event_facility STRING,
 	event_facility_namespace_id STRING,
 	event_facility_universal_id STRING,
-	event_facility_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	event_facility_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11857,6 +12010,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=EVN'
 DROP TABLE hl7.hl7_fac_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_fac (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -11929,6 +12084,8 @@ CREATE EXTERNAL TABLE hl7.hl7_fac (
 	facility_address_census_tract_second_alternate_value_set_version_id STRING,
 	facility_address_address_representation_code STRING,
 	facility_address_address_validity_range STRING,
+	facility_address_address_validity_range_range_start_date_time STRING,
+	facility_address_address_validity_range_range_end_date_time STRING,
 	facility_address_effective_date STRING,
 	facility_address_expiration_date STRING,
 	facility_address_expiration_reason STRING,
@@ -12132,6 +12289,8 @@ CREATE EXTERNAL TABLE hl7.hl7_fac (
 	contact_person_name_context_second_alternate_value_set_oid STRING,
 	contact_person_name_context_second_alternate_value_set_version_id STRING,
 	contact_person_name_validity_range STRING,
+	contact_person_name_validity_range_range_start_date_time STRING,
+	contact_person_name_validity_range_range_end_date_time STRING,
 	contact_person_name_assembly_order STRING,
 	contact_person_effective_date STRING,
 	contact_person_expiration_date STRING,
@@ -12245,6 +12404,8 @@ CREATE EXTERNAL TABLE hl7.hl7_fac (
 	contact_address_census_tract_second_alternate_value_set_version_id STRING,
 	contact_address_address_representation_code STRING,
 	contact_address_address_validity_range STRING,
+	contact_address_address_validity_range_range_start_date_time STRING,
+	contact_address_address_validity_range_range_end_date_time STRING,
 	contact_address_effective_date STRING,
 	contact_address_expiration_date STRING,
 	contact_address_expiration_reason STRING,
@@ -12448,6 +12609,8 @@ CREATE EXTERNAL TABLE hl7.hl7_fac (
 	signature_authority_name_context_second_alternate_value_set_oid STRING,
 	signature_authority_name_context_second_alternate_value_set_version_id STRING,
 	signature_authority_name_validity_range STRING,
+	signature_authority_name_validity_range_range_start_date_time STRING,
+	signature_authority_name_validity_range_range_end_date_time STRING,
 	signature_authority_name_assembly_order STRING,
 	signature_authority_effective_date STRING,
 	signature_authority_expiration_date STRING,
@@ -12561,6 +12724,8 @@ CREATE EXTERNAL TABLE hl7.hl7_fac (
 	signature_authority_address_census_tract_second_alternate_value_set_version_id STRING,
 	signature_authority_address_address_representation_code STRING,
 	signature_authority_address_address_validity_range STRING,
+	signature_authority_address_address_validity_range_range_start_date_time STRING,
+	signature_authority_address_address_validity_range_range_end_date_time STRING,
 	signature_authority_address_effective_date STRING,
 	signature_authority_address_expiration_date STRING,
 	signature_authority_address_expiration_reason STRING,
@@ -12690,15 +12855,14 @@ CREATE EXTERNAL TABLE hl7.hl7_fac (
 	signature_authority_telecommunication_shared_telecommunication_id_namespace_id STRING,
 	signature_authority_telecommunication_shared_telecommunication_id_universal_id STRING,
 	signature_authority_telecommunication_shared_telecommunication_id_universal_id_type STRING,
-	signature_authority_telecommunication_preference_order STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	signature_authority_telecommunication_preference_order STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12707,6 +12871,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FAC'
 DROP TABLE hl7.hl7_fhs_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_fhs (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -12744,15 +12910,14 @@ CREATE EXTERNAL TABLE hl7.hl7_fhs (
 	file_receiving_network_address STRING,
 	file_receiving_network_address_namespace_id STRING,
 	file_receiving_network_address_universal_id STRING,
-	file_receiving_network_address_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	file_receiving_network_address_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12761,6 +12926,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FHS'
 DROP TABLE hl7.hl7_ft1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ft1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -12770,7 +12937,7 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	set_id STRING,
 	transaction_id STRING,
 	transaction_batch_id STRING,
-	_transaction_date STRING,
+	transaction_date STRING,
 	transaction_date_range_start_date_time STRING,
 	transaction_date_range_end_date_time STRING,
 	transaction_posting_date STRING,
@@ -13141,6 +13308,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	performed_by_code_name_context_second_alternate_value_set_oid STRING,
 	performed_by_code_name_context_second_alternate_value_set_version_id STRING,
 	performed_by_code_name_validity_range STRING,
+	performed_by_code_name_validity_range_range_start_date_time STRING,
+	performed_by_code_name_validity_range_range_end_date_time STRING,
 	performed_by_code_name_assembly_order STRING,
 	performed_by_code_effective_date STRING,
 	performed_by_code_expiration_date STRING,
@@ -13266,6 +13435,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	ordered_by_code_name_context_second_alternate_value_set_oid STRING,
 	ordered_by_code_name_context_second_alternate_value_set_version_id STRING,
 	ordered_by_code_name_validity_range STRING,
+	ordered_by_code_name_validity_range_range_start_date_time STRING,
+	ordered_by_code_name_validity_range_range_end_date_time STRING,
 	ordered_by_code_name_assembly_order STRING,
 	ordered_by_code_effective_date STRING,
 	ordered_by_code_expiration_date STRING,
@@ -13427,6 +13598,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	entered_by_code_name_context_second_alternate_value_set_oid STRING,
 	entered_by_code_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_code_name_validity_range STRING,
+	entered_by_code_name_validity_range_range_start_date_time STRING,
+	entered_by_code_name_validity_range_range_end_date_time STRING,
 	entered_by_code_name_assembly_order STRING,
 	entered_by_code_effective_date STRING,
 	entered_by_code_expiration_date STRING,
@@ -14003,15 +14176,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ft1 (
 	ndc_qty_and_uom_units_alternate_value_set_version_id STRING,
 	ndc_qty_and_uom_units_second_alternate_coding_system_oid STRING,
 	ndc_qty_and_uom_units_second_alternate_value_set_oid STRING,
-	ndc_qty_and_uom_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	ndc_qty_and_uom_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14020,6 +14192,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FT1'
 DROP TABLE hl7.hl7_fts_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_fts (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14027,15 +14201,14 @@ CREATE EXTERNAL TABLE hl7.hl7_fts (
 	patient_account_num STRING,
 	unknown STRING,
 	file_batch_count STRING,
-	file_trailer_comment STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	file_trailer_comment STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14044,6 +14217,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=FTS'
 DROP TABLE hl7.hl7_gol_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_gol (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14161,6 +14336,54 @@ CREATE EXTERNAL TABLE hl7.hl7_gol (
 	next_goal_review_date_time STRING,
 	previous_goal_review_date_time STRING,
 	goal_review_interval STRING,
+	goal_review_interval_quantity STRING,
+	goal_review_interval_interval STRING,
+	goal_review_interval_interval_repeat_pattern STRING,
+	goal_review_interval_interval_explicit_time_interval STRING,
+	goal_review_interval_duration STRING,
+	goal_review_interval_start_date_time STRING,
+	goal_review_interval_end_date_time STRING,
+	goal_review_interval_priority STRING,
+	goal_review_interval_condition STRING,
+	goal_review_interval_text STRING,
+	goal_review_interval_text_text_data STRING,
+	goal_review_interval_conjunction STRING,
+	goal_review_interval_order_sequencing STRING,
+	goal_review_interval_order_sequencing_sequence_results_flag STRING,
+	goal_review_interval_order_sequencing_placer_order_num_entity_id STRING,
+	goal_review_interval_order_sequencing_placer_order_num_namespace_id STRING,
+	goal_review_interval_order_sequencing_filler_order_num_entity_id STRING,
+	goal_review_interval_order_sequencing_filler_order_num_namespace_id STRING,
+	goal_review_interval_order_sequencing_sequence_condition_value STRING,
+	goal_review_interval_order_sequencing_maximum_num_of_repeats STRING,
+	goal_review_interval_order_sequencing_placer_order_num_universal_id STRING,
+	goal_review_interval_order_sequencing_placer_order_num_universal_id_type STRING,
+	goal_review_interval_order_sequencing_filler_order_num_universal_id STRING,
+	goal_review_interval_order_sequencing_filler_order_num_universal_id_type STRING,
+	goal_review_interval_occurrence_duration STRING,
+	goal_review_interval_occurrence_duration_id STRING,
+	goal_review_interval_occurrence_duration_text STRING,
+	goal_review_interval_occurrence_duration_name_of_coding_system STRING,
+	goal_review_interval_occurrence_duration_alternate_id STRING,
+	goal_review_interval_occurrence_duration_alternate_text STRING,
+	goal_review_interval_occurrence_duration_name_of_alternate_coding_system STRING,
+	goal_review_interval_occurrence_duration_coding_system_version_id STRING,
+	goal_review_interval_occurrence_duration_alternate_coding_system_version_id STRING,
+	goal_review_interval_occurrence_duration_original_text STRING,
+	goal_review_interval_occurrence_duration_second_alternate_id STRING,
+	goal_review_interval_occurrence_duration_second_alternate_text STRING,
+	goal_review_interval_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	goal_review_interval_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	goal_review_interval_occurrence_duration_coding_system_oid STRING,
+	goal_review_interval_occurrence_duration_value_set_oid STRING,
+	goal_review_interval_occurrence_duration_value_set_version_id STRING,
+	goal_review_interval_occurrence_duration_alternate_coding_system_oid STRING,
+	goal_review_interval_occurrence_duration_alternate_value_set_oid STRING,
+	goal_review_interval_occurrence_duration_alternate_value_set_version_id STRING,
+	goal_review_interval_occurrence_duration_second_alternate_coding_system_oid STRING,
+	goal_review_interval_occurrence_duration_second_alternate_value_set_oid STRING,
+	goal_review_interval_occurrence_duration_second_alternate_value_set_version_id STRING,
+	goal_review_interval_total_occurrences STRING,
 	goal_evaluation STRING,
 	goal_evaluation_id STRING,
 	goal_evaluation_text STRING,
@@ -14270,6 +14493,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gol (
 	goal_target_name_name_context_second_alternate_value_set_oid STRING,
 	goal_target_name_name_context_second_alternate_value_set_version_id STRING,
 	goal_target_name_name_validity_range STRING,
+	goal_target_name_name_validity_range_range_start_date_time STRING,
+	goal_target_name_name_validity_range_range_end_date_time STRING,
 	goal_target_name_name_assembly_order STRING,
 	goal_target_name_effective_date STRING,
 	goal_target_name_expiration_date STRING,
@@ -14297,15 +14522,14 @@ CREATE EXTERNAL TABLE hl7.hl7_gol (
 	mood_code_alternate_value_set_version_id STRING,
 	mood_code_second_alternate_coding_system_oid STRING,
 	mood_code_second_alternate_value_set_oid STRING,
-	mood_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	mood_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14314,6 +14538,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GOL'
 DROP TABLE hl7.hl7_gp1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_gp1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14442,15 +14668,14 @@ CREATE EXTERNAL TABLE hl7.hl7_gp1 (
 	outlier_cost_range_units_second_alternate_coding_system_oid STRING,
 	outlier_cost_range_units_second_alternate_value_set_oid STRING,
 	outlier_cost_range_units_second_alternate_value_set_version_id STRING,
-	outlier_cost_range_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	outlier_cost_range_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14459,6 +14684,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP1'
 DROP TABLE hl7.hl7_gp2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_gp2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14766,15 +14993,14 @@ CREATE EXTERNAL TABLE hl7.hl7_gp2 (
 	copay_amt_range_units_second_alternate_value_set_oid STRING,
 	copay_amt_range_units_second_alternate_value_set_version_id STRING,
 	copay_amt_range_type STRING,
-	pay_rate_per_service_unit STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	pay_rate_per_service_unit STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14783,6 +15009,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GP2'
 DROP TABLE hl7.hl7_gt1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_gt1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -14891,6 +15119,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_name_name_context_second_alternate_value_set_oid STRING,
 	guarantor_name_name_context_second_alternate_value_set_version_id STRING,
 	guarantor_name_name_validity_range STRING,
+	guarantor_name_name_validity_range_range_start_date_time STRING,
+	guarantor_name_name_validity_range_range_end_date_time STRING,
 	guarantor_name_name_assembly_order STRING,
 	guarantor_name_effective_date STRING,
 	guarantor_name_expiration_date STRING,
@@ -14934,6 +15164,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_spouse_name_name_context_second_alternate_value_set_oid STRING,
 	guarantor_spouse_name_name_context_second_alternate_value_set_version_id STRING,
 	guarantor_spouse_name_name_validity_range STRING,
+	guarantor_spouse_name_name_validity_range_range_start_date_time STRING,
+	guarantor_spouse_name_name_validity_range_range_end_date_time STRING,
 	guarantor_spouse_name_name_assembly_order STRING,
 	guarantor_spouse_name_effective_date STRING,
 	guarantor_spouse_name_expiration_date STRING,
@@ -14999,6 +15231,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_address_census_tract_second_alternate_value_set_version_id STRING,
 	guarantor_address_address_representation_code STRING,
 	guarantor_address_address_validity_range STRING,
+	guarantor_address_address_validity_range_range_start_date_time STRING,
+	guarantor_address_address_validity_range_range_end_date_time STRING,
 	guarantor_address_effective_date STRING,
 	guarantor_address_expiration_date STRING,
 	guarantor_address_expiration_reason STRING,
@@ -15312,6 +15546,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_name_name_context_second_alternate_value_set_oid STRING,
 	guarantor_employer_name_name_context_second_alternate_value_set_version_id STRING,
 	guarantor_employer_name_name_validity_range STRING,
+	guarantor_employer_name_name_validity_range_range_start_date_time STRING,
+	guarantor_employer_name_name_validity_range_range_end_date_time STRING,
 	guarantor_employer_name_name_assembly_order STRING,
 	guarantor_employer_name_effective_date STRING,
 	guarantor_employer_name_expiration_date STRING,
@@ -15377,6 +15613,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	guarantor_employer_address_census_tract_second_alternate_value_set_version_id STRING,
 	guarantor_employer_address_address_representation_code STRING,
 	guarantor_employer_address_address_validity_range STRING,
+	guarantor_employer_address_address_validity_range_range_start_date_time STRING,
+	guarantor_employer_address_address_validity_range_range_end_date_time STRING,
 	guarantor_employer_address_effective_date STRING,
 	guarantor_employer_address_expiration_date STRING,
 	guarantor_employer_address_expiration_reason STRING,
@@ -16024,6 +16262,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	mother_maiden_name_name_context_second_alternate_value_set_oid STRING,
 	mother_maiden_name_name_context_second_alternate_value_set_version_id STRING,
 	mother_maiden_name_name_validity_range STRING,
+	mother_maiden_name_name_validity_range_range_start_date_time STRING,
+	mother_maiden_name_name_validity_range_range_end_date_time STRING,
 	mother_maiden_name_name_assembly_order STRING,
 	mother_maiden_name_effective_date STRING,
 	mother_maiden_name_expiration_date STRING,
@@ -16113,6 +16353,8 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	contact_person_name_name_context_second_alternate_value_set_oid STRING,
 	contact_person_name_name_context_second_alternate_value_set_version_id STRING,
 	contact_person_name_name_validity_range STRING,
+	contact_person_name_name_validity_range_range_start_date_time STRING,
+	contact_person_name_name_validity_range_range_end_date_time STRING,
 	contact_person_name_name_assembly_order STRING,
 	contact_person_name_effective_date STRING,
 	contact_person_name_expiration_date STRING,
@@ -16444,169 +16686,18 @@ CREATE EXTERNAL TABLE hl7.hl7_gt1 (
 	vip_indicator_second_alternate_value_set_version_id STRING,
 	guarantor_employer_name_name_validity_range_eff_from_date_time STRING,
 	guarantor_employer_name_name_validity_range_eff_to_date_time STRING,
-	guarantor_employer_address_street_address1 STRING,
-	guarantor_employer_address_street_address1_street_mailing_address STRING,
+	guarantor_employer_address_street_address1_street_or_mailing_address STRING,
 	guarantor_employer_address_street_address1_street_name STRING,
 	guarantor_employer_address_street_address1_dwelling_num STRING,
-	guarantor_employer_address_street_address2 STRING,
-	guarantor_employer_address_state_province STRING,
-	guarantor_employer_address_zip_postal_code STRING,
-	guarantor_employer_address_other_geo_designation STRING,
-	guarantor_employer_address_county_parish_code_primary_id STRING,
-	guarantor_employer_address_county_parish_code_name_of_coding_sys STRING,
-	guarantor_employer_address_county_parish_code_alt_id STRING,
-	guarantor_employer_address_county_parish_code_alt_text STRING,
-	guarantor_employer_address_county_parish_code_name_of_alt_coding_sys STRING,
-	guarantor_employer_address_county_parish_code_coding_sys_ver_id STRING,
-	guarantor_employer_address_county_parish_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_county_parish_code_second_alt_id STRING,
-	guarantor_employer_address_county_parish_code_second_alt_text STRING,
-	guarantor_employer_address_county_parish_code_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_address_county_parish_code_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_county_parish_code_coding_sys_oid STRING,
-	guarantor_employer_address_county_parish_code_value_set_ver_id STRING,
-	guarantor_employer_address_county_parish_code_alt_coding_sys_oid STRING,
-	guarantor_employer_address_county_parish_code_alt_value_set_oid STRING,
-	guarantor_employer_address_county_parish_code_alt_value_set_ver_id STRING,
-	guarantor_employer_address_county_parish_code_second_alt_coding_sys_oid STRING,
-	guarantor_employer_address_county_parish_code_second_alt_value_set_oid STRING,
-	guarantor_employer_address_county_parish_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_census_tract_primary_id STRING,
-	guarantor_employer_address_census_tract_name_of_coding_sys STRING,
-	guarantor_employer_address_census_tract_alt_id STRING,
-	guarantor_employer_address_census_tract_alt_text STRING,
-	guarantor_employer_address_census_tract_name_of_alt_coding_sys STRING,
-	guarantor_employer_address_census_tract_coding_sys_ver_id STRING,
-	guarantor_employer_address_census_tract_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_census_tract_second_alt_id STRING,
-	guarantor_employer_address_census_tract_second_alt_text STRING,
-	guarantor_employer_address_census_tract_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_address_census_tract_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_census_tract_coding_sys_oid STRING,
-	guarantor_employer_address_census_tract_value_set_ver_id STRING,
-	guarantor_employer_address_census_tract_alt_coding_sys_oid STRING,
-	guarantor_employer_address_census_tract_alt_value_set_oid STRING,
-	guarantor_employer_address_census_tract_alt_value_set_ver_id STRING,
-	guarantor_employer_address_census_tract_second_alt_coding_sys_oid STRING,
-	guarantor_employer_address_census_tract_second_alt_value_set_oid STRING,
-	guarantor_employer_address_census_tract_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_rep_code STRING,
-	guarantor_employer_address_validity_range STRING,
-	guarantor_employer_address_validity_range_eff_from_date_time STRING,
-	guarantor_employer_address_validity_range_eff_to_date_time STRING,
-	guarantor_employer_address_eff_from_date_time STRING,
-	guarantor_employer_address_eff_to_date_time STRING,
-	guarantor_employer_address_expr_reason STRING,
-	guarantor_employer_address_expr_reason_primary_id STRING,
-	guarantor_employer_address_expr_reason_text STRING,
-	guarantor_employer_address_expr_reason_name_of_coding_sys STRING,
-	guarantor_employer_address_expr_reason_alt_id STRING,
-	guarantor_employer_address_expr_reason_alt_text STRING,
-	guarantor_employer_address_expr_reason_name_of_alt_coding_sys STRING,
-	guarantor_employer_address_expr_reason_coding_sys_ver_id STRING,
-	guarantor_employer_address_expr_reason_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_expr_reason_original_text STRING,
-	guarantor_employer_address_expr_reason_second_alt_id STRING,
-	guarantor_employer_address_expr_reason_second_alt_text STRING,
-	guarantor_employer_address_expr_reason_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_address_expr_reason_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_expr_reason_coding_sys_oid STRING,
-	guarantor_employer_address_expr_reason_value_set_oid STRING,
-	guarantor_employer_address_expr_reason_value_set_ver_id STRING,
-	guarantor_employer_address_expr_reason_alt_coding_sys_oid STRING,
-	guarantor_employer_address_expr_reason_alt_value_set_oid STRING,
-	guarantor_employer_address_expr_reason_alt_value_set_ver_id STRING,
-	guarantor_employer_address_expr_reason_second_alt_coding_sys_oid STRING,
-	guarantor_employer_address_expr_reason_second_alt_value_set_oid STRING,
-	guarantor_employer_address_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_address_bad_indicator STRING,
-	guarantor_employer_address_bad_address_indicatorgt1_guarantor_employer_address_bad_address_indicator STRING,
-	guarantor_employer_address_address_comment STRING,
-	guarantor_employer_address_pref_order STRING,
-	guarantor_employer_address_protection_code_primary_id STRING,
-	guarantor_employer_address_protection_code_name_of_coding_sys STRING,
-	guarantor_employer_address_protection_code_alt_id STRING,
-	guarantor_employer_address_protection_code_alt_text STRING,
-	guarantor_employer_address_protection_code_name_of_alt_coding_sys STRING,
-	guarantor_employer_address_protection_code_coding_sys_ver_id STRING,
-	guarantor_employer_address_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_protection_code_second_alt_id STRING,
-	guarantor_employer_address_protection_code_second_alt_text STRING,
-	guarantor_employer_address_protection_code_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_address_protection_code_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_address_protection_code_coding_sys_oid STRING,
-	guarantor_employer_address_protection_code_value_set_ver_id STRING,
-	guarantor_employer_address_protection_code_alt_coding_sys_oid STRING,
-	guarantor_employer_address_protection_code_alt_value_set_oid STRING,
-	guarantor_employer_address_protection_code_alt_value_set_ver_id STRING,
-	guarantor_employer_address_protection_code_second_alt_coding_sys_oid STRING,
-	guarantor_employer_address_protection_code_second_alt_value_set_oid STRING,
-	guarantor_employer_address_protection_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_formatted_num STRING,
-	guarantor_employer_phone_num_use_code STRING,
-	guarantor_employer_phone_num_equipment_type STRING,
-	guarantor_employer_phone_num_comm_address STRING,
-	guarantor_employer_phone_num_local_number STRING,
-	guarantor_employer_phone_num_unformatted_num STRING,
-	guarantor_employer_phone_num_eff_from_date STRING,
-	guarantor_employer_phone_num_eff_to_date STRING,
-	guarantor_employer_phone_num_expr_reason STRING,
-	guarantor_employer_phone_num_expr_reason_primary_id STRING,
-	guarantor_employer_phone_num_expr_reason_text STRING,
-	guarantor_employer_phone_num_expr_reason_name_of_coding_sys STRING,
-	guarantor_employer_phone_num_expr_reason_alt_id STRING,
-	guarantor_employer_phone_num_expr_reason_alt_text STRING,
-	guarantor_employer_phone_num_expr_reason_name_of_alt_coding_sys STRING,
-	guarantor_employer_phone_num_expr_reason_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_expr_reason_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_expr_reason_original_text STRING,
-	guarantor_employer_phone_num_expr_reason_second_alt_id STRING,
-	guarantor_employer_phone_num_expr_reason_second_alt_text STRING,
-	guarantor_employer_phone_num_expr_reason_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_phone_num_expr_reason_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_expr_reason_coding_sys_oid STRING,
-	guarantor_employer_phone_num_expr_reason_value_set_oid STRING,
-	guarantor_employer_phone_num_expr_reason_value_set_ver_id STRING,
-	guarantor_employer_phone_num_expr_reason_alt_coding_sys_oid STRING,
-	guarantor_employer_phone_num_expr_reason_alt_value_set_oid STRING,
-	guarantor_employer_phone_num_expr_reason_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_expr_reason_second_alt_coding_sys_oid STRING,
-	guarantor_employer_phone_num_expr_reason_second_alt_value_set_oid STRING,
-	guarantor_employer_phone_num_expr_reason_second_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_primary_id STRING,
-	guarantor_employer_phone_num_protection_code_name_of_coding_sys STRING,
-	guarantor_employer_phone_num_protection_code_alt_id STRING,
-	guarantor_employer_phone_num_protection_code_alt_text STRING,
-	guarantor_employer_phone_num_protection_code_name_of_alt_coding_sys STRING,
-	guarantor_employer_phone_num_protection_code_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_second_alt_id STRING,
-	guarantor_employer_phone_num_protection_code_second_alt_text STRING,
-	guarantor_employer_phone_num_protection_code_name_of_second_alt_coding_sys STRING,
-	guarantor_employer_phone_num_protection_code_second_alt_coding_sys_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_coding_sys_oid STRING,
-	guarantor_employer_phone_num_protection_code_value_set_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_alt_coding_sys_oid STRING,
-	guarantor_employer_phone_num_protection_code_alt_value_set_oid STRING,
-	guarantor_employer_phone_num_protection_code_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_protection_code_second_alt_coding_sys_oid STRING,
-	guarantor_employer_phone_num_protection_code_second_alt_value_set_oid STRING,
-	guarantor_employer_phone_num_protection_code_second_alt_value_set_ver_id STRING,
-	guarantor_employer_phone_num_shared_id STRING,
-	guarantor_employer_phone_num_shared_id_entity_id STRING,
-	guarantor_employer_phone_num_shared_id_namespace_id STRING,
-	guarantor_employer_phone_num_shared_id_universal_id STRING,
-	guarantor_employer_phone_num_shared_id_universal_id_type STRING,
-	guarantor_employer_phone_num_pref_order STRING,
-	unknown STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	guarantor_employer_address_address_validity_range_eff_from_date_time STRING,
+	guarantor_employer_address_address_validity_range_eff_to_date_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -16615,6 +16706,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=GT1'
 DROP TABLE hl7.hl7_iam_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_iam (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -16808,6 +16901,8 @@ CREATE EXTERNAL TABLE hl7.hl7_iam (
 	reported_by_name_context_second_alternate_value_set_oid STRING,
 	reported_by_name_context_second_alternate_value_set_version_id STRING,
 	reported_by_name_validity_range STRING,
+	reported_by_name_validity_range_range_start_date_time STRING,
+	reported_by_name_validity_range_range_end_date_time STRING,
 	reported_by_name_assembly_order STRING,
 	reported_by_effective_date STRING,
 	reported_by_expiration_date STRING,
@@ -16955,6 +17050,8 @@ CREATE EXTERNAL TABLE hl7.hl7_iam (
 	statused_by_person_name_context_second_alternate_value_set_oid STRING,
 	statused_by_person_name_context_second_alternate_value_set_version_id STRING,
 	statused_by_person_name_validity_range STRING,
+	statused_by_person_name_validity_range_range_start_date_time STRING,
+	statused_by_person_name_validity_range_range_end_date_time STRING,
 	statused_by_person_name_assembly_order STRING,
 	statused_by_person_effective_date STRING,
 	statused_by_person_expiration_date STRING,
@@ -17120,6 +17217,8 @@ CREATE EXTERNAL TABLE hl7.hl7_iam (
 	inactivated_by_person_name_context_second_alternate_value_set_oid STRING,
 	inactivated_by_person_name_context_second_alternate_value_set_version_id STRING,
 	inactivated_by_person_name_validity_range STRING,
+	inactivated_by_person_name_validity_range_range_start_date_time STRING,
+	inactivated_by_person_name_validity_range_range_end_date_time STRING,
 	inactivated_by_person_name_assembly_order STRING,
 	inactivated_by_person_effective_date STRING,
 	inactivated_by_person_expiration_date STRING,
@@ -17246,6 +17345,8 @@ CREATE EXTERNAL TABLE hl7.hl7_iam (
 	initially_recorded_by_person_name_context_second_alternate_value_set_oid STRING,
 	initially_recorded_by_person_name_context_second_alternate_value_set_version_id STRING,
 	initially_recorded_by_person_name_validity_range STRING,
+	initially_recorded_by_person_name_validity_range_range_start_date_time STRING,
+	initially_recorded_by_person_name_validity_range_range_end_date_time STRING,
 	initially_recorded_by_person_name_assembly_order STRING,
 	initially_recorded_by_person_effective_date STRING,
 	initially_recorded_by_person_expiration_date STRING,
@@ -17372,6 +17473,8 @@ CREATE EXTERNAL TABLE hl7.hl7_iam (
 	modified_by_person_name_context_second_alternate_value_set_oid STRING,
 	modified_by_person_name_context_second_alternate_value_set_version_id STRING,
 	modified_by_person_name_validity_range STRING,
+	modified_by_person_name_validity_range_range_start_date_time STRING,
+	modified_by_person_name_validity_range_range_end_date_time STRING,
 	modified_by_person_name_assembly_order STRING,
 	modified_by_person_effective_date STRING,
 	modified_by_person_expiration_date STRING,
@@ -17564,15 +17667,14 @@ CREATE EXTERNAL TABLE hl7.hl7_iam (
 	inactivated_by_organization_assigning_facility_universal_id STRING,
 	inactivated_by_organization_assigning_facility_universal_id_type STRING,
 	inactivated_by_organization_name_representation_code STRING,
-	inactivated_by_organization_organization_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	inactivated_by_organization_organization_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17581,6 +17683,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAM'
 DROP TABLE hl7.hl7_iar_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_iar (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -17656,15 +17760,14 @@ CREATE EXTERNAL TABLE hl7.hl7_iar (
 	sensitivity_to_causative_agent_code_second_alternate_coding_system_oid STRING,
 	sensitivity_to_causative_agent_code_second_alternate_value_set_oid STRING,
 	sensitivity_to_causative_agent_code_second_alternate_value_set_version_id STRING,
-	management STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	management STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17673,6 +17776,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IAR'
 DROP TABLE hl7.hl7_iim_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_iim (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -17871,15 +17976,14 @@ CREATE EXTERNAL TABLE hl7.hl7_iim (
 	procedure_code_modifier_alternate_value_set_version_id STRING,
 	procedure_code_modifier_second_alternate_coding_system_oid STRING,
 	procedure_code_modifier_second_alternate_value_set_oid STRING,
-	procedure_code_modifier_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	procedure_code_modifier_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17888,6 +17992,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IIM'
 DROP TABLE hl7.hl7_ilt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ilt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -17949,15 +18055,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ilt (
 	inventory_on_hand_quantity_unit_alternate_value_set_version_id STRING,
 	inventory_on_hand_quantity_unit_second_alternate_coding_system_oid STRING,
 	inventory_on_hand_quantity_unit_second_alternate_value_set_oid STRING,
-	inventory_on_hand_quantity_unit_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	inventory_on_hand_quantity_unit_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17966,6 +18071,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ILT'
 DROP TABLE hl7.hl7_in1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_in1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -18158,6 +18265,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	insurance_company_address_census_tract_second_alternate_value_set_version_id STRING,
 	insurance_company_address_address_representation_code STRING,
 	insurance_company_address_address_validity_range STRING,
+	insurance_company_address_address_validity_range_range_start_date_time STRING,
+	insurance_company_address_address_validity_range_range_end_date_time STRING,
 	insurance_company_address_effective_date STRING,
 	insurance_company_address_expiration_date STRING,
 	insurance_company_address_expiration_reason STRING,
@@ -18255,6 +18364,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	insurance_company_contact_person_name_context_second_alternate_value_set_oid STRING,
 	insurance_company_contact_person_name_context_second_alternate_value_set_version_id STRING,
 	insurance_company_contact_person_name_validity_range STRING,
+	insurance_company_contact_person_name_validity_range_range_start_date_time STRING,
+	insurance_company_contact_person_name_validity_range_range_end_date_time STRING,
 	insurance_company_contact_person_name_assembly_order STRING,
 	insurance_company_contact_person_effective_date STRING,
 	insurance_company_contact_person_expiration_date STRING,
@@ -18540,6 +18651,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	name_of_insured_name_context_second_alternate_value_set_oid STRING,
 	name_of_insured_name_context_second_alternate_value_set_version_id STRING,
 	name_of_insured_name_validity_range STRING,
+	name_of_insured_name_validity_range_range_start_date_time STRING,
+	name_of_insured_name_validity_range_range_end_date_time STRING,
 	name_of_insured_name_assembly_order STRING,
 	name_of_insured_effective_date STRING,
 	name_of_insured_expiration_date STRING,
@@ -18629,6 +18742,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	insured_address_census_tract_second_alternate_value_set_version_id STRING,
 	insured_address_address_representation_code STRING,
 	insured_address_address_validity_range STRING,
+	insured_address_address_validity_range_range_start_date_time STRING,
+	insured_address_address_validity_range_range_end_date_time STRING,
 	insured_address_effective_date STRING,
 	insured_address_expiration_date STRING,
 	insured_address_expiration_reason STRING,
@@ -18837,6 +18952,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	verification_by_name_context_second_alternate_value_set_oid STRING,
 	verification_by_name_context_second_alternate_value_set_version_id STRING,
 	verification_by_name_validity_range STRING,
+	verification_by_name_validity_range_range_start_date_time STRING,
+	verification_by_name_validity_range_range_end_date_time STRING,
 	verification_by_name_assembly_order STRING,
 	verification_by_effective_date STRING,
 	verification_by_expiration_date STRING,
@@ -18993,9 +19110,99 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	policy_deductible_range_units_second_alternate_value_set_version_id STRING,
 	policy_deductible_range_type STRING,
 	policy_limit_amt STRING,
+	policy_limit_amt_price STRING,
+	policy_limit_amt_price_quantity STRING,
+	policy_limit_amt_price_denomination STRING,
+	policy_limit_amt_price_type STRING,
+	policy_limit_amt_from_value STRING,
+	policy_limit_amt_to_value STRING,
+	policy_limit_amt_range_units STRING,
+	policy_limit_amt_range_units_id STRING,
+	policy_limit_amt_range_units_text STRING,
+	policy_limit_amt_range_units_name_of_coding_system STRING,
+	policy_limit_amt_range_units_alternate_id STRING,
+	policy_limit_amt_range_units_alternate_text STRING,
+	policy_limit_amt_range_units_name_of_alternate_coding_system STRING,
+	policy_limit_amt_range_units_coding_system_version_id STRING,
+	policy_limit_amt_range_units_alternate_coding_system_version_id STRING,
+	policy_limit_amt_range_units_original_text STRING,
+	policy_limit_amt_range_units_second_alternate_id STRING,
+	policy_limit_amt_range_units_second_alternate_text STRING,
+	policy_limit_amt_range_units_name_of_second_alternate_coding_system STRING,
+	policy_limit_amt_range_units_second_alternate_coding_system_version_id STRING,
+	policy_limit_amt_range_units_coding_system_oid STRING,
+	policy_limit_amt_range_units_value_set_oid STRING,
+	policy_limit_amt_range_units_value_set_version_id STRING,
+	policy_limit_amt_range_units_alternate_coding_system_oid STRING,
+	policy_limit_amt_range_units_alternate_value_set_oid STRING,
+	policy_limit_amt_range_units_alternate_value_set_version_id STRING,
+	policy_limit_amt_range_units_second_alternate_coding_system_oid STRING,
+	policy_limit_amt_range_units_second_alternate_value_set_oid STRING,
+	policy_limit_amt_range_units_second_alternate_value_set_version_id STRING,
+	policy_limit_amt_range_type STRING,
 	policy_limit_days STRING,
 	room_rate_semi_private STRING,
+	room_rate_semi_private_price STRING,
+	room_rate_semi_private_price_quantity STRING,
+	room_rate_semi_private_price_denomination STRING,
+	room_rate_semi_private_price_type STRING,
+	room_rate_semi_private_from_value STRING,
+	room_rate_semi_private_to_value STRING,
+	room_rate_semi_private_range_units STRING,
+	room_rate_semi_private_range_units_id STRING,
+	room_rate_semi_private_range_units_text STRING,
+	room_rate_semi_private_range_units_name_of_coding_system STRING,
+	room_rate_semi_private_range_units_alternate_id STRING,
+	room_rate_semi_private_range_units_alternate_text STRING,
+	room_rate_semi_private_range_units_name_of_alternate_coding_system STRING,
+	room_rate_semi_private_range_units_coding_system_version_id STRING,
+	room_rate_semi_private_range_units_alternate_coding_system_version_id STRING,
+	room_rate_semi_private_range_units_original_text STRING,
+	room_rate_semi_private_range_units_second_alternate_id STRING,
+	room_rate_semi_private_range_units_second_alternate_text STRING,
+	room_rate_semi_private_range_units_name_of_second_alternate_coding_system STRING,
+	room_rate_semi_private_range_units_second_alternate_coding_system_version_id STRING,
+	room_rate_semi_private_range_units_coding_system_oid STRING,
+	room_rate_semi_private_range_units_value_set_oid STRING,
+	room_rate_semi_private_range_units_value_set_version_id STRING,
+	room_rate_semi_private_range_units_alternate_coding_system_oid STRING,
+	room_rate_semi_private_range_units_alternate_value_set_oid STRING,
+	room_rate_semi_private_range_units_alternate_value_set_version_id STRING,
+	room_rate_semi_private_range_units_second_alternate_coding_system_oid STRING,
+	room_rate_semi_private_range_units_second_alternate_value_set_oid STRING,
+	room_rate_semi_private_range_units_second_alternate_value_set_version_id STRING,
+	room_rate_semi_private_range_type STRING,
 	room_rate_private STRING,
+	room_rate_private_price STRING,
+	room_rate_private_price_quantity STRING,
+	room_rate_private_price_denomination STRING,
+	room_rate_private_price_type STRING,
+	room_rate_private_from_value STRING,
+	room_rate_private_to_value STRING,
+	room_rate_private_range_units STRING,
+	room_rate_private_range_units_id STRING,
+	room_rate_private_range_units_text STRING,
+	room_rate_private_range_units_name_of_coding_system STRING,
+	room_rate_private_range_units_alternate_id STRING,
+	room_rate_private_range_units_alternate_text STRING,
+	room_rate_private_range_units_name_of_alternate_coding_system STRING,
+	room_rate_private_range_units_coding_system_version_id STRING,
+	room_rate_private_range_units_alternate_coding_system_version_id STRING,
+	room_rate_private_range_units_original_text STRING,
+	room_rate_private_range_units_second_alternate_id STRING,
+	room_rate_private_range_units_second_alternate_text STRING,
+	room_rate_private_range_units_name_of_second_alternate_coding_system STRING,
+	room_rate_private_range_units_second_alternate_coding_system_version_id STRING,
+	room_rate_private_range_units_coding_system_oid STRING,
+	room_rate_private_range_units_value_set_oid STRING,
+	room_rate_private_range_units_value_set_version_id STRING,
+	room_rate_private_range_units_alternate_coding_system_oid STRING,
+	room_rate_private_range_units_alternate_value_set_oid STRING,
+	room_rate_private_range_units_alternate_value_set_version_id STRING,
+	room_rate_private_range_units_second_alternate_coding_system_oid STRING,
+	room_rate_private_range_units_second_alternate_value_set_oid STRING,
+	room_rate_private_range_units_second_alternate_value_set_version_id STRING,
+	room_rate_private_range_type STRING,
 	insured_employment_status STRING,
 	insured_employment_status_id STRING,
 	insured_employment_status_text STRING,
@@ -19102,6 +19309,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	insured_employer_address_census_tract_second_alternate_value_set_version_id STRING,
 	insured_employer_address_address_representation_code STRING,
 	insured_employer_address_address_validity_range STRING,
+	insured_employer_address_address_validity_range_range_start_date_time STRING,
+	insured_employer_address_address_validity_range_range_end_date_time STRING,
 	insured_employer_address_effective_date STRING,
 	insured_employer_address_expiration_date STRING,
 	insured_employer_address_expiration_reason STRING,
@@ -19406,15 +19615,14 @@ CREATE EXTERNAL TABLE hl7.hl7_in1 (
 	external_health_plan_ids_security_check STRING,
 	external_health_plan_ids_security_check_scheme STRING,
 	insurance_action_code STRING,
-	bill_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bill_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -19423,6 +19631,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN1'
 DROP TABLE hl7.hl7_in2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_in2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -19566,6 +19776,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	insured_employer_name_and_id_name_context_second_alternate_value_set_oid STRING,
 	insured_employer_name_and_id_name_context_second_alternate_value_set_version_id STRING,
 	insured_employer_name_and_id_name_validity_range STRING,
+	insured_employer_name_and_id_name_validity_range_range_start_date_time STRING,
+	insured_employer_name_and_id_name_validity_range_range_end_date_time STRING,
 	insured_employer_name_and_id_name_assembly_order STRING,
 	insured_employer_name_and_id_effective_date STRING,
 	insured_employer_name_and_id_expiration_date STRING,
@@ -19703,6 +19915,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	medicaid_case_name_name_context_second_alternate_value_set_oid STRING,
 	medicaid_case_name_name_context_second_alternate_value_set_version_id STRING,
 	medicaid_case_name_name_validity_range STRING,
+	medicaid_case_name_name_validity_range_range_start_date_time STRING,
+	medicaid_case_name_name_validity_range_range_end_date_time STRING,
 	medicaid_case_name_name_assembly_order STRING,
 	medicaid_case_name_effective_date STRING,
 	medicaid_case_name_expiration_date STRING,
@@ -19747,6 +19961,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	military_sponsor_name_name_context_second_alternate_value_set_oid STRING,
 	military_sponsor_name_name_context_second_alternate_value_set_version_id STRING,
 	military_sponsor_name_name_validity_range STRING,
+	military_sponsor_name_name_validity_range_range_start_date_time STRING,
+	military_sponsor_name_name_validity_range_range_end_date_time STRING,
 	military_sponsor_name_name_assembly_order STRING,
 	military_sponsor_name_effective_date STRING,
 	military_sponsor_name_expiration_date STRING,
@@ -19890,6 +20106,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	special_coverage_approval_name_name_context_second_alternate_value_set_oid STRING,
 	special_coverage_approval_name_name_context_second_alternate_value_set_version_id STRING,
 	special_coverage_approval_name_name_validity_range STRING,
+	special_coverage_approval_name_name_validity_range_range_start_date_time STRING,
+	special_coverage_approval_name_name_validity_range_range_end_date_time STRING,
 	special_coverage_approval_name_name_assembly_order STRING,
 	special_coverage_approval_name_effective_date STRING,
 	special_coverage_approval_name_expiration_date STRING,
@@ -20401,6 +20619,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	mother_maiden_name_name_context_second_alternate_value_set_oid STRING,
 	mother_maiden_name_name_context_second_alternate_value_set_version_id STRING,
 	mother_maiden_name_name_validity_range STRING,
+	mother_maiden_name_name_validity_range_range_start_date_time STRING,
+	mother_maiden_name_name_validity_range_range_end_date_time STRING,
 	mother_maiden_name_name_assembly_order STRING,
 	mother_maiden_name_effective_date STRING,
 	mother_maiden_name_expiration_date STRING,
@@ -20588,6 +20808,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	employer_contact_person_name_name_context_second_alternate_value_set_oid STRING,
 	employer_contact_person_name_name_context_second_alternate_value_set_version_id STRING,
 	employer_contact_person_name_name_validity_range STRING,
+	employer_contact_person_name_name_validity_range_range_start_date_time STRING,
+	employer_contact_person_name_name_validity_range_range_end_date_time STRING,
 	employer_contact_person_name_name_assembly_order STRING,
 	employer_contact_person_name_effective_date STRING,
 	employer_contact_person_name_expiration_date STRING,
@@ -20725,6 +20947,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	insured_contact_person_name_name_context_second_alternate_value_set_oid STRING,
 	insured_contact_person_name_name_context_second_alternate_value_set_version_id STRING,
 	insured_contact_person_name_name_validity_range STRING,
+	insured_contact_person_name_name_validity_range_range_start_date_time STRING,
+	insured_contact_person_name_name_validity_range_range_end_date_time STRING,
 	insured_contact_person_name_name_assembly_order STRING,
 	insured_contact_person_name_effective_date STRING,
 	insured_contact_person_name_expiration_date STRING,
@@ -21344,15 +21568,14 @@ CREATE EXTERNAL TABLE hl7.hl7_in2 (
 	patient_relationship_to_insured_second_alternate_coding_system_oid STRING,
 	patient_relationship_to_insured_second_alternate_value_set_oid STRING,
 	patient_relationship_to_insured_second_alternate_value_set_version_id STRING,
-	set_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	set_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -21361,6 +21584,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN2'
 DROP TABLE hl7.hl7_in3_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_in3 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -21504,6 +21729,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in3 (
 	certified_by_name_context_second_alternate_value_set_oid STRING,
 	certified_by_name_context_second_alternate_value_set_version_id STRING,
 	certified_by_name_validity_range STRING,
+	certified_by_name_validity_range_range_start_date_time STRING,
+	certified_by_name_validity_range_range_end_date_time STRING,
 	certified_by_name_assembly_order STRING,
 	certified_by_effective_date STRING,
 	certified_by_expiration_date STRING,
@@ -21636,6 +21863,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in3 (
 	operator_name_context_second_alternate_value_set_oid STRING,
 	operator_name_context_second_alternate_value_set_version_id STRING,
 	operator_name_validity_range STRING,
+	operator_name_validity_range_range_start_date_time STRING,
+	operator_name_validity_range_range_end_date_time STRING,
 	operator_name_assembly_order STRING,
 	operator_effective_date STRING,
 	operator_expiration_date STRING,
@@ -21812,6 +22041,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in3 (
 	physician_reviewer_name_context_second_alternate_value_set_oid STRING,
 	physician_reviewer_name_context_second_alternate_value_set_version_id STRING,
 	physician_reviewer_name_validity_range STRING,
+	physician_reviewer_name_validity_range_range_start_date_time STRING,
+	physician_reviewer_name_validity_range_range_end_date_time STRING,
 	physician_reviewer_name_assembly_order STRING,
 	physician_reviewer_effective_date STRING,
 	physician_reviewer_expiration_date STRING,
@@ -22200,6 +22431,8 @@ CREATE EXTERNAL TABLE hl7.hl7_in3 (
 	second_opinion_physician_name_context_second_alternate_value_set_oid STRING,
 	second_opinion_physician_name_context_second_alternate_value_set_version_id STRING,
 	second_opinion_physician_name_validity_range STRING,
+	second_opinion_physician_name_validity_range_range_start_date_time STRING,
+	second_opinion_physician_name_validity_range_range_end_date_time STRING,
 	second_opinion_physician_name_assembly_order STRING,
 	second_opinion_physician_effective_date STRING,
 	second_opinion_physician_expiration_date STRING,
@@ -22297,15 +22530,14 @@ CREATE EXTERNAL TABLE hl7.hl7_in3 (
 	certification_category_alternate_value_set_version_id STRING,
 	certification_category_second_alternate_coding_system_oid STRING,
 	certification_category_second_alternate_value_set_oid STRING,
-	certification_category_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	certification_category_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22314,6 +22546,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IN3'
 DROP TABLE hl7.hl7_inv_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_inv (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22488,6 +22722,54 @@ CREATE EXTERNAL TABLE hl7.hl7_inv (
 	expiration_date_time STRING,
 	first_used_date_time STRING,
 	on_board_stability_duration STRING,
+	on_board_stability_duration_quantity STRING,
+	on_board_stability_duration_interval STRING,
+	on_board_stability_duration_interval_repeat_pattern STRING,
+	on_board_stability_duration_interval_explicit_time_interval STRING,
+	on_board_stability_duration_duration STRING,
+	on_board_stability_duration_start_date_time STRING,
+	on_board_stability_duration_end_date_time STRING,
+	on_board_stability_duration_priority STRING,
+	on_board_stability_duration_condition STRING,
+	on_board_stability_duration_text STRING,
+	on_board_stability_duration_text_text_data STRING,
+	on_board_stability_duration_conjunction STRING,
+	on_board_stability_duration_order_sequencing STRING,
+	on_board_stability_duration_order_sequencing_sequence_results_flag STRING,
+	on_board_stability_duration_order_sequencing_placer_order_num_entity_id STRING,
+	on_board_stability_duration_order_sequencing_placer_order_num_namespace_id STRING,
+	on_board_stability_duration_order_sequencing_filler_order_num_entity_id STRING,
+	on_board_stability_duration_order_sequencing_filler_order_num_namespace_id STRING,
+	on_board_stability_duration_order_sequencing_sequence_condition_value STRING,
+	on_board_stability_duration_order_sequencing_maximum_num_of_repeats STRING,
+	on_board_stability_duration_order_sequencing_placer_order_num_universal_id STRING,
+	on_board_stability_duration_order_sequencing_placer_order_num_universal_id_type STRING,
+	on_board_stability_duration_order_sequencing_filler_order_num_universal_id STRING,
+	on_board_stability_duration_order_sequencing_filler_order_num_universal_id_type STRING,
+	on_board_stability_duration_occurrence_duration STRING,
+	on_board_stability_duration_occurrence_duration_id STRING,
+	on_board_stability_duration_occurrence_duration_text STRING,
+	on_board_stability_duration_occurrence_duration_name_of_coding_system STRING,
+	on_board_stability_duration_occurrence_duration_alternate_id STRING,
+	on_board_stability_duration_occurrence_duration_alternate_text STRING,
+	on_board_stability_duration_occurrence_duration_name_of_alternate_coding_system STRING,
+	on_board_stability_duration_occurrence_duration_coding_system_version_id STRING,
+	on_board_stability_duration_occurrence_duration_alternate_coding_system_version_id STRING,
+	on_board_stability_duration_occurrence_duration_original_text STRING,
+	on_board_stability_duration_occurrence_duration_second_alternate_id STRING,
+	on_board_stability_duration_occurrence_duration_second_alternate_text STRING,
+	on_board_stability_duration_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	on_board_stability_duration_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	on_board_stability_duration_occurrence_duration_coding_system_oid STRING,
+	on_board_stability_duration_occurrence_duration_value_set_oid STRING,
+	on_board_stability_duration_occurrence_duration_value_set_version_id STRING,
+	on_board_stability_duration_occurrence_duration_alternate_coding_system_oid STRING,
+	on_board_stability_duration_occurrence_duration_alternate_value_set_oid STRING,
+	on_board_stability_duration_occurrence_duration_alternate_value_set_version_id STRING,
+	on_board_stability_duration_occurrence_duration_second_alternate_coding_system_oid STRING,
+	on_board_stability_duration_occurrence_duration_second_alternate_value_set_oid STRING,
+	on_board_stability_duration_occurrence_duration_second_alternate_value_set_version_id STRING,
+	on_board_stability_duration_total_occurrences STRING,
 	test_fluid_id STRING,
 	test_fluid_id_id STRING,
 	test_fluid_id_text STRING,
@@ -22607,15 +22889,14 @@ CREATE EXTERNAL TABLE hl7.hl7_inv (
 	target_value_units_alternate_value_set_version_id STRING,
 	target_value_units_second_alternate_coding_system_oid STRING,
 	target_value_units_second_alternate_value_set_oid STRING,
-	target_value_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	target_value_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22624,6 +22905,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=INV'
 DROP TABLE hl7.hl7_ipc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ipc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22724,15 +23007,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ipc (
 	scheduled_procedure_step_location_second_alternate_coding_system_oid STRING,
 	scheduled_procedure_step_location_second_alternate_value_set_oid STRING,
 	scheduled_procedure_step_location_second_alternate_value_set_version_id STRING,
-	scheduled_station_ae_title STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	scheduled_station_ae_title STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22741,6 +23023,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPC'
 DROP TABLE hl7.hl7_ipr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ipr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22818,15 +23102,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ipr (
 	adjudicated_paid_amt_range_units_second_alternate_value_set_version_id STRING,
 	adjudicated_paid_amt_range_type STRING,
 	expected_payment_date_time STRING,
-	ipr_checksum STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	ipr_checksum STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22835,6 +23118,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IPR'
 DROP TABLE hl7.hl7_isd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_isd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -22887,15 +23172,14 @@ CREATE EXTERNAL TABLE hl7.hl7_isd (
 	interaction_active_state_alternate_value_set_version_id STRING,
 	interaction_active_state_second_alternate_coding_system_oid STRING,
 	interaction_active_state_second_alternate_value_set_oid STRING,
-	interaction_active_state_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	interaction_active_state_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22904,6 +23188,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ISD'
 DROP TABLE hl7.hl7_itm_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_itm (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -23512,15 +23798,14 @@ CREATE EXTERNAL TABLE hl7.hl7_itm (
 	united_nations_std_prod_and_serv_code_alternate_value_set_version_id STRING,
 	united_nations_std_prod_and_serv_code_second_alternate_coding_system_oid STRING,
 	united_nations_std_prod_and_serv_code_second_alternate_value_set_oid STRING,
-	united_nations_std_prod_and_serv_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	united_nations_std_prod_and_serv_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -23529,6 +23814,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ITM'
 DROP TABLE hl7.hl7_ivc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ivc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -23803,6 +24090,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ivc (
 	attention_name_context_second_alternate_value_set_oid STRING,
 	attention_name_context_second_alternate_value_set_version_id STRING,
 	attention_name_validity_range STRING,
+	attention_name_validity_range_range_start_date_time STRING,
+	attention_name_validity_range_range_end_date_time STRING,
 	attention_name_assembly_order STRING,
 	attention_effective_date STRING,
 	attention_expiration_date STRING,
@@ -24024,6 +24313,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ivc (
 	responsible_physician_name_context_second_alternate_value_set_oid STRING,
 	responsible_physician_name_context_second_alternate_value_set_version_id STRING,
 	responsible_physician_name_validity_range STRING,
+	responsible_physician_name_validity_range_range_start_date_time STRING,
+	responsible_physician_name_validity_range_range_end_date_time STRING,
 	responsible_physician_name_assembly_order STRING,
 	responsible_physician_effective_date STRING,
 	responsible_physician_expiration_date STRING,
@@ -24304,15 +24595,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ivc (
 	payer_tax_status_second_alternate_coding_system_oid STRING,
 	payer_tax_status_second_alternate_value_set_oid STRING,
 	payer_tax_status_second_alternate_value_set_version_id STRING,
-	sales_tax_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	sales_tax_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24321,6 +24611,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVC'
 DROP TABLE hl7.hl7_ivt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ivt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24678,15 +24970,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ivt (
 	operating_room_par_level_indicator_alternate_value_set_version_id STRING,
 	operating_room_par_level_indicator_second_alternate_coding_system_oid STRING,
 	operating_room_par_level_indicator_second_alternate_value_set_oid STRING,
-	operating_room_par_level_indicator_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	operating_room_par_level_indicator_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24695,6 +24986,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=IVT'
 DROP TABLE hl7.hl7_lan_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_lan (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24770,15 +25063,14 @@ CREATE EXTERNAL TABLE hl7.hl7_lan (
 	language_proficiency_code_alternate_value_set_version_id STRING,
 	language_proficiency_code_second_alternate_coding_system_oid STRING,
 	language_proficiency_code_second_alternate_value_set_oid STRING,
-	language_proficiency_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	language_proficiency_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24787,6 +25079,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LAN'
 DROP TABLE hl7.hl7_lcc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_lcc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -24898,15 +25192,14 @@ CREATE EXTERNAL TABLE hl7.hl7_lcc (
 	charge_code_alternate_value_set_version_id STRING,
 	charge_code_second_alternate_coding_system_oid STRING,
 	charge_code_second_alternate_value_set_oid STRING,
-	charge_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	charge_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24915,6 +25208,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCC'
 DROP TABLE hl7.hl7_lch_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_lch (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25009,15 +25304,14 @@ CREATE EXTERNAL TABLE hl7.hl7_lch (
 	location_characteristic_value_alternate_value_set_version_id STRING,
 	location_characteristic_value_second_alternate_coding_system_oid STRING,
 	location_characteristic_value_second_alternate_value_set_oid STRING,
-	location_characteristic_value_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	location_characteristic_value_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25026,6 +25320,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LCH'
 DROP TABLE hl7.hl7_ldp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ldp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25263,15 +25559,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ldp (
 	location_cost_center_alternate_value_set_version_id STRING,
 	location_cost_center_second_alternate_coding_system_oid STRING,
 	location_cost_center_second_alternate_value_set_oid STRING,
-	location_cost_center_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	location_cost_center_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25280,6 +25575,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LDP'
 DROP TABLE hl7.hl7_loc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_loc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25446,6 +25743,8 @@ CREATE EXTERNAL TABLE hl7.hl7_loc (
 	location_address_census_tract_second_alternate_value_set_version_id STRING,
 	location_address_address_representation_code STRING,
 	location_address_address_validity_range STRING,
+	location_address_address_validity_range_range_start_date_time STRING,
+	location_address_address_validity_range_range_end_date_time STRING,
 	location_address_effective_date STRING,
 	location_address_expiration_date STRING,
 	location_address_expiration_reason STRING,
@@ -25644,15 +25943,14 @@ CREATE EXTERNAL TABLE hl7.hl7_loc (
 	location_service_code_alternate_value_set_version_id STRING,
 	location_service_code_second_alternate_coding_system_oid STRING,
 	location_service_code_second_alternate_value_set_oid STRING,
-	location_service_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	location_service_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25661,6 +25959,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LOC'
 DROP TABLE hl7.hl7_lrl_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_lrl (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25808,15 +26108,14 @@ CREATE EXTERNAL TABLE hl7.hl7_lrl (
 	patient_location_relationship_value_assigning_authority_for_location STRING,
 	patient_location_relationship_value_assigning_authority_for_location_namespace_id STRING,
 	patient_location_relationship_value_assigning_authority_for_location_universal_id STRING,
-	patient_location_relationship_value_assigning_authority_for_location_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	patient_location_relationship_value_assigning_authority_for_location_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25825,6 +26124,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=LRL'
 DROP TABLE hl7.hl7_mcp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_mcp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25861,15 +26162,14 @@ CREATE EXTERNAL TABLE hl7.hl7_mcp (
 	universal_service_price_range_high_value STRING,
 	universal_service_price_range_high_value_quantity STRING,
 	universal_service_price_range_high_value_denomination STRING,
-	reason_for_universal_service_cost_range STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	reason_for_universal_service_cost_range STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25878,6 +26178,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MCP'
 DROP TABLE hl7.hl7_mfa_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_mfa (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -25911,15 +26213,14 @@ CREATE EXTERNAL TABLE hl7.hl7_mfa (
 	mfn_record_level_error_return_second_alternate_value_set_oid STRING,
 	mfn_record_level_error_return_second_alternate_value_set_version_id STRING,
 	primary_key_value STRING,
-	primary_key_value_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	primary_key_value_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25928,6 +26229,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFA'
 DROP TABLE hl7.hl7_mfe_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_mfe (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26013,6 +26316,8 @@ CREATE EXTERNAL TABLE hl7.hl7_mfe (
 	entered_by_name_context_second_alternate_value_set_oid STRING,
 	entered_by_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_name_validity_range STRING,
+	entered_by_name_validity_range_range_start_date_time STRING,
+	entered_by_name_validity_range_range_end_date_time STRING,
 	entered_by_name_assembly_order STRING,
 	entered_by_effective_date STRING,
 	entered_by_expiration_date STRING,
@@ -26064,15 +26369,14 @@ CREATE EXTERNAL TABLE hl7.hl7_mfe (
 	entered_by_assigning_agency_or_department_second_alternate_value_set_oid STRING,
 	entered_by_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	entered_by_security_check STRING,
-	entered_by_security_check_scheme STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	entered_by_security_check_scheme STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26081,6 +26385,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFE'
 DROP TABLE hl7.hl7_mfi_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_mfi (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26117,15 +26423,14 @@ CREATE EXTERNAL TABLE hl7.hl7_mfi (
 	file_level_event_code STRING,
 	entered_date_time STRING,
 	effective_date_time STRING,
-	response_level_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	response_level_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26134,6 +26439,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MFI'
 DROP TABLE hl7.hl7_mrg_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_mrg (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26204,6 +26511,68 @@ CREATE EXTERNAL TABLE hl7.hl7_mrg (
 	prior_patient_id_list_security_check STRING,
 	prior_patient_id_list_security_check_scheme STRING,
 	prior_alternate_patient_id STRING,
+	prior_alternate_patient_id_id_num STRING,
+	prior_alternate_patient_id_id_check_digit STRING,
+	prior_alternate_patient_id_check_digit_scheme STRING,
+	prior_alternate_patient_id_assigning_authority STRING,
+	prior_alternate_patient_id_assigning_authority_namespace_id STRING,
+	prior_alternate_patient_id_assigning_authority_universal_id STRING,
+	prior_alternate_patient_id_assigning_authority_universal_id_type STRING,
+	prior_alternate_patient_id_id_type_code STRING,
+	prior_alternate_patient_id_assigning_facility STRING,
+	prior_alternate_patient_id_assigning_facility_namespace_id STRING,
+	prior_alternate_patient_id_assigning_facility_universal_id STRING,
+	prior_alternate_patient_id_assigning_facility_universal_id_type STRING,
+	prior_alternate_patient_id_effective_date STRING,
+	prior_alternate_patient_id_expiration_date STRING,
+	prior_alternate_patient_id_assigning_jurisdiction STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_text STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_name_of_coding_system STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_alternate_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_alternate_text STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_coding_system_version_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_original_text STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_second_alternate_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_second_alternate_text STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_coding_system_oid STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_value_set_oid STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_value_set_version_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_alternate_value_set_oid STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	prior_alternate_patient_id_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_text STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_name_of_coding_system STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_alternate_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_alternate_text STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_coding_system_version_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_original_text STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_second_alternate_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_second_alternate_text STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_coding_system_oid STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_value_set_oid STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_value_set_version_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_alternate_value_set_oid STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	prior_alternate_patient_id_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	prior_alternate_patient_id_security_check STRING,
+	prior_alternate_patient_id_security_check_scheme STRING,
 	prior_patient_account_num STRING,
 	prior_patient_account_num_id_num STRING,
 	prior_patient_account_num_id_check_digit STRING,
@@ -26268,6 +26637,68 @@ CREATE EXTERNAL TABLE hl7.hl7_mrg (
 	prior_patient_account_num_security_check STRING,
 	prior_patient_account_num_security_check_scheme STRING,
 	prior_patient_id STRING,
+	prior_patient_id_id_num STRING,
+	prior_patient_id_id_check_digit STRING,
+	prior_patient_id_check_digit_scheme STRING,
+	prior_patient_id_assigning_authority STRING,
+	prior_patient_id_assigning_authority_namespace_id STRING,
+	prior_patient_id_assigning_authority_universal_id STRING,
+	prior_patient_id_assigning_authority_universal_id_type STRING,
+	prior_patient_id_id_type_code STRING,
+	prior_patient_id_assigning_facility STRING,
+	prior_patient_id_assigning_facility_namespace_id STRING,
+	prior_patient_id_assigning_facility_universal_id STRING,
+	prior_patient_id_assigning_facility_universal_id_type STRING,
+	prior_patient_id_effective_date STRING,
+	prior_patient_id_expiration_date STRING,
+	prior_patient_id_assigning_jurisdiction STRING,
+	prior_patient_id_assigning_jurisdiction_id STRING,
+	prior_patient_id_assigning_jurisdiction_text STRING,
+	prior_patient_id_assigning_jurisdiction_name_of_coding_system STRING,
+	prior_patient_id_assigning_jurisdiction_alternate_id STRING,
+	prior_patient_id_assigning_jurisdiction_alternate_text STRING,
+	prior_patient_id_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	prior_patient_id_assigning_jurisdiction_coding_system_version_id STRING,
+	prior_patient_id_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	prior_patient_id_assigning_jurisdiction_original_text STRING,
+	prior_patient_id_assigning_jurisdiction_second_alternate_id STRING,
+	prior_patient_id_assigning_jurisdiction_second_alternate_text STRING,
+	prior_patient_id_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	prior_patient_id_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	prior_patient_id_assigning_jurisdiction_coding_system_oid STRING,
+	prior_patient_id_assigning_jurisdiction_value_set_oid STRING,
+	prior_patient_id_assigning_jurisdiction_value_set_version_id STRING,
+	prior_patient_id_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	prior_patient_id_assigning_jurisdiction_alternate_value_set_oid STRING,
+	prior_patient_id_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	prior_patient_id_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	prior_patient_id_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	prior_patient_id_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	prior_patient_id_assigning_agency_or_department STRING,
+	prior_patient_id_assigning_agency_or_department_id STRING,
+	prior_patient_id_assigning_agency_or_department_text STRING,
+	prior_patient_id_assigning_agency_or_department_name_of_coding_system STRING,
+	prior_patient_id_assigning_agency_or_department_alternate_id STRING,
+	prior_patient_id_assigning_agency_or_department_alternate_text STRING,
+	prior_patient_id_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	prior_patient_id_assigning_agency_or_department_coding_system_version_id STRING,
+	prior_patient_id_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	prior_patient_id_assigning_agency_or_department_original_text STRING,
+	prior_patient_id_assigning_agency_or_department_second_alternate_id STRING,
+	prior_patient_id_assigning_agency_or_department_second_alternate_text STRING,
+	prior_patient_id_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	prior_patient_id_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	prior_patient_id_assigning_agency_or_department_coding_system_oid STRING,
+	prior_patient_id_assigning_agency_or_department_value_set_oid STRING,
+	prior_patient_id_assigning_agency_or_department_value_set_version_id STRING,
+	prior_patient_id_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	prior_patient_id_assigning_agency_or_department_alternate_value_set_oid STRING,
+	prior_patient_id_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	prior_patient_id_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	prior_patient_id_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	prior_patient_id_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	prior_patient_id_security_check STRING,
+	prior_patient_id_security_check_scheme STRING,
 	prior_visit_num STRING,
 	prior_visit_num_id_num STRING,
 	prior_visit_num_id_check_digit STRING,
@@ -26432,30 +26863,29 @@ CREATE EXTERNAL TABLE hl7.hl7_mrg (
 	prior_patient_name_name_context_second_alternate_value_set_oid STRING,
 	prior_patient_name_name_context_second_alternate_value_set_version_id STRING,
 	prior_patient_name_name_validity_range STRING,
+	prior_patient_name_name_validity_range_range_start_date_time STRING,
+	prior_patient_name_name_validity_range_range_end_date_time STRING,
 	prior_patient_name_name_assembly_order STRING,
 	prior_patient_name_effective_date STRING,
 	prior_patient_name_expiration_date STRING,
 	prior_patient_name_professional_suffix STRING,
 	prior_patient_name_called_by STRING,
+	prior_patient_id_list_sa STRING,
+	prior_patient_id_identifier_check_digit STRING,
+	prior_patient_id_sa STRING,
 	prior_internal_pat_id STRING,
-	prior_internal_pat_id_identifier_num STRING,
-	prior_internal_pat_id_sa STRING,
-	prior_internal_pat_id_assgn_authr STRING,
-	prior_external_pat_id STRING,
-	prior_external_pat_id_identifier_num STRING,
-	prior_external_pat_id_sa STRING,
-	prior_external_pat_id_assgn_authr STRING,
-	prior_internal_pat_id_identifier_check_digit STRING,
+	prior_internal_pat_id_id_num STRING,
+	prior_internal_pat_id_id_check_digit STRING,
 	prior_internal_pat_id_check_digit_scheme STRING,
-	prior_internal_pat_id_identifier_type_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	prior_internal_pat_id_assigning_authority STRING,
+	prior_internal_pat_id_id_type_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26464,6 +26894,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MRG'
 DROP TABLE hl7.hl7_msa_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_msa (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26471,21 +26903,42 @@ CREATE EXTERNAL TABLE hl7.hl7_msa (
 	patient_account_num STRING,
 	unknown STRING,
 	acknowledgement_code STRING,
-	message_control_id STRING,
+	_message_control_id STRING,
 	text_message STRING,
 	expected_sequence_num STRING,
 	delayed_acknowledgement_type STRING,
 	error_condition STRING,
+	error_condition_id STRING,
+	error_condition_text STRING,
+	error_condition_name_of_coding_system STRING,
+	error_condition_alternate_id STRING,
+	error_condition_alternate_text STRING,
+	error_condition_name_of_alternate_coding_system STRING,
+	error_condition_coding_system_version_id STRING,
+	error_condition_alternate_coding_system_version_id STRING,
+	error_condition_original_text STRING,
+	error_condition_second_alternate_id STRING,
+	error_condition_second_alternate_text STRING,
+	error_condition_name_of_second_alternate_coding_system STRING,
+	error_condition_second_alternate_coding_system_version_id STRING,
+	error_condition_coding_system_oid STRING,
+	error_condition_value_set_oid STRING,
+	error_condition_value_set_version_id STRING,
+	error_condition_alternate_coding_system_oid STRING,
+	error_condition_alternate_value_set_oid STRING,
+	error_condition_alternate_value_set_version_id STRING,
+	error_condition_second_alternate_coding_system_oid STRING,
+	error_condition_second_alternate_value_set_oid STRING,
+	error_condition_second_alternate_value_set_version_id STRING,
 	message_waiting_num STRING,
-	message_waiting_priority STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	message_waiting_priority STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26494,6 +26947,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSA'
 DROP TABLE hl7.hl7_msh_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_msh (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26506,7 +26961,6 @@ CREATE EXTERNAL TABLE hl7.hl7_msh (
 	sending_application_namespace_id STRING,
 	sending_application_universal_id STRING,
 	sending_application_universal_id_type STRING,
-	sending_facility STRING,
 	sending_facility_namespace_id STRING,
 	sending_facility_universal_id STRING,
 	sending_facility_universal_id_type STRING,
@@ -26520,11 +26974,9 @@ CREATE EXTERNAL TABLE hl7.hl7_msh (
 	receiving_facility_universal_id_type STRING,
 	date_time_of_message STRING,
 	security STRING,
-	message_type STRING,
 	message_type_message_code STRING,
 	message_type_trigger_event STRING,
 	message_type_message_structure STRING,
-	message_control_id STRING,
 	processing_id STRING,
 	processing_id_processing_id STRING,
 	processing_id_processing_mode STRING,
@@ -26698,15 +27150,14 @@ CREATE EXTERNAL TABLE hl7.hl7_msh (
 	receiving_network_address_universal_id STRING,
 	receiving_network_address_universal_id_type STRING,
 	continuation_pointer_network_id STRING,
-	continuation_pointer_unit_number STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	continuation_pointer_unit_number STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26715,21 +27166,22 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=MSH'
 DROP TABLE hl7.hl7_nck_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_nck (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	system_date_time STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	system_date_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26738,6 +27190,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NCK'
 DROP TABLE hl7.hl7_nds_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_nds (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26791,15 +27245,14 @@ CREATE EXTERNAL TABLE hl7.hl7_nds (
 	notification_code_alternate_value_set_version_id STRING,
 	notification_code_second_alternate_coding_system_oid STRING,
 	notification_code_second_alternate_value_set_oid STRING,
-	notification_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	notification_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26808,6 +27261,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NDS'
 DROP TABLE hl7.hl7_nk1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_nk1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -26853,6 +27308,8 @@ CREATE EXTERNAL TABLE hl7.hl7_nk1 (
 	name_name_context_second_alternate_value_set_oid STRING,
 	name_name_context_second_alternate_value_set_version_id STRING,
 	name_name_validity_range STRING,
+	name_name_validity_range_range_start_date_time STRING,
+	name_name_validity_range_range_end_date_time STRING,
 	name_name_assembly_order STRING,
 	name_effective_date STRING,
 	name_expiration_date STRING,
@@ -26941,6 +27398,8 @@ CREATE EXTERNAL TABLE hl7.hl7_nk1 (
 	address_census_tract_second_alternate_value_set_version_id STRING,
 	address_address_representation_code STRING,
 	address_address_validity_range STRING,
+	address_address_validity_range_range_start_date_time STRING,
+	address_address_validity_range_range_end_date_time STRING,
 	address_effective_date STRING,
 	address_expiration_date STRING,
 	address_expiration_reason STRING,
@@ -27589,6 +28048,8 @@ CREATE EXTERNAL TABLE hl7.hl7_nk1 (
 	mother_maiden_name_name_context_second_alternate_value_set_oid STRING,
 	mother_maiden_name_name_context_second_alternate_value_set_version_id STRING,
 	mother_maiden_name_name_validity_range STRING,
+	mother_maiden_name_name_validity_range_range_start_date_time STRING,
+	mother_maiden_name_name_validity_range_range_end_date_time STRING,
 	mother_maiden_name_name_assembly_order STRING,
 	mother_maiden_name_effective_date STRING,
 	mother_maiden_name_expiration_date STRING,
@@ -27701,6 +28162,8 @@ CREATE EXTERNAL TABLE hl7.hl7_nk1 (
 	contact_person_name_name_context_second_alternate_value_set_oid STRING,
 	contact_person_name_name_context_second_alternate_value_set_version_id STRING,
 	contact_person_name_name_validity_range STRING,
+	contact_person_name_name_validity_range_range_start_date_time STRING,
+	contact_person_name_name_validity_range_range_end_date_time STRING,
 	contact_person_name_name_assembly_order STRING,
 	contact_person_name_effective_date STRING,
 	contact_person_name_expiration_date STRING,
@@ -27837,6 +28300,8 @@ CREATE EXTERNAL TABLE hl7.hl7_nk1 (
 	contact_person_address_census_tract_second_alternate_value_set_version_id STRING,
 	contact_person_address_address_representation_code STRING,
 	contact_person_address_address_validity_range STRING,
+	contact_person_address_address_validity_range_range_start_date_time STRING,
+	contact_person_address_address_validity_range_range_end_date_time STRING,
 	contact_person_address_effective_date STRING,
 	contact_person_address_expiration_date STRING,
 	contact_person_address_expiration_reason STRING,
@@ -28194,15 +28659,14 @@ CREATE EXTERNAL TABLE hl7.hl7_nk1 (
 	contact_person_telecommunication_information_shared_telecommunication_id_namespace_id STRING,
 	contact_person_telecommunication_information_shared_telecommunication_id_universal_id STRING,
 	contact_person_telecommunication_information_shared_telecommunication_id_universal_id_type STRING,
-	contact_person_telecommunication_information_preference_order STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	contact_person_telecommunication_information_preference_order STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28211,6 +28675,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NK1'
 DROP TABLE hl7.hl7_npu_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_npu (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28276,15 +28742,14 @@ CREATE EXTERNAL TABLE hl7.hl7_npu (
 	bed_status_alternate_value_set_version_id STRING,
 	bed_status_second_alternate_coding_system_oid STRING,
 	bed_status_second_alternate_value_set_oid STRING,
-	bed_status_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bed_status_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28293,6 +28758,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NPU'
 DROP TABLE hl7.hl7_nsc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_nsc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28341,15 +28808,14 @@ CREATE EXTERNAL TABLE hl7.hl7_nsc (
 	new_facility STRING,
 	new_facility_namespace_id STRING,
 	new_facility_universal_id STRING,
-	new_facility_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	new_facility_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28358,6 +28824,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NSC'
 DROP TABLE hl7.hl7_nst_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_nst (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28378,15 +28846,14 @@ CREATE EXTERNAL TABLE hl7.hl7_nst (
 	other_errors_received STRING,
 	connect_timeouts STRING,
 	receive_timeouts STRING,
-	application_control_level_errors STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	application_control_level_errors STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28395,6 +28862,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NST'
 DROP TABLE hl7.hl7_nte_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_nte (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28500,6 +28969,8 @@ CREATE EXTERNAL TABLE hl7.hl7_nte (
 	entered_by_name_context_second_alternate_value_set_oid STRING,
 	entered_by_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_name_validity_range STRING,
+	entered_by_name_validity_range_range_start_date_time STRING,
+	entered_by_name_validity_range_range_end_date_time STRING,
 	entered_by_name_assembly_order STRING,
 	entered_by_effective_date STRING,
 	entered_by_expiration_date STRING,
@@ -28555,19 +29026,22 @@ CREATE EXTERNAL TABLE hl7.hl7_nte (
 	entered_date_time STRING,
 	effective_start_date STRING,
 	expiration_date STRING,
-	comment_source STRING,
-	comment_source_code STRING,
-	comment_source_comment_type_query_mnem STRING,
-	comment_source_counter_num_query_text STRING,
-	comment_source_query_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	source_of_comment_code STRING,
+	source_of_comment_comment_type_query_mnem STRING,
+	source_of_comment_counter_num_query_text STRING,
+	source_of_comment_query_type STRING,
+	_comment_query_code STRING,
+	_comment_query_text STRING,
+	_comment_query_element_code STRING,
+	_comment_query_response STRING,
+	_comment_query_response_name STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28576,6 +29050,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=NTE'
 DROP TABLE hl7.hl7_obr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_obr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -28718,6 +29194,8 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	collector_id_name_context_second_alternate_value_set_oid STRING,
 	collector_id_name_context_second_alternate_value_set_version_id STRING,
 	collector_id_name_validity_range STRING,
+	collector_id_name_validity_range_range_start_date_time STRING,
+	collector_id_name_validity_range_range_end_date_time STRING,
 	collector_id_name_assembly_order STRING,
 	collector_id_effective_date STRING,
 	collector_id_expiration_date STRING,
@@ -28819,12 +29297,146 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	relevant_clinical_information_second_alternate_value_set_version_id STRING,
 	specimen_received_date_time STRING,
 	specimen_source STRING,
-	specimen_source_name_code STRING,
+	specimen_source_specimen_source_name_or_code STRING,
+	specimen_source_specimen_source_name_or_code_id STRING,
+	specimen_source_specimen_source_name_or_code_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_alternate_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_alternate_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_original_text STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_id STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_second_alternate_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_value_set_version_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_alternate_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_alternate_value_set_version_id STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_value_set_version_id STRING,
 	specimen_source_additives STRING,
-	specimen_source_free_text STRING,
+	specimen_source_additives_id STRING,
+	specimen_source_additives_text STRING,
+	specimen_source_additives_name_of_coding_system STRING,
+	specimen_source_additives_alternate_id STRING,
+	specimen_source_additives_alternate_text STRING,
+	specimen_source_additives_name_of_alternate_coding_system STRING,
+	specimen_source_additives_coding_system_version_id STRING,
+	specimen_source_additives_alternate_coding_system_version_id STRING,
+	specimen_source_additives_original_text STRING,
+	specimen_source_additives_second_alternate_id STRING,
+	specimen_source_additives_second_alternate_text STRING,
+	specimen_source_additives_name_of_second_alternate_coding_system STRING,
+	specimen_source_additives_second_alternate_coding_system_version_id STRING,
+	specimen_source_additives_coding_system_oid STRING,
+	specimen_source_additives_value_set_oid STRING,
+	specimen_source_additives_value_set_version_id STRING,
+	specimen_source_additives_alternate_coding_system_oid STRING,
+	specimen_source_additives_alternate_value_set_oid STRING,
+	specimen_source_additives_alternate_value_set_version_id STRING,
+	specimen_source_additives_second_alternate_coding_system_oid STRING,
+	specimen_source_additives_second_alternate_value_set_oid STRING,
+	specimen_source_additives_second_alternate_value_set_version_id STRING,
+	specimen_source_specimen_collection_method STRING,
+	specimen_source_specimen_collection_method_text_data STRING,
 	specimen_source_body_site STRING,
-	specimen_source_site_modfr STRING,
-	specimen_source_coll_method_modfr_code STRING,
+	specimen_source_body_site_id STRING,
+	specimen_source_body_site_text STRING,
+	specimen_source_body_site_name_of_coding_system STRING,
+	specimen_source_body_site_alternate_id STRING,
+	specimen_source_body_site_alternate_text STRING,
+	specimen_source_body_site_name_of_alternate_coding_system STRING,
+	specimen_source_body_site_coding_system_version_id STRING,
+	specimen_source_body_site_alternate_coding_system_version_id STRING,
+	specimen_source_body_site_original_text STRING,
+	specimen_source_body_site_second_alternate_id STRING,
+	specimen_source_body_site_second_alternate_text STRING,
+	specimen_source_body_site_name_of_second_alternate_coding_system STRING,
+	specimen_source_body_site_second_alternate_coding_system_version_id STRING,
+	specimen_source_body_site_coding_system_oid STRING,
+	specimen_source_body_site_value_set_oid STRING,
+	specimen_source_body_site_value_set_version_id STRING,
+	specimen_source_body_site_alternate_coding_system_oid STRING,
+	specimen_source_body_site_alternate_value_set_oid STRING,
+	specimen_source_body_site_alternate_value_set_version_id STRING,
+	specimen_source_body_site_second_alternate_coding_system_oid STRING,
+	specimen_source_body_site_second_alternate_value_set_oid STRING,
+	specimen_source_body_site_second_alternate_value_set_version_id STRING,
+	specimen_source_site_modifier STRING,
+	specimen_source_site_modifier_id STRING,
+	specimen_source_site_modifier_text STRING,
+	specimen_source_site_modifier_name_of_coding_system STRING,
+	specimen_source_site_modifier_alternate_id STRING,
+	specimen_source_site_modifier_alternate_text STRING,
+	specimen_source_site_modifier_name_of_alternate_coding_system STRING,
+	specimen_source_site_modifier_coding_system_version_id STRING,
+	specimen_source_site_modifier_alternate_coding_system_version_id STRING,
+	specimen_source_site_modifier_original_text STRING,
+	specimen_source_site_modifier_second_alternate_id STRING,
+	specimen_source_site_modifier_second_alternate_text STRING,
+	specimen_source_site_modifier_name_of_second_alternate_coding_system STRING,
+	specimen_source_site_modifier_second_alternate_coding_system_version_id STRING,
+	specimen_source_site_modifier_coding_system_oid STRING,
+	specimen_source_site_modifier_value_set_oid STRING,
+	specimen_source_site_modifier_value_set_version_id STRING,
+	specimen_source_site_modifier_alternate_coding_system_oid STRING,
+	specimen_source_site_modifier_alternate_value_set_oid STRING,
+	specimen_source_site_modifier_alternate_value_set_version_id STRING,
+	specimen_source_site_modifier_second_alternate_coding_system_oid STRING,
+	specimen_source_site_modifier_second_alternate_value_set_oid STRING,
+	specimen_source_site_modifier_second_alternate_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code STRING,
+	specimen_source_collection_method_modifier_code_id STRING,
+	specimen_source_collection_method_modifier_code_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_coding_system STRING,
+	specimen_source_collection_method_modifier_code_alternate_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_alternate_coding_system STRING,
+	specimen_source_collection_method_modifier_code_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_original_text STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_id STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_second_alternate_coding_system STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_alternate_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_alternate_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_value_set_version_id STRING,
+	specimen_source_specimen_role STRING,
+	specimen_source_specimen_role_id STRING,
+	specimen_source_specimen_role_text STRING,
+	specimen_source_specimen_role_name_of_coding_system STRING,
+	specimen_source_specimen_role_alternate_id STRING,
+	specimen_source_specimen_role_alternate_text STRING,
+	specimen_source_specimen_role_name_of_alternate_coding_system STRING,
+	specimen_source_specimen_role_coding_system_version_id STRING,
+	specimen_source_specimen_role_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_role_original_text STRING,
+	specimen_source_specimen_role_second_alternate_id STRING,
+	specimen_source_specimen_role_second_alternate_text STRING,
+	specimen_source_specimen_role_name_of_second_alternate_coding_system STRING,
+	specimen_source_specimen_role_second_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_role_coding_system_oid STRING,
+	specimen_source_specimen_role_value_set_oid STRING,
+	specimen_source_specimen_role_value_set_version_id STRING,
+	specimen_source_specimen_role_alternate_coding_system_oid STRING,
+	specimen_source_specimen_role_alternate_value_set_oid STRING,
+	specimen_source_specimen_role_alternate_value_set_version_id STRING,
+	specimen_source_specimen_role_second_alternate_coding_system_oid STRING,
+	specimen_source_specimen_role_second_alternate_value_set_oid STRING,
+	specimen_source_specimen_role_second_alternate_value_set_version_id STRING,
 	ordering_provider STRING,
 	ordering_provider_person_id STRING,
 	ordering_provider_family_name STRING,
@@ -28898,6 +29510,8 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	ordering_provider_name_context_second_alternate_value_set_oid STRING,
 	ordering_provider_name_context_second_alternate_value_set_version_id STRING,
 	ordering_provider_name_validity_range STRING,
+	ordering_provider_name_validity_range_range_start_date_time STRING,
+	ordering_provider_name_validity_range_range_end_date_time STRING,
 	ordering_provider_name_assembly_order STRING,
 	ordering_provider_effective_date STRING,
 	ordering_provider_expiration_date STRING,
@@ -29089,16 +29703,52 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	quantity_timing STRING,
 	quantity_timing_quantity STRING,
 	quantity_timing_interval STRING,
+	quantity_timing_interval_repeat_pattern STRING,
+	quantity_timing_interval_explicit_time_interval STRING,
 	quantity_timing_duration STRING,
-	quantity_timing_eff_from_date_time STRING,
-	quantity_timing_eff_to_date_time STRING,
+	quantity_timing_start_date_time STRING,
+	quantity_timing_end_date_time STRING,
 	quantity_timing_priority STRING,
 	quantity_timing_condition STRING,
 	quantity_timing_text STRING,
+	quantity_timing_text_text_data STRING,
 	quantity_timing_conjunction STRING,
-	quantity_timing_order_seq STRING,
-	quantity_timing_occurrence_dur STRING,
-	quantity_timing_total_occurence STRING,
+	quantity_timing_order_sequencing STRING,
+	quantity_timing_order_sequencing_sequence_results_flag STRING,
+	quantity_timing_order_sequencing_placer_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_sequence_condition_value STRING,
+	quantity_timing_order_sequencing_maximum_num_of_repeats STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id_type STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id_type STRING,
+	quantity_timing_occurrence_duration STRING,
+	quantity_timing_occurrence_duration_id STRING,
+	quantity_timing_occurrence_duration_text STRING,
+	quantity_timing_occurrence_duration_name_of_coding_system STRING,
+	quantity_timing_occurrence_duration_alternate_id STRING,
+	quantity_timing_occurrence_duration_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_original_text STRING,
+	quantity_timing_occurrence_duration_second_alternate_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_value_set_oid STRING,
+	quantity_timing_occurrence_duration_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_version_id STRING,
+	quantity_timing_total_occurrences STRING,
 	result_copies_to STRING,
 	result_copies_to_person_id STRING,
 	result_copies_to_family_name STRING,
@@ -29172,6 +29822,8 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	result_copies_to_name_context_second_alternate_value_set_oid STRING,
 	result_copies_to_name_context_second_alternate_value_set_version_id STRING,
 	result_copies_to_name_validity_range STRING,
+	result_copies_to_name_validity_range_range_start_date_time STRING,
+	result_copies_to_name_validity_range_range_end_date_time STRING,
 	result_copies_to_name_assembly_order STRING,
 	result_copies_to_effective_date STRING,
 	result_copies_to_expiration_date STRING,
@@ -29706,25 +30358,23 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	parent_order_filler_assigned_id_universal_id_type STRING,
 	principal_result_interpreter_n_a STRING,
 	principal_result_interpreter_identifier_type_code STRING,
-	placer_first_generic_field_primary_id STRING,
-	placer_first_generic_field_order_category STRING,
-	placer_first_generic_field_order_number STRING,
+	placer_field_1_order_category STRING,
+	placer_field_1_order_number STRING,
 	lab_site STRING,
 	lab_site_mnem STRING,
 	lab_site_name STRING,
-	principal_result_interpreter_person_id STRING,
-	principal_result_interpreter_last_name STRING,
-	principal_result_interpreter_first_name STRING,
-	principal_result_interpreter_middle_name STRING,
+	principal_result_interpreter_id_num STRING,
+	principal_result_interpreter_family_name STRING,
+	principal_result_interpreter_given_name STRING,
+	principal_result_interpreter_second_and_further_given_names_or_initials_thereof STRING,
 	principal_result_interpreter_suffix STRING,
-	principal_result_interpreter_person_prefix STRING,
+	principal_result_interpreter_prefix STRING,
 	principal_result_interpreter_degree STRING,
 	principal_result_interpreter_source_table STRING,
-	principal_result_interpreter_assgn_authr STRING,
+	principal_result_interpreter_assigning_authority STRING,
 	principal_result_interpreter_name_type_code STRING,
 	principal_result_interpreter_identifier_check_digit STRING,
 	principal_result_interpreter_check_digit_scheme STRING,
-	principal_result_interpreter_assgn_facility STRING,
 	principal_result_interpreter_name_rep_code STRING,
 	principal_result_interpreter_context STRING,
 	principal_result_interpreter_validity_range STRING,
@@ -29736,28 +30386,28 @@ CREATE EXTERNAL TABLE hl7.hl7_obr (
 	principal_result_interpreter_assgn_agency_dept STRING,
 	principal_result_interpreter_security_check STRING,
 	principal_result_interpreter_security_check_scheme STRING,
-	technician_person_id STRING,
-	technician_last_name STRING,
-	technician_first_name STRING,
-	technician_middle_name STRING,
+	technician_id_num STRING,
+	technician_family_name STRING,
+	technician_given_name STRING,
+	technician_second_and_further_given_names_or_initials_thereof STRING,
 	technician_suffix STRING,
-	technician_person_prefix STRING,
+	technician_prefix STRING,
 	technician_degree STRING,
-	transcriptionist_person_id STRING,
-	transcriptionist_last_name STRING,
-	transcriptionist_first_name STRING,
-	transcriptionist_middle_name STRING,
+	transcriptionist_id_num STRING,
+	transcriptionist_family_name STRING,
+	transcriptionist_given_name STRING,
+	transcriptionist_second_and_further_given_names_or_initials_thereof STRING,
 	transcriptionist_suffix STRING,
-	transcriptionist_person_prefix STRING,
+	transcriptionist_prefix STRING,
 	transcriptionist_degree STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	placer_field_1_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -29766,6 +30416,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBR'
 DROP TABLE hl7.hl7_obx_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_obx (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -29803,15 +30455,28 @@ CREATE EXTERNAL TABLE hl7.hl7_obx (
 	obsv_sub_id_sequence STRING,
 	obsv_sub_id_id STRING,
 	obsv_value STRING,
-	obsv_value_primary_id STRING,
+	obsv_value_id STRING,
 	obsv_value_text STRING,
-	obsv_value_name_of_coding_sys STRING,
-	obsv_value_encoding_scheme STRING,
-	obsv_value_data_1 STRING,
-	obsv_value_data_2 STRING,
-	obsv_value_data_3 STRING,
-	obsv_value_data_4 STRING,
-	obsv_value_data_5 STRING,
+	obsv_value_name_of_coding_system STRING,
+	obsv_value_alternate_id STRING,
+	obsv_value_alternate_text STRING,
+	obsv_value_name_of_alternate_coding_system STRING,
+	obsv_value_coding_system_version_id STRING,
+	obsv_value_alternate_coding_system_version_id STRING,
+	obsv_value_original_text STRING,
+	obsv_value_second_alternate_id STRING,
+	obsv_value_second_alternate_text STRING,
+	obsv_value_name_of_second_alternate_coding_system STRING,
+	obsv_value_second_alternate_coding_system_version_id STRING,
+	obsv_value_coding_system_oid STRING,
+	obsv_value_value_set_oid STRING,
+	obsv_value_value_set_version_id STRING,
+	obsv_value_alternate_coding_system_oid STRING,
+	obsv_value_alternate_value_set_oid STRING,
+	obsv_value_alternate_value_set_version_id STRING,
+	obsv_value_second_alternate_coding_system_oid STRING,
+	obsv_value_second_alternate_value_set_oid STRING,
+	obsv_value_second_alternate_value_set_version_id STRING,
 	units STRING,
 	units_id STRING,
 	units_text STRING,
@@ -29961,6 +30626,8 @@ CREATE EXTERNAL TABLE hl7.hl7_obx (
 	responsible_obsverver_name_context_second_alternate_value_set_oid STRING,
 	responsible_obsverver_name_context_second_alternate_value_set_version_id STRING,
 	responsible_obsverver_name_validity_range STRING,
+	responsible_obsverver_name_validity_range_range_start_date_time STRING,
+	responsible_obsverver_name_validity_range_range_end_date_time STRING,
 	responsible_obsverver_name_assembly_order STRING,
 	responsible_obsverver_effective_date STRING,
 	responsible_obsverver_expiration_date STRING,
@@ -30192,6 +30859,8 @@ CREATE EXTERNAL TABLE hl7.hl7_obx (
 	performing_organization_address_census_tract_second_alternate_value_set_version_id STRING,
 	performing_organization_address_address_representation_code STRING,
 	performing_organization_address_address_validity_range STRING,
+	performing_organization_address_address_validity_range_range_start_date_time STRING,
+	performing_organization_address_address_validity_range_range_end_date_time STRING,
 	performing_organization_address_effective_date STRING,
 	performing_organization_address_expiration_date STRING,
 	performing_organization_address_expiration_reason STRING,
@@ -30324,6 +30993,8 @@ CREATE EXTERNAL TABLE hl7.hl7_obx (
 	performing_organization_medical_director_name_context_second_alternate_value_set_oid STRING,
 	performing_organization_medical_director_name_context_second_alternate_value_set_version_id STRING,
 	performing_organization_medical_director_name_validity_range STRING,
+	performing_organization_medical_director_name_validity_range_range_start_date_time STRING,
+	performing_organization_medical_director_name_validity_range_range_end_date_time STRING,
 	performing_organization_medical_director_name_assembly_order STRING,
 	performing_organization_medical_director_effective_date STRING,
 	performing_organization_medical_director_expiration_date STRING,
@@ -30425,49 +31096,45 @@ CREATE EXTERNAL TABLE hl7.hl7_obx (
 	local_process_control_second_alternate_value_set_version_id STRING,
 	obsv_type STRING,
 	obsv_sub_type STRING,
-	user_defined_access_check STRING,
-	user_defined_access_check_primary_id STRING,
-	user_defined_access_check_text STRING,
-	user_defined_access_check_name_of_coding_sys STRING,
-	user_defined_access_check_alt_id STRING,
-	user_defined_access_check_alt_text STRING,
-	user_defined_access_check_name_of_alt_coding_sys STRING,
-	user_defined_access_check_coding_sys_ver_id STRING,
-	user_defined_access_check_alt_coding_sys_ver_id STRING,
-	user_defined_access_check_original_text STRING,
-	user_defined_access_check_second_alt_id STRING,
-	user_defined_access_check_second_alt_text STRING,
-	user_defined_access_check_name_of_second_alt_coding_sys STRING,
-	user_defined_access_check_second_alt_coding_sys_ver_id STRING,
-	user_defined_access_check_coding_sys_oid STRING,
-	user_defined_access_check_value_set_oid STRING,
-	user_defined_access_check_value_set_ver_id STRING,
-	user_defined_access_check_alt_coding_sys_oid STRING,
-	user_defined_access_check_alt_value_set_oid STRING,
-	user_defined_access_check_alt_value_set_ver_id STRING,
-	user_defined_access_check_second_alt_coding_sys_oid STRING,
-	user_defined_access_check_second_alt_value_set_oid STRING,
-	user_defined_access_check_second_alt_value_set_ver_id STRING,
 	result_group STRING,
 	result_group_group_code STRING,
 	result_group_result_code STRING,
 	result_group_group_name STRING,
 	result_group_group_long_name STRING,
 	result_group_test_print_num STRING,
-	observation_value STRING,
-	observation_value_primary_id STRING,
-	observation_value_data_type STRING,
-	observation_value_data_subtype STRING,
-	observation_value_encoding_scheme STRING,
-	observation_value_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	user_defined_access_checks_id STRING,
+	user_defined_access_checks_text STRING,
+	user_defined_access_checks_name_of_coding_system STRING,
+	user_defined_access_checks_alternate_id STRING,
+	user_defined_access_checks_alternate_text STRING,
+	user_defined_access_checks_name_of_alternate_coding_system STRING,
+	user_defined_access_checks_coding_system_version_id STRING,
+	user_defined_access_checks_alternate_coding_system_version_id STRING,
+	user_defined_access_checks_original_text STRING,
+	user_defined_access_checks_second_alternate_id STRING,
+	user_defined_access_checks_second_alternate_text STRING,
+	user_defined_access_checks_name_of_second_alternate_coding_system STRING,
+	user_defined_access_checks_second_alternate_coding_system_version_id STRING,
+	user_defined_access_checks_coding_system_oid STRING,
+	user_defined_access_checks_value_set_oid STRING,
+	user_defined_access_checks_value_set_version_id STRING,
+	user_defined_access_checks_alternate_coding_system_oid STRING,
+	user_defined_access_checks_second_alternate_value_set_oid STRING,
+	user_defined_access_checks_alternate_value_set_version_id STRING,
+	user_defined_access_checks_second_alternate_coding_system_oid STRING,
+	user_defined_access_checks_second_alternate_value_set_version_id STRING,
+	obsv_value_primary_id STRING,
+	obsv_value_data_type STRING,
+	obsv_value_data_subtype STRING,
+	obsv_value_encoding_scheme STRING,
+	obsv_value_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30476,6 +31143,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OBX'
 DROP TABLE hl7.hl7_ods_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ods (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -30529,15 +31198,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ods (
 	diet_supplement_or_preference_code_second_alternate_coding_system_oid STRING,
 	diet_supplement_or_preference_code_second_alternate_value_set_oid STRING,
 	diet_supplement_or_preference_code_second_alternate_value_set_version_id STRING,
-	text_instruction STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	text_instruction STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30546,6 +31214,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODS'
 DROP TABLE hl7.hl7_odt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_odt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -30598,15 +31268,14 @@ CREATE EXTERNAL TABLE hl7.hl7_odt (
 	service_period_second_alternate_coding_system_oid STRING,
 	service_period_second_alternate_value_set_oid STRING,
 	service_period_second_alternate_value_set_version_id STRING,
-	text_instruction STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	text_instruction STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30615,6 +31284,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ODT'
 DROP TABLE hl7.hl7_om1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -30977,6 +31648,8 @@ CREATE EXTERNAL TABLE hl7.hl7_om1 (
 	address_of_outside_site_census_tract_second_alternate_value_set_version_id STRING,
 	address_of_outside_site_address_representation_code STRING,
 	address_of_outside_site_address_validity_range STRING,
+	address_of_outside_site_address_validity_range_range_start_date_time STRING,
+	address_of_outside_site_address_validity_range_range_end_date_time STRING,
 	address_of_outside_site_effective_date STRING,
 	address_of_outside_site_expiration_date STRING,
 	address_of_outside_site_expiration_reason STRING,
@@ -31520,15 +32193,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om1 (
 	gender_restriction_second_alternate_value_set_version_id STRING,
 	age_restriction STRING,
 	age_restriction_low_value STRING,
-	age_restriction_high_value STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	age_restriction_high_value STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31537,6 +32209,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM1'
 DROP TABLE hl7.hl7_om2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -31711,15 +32385,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om2 (
 	delta_check_criteria_numeric_threshold STRING,
 	delta_check_criteria_change_computation STRING,
 	delta_check_criteria_days_retained STRING,
-	minimum_meaningful_increments STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	minimum_meaningful_increments STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31728,6 +32401,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM2'
 DROP TABLE hl7.hl7_om3_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om3 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -31850,15 +32525,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om3 (
 	critical_text_codes_for_categorical_obsv_second_alternate_coding_system_oid STRING,
 	critical_text_codes_for_categorical_obsv_second_alternate_value_set_oid STRING,
 	critical_text_codes_for_categorical_obsv_second_alternate_value_set_version_id STRING,
-	value_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	value_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31867,6 +32541,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM3'
 DROP TABLE hl7.hl7_om4_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om4 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32076,15 +32752,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om4 (
 	taxonomic_classification_code_alternate_value_set_version_id STRING,
 	taxonomic_classification_code_second_alternate_coding_system_oid STRING,
 	taxonomic_classification_code_second_alternate_value_set_oid STRING,
-	taxonomic_classification_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	taxonomic_classification_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32093,6 +32768,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM4'
 DROP TABLE hl7.hl7_om5_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om5 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32123,15 +32800,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om5 (
 	test_obsv_included_within_ordered_test_battery_second_alternate_coding_system_oid STRING,
 	test_obsv_included_within_ordered_test_battery_second_alternate_value_set_oid STRING,
 	test_obsv_included_within_ordered_test_battery_second_alternate_value_set_version_id STRING,
-	obsv_id_suffixes STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	obsv_id_suffixes STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32140,6 +32816,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM5'
 DROP TABLE hl7.hl7_om6_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om6 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32148,15 +32826,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om6 (
 	unknown STRING,
 	sequence_num_test_obsv_master_file STRING,
 	derivation_rule STRING,
-	derivation_rule_text_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	derivation_rule_text_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32165,6 +32842,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM6'
 DROP TABLE hl7.hl7_om7_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_om7 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32418,6 +33097,8 @@ CREATE EXTERNAL TABLE hl7.hl7_om7 (
 	entered_by_name_context_second_alternate_value_set_oid STRING,
 	entered_by_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_name_validity_range STRING,
+	entered_by_name_validity_range_range_start_date_time STRING,
+	entered_by_name_validity_range_range_end_date_time STRING,
 	entered_by_name_assembly_order STRING,
 	entered_by_effective_date STRING,
 	entered_by_expiration_date STRING,
@@ -32553,15 +33234,14 @@ CREATE EXTERNAL TABLE hl7.hl7_om7 (
 	primary_key_value_alternate_value_set_version_id STRING,
 	primary_key_value_second_alternate_coding_system_oid STRING,
 	primary_key_value_second_alternate_value_set_oid STRING,
-	primary_key_value_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	primary_key_value_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32570,6 +33250,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OM7'
 DROP TABLE hl7.hl7_omc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_omc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32680,15 +33362,14 @@ CREATE EXTERNAL TABLE hl7.hl7_omc (
 	answer_choices_second_alternate_value_set_oid STRING,
 	answer_choices_second_alternate_value_set_version_id STRING,
 	character_limit STRING,
-	num_of_decimals STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	num_of_decimals STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32697,6 +33378,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OMC'
 DROP TABLE hl7.hl7_orc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_orc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -32731,17 +33414,51 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	quantity_timing_quantity STRING,
 	quantity_timing_interval STRING,
 	quantity_timing_interval_repeat_pattern STRING,
-	quantity_timing_interval_time_interval STRING,
+	quantity_timing_interval_explicit_time_interval STRING,
 	quantity_timing_duration STRING,
-	quantity_timing_eff_from_date_time STRING,
-	quantity_timing_eff_to_date_time STRING,
+	quantity_timing_start_date_time STRING,
+	quantity_timing_end_date_time STRING,
 	quantity_timing_priority STRING,
 	quantity_timing_condition STRING,
 	quantity_timing_text STRING,
+	quantity_timing_text_text_data STRING,
 	quantity_timing_conjunction STRING,
-	quantity_timing_order_seq STRING,
-	quantity_timing_occurrence_dur STRING,
-	quantity_timing_total_occurence STRING,
+	quantity_timing_order_sequencing STRING,
+	quantity_timing_order_sequencing_sequence_results_flag STRING,
+	quantity_timing_order_sequencing_placer_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_sequence_condition_value STRING,
+	quantity_timing_order_sequencing_maximum_num_of_repeats STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id_type STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id_type STRING,
+	quantity_timing_occurrence_duration STRING,
+	quantity_timing_occurrence_duration_id STRING,
+	quantity_timing_occurrence_duration_text STRING,
+	quantity_timing_occurrence_duration_name_of_coding_system STRING,
+	quantity_timing_occurrence_duration_alternate_id STRING,
+	quantity_timing_occurrence_duration_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_original_text STRING,
+	quantity_timing_occurrence_duration_second_alternate_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_value_set_oid STRING,
+	quantity_timing_occurrence_duration_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_version_id STRING,
+	quantity_timing_total_occurrences STRING,
 	parent_order STRING,
 	parent_order_placer_assigned_id STRING,
 	parent_order_placer_assigned_id_entity_id STRING,
@@ -32827,6 +33544,8 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	entered_by_name_context_second_alternate_value_set_oid STRING,
 	entered_by_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_name_validity_range STRING,
+	entered_by_name_validity_range_range_start_date_time STRING,
+	entered_by_name_validity_range_range_end_date_time STRING,
 	entered_by_name_assembly_order STRING,
 	entered_by_effective_date STRING,
 	entered_by_expiration_date STRING,
@@ -32952,6 +33671,8 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	verified_by_name_context_second_alternate_value_set_oid STRING,
 	verified_by_name_context_second_alternate_value_set_version_id STRING,
 	verified_by_name_validity_range STRING,
+	verified_by_name_validity_range_range_start_date_time STRING,
+	verified_by_name_validity_range_range_end_date_time STRING,
 	verified_by_name_assembly_order STRING,
 	verified_by_effective_date STRING,
 	verified_by_expiration_date STRING,
@@ -33077,6 +33798,8 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	ordering_provider_name_context_second_alternate_value_set_oid STRING,
 	ordering_provider_name_context_second_alternate_value_set_version_id STRING,
 	ordering_provider_name_validity_range STRING,
+	ordering_provider_name_validity_range_range_start_date_time STRING,
+	ordering_provider_name_validity_range_range_end_date_time STRING,
 	ordering_provider_name_assembly_order STRING,
 	ordering_provider_effective_date STRING,
 	ordering_provider_expiration_date STRING,
@@ -33380,6 +34103,8 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	action_by_name_context_second_alternate_value_set_oid STRING,
 	action_by_name_context_second_alternate_value_set_version_id STRING,
 	action_by_name_validity_range STRING,
+	action_by_name_validity_range_range_start_date_time STRING,
+	action_by_name_validity_range_range_end_date_time STRING,
 	action_by_name_assembly_order STRING,
 	action_by_effective_date STRING,
 	action_by_expiration_date STRING,
@@ -33554,6 +34279,8 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	ordering_facility_address_census_tract_second_alternate_value_set_version_id STRING,
 	ordering_facility_address_address_representation_code STRING,
 	ordering_facility_address_address_validity_range STRING,
+	ordering_facility_address_address_validity_range_range_start_date_time STRING,
+	ordering_facility_address_address_validity_range_range_end_date_time STRING,
 	ordering_facility_address_effective_date STRING,
 	ordering_facility_address_expiration_date STRING,
 	ordering_facility_address_expiration_reason STRING,
@@ -33744,6 +34471,8 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	ordering_provider_address_census_tract_second_alternate_value_set_version_id STRING,
 	ordering_provider_address_address_representation_code STRING,
 	ordering_provider_address_address_validity_range STRING,
+	ordering_provider_address_address_validity_range_range_start_date_time STRING,
+	ordering_provider_address_address_validity_range_range_end_date_time STRING,
 	ordering_provider_address_effective_date STRING,
 	ordering_provider_address_expiration_date STRING,
 	ordering_provider_address_expiration_reason STRING,
@@ -34031,15 +34760,14 @@ CREATE EXTERNAL TABLE hl7.hl7_orc (
 	order_workflow_profile_second_alternate_value_set_version_id STRING,
 	placer_group_num_entity_id STRING,
 	placer_group_num_universal_id STRING,
-	placer_group_num_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	placer_group_num_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34048,6 +34776,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORC'
 DROP TABLE hl7.hl7_org_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_org (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34284,15 +35014,14 @@ CREATE EXTERNAL TABLE hl7.hl7_org (
 	cost_center_code_alternate_value_set_version_id STRING,
 	cost_center_code_second_alternate_coding_system_oid STRING,
 	cost_center_code_second_alternate_value_set_oid STRING,
-	cost_center_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	cost_center_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34301,6 +35030,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ORG'
 DROP TABLE hl7.hl7_ovr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ovr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34428,6 +35159,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ovr (
 	override_entered_by_name_context_second_alternate_value_set_oid STRING,
 	override_entered_by_name_context_second_alternate_value_set_version_id STRING,
 	override_entered_by_name_validity_range STRING,
+	override_entered_by_name_validity_range_range_start_date_time STRING,
+	override_entered_by_name_validity_range_range_end_date_time STRING,
 	override_entered_by_name_assembly_order STRING,
 	override_entered_by_effective_date STRING,
 	override_entered_by_expiration_date STRING,
@@ -34553,6 +35286,8 @@ CREATE EXTERNAL TABLE hl7.hl7_ovr (
 	override_authorized_by_name_context_second_alternate_value_set_oid STRING,
 	override_authorized_by_name_context_second_alternate_value_set_version_id STRING,
 	override_authorized_by_name_validity_range STRING,
+	override_authorized_by_name_validity_range_range_start_date_time STRING,
+	override_authorized_by_name_validity_range_range_end_date_time STRING,
 	override_authorized_by_name_assembly_order STRING,
 	override_authorized_by_effective_date STRING,
 	override_authorized_by_expiration_date STRING,
@@ -34604,15 +35339,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ovr (
 	override_authorized_by_assigning_agency_or_department_second_alternate_value_set_oid STRING,
 	override_authorized_by_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	override_authorized_by_security_check STRING,
-	override_authorized_by_security_check_scheme STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	override_authorized_by_security_check_scheme STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34621,6 +35355,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=OVR'
 DROP TABLE hl7.hl7_pac_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pac (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34734,15 +35470,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pac (
 	package_risk_code_alternate_value_set_version_id STRING,
 	package_risk_code_second_alternate_coding_system_oid STRING,
 	package_risk_code_second_alternate_value_set_oid STRING,
-	package_risk_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	package_risk_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34751,6 +35486,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PAC'
 DROP TABLE hl7.hl7_pce_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pce (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -34874,15 +35611,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pce (
 	transaction_amt_unit_range_units_second_alternate_coding_system_oid STRING,
 	transaction_amt_unit_range_units_second_alternate_value_set_oid STRING,
 	transaction_amt_unit_range_units_second_alternate_value_set_version_id STRING,
-	transaction_amt_unit_range_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	transaction_amt_unit_range_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34891,6 +35627,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCE'
 DROP TABLE hl7.hl7_pcr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pcr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -35141,15 +35879,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pcr (
 	relatedness_assessment STRING,
 	action_taken_in_response_to_the_event STRING,
 	event_causality_obsv STRING,
-	indirect_exposure_mechanism STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	indirect_exposure_mechanism STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35158,6 +35895,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PCR'
 DROP TABLE hl7.hl7_pd1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pd1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -35251,129 +35990,129 @@ CREATE EXTERNAL TABLE hl7.hl7_pd1 (
 	patient_primary_facility_organization_id STRING,
 	patient_primary_care_provider_name_and_id_num STRING,
 	patient_primary_care_provider_name_and_id_num_person_id STRING,
-	patient_primary_care_provider_name_and_id_num_last_name STRING,
-	patient_primary_care_provider_name_and_id_num_last_name_surname STRING,
-	patient_primary_care_provider_name_and_id_num_last_name_own_surname_prefix STRING,
-	patient_primary_care_provider_name_and_id_num_last_name_own_surname STRING,
-	patient_primary_care_provider_name_and_id_num_last_name_surname_prefix_from_partner STRING,
-	patient_primary_care_provider_name_and_id_num_last_name_surname_from_partner STRING,
-	patient_primary_care_provider_name_and_id_num_first_name STRING,
-	patient_primary_care_provider_name_and_id_num_middle_name STRING,
+	patient_primary_care_provider_name_and_id_num_family_name STRING,
+	patient_primary_care_provider_name_and_id_num_family_name_surname STRING,
+	patient_primary_care_provider_name_and_id_num_family_name_own_surname_prefix STRING,
+	patient_primary_care_provider_name_and_id_num_family_name_own_surname STRING,
+	patient_primary_care_provider_name_and_id_num_family_name_surname_prefix_from_partner_spouse STRING,
+	patient_primary_care_provider_name_and_id_num_family_name_surname_from_partner_spouse STRING,
+	patient_primary_care_provider_name_and_id_num_given_name STRING,
+	patient_primary_care_provider_name_and_id_num_second_and_further_given_names_or_initials_thereof STRING,
 	patient_primary_care_provider_name_and_id_num_suffix STRING,
-	patient_primary_care_provider_name_and_id_num_person_prefix STRING,
+	patient_primary_care_provider_name_and_id_num_prefix STRING,
 	patient_primary_care_provider_name_and_id_num_degree STRING,
 	patient_primary_care_provider_name_and_id_num_source_table STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_primary_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_id STRING,
 	patient_primary_care_provider_name_and_id_num_source_table_text STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_name_of_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_name_of_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_alt_coding_sys_ver_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_name_of_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_name_of_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_alternate_coding_system_version_id STRING,
 	patient_primary_care_provider_name_and_id_num_source_table_original_text STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_second_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_second_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_name_of_second_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_second_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_coding_sys_oid STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_second_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_second_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_name_of_second_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_second_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_coding_system_oid STRING,
 	patient_primary_care_provider_name_and_id_num_source_table_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_second_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_second_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_source_table_second_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_authr STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_authr_namespace_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_authr_universal_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_authr_universal_id_type STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_second_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_second_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_source_table_second_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_authority STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_authority_namespace_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_authority_universal_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_authority_universal_id_type STRING,
 	patient_primary_care_provider_name_and_id_num_name_type_code STRING,
-	patient_primary_care_provider_name_and_id_num_identifier_check_digit STRING,
+	patient_primary_care_provider_name_and_id_num_id_check_digit STRING,
 	patient_primary_care_provider_name_and_id_num_check_digit_scheme STRING,
-	patient_primary_care_provider_name_and_id_num_identifier_type_code STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_facility STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_facility_namespace_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_facility_universal_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_facility_universal_id_type STRING,
-	patient_primary_care_provider_name_and_id_num_name_rep_code STRING,
-	patient_primary_care_provider_name_and_id_num_context STRING,
-	patient_primary_care_provider_name_and_id_num_context_primary_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_text STRING,
-	patient_primary_care_provider_name_and_id_num_context_name_of_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_context_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_context_name_of_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_context_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_original_text STRING,
-	patient_primary_care_provider_name_and_id_num_context_second_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_second_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_context_name_of_second_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_context_second_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_context_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_context_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_context_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_context_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_context_second_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_context_second_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_context_second_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_validity_range STRING,
-	patient_primary_care_provider_name_and_id_num_validity_range_eff_from_date_time STRING,
-	patient_primary_care_provider_name_and_id_num_validity_range_eff_to_date_time STRING,
-	patient_primary_care_provider_name_and_id_num_assembly_order STRING,
-	patient_primary_care_provider_name_and_id_num_eff_from_date_time STRING,
-	patient_primary_care_provider_name_and_id_num_eff_to_date_time STRING,
-	patient_primary_care_provider_name_and_id_num_prof_suffix STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_primary_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_name_of_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_name_of_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_original_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_second_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_second_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_name_of_second_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_second_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_second_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_second_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_jurisdiction_second_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_primary_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_name_of_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_name_of_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_original_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_second_alt_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_second_alt_text STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_name_of_second_alt_coding_sys STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_second_alt_coding_sys_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_alt_value_set_ver_id STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_second_alt_coding_sys_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_second_alt_value_set_oid STRING,
-	patient_primary_care_provider_name_and_id_num_assgn_agency_dept_second_alt_value_set_ver_id STRING,
+	patient_primary_care_provider_name_and_id_num_id_type_code STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_facility STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_facility_namespace_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_facility_universal_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_facility_universal_id_type STRING,
+	patient_primary_care_provider_name_and_id_num_name_representation_code STRING,
+	patient_primary_care_provider_name_and_id_num_name_context STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_text STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_name_of_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_name_of_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_original_text STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_second_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_second_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_name_of_second_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_second_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_second_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_second_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_name_context_second_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_name_validity_range STRING,
+	patient_primary_care_provider_name_and_id_num_name_validity_range_range_start_date_time STRING,
+	patient_primary_care_provider_name_and_id_num_name_validity_range_range_end_date_time STRING,
+	patient_primary_care_provider_name_and_id_num_name_assembly_order STRING,
+	patient_primary_care_provider_name_and_id_num_effective_date STRING,
+	patient_primary_care_provider_name_and_id_num_expiration_date STRING,
+	patient_primary_care_provider_name_and_id_num_professional_suffix STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_name_of_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_original_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_second_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_second_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_name_of_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_original_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_second_alternate_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_second_alternate_text STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	patient_primary_care_provider_name_and_id_num_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	patient_primary_care_provider_name_and_id_num_security_check STRING,
 	patient_primary_care_provider_name_and_id_num_security_check_scheme STRING,
 	student_indicator STRING,
@@ -35713,15 +36452,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pd1 (
 	military_status_second_alternate_coding_system_oid STRING,
 	military_status_second_alternate_value_set_oid STRING,
 	military_status_second_alternate_value_set_version_id STRING,
-	advance_directive_last_verified_date STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	advance_directive_last_verified_date STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35730,6 +36468,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PD1'
 DROP TABLE hl7.hl7_pda_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pda (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -35871,6 +36611,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pda (
 	death_certified_by_name_context_second_alternate_value_set_oid STRING,
 	death_certified_by_name_context_second_alternate_value_set_version_id STRING,
 	death_certified_by_name_validity_range STRING,
+	death_certified_by_name_validity_range_range_start_date_time STRING,
+	death_certified_by_name_validity_range_range_end_date_time STRING,
 	death_certified_by_name_assembly_order STRING,
 	death_certified_by_effective_date STRING,
 	death_certified_by_expiration_date STRING,
@@ -36000,6 +36742,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pda (
 	autopsy_performed_by_name_context_second_alternate_value_set_oid STRING,
 	autopsy_performed_by_name_context_second_alternate_value_set_version_id STRING,
 	autopsy_performed_by_name_validity_range STRING,
+	autopsy_performed_by_name_validity_range_range_start_date_time STRING,
+	autopsy_performed_by_name_validity_range_range_end_date_time STRING,
 	autopsy_performed_by_name_assembly_order STRING,
 	autopsy_performed_by_effective_date STRING,
 	autopsy_performed_by_expiration_date STRING,
@@ -36052,15 +36796,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pda (
 	autopsy_performed_by_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	autopsy_performed_by_security_check STRING,
 	autopsy_performed_by_security_check_scheme STRING,
-	coroner_indicator STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	coroner_indicator STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36069,6 +36812,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDA'
 DROP TABLE hl7.hl7_pdc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pdc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -36241,15 +36986,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pdc (
 	expected_shelf_life_units_second_alternate_value_set_oid STRING,
 	expected_shelf_life_units_second_alternate_value_set_version_id STRING,
 	date_first_marketed STRING,
-	date_last_marketed STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	date_last_marketed STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36258,6 +37002,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PDC'
 DROP TABLE hl7.hl7_peo_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_peo (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -36374,6 +37120,8 @@ CREATE EXTERNAL TABLE hl7.hl7_peo (
 	event_location_occurred_address_census_tract_second_alternate_value_set_version_id STRING,
 	event_location_occurred_address_address_representation_code STRING,
 	event_location_occurred_address_address_validity_range STRING,
+	event_location_occurred_address_address_validity_range_range_start_date_time STRING,
+	event_location_occurred_address_address_validity_range_range_end_date_time STRING,
 	event_location_occurred_address_effective_date STRING,
 	event_location_occurred_address_expiration_date STRING,
 	event_location_occurred_address_expiration_reason STRING,
@@ -36504,6 +37252,8 @@ CREATE EXTERNAL TABLE hl7.hl7_peo (
 	primary_observer_name_name_context_second_alternate_value_set_oid STRING,
 	primary_observer_name_name_context_second_alternate_value_set_version_id STRING,
 	primary_observer_name_name_validity_range STRING,
+	primary_observer_name_name_validity_range_range_start_date_time STRING,
+	primary_observer_name_name_validity_range_range_end_date_time STRING,
 	primary_observer_name_name_assembly_order STRING,
 	primary_observer_name_effective_date STRING,
 	primary_observer_name_expiration_date STRING,
@@ -36569,6 +37319,8 @@ CREATE EXTERNAL TABLE hl7.hl7_peo (
 	primary_observer_address_census_tract_second_alternate_value_set_version_id STRING,
 	primary_observer_address_address_representation_code STRING,
 	primary_observer_address_address_validity_range STRING,
+	primary_observer_address_address_validity_range_range_start_date_time STRING,
+	primary_observer_address_address_validity_range_range_end_date_time STRING,
 	primary_observer_address_effective_date STRING,
 	primary_observer_address_expiration_date STRING,
 	primary_observer_address_expiration_reason STRING,
@@ -36702,15 +37454,14 @@ CREATE EXTERNAL TABLE hl7.hl7_peo (
 	primary_observer_qualification STRING,
 	confirmation_provided_by STRING,
 	primary_observer_aware_date_time STRING,
-	primary_observer_identity_may_be_divulged STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	primary_observer_identity_may_be_divulged STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36719,6 +37470,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PEO'
 DROP TABLE hl7.hl7_pes_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pes (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -36837,6 +37590,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pes (
 	sender_individual_name_name_context_second_alternate_value_set_oid STRING,
 	sender_individual_name_name_context_second_alternate_value_set_version_id STRING,
 	sender_individual_name_name_validity_range STRING,
+	sender_individual_name_name_validity_range_range_start_date_time STRING,
+	sender_individual_name_name_validity_range_range_end_date_time STRING,
 	sender_individual_name_name_assembly_order STRING,
 	sender_individual_name_effective_date STRING,
 	sender_individual_name_expiration_date STRING,
@@ -36949,6 +37704,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pes (
 	sender_address_census_tract_second_alternate_value_set_version_id STRING,
 	sender_address_address_representation_code STRING,
 	sender_address_address_validity_range STRING,
+	sender_address_address_validity_range_range_start_date_time STRING,
+	sender_address_address_validity_range_range_end_date_time STRING,
 	sender_address_effective_date STRING,
 	sender_address_expiration_date STRING,
 	sender_address_expiration_reason STRING,
@@ -37091,15 +37848,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pes (
 	event_report_date STRING,
 	event_report_timing_type STRING,
 	event_report_source STRING,
-	event_reported_to STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	event_reported_to STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -37108,6 +37864,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PES'
 DROP TABLE hl7.hl7_pid_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pid (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -37116,22 +37874,68 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	unknown STRING,
 	set_id STRING,
 	patient_id STRING,
-	patient_id_identifier_num STRING,
-	patient_id_identifier_check_digit STRING,
+	patient_id_id_num STRING,
+	patient_id_id_check_digit STRING,
 	patient_id_check_digit_scheme STRING,
-	patient_id_assgn_authr STRING,
-	patient_id_assgn_authr_namespace_id STRING,
-	patient_id_assgn_authr_universal_id STRING,
-	patient_id_assgn_authr_universal_id_type STRING,
-	patient_id_identifier_type_code STRING,
-	patient_id_assgn_facility STRING,
-	patient_id_assgn_facility_namespace_id STRING,
-	patient_id_assgn_facility_universal_id STRING,
-	patient_id_assgn_facility_universal_id_type STRING,
-	patient_id_eff_from_date STRING,
-	patient_id_eff_to_date STRING,
-	patient_id_assgn_jurisdiction STRING,
-	patient_id_assgn_agency_dept STRING,
+	patient_id_assigning_authority STRING,
+	patient_id_assigning_authority_namespace_id STRING,
+	patient_id_assigning_authority_universal_id STRING,
+	patient_id_assigning_authority_universal_id_type STRING,
+	patient_id_id_type_code STRING,
+	patient_id_assigning_facility STRING,
+	patient_id_assigning_facility_namespace_id STRING,
+	patient_id_assigning_facility_universal_id STRING,
+	patient_id_assigning_facility_universal_id_type STRING,
+	patient_id_effective_date STRING,
+	patient_id_expiration_date STRING,
+	patient_id_assigning_jurisdiction STRING,
+	patient_id_assigning_jurisdiction_id STRING,
+	patient_id_assigning_jurisdiction_text STRING,
+	patient_id_assigning_jurisdiction_name_of_coding_system STRING,
+	patient_id_assigning_jurisdiction_alternate_id STRING,
+	patient_id_assigning_jurisdiction_alternate_text STRING,
+	patient_id_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	patient_id_assigning_jurisdiction_coding_system_version_id STRING,
+	patient_id_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	patient_id_assigning_jurisdiction_original_text STRING,
+	patient_id_assigning_jurisdiction_second_alternate_id STRING,
+	patient_id_assigning_jurisdiction_second_alternate_text STRING,
+	patient_id_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	patient_id_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	patient_id_assigning_jurisdiction_coding_system_oid STRING,
+	patient_id_assigning_jurisdiction_value_set_oid STRING,
+	patient_id_assigning_jurisdiction_value_set_version_id STRING,
+	patient_id_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	patient_id_assigning_jurisdiction_alternate_value_set_oid STRING,
+	patient_id_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	patient_id_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	patient_id_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	patient_id_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	patient_id_assigning_agency_or_department STRING,
+	patient_id_assigning_agency_or_department_id STRING,
+	patient_id_assigning_agency_or_department_text STRING,
+	patient_id_assigning_agency_or_department_name_of_coding_system STRING,
+	patient_id_assigning_agency_or_department_alternate_id STRING,
+	patient_id_assigning_agency_or_department_alternate_text STRING,
+	patient_id_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	patient_id_assigning_agency_or_department_coding_system_version_id STRING,
+	patient_id_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	patient_id_assigning_agency_or_department_original_text STRING,
+	patient_id_assigning_agency_or_department_second_alternate_id STRING,
+	patient_id_assigning_agency_or_department_second_alternate_text STRING,
+	patient_id_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	patient_id_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	patient_id_assigning_agency_or_department_coding_system_oid STRING,
+	patient_id_assigning_agency_or_department_value_set_oid STRING,
+	patient_id_assigning_agency_or_department_value_set_version_id STRING,
+	patient_id_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	patient_id_assigning_agency_or_department_alternate_value_set_oid STRING,
+	patient_id_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	patient_id_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	patient_id_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	patient_id_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	patient_id_security_check STRING,
+	patient_id_security_check_scheme STRING,
 	patient_id_list STRING,
 	patient_id_list_id_num STRING,
 	patient_id_list_id_check_digit STRING,
@@ -37196,22 +38000,68 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	patient_id_list_security_check STRING,
 	patient_id_list_security_check_scheme STRING,
 	alternate_patient_id STRING,
-	alternate_patient_id_identifier_num STRING,
-	alternate_patient_id_identifier_check_digit STRING,
+	alternate_patient_id_id_num STRING,
+	alternate_patient_id_id_check_digit STRING,
 	alternate_patient_id_check_digit_scheme STRING,
-	alternate_patient_id_assgn_authr STRING,
-	alternate_patient_id_assgn_authr_namespace_id STRING,
-	alternate_patient_id_assgn_authr_universal_id STRING,
-	alternate_patient_id_assgn_authr_universal_id_type STRING,
-	alternate_patient_id_identifier_type_code STRING,
-	alternate_patient_id_assgn_facility STRING,
-	alternate_patient_id_assgn_facility_namespace_id STRING,
-	alternate_patient_id_assgn_facility_universal_id STRING,
-	alternate_patient_id_assgn_facility_universal_id_type STRING,
-	alternate_patient_id_eff_from_date STRING,
-	alternate_patient_id_eff_to_date STRING,
-	alternate_patient_id_assgn_jurisdiction STRING,
-	alternate_patient_id_assgn_agency_dept STRING,
+	alternate_patient_id_assigning_authority STRING,
+	alternate_patient_id_assigning_authority_namespace_id STRING,
+	alternate_patient_id_assigning_authority_universal_id STRING,
+	alternate_patient_id_assigning_authority_universal_id_type STRING,
+	alternate_patient_id_id_type_code STRING,
+	alternate_patient_id_assigning_facility STRING,
+	alternate_patient_id_assigning_facility_namespace_id STRING,
+	alternate_patient_id_assigning_facility_universal_id STRING,
+	alternate_patient_id_assigning_facility_universal_id_type STRING,
+	alternate_patient_id_effective_date STRING,
+	alternate_patient_id_expiration_date STRING,
+	alternate_patient_id_assigning_jurisdiction STRING,
+	alternate_patient_id_assigning_jurisdiction_id STRING,
+	alternate_patient_id_assigning_jurisdiction_text STRING,
+	alternate_patient_id_assigning_jurisdiction_name_of_coding_system STRING,
+	alternate_patient_id_assigning_jurisdiction_alternate_id STRING,
+	alternate_patient_id_assigning_jurisdiction_alternate_text STRING,
+	alternate_patient_id_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	alternate_patient_id_assigning_jurisdiction_coding_system_version_id STRING,
+	alternate_patient_id_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	alternate_patient_id_assigning_jurisdiction_original_text STRING,
+	alternate_patient_id_assigning_jurisdiction_second_alternate_id STRING,
+	alternate_patient_id_assigning_jurisdiction_second_alternate_text STRING,
+	alternate_patient_id_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	alternate_patient_id_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	alternate_patient_id_assigning_jurisdiction_coding_system_oid STRING,
+	alternate_patient_id_assigning_jurisdiction_value_set_oid STRING,
+	alternate_patient_id_assigning_jurisdiction_value_set_version_id STRING,
+	alternate_patient_id_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	alternate_patient_id_assigning_jurisdiction_alternate_value_set_oid STRING,
+	alternate_patient_id_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	alternate_patient_id_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	alternate_patient_id_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	alternate_patient_id_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	alternate_patient_id_assigning_agency_or_department STRING,
+	alternate_patient_id_assigning_agency_or_department_id STRING,
+	alternate_patient_id_assigning_agency_or_department_text STRING,
+	alternate_patient_id_assigning_agency_or_department_name_of_coding_system STRING,
+	alternate_patient_id_assigning_agency_or_department_alternate_id STRING,
+	alternate_patient_id_assigning_agency_or_department_alternate_text STRING,
+	alternate_patient_id_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	alternate_patient_id_assigning_agency_or_department_coding_system_version_id STRING,
+	alternate_patient_id_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	alternate_patient_id_assigning_agency_or_department_original_text STRING,
+	alternate_patient_id_assigning_agency_or_department_second_alternate_id STRING,
+	alternate_patient_id_assigning_agency_or_department_second_alternate_text STRING,
+	alternate_patient_id_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	alternate_patient_id_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	alternate_patient_id_assigning_agency_or_department_coding_system_oid STRING,
+	alternate_patient_id_assigning_agency_or_department_value_set_oid STRING,
+	alternate_patient_id_assigning_agency_or_department_value_set_version_id STRING,
+	alternate_patient_id_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	alternate_patient_id_assigning_agency_or_department_alternate_value_set_oid STRING,
+	alternate_patient_id_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	alternate_patient_id_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	alternate_patient_id_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	alternate_patient_id_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	alternate_patient_id_security_check STRING,
+	alternate_patient_id_security_check_scheme STRING,
 	patient_name STRING,
 	patient_name_family_name STRING,
 	patient_name_family_name_surname STRING,
@@ -37250,6 +38100,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	patient_name_name_context_second_alternate_value_set_oid STRING,
 	patient_name_name_context_second_alternate_value_set_version_id STRING,
 	patient_name_name_validity_range STRING,
+	patient_name_name_validity_range_range_start_date_time STRING,
+	patient_name_name_validity_range_range_end_date_time STRING,
 	patient_name_name_assembly_order STRING,
 	patient_name_effective_date STRING,
 	patient_name_expiration_date STRING,
@@ -37293,6 +38145,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	mother_maiden_name_name_context_second_alternate_value_set_oid STRING,
 	mother_maiden_name_name_context_second_alternate_value_set_version_id STRING,
 	mother_maiden_name_name_validity_range STRING,
+	mother_maiden_name_name_validity_range_range_start_date_time STRING,
+	mother_maiden_name_name_validity_range_range_end_date_time STRING,
 	mother_maiden_name_name_assembly_order STRING,
 	mother_maiden_name_effective_date STRING,
 	mother_maiden_name_expiration_date STRING,
@@ -37323,20 +38177,50 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	administrative_sex_second_alternate_value_set_oid STRING,
 	administrative_sex_second_alternate_value_set_version_id STRING,
 	patient_alias STRING,
-	patient_alias_last_name STRING,
-	patient_alias_first_name STRING,
-	patient_alias_middle_name STRING,
+	patient_alias_family_name STRING,
+	patient_alias_family_name_surname STRING,
+	patient_alias_family_name_own_surname_prefix STRING,
+	patient_alias_family_name_own_surname STRING,
+	patient_alias_family_name_surname_prefix_from_partner_spouse STRING,
+	patient_alias_family_name_surname_from_partner_spouse STRING,
+	patient_alias_given_name STRING,
+	patient_alias_second_and_further_given_names_or_initials_thereof STRING,
 	patient_alias_suffix STRING,
-	patient_alias_person_prefix STRING,
+	patient_alias_prefix STRING,
 	patient_alias_degree STRING,
-	patient_alias_type_code STRING,
-	patient_alias_name_rep_code STRING,
-	patient_alias_context STRING,
-	patient_alias_validity_range STRING,
-	patient_alias_assembly_order STRING,
-	patient_alias_eff_from_date_time STRING,
-	patient_alias_eff_to_date_time STRING,
-	patient_alias_prof_suffix STRING,
+	patient_alias_name_type_code STRING,
+	patient_alias_name_representation_code STRING,
+	patient_alias_name_context STRING,
+	patient_alias_name_context_id STRING,
+	patient_alias_name_context_text STRING,
+	patient_alias_name_context_name_of_coding_system STRING,
+	patient_alias_name_context_alternate_id STRING,
+	patient_alias_name_context_alternate_text STRING,
+	patient_alias_name_context_name_of_alternate_coding_system STRING,
+	patient_alias_name_context_coding_system_version_id STRING,
+	patient_alias_name_context_alternate_coding_system_version_id STRING,
+	patient_alias_name_context_original_text STRING,
+	patient_alias_name_context_second_alternate_id STRING,
+	patient_alias_name_context_second_alternate_text STRING,
+	patient_alias_name_context_name_of_second_alternate_coding_system STRING,
+	patient_alias_name_context_second_alternate_coding_system_version_id STRING,
+	patient_alias_name_context_coding_system_oid STRING,
+	patient_alias_name_context_value_set_oid STRING,
+	patient_alias_name_context_value_set_version_id STRING,
+	patient_alias_name_context_alternate_coding_system_oid STRING,
+	patient_alias_name_context_alternate_value_set_oid STRING,
+	patient_alias_name_context_alternate_value_set_version_id STRING,
+	patient_alias_name_context_second_alternate_coding_system_oid STRING,
+	patient_alias_name_context_second_alternate_value_set_oid STRING,
+	patient_alias_name_context_second_alternate_value_set_version_id STRING,
+	patient_alias_name_validity_range STRING,
+	patient_alias_name_validity_range_range_start_date_time STRING,
+	patient_alias_name_validity_range_range_end_date_time STRING,
+	patient_alias_name_assembly_order STRING,
+	patient_alias_effective_date STRING,
+	patient_alias_expiration_date STRING,
+	patient_alias_professional_suffix STRING,
+	patient_alias_called_by STRING,
 	race STRING,
 	race_id STRING,
 	race_text STRING,
@@ -37420,6 +38304,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	patient_address_census_tract_second_alternate_value_set_version_id STRING,
 	patient_address_address_representation_code STRING,
 	patient_address_address_validity_range STRING,
+	patient_address_address_validity_range_range_start_date_time STRING,
+	patient_address_address_validity_range_range_end_date_time STRING,
 	patient_address_effective_date STRING,
 	patient_address_expiration_date STRING,
 	patient_address_expiration_reason STRING,
@@ -37691,7 +38577,6 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	religion_second_alternate_coding_system_oid STRING,
 	religion_second_alternate_value_set_oid STRING,
 	religion_second_alternate_value_set_version_id STRING,
-	patient_account_num STRING,
 	patient_account_num_id_num STRING,
 	patient_account_num_id_check_digit STRING,
 	patient_account_num_check_digit_scheme STRING,
@@ -37756,6 +38641,31 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	patient_account_num_security_check_scheme STRING,
 	ssn_num_patient STRING,
 	driver_license_num STRING,
+	driver_license_num_license_num STRING,
+	driver_license_num_issuing_state_province_country STRING,
+	driver_license_num_issuing_state_province_country_id STRING,
+	driver_license_num_issuing_state_province_country_text STRING,
+	driver_license_num_issuing_state_province_country_name_of_coding_system STRING,
+	driver_license_num_issuing_state_province_country_alternate_id STRING,
+	driver_license_num_issuing_state_province_country_alternate_text STRING,
+	driver_license_num_issuing_state_province_country_name_of_alternate_coding_system STRING,
+	driver_license_num_issuing_state_province_country_coding_system_version_id STRING,
+	driver_license_num_issuing_state_province_country_alternate_coding_system_version_id STRING,
+	driver_license_num_issuing_state_province_country_original_text STRING,
+	driver_license_num_issuing_state_province_country_second_alternate_id STRING,
+	driver_license_num_issuing_state_province_country_second_alternate_text STRING,
+	driver_license_num_issuing_state_province_country_name_of_second_alternate_coding_system STRING,
+	driver_license_num_issuing_state_province_country_second_alternate_coding_system_version_id STRING,
+	driver_license_num_issuing_state_province_country_coding_system_oid STRING,
+	driver_license_num_issuing_state_province_country_value_set_oid STRING,
+	driver_license_num_issuing_state_province_country_value_set_version_id STRING,
+	driver_license_num_issuing_state_province_country_alternate_coding_system_oid STRING,
+	driver_license_num_issuing_state_province_country_alternate_value_set_oid STRING,
+	driver_license_num_issuing_state_province_country_alternate_value_set_version_id STRING,
+	driver_license_num_issuing_state_province_country_second_alternate_coding_system_oid STRING,
+	driver_license_num_issuing_state_province_country_second_alternate_value_set_oid STRING,
+	driver_license_num_issuing_state_province_country_second_alternate_value_set_version_id STRING,
+	driver_license_num_expiration_date STRING,
 	mother_id STRING,
 	mother_id_id_num STRING,
 	mother_id_id_check_digit STRING,
@@ -38110,21 +39020,18 @@ CREATE EXTERNAL TABLE hl7.hl7_pid (
 	patient_telecommunication_information_shared_telecommunication_id_universal_id_type STRING,
 	patient_telecommunication_information_preference_order STRING,
 	mother_name STRING,
-	mother_name_last_name STRING,
-	mother_name_first_name STRING,
-	mother_name_middle_name STRING,
+	mother_name_family_name STRING,
+	mother_name_given_name STRING,
+	mother_name_second_and_further_given_names_or_initials_thereof STRING,
 	mother_name_n_a STRING,
-	lss_encounter_num STRING,
-	medical_record_num STRING,
-	medical_record_urn STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	lss_encounter_num STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38133,6 +39040,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PID'
 DROP TABLE hl7.hl7_pkg_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pkg (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -38272,15 +39181,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pkg (
 	global_trade_item_num_alternate_value_set_version_id STRING,
 	global_trade_item_num_second_alternate_coding_system_oid STRING,
 	global_trade_item_num_second_alternate_value_set_oid STRING,
-	global_trade_item_num_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	global_trade_item_num_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38289,6 +39197,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PKG'
 DROP TABLE hl7.hl7_pm1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pm1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -38480,6 +39390,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pm1 (
 	insurance_company_address_census_tract_second_alternate_value_set_version_id STRING,
 	insurance_company_address_address_representation_code STRING,
 	insurance_company_address_address_validity_range STRING,
+	insurance_company_address_address_validity_range_range_start_date_time STRING,
+	insurance_company_address_address_validity_range_range_end_date_time STRING,
 	insurance_company_address_effective_date STRING,
 	insurance_company_address_expiration_date STRING,
 	insurance_company_address_expiration_reason STRING,
@@ -38577,6 +39489,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pm1 (
 	insurance_company_contact_person_name_context_second_alternate_value_set_oid STRING,
 	insurance_company_contact_person_name_context_second_alternate_value_set_version_id STRING,
 	insurance_company_contact_person_name_validity_range STRING,
+	insurance_company_contact_person_name_validity_range_range_start_date_time STRING,
+	insurance_company_contact_person_name_validity_range_range_end_date_time STRING,
 	insurance_company_contact_person_name_assembly_order STRING,
 	insurance_company_contact_person_effective_date STRING,
 	insurance_company_contact_person_expiration_date STRING,
@@ -38708,15 +39622,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pm1 (
 	bill_type_required STRING,
 	commercial_carrier_name_and_address_required STRING,
 	policy_num_pattern STRING,
-	group_num_pattern STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	group_num_pattern STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38725,6 +39638,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PM1'
 DROP TABLE hl7.hl7_pmt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pmt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -38940,15 +39855,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pmt (
 	payment_organization_assigning_facility_universal_id_type STRING,
 	payment_organization_name_representation_code STRING,
 	payment_organization_organization_id STRING,
-	esr_code_line STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	esr_code_line STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38957,6 +39871,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PMT'
 DROP TABLE hl7.hl7_pr1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pr1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39015,6 +39931,132 @@ CREATE EXTERNAL TABLE hl7.hl7_pr1 (
 	procedure_functional_type_second_alternate_value_set_version_id STRING,
 	procedure_minutes STRING,
 	anesthesiologist STRING,
+	anesthesiologist_person_id STRING,
+	anesthesiologist_family_name STRING,
+	anesthesiologist_family_name_surname STRING,
+	anesthesiologist_family_name_own_surname_prefix STRING,
+	anesthesiologist_family_name_own_surname STRING,
+	anesthesiologist_family_name_surname_prefix_from_partner_spouse STRING,
+	anesthesiologist_family_name_surname_from_partner_spouse STRING,
+	anesthesiologist_given_name STRING,
+	anesthesiologist_second_and_further_given_names_or_initials_thereof STRING,
+	anesthesiologist_suffix STRING,
+	anesthesiologist_prefix STRING,
+	anesthesiologist_degree STRING,
+	anesthesiologist_source_table STRING,
+	anesthesiologist_source_table_id STRING,
+	anesthesiologist_source_table_text STRING,
+	anesthesiologist_source_table_name_of_coding_system STRING,
+	anesthesiologist_source_table_alternate_id STRING,
+	anesthesiologist_source_table_alternate_text STRING,
+	anesthesiologist_source_table_name_of_alternate_coding_system STRING,
+	anesthesiologist_source_table_coding_system_version_id STRING,
+	anesthesiologist_source_table_alternate_coding_system_version_id STRING,
+	anesthesiologist_source_table_original_text STRING,
+	anesthesiologist_source_table_second_alternate_id STRING,
+	anesthesiologist_source_table_second_alternate_text STRING,
+	anesthesiologist_source_table_name_of_second_alternate_coding_system STRING,
+	anesthesiologist_source_table_second_alternate_coding_system_version_id STRING,
+	anesthesiologist_source_table_coding_system_oid STRING,
+	anesthesiologist_source_table_value_set_oid STRING,
+	anesthesiologist_source_table_value_set_version_id STRING,
+	anesthesiologist_source_table_alternate_coding_system_oid STRING,
+	anesthesiologist_source_table_alternate_value_set_oid STRING,
+	anesthesiologist_source_table_alternate_value_set_version_id STRING,
+	anesthesiologist_source_table_second_alternate_coding_system_oid STRING,
+	anesthesiologist_source_table_second_alternate_value_set_oid STRING,
+	anesthesiologist_source_table_second_alternate_value_set_version_id STRING,
+	anesthesiologist_assigning_authority STRING,
+	anesthesiologist_assigning_authority_namespace_id STRING,
+	anesthesiologist_assigning_authority_universal_id STRING,
+	anesthesiologist_assigning_authority_universal_id_type STRING,
+	anesthesiologist_name_type_code STRING,
+	anesthesiologist_id_check_digit STRING,
+	anesthesiologist_check_digit_scheme STRING,
+	anesthesiologist_id_type_code STRING,
+	anesthesiologist_assigning_facility STRING,
+	anesthesiologist_assigning_facility_namespace_id STRING,
+	anesthesiologist_assigning_facility_universal_id STRING,
+	anesthesiologist_assigning_facility_universal_id_type STRING,
+	anesthesiologist_name_representation_code STRING,
+	anesthesiologist_name_context STRING,
+	anesthesiologist_name_context_id STRING,
+	anesthesiologist_name_context_text STRING,
+	anesthesiologist_name_context_name_of_coding_system STRING,
+	anesthesiologist_name_context_alternate_id STRING,
+	anesthesiologist_name_context_alternate_text STRING,
+	anesthesiologist_name_context_name_of_alternate_coding_system STRING,
+	anesthesiologist_name_context_coding_system_version_id STRING,
+	anesthesiologist_name_context_alternate_coding_system_version_id STRING,
+	anesthesiologist_name_context_original_text STRING,
+	anesthesiologist_name_context_second_alternate_id STRING,
+	anesthesiologist_name_context_second_alternate_text STRING,
+	anesthesiologist_name_context_name_of_second_alternate_coding_system STRING,
+	anesthesiologist_name_context_second_alternate_coding_system_version_id STRING,
+	anesthesiologist_name_context_coding_system_oid STRING,
+	anesthesiologist_name_context_value_set_oid STRING,
+	anesthesiologist_name_context_value_set_version_id STRING,
+	anesthesiologist_name_context_alternate_coding_system_oid STRING,
+	anesthesiologist_name_context_alternate_value_set_oid STRING,
+	anesthesiologist_name_context_alternate_value_set_version_id STRING,
+	anesthesiologist_name_context_second_alternate_coding_system_oid STRING,
+	anesthesiologist_name_context_second_alternate_value_set_oid STRING,
+	anesthesiologist_name_context_second_alternate_value_set_version_id STRING,
+	anesthesiologist_name_validity_range STRING,
+	anesthesiologist_name_validity_range_range_start_date_time STRING,
+	anesthesiologist_name_validity_range_range_end_date_time STRING,
+	anesthesiologist_name_assembly_order STRING,
+	anesthesiologist_effective_date STRING,
+	anesthesiologist_expiration_date STRING,
+	anesthesiologist_professional_suffix STRING,
+	anesthesiologist_assigning_jurisdiction STRING,
+	anesthesiologist_assigning_jurisdiction_id STRING,
+	anesthesiologist_assigning_jurisdiction_text STRING,
+	anesthesiologist_assigning_jurisdiction_name_of_coding_system STRING,
+	anesthesiologist_assigning_jurisdiction_alternate_id STRING,
+	anesthesiologist_assigning_jurisdiction_alternate_text STRING,
+	anesthesiologist_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	anesthesiologist_assigning_jurisdiction_coding_system_version_id STRING,
+	anesthesiologist_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	anesthesiologist_assigning_jurisdiction_original_text STRING,
+	anesthesiologist_assigning_jurisdiction_second_alternate_id STRING,
+	anesthesiologist_assigning_jurisdiction_second_alternate_text STRING,
+	anesthesiologist_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	anesthesiologist_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	anesthesiologist_assigning_jurisdiction_coding_system_oid STRING,
+	anesthesiologist_assigning_jurisdiction_value_set_oid STRING,
+	anesthesiologist_assigning_jurisdiction_value_set_version_id STRING,
+	anesthesiologist_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	anesthesiologist_assigning_jurisdiction_alternate_value_set_oid STRING,
+	anesthesiologist_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	anesthesiologist_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	anesthesiologist_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	anesthesiologist_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	anesthesiologist_assigning_agency_or_department STRING,
+	anesthesiologist_assigning_agency_or_department_id STRING,
+	anesthesiologist_assigning_agency_or_department_text STRING,
+	anesthesiologist_assigning_agency_or_department_name_of_coding_system STRING,
+	anesthesiologist_assigning_agency_or_department_alternate_id STRING,
+	anesthesiologist_assigning_agency_or_department_alternate_text STRING,
+	anesthesiologist_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	anesthesiologist_assigning_agency_or_department_coding_system_version_id STRING,
+	anesthesiologist_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	anesthesiologist_assigning_agency_or_department_original_text STRING,
+	anesthesiologist_assigning_agency_or_department_second_alternate_id STRING,
+	anesthesiologist_assigning_agency_or_department_second_alternate_text STRING,
+	anesthesiologist_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	anesthesiologist_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	anesthesiologist_assigning_agency_or_department_coding_system_oid STRING,
+	anesthesiologist_assigning_agency_or_department_value_set_oid STRING,
+	anesthesiologist_assigning_agency_or_department_value_set_version_id STRING,
+	anesthesiologist_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	anesthesiologist_assigning_agency_or_department_alternate_value_set_oid STRING,
+	anesthesiologist_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	anesthesiologist_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	anesthesiologist_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	anesthesiologist_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	anesthesiologist_security_check STRING,
+	anesthesiologist_security_check_scheme STRING,
 	anesthesia_code STRING,
 	anesthesia_code_id STRING,
 	anesthesia_code_text STRING,
@@ -39040,7 +40082,259 @@ CREATE EXTERNAL TABLE hl7.hl7_pr1 (
 	anesthesia_code_second_alternate_value_set_version_id STRING,
 	anesthesia_minutes STRING,
 	surgeon STRING,
+	surgeon_person_id STRING,
+	surgeon_family_name STRING,
+	surgeon_family_name_surname STRING,
+	surgeon_family_name_own_surname_prefix STRING,
+	surgeon_family_name_own_surname STRING,
+	surgeon_family_name_surname_prefix_from_partner_spouse STRING,
+	surgeon_family_name_surname_from_partner_spouse STRING,
+	surgeon_given_name STRING,
+	surgeon_second_and_further_given_names_or_initials_thereof STRING,
+	surgeon_suffix STRING,
+	surgeon_prefix STRING,
+	surgeon_degree STRING,
+	surgeon_source_table STRING,
+	surgeon_source_table_id STRING,
+	surgeon_source_table_text STRING,
+	surgeon_source_table_name_of_coding_system STRING,
+	surgeon_source_table_alternate_id STRING,
+	surgeon_source_table_alternate_text STRING,
+	surgeon_source_table_name_of_alternate_coding_system STRING,
+	surgeon_source_table_coding_system_version_id STRING,
+	surgeon_source_table_alternate_coding_system_version_id STRING,
+	surgeon_source_table_original_text STRING,
+	surgeon_source_table_second_alternate_id STRING,
+	surgeon_source_table_second_alternate_text STRING,
+	surgeon_source_table_name_of_second_alternate_coding_system STRING,
+	surgeon_source_table_second_alternate_coding_system_version_id STRING,
+	surgeon_source_table_coding_system_oid STRING,
+	surgeon_source_table_value_set_oid STRING,
+	surgeon_source_table_value_set_version_id STRING,
+	surgeon_source_table_alternate_coding_system_oid STRING,
+	surgeon_source_table_alternate_value_set_oid STRING,
+	surgeon_source_table_alternate_value_set_version_id STRING,
+	surgeon_source_table_second_alternate_coding_system_oid STRING,
+	surgeon_source_table_second_alternate_value_set_oid STRING,
+	surgeon_source_table_second_alternate_value_set_version_id STRING,
+	surgeon_assigning_authority STRING,
+	surgeon_assigning_authority_namespace_id STRING,
+	surgeon_assigning_authority_universal_id STRING,
+	surgeon_assigning_authority_universal_id_type STRING,
+	surgeon_name_type_code STRING,
+	surgeon_id_check_digit STRING,
+	surgeon_check_digit_scheme STRING,
+	surgeon_id_type_code STRING,
+	surgeon_assigning_facility STRING,
+	surgeon_assigning_facility_namespace_id STRING,
+	surgeon_assigning_facility_universal_id STRING,
+	surgeon_assigning_facility_universal_id_type STRING,
+	surgeon_name_representation_code STRING,
+	surgeon_name_context STRING,
+	surgeon_name_context_id STRING,
+	surgeon_name_context_text STRING,
+	surgeon_name_context_name_of_coding_system STRING,
+	surgeon_name_context_alternate_id STRING,
+	surgeon_name_context_alternate_text STRING,
+	surgeon_name_context_name_of_alternate_coding_system STRING,
+	surgeon_name_context_coding_system_version_id STRING,
+	surgeon_name_context_alternate_coding_system_version_id STRING,
+	surgeon_name_context_original_text STRING,
+	surgeon_name_context_second_alternate_id STRING,
+	surgeon_name_context_second_alternate_text STRING,
+	surgeon_name_context_name_of_second_alternate_coding_system STRING,
+	surgeon_name_context_second_alternate_coding_system_version_id STRING,
+	surgeon_name_context_coding_system_oid STRING,
+	surgeon_name_context_value_set_oid STRING,
+	surgeon_name_context_value_set_version_id STRING,
+	surgeon_name_context_alternate_coding_system_oid STRING,
+	surgeon_name_context_alternate_value_set_oid STRING,
+	surgeon_name_context_alternate_value_set_version_id STRING,
+	surgeon_name_context_second_alternate_coding_system_oid STRING,
+	surgeon_name_context_second_alternate_value_set_oid STRING,
+	surgeon_name_context_second_alternate_value_set_version_id STRING,
+	surgeon_name_validity_range STRING,
+	surgeon_name_validity_range_range_start_date_time STRING,
+	surgeon_name_validity_range_range_end_date_time STRING,
+	surgeon_name_assembly_order STRING,
+	surgeon_effective_date STRING,
+	surgeon_expiration_date STRING,
+	surgeon_professional_suffix STRING,
+	surgeon_assigning_jurisdiction STRING,
+	surgeon_assigning_jurisdiction_id STRING,
+	surgeon_assigning_jurisdiction_text STRING,
+	surgeon_assigning_jurisdiction_name_of_coding_system STRING,
+	surgeon_assigning_jurisdiction_alternate_id STRING,
+	surgeon_assigning_jurisdiction_alternate_text STRING,
+	surgeon_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	surgeon_assigning_jurisdiction_coding_system_version_id STRING,
+	surgeon_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	surgeon_assigning_jurisdiction_original_text STRING,
+	surgeon_assigning_jurisdiction_second_alternate_id STRING,
+	surgeon_assigning_jurisdiction_second_alternate_text STRING,
+	surgeon_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	surgeon_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	surgeon_assigning_jurisdiction_coding_system_oid STRING,
+	surgeon_assigning_jurisdiction_value_set_oid STRING,
+	surgeon_assigning_jurisdiction_value_set_version_id STRING,
+	surgeon_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	surgeon_assigning_jurisdiction_alternate_value_set_oid STRING,
+	surgeon_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	surgeon_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	surgeon_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	surgeon_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	surgeon_assigning_agency_or_department STRING,
+	surgeon_assigning_agency_or_department_id STRING,
+	surgeon_assigning_agency_or_department_text STRING,
+	surgeon_assigning_agency_or_department_name_of_coding_system STRING,
+	surgeon_assigning_agency_or_department_alternate_id STRING,
+	surgeon_assigning_agency_or_department_alternate_text STRING,
+	surgeon_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	surgeon_assigning_agency_or_department_coding_system_version_id STRING,
+	surgeon_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	surgeon_assigning_agency_or_department_original_text STRING,
+	surgeon_assigning_agency_or_department_second_alternate_id STRING,
+	surgeon_assigning_agency_or_department_second_alternate_text STRING,
+	surgeon_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	surgeon_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	surgeon_assigning_agency_or_department_coding_system_oid STRING,
+	surgeon_assigning_agency_or_department_value_set_oid STRING,
+	surgeon_assigning_agency_or_department_value_set_version_id STRING,
+	surgeon_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	surgeon_assigning_agency_or_department_alternate_value_set_oid STRING,
+	surgeon_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	surgeon_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	surgeon_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	surgeon_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	surgeon_security_check STRING,
+	surgeon_security_check_scheme STRING,
 	procedure_practitioner STRING,
+	procedure_practitioner_person_id STRING,
+	procedure_practitioner_family_name STRING,
+	procedure_practitioner_family_name_surname STRING,
+	procedure_practitioner_family_name_own_surname_prefix STRING,
+	procedure_practitioner_family_name_own_surname STRING,
+	procedure_practitioner_family_name_surname_prefix_from_partner_spouse STRING,
+	procedure_practitioner_family_name_surname_from_partner_spouse STRING,
+	procedure_practitioner_given_name STRING,
+	procedure_practitioner_second_and_further_given_names_or_initials_thereof STRING,
+	procedure_practitioner_suffix STRING,
+	procedure_practitioner_prefix STRING,
+	procedure_practitioner_degree STRING,
+	procedure_practitioner_source_table STRING,
+	procedure_practitioner_source_table_id STRING,
+	procedure_practitioner_source_table_text STRING,
+	procedure_practitioner_source_table_name_of_coding_system STRING,
+	procedure_practitioner_source_table_alternate_id STRING,
+	procedure_practitioner_source_table_alternate_text STRING,
+	procedure_practitioner_source_table_name_of_alternate_coding_system STRING,
+	procedure_practitioner_source_table_coding_system_version_id STRING,
+	procedure_practitioner_source_table_alternate_coding_system_version_id STRING,
+	procedure_practitioner_source_table_original_text STRING,
+	procedure_practitioner_source_table_second_alternate_id STRING,
+	procedure_practitioner_source_table_second_alternate_text STRING,
+	procedure_practitioner_source_table_name_of_second_alternate_coding_system STRING,
+	procedure_practitioner_source_table_second_alternate_coding_system_version_id STRING,
+	procedure_practitioner_source_table_coding_system_oid STRING,
+	procedure_practitioner_source_table_value_set_oid STRING,
+	procedure_practitioner_source_table_value_set_version_id STRING,
+	procedure_practitioner_source_table_alternate_coding_system_oid STRING,
+	procedure_practitioner_source_table_alternate_value_set_oid STRING,
+	procedure_practitioner_source_table_alternate_value_set_version_id STRING,
+	procedure_practitioner_source_table_second_alternate_coding_system_oid STRING,
+	procedure_practitioner_source_table_second_alternate_value_set_oid STRING,
+	procedure_practitioner_source_table_second_alternate_value_set_version_id STRING,
+	procedure_practitioner_assigning_authority STRING,
+	procedure_practitioner_assigning_authority_namespace_id STRING,
+	procedure_practitioner_assigning_authority_universal_id STRING,
+	procedure_practitioner_assigning_authority_universal_id_type STRING,
+	procedure_practitioner_name_type_code STRING,
+	procedure_practitioner_id_check_digit STRING,
+	procedure_practitioner_check_digit_scheme STRING,
+	procedure_practitioner_id_type_code STRING,
+	procedure_practitioner_assigning_facility STRING,
+	procedure_practitioner_assigning_facility_namespace_id STRING,
+	procedure_practitioner_assigning_facility_universal_id STRING,
+	procedure_practitioner_assigning_facility_universal_id_type STRING,
+	procedure_practitioner_name_representation_code STRING,
+	procedure_practitioner_name_context STRING,
+	procedure_practitioner_name_context_id STRING,
+	procedure_practitioner_name_context_text STRING,
+	procedure_practitioner_name_context_name_of_coding_system STRING,
+	procedure_practitioner_name_context_alternate_id STRING,
+	procedure_practitioner_name_context_alternate_text STRING,
+	procedure_practitioner_name_context_name_of_alternate_coding_system STRING,
+	procedure_practitioner_name_context_coding_system_version_id STRING,
+	procedure_practitioner_name_context_alternate_coding_system_version_id STRING,
+	procedure_practitioner_name_context_original_text STRING,
+	procedure_practitioner_name_context_second_alternate_id STRING,
+	procedure_practitioner_name_context_second_alternate_text STRING,
+	procedure_practitioner_name_context_name_of_second_alternate_coding_system STRING,
+	procedure_practitioner_name_context_second_alternate_coding_system_version_id STRING,
+	procedure_practitioner_name_context_coding_system_oid STRING,
+	procedure_practitioner_name_context_value_set_oid STRING,
+	procedure_practitioner_name_context_value_set_version_id STRING,
+	procedure_practitioner_name_context_alternate_coding_system_oid STRING,
+	procedure_practitioner_name_context_alternate_value_set_oid STRING,
+	procedure_practitioner_name_context_alternate_value_set_version_id STRING,
+	procedure_practitioner_name_context_second_alternate_coding_system_oid STRING,
+	procedure_practitioner_name_context_second_alternate_value_set_oid STRING,
+	procedure_practitioner_name_context_second_alternate_value_set_version_id STRING,
+	procedure_practitioner_name_validity_range STRING,
+	procedure_practitioner_name_validity_range_range_start_date_time STRING,
+	procedure_practitioner_name_validity_range_range_end_date_time STRING,
+	procedure_practitioner_name_assembly_order STRING,
+	procedure_practitioner_effective_date STRING,
+	procedure_practitioner_expiration_date STRING,
+	procedure_practitioner_professional_suffix STRING,
+	procedure_practitioner_assigning_jurisdiction STRING,
+	procedure_practitioner_assigning_jurisdiction_id STRING,
+	procedure_practitioner_assigning_jurisdiction_text STRING,
+	procedure_practitioner_assigning_jurisdiction_name_of_coding_system STRING,
+	procedure_practitioner_assigning_jurisdiction_alternate_id STRING,
+	procedure_practitioner_assigning_jurisdiction_alternate_text STRING,
+	procedure_practitioner_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	procedure_practitioner_assigning_jurisdiction_coding_system_version_id STRING,
+	procedure_practitioner_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	procedure_practitioner_assigning_jurisdiction_original_text STRING,
+	procedure_practitioner_assigning_jurisdiction_second_alternate_id STRING,
+	procedure_practitioner_assigning_jurisdiction_second_alternate_text STRING,
+	procedure_practitioner_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	procedure_practitioner_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	procedure_practitioner_assigning_jurisdiction_coding_system_oid STRING,
+	procedure_practitioner_assigning_jurisdiction_value_set_oid STRING,
+	procedure_practitioner_assigning_jurisdiction_value_set_version_id STRING,
+	procedure_practitioner_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	procedure_practitioner_assigning_jurisdiction_alternate_value_set_oid STRING,
+	procedure_practitioner_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	procedure_practitioner_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	procedure_practitioner_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	procedure_practitioner_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	procedure_practitioner_assigning_agency_or_department STRING,
+	procedure_practitioner_assigning_agency_or_department_id STRING,
+	procedure_practitioner_assigning_agency_or_department_text STRING,
+	procedure_practitioner_assigning_agency_or_department_name_of_coding_system STRING,
+	procedure_practitioner_assigning_agency_or_department_alternate_id STRING,
+	procedure_practitioner_assigning_agency_or_department_alternate_text STRING,
+	procedure_practitioner_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	procedure_practitioner_assigning_agency_or_department_coding_system_version_id STRING,
+	procedure_practitioner_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	procedure_practitioner_assigning_agency_or_department_original_text STRING,
+	procedure_practitioner_assigning_agency_or_department_second_alternate_id STRING,
+	procedure_practitioner_assigning_agency_or_department_second_alternate_text STRING,
+	procedure_practitioner_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	procedure_practitioner_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	procedure_practitioner_assigning_agency_or_department_coding_system_oid STRING,
+	procedure_practitioner_assigning_agency_or_department_value_set_oid STRING,
+	procedure_practitioner_assigning_agency_or_department_value_set_version_id STRING,
+	procedure_practitioner_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	procedure_practitioner_assigning_agency_or_department_alternate_value_set_oid STRING,
+	procedure_practitioner_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	procedure_practitioner_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	procedure_practitioner_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	procedure_practitioner_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	procedure_practitioner_security_check STRING,
+	procedure_practitioner_security_check_scheme STRING,
 	consent_code STRING,
 	consent_code_id STRING,
 	consent_code_text STRING,
@@ -39251,15 +40545,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pr1 (
 	parent_procedure_id_entity_id STRING,
 	parent_procedure_id_namespace_id STRING,
 	parent_procedure_id_universal_id STRING,
-	parent_procedure_id_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	parent_procedure_id_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39268,6 +40561,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PR1'
 DROP TABLE hl7.hl7_pra_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pra (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39478,15 +40773,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pra (
 	government_reimbursement_billing_eligibility_second_alternate_coding_system_oid STRING,
 	government_reimbursement_billing_eligibility_second_alternate_value_set_oid STRING,
 	government_reimbursement_billing_eligibility_second_alternate_value_set_version_id STRING,
-	set_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	set_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39495,6 +40789,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRA'
 DROP TABLE hl7.hl7_prb_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_prb (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -39870,21 +41166,16 @@ CREATE EXTERNAL TABLE hl7.hl7_prb (
 	action_date_time_date_time STRING,
 	action_date_time_person_id STRING,
 	action_date_time_provider_id STRING,
-	problem_id_primary_id STRING,
-	problem_id_name_of_coding_sys STRING,
-	problem_id_alt_text STRING,
-	problem_estbl_date_time STRING,
-	problem_estbl_date_time_date_time STRING,
-	problem_estbl_date_time_person_id STRING,
-	problem_estbl_date_time_provider_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	problem_established_date_time_date_time STRING,
+	problem_established_date_time_person_id STRING,
+	problem_established_date_time_provider_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39893,6 +41184,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRB'
 DROP TABLE hl7.hl7_prc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_prc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -40106,15 +41399,14 @@ CREATE EXTERNAL TABLE hl7.hl7_prc (
 	charge_on_indicator_alternate_value_set_version_id STRING,
 	charge_on_indicator_second_alternate_coding_system_oid STRING,
 	charge_on_indicator_second_alternate_value_set_oid STRING,
-	charge_on_indicator_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	charge_on_indicator_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40123,6 +41415,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRC'
 DROP TABLE hl7.hl7_prd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_prd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -40190,6 +41484,8 @@ CREATE EXTERNAL TABLE hl7.hl7_prd (
 	provider_name_name_context_second_alternate_value_set_oid STRING,
 	provider_name_name_context_second_alternate_value_set_version_id STRING,
 	provider_name_name_validity_range STRING,
+	provider_name_name_validity_range_range_start_date_time STRING,
+	provider_name_name_validity_range_range_end_date_time STRING,
 	provider_name_name_assembly_order STRING,
 	provider_name_effective_date STRING,
 	provider_name_expiration_date STRING,
@@ -40255,6 +41551,8 @@ CREATE EXTERNAL TABLE hl7.hl7_prd (
 	provider_address_census_tract_second_alternate_value_set_version_id STRING,
 	provider_address_address_representation_code STRING,
 	provider_address_address_validity_range STRING,
+	provider_address_address_validity_range_range_start_date_time STRING,
+	provider_address_address_validity_range_range_end_date_time STRING,
 	provider_address_effective_date STRING,
 	provider_address_expiration_date STRING,
 	provider_address_expiration_reason STRING,
@@ -40573,6 +41871,8 @@ CREATE EXTERNAL TABLE hl7.hl7_prd (
 	provider_organization_address_census_tract_second_alternate_value_set_version_id STRING,
 	provider_organization_address_address_representation_code STRING,
 	provider_organization_address_address_validity_range STRING,
+	provider_organization_address_address_validity_range_range_start_date_time STRING,
+	provider_organization_address_address_validity_range_range_end_date_time STRING,
 	provider_organization_address_effective_date STRING,
 	provider_organization_address_expiration_date STRING,
 	provider_organization_address_expiration_reason STRING,
@@ -40762,15 +42062,14 @@ CREATE EXTERNAL TABLE hl7.hl7_prd (
 	provider_organization_method_of_contact_alternate_value_set_version_id STRING,
 	provider_organization_method_of_contact_second_alternate_coding_system_oid STRING,
 	provider_organization_method_of_contact_second_alternate_value_set_oid STRING,
-	provider_organization_method_of_contact_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	provider_organization_method_of_contact_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40779,6 +42078,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRD'
 DROP TABLE hl7.hl7_prt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_prt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -40910,6 +42211,8 @@ CREATE EXTERNAL TABLE hl7.hl7_prt (
 	participation_person_name_context_second_alternate_value_set_oid STRING,
 	participation_person_name_context_second_alternate_value_set_version_id STRING,
 	participation_person_name_validity_range STRING,
+	participation_person_name_validity_range_range_start_date_time STRING,
+	participation_person_name_validity_range_range_end_date_time STRING,
 	participation_person_name_assembly_order STRING,
 	participation_person_effective_date STRING,
 	participation_person_expiration_date STRING,
@@ -41174,6 +42477,8 @@ CREATE EXTERNAL TABLE hl7.hl7_prt (
 	participation_address_census_tract_second_alternate_value_set_version_id STRING,
 	participation_address_address_representation_code STRING,
 	participation_address_address_validity_range STRING,
+	participation_address_address_validity_range_range_start_date_time STRING,
+	participation_address_address_validity_range_range_end_date_time STRING,
 	participation_address_effective_date STRING,
 	participation_address_expiration_date STRING,
 	participation_address_expiration_reason STRING,
@@ -41340,15 +42645,14 @@ CREATE EXTERNAL TABLE hl7.hl7_prt (
 	participation_device_type_alternate_value_set_version_id STRING,
 	participation_device_type_second_alternate_coding_system_oid STRING,
 	participation_device_type_second_alternate_value_set_oid STRING,
-	participation_device_type_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	participation_device_type_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41357,6 +42661,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PRT'
 DROP TABLE hl7.hl7_psg_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_psg (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -41406,15 +42712,14 @@ CREATE EXTERNAL TABLE hl7.hl7_psg (
 	product_service_group_billed_amt_range_units_second_alternate_value_set_oid STRING,
 	product_service_group_billed_amt_range_units_second_alternate_value_set_version_id STRING,
 	product_service_group_billed_amt_range_type STRING,
-	product_service_group_description STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	product_service_group_description STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41423,6 +42728,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSG'
 DROP TABLE hl7.hl7_psh_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_psh (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -41514,15 +42821,14 @@ CREATE EXTERNAL TABLE hl7.hl7_psh (
 	quantity_in_use_method STRING,
 	quantity_in_use_comment STRING,
 	num_of_product_experience_reports_filed_by_facility STRING,
-	num_of_product_experience_reports_filed_by_distributor STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	num_of_product_experience_reports_filed_by_distributor STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41531,6 +42837,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSH'
 DROP TABLE hl7.hl7_psl_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_psl (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -41998,6 +43306,8 @@ CREATE EXTERNAL TABLE hl7.hl7_psl (
 	executing_physician_id_name_context_second_alternate_value_set_oid STRING,
 	executing_physician_id_name_context_second_alternate_value_set_version_id STRING,
 	executing_physician_id_name_validity_range STRING,
+	executing_physician_id_name_validity_range_range_start_date_time STRING,
+	executing_physician_id_name_validity_range_range_end_date_time STRING,
 	executing_physician_id_name_assembly_order STRING,
 	executing_physician_id_effective_date STRING,
 	executing_physician_id_expiration_date STRING,
@@ -42123,6 +43433,8 @@ CREATE EXTERNAL TABLE hl7.hl7_psl (
 	responsible_physician_id_name_context_second_alternate_value_set_oid STRING,
 	responsible_physician_id_name_context_second_alternate_value_set_version_id STRING,
 	responsible_physician_id_name_validity_range STRING,
+	responsible_physician_id_name_validity_range_range_start_date_time STRING,
+	responsible_physician_id_name_validity_range_range_end_date_time STRING,
 	responsible_physician_id_name_assembly_order STRING,
 	responsible_physician_id_effective_date STRING,
 	responsible_physician_id_expiration_date STRING,
@@ -42408,15 +43720,14 @@ CREATE EXTERNAL TABLE hl7.hl7_psl (
 	vat_rate STRING,
 	main_service STRING,
 	validation STRING,
-	_comment STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	_comment STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42425,6 +43736,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSL'
 DROP TABLE hl7.hl7_pss_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pss (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -42473,15 +43786,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pss (
 	billed_amt_range_units_second_alternate_value_set_oid STRING,
 	billed_amt_range_units_second_alternate_value_set_version_id STRING,
 	billed_amt_range_type STRING,
-	section_description_or_heading STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	section_description_or_heading STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42490,6 +43802,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PSS'
 DROP TABLE hl7.hl7_pth_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pth (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -42572,15 +43886,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pth (
 	mood_code_alternate_value_set_version_id STRING,
 	mood_code_second_alternate_coding_system_oid STRING,
 	mood_code_second_alternate_value_set_oid STRING,
-	mood_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	mood_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42589,6 +43902,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PTH'
 DROP TABLE hl7.hl7_pv1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pv1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -42852,6 +44167,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	attending_doctor_name_context_second_alternate_value_set_oid STRING,
 	attending_doctor_name_context_second_alternate_value_set_version_id STRING,
 	attending_doctor_name_validity_range STRING,
+	attending_doctor_name_validity_range_range_start_date_time STRING,
+	attending_doctor_name_validity_range_range_end_date_time STRING,
 	attending_doctor_name_assembly_order STRING,
 	attending_doctor_effective_date STRING,
 	attending_doctor_expiration_date STRING,
@@ -42977,6 +44294,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	referring_doctor_name_context_second_alternate_value_set_oid STRING,
 	referring_doctor_name_context_second_alternate_value_set_version_id STRING,
 	referring_doctor_name_validity_range STRING,
+	referring_doctor_name_validity_range_range_start_date_time STRING,
+	referring_doctor_name_validity_range_range_end_date_time STRING,
 	referring_doctor_name_assembly_order STRING,
 	referring_doctor_effective_date STRING,
 	referring_doctor_expiration_date STRING,
@@ -43102,6 +44421,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	consulting_doctor_name_context_second_alternate_value_set_oid STRING,
 	consulting_doctor_name_context_second_alternate_value_set_version_id STRING,
 	consulting_doctor_name_validity_range STRING,
+	consulting_doctor_name_validity_range_range_start_date_time STRING,
+	consulting_doctor_name_validity_range_range_end_date_time STRING,
 	consulting_doctor_name_assembly_order STRING,
 	consulting_doctor_effective_date STRING,
 	consulting_doctor_expiration_date STRING,
@@ -43402,6 +44723,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	admitting_doctor_name_context_second_alternate_value_set_oid STRING,
 	admitting_doctor_name_context_second_alternate_value_set_version_id STRING,
 	admitting_doctor_name_validity_range STRING,
+	admitting_doctor_name_validity_range_range_start_date_time STRING,
+	admitting_doctor_name_validity_range_range_end_date_time STRING,
 	admitting_doctor_name_assembly_order STRING,
 	admitting_doctor_effective_date STRING,
 	admitting_doctor_expiration_date STRING,
@@ -44064,31 +45387,129 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	visit_indicator_second_alternate_value_set_version_id STRING,
 	other_healthcare_provider STRING,
 	other_healthcare_provider_person_id STRING,
-	other_healthcare_provider_last_name STRING,
-	other_healthcare_provider_first_name STRING,
-	other_healthcare_provider_middle_name STRING,
+	other_healthcare_provider_family_name STRING,
+	other_healthcare_provider_family_name_surname STRING,
+	other_healthcare_provider_family_name_own_surname_prefix STRING,
+	other_healthcare_provider_family_name_own_surname STRING,
+	other_healthcare_provider_family_name_surname_prefix_from_partner_spouse STRING,
+	other_healthcare_provider_family_name_surname_from_partner_spouse STRING,
+	other_healthcare_provider_given_name STRING,
+	other_healthcare_provider_second_and_further_given_names_or_initials_thereof STRING,
 	other_healthcare_provider_suffix STRING,
-	other_healthcare_provider_person_prefix STRING,
+	other_healthcare_provider_prefix STRING,
 	other_healthcare_provider_degree STRING,
 	other_healthcare_provider_source_table STRING,
-	other_healthcare_provider_assgn_authr STRING,
-	other_healthcare_provider_assgn_authr_namespace_id STRING,
-	other_healthcare_provider_assgn_authr_universal_id STRING,
-	other_healthcare_provider_assgn_authr_universal_id_type STRING,
+	other_healthcare_provider_source_table_id STRING,
+	other_healthcare_provider_source_table_text STRING,
+	other_healthcare_provider_source_table_name_of_coding_system STRING,
+	other_healthcare_provider_source_table_alternate_id STRING,
+	other_healthcare_provider_source_table_alternate_text STRING,
+	other_healthcare_provider_source_table_name_of_alternate_coding_system STRING,
+	other_healthcare_provider_source_table_coding_system_version_id STRING,
+	other_healthcare_provider_source_table_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_source_table_original_text STRING,
+	other_healthcare_provider_source_table_second_alternate_id STRING,
+	other_healthcare_provider_source_table_second_alternate_text STRING,
+	other_healthcare_provider_source_table_name_of_second_alternate_coding_system STRING,
+	other_healthcare_provider_source_table_second_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_source_table_coding_system_oid STRING,
+	other_healthcare_provider_source_table_value_set_oid STRING,
+	other_healthcare_provider_source_table_value_set_version_id STRING,
+	other_healthcare_provider_source_table_alternate_coding_system_oid STRING,
+	other_healthcare_provider_source_table_alternate_value_set_oid STRING,
+	other_healthcare_provider_source_table_alternate_value_set_version_id STRING,
+	other_healthcare_provider_source_table_second_alternate_coding_system_oid STRING,
+	other_healthcare_provider_source_table_second_alternate_value_set_oid STRING,
+	other_healthcare_provider_source_table_second_alternate_value_set_version_id STRING,
+	other_healthcare_provider_assigning_authority STRING,
+	other_healthcare_provider_assigning_authority_namespace_id STRING,
+	other_healthcare_provider_assigning_authority_universal_id STRING,
+	other_healthcare_provider_assigning_authority_universal_id_type STRING,
 	other_healthcare_provider_name_type_code STRING,
-	other_healthcare_provider_identifier_check_digit STRING,
+	other_healthcare_provider_id_check_digit STRING,
 	other_healthcare_provider_check_digit_scheme STRING,
-	other_healthcare_provider_identifier_type_code STRING,
-	other_healthcare_provider_assgn_facility STRING,
-	other_healthcare_provider_name_rep_code STRING,
-	other_healthcare_provider_context STRING,
-	other_healthcare_provider_validity_range STRING,
-	other_healthcare_provider_assembly_order STRING,
-	other_healthcare_provider_eff_from_date_time STRING,
-	other_healthcare_provider_eff_to_date_time STRING,
-	other_healthcare_provider_prof_suffix STRING,
-	other_healthcare_provider_assgn_jurisdiction STRING,
-	other_healthcare_provider_assgn_agency_dept STRING,
+	other_healthcare_provider_id_type_code STRING,
+	other_healthcare_provider_assigning_facility STRING,
+	other_healthcare_provider_assigning_facility_namespace_id STRING,
+	other_healthcare_provider_assigning_facility_universal_id STRING,
+	other_healthcare_provider_assigning_facility_universal_id_type STRING,
+	other_healthcare_provider_name_representation_code STRING,
+	other_healthcare_provider_name_context STRING,
+	other_healthcare_provider_name_context_id STRING,
+	other_healthcare_provider_name_context_text STRING,
+	other_healthcare_provider_name_context_name_of_coding_system STRING,
+	other_healthcare_provider_name_context_alternate_id STRING,
+	other_healthcare_provider_name_context_alternate_text STRING,
+	other_healthcare_provider_name_context_name_of_alternate_coding_system STRING,
+	other_healthcare_provider_name_context_coding_system_version_id STRING,
+	other_healthcare_provider_name_context_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_name_context_original_text STRING,
+	other_healthcare_provider_name_context_second_alternate_id STRING,
+	other_healthcare_provider_name_context_second_alternate_text STRING,
+	other_healthcare_provider_name_context_name_of_second_alternate_coding_system STRING,
+	other_healthcare_provider_name_context_second_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_name_context_coding_system_oid STRING,
+	other_healthcare_provider_name_context_value_set_oid STRING,
+	other_healthcare_provider_name_context_value_set_version_id STRING,
+	other_healthcare_provider_name_context_alternate_coding_system_oid STRING,
+	other_healthcare_provider_name_context_alternate_value_set_oid STRING,
+	other_healthcare_provider_name_context_alternate_value_set_version_id STRING,
+	other_healthcare_provider_name_context_second_alternate_coding_system_oid STRING,
+	other_healthcare_provider_name_context_second_alternate_value_set_oid STRING,
+	other_healthcare_provider_name_context_second_alternate_value_set_version_id STRING,
+	other_healthcare_provider_name_validity_range STRING,
+	other_healthcare_provider_name_validity_range_range_start_date_time STRING,
+	other_healthcare_provider_name_validity_range_range_end_date_time STRING,
+	other_healthcare_provider_name_assembly_order STRING,
+	other_healthcare_provider_effective_date STRING,
+	other_healthcare_provider_expiration_date STRING,
+	other_healthcare_provider_professional_suffix STRING,
+	other_healthcare_provider_assigning_jurisdiction STRING,
+	other_healthcare_provider_assigning_jurisdiction_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_text STRING,
+	other_healthcare_provider_assigning_jurisdiction_name_of_coding_system STRING,
+	other_healthcare_provider_assigning_jurisdiction_alternate_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_alternate_text STRING,
+	other_healthcare_provider_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	other_healthcare_provider_assigning_jurisdiction_coding_system_version_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_original_text STRING,
+	other_healthcare_provider_assigning_jurisdiction_second_alternate_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_second_alternate_text STRING,
+	other_healthcare_provider_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	other_healthcare_provider_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_coding_system_oid STRING,
+	other_healthcare_provider_assigning_jurisdiction_value_set_oid STRING,
+	other_healthcare_provider_assigning_jurisdiction_value_set_version_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	other_healthcare_provider_assigning_jurisdiction_alternate_value_set_oid STRING,
+	other_healthcare_provider_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	other_healthcare_provider_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	other_healthcare_provider_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	other_healthcare_provider_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	other_healthcare_provider_assigning_agency_or_department STRING,
+	other_healthcare_provider_assigning_agency_or_department_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_text STRING,
+	other_healthcare_provider_assigning_agency_or_department_name_of_coding_system STRING,
+	other_healthcare_provider_assigning_agency_or_department_alternate_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_alternate_text STRING,
+	other_healthcare_provider_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	other_healthcare_provider_assigning_agency_or_department_coding_system_version_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_original_text STRING,
+	other_healthcare_provider_assigning_agency_or_department_second_alternate_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_second_alternate_text STRING,
+	other_healthcare_provider_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	other_healthcare_provider_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_coding_system_oid STRING,
+	other_healthcare_provider_assigning_agency_or_department_value_set_oid STRING,
+	other_healthcare_provider_assigning_agency_or_department_value_set_version_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	other_healthcare_provider_assigning_agency_or_department_alternate_value_set_oid STRING,
+	other_healthcare_provider_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	other_healthcare_provider_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	other_healthcare_provider_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	other_healthcare_provider_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	other_healthcare_provider_security_check STRING,
 	other_healthcare_provider_security_check_scheme STRING,
 	service_episode_description STRING,
@@ -44155,9 +45576,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	service_episode_id_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
 	service_episode_id_security_check STRING,
 	service_episode_id_security_check_scheme STRING,
-	adm_type_visit_type STRING,
-	adm_type_reason_for_visit STRING,
-	pat_type STRING,
+	admission_type_visit_type STRING,
+	admission_type_reason_for_visit STRING,
 	primary_care_doctor STRING,
 	primary_care_doctor_person_id STRING,
 	primary_care_doctor_last_name STRING,
@@ -44184,33 +45604,32 @@ CREATE EXTERNAL TABLE hl7.hl7_pv1 (
 	primary_care_doctor_assgn_agency_dept STRING,
 	primary_care_doctor_security_check STRING,
 	primary_care_doctor_security_check_scheme STRING,
+	primary_care_doctor_family_name STRING,
+	primary_care_doctor_given_name STRING,
+	primary_care_doctor_second_and_further_given_names_or_initials_thereof STRING,
+	primary_care_doctor_prefix STRING,
+	primary_care_doctor_assigning_authority STRING,
+	primary_care_doctor_id_check_digit STRING,
+	primary_care_doctor_id_type_code STRING,
+	primary_care_doctor_assigning_facility STRING,
+	primary_care_doctor_name_representation_code STRING,
+	primary_care_doctor_name_context STRING,
+	primary_care_doctor_name_validity_range STRING,
+	primary_care_doctor_name_assembly_order STRING,
+	primary_care_doctor_effective_date STRING,
+	primary_care_doctor_expiration_date STRING,
+	primary_care_doctor_professional_suffix STRING,
+	primary_care_doctor_assigning_jurisdiction STRING,
+	primary_care_doctor_assigning_agency_or_department STRING,
 	mode_of_arrival STRING,
-	reason_for_visit STRING,
-	consulting_doctor_last_name STRING,
-	consulting_doctor_first_name STRING,
-	consulting_doctor_middle_name STRING,
-	consulting_doctor_person_prefix STRING,
-	consulting_doctor_assgn_authr STRING,
-	consulting_doctor_identifier_check_digit STRING,
-	consulting_doctor_identifier_type_code STRING,
-	consulting_doctor_assgn_facility STRING,
-	consulting_doctor_name_rep_code STRING,
-	consulting_doctor_context STRING,
-	consulting_doctor_validity_range STRING,
-	consulting_doctor_assembly_order STRING,
-	consulting_doctor_eff_from_date_time STRING,
-	consulting_doctor_eff_to_date_time STRING,
-	consulting_doctor_prof_suffix STRING,
-	consulting_doctor_assgn_jurisdiction STRING,
-	consulting_doctor_assgn_agency_dept STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	reason_for_visit STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -44219,6 +45638,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV1'
 DROP TABLE hl7.hl7_pv2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pv2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -44434,6 +45855,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pv2 (
 	referral_source_code_name_context_second_alternate_value_set_oid STRING,
 	referral_source_code_name_context_second_alternate_value_set_version_id STRING,
 	referral_source_code_name_validity_range STRING,
+	referral_source_code_name_validity_range_range_start_date_time STRING,
+	referral_source_code_name_validity_range_range_end_date_time STRING,
 	referral_source_code_name_assembly_order STRING,
 	referral_source_code_effective_date STRING,
 	referral_source_code_expiration_date STRING,
@@ -44934,15 +46357,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pv2 (
 	notify_clergy_code_second_alternate_coding_system_oid STRING,
 	notify_clergy_code_second_alternate_value_set_oid STRING,
 	notify_clergy_code_second_alternate_value_set_version_id STRING,
-	advance_directive_last_verified_date STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	advance_directive_last_verified_date STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -44951,6 +46373,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PV2'
 DROP TABLE hl7.hl7_pye_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_pye (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45081,6 +46505,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pye (
 	payee_person_name_name_context_second_alternate_value_set_oid STRING,
 	payee_person_name_name_context_second_alternate_value_set_version_id STRING,
 	payee_person_name_name_validity_range STRING,
+	payee_person_name_name_validity_range_range_start_date_time STRING,
+	payee_person_name_name_validity_range_range_end_date_time STRING,
 	payee_person_name_name_assembly_order STRING,
 	payee_person_name_effective_date STRING,
 	payee_person_name_expiration_date STRING,
@@ -45146,6 +46572,8 @@ CREATE EXTERNAL TABLE hl7.hl7_pye (
 	payee_address_census_tract_second_alternate_value_set_version_id STRING,
 	payee_address_address_representation_code STRING,
 	payee_address_address_validity_range STRING,
+	payee_address_address_validity_range_range_start_date_time STRING,
+	payee_address_address_validity_range_range_end_date_time STRING,
 	payee_address_effective_date STRING,
 	payee_address_expiration_date STRING,
 	payee_address_expiration_reason STRING,
@@ -45227,15 +46655,14 @@ CREATE EXTERNAL TABLE hl7.hl7_pye (
 	payment_method_alternate_value_set_version_id STRING,
 	payment_method_second_alternate_coding_system_oid STRING,
 	payment_method_second_alternate_value_set_oid STRING,
-	payment_method_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	payment_method_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45244,6 +46671,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=PYE'
 DROP TABLE hl7.hl7_qak_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_qak (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45277,15 +46706,14 @@ CREATE EXTERNAL TABLE hl7.hl7_qak (
 	message_query_name_second_alternate_value_set_version_id STRING,
 	hit_count_total STRING,
 	this_payload STRING,
-	hits_remaining STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	hits_remaining STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45294,6 +46722,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QAK'
 DROP TABLE hl7.hl7_qid_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_qid (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45323,15 +46753,14 @@ CREATE EXTERNAL TABLE hl7.hl7_qid (
 	message_query_name_alternate_value_set_version_id STRING,
 	message_query_name_second_alternate_coding_system_oid STRING,
 	message_query_name_second_alternate_value_set_oid STRING,
-	message_query_name_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	message_query_name_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45340,6 +46769,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QID'
 DROP TABLE hl7.hl7_qpd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_qpd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45370,15 +46801,14 @@ CREATE EXTERNAL TABLE hl7.hl7_qpd (
 	message_query_name_second_alternate_value_set_oid STRING,
 	message_query_name_second_alternate_value_set_version_id STRING,
 	query_tag STRING,
-	user_parameters_in_successive_fields STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	user_parameters_in_successive_fields STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45387,6 +46817,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QPD'
 DROP TABLE hl7.hl7_qrd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_qrd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45394,25 +46826,240 @@ CREATE EXTERNAL TABLE hl7.hl7_qrd (
 	patient_account_num STRING,
 	unknown STRING,
 	query_date_time STRING,
-	query_format STRING,
+	query_format_code STRING,
 	query_priority STRING,
 	query_id STRING,
 	deferred_response_type STRING,
 	deferred_response_date_time STRING,
-	qty_limited_request STRING,
+	quantity_limited_request STRING,
+	quantity_limited_request_quantity STRING,
+	quantity_limited_request_units STRING,
+	quantity_limited_request_units_id STRING,
+	quantity_limited_request_units_text STRING,
+	quantity_limited_request_units_name_of_coding_system STRING,
+	quantity_limited_request_units_alternate_id STRING,
+	quantity_limited_request_units_alternate_text STRING,
+	quantity_limited_request_units_name_of_alternate_coding_system STRING,
+	quantity_limited_request_units_coding_system_version_id STRING,
+	quantity_limited_request_units_alternate_coding_system_version_id STRING,
+	quantity_limited_request_units_original_text STRING,
+	quantity_limited_request_units_second_alternate_id STRING,
+	quantity_limited_request_units_second_alternate_text STRING,
+	quantity_limited_request_units_name_of_second_alternate_coding_system STRING,
+	quantity_limited_request_units_second_alternate_coding_system_version_id STRING,
+	quantity_limited_request_units_coding_system_oid STRING,
+	quantity_limited_request_units_value_set_oid STRING,
+	quantity_limited_request_units_value_set_version_id STRING,
+	quantity_limited_request_units_alternate_coding_system_oid STRING,
+	quantity_limited_request_units_alternate_value_set_oid STRING,
+	quantity_limited_request_units_alternate_value_set_version_id STRING,
+	quantity_limited_request_units_second_alternate_coding_system_oid STRING,
+	quantity_limited_request_units_second_alternate_value_set_oid STRING,
+	quantity_limited_request_units_second_alternate_value_set_version_id STRING,
 	who_subject_filter STRING,
+	who_subject_filter_id STRING,
+	who_subject_filter_text STRING,
+	who_subject_filter_name_of_coding_system STRING,
+	who_subject_filter_alternate_id STRING,
+	who_subject_filter_alternate_text STRING,
+	who_subject_filter_name_of_alternate_coding_system STRING,
+	who_subject_filter_coding_system_version_id STRING,
+	who_subject_filter_alternate_coding_system_version_id STRING,
+	who_subject_filter_original_text STRING,
+	who_subject_filter_second_alternate_id STRING,
+	who_subject_filter_second_alternate_text STRING,
+	who_subject_filter_name_of_second_alternate_coding_system STRING,
+	who_subject_filter_second_alternate_coding_system_version_id STRING,
+	who_subject_filter_coding_system_oid STRING,
+	who_subject_filter_value_set_oid STRING,
+	who_subject_filter_value_set_version_id STRING,
+	who_subject_filter_alternate_coding_system_oid STRING,
+	who_subject_filter_alternate_value_set_oid STRING,
+	who_subject_filter_alternate_value_set_version_id STRING,
+	who_subject_filter_second_alternate_coding_system_oid STRING,
+	who_subject_filter_second_alternate_value_set_oid STRING,
+	who_subject_filter_second_alternate_value_set_version_id STRING,
 	what_subject_filter STRING,
+	what_subject_filter_person_id STRING,
+	what_subject_filter_family_name STRING,
+	what_subject_filter_family_name_surname STRING,
+	what_subject_filter_family_name_own_surname_prefix STRING,
+	what_subject_filter_family_name_own_surname STRING,
+	what_subject_filter_family_name_surname_prefix_from_partner_spouse STRING,
+	what_subject_filter_family_name_surname_from_partner_spouse STRING,
+	what_subject_filter_given_name STRING,
+	what_subject_filter_second_and_further_given_names_or_initials_thereof STRING,
+	what_subject_filter_suffix STRING,
+	what_subject_filter_prefix STRING,
+	what_subject_filter_degree STRING,
+	what_subject_filter_source_table STRING,
+	what_subject_filter_source_table_id STRING,
+	what_subject_filter_source_table_text STRING,
+	what_subject_filter_source_table_name_of_coding_system STRING,
+	what_subject_filter_source_table_alternate_id STRING,
+	what_subject_filter_source_table_alternate_text STRING,
+	what_subject_filter_source_table_name_of_alternate_coding_system STRING,
+	what_subject_filter_source_table_coding_system_version_id STRING,
+	what_subject_filter_source_table_alternate_coding_system_version_id STRING,
+	what_subject_filter_source_table_original_text STRING,
+	what_subject_filter_source_table_second_alternate_id STRING,
+	what_subject_filter_source_table_second_alternate_text STRING,
+	what_subject_filter_source_table_name_of_second_alternate_coding_system STRING,
+	what_subject_filter_source_table_second_alternate_coding_system_version_id STRING,
+	what_subject_filter_source_table_coding_system_oid STRING,
+	what_subject_filter_source_table_value_set_oid STRING,
+	what_subject_filter_source_table_value_set_version_id STRING,
+	what_subject_filter_source_table_alternate_coding_system_oid STRING,
+	what_subject_filter_source_table_alternate_value_set_oid STRING,
+	what_subject_filter_source_table_alternate_value_set_version_id STRING,
+	what_subject_filter_source_table_second_alternate_coding_system_oid STRING,
+	what_subject_filter_source_table_second_alternate_value_set_oid STRING,
+	what_subject_filter_source_table_second_alternate_value_set_version_id STRING,
+	what_subject_filter_assigning_authority STRING,
+	what_subject_filter_assigning_authority_namespace_id STRING,
+	what_subject_filter_assigning_authority_universal_id STRING,
+	what_subject_filter_assigning_authority_universal_id_type STRING,
+	what_subject_filter_name_type_code STRING,
+	what_subject_filter_id_check_digit STRING,
+	what_subject_filter_check_digit_scheme STRING,
+	what_subject_filter_id_type_code STRING,
+	what_subject_filter_assigning_facility STRING,
+	what_subject_filter_assigning_facility_namespace_id STRING,
+	what_subject_filter_assigning_facility_universal_id STRING,
+	what_subject_filter_assigning_facility_universal_id_type STRING,
+	what_subject_filter_name_representation_code STRING,
+	what_subject_filter_name_context STRING,
+	what_subject_filter_name_context_id STRING,
+	what_subject_filter_name_context_text STRING,
+	what_subject_filter_name_context_name_of_coding_system STRING,
+	what_subject_filter_name_context_alternate_id STRING,
+	what_subject_filter_name_context_alternate_text STRING,
+	what_subject_filter_name_context_name_of_alternate_coding_system STRING,
+	what_subject_filter_name_context_coding_system_version_id STRING,
+	what_subject_filter_name_context_alternate_coding_system_version_id STRING,
+	what_subject_filter_name_context_original_text STRING,
+	what_subject_filter_name_context_second_alternate_id STRING,
+	what_subject_filter_name_context_second_alternate_text STRING,
+	what_subject_filter_name_context_name_of_second_alternate_coding_system STRING,
+	what_subject_filter_name_context_second_alternate_coding_system_version_id STRING,
+	what_subject_filter_name_context_coding_system_oid STRING,
+	what_subject_filter_name_context_value_set_oid STRING,
+	what_subject_filter_name_context_value_set_version_id STRING,
+	what_subject_filter_name_context_alternate_coding_system_oid STRING,
+	what_subject_filter_name_context_alternate_value_set_oid STRING,
+	what_subject_filter_name_context_alternate_value_set_version_id STRING,
+	what_subject_filter_name_context_second_alternate_coding_system_oid STRING,
+	what_subject_filter_name_context_second_alternate_value_set_oid STRING,
+	what_subject_filter_name_context_second_alternate_value_set_version_id STRING,
+	what_subject_filter_name_validity_range STRING,
+	what_subject_filter_name_validity_range_range_start_date_time STRING,
+	what_subject_filter_name_validity_range_range_end_date_time STRING,
+	what_subject_filter_name_assembly_order STRING,
+	what_subject_filter_effective_date STRING,
+	what_subject_filter_expiration_date STRING,
+	what_subject_filter_professional_suffix STRING,
+	what_subject_filter_assigning_jurisdiction STRING,
+	what_subject_filter_assigning_jurisdiction_id STRING,
+	what_subject_filter_assigning_jurisdiction_text STRING,
+	what_subject_filter_assigning_jurisdiction_name_of_coding_system STRING,
+	what_subject_filter_assigning_jurisdiction_alternate_id STRING,
+	what_subject_filter_assigning_jurisdiction_alternate_text STRING,
+	what_subject_filter_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	what_subject_filter_assigning_jurisdiction_coding_system_version_id STRING,
+	what_subject_filter_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	what_subject_filter_assigning_jurisdiction_original_text STRING,
+	what_subject_filter_assigning_jurisdiction_second_alternate_id STRING,
+	what_subject_filter_assigning_jurisdiction_second_alternate_text STRING,
+	what_subject_filter_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	what_subject_filter_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	what_subject_filter_assigning_jurisdiction_coding_system_oid STRING,
+	what_subject_filter_assigning_jurisdiction_value_set_oid STRING,
+	what_subject_filter_assigning_jurisdiction_value_set_version_id STRING,
+	what_subject_filter_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	what_subject_filter_assigning_jurisdiction_alternate_value_set_oid STRING,
+	what_subject_filter_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	what_subject_filter_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	what_subject_filter_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	what_subject_filter_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	what_subject_filter_assigning_agency_or_department STRING,
+	what_subject_filter_assigning_agency_or_department_id STRING,
+	what_subject_filter_assigning_agency_or_department_text STRING,
+	what_subject_filter_assigning_agency_or_department_name_of_coding_system STRING,
+	what_subject_filter_assigning_agency_or_department_alternate_id STRING,
+	what_subject_filter_assigning_agency_or_department_alternate_text STRING,
+	what_subject_filter_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	what_subject_filter_assigning_agency_or_department_coding_system_version_id STRING,
+	what_subject_filter_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	what_subject_filter_assigning_agency_or_department_original_text STRING,
+	what_subject_filter_assigning_agency_or_department_second_alternate_id STRING,
+	what_subject_filter_assigning_agency_or_department_second_alternate_text STRING,
+	what_subject_filter_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	what_subject_filter_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	what_subject_filter_assigning_agency_or_department_coding_system_oid STRING,
+	what_subject_filter_assigning_agency_or_department_value_set_oid STRING,
+	what_subject_filter_assigning_agency_or_department_value_set_version_id STRING,
+	what_subject_filter_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	what_subject_filter_assigning_agency_or_department_alternate_value_set_oid STRING,
+	what_subject_filter_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	what_subject_filter_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	what_subject_filter_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	what_subject_filter_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	what_subject_filter_security_check STRING,
+	what_subject_filter_security_check_scheme STRING,
 	what_department_data_code STRING,
+	what_department_data_code_id STRING,
+	what_department_data_code_text STRING,
+	what_department_data_code_name_of_coding_system STRING,
+	what_department_data_code_alternate_id STRING,
+	what_department_data_code_alternate_text STRING,
+	what_department_data_code_name_of_alternate_coding_system STRING,
+	what_department_data_code_coding_system_version_id STRING,
+	what_department_data_code_alternate_coding_system_version_id STRING,
+	what_department_data_code_original_text STRING,
+	what_department_data_code_second_alternate_id STRING,
+	what_department_data_code_second_alternate_text STRING,
+	what_department_data_code_name_of_second_alternate_coding_system STRING,
+	what_department_data_code_second_alternate_coding_system_version_id STRING,
+	what_department_data_code_coding_system_oid STRING,
+	what_department_data_code_value_set_oid STRING,
+	what_department_data_code_value_set_version_id STRING,
+	what_department_data_code_alternate_coding_system_oid STRING,
+	what_department_data_code_alternate_value_set_oid STRING,
+	what_department_data_code_alternate_value_set_version_id STRING,
+	what_department_data_code_second_alternate_coding_system_oid STRING,
+	what_department_data_code_second_alternate_value_set_oid STRING,
+	what_department_data_code_second_alternate_value_set_version_id STRING,
 	what_data_code_value_qualifier STRING,
-	query_results_level STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	what_data_code_value_qualifier_id STRING,
+	what_data_code_value_qualifier_text STRING,
+	what_data_code_value_qualifier_name_of_coding_system STRING,
+	what_data_code_value_qualifier_alternate_id STRING,
+	what_data_code_value_qualifier_alternate_text STRING,
+	what_data_code_value_qualifier_name_of_alternate_coding_system STRING,
+	what_data_code_value_qualifier_coding_system_version_id STRING,
+	what_data_code_value_qualifier_alternate_coding_system_version_id STRING,
+	what_data_code_value_qualifier_original_text STRING,
+	what_data_code_value_qualifier_second_alternate_id STRING,
+	what_data_code_value_qualifier_second_alternate_text STRING,
+	what_data_code_value_qualifier_name_of_second_alternate_coding_system STRING,
+	what_data_code_value_qualifier_second_alternate_coding_system_version_id STRING,
+	what_data_code_value_qualifier_coding_system_oid STRING,
+	what_data_code_value_qualifier_value_set_oid STRING,
+	what_data_code_value_qualifier_value_set_version_id STRING,
+	what_data_code_value_qualifier_alternate_coding_system_oid STRING,
+	what_data_code_value_qualifier_alternate_value_set_oid STRING,
+	what_data_code_value_qualifier_alternate_value_set_version_id STRING,
+	what_data_code_value_qualifier_second_alternate_coding_system_oid STRING,
+	what_data_code_value_qualifier_second_alternate_value_set_oid STRING,
+	what_data_code_value_qualifier_second_alternate_value_set_version_id STRING,
+	query_results_level STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45421,6 +47068,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRD'
 DROP TABLE hl7.hl7_qrf_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_qrf (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45435,16 +47084,63 @@ CREATE EXTERNAL TABLE hl7.hl7_qrf (
 	which_date_time_qualifier STRING,
 	which_date_time_status_qualifier STRING,
 	date_time_selection_qualifier STRING,
-	when_qty_timing_qualifier STRING,
-	search_confidence_threshold STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	when_quantity_timing_qualifier STRING,
+	when_quantity_timing_qualifier_quantity STRING,
+	when_quantity_timing_qualifier_interval STRING,
+	when_quantity_timing_qualifier_interval_repeat_pattern STRING,
+	when_quantity_timing_qualifier_interval_explicit_time_interval STRING,
+	when_quantity_timing_qualifier_duration STRING,
+	when_quantity_timing_qualifier_start_date_time STRING,
+	when_quantity_timing_qualifier_end_date_time STRING,
+	when_quantity_timing_qualifier_priority STRING,
+	when_quantity_timing_qualifier_condition STRING,
+	when_quantity_timing_qualifier_text STRING,
+	when_quantity_timing_qualifier_text_text_data STRING,
+	when_quantity_timing_qualifier_conjunction STRING,
+	when_quantity_timing_qualifier_order_sequencing STRING,
+	when_quantity_timing_qualifier_order_sequencing_sequence_results_flag STRING,
+	when_quantity_timing_qualifier_order_sequencing_placer_order_num_entity_id STRING,
+	when_quantity_timing_qualifier_order_sequencing_placer_order_num_namespace_id STRING,
+	when_quantity_timing_qualifier_order_sequencing_filler_order_num_entity_id STRING,
+	when_quantity_timing_qualifier_order_sequencing_filler_order_num_namespace_id STRING,
+	when_quantity_timing_qualifier_order_sequencing_sequence_condition_value STRING,
+	when_quantity_timing_qualifier_order_sequencing_maximum_num_of_repeats STRING,
+	when_quantity_timing_qualifier_order_sequencing_placer_order_num_universal_id STRING,
+	when_quantity_timing_qualifier_order_sequencing_placer_order_num_universal_id_type STRING,
+	when_quantity_timing_qualifier_order_sequencing_filler_order_num_universal_id STRING,
+	when_quantity_timing_qualifier_order_sequencing_filler_order_num_universal_id_type STRING,
+	when_quantity_timing_qualifier_occurrence_duration STRING,
+	when_quantity_timing_qualifier_occurrence_duration_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_text STRING,
+	when_quantity_timing_qualifier_occurrence_duration_name_of_coding_system STRING,
+	when_quantity_timing_qualifier_occurrence_duration_alternate_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_alternate_text STRING,
+	when_quantity_timing_qualifier_occurrence_duration_name_of_alternate_coding_system STRING,
+	when_quantity_timing_qualifier_occurrence_duration_coding_system_version_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_alternate_coding_system_version_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_original_text STRING,
+	when_quantity_timing_qualifier_occurrence_duration_second_alternate_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_second_alternate_text STRING,
+	when_quantity_timing_qualifier_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	when_quantity_timing_qualifier_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_coding_system_oid STRING,
+	when_quantity_timing_qualifier_occurrence_duration_value_set_oid STRING,
+	when_quantity_timing_qualifier_occurrence_duration_value_set_version_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_alternate_coding_system_oid STRING,
+	when_quantity_timing_qualifier_occurrence_duration_alternate_value_set_oid STRING,
+	when_quantity_timing_qualifier_occurrence_duration_alternate_value_set_version_id STRING,
+	when_quantity_timing_qualifier_occurrence_duration_second_alternate_coding_system_oid STRING,
+	when_quantity_timing_qualifier_occurrence_duration_second_alternate_value_set_oid STRING,
+	when_quantity_timing_qualifier_occurrence_duration_second_alternate_value_set_version_id STRING,
+	when_quantity_timing_qualifier_total_occurrences STRING,
+	search_confidence_threshold STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45453,6 +47149,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRF'
 DROP TABLE hl7.hl7_qri_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_qri (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45505,15 +47203,14 @@ CREATE EXTERNAL TABLE hl7.hl7_qri (
 	algorithm_descriptor_alternate_value_set_version_id STRING,
 	algorithm_descriptor_second_alternate_coding_system_oid STRING,
 	algorithm_descriptor_second_alternate_value_set_oid STRING,
-	algorithm_descriptor_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	algorithm_descriptor_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45522,6 +47219,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=QRI'
 DROP TABLE hl7.hl7_rcp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rcp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45582,15 +47281,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rcp (
 	sort_by_field STRING,
 	sort_by_field_sort_by_field STRING,
 	sort_by_field_sequencing STRING,
-	segment_group_inclusion STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	segment_group_inclusion STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45599,6 +47297,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RCP'
 DROP TABLE hl7.hl7_rdf_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rdf (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45609,15 +47309,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rdf (
 	column_description STRING,
 	column_description_segment_field_name STRING,
 	column_description_hl7_data_type STRING,
-	column_description_maximum_column_width STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	column_description_maximum_column_width STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45626,21 +47325,22 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDF'
 DROP TABLE hl7.hl7_rdt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rdt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	column_value STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	column_value STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45649,6 +47349,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RDT'
 DROP TABLE hl7.hl7_rel_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rel (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -45772,6 +47474,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rel (
 	asserting_person_name_context_second_alternate_value_set_oid STRING,
 	asserting_person_name_context_second_alternate_value_set_version_id STRING,
 	asserting_person_name_validity_range STRING,
+	asserting_person_name_validity_range_range_start_date_time STRING,
+	asserting_person_name_validity_range_range_end_date_time STRING,
 	asserting_person_name_assembly_order STRING,
 	asserting_person_effective_date STRING,
 	asserting_person_expiration_date STRING,
@@ -45923,6 +47627,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rel (
 	assertor_address_census_tract_second_alternate_value_set_version_id STRING,
 	assertor_address_address_representation_code STRING,
 	assertor_address_address_validity_range STRING,
+	assertor_address_address_validity_range_range_start_date_time STRING,
+	assertor_address_address_validity_range_range_end_date_time STRING,
 	assertor_address_effective_date STRING,
 	assertor_address_expiration_date STRING,
 	assertor_address_expiration_reason STRING,
@@ -46082,15 +47788,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rel (
 	certainty_of_relationship_second_alternate_value_set_version_id STRING,
 	priority_num STRING,
 	priority_sequence_num_rel_preference_for_consideration STRING,
-	separability_indicator STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	separability_indicator STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46099,6 +47804,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=REL'
 DROP TABLE hl7.hl7_rf1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rf1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46471,6 +48178,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rf1 (
 	authorized_health_professional_name_context_second_alternate_value_set_oid STRING,
 	authorized_health_professional_name_context_second_alternate_value_set_version_id STRING,
 	authorized_health_professional_name_validity_range STRING,
+	authorized_health_professional_name_validity_range_range_start_date_time STRING,
+	authorized_health_professional_name_validity_range_range_end_date_time STRING,
 	authorized_health_professional_name_assembly_order STRING,
 	authorized_health_professional_effective_date STRING,
 	authorized_health_professional_expiration_date STRING,
@@ -46597,15 +48306,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rf1 (
 	source_phone_shared_telecommunication_id_universal_id_type STRING,
 	source_phone_preference_order STRING,
 	_comment STRING,
-	action_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	action_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46614,6 +48322,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RF1'
 DROP TABLE hl7.hl7_rfi_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rfi (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46623,15 +48333,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rfi (
 	request_date STRING,
 	response_due_date STRING,
 	patient_consent STRING,
-	date_additional_information_was_submitted STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	date_additional_information_was_submitted STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46640,6 +48349,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RFI'
 DROP TABLE hl7.hl7_rgs_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rgs (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46670,15 +48381,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rgs (
 	resource_group_id_alternate_value_set_version_id STRING,
 	resource_group_id_second_alternate_coding_system_oid STRING,
 	resource_group_id_second_alternate_value_set_oid STRING,
-	resource_group_id_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	resource_group_id_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46687,6 +48397,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RGS'
 DROP TABLE hl7.hl7_rmi_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rmi (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46739,15 +48451,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rmi (
 	incident_type_code_alternate_value_set_version_id STRING,
 	incident_type_code_second_alternate_coding_system_oid STRING,
 	incident_type_code_second_alternate_value_set_oid STRING,
-	incident_type_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	incident_type_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46756,6 +48467,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RMI'
 DROP TABLE hl7.hl7_rol_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rol (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -46864,6 +48577,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rol (
 	role_person_name_context_second_alternate_value_set_oid STRING,
 	role_person_name_context_second_alternate_value_set_version_id STRING,
 	role_person_name_validity_range STRING,
+	role_person_name_validity_range_range_start_date_time STRING,
+	role_person_name_validity_range_range_end_date_time STRING,
 	role_person_name_assembly_order STRING,
 	role_person_effective_date STRING,
 	role_person_expiration_date STRING,
@@ -47070,6 +48785,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rol (
 	office_home_address_birthplace_census_tract_second_alternate_value_set_version_id STRING,
 	office_home_address_birthplace_address_representation_code STRING,
 	office_home_address_birthplace_address_validity_range STRING,
+	office_home_address_birthplace_address_validity_range_range_start_date_time STRING,
+	office_home_address_birthplace_address_validity_range_range_end_date_time STRING,
 	office_home_address_birthplace_effective_date STRING,
 	office_home_address_birthplace_expiration_date STRING,
 	office_home_address_birthplace_expiration_reason STRING,
@@ -47275,34 +48992,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rol (
 	organization_assigning_facility_universal_id STRING,
 	organization_assigning_facility_universal_id_type STRING,
 	organization_name_representation_code STRING,
-	organization_organization_id STRING,
-	provider_phone_number STRING,
-	provider_phone_number_formatted_num STRING,
-	provider_phone_number_use_code STRING,
-	provider_phone_number_equipment_type STRING,
-	provider_phone_number_comm_address STRING,
-	provider_phone_number_country_code STRING,
-	provider_phone_number_area_city_code STRING,
-	provider_phone_number_local_number STRING,
-	provider_phone_number_extension STRING,
-	provider_phone_number_any_text STRING,
-	provider_phone_number_extension_prefix STRING,
-	provider_phone_number_speed_dial_code STRING,
-	provider_phone_number_unformatted_num STRING,
-	provider_phone_number_eff_from_date STRING,
-	provider_phone_number_eff_to_date STRING,
-	provider_phone_number_expr_reason STRING,
-	provider_phone_number_protection_code STRING,
-	provider_phone_number_shared_id STRING,
-	provider_phone_number_pref_order STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	organization_organization_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47311,6 +49008,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ROL'
 DROP TABLE hl7.hl7_rq1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rq1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -47367,15 +49066,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rq1 (
 	vendor_id_second_alternate_value_set_version_id STRING,
 	vendor_catalog STRING,
 	taxable STRING,
-	substitute_allowed STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	substitute_allowed STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47384,6 +49082,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQ1'
 DROP TABLE hl7.hl7_rqd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rqd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -47593,15 +49293,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rqd (
 	deliver_to_id_second_alternate_coding_system_oid STRING,
 	deliver_to_id_second_alternate_value_set_oid STRING,
 	deliver_to_id_second_alternate_value_set_version_id STRING,
-	date_needed STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	date_needed STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47610,6 +49309,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RQD'
 DROP TABLE hl7.hl7_rxa_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxa (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -47786,6 +49487,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxa (
 	administering_provider_name_context_second_alternate_value_set_oid STRING,
 	administering_provider_name_context_second_alternate_value_set_version_id STRING,
 	administering_provider_name_validity_range STRING,
+	administering_provider_name_validity_range_range_start_date_time STRING,
+	administering_provider_name_validity_range_range_end_date_time STRING,
 	administering_provider_name_assembly_order STRING,
 	administering_provider_effective_date STRING,
 	administering_provider_expiration_date STRING,
@@ -47839,6 +49542,25 @@ CREATE EXTERNAL TABLE hl7.hl7_rxa (
 	administering_provider_security_check STRING,
 	administering_provider_security_check_scheme STRING,
 	administered_at_location STRING,
+	administered_at_location_point_of_care STRING,
+	administered_at_location_room STRING,
+	administered_at_location_bed STRING,
+	administered_at_location_facility STRING,
+	administered_at_location_facility_namespace_id STRING,
+	administered_at_location_facility_universal_id STRING,
+	administered_at_location_facility_universal_id_type STRING,
+	administered_at_location_location_status STRING,
+	administered_at_location_patient_location_type STRING,
+	administered_at_location_building STRING,
+	administered_at_location_floor STRING,
+	administered_at_location_street_address STRING,
+	administered_at_location_other_designation STRING,
+	administered_at_location_city STRING,
+	administered_at_location_state_or_province STRING,
+	administered_at_location_zip_or_postal_code STRING,
+	administered_at_location_country STRING,
+	administered_at_location_address_type STRING,
+	administered_at_location_other_geographic_designation STRING,
 	administered_per_time_unit STRING,
 	administered_strength STRING,
 	administered_strength_units STRING,
@@ -48083,6 +49805,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxa (
 	administered_at_address_census_tract_second_alternate_value_set_version_id STRING,
 	administered_at_address_address_representation_code STRING,
 	administered_at_address_address_validity_range STRING,
+	administered_at_address_address_validity_range_range_start_date_time STRING,
+	administered_at_address_address_validity_range_range_end_date_time STRING,
 	administered_at_address_effective_date STRING,
 	administered_at_address_expiration_date STRING,
 	administered_at_address_expiration_reason STRING,
@@ -48147,14 +49871,21 @@ CREATE EXTERNAL TABLE hl7.hl7_rxa (
 	administered_tag_id_namespace_id STRING,
 	administered_tag_id_universal_id STRING,
 	administered_tag_id_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	administered_at_location_status STRING,
+	administered_at_location_person_loc_type STRING,
+	administered_at_location_loc_floor STRING,
+	administered_at_location_street_address1 STRING,
+	administered_at_location_street_address2 STRING,
+	administered_at_location_state_province STRING,
+	administered_at_location_zip_postal_code STRING,
+	administered_at_location_other_geo_designation STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48163,6 +49894,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXA'
 DROP TABLE hl7.hl7_rxc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -48311,15 +50044,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxc (
 	dispense_units_alternate_value_set_version_id STRING,
 	dispense_units_second_alternate_coding_system_oid STRING,
 	dispense_units_second_alternate_value_set_oid STRING,
-	dispense_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	dispense_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48328,6 +50060,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXC'
 DROP TABLE hl7.hl7_rxd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -48482,6 +50216,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxd (
 	dispensing_provider_name_context_second_alternate_value_set_oid STRING,
 	dispensing_provider_name_context_second_alternate_value_set_version_id STRING,
 	dispensing_provider_name_validity_range STRING,
+	dispensing_provider_name_validity_range_range_start_date_time STRING,
+	dispensing_provider_name_validity_range_range_end_date_time STRING,
 	dispensing_provider_name_assembly_order STRING,
 	dispensing_provider_effective_date STRING,
 	dispensing_provider_expiration_date STRING,
@@ -48561,6 +50297,25 @@ CREATE EXTERNAL TABLE hl7.hl7_rxd (
 	total_daily_dose_units_second_alternate_value_set_oid STRING,
 	total_daily_dose_units_second_alternate_value_set_version_id STRING,
 	dispense_to_location STRING,
+	dispense_to_location_point_of_care STRING,
+	dispense_to_location_room STRING,
+	dispense_to_location_bed STRING,
+	dispense_to_location_facility STRING,
+	dispense_to_location_facility_namespace_id STRING,
+	dispense_to_location_facility_universal_id STRING,
+	dispense_to_location_facility_universal_id_type STRING,
+	dispense_to_location_location_status STRING,
+	dispense_to_location_patient_location_type STRING,
+	dispense_to_location_building STRING,
+	dispense_to_location_floor STRING,
+	dispense_to_location_street_address STRING,
+	dispense_to_location_other_designation STRING,
+	dispense_to_location_city STRING,
+	dispense_to_location_state_or_province STRING,
+	dispense_to_location_zip_or_postal_code STRING,
+	dispense_to_location_country STRING,
+	dispense_to_location_address_type STRING,
+	dispense_to_location_other_geographic_designation STRING,
 	needs_human_review STRING,
 	special_dispensing_instructions STRING,
 	special_dispensing_instructions_id STRING,
@@ -48858,6 +50613,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxd (
 	dispense_to_pharmacy_address_census_tract_second_alternate_value_set_version_id STRING,
 	dispense_to_pharmacy_address_address_representation_code STRING,
 	dispense_to_pharmacy_address_address_validity_range STRING,
+	dispense_to_pharmacy_address_address_validity_range_range_start_date_time STRING,
+	dispense_to_pharmacy_address_address_validity_range_range_end_date_time STRING,
 	dispense_to_pharmacy_address_effective_date STRING,
 	dispense_to_pharmacy_address_expiration_date STRING,
 	dispense_to_pharmacy_address_expiration_reason STRING,
@@ -49016,15 +50773,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxd (
 	dispense_tag_id_entity_id STRING,
 	dispense_tag_id_namespace_id STRING,
 	dispense_tag_id_universal_id STRING,
-	dispense_tag_id_universal_id_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	dispense_tag_id_universal_id_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49033,6 +50789,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXD'
 DROP TABLE hl7.hl7_rxe_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxe (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -49040,6 +50798,54 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	patient_account_num STRING,
 	unknown STRING,
 	quantity_timing STRING,
+	quantity_timing_quantity STRING,
+	quantity_timing_interval STRING,
+	quantity_timing_interval_repeat_pattern STRING,
+	quantity_timing_interval_explicit_time_interval STRING,
+	quantity_timing_duration STRING,
+	quantity_timing_start_date_time STRING,
+	quantity_timing_end_date_time STRING,
+	quantity_timing_priority STRING,
+	quantity_timing_condition STRING,
+	quantity_timing_text STRING,
+	quantity_timing_text_text_data STRING,
+	quantity_timing_conjunction STRING,
+	quantity_timing_order_sequencing STRING,
+	quantity_timing_order_sequencing_sequence_results_flag STRING,
+	quantity_timing_order_sequencing_placer_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_sequence_condition_value STRING,
+	quantity_timing_order_sequencing_maximum_num_of_repeats STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id_type STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id_type STRING,
+	quantity_timing_occurrence_duration STRING,
+	quantity_timing_occurrence_duration_id STRING,
+	quantity_timing_occurrence_duration_text STRING,
+	quantity_timing_occurrence_duration_name_of_coding_system STRING,
+	quantity_timing_occurrence_duration_alternate_id STRING,
+	quantity_timing_occurrence_duration_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_original_text STRING,
+	quantity_timing_occurrence_duration_second_alternate_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_value_set_oid STRING,
+	quantity_timing_occurrence_duration_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_version_id STRING,
+	quantity_timing_total_occurrences STRING,
 	give_code STRING,
 	give_code_id STRING,
 	give_code_text STRING,
@@ -49135,6 +50941,26 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	provider_administration_instructions_second_alternate_value_set_oid STRING,
 	provider_administration_instructions_second_alternate_value_set_version_id STRING,
 	deliver_to_location STRING,
+	deliver_to_location_point_of_care STRING,
+	deliver_to_location_room STRING,
+	deliver_to_location_bed STRING,
+	deliver_to_location_facility STRING,
+	deliver_to_location_facility_namespace_id STRING,
+	deliver_to_location_facility_universal_id STRING,
+	deliver_to_location_facility_universal_id_type STRING,
+	deliver_to_location_location_status STRING,
+	deliver_to_location_patient_location_type STRING,
+	deliver_to_location_building STRING,
+	deliver_to_location_floor STRING,
+	deliver_to_location_address STRING,
+	deliver_to_location_address_street_address STRING,
+	deliver_to_location_address_other_designation STRING,
+	deliver_to_location_address_city STRING,
+	deliver_to_location_address_state_or_province STRING,
+	deliver_to_location_address_zip_or_postal_code STRING,
+	deliver_to_location_address_country STRING,
+	deliver_to_location_address_address_type STRING,
+	deliver_to_location_address_other_geographic_designation STRING,
 	substitution_status STRING,
 	dispense_amt STRING,
 	dispense_units STRING,
@@ -49234,6 +51060,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	ordering_provider_dea_num_name_context_second_alternate_value_set_oid STRING,
 	ordering_provider_dea_num_name_context_second_alternate_value_set_version_id STRING,
 	ordering_provider_dea_num_name_validity_range STRING,
+	ordering_provider_dea_num_name_validity_range_range_start_date_time STRING,
+	ordering_provider_dea_num_name_validity_range_range_end_date_time STRING,
 	ordering_provider_dea_num_name_assembly_order STRING,
 	ordering_provider_dea_num_effective_date STRING,
 	ordering_provider_dea_num_expiration_date STRING,
@@ -49359,6 +51187,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	pharmacist_treatment_supplier_verifier_id_name_context_second_alternate_value_set_oid STRING,
 	pharmacist_treatment_supplier_verifier_id_name_context_second_alternate_value_set_version_id STRING,
 	pharmacist_treatment_supplier_verifier_id_name_validity_range STRING,
+	pharmacist_treatment_supplier_verifier_id_name_validity_range_range_start_date_time STRING,
+	pharmacist_treatment_supplier_verifier_id_name_validity_range_range_end_date_time STRING,
 	pharmacist_treatment_supplier_verifier_id_name_assembly_order STRING,
 	pharmacist_treatment_supplier_verifier_id_effective_date STRING,
 	pharmacist_treatment_supplier_verifier_id_expiration_date STRING,
@@ -49763,6 +51593,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	dispensing_pharmacy_address_census_tract_second_alternate_value_set_version_id STRING,
 	dispensing_pharmacy_address_address_representation_code STRING,
 	dispensing_pharmacy_address_address_validity_range STRING,
+	dispensing_pharmacy_address_address_validity_range_range_start_date_time STRING,
+	dispensing_pharmacy_address_address_validity_range_range_end_date_time STRING,
 	dispensing_pharmacy_address_effective_date STRING,
 	dispensing_pharmacy_address_expiration_date STRING,
 	dispensing_pharmacy_address_expiration_reason STRING,
@@ -49919,6 +51751,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	deliver_to_address_census_tract_second_alternate_value_set_version_id STRING,
 	deliver_to_address_address_representation_code STRING,
 	deliver_to_address_address_validity_range STRING,
+	deliver_to_address_address_validity_range_range_start_date_time STRING,
+	deliver_to_address_address_validity_range_range_end_date_time STRING,
 	deliver_to_address_effective_date STRING,
 	deliver_to_address_expiration_date STRING,
 	deliver_to_address_expiration_reason STRING,
@@ -50049,15 +51883,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxe (
 	pharmacy_phone_num_shared_telecommunication_id_namespace_id STRING,
 	pharmacy_phone_num_shared_telecommunication_id_universal_id STRING,
 	pharmacy_phone_num_shared_telecommunication_id_universal_id_type STRING,
-	pharmacy_phone_num_preference_order STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	pharmacy_phone_num_preference_order STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -50066,6 +51899,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXE'
 DROP TABLE hl7.hl7_rxg_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxg (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -50075,6 +51910,54 @@ CREATE EXTERNAL TABLE hl7.hl7_rxg (
 	give_sub_id_counter STRING,
 	dispense_sub_id_counter STRING,
 	quantity_timing STRING,
+	quantity_timing_quantity STRING,
+	quantity_timing_interval STRING,
+	quantity_timing_interval_repeat_pattern STRING,
+	quantity_timing_interval_explicit_time_interval STRING,
+	quantity_timing_duration STRING,
+	quantity_timing_start_date_time STRING,
+	quantity_timing_end_date_time STRING,
+	quantity_timing_priority STRING,
+	quantity_timing_condition STRING,
+	quantity_timing_text STRING,
+	quantity_timing_text_text_data STRING,
+	quantity_timing_conjunction STRING,
+	quantity_timing_order_sequencing STRING,
+	quantity_timing_order_sequencing_sequence_results_flag STRING,
+	quantity_timing_order_sequencing_placer_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_entity_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_namespace_id STRING,
+	quantity_timing_order_sequencing_sequence_condition_value STRING,
+	quantity_timing_order_sequencing_maximum_num_of_repeats STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_placer_order_num_universal_id_type STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id STRING,
+	quantity_timing_order_sequencing_filler_order_num_universal_id_type STRING,
+	quantity_timing_occurrence_duration STRING,
+	quantity_timing_occurrence_duration_id STRING,
+	quantity_timing_occurrence_duration_text STRING,
+	quantity_timing_occurrence_duration_name_of_coding_system STRING,
+	quantity_timing_occurrence_duration_alternate_id STRING,
+	quantity_timing_occurrence_duration_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_original_text STRING,
+	quantity_timing_occurrence_duration_second_alternate_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_text STRING,
+	quantity_timing_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	quantity_timing_occurrence_duration_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_value_set_oid STRING,
+	quantity_timing_occurrence_duration_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_alternate_value_set_version_id STRING,
+	quantity_timing_occurrence_duration_second_alternate_coding_system_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_oid STRING,
+	quantity_timing_occurrence_duration_second_alternate_value_set_version_id STRING,
+	quantity_timing_total_occurrences STRING,
 	give_code STRING,
 	give_code_id STRING,
 	give_code_text STRING,
@@ -50171,6 +52054,25 @@ CREATE EXTERNAL TABLE hl7.hl7_rxg (
 	administration_notes_second_alternate_value_set_version_id STRING,
 	substitution_status STRING,
 	dispense_to_location STRING,
+	dispense_to_location_point_of_care STRING,
+	dispense_to_location_room STRING,
+	dispense_to_location_bed STRING,
+	dispense_to_location_facility STRING,
+	dispense_to_location_facility_namespace_id STRING,
+	dispense_to_location_facility_universal_id STRING,
+	dispense_to_location_facility_universal_id_type STRING,
+	dispense_to_location_location_status STRING,
+	dispense_to_location_patient_location_type STRING,
+	dispense_to_location_building STRING,
+	dispense_to_location_floor STRING,
+	dispense_to_location_street_address STRING,
+	dispense_to_location_other_designation STRING,
+	dispense_to_location_city STRING,
+	dispense_to_location_state_or_province STRING,
+	dispense_to_location_zip_or_postal_code STRING,
+	dispense_to_location_country STRING,
+	dispense_to_location_address_type STRING,
+	dispense_to_location_other_geographic_designation STRING,
 	needs_human_review STRING,
 	special_administration_instructions STRING,
 	special_administration_instructions_id STRING,
@@ -50423,6 +52325,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxg (
 	dispense_to_pharmacy_address_census_tract_second_alternate_value_set_version_id STRING,
 	dispense_to_pharmacy_address_address_representation_code STRING,
 	dispense_to_pharmacy_address_address_validity_range STRING,
+	dispense_to_pharmacy_address_address_validity_range_range_start_date_time STRING,
+	dispense_to_pharmacy_address_address_validity_range_range_end_date_time STRING,
 	dispense_to_pharmacy_address_effective_date STRING,
 	dispense_to_pharmacy_address_expiration_date STRING,
 	dispense_to_pharmacy_address_expiration_reason STRING,
@@ -50579,6 +52483,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxg (
 	deliver_to_address_census_tract_second_alternate_value_set_version_id STRING,
 	deliver_to_address_address_representation_code STRING,
 	deliver_to_address_address_validity_range STRING,
+	deliver_to_address_address_validity_range_range_start_date_time STRING,
+	deliver_to_address_address_validity_range_range_end_date_time STRING,
 	deliver_to_address_effective_date STRING,
 	deliver_to_address_expiration_date STRING,
 	deliver_to_address_expiration_reason STRING,
@@ -50666,15 +52572,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxg (
 	dispense_units_alternate_value_set_version_id STRING,
 	dispense_units_second_alternate_coding_system_oid STRING,
 	dispense_units_second_alternate_value_set_oid STRING,
-	dispense_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	dispense_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -50683,6 +52588,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXG'
 DROP TABLE hl7.hl7_rxo_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxo (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -50807,6 +52714,26 @@ CREATE EXTERNAL TABLE hl7.hl7_rxo (
 	provider_administration_instructions_second_alternate_value_set_oid STRING,
 	provider_administration_instructions_second_alternate_value_set_version_id STRING,
 	deliver_to_location STRING,
+	deliver_to_location_point_of_care STRING,
+	deliver_to_location_room STRING,
+	deliver_to_location_bed STRING,
+	deliver_to_location_facility STRING,
+	deliver_to_location_facility_namespace_id STRING,
+	deliver_to_location_facility_universal_id STRING,
+	deliver_to_location_facility_universal_id_type STRING,
+	deliver_to_location_location_status STRING,
+	deliver_to_location_patient_location_type STRING,
+	deliver_to_location_building STRING,
+	deliver_to_location_floor STRING,
+	deliver_to_location_address STRING,
+	deliver_to_location_address_street_address STRING,
+	deliver_to_location_address_other_designation STRING,
+	deliver_to_location_address_city STRING,
+	deliver_to_location_address_state_or_province STRING,
+	deliver_to_location_address_zip_or_postal_code STRING,
+	deliver_to_location_address_country STRING,
+	deliver_to_location_address_address_type STRING,
+	deliver_to_location_address_other_geographic_designation STRING,
 	allow_substitutions STRING,
 	requested_dispense_code STRING,
 	requested_dispense_code_id STRING,
@@ -50929,6 +52856,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxo (
 	ordering_provider_dea_num_name_context_second_alternate_value_set_oid STRING,
 	ordering_provider_dea_num_name_context_second_alternate_value_set_version_id STRING,
 	ordering_provider_dea_num_name_validity_range STRING,
+	ordering_provider_dea_num_name_validity_range_range_start_date_time STRING,
+	ordering_provider_dea_num_name_validity_range_range_end_date_time STRING,
 	ordering_provider_dea_num_name_assembly_order STRING,
 	ordering_provider_dea_num_effective_date STRING,
 	ordering_provider_dea_num_expiration_date STRING,
@@ -51054,6 +52983,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxo (
 	pharmacist_treatment_supplier_verifier_id_name_context_second_alternate_value_set_oid STRING,
 	pharmacist_treatment_supplier_verifier_id_name_context_second_alternate_value_set_version_id STRING,
 	pharmacist_treatment_supplier_verifier_id_name_validity_range STRING,
+	pharmacist_treatment_supplier_verifier_id_name_validity_range_range_start_date_time STRING,
+	pharmacist_treatment_supplier_verifier_id_name_validity_range_range_end_date_time STRING,
 	pharmacist_treatment_supplier_verifier_id_name_assembly_order STRING,
 	pharmacist_treatment_supplier_verifier_id_effective_date STRING,
 	pharmacist_treatment_supplier_verifier_id_expiration_date STRING,
@@ -51369,6 +53300,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxo (
 	dispensing_pharmacy_address_census_tract_second_alternate_value_set_version_id STRING,
 	dispensing_pharmacy_address_address_representation_code STRING,
 	dispensing_pharmacy_address_address_validity_range STRING,
+	dispensing_pharmacy_address_address_validity_range_range_start_date_time STRING,
+	dispensing_pharmacy_address_address_validity_range_range_end_date_time STRING,
 	dispensing_pharmacy_address_effective_date STRING,
 	dispensing_pharmacy_address_expiration_date STRING,
 	dispensing_pharmacy_address_expiration_reason STRING,
@@ -51525,6 +53458,8 @@ CREATE EXTERNAL TABLE hl7.hl7_rxo (
 	deliver_to_address_census_tract_second_alternate_value_set_version_id STRING,
 	deliver_to_address_address_representation_code STRING,
 	deliver_to_address_address_validity_range STRING,
+	deliver_to_address_address_validity_range_range_start_date_time STRING,
+	deliver_to_address_address_validity_range_range_end_date_time STRING,
 	deliver_to_address_effective_date STRING,
 	deliver_to_address_expiration_date STRING,
 	deliver_to_address_expiration_reason STRING,
@@ -51654,15 +53589,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxo (
 	pharmacy_phone_num_shared_telecommunication_id_namespace_id STRING,
 	pharmacy_phone_num_shared_telecommunication_id_universal_id STRING,
 	pharmacy_phone_num_shared_telecommunication_id_universal_id_type STRING,
-	pharmacy_phone_num_preference_order STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	pharmacy_phone_num_preference_order STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -51671,6 +53605,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXO'
 DROP TABLE hl7.hl7_rxr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -51814,15 +53750,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxr (
 	administration_site_modifier_alternate_value_set_version_id STRING,
 	administration_site_modifier_second_alternate_coding_system_oid STRING,
 	administration_site_modifier_second_alternate_value_set_oid STRING,
-	administration_site_modifier_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	administration_site_modifier_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -51831,6 +53766,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXR'
 DROP TABLE hl7.hl7_rxv_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_rxv (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -52104,15 +54041,14 @@ CREATE EXTERNAL TABLE hl7.hl7_rxv (
 	syringe_size_units_second_alternate_coding_system_oid STRING,
 	syringe_size_units_second_alternate_value_set_oid STRING,
 	syringe_size_units_second_alternate_value_set_version_id STRING,
-	action_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	action_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -52121,6 +54057,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=RXV'
 DROP TABLE hl7.hl7_sac_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sac (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -52153,6 +54091,146 @@ CREATE EXTERNAL TABLE hl7.hl7_sac (
 	equipment_container_id_universal_id STRING,
 	equipment_container_id_universal_id_type STRING,
 	specimen_source STRING,
+	specimen_source_specimen_source_name_or_code STRING,
+	specimen_source_specimen_source_name_or_code_id STRING,
+	specimen_source_specimen_source_name_or_code_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_alternate_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_alternate_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_original_text STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_id STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_second_alternate_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_value_set_version_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_alternate_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_alternate_value_set_version_id STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_value_set_version_id STRING,
+	specimen_source_additives STRING,
+	specimen_source_additives_id STRING,
+	specimen_source_additives_text STRING,
+	specimen_source_additives_name_of_coding_system STRING,
+	specimen_source_additives_alternate_id STRING,
+	specimen_source_additives_alternate_text STRING,
+	specimen_source_additives_name_of_alternate_coding_system STRING,
+	specimen_source_additives_coding_system_version_id STRING,
+	specimen_source_additives_alternate_coding_system_version_id STRING,
+	specimen_source_additives_original_text STRING,
+	specimen_source_additives_second_alternate_id STRING,
+	specimen_source_additives_second_alternate_text STRING,
+	specimen_source_additives_name_of_second_alternate_coding_system STRING,
+	specimen_source_additives_second_alternate_coding_system_version_id STRING,
+	specimen_source_additives_coding_system_oid STRING,
+	specimen_source_additives_value_set_oid STRING,
+	specimen_source_additives_value_set_version_id STRING,
+	specimen_source_additives_alternate_coding_system_oid STRING,
+	specimen_source_additives_alternate_value_set_oid STRING,
+	specimen_source_additives_alternate_value_set_version_id STRING,
+	specimen_source_additives_second_alternate_coding_system_oid STRING,
+	specimen_source_additives_second_alternate_value_set_oid STRING,
+	specimen_source_additives_second_alternate_value_set_version_id STRING,
+	specimen_source_specimen_collection_method STRING,
+	specimen_source_specimen_collection_method_text_data STRING,
+	specimen_source_body_site STRING,
+	specimen_source_body_site_id STRING,
+	specimen_source_body_site_text STRING,
+	specimen_source_body_site_name_of_coding_system STRING,
+	specimen_source_body_site_alternate_id STRING,
+	specimen_source_body_site_alternate_text STRING,
+	specimen_source_body_site_name_of_alternate_coding_system STRING,
+	specimen_source_body_site_coding_system_version_id STRING,
+	specimen_source_body_site_alternate_coding_system_version_id STRING,
+	specimen_source_body_site_original_text STRING,
+	specimen_source_body_site_second_alternate_id STRING,
+	specimen_source_body_site_second_alternate_text STRING,
+	specimen_source_body_site_name_of_second_alternate_coding_system STRING,
+	specimen_source_body_site_second_alternate_coding_system_version_id STRING,
+	specimen_source_body_site_coding_system_oid STRING,
+	specimen_source_body_site_value_set_oid STRING,
+	specimen_source_body_site_value_set_version_id STRING,
+	specimen_source_body_site_alternate_coding_system_oid STRING,
+	specimen_source_body_site_alternate_value_set_oid STRING,
+	specimen_source_body_site_alternate_value_set_version_id STRING,
+	specimen_source_body_site_second_alternate_coding_system_oid STRING,
+	specimen_source_body_site_second_alternate_value_set_oid STRING,
+	specimen_source_body_site_second_alternate_value_set_version_id STRING,
+	specimen_source_site_modifier STRING,
+	specimen_source_site_modifier_id STRING,
+	specimen_source_site_modifier_text STRING,
+	specimen_source_site_modifier_name_of_coding_system STRING,
+	specimen_source_site_modifier_alternate_id STRING,
+	specimen_source_site_modifier_alternate_text STRING,
+	specimen_source_site_modifier_name_of_alternate_coding_system STRING,
+	specimen_source_site_modifier_coding_system_version_id STRING,
+	specimen_source_site_modifier_alternate_coding_system_version_id STRING,
+	specimen_source_site_modifier_original_text STRING,
+	specimen_source_site_modifier_second_alternate_id STRING,
+	specimen_source_site_modifier_second_alternate_text STRING,
+	specimen_source_site_modifier_name_of_second_alternate_coding_system STRING,
+	specimen_source_site_modifier_second_alternate_coding_system_version_id STRING,
+	specimen_source_site_modifier_coding_system_oid STRING,
+	specimen_source_site_modifier_value_set_oid STRING,
+	specimen_source_site_modifier_value_set_version_id STRING,
+	specimen_source_site_modifier_alternate_coding_system_oid STRING,
+	specimen_source_site_modifier_alternate_value_set_oid STRING,
+	specimen_source_site_modifier_alternate_value_set_version_id STRING,
+	specimen_source_site_modifier_second_alternate_coding_system_oid STRING,
+	specimen_source_site_modifier_second_alternate_value_set_oid STRING,
+	specimen_source_site_modifier_second_alternate_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code STRING,
+	specimen_source_collection_method_modifier_code_id STRING,
+	specimen_source_collection_method_modifier_code_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_coding_system STRING,
+	specimen_source_collection_method_modifier_code_alternate_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_alternate_coding_system STRING,
+	specimen_source_collection_method_modifier_code_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_original_text STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_id STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_second_alternate_coding_system STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_alternate_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_alternate_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_value_set_version_id STRING,
+	specimen_source_specimen_role STRING,
+	specimen_source_specimen_role_id STRING,
+	specimen_source_specimen_role_text STRING,
+	specimen_source_specimen_role_name_of_coding_system STRING,
+	specimen_source_specimen_role_alternate_id STRING,
+	specimen_source_specimen_role_alternate_text STRING,
+	specimen_source_specimen_role_name_of_alternate_coding_system STRING,
+	specimen_source_specimen_role_coding_system_version_id STRING,
+	specimen_source_specimen_role_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_role_original_text STRING,
+	specimen_source_specimen_role_second_alternate_id STRING,
+	specimen_source_specimen_role_second_alternate_text STRING,
+	specimen_source_specimen_role_name_of_second_alternate_coding_system STRING,
+	specimen_source_specimen_role_second_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_role_coding_system_oid STRING,
+	specimen_source_specimen_role_value_set_oid STRING,
+	specimen_source_specimen_role_value_set_version_id STRING,
+	specimen_source_specimen_role_alternate_coding_system_oid STRING,
+	specimen_source_specimen_role_alternate_value_set_oid STRING,
+	specimen_source_specimen_role_alternate_value_set_version_id STRING,
+	specimen_source_specimen_role_second_alternate_coding_system_oid STRING,
+	specimen_source_specimen_role_second_alternate_value_set_oid STRING,
+	specimen_source_specimen_role_second_alternate_value_set_version_id STRING,
 	registration_date_time STRING,
 	container_status STRING,
 	container_status_id STRING,
@@ -52243,29 +54321,29 @@ CREATE EXTERNAL TABLE hl7.hl7_sac (
 	position_in_tray_value2 STRING,
 	position_in_tray_value3 STRING,
 	position_in_tray_value4 STRING,
-	location STRING,
-	location_id STRING,
-	location_text STRING,
-	location_name_of_coding_system STRING,
-	location_alternate_id STRING,
-	location_alternate_text STRING,
-	location_name_of_alternate_coding_system STRING,
-	location_coding_system_version_id STRING,
-	location_alternate_coding_system_version_id STRING,
-	location_original_text STRING,
-	location_second_alternate_id STRING,
-	location_second_alternate_text STRING,
-	location_name_of_second_alternate_coding_system STRING,
-	location_second_alternate_coding_system_version_id STRING,
-	location_coding_system_oid STRING,
-	location_value_set_oid STRING,
-	location_value_set_version_id STRING,
-	location_alternate_coding_system_oid STRING,
-	location_alternate_value_set_oid STRING,
-	location_alternate_value_set_version_id STRING,
-	location_second_alternate_coding_system_oid STRING,
-	location_second_alternate_value_set_oid STRING,
-	location_second_alternate_value_set_version_id STRING,
+	_location STRING,
+	_location_id STRING,
+	_location_text STRING,
+	_location_name_of_coding_system STRING,
+	_location_alternate_id STRING,
+	_location_alternate_text STRING,
+	_location_name_of_alternate_coding_system STRING,
+	_location_coding_system_version_id STRING,
+	_location_alternate_coding_system_version_id STRING,
+	_location_original_text STRING,
+	_location_second_alternate_id STRING,
+	_location_second_alternate_text STRING,
+	_location_name_of_second_alternate_coding_system STRING,
+	_location_second_alternate_coding_system_version_id STRING,
+	_location_coding_system_oid STRING,
+	_location_value_set_oid STRING,
+	_location_value_set_version_id STRING,
+	_location_alternate_coding_system_oid STRING,
+	_location_alternate_value_set_oid STRING,
+	_location_alternate_value_set_version_id STRING,
+	_location_second_alternate_coding_system_oid STRING,
+	_location_second_alternate_value_set_oid STRING,
+	_location_second_alternate_value_set_version_id STRING,
 	container_height STRING,
 	container_diameter STRING,
 	barrier_delta STRING,
@@ -52654,15 +54732,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sac (
 	other_environmental_factors_alternate_value_set_version_id STRING,
 	other_environmental_factors_second_alternate_coding_system_oid STRING,
 	other_environmental_factors_second_alternate_value_set_oid STRING,
-	other_environmental_factors_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	other_environmental_factors_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -52671,6 +54748,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SAC'
 DROP TABLE hl7.hl7_scd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_scd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -53216,6 +55295,8 @@ CREATE EXTERNAL TABLE hl7.hl7_scd (
 	operator_unload_name_context_second_alternate_value_set_oid STRING,
 	operator_unload_name_context_second_alternate_value_set_version_id STRING,
 	operator_unload_name_validity_range STRING,
+	operator_unload_name_validity_range_range_start_date_time STRING,
+	operator_unload_name_validity_range_range_end_date_time STRING,
 	operator_unload_name_assembly_order STRING,
 	operator_unload_effective_date STRING,
 	operator_unload_expiration_date STRING,
@@ -53571,6 +55652,8 @@ CREATE EXTERNAL TABLE hl7.hl7_scd (
 	attending_doctor_name_context_second_alternate_value_set_oid STRING,
 	attending_doctor_name_context_second_alternate_value_set_version_id STRING,
 	attending_doctor_name_validity_range STRING,
+	attending_doctor_name_validity_range_range_start_date_time STRING,
+	attending_doctor_name_validity_range_range_end_date_time STRING,
 	attending_doctor_name_assembly_order STRING,
 	attending_doctor_effective_date STRING,
 	attending_doctor_expiration_date STRING,
@@ -53677,15 +55760,14 @@ CREATE EXTERNAL TABLE hl7.hl7_scd (
 	inlet_temperature_units_alternate_value_set_version_id STRING,
 	inlet_temperature_units_second_alternate_coding_system_oid STRING,
 	inlet_temperature_units_second_alternate_value_set_oid STRING,
-	inlet_temperature_units_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	inlet_temperature_units_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53694,6 +55776,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCD'
 DROP TABLE hl7.hl7_sch_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sch (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -53839,6 +55923,54 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	appointment_duration_units_second_alternate_value_set_oid STRING,
 	appointment_duration_units_second_alternate_value_set_version_id STRING,
 	appointment_timing_quantity STRING,
+	appointment_timing_quantity_quantity STRING,
+	appointment_timing_quantity_interval STRING,
+	appointment_timing_quantity_interval_repeat_pattern STRING,
+	appointment_timing_quantity_interval_explicit_time_interval STRING,
+	appointment_timing_quantity_duration STRING,
+	appointment_timing_quantity_start_date_time STRING,
+	appointment_timing_quantity_end_date_time STRING,
+	appointment_timing_quantity_priority STRING,
+	appointment_timing_quantity_condition STRING,
+	appointment_timing_quantity_text STRING,
+	appointment_timing_quantity_text_text_data STRING,
+	appointment_timing_quantity_conjunction STRING,
+	appointment_timing_quantity_order_sequencing STRING,
+	appointment_timing_quantity_order_sequencing_sequence_results_flag STRING,
+	appointment_timing_quantity_order_sequencing_placer_order_num_entity_id STRING,
+	appointment_timing_quantity_order_sequencing_placer_order_num_namespace_id STRING,
+	appointment_timing_quantity_order_sequencing_filler_order_num_entity_id STRING,
+	appointment_timing_quantity_order_sequencing_filler_order_num_namespace_id STRING,
+	appointment_timing_quantity_order_sequencing_sequence_condition_value STRING,
+	appointment_timing_quantity_order_sequencing_maximum_num_of_repeats STRING,
+	appointment_timing_quantity_order_sequencing_placer_order_num_universal_id STRING,
+	appointment_timing_quantity_order_sequencing_placer_order_num_universal_id_type STRING,
+	appointment_timing_quantity_order_sequencing_filler_order_num_universal_id STRING,
+	appointment_timing_quantity_order_sequencing_filler_order_num_universal_id_type STRING,
+	appointment_timing_quantity_occurrence_duration STRING,
+	appointment_timing_quantity_occurrence_duration_id STRING,
+	appointment_timing_quantity_occurrence_duration_text STRING,
+	appointment_timing_quantity_occurrence_duration_name_of_coding_system STRING,
+	appointment_timing_quantity_occurrence_duration_alternate_id STRING,
+	appointment_timing_quantity_occurrence_duration_alternate_text STRING,
+	appointment_timing_quantity_occurrence_duration_name_of_alternate_coding_system STRING,
+	appointment_timing_quantity_occurrence_duration_coding_system_version_id STRING,
+	appointment_timing_quantity_occurrence_duration_alternate_coding_system_version_id STRING,
+	appointment_timing_quantity_occurrence_duration_original_text STRING,
+	appointment_timing_quantity_occurrence_duration_second_alternate_id STRING,
+	appointment_timing_quantity_occurrence_duration_second_alternate_text STRING,
+	appointment_timing_quantity_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	appointment_timing_quantity_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	appointment_timing_quantity_occurrence_duration_coding_system_oid STRING,
+	appointment_timing_quantity_occurrence_duration_value_set_oid STRING,
+	appointment_timing_quantity_occurrence_duration_value_set_version_id STRING,
+	appointment_timing_quantity_occurrence_duration_alternate_coding_system_oid STRING,
+	appointment_timing_quantity_occurrence_duration_alternate_value_set_oid STRING,
+	appointment_timing_quantity_occurrence_duration_alternate_value_set_version_id STRING,
+	appointment_timing_quantity_occurrence_duration_second_alternate_coding_system_oid STRING,
+	appointment_timing_quantity_occurrence_duration_second_alternate_value_set_oid STRING,
+	appointment_timing_quantity_occurrence_duration_second_alternate_value_set_version_id STRING,
+	appointment_timing_quantity_total_occurrences STRING,
 	placer_contact_person STRING,
 	placer_contact_person_person_id STRING,
 	placer_contact_person_family_name STRING,
@@ -53912,6 +56044,8 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	placer_contact_person_name_context_second_alternate_value_set_oid STRING,
 	placer_contact_person_name_context_second_alternate_value_set_version_id STRING,
 	placer_contact_person_name_validity_range STRING,
+	placer_contact_person_name_validity_range_range_start_date_time STRING,
+	placer_contact_person_name_validity_range_range_end_date_time STRING,
 	placer_contact_person_name_assembly_order STRING,
 	placer_contact_person_effective_date STRING,
 	placer_contact_person_expiration_date STRING,
@@ -54095,6 +56229,8 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	placer_contact_address_census_tract_second_alternate_value_set_version_id STRING,
 	placer_contact_address_address_representation_code STRING,
 	placer_contact_address_address_validity_range STRING,
+	placer_contact_address_address_validity_range_range_start_date_time STRING,
+	placer_contact_address_address_validity_range_range_end_date_time STRING,
 	placer_contact_address_effective_date STRING,
 	placer_contact_address_expiration_date STRING,
 	placer_contact_address_expiration_reason STRING,
@@ -54264,6 +56400,8 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	filler_contact_person_name_context_second_alternate_value_set_oid STRING,
 	filler_contact_person_name_context_second_alternate_value_set_version_id STRING,
 	filler_contact_person_name_validity_range STRING,
+	filler_contact_person_name_validity_range_range_start_date_time STRING,
+	filler_contact_person_name_validity_range_range_end_date_time STRING,
 	filler_contact_person_name_assembly_order STRING,
 	filler_contact_person_effective_date STRING,
 	filler_contact_person_expiration_date STRING,
@@ -54447,6 +56585,8 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	filler_contact_address_census_tract_second_alternate_value_set_version_id STRING,
 	filler_contact_address_address_representation_code STRING,
 	filler_contact_address_address_validity_range STRING,
+	filler_contact_address_address_validity_range_range_start_date_time STRING,
+	filler_contact_address_address_validity_range_range_end_date_time STRING,
 	filler_contact_address_effective_date STRING,
 	filler_contact_address_expiration_date STRING,
 	filler_contact_address_expiration_reason STRING,
@@ -54616,6 +56756,8 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	entered_by_person_name_context_second_alternate_value_set_oid STRING,
 	entered_by_person_name_context_second_alternate_value_set_version_id STRING,
 	entered_by_person_name_validity_range STRING,
+	entered_by_person_name_validity_range_range_start_date_time STRING,
+	entered_by_person_name_validity_range_range_end_date_time STRING,
 	entered_by_person_name_assembly_order STRING,
 	entered_by_person_effective_date STRING,
 	entered_by_person_expiration_date STRING,
@@ -54847,15 +56989,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sch (
 	operation_scheduled_date_time STRING,
 	operation_cancelled STRING,
 	operation_cancelled_cancelled_date_time STRING,
-	operation_cancelled_cancelled_by STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	operation_cancelled_cancelled_by STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -54864,6 +57005,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCH'
 DROP TABLE hl7.hl7_scp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_scp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -54969,15 +57112,14 @@ CREATE EXTERNAL TABLE hl7.hl7_scp (
 	lot_control_alternate_value_set_version_id STRING,
 	lot_control_second_alternate_coding_system_oid STRING,
 	lot_control_second_alternate_value_set_oid STRING,
-	lot_control_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	lot_control_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -54986,6 +57128,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SCP'
 DROP TABLE hl7.hl7_sdd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sdd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55050,15 +57194,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sdd (
 	load_status_second_alternate_value_set_oid STRING,
 	load_status_second_alternate_value_set_version_id STRING,
 	control_code STRING,
-	operator_name STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	operator_name STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55067,6 +57210,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SDD'
 DROP TABLE hl7.hl7_sft_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sft (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55117,15 +57262,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sft (
 	software_binary_id STRING,
 	software_product_information STRING,
 	software_product_information_text_data STRING,
-	software_install_date STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	software_install_date STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55134,6 +57278,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SFT'
 DROP TABLE hl7.hl7_sgh_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sgh (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55141,15 +57287,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sgh (
 	patient_account_num STRING,
 	unknown STRING,
 	set_id STRING,
-	segment_group_name STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	segment_group_name STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55158,6 +57303,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGH'
 DROP TABLE hl7.hl7_sgt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sgt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55165,15 +57312,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sgt (
 	patient_account_num STRING,
 	unknown STRING,
 	set_id STRING,
-	segment_group_name STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	segment_group_name STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55182,6 +57328,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SGT'
 DROP TABLE hl7.hl7_shp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_shp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55339,15 +57487,14 @@ CREATE EXTERNAL TABLE hl7.hl7_shp (
 	shipment_risk_code_alternate_value_set_version_id STRING,
 	shipment_risk_code_second_alternate_coding_system_oid STRING,
 	shipment_risk_code_second_alternate_value_set_oid STRING,
-	shipment_risk_code_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	shipment_risk_code_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55356,6 +57503,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SHP'
 DROP TABLE hl7.hl7_sid_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_sid (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55409,15 +57558,14 @@ CREATE EXTERNAL TABLE hl7.hl7_sid (
 	substance_manufacturer_id_alternate_value_set_version_id STRING,
 	substance_manufacturer_id_second_alternate_coding_system_oid STRING,
 	substance_manufacturer_id_second_alternate_value_set_oid STRING,
-	substance_manufacturer_id_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	substance_manufacturer_id_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55426,6 +57574,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SID'
 DROP TABLE hl7.hl7_slt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_slt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -55448,15 +57598,14 @@ CREATE EXTERNAL TABLE hl7.hl7_slt (
 	item_id_namespace_id STRING,
 	item_id_universal_id STRING,
 	item_id_universal_id_type STRING,
-	bar_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bar_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55465,6 +57614,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SLT'
 DROP TABLE hl7.hl7_spm_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_spm (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -56075,17 +58226,16 @@ CREATE EXTERNAL TABLE hl7.hl7_spm (
 	shipment_id_namespace_id STRING,
 	shipment_id_universal_id STRING,
 	shipment_id_universal_id_type STRING,
-	specimen_desc_mnemonic STRING,
-	specimen_desc_name STRING,
-	specimen_desc_abbreviation STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	specimen_description_mnemonic STRING,
+	specimen_description_name STRING,
+	specimen_description_abbreviation STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56094,6 +58244,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=SPM'
 DROP TABLE hl7.hl7_stf_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_stf (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -56224,6 +58376,8 @@ CREATE EXTERNAL TABLE hl7.hl7_stf (
 	staff_name_name_context_second_alternate_value_set_oid STRING,
 	staff_name_name_context_second_alternate_value_set_version_id STRING,
 	staff_name_name_validity_range STRING,
+	staff_name_name_validity_range_range_start_date_time STRING,
+	staff_name_name_validity_range_range_end_date_time STRING,
 	staff_name_name_assembly_order STRING,
 	staff_name_effective_date STRING,
 	staff_name_expiration_date STRING,
@@ -56454,6 +58608,8 @@ CREATE EXTERNAL TABLE hl7.hl7_stf (
 	office_home_address_birthplace_census_tract_second_alternate_value_set_version_id STRING,
 	office_home_address_birthplace_address_representation_code STRING,
 	office_home_address_birthplace_address_validity_range STRING,
+	office_home_address_birthplace_address_validity_range_range_start_date_time STRING,
+	office_home_address_birthplace_address_validity_range_range_end_date_time STRING,
 	office_home_address_birthplace_effective_date STRING,
 	office_home_address_birthplace_expiration_date STRING,
 	office_home_address_birthplace_expiration_reason STRING,
@@ -56938,15 +59094,14 @@ CREATE EXTERNAL TABLE hl7.hl7_stf (
 	signature_data_subtype STRING,
 	signature_encoding STRING,
 	signature_data STRING,
-	signature_data_text_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	signature_data_text_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56955,6 +59110,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STF'
 DROP TABLE hl7.hl7_stz_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_stz (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57052,15 +59209,14 @@ CREATE EXTERNAL TABLE hl7.hl7_stz (
 	maintenance_type_alternate_value_set_version_id STRING,
 	maintenance_type_second_alternate_coding_system_oid STRING,
 	maintenance_type_second_alternate_value_set_oid STRING,
-	maintenance_type_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	maintenance_type_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57069,6 +59225,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=STZ'
 DROP TABLE hl7.hl7_tcc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_tcc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57104,6 +59262,146 @@ CREATE EXTERNAL TABLE hl7.hl7_tcc (
 	equipment_test_application_id_universal_id STRING,
 	equipment_test_application_id_universal_id_type STRING,
 	specimen_source STRING,
+	specimen_source_specimen_source_name_or_code STRING,
+	specimen_source_specimen_source_name_or_code_id STRING,
+	specimen_source_specimen_source_name_or_code_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_alternate_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_alternate_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_original_text STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_id STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_text STRING,
+	specimen_source_specimen_source_name_or_code_name_of_second_alternate_coding_system STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_source_name_or_code_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_value_set_version_id STRING,
+	specimen_source_specimen_source_name_or_code_alternate_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_alternate_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_alternate_value_set_version_id STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_coding_system_oid STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_value_set_oid STRING,
+	specimen_source_specimen_source_name_or_code_second_alternate_value_set_version_id STRING,
+	specimen_source_additives STRING,
+	specimen_source_additives_id STRING,
+	specimen_source_additives_text STRING,
+	specimen_source_additives_name_of_coding_system STRING,
+	specimen_source_additives_alternate_id STRING,
+	specimen_source_additives_alternate_text STRING,
+	specimen_source_additives_name_of_alternate_coding_system STRING,
+	specimen_source_additives_coding_system_version_id STRING,
+	specimen_source_additives_alternate_coding_system_version_id STRING,
+	specimen_source_additives_original_text STRING,
+	specimen_source_additives_second_alternate_id STRING,
+	specimen_source_additives_second_alternate_text STRING,
+	specimen_source_additives_name_of_second_alternate_coding_system STRING,
+	specimen_source_additives_second_alternate_coding_system_version_id STRING,
+	specimen_source_additives_coding_system_oid STRING,
+	specimen_source_additives_value_set_oid STRING,
+	specimen_source_additives_value_set_version_id STRING,
+	specimen_source_additives_alternate_coding_system_oid STRING,
+	specimen_source_additives_alternate_value_set_oid STRING,
+	specimen_source_additives_alternate_value_set_version_id STRING,
+	specimen_source_additives_second_alternate_coding_system_oid STRING,
+	specimen_source_additives_second_alternate_value_set_oid STRING,
+	specimen_source_additives_second_alternate_value_set_version_id STRING,
+	specimen_source_specimen_collection_method STRING,
+	specimen_source_specimen_collection_method_text_data STRING,
+	specimen_source_body_site STRING,
+	specimen_source_body_site_id STRING,
+	specimen_source_body_site_text STRING,
+	specimen_source_body_site_name_of_coding_system STRING,
+	specimen_source_body_site_alternate_id STRING,
+	specimen_source_body_site_alternate_text STRING,
+	specimen_source_body_site_name_of_alternate_coding_system STRING,
+	specimen_source_body_site_coding_system_version_id STRING,
+	specimen_source_body_site_alternate_coding_system_version_id STRING,
+	specimen_source_body_site_original_text STRING,
+	specimen_source_body_site_second_alternate_id STRING,
+	specimen_source_body_site_second_alternate_text STRING,
+	specimen_source_body_site_name_of_second_alternate_coding_system STRING,
+	specimen_source_body_site_second_alternate_coding_system_version_id STRING,
+	specimen_source_body_site_coding_system_oid STRING,
+	specimen_source_body_site_value_set_oid STRING,
+	specimen_source_body_site_value_set_version_id STRING,
+	specimen_source_body_site_alternate_coding_system_oid STRING,
+	specimen_source_body_site_alternate_value_set_oid STRING,
+	specimen_source_body_site_alternate_value_set_version_id STRING,
+	specimen_source_body_site_second_alternate_coding_system_oid STRING,
+	specimen_source_body_site_second_alternate_value_set_oid STRING,
+	specimen_source_body_site_second_alternate_value_set_version_id STRING,
+	specimen_source_site_modifier STRING,
+	specimen_source_site_modifier_id STRING,
+	specimen_source_site_modifier_text STRING,
+	specimen_source_site_modifier_name_of_coding_system STRING,
+	specimen_source_site_modifier_alternate_id STRING,
+	specimen_source_site_modifier_alternate_text STRING,
+	specimen_source_site_modifier_name_of_alternate_coding_system STRING,
+	specimen_source_site_modifier_coding_system_version_id STRING,
+	specimen_source_site_modifier_alternate_coding_system_version_id STRING,
+	specimen_source_site_modifier_original_text STRING,
+	specimen_source_site_modifier_second_alternate_id STRING,
+	specimen_source_site_modifier_second_alternate_text STRING,
+	specimen_source_site_modifier_name_of_second_alternate_coding_system STRING,
+	specimen_source_site_modifier_second_alternate_coding_system_version_id STRING,
+	specimen_source_site_modifier_coding_system_oid STRING,
+	specimen_source_site_modifier_value_set_oid STRING,
+	specimen_source_site_modifier_value_set_version_id STRING,
+	specimen_source_site_modifier_alternate_coding_system_oid STRING,
+	specimen_source_site_modifier_alternate_value_set_oid STRING,
+	specimen_source_site_modifier_alternate_value_set_version_id STRING,
+	specimen_source_site_modifier_second_alternate_coding_system_oid STRING,
+	specimen_source_site_modifier_second_alternate_value_set_oid STRING,
+	specimen_source_site_modifier_second_alternate_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code STRING,
+	specimen_source_collection_method_modifier_code_id STRING,
+	specimen_source_collection_method_modifier_code_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_coding_system STRING,
+	specimen_source_collection_method_modifier_code_alternate_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_alternate_coding_system STRING,
+	specimen_source_collection_method_modifier_code_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_original_text STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_id STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_text STRING,
+	specimen_source_collection_method_modifier_code_name_of_second_alternate_coding_system STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_coding_system_version_id STRING,
+	specimen_source_collection_method_modifier_code_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code_alternate_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_alternate_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_alternate_value_set_version_id STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_coding_system_oid STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_value_set_oid STRING,
+	specimen_source_collection_method_modifier_code_second_alternate_value_set_version_id STRING,
+	specimen_source_specimen_role STRING,
+	specimen_source_specimen_role_id STRING,
+	specimen_source_specimen_role_text STRING,
+	specimen_source_specimen_role_name_of_coding_system STRING,
+	specimen_source_specimen_role_alternate_id STRING,
+	specimen_source_specimen_role_alternate_text STRING,
+	specimen_source_specimen_role_name_of_alternate_coding_system STRING,
+	specimen_source_specimen_role_coding_system_version_id STRING,
+	specimen_source_specimen_role_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_role_original_text STRING,
+	specimen_source_specimen_role_second_alternate_id STRING,
+	specimen_source_specimen_role_second_alternate_text STRING,
+	specimen_source_specimen_role_name_of_second_alternate_coding_system STRING,
+	specimen_source_specimen_role_second_alternate_coding_system_version_id STRING,
+	specimen_source_specimen_role_coding_system_oid STRING,
+	specimen_source_specimen_role_value_set_oid STRING,
+	specimen_source_specimen_role_value_set_version_id STRING,
+	specimen_source_specimen_role_alternate_coding_system_oid STRING,
+	specimen_source_specimen_role_alternate_value_set_oid STRING,
+	specimen_source_specimen_role_alternate_value_set_version_id STRING,
+	specimen_source_specimen_role_second_alternate_coding_system_oid STRING,
+	specimen_source_specimen_role_second_alternate_value_set_oid STRING,
+	specimen_source_specimen_role_second_alternate_value_set_version_id STRING,
 	auto_dilution_factor_default STRING,
 	auto_dilution_factor_default_comparator STRING,
 	auto_dilution_factor_default_num1 STRING,
@@ -57201,15 +59499,14 @@ CREATE EXTERNAL TABLE hl7.hl7_tcc (
 	test_criticality_alternate_value_set_version_id STRING,
 	test_criticality_second_alternate_coding_system_oid STRING,
 	test_criticality_second_alternate_value_set_oid STRING,
-	test_criticality_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	test_criticality_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57218,6 +59515,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCC'
 DROP TABLE hl7.hl7_tcd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_tcd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57291,15 +59590,14 @@ CREATE EXTERNAL TABLE hl7.hl7_tcd (
 	analyte_repeat_status_alternate_value_set_version_id STRING,
 	analyte_repeat_status_second_alternate_coding_system_oid STRING,
 	analyte_repeat_status_second_alternate_value_set_oid STRING,
-	analyte_repeat_status_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	analyte_repeat_status_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57308,6 +59606,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TCD'
 DROP TABLE hl7.hl7_tq1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_tq1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57524,15 +59824,14 @@ CREATE EXTERNAL TABLE hl7.hl7_tq1 (
 	occurrence_duration_units_second_alternate_coding_system_oid STRING,
 	occurrence_duration_units_second_alternate_value_set_oid STRING,
 	occurrence_duration_units_second_alternate_value_set_version_id STRING,
-	total_occurrences STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	total_occurrences STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57541,6 +59840,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ1'
 DROP TABLE hl7.hl7_tq2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_tq2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57592,15 +59893,14 @@ CREATE EXTERNAL TABLE hl7.hl7_tq2 (
 	sequence_condition_time_interval_units_second_alternate_value_set_oid STRING,
 	sequence_condition_time_interval_units_second_alternate_value_set_version_id STRING,
 	cyclic_group_maximum_num_of_repeats STRING,
-	special_service_request_relationship STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	special_service_request_relationship STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57609,6 +59909,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TQ2'
 DROP TABLE hl7.hl7_txa_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_txa (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -57714,6 +60016,8 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	primary_activity_provider_code_name_name_context_second_alternate_value_set_oid STRING,
 	primary_activity_provider_code_name_name_context_second_alternate_value_set_version_id STRING,
 	primary_activity_provider_code_name_name_validity_range STRING,
+	primary_activity_provider_code_name_name_validity_range_range_start_date_time STRING,
+	primary_activity_provider_code_name_name_validity_range_range_end_date_time STRING,
 	primary_activity_provider_code_name_name_assembly_order STRING,
 	primary_activity_provider_code_name_effective_date STRING,
 	primary_activity_provider_code_name_expiration_date STRING,
@@ -57842,6 +60146,8 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	originator_code_name_name_context_second_alternate_value_set_oid STRING,
 	originator_code_name_name_context_second_alternate_value_set_version_id STRING,
 	originator_code_name_name_validity_range STRING,
+	originator_code_name_name_validity_range_range_start_date_time STRING,
+	originator_code_name_name_validity_range_range_end_date_time STRING,
 	originator_code_name_name_assembly_order STRING,
 	originator_code_name_effective_date STRING,
 	originator_code_name_expiration_date STRING,
@@ -57967,6 +60273,8 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	assigned_document_authenticator_name_context_second_alternate_value_set_oid STRING,
 	assigned_document_authenticator_name_context_second_alternate_value_set_version_id STRING,
 	assigned_document_authenticator_name_validity_range STRING,
+	assigned_document_authenticator_name_validity_range_range_start_date_time STRING,
+	assigned_document_authenticator_name_validity_range_range_end_date_time STRING,
 	assigned_document_authenticator_name_assembly_order STRING,
 	assigned_document_authenticator_effective_date STRING,
 	assigned_document_authenticator_expiration_date STRING,
@@ -58092,6 +60400,8 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	transcriptionist_code_name_name_context_second_alternate_value_set_oid STRING,
 	transcriptionist_code_name_name_context_second_alternate_value_set_version_id STRING,
 	transcriptionist_code_name_name_validity_range STRING,
+	transcriptionist_code_name_name_validity_range_range_start_date_time STRING,
+	transcriptionist_code_name_name_validity_range_range_end_date_time STRING,
 	transcriptionist_code_name_name_assembly_order STRING,
 	transcriptionist_code_name_effective_date STRING,
 	transcriptionist_code_name_expiration_date STRING,
@@ -58244,6 +60554,8 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	authentication_person_time_stamp_name_context_second_alternate_value_set_oid STRING,
 	authentication_person_time_stamp_name_context_second_alternate_value_set_version_id STRING,
 	authentication_person_time_stamp_name_validity_range STRING,
+	authentication_person_time_stamp_name_validity_range_range_start_date_time STRING,
+	authentication_person_time_stamp_name_validity_range_range_end_date_time STRING,
 	authentication_person_time_stamp_name_assembly_order STRING,
 	authentication_person_time_stamp_effective_date STRING,
 	authentication_person_time_stamp_expiration_date STRING,
@@ -58369,6 +60681,8 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	dstr_copies_code_and_name_of_recp_name_context_second_alternate_value_set_oid STRING,
 	dstr_copies_code_and_name_of_recp_name_context_second_alternate_value_set_version_id STRING,
 	dstr_copies_code_and_name_of_recp_name_validity_range STRING,
+	dstr_copies_code_and_name_of_recp_name_validity_range_range_start_date_time STRING,
+	dstr_copies_code_and_name_of_recp_name_validity_range_range_end_date_time STRING,
 	dstr_copies_code_and_name_of_recp_name_assembly_order STRING,
 	dstr_copies_code_and_name_of_recp_effective_date STRING,
 	dstr_copies_code_and_name_of_recp_expiration_date STRING,
@@ -58445,15 +60759,14 @@ CREATE EXTERNAL TABLE hl7.hl7_txa (
 	folder_assignment_second_alternate_value_set_oid STRING,
 	folder_assignment_second_alternate_value_set_version_id STRING,
 	document_title STRING,
-	agreed_due_date_time STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	agreed_due_date_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58462,6 +60775,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=TXA'
 DROP TABLE hl7.hl7_uac_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_uac (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58500,15 +60815,14 @@ CREATE EXTERNAL TABLE hl7.hl7_uac (
 	user_authentication_credential_data_subtype STRING,
 	user_authentication_credential_encoding STRING,
 	user_authentication_credential_data STRING,
-	user_authentication_credential_data_text_data STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	user_authentication_credential_data_text_data STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58517,6 +60831,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UAC'
 DROP TABLE hl7.hl7_ub1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ub1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58533,27 +60849,166 @@ CREATE EXTERNAL TABLE hl7.hl7_ub1 (
 	covered_days STRING,
 	non_covered_days STRING,
 	value_amt_and_code STRING,
+	value_amt_and_code_value_code STRING,
+	value_amt_and_code_value_code_id STRING,
+	value_amt_and_code_value_code_text STRING,
+	value_amt_and_code_value_code_name_of_coding_system STRING,
+	value_amt_and_code_value_code_alternate_id STRING,
+	value_amt_and_code_value_code_alternate_text STRING,
+	value_amt_and_code_value_code_name_of_alternate_coding_system STRING,
+	value_amt_and_code_value_code_coding_system_version_id STRING,
+	value_amt_and_code_value_code_alternate_coding_system_version_id STRING,
+	value_amt_and_code_value_code_original_text STRING,
+	value_amt_and_code_value_code_second_alternate_id STRING,
+	value_amt_and_code_value_code_second_alternate_text STRING,
+	value_amt_and_code_value_code_name_of_second_alternate_coding_system STRING,
+	value_amt_and_code_value_code_second_alternate_coding_system_version_id STRING,
+	value_amt_and_code_value_code_coding_system_oid STRING,
+	value_amt_and_code_value_code_value_set_oid STRING,
+	value_amt_and_code_value_code_value_set_version_id STRING,
+	value_amt_and_code_value_code_alternate_coding_system_oid STRING,
+	value_amt_and_code_value_code_alternate_value_set_oid STRING,
+	value_amt_and_code_value_code_alternate_value_set_version_id STRING,
+	value_amt_and_code_value_code_second_alternate_coding_system_oid STRING,
+	value_amt_and_code_value_code_second_alternate_value_set_oid STRING,
+	value_amt_and_code_value_code_second_alternate_value_set_version_id STRING,
+	value_amt_and_code_value_amt STRING,
+	value_amt_and_code_value_amt_quantity STRING,
+	value_amt_and_code_value_amt_denomination STRING,
+	value_amt_and_code_non_monetary_value_amt_quantity STRING,
+	value_amt_and_code_non_monetary_value_amt_units STRING,
+	value_amt_and_code_non_monetary_value_amt_units_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_text STRING,
+	value_amt_and_code_non_monetary_value_amt_units_name_of_coding_system STRING,
+	value_amt_and_code_non_monetary_value_amt_units_alternate_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_alternate_text STRING,
+	value_amt_and_code_non_monetary_value_amt_units_name_of_alternate_coding_system STRING,
+	value_amt_and_code_non_monetary_value_amt_units_coding_system_version_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_alternate_coding_system_version_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_original_text STRING,
+	value_amt_and_code_non_monetary_value_amt_units_second_alternate_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_second_alternate_text STRING,
+	value_amt_and_code_non_monetary_value_amt_units_name_of_second_alternate_coding_system STRING,
+	value_amt_and_code_non_monetary_value_amt_units_second_alternate_coding_system_version_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_coding_system_oid STRING,
+	value_amt_and_code_non_monetary_value_amt_units_value_set_oid STRING,
+	value_amt_and_code_non_monetary_value_amt_units_value_set_version_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_alternate_coding_system_oid STRING,
+	value_amt_and_code_non_monetary_value_amt_units_alternate_value_set_oid STRING,
+	value_amt_and_code_non_monetary_value_amt_units_alternate_value_set_version_id STRING,
+	value_amt_and_code_non_monetary_value_amt_units_second_alternate_coding_system_oid STRING,
+	value_amt_and_code_non_monetary_value_amt_units_second_alternate_value_set_oid STRING,
+	value_amt_and_code_non_monetary_value_amt_units_second_alternate_value_set_version_id STRING,
 	num_of_grace_days STRING,
 	special_program_indicator STRING,
+	special_program_indicator_id STRING,
+	special_program_indicator_text STRING,
+	special_program_indicator_name_of_coding_system STRING,
+	special_program_indicator_alternate_id STRING,
+	special_program_indicator_alternate_text STRING,
+	special_program_indicator_name_of_alternate_coding_system STRING,
+	special_program_indicator_coding_system_version_id STRING,
+	special_program_indicator_alternate_coding_system_version_id STRING,
+	special_program_indicator_original_text STRING,
+	special_program_indicator_second_alternate_id STRING,
+	special_program_indicator_second_alternate_text STRING,
+	special_program_indicator_name_of_second_alternate_coding_system STRING,
+	special_program_indicator_second_alternate_coding_system_version_id STRING,
+	special_program_indicator_coding_system_oid STRING,
+	special_program_indicator_value_set_oid STRING,
+	special_program_indicator_value_set_version_id STRING,
+	special_program_indicator_alternate_coding_system_oid STRING,
+	special_program_indicator_alternate_value_set_oid STRING,
+	special_program_indicator_alternate_value_set_version_id STRING,
+	special_program_indicator_second_alternate_coding_system_oid STRING,
+	special_program_indicator_second_alternate_value_set_oid STRING,
+	special_program_indicator_second_alternate_value_set_version_id STRING,
 	psro_ur_approval_indicator STRING,
+	psro_ur_approval_indicator_id STRING,
+	psro_ur_approval_indicator_text STRING,
+	psro_ur_approval_indicator_name_of_coding_system STRING,
+	psro_ur_approval_indicator_alternate_id STRING,
+	psro_ur_approval_indicator_alternate_text STRING,
+	psro_ur_approval_indicator_name_of_alternate_coding_system STRING,
+	psro_ur_approval_indicator_coding_system_version_id STRING,
+	psro_ur_approval_indicator_alternate_coding_system_version_id STRING,
+	psro_ur_approval_indicator_original_text STRING,
+	psro_ur_approval_indicator_second_alternate_id STRING,
+	psro_ur_approval_indicator_second_alternate_text STRING,
+	psro_ur_approval_indicator_name_of_second_alternate_coding_system STRING,
+	psro_ur_approval_indicator_second_alternate_coding_system_version_id STRING,
+	psro_ur_approval_indicator_coding_system_oid STRING,
+	psro_ur_approval_indicator_value_set_oid STRING,
+	psro_ur_approval_indicator_value_set_version_id STRING,
+	psro_ur_approval_indicator_alternate_coding_system_oid STRING,
+	psro_ur_approval_indicator_alternate_value_set_oid STRING,
+	psro_ur_approval_indicator_alternate_value_set_version_id STRING,
+	psro_ur_approval_indicator_second_alternate_coding_system_oid STRING,
+	psro_ur_approval_indicator_second_alternate_value_set_oid STRING,
+	psro_ur_approval_indicator_second_alternate_value_set_version_id STRING,
 	psro_ur_approved_stay_from STRING,
 	psro_ur_approved_stay_to STRING,
 	occurrence STRING,
+	occurrence_occurrence_code STRING,
+	occurrence_occurrence_code_id STRING,
+	occurrence_occurrence_code_text STRING,
+	occurrence_occurrence_code_name_of_coding_system STRING,
+	occurrence_occurrence_code_alternate_id STRING,
+	occurrence_occurrence_code_alternate_text STRING,
+	occurrence_occurrence_code_name_of_alternate_coding_system STRING,
+	occurrence_occurrence_code_coding_system_version_id STRING,
+	occurrence_occurrence_code_alternate_coding_system_version_id STRING,
+	occurrence_occurrence_code_original_text STRING,
+	occurrence_occurrence_code_second_alternate_id STRING,
+	occurrence_occurrence_code_second_alternate_text STRING,
+	occurrence_occurrence_code_name_of_second_alternate_coding_system STRING,
+	occurrence_occurrence_code_second_alternate_coding_system_version_id STRING,
+	occurrence_occurrence_code_coding_system_oid STRING,
+	occurrence_occurrence_code_value_set_oid STRING,
+	occurrence_occurrence_code_value_set_version_id STRING,
+	occurrence_occurrence_code_alternate_coding_system_oid STRING,
+	occurrence_occurrence_code_alternate_value_set_oid STRING,
+	occurrence_occurrence_code_alternate_value_set_version_id STRING,
+	occurrence_occurrence_code_second_alternate_coding_system_oid STRING,
+	occurrence_occurrence_code_second_alternate_value_set_oid STRING,
+	occurrence_occurrence_code_second_alternate_value_set_version_id STRING,
+	occurrence_occurrence_date STRING,
 	occurrence_span STRING,
+	occurrence_span_id STRING,
+	occurrence_span_text STRING,
+	occurrence_span_name_of_coding_system STRING,
+	occurrence_span_alternate_id STRING,
+	occurrence_span_alternate_text STRING,
+	occurrence_span_name_of_alternate_coding_system STRING,
+	occurrence_span_coding_system_version_id STRING,
+	occurrence_span_alternate_coding_system_version_id STRING,
+	occurrence_span_original_text STRING,
+	occurrence_span_second_alternate_id STRING,
+	occurrence_span_second_alternate_text STRING,
+	occurrence_span_name_of_second_alternate_coding_system STRING,
+	occurrence_span_second_alternate_coding_system_version_id STRING,
+	occurrence_span_coding_system_oid STRING,
+	occurrence_span_value_set_oid STRING,
+	occurrence_span_value_set_version_id STRING,
+	occurrence_span_alternate_coding_system_oid STRING,
+	occurrence_span_alternate_value_set_oid STRING,
+	occurrence_span_alternate_value_set_version_id STRING,
+	occurrence_span_second_alternate_coding_system_oid STRING,
+	occurrence_span_second_alternate_value_set_oid STRING,
+	occurrence_span_second_alternate_value_set_version_id STRING,
 	occur_span_start_date STRING,
 	occur_span_end_date STRING,
 	ub82_locator_2 STRING,
 	ub82_locator_9 STRING,
 	ub82_locator_27 STRING,
-	ub82_locator_45 STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	ub82_locator_45 STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58562,6 +61017,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB1'
 DROP TABLE hl7.hl7_ub2_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ub2 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58705,15 +61162,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ub2 (
 	uniform_billing_locator_56_state STRING,
 	uniform_billing_locator_57_sational STRING,
 	uniform_billing_locator_78_state STRING,
-	special_visit_count STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	special_visit_count STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58722,27 +61178,198 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=UB2'
 DROP TABLE hl7.hl7_urd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_urd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	results_update_date_time STRING,
+	r_u_date_time STRING,
 	report_priority STRING,
-	results_update_who_subject_definition STRING,
-	results_update_what_subject_definition STRING,
-	results_update_what_department_code STRING,
-	results_update_display_print_location STRING,
-	results_update_results_level STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	r_u_who_subject_definition STRING,
+	r_u_who_subject_definition_person_id STRING,
+	r_u_who_subject_definition_family_name STRING,
+	r_u_who_subject_definition_family_name_surname STRING,
+	r_u_who_subject_definition_family_name_own_surname_prefix STRING,
+	r_u_who_subject_definition_family_name_own_surname STRING,
+	r_u_who_subject_definition_family_name_surname_prefix_from_partner_spouse STRING,
+	r_u_who_subject_definition_family_name_surname_from_partner_spouse STRING,
+	r_u_who_subject_definition_given_name STRING,
+	r_u_who_subject_definition_second_and_further_given_names_or_initials_thereof STRING,
+	r_u_who_subject_definition_suffix STRING,
+	r_u_who_subject_definition_prefix STRING,
+	r_u_who_subject_definition_degree STRING,
+	r_u_who_subject_definition_source_table STRING,
+	r_u_who_subject_definition_source_table_id STRING,
+	r_u_who_subject_definition_source_table_text STRING,
+	r_u_who_subject_definition_source_table_name_of_coding_system STRING,
+	r_u_who_subject_definition_source_table_alternate_id STRING,
+	r_u_who_subject_definition_source_table_alternate_text STRING,
+	r_u_who_subject_definition_source_table_name_of_alternate_coding_system STRING,
+	r_u_who_subject_definition_source_table_coding_system_version_id STRING,
+	r_u_who_subject_definition_source_table_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_source_table_original_text STRING,
+	r_u_who_subject_definition_source_table_second_alternate_id STRING,
+	r_u_who_subject_definition_source_table_second_alternate_text STRING,
+	r_u_who_subject_definition_source_table_name_of_second_alternate_coding_system STRING,
+	r_u_who_subject_definition_source_table_second_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_source_table_coding_system_oid STRING,
+	r_u_who_subject_definition_source_table_value_set_oid STRING,
+	r_u_who_subject_definition_source_table_value_set_version_id STRING,
+	r_u_who_subject_definition_source_table_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_source_table_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_source_table_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_source_table_second_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_source_table_second_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_source_table_second_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_assigning_authority STRING,
+	r_u_who_subject_definition_assigning_authority_namespace_id STRING,
+	r_u_who_subject_definition_assigning_authority_universal_id STRING,
+	r_u_who_subject_definition_assigning_authority_universal_id_type STRING,
+	r_u_who_subject_definition_name_type_code STRING,
+	r_u_who_subject_definition_id_check_digit STRING,
+	r_u_who_subject_definition_check_digit_scheme STRING,
+	r_u_who_subject_definition_id_type_code STRING,
+	r_u_who_subject_definition_assigning_facility STRING,
+	r_u_who_subject_definition_assigning_facility_namespace_id STRING,
+	r_u_who_subject_definition_assigning_facility_universal_id STRING,
+	r_u_who_subject_definition_assigning_facility_universal_id_type STRING,
+	r_u_who_subject_definition_name_representation_code STRING,
+	r_u_who_subject_definition_name_context STRING,
+	r_u_who_subject_definition_name_context_id STRING,
+	r_u_who_subject_definition_name_context_text STRING,
+	r_u_who_subject_definition_name_context_name_of_coding_system STRING,
+	r_u_who_subject_definition_name_context_alternate_id STRING,
+	r_u_who_subject_definition_name_context_alternate_text STRING,
+	r_u_who_subject_definition_name_context_name_of_alternate_coding_system STRING,
+	r_u_who_subject_definition_name_context_coding_system_version_id STRING,
+	r_u_who_subject_definition_name_context_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_name_context_original_text STRING,
+	r_u_who_subject_definition_name_context_second_alternate_id STRING,
+	r_u_who_subject_definition_name_context_second_alternate_text STRING,
+	r_u_who_subject_definition_name_context_name_of_second_alternate_coding_system STRING,
+	r_u_who_subject_definition_name_context_second_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_name_context_coding_system_oid STRING,
+	r_u_who_subject_definition_name_context_value_set_oid STRING,
+	r_u_who_subject_definition_name_context_value_set_version_id STRING,
+	r_u_who_subject_definition_name_context_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_name_context_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_name_context_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_name_context_second_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_name_context_second_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_name_context_second_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_name_validity_range STRING,
+	r_u_who_subject_definition_name_validity_range_range_start_date_time STRING,
+	r_u_who_subject_definition_name_validity_range_range_end_date_time STRING,
+	r_u_who_subject_definition_name_assembly_order STRING,
+	r_u_who_subject_definition_effective_date STRING,
+	r_u_who_subject_definition_expiration_date STRING,
+	r_u_who_subject_definition_professional_suffix STRING,
+	r_u_who_subject_definition_assigning_jurisdiction STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_text STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_name_of_coding_system STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_alternate_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_alternate_text STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_name_of_alternate_coding_system STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_coding_system_version_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_original_text STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_second_alternate_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_second_alternate_text STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_name_of_second_alternate_coding_system STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_second_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_coding_system_oid STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_value_set_oid STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_value_set_version_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_second_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_second_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_assigning_jurisdiction_second_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_text STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_name_of_coding_system STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_alternate_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_alternate_text STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_name_of_alternate_coding_system STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_coding_system_version_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_original_text STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_second_alternate_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_second_alternate_text STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_name_of_second_alternate_coding_system STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_second_alternate_coding_system_version_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_coding_system_oid STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_value_set_oid STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_value_set_version_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_second_alternate_coding_system_oid STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_second_alternate_value_set_oid STRING,
+	r_u_who_subject_definition_assigning_agency_or_department_second_alternate_value_set_version_id STRING,
+	r_u_who_subject_definition_security_check STRING,
+	r_u_who_subject_definition_security_check_scheme STRING,
+	r_u_what_subject_definition STRING,
+	r_u_what_subject_definition_id STRING,
+	r_u_what_subject_definition_text STRING,
+	r_u_what_subject_definition_name_of_coding_system STRING,
+	r_u_what_subject_definition_alternate_id STRING,
+	r_u_what_subject_definition_alternate_text STRING,
+	r_u_what_subject_definition_name_of_alternate_coding_system STRING,
+	r_u_what_subject_definition_coding_system_version_id STRING,
+	r_u_what_subject_definition_alternate_coding_system_version_id STRING,
+	r_u_what_subject_definition_original_text STRING,
+	r_u_what_subject_definition_second_alternate_id STRING,
+	r_u_what_subject_definition_second_alternate_text STRING,
+	r_u_what_subject_definition_name_of_second_alternate_coding_system STRING,
+	r_u_what_subject_definition_second_alternate_coding_system_version_id STRING,
+	r_u_what_subject_definition_coding_system_oid STRING,
+	r_u_what_subject_definition_value_set_oid STRING,
+	r_u_what_subject_definition_value_set_version_id STRING,
+	r_u_what_subject_definition_alternate_coding_system_oid STRING,
+	r_u_what_subject_definition_alternate_value_set_oid STRING,
+	r_u_what_subject_definition_alternate_value_set_version_id STRING,
+	r_u_what_subject_definition_second_alternate_coding_system_oid STRING,
+	r_u_what_subject_definition_second_alternate_value_set_oid STRING,
+	r_u_what_subject_definition_second_alternate_value_set_version_id STRING,
+	r_u_what_department_code STRING,
+	r_u_what_department_code_id STRING,
+	r_u_what_department_code_text STRING,
+	r_u_what_department_code_name_of_coding_system STRING,
+	r_u_what_department_code_alternate_id STRING,
+	r_u_what_department_code_alternate_text STRING,
+	r_u_what_department_code_name_of_alternate_coding_system STRING,
+	r_u_what_department_code_coding_system_version_id STRING,
+	r_u_what_department_code_alternate_coding_system_version_id STRING,
+	r_u_what_department_code_original_text STRING,
+	r_u_what_department_code_second_alternate_id STRING,
+	r_u_what_department_code_second_alternate_text STRING,
+	r_u_what_department_code_name_of_second_alternate_coding_system STRING,
+	r_u_what_department_code_second_alternate_coding_system_version_id STRING,
+	r_u_what_department_code_coding_system_oid STRING,
+	r_u_what_department_code_value_set_oid STRING,
+	r_u_what_department_code_value_set_version_id STRING,
+	r_u_what_department_code_alternate_coding_system_oid STRING,
+	r_u_what_department_code_alternate_value_set_oid STRING,
+	r_u_what_department_code_alternate_value_set_version_id STRING,
+	r_u_what_department_code_second_alternate_coding_system_oid STRING,
+	r_u_what_department_code_second_alternate_value_set_oid STRING,
+	r_u_what_department_code_second_alternate_value_set_version_id STRING,
+	r_u_display_print_locations STRING,
+	r_u_results_level STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58751,29 +61378,78 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URD'
 DROP TABLE hl7.hl7_urs_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_urs (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	results_update_where_subject_definition STRING,
-	results_update_when_data_start_date_time STRING,
-	results_update_when_data_end_date_time STRING,
-	results_update_what_user_qualifier STRING,
-	results_update_other_results_subject_definition STRING,
-	results_update_which_date_time_qualifier STRING,
-	results_update_which_date_time_status_qualifier STRING,
-	results_update_date_time_selection_qualifier STRING,
-	results_update_qty_timing_qualifier STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	r_u_where_subject_definition STRING,
+	r_u_when_data_start_date_time STRING,
+	r_u_when_data_end_date_time STRING,
+	r_u_what_user_qualifier STRING,
+	other_results_subject_definition STRING,
+	r_u_which_date_time_qualifier STRING,
+	r_u_which_date_time_status_qualifier STRING,
+	r_u_date_time_selection_qualifier STRING,
+	r_u_quantity_timing_qualifier STRING,
+	r_u_quantity_timing_qualifier_quantity STRING,
+	r_u_quantity_timing_qualifier_interval STRING,
+	r_u_quantity_timing_qualifier_interval_repeat_pattern STRING,
+	r_u_quantity_timing_qualifier_interval_explicit_time_interval STRING,
+	r_u_quantity_timing_qualifier_duration STRING,
+	r_u_quantity_timing_qualifier_start_date_time STRING,
+	r_u_quantity_timing_qualifier_end_date_time STRING,
+	r_u_quantity_timing_qualifier_priority STRING,
+	r_u_quantity_timing_qualifier_condition STRING,
+	r_u_quantity_timing_qualifier_text STRING,
+	r_u_quantity_timing_qualifier_text_text_data STRING,
+	r_u_quantity_timing_qualifier_conjunction STRING,
+	r_u_quantity_timing_qualifier_order_sequencing STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_sequence_results_flag STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_placer_order_num_entity_id STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_placer_order_num_namespace_id STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_filler_order_num_entity_id STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_filler_order_num_namespace_id STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_sequence_condition_value STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_maximum_num_of_repeats STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_placer_order_num_universal_id STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_placer_order_num_universal_id_type STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_filler_order_num_universal_id STRING,
+	r_u_quantity_timing_qualifier_order_sequencing_filler_order_num_universal_id_type STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_text STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_name_of_coding_system STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_alternate_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_alternate_text STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_name_of_alternate_coding_system STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_coding_system_version_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_alternate_coding_system_version_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_original_text STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_second_alternate_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_second_alternate_text STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_name_of_second_alternate_coding_system STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_second_alternate_coding_system_version_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_coding_system_oid STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_value_set_oid STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_value_set_version_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_alternate_coding_system_oid STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_alternate_value_set_oid STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_alternate_value_set_version_id STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_second_alternate_coding_system_oid STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_second_alternate_value_set_oid STRING,
+	r_u_quantity_timing_qualifier_occurrence_duration_second_alternate_value_set_version_id STRING,
+	r_u_quantity_timing_qualifier_total_occurrences STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58782,6 +61458,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=URS'
 DROP TABLE hl7.hl7_var_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_var (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -58868,6 +61546,8 @@ CREATE EXTERNAL TABLE hl7.hl7_var (
 	variance_originator_name_context_second_alternate_value_set_oid STRING,
 	variance_originator_name_context_second_alternate_value_set_version_id STRING,
 	variance_originator_name_validity_range STRING,
+	variance_originator_name_validity_range_range_start_date_time STRING,
+	variance_originator_name_validity_range_range_end_date_time STRING,
 	variance_originator_name_assembly_order STRING,
 	variance_originator_effective_date STRING,
 	variance_originator_expiration_date STRING,
@@ -58943,15 +61623,14 @@ CREATE EXTERNAL TABLE hl7.hl7_var (
 	variance_classification_second_alternate_coding_system_oid STRING,
 	variance_classification_second_alternate_value_set_oid STRING,
 	variance_classification_second_alternate_value_set_version_id STRING,
-	variance_description STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	variance_description STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58960,6 +61639,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VAR'
 DROP TABLE hl7.hl7_vnd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_vnd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59000,15 +61681,14 @@ CREATE EXTERNAL TABLE hl7.hl7_vnd (
 	primary_vendor_indicator_alternate_value_set_version_id STRING,
 	primary_vendor_indicator_second_alternate_coding_system_oid STRING,
 	primary_vendor_indicator_second_alternate_value_set_oid STRING,
-	primary_vendor_indicator_second_alternate_value_set_version_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	primary_vendor_indicator_second_alternate_value_set_version_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59017,6 +61697,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=VND'
 DROP TABLE hl7.hl7_zao_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zao (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59039,15 +61721,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zao (
 	surgeon_last_name STRING,
 	surgeon_first_name STRING,
 	wound_status STRING,
-	duration STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	duration STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59056,6 +61737,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAO'
 DROP TABLE hl7.hl7_zap_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zap (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59071,15 +61754,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zap (
 	other_dictated_by_signed_date_time_suffix STRING,
 	other_dictated_by_signed_date_time_title STRING,
 	other_dictated_by_signed_date_time_degree STRING,
-	other_dictated_by_signed_date_time_signed_date_and_time STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	other_dictated_by_signed_date_time_signed_date_and_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59088,6 +61770,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZAP'
 DROP TABLE hl7.hl7_zbt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zbt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59096,15 +61780,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zbt (
 	unknown STRING,
 	counter STRING,
 	types STRING,
-	transfused_units_number STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	transfused_units_number STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59113,6 +61796,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZBT'
 DROP TABLE hl7.hl7_zcd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zcd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59123,15 +61808,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zcd (
 	query_data STRING,
 	query_data_mnem STRING,
 	query_data_text STRING,
-	query_data_response STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	query_data_response STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59140,6 +61824,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCD'
 DROP TABLE hl7.hl7_zcl_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zcl (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59157,15 +61843,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zcl (
 	filed_information STRING,
 	filed_information_file_date_time STRING,
 	filed_information_person_id STRING,
-	filed_information_type_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	filed_information_type_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59174,6 +61859,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCL'
 DROP TABLE hl7.hl7_zcn_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zcn (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59183,15 +61870,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zcn (
 	set_id STRING,
 	collection_note_date_time STRING,
 	collection_note_user STRING,
-	collection_note_text STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	collection_note_text STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59200,6 +61886,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCN'
 DROP TABLE hl7.hl7_zcp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zcp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59215,15 +61903,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zcp (
 	pacu2_completed_date_time STRING,
 	pacu2_completed_id STRING,
 	hold_completed_date_time STRING,
-	hold_completed_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	hold_completed_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59232,6 +61919,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCP'
 DROP TABLE hl7.hl7_zcs_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zcs (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59248,15 +61937,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zcs (
 	patient_employment_status STRING,
 	patient_e_mail_address STRING,
 	guarantor_e_mail_address STRING,
-	patient_accounting_facility_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	patient_accounting_facility_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59265,6 +61953,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCS'
 DROP TABLE hl7.hl7_zct_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zct (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59290,15 +61980,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zct (
 	count_four_nurse_two STRING,
 	count_four_comment_one STRING,
 	count_four_comment_two STRING,
-	count_four_correct STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	count_four_correct STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59307,6 +61996,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCT'
 DROP TABLE hl7.hl7_zcx_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zcx (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59317,15 +62008,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zcx (
 	complication_type STRING,
 	complication STRING,
 	complication_complication_mnemonic STRING,
-	complication_complication_description STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	complication_complication_description STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59334,6 +62024,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZCX'
 DROP TABLE hl7.hl7_zds_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zds (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59344,15 +62036,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zds (
 	study_instance_reference_pointer STRING,
 	study_instance_application_id STRING,
 	study_instance_data_type STRING,
-	study_instance_subtype STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	study_instance_subtype STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59361,6 +62052,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDS'
 DROP TABLE hl7.hl7_zdt_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zdt (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59383,15 +62076,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zdt (
 	event_start_date_time STRING,
 	accomodation_code STRING,
 	hospital_service STRING,
-	admission_level_care_code STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	admission_level_care_code STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59400,6 +62092,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDT'
 DROP TABLE hl7.hl7_zdu_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zdu (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59413,15 +62107,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zdu (
 	academic_degree_granted_date STRING,
 	school_name STRING,
 	school_type_code STRING,
-	school_address STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	school_address STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59430,6 +62123,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDU'
 DROP TABLE hl7.hl7_zdv_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zdv (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59442,15 +62137,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zdv (
 	device_device_description STRING,
 	device_comment STRING,
 	device_comment_1 STRING,
-	device_comment_2 STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	device_comment_2 STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59459,6 +62153,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZDV'
 DROP TABLE hl7.hl7_ze1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ze1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59471,15 +62167,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ze1 (
 	observation_identifier_equipment_query_mnemonic STRING,
 	observation_idenfitier_query_text STRING,
 	observation_sub_id STRING,
-	observation_value STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	observation_value STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59488,6 +62183,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZE1'
 DROP TABLE hl7.hl7_zeq_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zeq (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59497,15 +62194,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zeq (
 	counter STRING,
 	equipment STRING,
 	equipment_equipment_mnemonic STRING,
-	equipment_equipment_description STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	equipment_equipment_description STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59514,6 +62210,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEQ'
 DROP TABLE hl7.hl7_zer_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zer (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59531,9 +62229,9 @@ CREATE EXTERNAL TABLE hl7.hl7_zer (
 	priority_priority_code STRING,
 	priority_priority_name STRING,
 	priority_priority_rank STRING,
-	location STRING,
-	location_location_code STRING,
-	location_location_name STRING,
+	_location STRING,
+	_location_location_code STRING,
+	_location_location_name STRING,
 	room_treatment STRING,
 	room_treatment_room_treatment_code STRING,
 	room_treatment_room_treatment_name STRING,
@@ -59570,15 +62268,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zer (
 	assessment_assessment STRING,
 	assessment_assessment_assessment_code STRING,
 	assessment_assessment_assessment_desc STRING,
-	assessment_assessment_date_time STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	assessment_assessment_date_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59587,6 +62284,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZER'
 DROP TABLE hl7.hl7_zex_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zex (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59594,15 +62293,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zex (
 	patient_account_num STRING,
 	unknown STRING,
 	patient_death_date_time STRING,
-	patient_death_ind STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	patient_death_ind STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59611,6 +62309,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZEX'
 DROP TABLE hl7.hl7_zg1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zg1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59620,15 +62320,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zg1 (
 	fpl_effective_from_date STRING,
 	fpl_effective_to_date STRING,
 	fpl_pct STRING,
-	guarantor_service_area STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	guarantor_service_area STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59637,6 +62336,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZG1'
 DROP TABLE hl7.hl7_zid_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zid (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59644,15 +62345,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zid (
 	patient_account_num STRING,
 	unknown STRING,
 	surviving_id STRING,
-	non_surviving_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	non_surviving_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59661,6 +62361,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZID'
 DROP TABLE hl7.hl7_zif_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zif (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59674,15 +62376,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zif (
 	patient_encounter_infection_type2 STRING,
 	patient_encounter_infection_type2_infection_type STRING,
 	patient_encounter_infection_type2_instant_added STRING,
-	patient_encounter_infection_type2_instant_resolved STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	patient_encounter_infection_type2_instant_resolved STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59691,6 +62392,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIF'
 DROP TABLE hl7.hl7_zin_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zin (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59736,15 +62439,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zin (
 	authorized_by STRING,
 	authorization_phone STRING,
 	referral_num STRING,
-	insurance_plan_id STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	insurance_plan_id STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59753,6 +62455,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIN'
 DROP TABLE hl7.hl7_zip_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zip (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59777,15 +62481,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zip (
 	site_site_name STRING,
 	size STRING,
 	first_comment STRING,
-	second_comment STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	second_comment STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59794,6 +62497,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIP'
 DROP TABLE hl7.hl7_zit_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zit (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59813,15 +62518,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zit (
 	item_item_dictionary_description STRING,
 	item_item_dictionary_alternate_description STRING,
 	item_quantity STRING,
-	item_quantity_out STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	item_quantity_out STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59830,6 +62534,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIT'
 DROP TABLE hl7.hl7_ziv_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ziv (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59853,15 +62559,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ziv (
 	begin STRING,
 	end_ltc STRING,
 	user STRING,
-	_comment STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	comment STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59870,6 +62575,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZIV'
 DROP TABLE hl7.hl7_zm0_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zm0 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59889,15 +62596,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zm0 (
 	implant_item_item_dictionary_description STRING,
 	implant_item_item_dictionary_alternate_description STRING,
 	implant_quantity STRING,
-	implant_quantity_out STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	implant_quantity_out STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59906,6 +62612,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM0'
 DROP TABLE hl7.hl7_zm1_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zm1 (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59947,15 +62655,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zm1 (
 	query_data STRING,
 	query_data_mnem STRING,
 	query_data_text STRING,
-	query_data_response STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	query_data_response STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59964,6 +62671,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZM1'
 DROP TABLE hl7.hl7_zmn_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zmn (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -59971,15 +62680,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zmn (
 	patient_account_num STRING,
 	unknown STRING,
 	icd_diagnosis STRING,
-	icd_status STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	icd_status STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59988,6 +62696,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMN'
 DROP TABLE hl7.hl7_zmp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zmp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60090,15 +62800,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zmp (
 	spouse_eghp_covrage_has_20_employees STRING,
 	sponsored_by_patient_current_employer STRING,
 	sponsored_by_spouse_current_employer STRING,
-	sponsored_by_family_member_current_employer STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	sponsored_by_family_member_current_employer STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60107,6 +62816,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMP'
 DROP TABLE hl7.hl7_zmr_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zmr (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60114,15 +62825,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zmr (
 	patient_account_num STRING,
 	unknown STRING,
 	set_id STRING,
-	med_rec_num STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	med_rec_num STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60131,6 +62841,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZMR'
 DROP TABLE hl7.hl7_zou_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zou (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60148,15 +62860,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zou (
 	output_type_output_type_mnemonic STRING,
 	output_type_output_type_name STRING,
 	output_volume STRING,
-	output_user STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	output_user STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60165,6 +62876,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZOU'
 DROP TABLE hl7.hl7_zpa_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zpa (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60179,15 +62892,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zpa (
 	circulation_par STRING,
 	consciousness_par STRING,
 	color_par STRING,
-	total_par STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	total_par STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60196,6 +62908,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPA'
 DROP TABLE hl7.hl7_zpd_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zpd (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60210,15 +62924,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zpd (
 	authorized_service_area STRING,
 	pregnancy_flag STRING,
 	expected_delivery_date STRING,
-	transplant_patient_flag STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	transplant_patient_flag STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60227,6 +62940,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPD'
 DROP TABLE hl7.hl7_zpe_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zpe (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60239,15 +62954,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zpe (
 	ordering_provider STRING,
 	bed_request_status STRING,
 	reason STRING,
-	_comment STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	comment STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60256,6 +62970,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPE'
 DROP TABLE hl7.hl7_zpo_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zpo (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60270,15 +62986,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zpo (
 	anesthetic_pre_op_asa_asa_desc STRING,
 	surgery_outcome STRING,
 	surgery_outcome_outcome_code STRING,
-	surgery_outcome_outcome_desc STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	surgery_outcome_outcome_desc STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60287,6 +63002,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPO'
 DROP TABLE hl7.hl7_zpp_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zpp (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60308,15 +63025,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zpp (
 	surgeon_last_name STRING,
 	surgeon_first_name STRING,
 	clin_sys_override_7 STRING,
-	props_opr_duration STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	props_opr_duration STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60325,6 +63041,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPP'
 DROP TABLE hl7.hl7_zps_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zps (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60334,15 +63052,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zps (
 	counter STRING,
 	position STRING,
 	position_position_mnemonic STRING,
-	position_position_description STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	position_position_description STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60351,6 +63068,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPS'
 DROP TABLE hl7.hl7_zpv_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zpv (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60392,15 +63111,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zpv (
 	room_type_reason_text STRING,
 	accomodation_code_reason STRING,
 	accomodation_code_reason_code STRING,
-	accomodation_code_reason_text STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	accomodation_code_reason_text STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60409,6 +63127,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZPV'
 DROP TABLE hl7.hl7_zrq_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zrq (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60419,15 +63139,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zrq (
 	data_type STRING,
 	external_id STRING,
 	sub_id STRING,
-	item_value STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	item_value STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60436,6 +63155,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRQ'
 DROP TABLE hl7.hl7_zrx_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zrx (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60461,19 +63182,18 @@ CREATE EXTERNAL TABLE hl7.hl7_zrx (
 	ordering_physician_person_id STRING,
 	ordering_physician_last_name STRING,
 	ordering_physician_first_name STRING,
-	_comment STRING,
+	comment STRING,
 	second_comment STRING,
 	dispense_code STRING,
 	cycle_date_time STRING,
-	bottle_type STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	bottle_type STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60482,6 +63202,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZRX'
 DROP TABLE hl7.hl7_zsc_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zsc (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60494,15 +63216,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zsc (
 	drug_info_name_of_coding_sys STRING,
 	drug_info_drug_id STRING,
 	drug_info_trade_name STRING,
-	drug_info_generic_name STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	drug_info_generic_name STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60511,6 +63232,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSC'
 DROP TABLE hl7.hl7_zsi_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zsi (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60519,15 +63242,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zsi (
 	unknown STRING,
 	set_id STRING,
 	indicator_id STRING,
-	indicator_information STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	indicator_information STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60536,6 +63258,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSI'
 DROP TABLE hl7.hl7_zst_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zst (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60550,20 +63274,19 @@ CREATE EXTERNAL TABLE hl7.hl7_zst (
 	staff_identifier_person_id STRING,
 	staff_identifier_last_name STRING,
 	staff_identifier_first_name STRING,
-	_comment STRING,
+	comment STRING,
 	in_out_range STRING,
 	in_out_range_sequence_num STRING,
 	in_out_range_range_date STRING,
 	in_out_range_range_in_time STRING,
-	in_out_range_range_out_time STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	in_out_range_range_out_time STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60572,6 +63295,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZST'
 DROP TABLE hl7.hl7_zsu_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zsu (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60579,15 +63304,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zsu (
 	patient_account_num STRING,
 	unknown STRING,
 	event_type STRING,
-	patient_prior_unit_num STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	patient_prior_unit_num STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60596,6 +63320,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZSU'
 DROP TABLE hl7.hl7_ztf_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ztf (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60613,15 +63339,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ztf (
 	user STRING,
 	user_person_id STRING,
 	user_last_name STRING,
-	user_first_name STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	user_first_name STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60630,6 +63355,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTF'
 DROP TABLE hl7.hl7_ztm_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ztm (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60767,15 +63494,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ztm (
 	case_phase2_2_time_phase2_date_time STRING,
 	case_phase2_2_time_delay_code STRING,
 	case_phase2_2_time_delay_desc STRING,
-	case_phase2_2_time_delay_duration_min STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	case_phase2_2_time_delay_duration_min STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60784,6 +63510,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTM'
 DROP TABLE hl7.hl7_ztx_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_ztx (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60792,15 +63520,14 @@ CREATE EXTERNAL TABLE hl7.hl7_ztx (
 	unknown STRING,
 	counter STRING,
 	type_of_text_comment_values STRING,
-	text_line STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	text_line STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60809,6 +63536,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZTX'
 DROP TABLE hl7.hl7_zur_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zur (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60816,15 +63545,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zur (
 	patient_account_num STRING,
 	unknown STRING,
 	set_id STRING,
-	information STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	information STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60833,6 +63561,8 @@ LOCATION '/user/hive/warehouse/hl7.db/dev/landing_zone=SEGMENTS/hl7_segment=ZUR'
 DROP TABLE hl7.hl7_zvn_data;
 
 CREATE EXTERNAL TABLE hl7.hl7_zvn (
+	etl_firstinsert_datetime STRING,
+	field_sequence_num STRING,
 	sending_facility STRING,
 	message_control_id STRING,
 	medical_record_num STRING,
@@ -60844,15 +63574,14 @@ CREATE EXTERNAL TABLE hl7.hl7_zvn (
 	triggering_workstation_name STRING,
 	triggering_workstation_n_a STRING,
 	triggering_workstation_dept_name STRING,
-	triggering_workstation_user_login_dept STRING,
-	etl_firstinsert_datetime STRING,
-	field_sequence_num STRING
+	triggering_workstation_user_login_dept STRING
+
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-17'
+COMMENT 'Table updated on 2017-05-22'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
