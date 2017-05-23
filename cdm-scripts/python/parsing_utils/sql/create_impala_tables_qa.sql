@@ -1,6 +1,4 @@
 
-DROP TABLE hl7_qa.hl7_abs_data;
-
 CREATE EXTERNAL TABLE hl7_qa.hl7_abs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
@@ -540,13 +538,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ABS';
-
-DROP TABLE hl7_qa.hl7_acc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_acc (
 	etl_firstinsert_datetime STRING,
@@ -872,13 +868,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ACC';
-
-DROP TABLE hl7_qa.hl7_add_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_add (
 	etl_firstinsert_datetime STRING,
@@ -896,13 +890,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ADD';
-
-DROP TABLE hl7_qa.hl7_adj_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_adj (
 	etl_firstinsert_datetime STRING,
@@ -1108,13 +1100,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ADJ';
-
-DROP TABLE hl7_qa.hl7_aff_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_aff (
 	etl_firstinsert_datetime STRING,
@@ -1296,13 +1286,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AFF';
-
-DROP TABLE hl7_qa.hl7_aig_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_aig (
 	etl_firstinsert_datetime STRING,
@@ -1509,13 +1497,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AIG';
-
-DROP TABLE hl7_qa.hl7_ail_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ail (
 	etl_firstinsert_datetime STRING,
@@ -1712,13 +1698,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AIL';
-
-DROP TABLE hl7_qa.hl7_aip_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_aip (
 	etl_firstinsert_datetime STRING,
@@ -2005,13 +1989,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AIP';
-
-DROP TABLE hl7_qa.hl7_ais_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ais (
 	etl_firstinsert_datetime STRING,
@@ -2194,13 +2176,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AIS';
-
-DROP TABLE hl7_qa.hl7_al1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_al1 (
 	etl_firstinsert_datetime STRING,
@@ -2313,13 +2293,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AL1';
-
-DROP TABLE hl7_qa.hl7_apr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_apr (
 	etl_firstinsert_datetime STRING,
@@ -2437,13 +2415,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=APR';
-
-DROP TABLE hl7_qa.hl7_arq_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_arq (
 	etl_firstinsert_datetime STRING,
@@ -3217,13 +3193,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ARQ';
-
-DROP TABLE hl7_qa.hl7_arv_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_arv (
 	etl_firstinsert_datetime STRING,
@@ -3314,13 +3288,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ARV';
-
-DROP TABLE hl7_qa.hl7_aut_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_aut (
 	etl_firstinsert_datetime STRING,
@@ -3924,7 +3896,7 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_aut (
 	source_phone_shared_telecommunication_id_universal_id STRING,
 	source_phone_shared_telecommunication_id_universal_id_type STRING,
 	source_phone_preference_order STRING,
-	comment STRING,
+	_comment STRING,
 	action_code STRING
 
 )
@@ -3932,13 +3904,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=AUT';
-
-DROP TABLE hl7_qa.hl7_bhs_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_bhs (
 	etl_firstinsert_datetime STRING,
@@ -3987,13 +3957,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BHS';
-
-DROP TABLE hl7_qa.hl7_blc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_blc (
 	etl_firstinsert_datetime STRING,
@@ -4058,13 +4026,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BLC';
-
-DROP TABLE hl7_qa.hl7_blg_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_blg (
 	etl_firstinsert_datetime STRING,
@@ -4171,13 +4137,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BLG';
-
-DROP TABLE hl7_qa.hl7_bpo_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_bpo (
 	etl_firstinsert_datetime STRING,
@@ -4608,13 +4572,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BPO';
-
-DROP TABLE hl7_qa.hl7_bpx_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_bpx (
 	etl_firstinsert_datetime STRING,
@@ -5264,13 +5226,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BPX';
-
-DROP TABLE hl7_qa.hl7_bts_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_bts (
 	etl_firstinsert_datetime STRING,
@@ -5290,13 +5250,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BTS';
-
-DROP TABLE hl7_qa.hl7_btx_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_btx (
 	etl_firstinsert_datetime STRING,
@@ -5789,13 +5747,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BTX';
-
-DROP TABLE hl7_qa.hl7_bui_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_bui (
 	etl_firstinsert_datetime STRING,
@@ -5956,13 +5912,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=BUI';
-
-DROP TABLE hl7_qa.hl7_cdm_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cdm (
 	etl_firstinsert_datetime STRING,
@@ -6224,13 +6178,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CDM';
-
-DROP TABLE hl7_qa.hl7_cdo_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cdo (
 	etl_firstinsert_datetime STRING,
@@ -6299,13 +6251,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CDO';
-
-DROP TABLE hl7_qa.hl7_cer_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cer (
 	etl_firstinsert_datetime STRING,
@@ -6816,13 +6766,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CER';
-
-DROP TABLE hl7_qa.hl7_cm0_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cm0 (
 	etl_firstinsert_datetime STRING,
@@ -7300,13 +7248,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CM0';
-
-DROP TABLE hl7_qa.hl7_cm1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cm1 (
 	etl_firstinsert_datetime STRING,
@@ -7348,13 +7294,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CM1';
-
-DROP TABLE hl7_qa.hl7_cm2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cm2 (
 	etl_firstinsert_datetime STRING,
@@ -7419,13 +7363,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CM2';
-
-DROP TABLE hl7_qa.hl7_cns_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cns (
 	etl_firstinsert_datetime STRING,
@@ -7492,13 +7434,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CNS';
-
-DROP TABLE hl7_qa.hl7_con_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_con (
 	etl_firstinsert_datetime STRING,
@@ -7764,13 +7704,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CON';
-
-DROP TABLE hl7_qa.hl7_csp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_csp (
 	etl_firstinsert_datetime STRING,
@@ -7835,13 +7773,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CSP';
-
-DROP TABLE hl7_qa.hl7_csr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_csr (
 	etl_firstinsert_datetime STRING,
@@ -8390,13 +8326,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CSR';
-
-DROP TABLE hl7_qa.hl7_css_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_css (
 	etl_firstinsert_datetime STRING,
@@ -8460,13 +8394,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CSS';
-
-DROP TABLE hl7_qa.hl7_ctd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ctd (
 	etl_firstinsert_datetime STRING,
@@ -8830,13 +8762,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CTD';
-
-DROP TABLE hl7_qa.hl7_cti_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_cti (
 	etl_firstinsert_datetime STRING,
@@ -8904,13 +8834,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=CTI';
-
-DROP TABLE hl7_qa.hl7_db1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_db1 (
 	etl_firstinsert_datetime STRING,
@@ -9019,13 +8947,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DB1';
-
-DROP TABLE hl7_qa.hl7_dg1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_dg1 (
 	etl_firstinsert_datetime STRING,
@@ -9454,13 +9380,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DG1';
-
-DROP TABLE hl7_qa.hl7_dmi_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_dmi (
 	etl_firstinsert_datetime STRING,
@@ -9528,13 +9452,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DMI';
-
-DROP TABLE hl7_qa.hl7_don_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_don (
 	etl_firstinsert_datetime STRING,
@@ -10322,13 +10244,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DON';
-
-DROP TABLE hl7_qa.hl7_dps_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_dps (
 	etl_firstinsert_datetime STRING,
@@ -10416,13 +10336,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DPS';
-
-DROP TABLE hl7_qa.hl7_drg_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_drg (
 	etl_firstinsert_datetime STRING,
@@ -10960,13 +10878,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DRG';
-
-DROP TABLE hl7_qa.hl7_dsc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_dsc (
 	etl_firstinsert_datetime STRING,
@@ -10985,13 +10901,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DSC';
-
-DROP TABLE hl7_qa.hl7_dsp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_dsp (
 	etl_firstinsert_datetime STRING,
@@ -11015,13 +10929,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=DSP';
-
-DROP TABLE hl7_qa.hl7_ecd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ecd (
 	etl_firstinsert_datetime STRING,
@@ -11114,13 +11026,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ECD';
-
-DROP TABLE hl7_qa.hl7_ecr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ecr (
 	etl_firstinsert_datetime STRING,
@@ -11163,13 +11073,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ECR';
-
-DROP TABLE hl7_qa.hl7_edu_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_edu (
 	etl_firstinsert_datetime STRING,
@@ -11423,13 +11331,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=EDU';
-
-DROP TABLE hl7_qa.hl7_eqp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_eqp (
 	etl_firstinsert_datetime STRING,
@@ -11473,13 +11379,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=EQP';
-
-DROP TABLE hl7_qa.hl7_equ_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_equ (
 	etl_firstinsert_datetime STRING,
@@ -11571,13 +11475,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=EQU';
-
-DROP TABLE hl7_qa.hl7_err_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_err (
 	etl_firstinsert_datetime STRING,
@@ -11820,13 +11722,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ERR';
-
-DROP TABLE hl7_qa.hl7_evn_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_evn (
 	etl_firstinsert_datetime STRING,
@@ -12001,13 +11901,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=EVN';
-
-DROP TABLE hl7_qa.hl7_fac_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_fac (
 	etl_firstinsert_datetime STRING,
@@ -12862,13 +12760,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=FAC';
-
-DROP TABLE hl7_qa.hl7_fhs_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_fhs (
 	etl_firstinsert_datetime STRING,
@@ -12917,13 +12813,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=FHS';
-
-DROP TABLE hl7_qa.hl7_ft1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ft1 (
 	etl_firstinsert_datetime STRING,
@@ -12937,7 +12831,7 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_ft1 (
 	set_id STRING,
 	transaction_id STRING,
 	transaction_batch_id STRING,
-	transaction_date STRING,
+	_transaction_date STRING,
 	transaction_date_range_start_date_time STRING,
 	transaction_date_range_end_date_time STRING,
 	transaction_posting_date STRING,
@@ -14183,13 +14077,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=FT1';
-
-DROP TABLE hl7_qa.hl7_fts_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_fts (
 	etl_firstinsert_datetime STRING,
@@ -14208,13 +14100,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=FTS';
-
-DROP TABLE hl7_qa.hl7_gol_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_gol (
 	etl_firstinsert_datetime STRING,
@@ -14529,13 +14419,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=GOL';
-
-DROP TABLE hl7_qa.hl7_gp1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_gp1 (
 	etl_firstinsert_datetime STRING,
@@ -14675,13 +14563,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=GP1';
-
-DROP TABLE hl7_qa.hl7_gp2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_gp2 (
 	etl_firstinsert_datetime STRING,
@@ -15000,13 +14886,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=GP2';
-
-DROP TABLE hl7_qa.hl7_gt1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_gt1 (
 	etl_firstinsert_datetime STRING,
@@ -16697,13 +16581,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=GT1';
-
-DROP TABLE hl7_qa.hl7_iam_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_iam (
 	etl_firstinsert_datetime STRING,
@@ -17674,13 +17556,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IAM';
-
-DROP TABLE hl7_qa.hl7_iar_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_iar (
 	etl_firstinsert_datetime STRING,
@@ -17767,13 +17647,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IAR';
-
-DROP TABLE hl7_qa.hl7_iim_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_iim (
 	etl_firstinsert_datetime STRING,
@@ -17983,13 +17861,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IIM';
-
-DROP TABLE hl7_qa.hl7_ilt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ilt (
 	etl_firstinsert_datetime STRING,
@@ -18062,13 +17938,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ILT';
-
-DROP TABLE hl7_qa.hl7_in1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_in1 (
 	etl_firstinsert_datetime STRING,
@@ -19622,13 +19496,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IN1';
-
-DROP TABLE hl7_qa.hl7_in2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_in2 (
 	etl_firstinsert_datetime STRING,
@@ -21575,13 +21447,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IN2';
-
-DROP TABLE hl7_qa.hl7_in3_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_in3 (
 	etl_firstinsert_datetime STRING,
@@ -22537,13 +22407,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IN3';
-
-DROP TABLE hl7_qa.hl7_inv_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_inv (
 	etl_firstinsert_datetime STRING,
@@ -22896,13 +22764,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=INV';
-
-DROP TABLE hl7_qa.hl7_ipc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ipc (
 	etl_firstinsert_datetime STRING,
@@ -23014,13 +22880,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IPC';
-
-DROP TABLE hl7_qa.hl7_ipr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ipr (
 	etl_firstinsert_datetime STRING,
@@ -23109,13 +22973,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IPR';
-
-DROP TABLE hl7_qa.hl7_isd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_isd (
 	etl_firstinsert_datetime STRING,
@@ -23179,13 +23041,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ISD';
-
-DROP TABLE hl7_qa.hl7_itm_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_itm (
 	etl_firstinsert_datetime STRING,
@@ -23805,13 +23665,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ITM';
-
-DROP TABLE hl7_qa.hl7_ivc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ivc (
 	etl_firstinsert_datetime STRING,
@@ -24602,13 +24460,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IVC';
-
-DROP TABLE hl7_qa.hl7_ivt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ivt (
 	etl_firstinsert_datetime STRING,
@@ -24977,13 +24833,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=IVT';
-
-DROP TABLE hl7_qa.hl7_lan_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_lan (
 	etl_firstinsert_datetime STRING,
@@ -25070,13 +24924,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=LAN';
-
-DROP TABLE hl7_qa.hl7_lcc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_lcc (
 	etl_firstinsert_datetime STRING,
@@ -25199,13 +25051,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=LCC';
-
-DROP TABLE hl7_qa.hl7_lch_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_lch (
 	etl_firstinsert_datetime STRING,
@@ -25311,13 +25161,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=LCH';
-
-DROP TABLE hl7_qa.hl7_ldp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ldp (
 	etl_firstinsert_datetime STRING,
@@ -25566,13 +25414,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=LDP';
-
-DROP TABLE hl7_qa.hl7_loc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_loc (
 	etl_firstinsert_datetime STRING,
@@ -25950,13 +25796,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=LOC';
-
-DROP TABLE hl7_qa.hl7_lrl_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_lrl (
 	etl_firstinsert_datetime STRING,
@@ -26115,13 +25959,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=LRL';
-
-DROP TABLE hl7_qa.hl7_mcp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_mcp (
 	etl_firstinsert_datetime STRING,
@@ -26169,13 +26011,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MCP';
-
-DROP TABLE hl7_qa.hl7_mfa_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_mfa (
 	etl_firstinsert_datetime STRING,
@@ -26220,13 +26060,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MFA';
-
-DROP TABLE hl7_qa.hl7_mfe_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_mfe (
 	etl_firstinsert_datetime STRING,
@@ -26376,13 +26214,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MFE';
-
-DROP TABLE hl7_qa.hl7_mfi_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_mfi (
 	etl_firstinsert_datetime STRING,
@@ -26430,13 +26266,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MFI';
-
-DROP TABLE hl7_qa.hl7_mrg_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_mrg (
 	etl_firstinsert_datetime STRING,
@@ -26885,13 +26719,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MRG';
-
-DROP TABLE hl7_qa.hl7_msa_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_msa (
 	etl_firstinsert_datetime STRING,
@@ -26938,13 +26770,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MSA';
-
-DROP TABLE hl7_qa.hl7_msh_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_msh (
 	etl_firstinsert_datetime STRING,
@@ -27157,13 +26987,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=MSH';
-
-DROP TABLE hl7_qa.hl7_nck_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_nck (
 	etl_firstinsert_datetime STRING,
@@ -27181,13 +27009,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NCK';
-
-DROP TABLE hl7_qa.hl7_nds_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_nds (
 	etl_firstinsert_datetime STRING,
@@ -27252,13 +27078,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NDS';
-
-DROP TABLE hl7_qa.hl7_nk1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_nk1 (
 	etl_firstinsert_datetime STRING,
@@ -28666,13 +28490,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NK1';
-
-DROP TABLE hl7_qa.hl7_npu_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_npu (
 	etl_firstinsert_datetime STRING,
@@ -28749,13 +28571,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NPU';
-
-DROP TABLE hl7_qa.hl7_nsc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_nsc (
 	etl_firstinsert_datetime STRING,
@@ -28815,13 +28635,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NSC';
-
-DROP TABLE hl7_qa.hl7_nst_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_nst (
 	etl_firstinsert_datetime STRING,
@@ -28853,13 +28671,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NST';
-
-DROP TABLE hl7_qa.hl7_nte_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_nte (
 	etl_firstinsert_datetime STRING,
@@ -29030,24 +28846,22 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_nte (
 	source_of_comment_comment_type_query_mnem STRING,
 	source_of_comment_counter_num_query_text STRING,
 	source_of_comment_query_type STRING,
-	_comment_query_code STRING,
-	_comment_query_text STRING,
-	_comment_query_element_code STRING,
-	_comment_query_response STRING,
-	_comment_query_response_name STRING
+	comment_query_code STRING,
+	comment_query_text STRING,
+	comment_query_element_code STRING,
+	comment_query_response STRING,
+	comment_query_response_name STRING
 
 )
 PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=NTE';
-
-DROP TABLE hl7_qa.hl7_obr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_obr (
 	etl_firstinsert_datetime STRING,
@@ -30407,13 +30221,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OBR';
-
-DROP TABLE hl7_qa.hl7_obx_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_obx (
 	etl_firstinsert_datetime STRING,
@@ -31134,13 +30946,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OBX';
-
-DROP TABLE hl7_qa.hl7_ods_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ods (
 	etl_firstinsert_datetime STRING,
@@ -31205,13 +31015,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ODS';
-
-DROP TABLE hl7_qa.hl7_odt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_odt (
 	etl_firstinsert_datetime STRING,
@@ -31275,13 +31083,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ODT';
-
-DROP TABLE hl7_qa.hl7_om1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om1 (
 	etl_firstinsert_datetime STRING,
@@ -32200,13 +32006,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM1';
-
-DROP TABLE hl7_qa.hl7_om2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om2 (
 	etl_firstinsert_datetime STRING,
@@ -32392,13 +32196,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM2';
-
-DROP TABLE hl7_qa.hl7_om3_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om3 (
 	etl_firstinsert_datetime STRING,
@@ -32532,13 +32334,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM3';
-
-DROP TABLE hl7_qa.hl7_om4_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om4 (
 	etl_firstinsert_datetime STRING,
@@ -32759,13 +32559,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM4';
-
-DROP TABLE hl7_qa.hl7_om5_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om5 (
 	etl_firstinsert_datetime STRING,
@@ -32807,13 +32605,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM5';
-
-DROP TABLE hl7_qa.hl7_om6_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om6 (
 	etl_firstinsert_datetime STRING,
@@ -32833,13 +32629,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM6';
-
-DROP TABLE hl7_qa.hl7_om7_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_om7 (
 	etl_firstinsert_datetime STRING,
@@ -33241,13 +33035,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OM7';
-
-DROP TABLE hl7_qa.hl7_omc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_omc (
 	etl_firstinsert_datetime STRING,
@@ -33369,13 +33161,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OMC';
-
-DROP TABLE hl7_qa.hl7_orc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_orc (
 	etl_firstinsert_datetime STRING,
@@ -34767,13 +34557,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ORC';
-
-DROP TABLE hl7_qa.hl7_org_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_org (
 	etl_firstinsert_datetime STRING,
@@ -35021,13 +34809,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ORG';
-
-DROP TABLE hl7_qa.hl7_ovr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ovr (
 	etl_firstinsert_datetime STRING,
@@ -35346,13 +35132,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=OVR';
-
-DROP TABLE hl7_qa.hl7_pac_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pac (
 	etl_firstinsert_datetime STRING,
@@ -35477,13 +35261,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PAC';
-
-DROP TABLE hl7_qa.hl7_pce_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pce (
 	etl_firstinsert_datetime STRING,
@@ -35618,13 +35400,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PCE';
-
-DROP TABLE hl7_qa.hl7_pcr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pcr (
 	etl_firstinsert_datetime STRING,
@@ -35886,13 +35666,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PCR';
-
-DROP TABLE hl7_qa.hl7_pd1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pd1 (
 	etl_firstinsert_datetime STRING,
@@ -36459,13 +36237,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PD1';
-
-DROP TABLE hl7_qa.hl7_pda_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pda (
 	etl_firstinsert_datetime STRING,
@@ -36803,13 +36579,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PDA';
-
-DROP TABLE hl7_qa.hl7_pdc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pdc (
 	etl_firstinsert_datetime STRING,
@@ -36993,13 +36767,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PDC';
-
-DROP TABLE hl7_qa.hl7_peo_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_peo (
 	etl_firstinsert_datetime STRING,
@@ -37461,13 +37233,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PEO';
-
-DROP TABLE hl7_qa.hl7_pes_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pes (
 	etl_firstinsert_datetime STRING,
@@ -37855,13 +37625,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PES';
-
-DROP TABLE hl7_qa.hl7_pid_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pid (
 	etl_firstinsert_datetime STRING,
@@ -39031,13 +38799,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PID';
-
-DROP TABLE hl7_qa.hl7_pkg_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pkg (
 	etl_firstinsert_datetime STRING,
@@ -39188,13 +38954,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PKG';
-
-DROP TABLE hl7_qa.hl7_pm1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pm1 (
 	etl_firstinsert_datetime STRING,
@@ -39629,13 +39393,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PM1';
-
-DROP TABLE hl7_qa.hl7_pmt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pmt (
 	etl_firstinsert_datetime STRING,
@@ -39862,13 +39624,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PMT';
-
-DROP TABLE hl7_qa.hl7_pr1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pr1 (
 	etl_firstinsert_datetime STRING,
@@ -40552,13 +40312,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PR1';
-
-DROP TABLE hl7_qa.hl7_pra_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pra (
 	etl_firstinsert_datetime STRING,
@@ -40780,13 +40538,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PRA';
-
-DROP TABLE hl7_qa.hl7_prb_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_prb (
 	etl_firstinsert_datetime STRING,
@@ -41175,13 +40931,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PRB';
-
-DROP TABLE hl7_qa.hl7_prc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_prc (
 	etl_firstinsert_datetime STRING,
@@ -41406,13 +41160,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PRC';
-
-DROP TABLE hl7_qa.hl7_prd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_prd (
 	etl_firstinsert_datetime STRING,
@@ -42069,13 +41821,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PRD';
-
-DROP TABLE hl7_qa.hl7_prt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_prt (
 	etl_firstinsert_datetime STRING,
@@ -42652,13 +42402,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PRT';
-
-DROP TABLE hl7_qa.hl7_psg_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_psg (
 	etl_firstinsert_datetime STRING,
@@ -42719,13 +42467,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PSG';
-
-DROP TABLE hl7_qa.hl7_psh_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_psh (
 	etl_firstinsert_datetime STRING,
@@ -42828,13 +42574,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PSH';
-
-DROP TABLE hl7_qa.hl7_psl_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_psl (
 	etl_firstinsert_datetime STRING,
@@ -43727,13 +43471,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PSL';
-
-DROP TABLE hl7_qa.hl7_pss_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pss (
 	etl_firstinsert_datetime STRING,
@@ -43793,13 +43535,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PSS';
-
-DROP TABLE hl7_qa.hl7_pth_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pth (
 	etl_firstinsert_datetime STRING,
@@ -43893,13 +43633,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PTH';
-
-DROP TABLE hl7_qa.hl7_pv1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pv1 (
 	etl_firstinsert_datetime STRING,
@@ -45629,13 +45367,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PV1';
-
-DROP TABLE hl7_qa.hl7_pv2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pv2 (
 	etl_firstinsert_datetime STRING,
@@ -46364,13 +46100,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PV2';
-
-DROP TABLE hl7_qa.hl7_pye_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_pye (
 	etl_firstinsert_datetime STRING,
@@ -46662,13 +46396,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=PYE';
-
-DROP TABLE hl7_qa.hl7_qak_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_qak (
 	etl_firstinsert_datetime STRING,
@@ -46713,13 +46445,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=QAK';
-
-DROP TABLE hl7_qa.hl7_qid_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_qid (
 	etl_firstinsert_datetime STRING,
@@ -46760,13 +46490,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=QID';
-
-DROP TABLE hl7_qa.hl7_qpd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_qpd (
 	etl_firstinsert_datetime STRING,
@@ -46808,13 +46536,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=QPD';
-
-DROP TABLE hl7_qa.hl7_qrd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_qrd (
 	etl_firstinsert_datetime STRING,
@@ -47059,13 +46785,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=QRD';
-
-DROP TABLE hl7_qa.hl7_qrf_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_qrf (
 	etl_firstinsert_datetime STRING,
@@ -47140,13 +46864,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=QRF';
-
-DROP TABLE hl7_qa.hl7_qri_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_qri (
 	etl_firstinsert_datetime STRING,
@@ -47210,13 +46932,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=QRI';
-
-DROP TABLE hl7_qa.hl7_rcp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rcp (
 	etl_firstinsert_datetime STRING,
@@ -47288,13 +47008,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RCP';
-
-DROP TABLE hl7_qa.hl7_rdf_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rdf (
 	etl_firstinsert_datetime STRING,
@@ -47316,13 +47034,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RDF';
-
-DROP TABLE hl7_qa.hl7_rdt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rdt (
 	etl_firstinsert_datetime STRING,
@@ -47340,13 +47056,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RDT';
-
-DROP TABLE hl7_qa.hl7_rel_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rel (
 	etl_firstinsert_datetime STRING,
@@ -47795,13 +47509,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=REL';
-
-DROP TABLE hl7_qa.hl7_rf1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rf1 (
 	etl_firstinsert_datetime STRING,
@@ -47987,7 +47699,7 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_rf1 (
 	referral_documentation_completion_status_second_alternate_value_set_oid STRING,
 	referral_documentation_completion_status_second_alternate_value_set_version_id STRING,
 	planned_treatment_stop_date STRING,
-	referral_reason_text STRING,
+	_referral_reason_text STRING,
 	num_of_authorized_treatments_units STRING,
 	num_of_authorized_treatments_units_quantity STRING,
 	num_of_authorized_treatments_units_units STRING,
@@ -48313,13 +48025,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RF1';
-
-DROP TABLE hl7_qa.hl7_rfi_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rfi (
 	etl_firstinsert_datetime STRING,
@@ -48340,13 +48050,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RFI';
-
-DROP TABLE hl7_qa.hl7_rgs_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rgs (
 	etl_firstinsert_datetime STRING,
@@ -48388,13 +48096,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RGS';
-
-DROP TABLE hl7_qa.hl7_rmi_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rmi (
 	etl_firstinsert_datetime STRING,
@@ -48458,13 +48164,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RMI';
-
-DROP TABLE hl7_qa.hl7_rol_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rol (
 	etl_firstinsert_datetime STRING,
@@ -48999,13 +48703,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ROL';
-
-DROP TABLE hl7_qa.hl7_rq1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rq1 (
 	etl_firstinsert_datetime STRING,
@@ -49073,13 +48775,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RQ1';
-
-DROP TABLE hl7_qa.hl7_rqd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rqd (
 	etl_firstinsert_datetime STRING,
@@ -49300,13 +49000,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RQD';
-
-DROP TABLE hl7_qa.hl7_rxa_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxa (
 	etl_firstinsert_datetime STRING,
@@ -49885,13 +49583,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXA';
-
-DROP TABLE hl7_qa.hl7_rxc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxc (
 	etl_firstinsert_datetime STRING,
@@ -50051,13 +49747,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXC';
-
-DROP TABLE hl7_qa.hl7_rxd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxd (
 	etl_firstinsert_datetime STRING,
@@ -50780,13 +50474,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXD';
-
-DROP TABLE hl7_qa.hl7_rxe_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxe (
 	etl_firstinsert_datetime STRING,
@@ -51890,13 +51582,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXE';
-
-DROP TABLE hl7_qa.hl7_rxg_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxg (
 	etl_firstinsert_datetime STRING,
@@ -52579,13 +52269,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXG';
-
-DROP TABLE hl7_qa.hl7_rxo_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxo (
 	etl_firstinsert_datetime STRING,
@@ -53596,13 +53284,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXO';
-
-DROP TABLE hl7_qa.hl7_rxr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxr (
 	etl_firstinsert_datetime STRING,
@@ -53757,13 +53443,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXR';
-
-DROP TABLE hl7_qa.hl7_rxv_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_rxv (
 	etl_firstinsert_datetime STRING,
@@ -54048,13 +53732,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=RXV';
-
-DROP TABLE hl7_qa.hl7_sac_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sac (
 	etl_firstinsert_datetime STRING,
@@ -54322,28 +54004,28 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_sac (
 	position_in_tray_value3 STRING,
 	position_in_tray_value4 STRING,
 	_location STRING,
-	_location_id STRING,
-	_location_text STRING,
-	_location_name_of_coding_system STRING,
-	_location_alternate_id STRING,
-	_location_alternate_text STRING,
-	_location_name_of_alternate_coding_system STRING,
-	_location_coding_system_version_id STRING,
-	_location_alternate_coding_system_version_id STRING,
-	_location_original_text STRING,
-	_location_second_alternate_id STRING,
-	_location_second_alternate_text STRING,
-	_location_name_of_second_alternate_coding_system STRING,
-	_location_second_alternate_coding_system_version_id STRING,
-	_location_coding_system_oid STRING,
-	_location_value_set_oid STRING,
-	_location_value_set_version_id STRING,
-	_location_alternate_coding_system_oid STRING,
-	_location_alternate_value_set_oid STRING,
-	_location_alternate_value_set_version_id STRING,
-	_location_second_alternate_coding_system_oid STRING,
-	_location_second_alternate_value_set_oid STRING,
-	_location_second_alternate_value_set_version_id STRING,
+	location_id STRING,
+	location_text STRING,
+	location_name_of_coding_system STRING,
+	location_alternate_id STRING,
+	location_alternate_text STRING,
+	location_name_of_alternate_coding_system STRING,
+	location_coding_system_version_id STRING,
+	location_alternate_coding_system_version_id STRING,
+	location_original_text STRING,
+	location_second_alternate_id STRING,
+	location_second_alternate_text STRING,
+	location_name_of_second_alternate_coding_system STRING,
+	location_second_alternate_coding_system_version_id STRING,
+	location_coding_system_oid STRING,
+	location_value_set_oid STRING,
+	location_value_set_version_id STRING,
+	location_alternate_coding_system_oid STRING,
+	location_alternate_value_set_oid STRING,
+	location_alternate_value_set_version_id STRING,
+	location_second_alternate_coding_system_oid STRING,
+	location_second_alternate_value_set_oid STRING,
+	location_second_alternate_value_set_version_id STRING,
 	container_height STRING,
 	container_diameter STRING,
 	barrier_delta STRING,
@@ -54739,13 +54421,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SAC';
-
-DROP TABLE hl7_qa.hl7_scd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_scd (
 	etl_firstinsert_datetime STRING,
@@ -55767,13 +55447,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SCD';
-
-DROP TABLE hl7_qa.hl7_sch_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sch (
 	etl_firstinsert_datetime STRING,
@@ -56996,13 +56674,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SCH';
-
-DROP TABLE hl7_qa.hl7_scp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_scp (
 	etl_firstinsert_datetime STRING,
@@ -57119,13 +56795,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SCP';
-
-DROP TABLE hl7_qa.hl7_sdd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sdd (
 	etl_firstinsert_datetime STRING,
@@ -57201,13 +56875,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SDD';
-
-DROP TABLE hl7_qa.hl7_sft_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sft (
 	etl_firstinsert_datetime STRING,
@@ -57269,13 +56941,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SFT';
-
-DROP TABLE hl7_qa.hl7_sgh_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sgh (
 	etl_firstinsert_datetime STRING,
@@ -57294,13 +56964,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SGH';
-
-DROP TABLE hl7_qa.hl7_sgt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sgt (
 	etl_firstinsert_datetime STRING,
@@ -57319,13 +56987,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SGT';
-
-DROP TABLE hl7_qa.hl7_shp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_shp (
 	etl_firstinsert_datetime STRING,
@@ -57494,13 +57160,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SHP';
-
-DROP TABLE hl7_qa.hl7_sid_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_sid (
 	etl_firstinsert_datetime STRING,
@@ -57565,13 +57229,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SID';
-
-DROP TABLE hl7_qa.hl7_slt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_slt (
 	etl_firstinsert_datetime STRING,
@@ -57605,13 +57267,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SLT';
-
-DROP TABLE hl7_qa.hl7_spm_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_spm (
 	etl_firstinsert_datetime STRING,
@@ -58235,13 +57895,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=SPM';
-
-DROP TABLE hl7_qa.hl7_stf_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_stf (
 	etl_firstinsert_datetime STRING,
@@ -59101,13 +58759,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=STF';
-
-DROP TABLE hl7_qa.hl7_stz_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_stz (
 	etl_firstinsert_datetime STRING,
@@ -59216,13 +58872,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=STZ';
-
-DROP TABLE hl7_qa.hl7_tcc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_tcc (
 	etl_firstinsert_datetime STRING,
@@ -59506,13 +59160,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=TCC';
-
-DROP TABLE hl7_qa.hl7_tcd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_tcd (
 	etl_firstinsert_datetime STRING,
@@ -59597,13 +59249,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=TCD';
-
-DROP TABLE hl7_qa.hl7_tq1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_tq1 (
 	etl_firstinsert_datetime STRING,
@@ -59831,13 +59481,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=TQ1';
-
-DROP TABLE hl7_qa.hl7_tq2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_tq2 (
 	etl_firstinsert_datetime STRING,
@@ -59900,13 +59548,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=TQ2';
-
-DROP TABLE hl7_qa.hl7_txa_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_txa (
 	etl_firstinsert_datetime STRING,
@@ -60766,13 +60412,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=TXA';
-
-DROP TABLE hl7_qa.hl7_uac_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_uac (
 	etl_firstinsert_datetime STRING,
@@ -60822,13 +60466,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=UAC';
-
-DROP TABLE hl7_qa.hl7_ub1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ub1 (
 	etl_firstinsert_datetime STRING,
@@ -61008,13 +60650,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=UB1';
-
-DROP TABLE hl7_qa.hl7_ub2_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ub2 (
 	etl_firstinsert_datetime STRING,
@@ -61169,13 +60809,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=UB2';
-
-DROP TABLE hl7_qa.hl7_urd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_urd (
 	etl_firstinsert_datetime STRING,
@@ -61369,13 +61007,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=URD';
-
-DROP TABLE hl7_qa.hl7_urs_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_urs (
 	etl_firstinsert_datetime STRING,
@@ -61449,13 +61085,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=URS';
-
-DROP TABLE hl7_qa.hl7_var_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_var (
 	etl_firstinsert_datetime STRING,
@@ -61630,13 +61264,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=VAR';
-
-DROP TABLE hl7_qa.hl7_vnd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_vnd (
 	etl_firstinsert_datetime STRING,
@@ -61688,13 +61320,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=VND';
-
-DROP TABLE hl7_qa.hl7_zao_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zao (
 	etl_firstinsert_datetime STRING,
@@ -61728,13 +61358,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZAO';
-
-DROP TABLE hl7_qa.hl7_zap_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zap (
 	etl_firstinsert_datetime STRING,
@@ -61761,13 +61389,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZAP';
-
-DROP TABLE hl7_qa.hl7_zbt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zbt (
 	etl_firstinsert_datetime STRING,
@@ -61787,13 +61413,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZBT';
-
-DROP TABLE hl7_qa.hl7_zcd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zcd (
 	etl_firstinsert_datetime STRING,
@@ -61815,13 +61439,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCD';
-
-DROP TABLE hl7_qa.hl7_zcl_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zcl (
 	etl_firstinsert_datetime STRING,
@@ -61850,13 +61472,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCL';
-
-DROP TABLE hl7_qa.hl7_zcn_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zcn (
 	etl_firstinsert_datetime STRING,
@@ -61877,13 +61497,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCN';
-
-DROP TABLE hl7_qa.hl7_zcp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zcp (
 	etl_firstinsert_datetime STRING,
@@ -61910,13 +61528,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCP';
-
-DROP TABLE hl7_qa.hl7_zcs_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zcs (
 	etl_firstinsert_datetime STRING,
@@ -61944,13 +61560,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCS';
-
-DROP TABLE hl7_qa.hl7_zct_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zct (
 	etl_firstinsert_datetime STRING,
@@ -61987,13 +61601,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCT';
-
-DROP TABLE hl7_qa.hl7_zcx_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zcx (
 	etl_firstinsert_datetime STRING,
@@ -62015,13 +61627,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZCX';
-
-DROP TABLE hl7_qa.hl7_zds_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zds (
 	etl_firstinsert_datetime STRING,
@@ -62043,13 +61653,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZDS';
-
-DROP TABLE hl7_qa.hl7_zdt_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zdt (
 	etl_firstinsert_datetime STRING,
@@ -62083,13 +61691,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZDT';
-
-DROP TABLE hl7_qa.hl7_zdu_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zdu (
 	etl_firstinsert_datetime STRING,
@@ -62114,13 +61720,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZDU';
-
-DROP TABLE hl7_qa.hl7_zdv_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zdv (
 	etl_firstinsert_datetime STRING,
@@ -62144,13 +61748,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZDV';
-
-DROP TABLE hl7_qa.hl7_ze1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ze1 (
 	etl_firstinsert_datetime STRING,
@@ -62174,13 +61776,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZE1';
-
-DROP TABLE hl7_qa.hl7_zeq_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zeq (
 	etl_firstinsert_datetime STRING,
@@ -62201,13 +61801,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZEQ';
-
-DROP TABLE hl7_qa.hl7_zer_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zer (
 	etl_firstinsert_datetime STRING,
@@ -62230,8 +61828,8 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_zer (
 	priority_priority_name STRING,
 	priority_priority_rank STRING,
 	_location STRING,
-	_location_location_code STRING,
-	_location_location_name STRING,
+	location_location_code STRING,
+	location_location_name STRING,
 	room_treatment STRING,
 	room_treatment_room_treatment_code STRING,
 	room_treatment_room_treatment_name STRING,
@@ -62275,13 +61873,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZER';
-
-DROP TABLE hl7_qa.hl7_zex_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zex (
 	etl_firstinsert_datetime STRING,
@@ -62300,13 +61896,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZEX';
-
-DROP TABLE hl7_qa.hl7_zg1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zg1 (
 	etl_firstinsert_datetime STRING,
@@ -62327,13 +61921,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZG1';
-
-DROP TABLE hl7_qa.hl7_zid_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zid (
 	etl_firstinsert_datetime STRING,
@@ -62352,13 +61944,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZID';
-
-DROP TABLE hl7_qa.hl7_zif_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zif (
 	etl_firstinsert_datetime STRING,
@@ -62383,13 +61973,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZIF';
-
-DROP TABLE hl7_qa.hl7_zin_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zin (
 	etl_firstinsert_datetime STRING,
@@ -62446,13 +62034,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZIN';
-
-DROP TABLE hl7_qa.hl7_zip_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zip (
 	etl_firstinsert_datetime STRING,
@@ -62488,13 +62074,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZIP';
-
-DROP TABLE hl7_qa.hl7_zit_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zit (
 	etl_firstinsert_datetime STRING,
@@ -62525,13 +62109,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZIT';
-
-DROP TABLE hl7_qa.hl7_ziv_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ziv (
 	etl_firstinsert_datetime STRING,
@@ -62566,13 +62148,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZIV';
-
-DROP TABLE hl7_qa.hl7_zm0_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zm0 (
 	etl_firstinsert_datetime STRING,
@@ -62603,13 +62183,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZM0';
-
-DROP TABLE hl7_qa.hl7_zm1_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zm1 (
 	etl_firstinsert_datetime STRING,
@@ -62662,13 +62240,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZM1';
-
-DROP TABLE hl7_qa.hl7_zmn_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zmn (
 	etl_firstinsert_datetime STRING,
@@ -62687,13 +62263,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZMN';
-
-DROP TABLE hl7_qa.hl7_zmp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zmp (
 	etl_firstinsert_datetime STRING,
@@ -62807,13 +62381,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZMP';
-
-DROP TABLE hl7_qa.hl7_zmr_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zmr (
 	etl_firstinsert_datetime STRING,
@@ -62832,13 +62404,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZMR';
-
-DROP TABLE hl7_qa.hl7_zou_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zou (
 	etl_firstinsert_datetime STRING,
@@ -62867,13 +62437,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZOU';
-
-DROP TABLE hl7_qa.hl7_zpa_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zpa (
 	etl_firstinsert_datetime STRING,
@@ -62899,13 +62467,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPA';
-
-DROP TABLE hl7_qa.hl7_zpd_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zpd (
 	etl_firstinsert_datetime STRING,
@@ -62931,13 +62497,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPD';
-
-DROP TABLE hl7_qa.hl7_zpe_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zpe (
 	etl_firstinsert_datetime STRING,
@@ -62961,13 +62525,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPE';
-
-DROP TABLE hl7_qa.hl7_zpo_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zpo (
 	etl_firstinsert_datetime STRING,
@@ -62993,13 +62555,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPO';
-
-DROP TABLE hl7_qa.hl7_zpp_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zpp (
 	etl_firstinsert_datetime STRING,
@@ -63032,13 +62592,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPP';
-
-DROP TABLE hl7_qa.hl7_zps_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zps (
 	etl_firstinsert_datetime STRING,
@@ -63059,13 +62617,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPS';
-
-DROP TABLE hl7_qa.hl7_zpv_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zpv (
 	etl_firstinsert_datetime STRING,
@@ -63118,13 +62674,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZPV';
-
-DROP TABLE hl7_qa.hl7_zrq_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zrq (
 	etl_firstinsert_datetime STRING,
@@ -63146,13 +62700,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZRQ';
-
-DROP TABLE hl7_qa.hl7_zrx_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zrx (
 	etl_firstinsert_datetime STRING,
@@ -63193,13 +62745,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZRX';
-
-DROP TABLE hl7_qa.hl7_zsc_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zsc (
 	etl_firstinsert_datetime STRING,
@@ -63223,13 +62773,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZSC';
-
-DROP TABLE hl7_qa.hl7_zsi_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zsi (
 	etl_firstinsert_datetime STRING,
@@ -63249,13 +62797,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZSI';
-
-DROP TABLE hl7_qa.hl7_zst_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zst (
 	etl_firstinsert_datetime STRING,
@@ -63286,13 +62832,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZST';
-
-DROP TABLE hl7_qa.hl7_zsu_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zsu (
 	etl_firstinsert_datetime STRING,
@@ -63311,13 +62855,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZSU';
-
-DROP TABLE hl7_qa.hl7_ztf_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ztf (
 	etl_firstinsert_datetime STRING,
@@ -63346,13 +62888,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZTF';
-
-DROP TABLE hl7_qa.hl7_ztm_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ztm (
 	etl_firstinsert_datetime STRING,
@@ -63501,13 +63041,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZTM';
-
-DROP TABLE hl7_qa.hl7_ztx_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_ztx (
 	etl_firstinsert_datetime STRING,
@@ -63527,13 +63065,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZTX';
-
-DROP TABLE hl7_qa.hl7_zur_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zur (
 	etl_firstinsert_datetime STRING,
@@ -63552,13 +63088,11 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
 LOCATION '/user/hive/warehouse/hl7_qa/landing_zone=SEGMENTS/hl7_segment=ZUR';
-
-DROP TABLE hl7_qa.hl7_zvn_data;
 
 CREATE EXTERNAL TABLE hl7_qa.hl7_zvn (
 	etl_firstinsert_datetime STRING,
@@ -63581,7 +63115,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Table updated on 2017-05-22'
+COMMENT 'Table updated on 2017-05-23'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE

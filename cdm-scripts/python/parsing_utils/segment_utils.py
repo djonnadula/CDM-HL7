@@ -79,7 +79,7 @@ class SegmentUtils:
 
     @staticmethod
     def add_prefix_underscore(string):
-        dup_dict = {'comment', 'transaction_date', 'message_control_id', 'location'}
+        dup_dict = {'comment', 'transaction_date', 'message_control_id', 'location', 'referral_reason_text'}
         if string in dup_dict:
             return '_' + string
         else:

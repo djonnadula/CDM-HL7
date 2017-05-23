@@ -68,11 +68,6 @@ def main():
         field = i[1]
         component = i[2]
         sub_component = i[3]
-        if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
-            or segment_name == 'SAC' or segment_name == 'ZER':
-            field = SegmentUtils.add_prefix_underscore(field)
-            component = SegmentUtils.add_prefix_underscore(component)
-            sub_component = SegmentUtils.add_prefix_underscore(sub_component)
         if current_segment != segment_name:
             if current_segment != '':
                 f.write(cur_message_type + ',' + final_string + '\n')
@@ -81,6 +76,11 @@ def main():
             current_segment = segment_name
             final_string = ''
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
+        if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
+                or segment_name == 'SAC' or segment_name == 'ZER' or segment_name == 'AUT' or segment_name == 'FT1'\
+                or segment_name == 'RF1':
+            new_string = SegmentUtils.add_prefix_underscore(new_string)
+
         if new_string in static_dict:
             print new_string
             continue
@@ -103,6 +103,7 @@ def main():
         db_name = environments.get(env).get('db_name')
         db_path = environments.get(env).get('db_path')
         f = open('sql/create_impala_tables_{0}.sql'.format(env), 'w')
+        f2 = open('sql/drop_impala_tables_{0}.sql'.format(env), 'w')
         with open(segment_file_name, 'rU') as csv_file:
             reader = csv.reader(csv_file, delimiter=',')
             for row in reader:
@@ -116,7 +117,7 @@ def main():
                     size = len(comp_split)
                     # print segment_name
                     if add_drop_tables:
-                        f.write(TableUtils.hl7_drop_table(segment_name, db_name))
+                        f2.write(TableUtils.hl7_drop_table(segment_name, db_name))
                     f.write(TableUtils.hl7_table_prefix(segment_name, db_name))
                     f.write(TableUtils.common_columns)
                     for element in comp_split:
