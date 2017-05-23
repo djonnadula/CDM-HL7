@@ -46,6 +46,7 @@ package object model {
   lazy val skippedStr = "SKIPPED"
   lazy val filteredStr = "FILTERED"
   lazy val timeStampKey = "etl_firstinsert_datetime"
+  lazy val fieldSeqNum = "field_seq_num"
   lazy val NA = "Not Applicable"
   private lazy val toJson = jsonHandler()
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
@@ -71,7 +72,8 @@ package object model {
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
 
   private lazy val templateBuildPath = {
-    val basePath = Paths.get(new java.io.File(".").getAbsolutePath).getParent.getParent
+    val basePath = Paths.get(new java.io.File(".").getAbsolutePath)
+    //.getParent.getParent
     val templatePath = "cdm-scripts" + FS + "templates"
     Paths.get(basePath.toString, templatePath)
   }
@@ -454,6 +456,8 @@ package object model {
     if (!isAdhoc) {
       // Storing Which Segment for Every Record makes Redundant data. Which already exist in Partition
       // layout += commonSegkey -> whichSeg
+      layout += timeStampKey -> EMPTYSTR
+      layout += fieldSeqNum -> EMPTYSTR
       commonNode.clone() transform ((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v) foreach (ele => layout += ele)
     }
     (segmentData split(delimitedBy, -1)) foreach (ele => layout += ele -> EMPTYSTR)

@@ -74,8 +74,9 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   layout = model.layoutCopy
                   if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                     handleCommonSegments(data, layout)
-                    val out = s"${makeFinal(layout)}$PIPE_DELIMITED_STR${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
-                    (out, null)
+                    if (layout isDefinedAt fieldSeqNum) layout update(fieldSeqNum, node._1.substring(0, node._1.indexOf(DOT)))
+                    if (layout isDefinedAt timeStampKey) layout update(timeStampKey, timeStamp)
+                    (makeFinal(layout,etlTimeReq = false), null)
                   } else {
                     (skippedStr, null)
                   }
@@ -141,10 +142,10 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @param layout
     * @return
     */
-  private def makeFinal(layout: mutable.LinkedHashMap[String, String]): String = {
+  private def makeFinal(layout: mutable.LinkedHashMap[String, String],etlTimeReq : Boolean = timeStampReq): String = {
     val builder = new StringBuilder(layout.size * 40)
     layout.foreach({ case (k, v) => builder append (v + outDelim) })
-    if (timeStampReq) builder append timeStamp
+    if (etlTimeReq) builder append timeStamp
     builder.toString
   }
 
