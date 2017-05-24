@@ -258,4 +258,13 @@ class HL7ParserADTTest extends FlatSpec {
     "ADT Message Test 30 (ADT_30)" should "have a match for the parsed output" in {
         assert(res30 === expected30)
     }
+
+    //EPIC.2.3 AL1.7, AL1.8 Test
+    val messageName31 = "ADT_31"
+    val msg31 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName31, messageType)
+    val res31 = hl7TestSetup.parse(msg31)
+    val expected31 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName31, messageType)
+    "ADT Message Test 31 (ADT_31)" should "have a match for the parsed output" in {
+        assert(res31 === expected31)
+    }
 }

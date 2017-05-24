@@ -1,0 +1,281 @@
+{
+  "0000.COMN": {
+    "sending_facility": "HHAH",
+    "message_control_id": "EPIC_HHAH_ADT_8986513",
+    "medical_record_num": "8798465133",
+    "medical_record_urn": "",
+    "patient_account_num": ""
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "HHAH",
+    "date_time_of_message": "20170505031847",
+    "security": "AWE1241",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A31"
+    },
+    "message_control_id": "EPIC_HHAH_ADT_8986513",
+    "processing_id": "P",
+    "version_id": "2.3",
+    "continuation_pointer": "Epic_CWDV"
+  },
+  "0002.EVN": {
+    "event_type_code": "A31",
+    "recorded_date_time": "20170505031846",
+    "event_reason_code": "REG_UPDATE",
+    "operator_id": {
+      "person_id": "AWE1241",
+      "family_name": "FERRALL",
+      "given_name": "BARREL",
+      "assigning_authority": "AH",
+      "assigning_facility": "HHAH"
+    }
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "8798465133",
+      "assigning_authority": "EPIC",
+      "id_type_code": "MRN"
+    },
+    "patient_name": {
+      "family_name": "BARBARA",
+      "given_name": "HENRY",
+      "second_and_further_given_names_or_initials_thereof": "W"
+    },
+    "date_time_of_birth": "19800505",
+    "administrative_sex": "M",
+    "patient_alias": {
+      "family_name": "BARBARA",
+      "given_name": "HENRY"
+    },
+    "race": "W",
+    "patient_address": {
+      "street_address": "1 DRIVE",
+      "city": "GARY",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "98478",
+      "country": "USA",
+      "address_type": "P",
+      "county_parish_code": "BELL"
+    },
+    "county_code": "BELL",
+    "phone_num_home": [
+      {
+        "telephone_num": "(999)999-9999",
+        "telecommunication_use_code": "P",
+        "telecommunication_equipment_type": "H",
+        "area_city_code": "254",
+        "local_num": "9876845"
+      },
+      {
+        "telecommunication_use_code": "NET",
+        "telecommunication_equipment_type": "Internet",
+        "communication_address": "BARBARA64@outlook.com"
+      },
+      {
+        "telephone_num": "(999)999-9999",
+        "telecommunication_use_code": "P",
+        "telecommunication_equipment_type": "M",
+        "area_city_code": "254",
+        "local_num": "5636419"
+      }
+    ],
+    "primary_language": "ENGLISH",
+    "marital_status": "M",
+    "religion": "NOD",
+    "ssn_num_patient": "999-99-9999",
+    "ethnic_group": "NOT HISPANIC",
+    "patient_death_indicator": "N"
+  },
+  "0004.ZPD": {
+    "my_chart_status": "NOT USED",
+    "pregnancy_flag": "N"
+  },
+  "0005.PD1": {
+    "patient_primary_facility": {
+      "organization_name": "TOMATO CANDY BARKER",
+      "id_num": "90000012"
+    },
+    "patient_primary_care_provider_name_and_id_num": {
+      "person_id": "9999999999",
+      "family_name": "ALMA",
+      "given_name": "MATER",
+      "second_and_further_given_names_or_initials_thereof": "TOMATER",
+      "assigning_authority": "NPI",
+      "id_type_code": "NPI"
+    }
+  },
+  "0006.CON": {
+    "set_id": "1",
+    "consent_type": "HIPPAA Notic",
+    "consent_form_id_and_version": "HIPPA",
+    "consent_status": "RECEIVED",
+    "consent_decision_date_time": "20160420182300",
+    "consent_end_date_time": "20170420000000"
+  },
+  "0007.CON": {
+    "set_id": "2",
+    "consent_type": "EPC.Driver's",
+    "consent_form_id_and_version": "DRIVERS LICENSE",
+    "consent_status": "RECEIVED",
+    "consent_decision_date_time": "20160420182200"
+  },
+  "0008.CON": {
+    "set_id": "3",
+    "consent_type": "Ovrll CNST",
+    "consent_form_id_and_version": "GENERAL CONSENT",
+    "consent_status": "RECEIVED",
+    "consent_decision_date_time": "20160420182200"
+  },
+  "0009.CON": {
+    "set_id": "4",
+    "consent_type": "Insur Card",
+    "consent_form_id_and_version": "SWHP",
+    "consent_status": "RECEIVED",
+    "consent_decision_date_time": "20160420182300"
+  },
+  "0010.CON": {
+    "set_id": "5",
+    "consent_type": "EPC.Other Fo",
+    "consent_form_id_and_version": "WAVIER",
+    "consent_status": "RECEIVED",
+    "consent_decision_date_time": "20160420182300"
+  },
+  "0011.NK1": {
+    "set_id": "1",
+    "name": {
+      "family_name": "BARBARA",
+      "given_name": "JAN"
+    },
+    "relationship": "SP",
+    "address": {
+      "street_address": "1 DRIVE",
+      "city": "GARY",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "76513",
+      "country": "USA"
+    },
+    "phone_num": {
+      "telephone_num": "(254)295-7381",
+      "telecommunication_equipment_type": "H",
+      "area_city_code": "254",
+      "local_num": "2957381"
+    },
+    "contact_role": "Emergency Contact 1"
+  },
+  "0012.PV1": {
+    "set_id": "1",
+    "patient_class": "N"
+  },
+  "0013.PV2": {
+    "visit_protection_indicator": "N"
+  },
+  "0014.ZPV": {},
+  "0015.AL1": {
+    "set_id": "1",
+    "allergen_type_code": "Drug Class",
+    "allergen_code_mnemonic_description": {
+      "text": "PENICILLINS"
+    },
+    "identification_date": "20160420",
+    "sensitivity_causative_agent_cd": "Allergy"
+  },
+  "0016.GT1": {
+    "set_id": "1",
+    "guarantor_num": "121307",
+    "guarantor_name": {
+      "family_name": "BARBARA",
+      "given_name": "HENRY",
+      "second_and_further_given_names_or_initials_thereof": "W"
+    },
+    "guarantor_address": {
+      "street_address": "1 DRIVE",
+      "city": "GARY",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "76513",
+      "country": "USA",
+      "county_parish_code": "BELL"
+    },
+    "guarantor_phone_num_home": {
+      "telephone_num": "(999)999-9999",
+      "area_city_code": "254",
+      "local_num": "9876845"
+    },
+    "guarantor_date_time_of_birth": "19800505",
+    "guarantor_administrative_sex": "M",
+    "guarantor_type": "P/F",
+    "guarantor_relationship": "SLF",
+    "guarantor_ssn": "999-99-9999",
+    "guarantor_employer_address": {
+      "country": "USA"
+    },
+    "guarantor_employment_status": "Full"
+  },
+  "0017.ZG1": {
+    "guarantor_service_area": "900"
+  },
+  "0018.IN1": {
+    "set_id": "1",
+    "in1_unknown": "AT^T",
+    "health_plan_id": {
+      "id": "100984"
+    },
+    "insurance_company_id": "1700",
+    "insurance_company_name": "AT&T",
+    "insurance_company_address": {
+      "street_address": "PO BOX 21800",
+      "city": "EAGAN",
+      "state_or_province": "MN",
+      "zip_or_postal_code": "55121"
+    },
+    "insurance_company_phone_num": {
+      "telephone_num": "(999)999-9999",
+      "area_city_code": "800",
+      "local_num": "3217947"
+    },
+    "plan_effective_date": "20160101",
+    "name_of_insured": {
+      "family_name": "BARBARA",
+      "given_name": "HENRY",
+      "second_and_further_given_names_or_initials_thereof": "W"
+    },
+    "insured_relationship_to_patient": "Self",
+    "insured_date_of_birth": "19800505",
+    "insured_address": {
+      "street_address": "1 DRIVE",
+      "city": "GARY",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "76513",
+      "country": "USA",
+      "county_parish_code": "BELL"
+    },
+    "coordination_of_benefits_priority": "1",
+    "verification_date_time": "20161123074451",
+    "verification_by": {
+      "person_id": "QWE1231",
+      "family_name": "FRED",
+      "given_name": "REGGIE"
+    },
+    "company_plan_code": "184081",
+    "policy_num": "30023329900",
+    "insured_employment_status": "Full",
+    "insured_administrative_sex": "M",
+    "insured_employer_address": {
+      "country": "USA"
+    },
+    "verification_status": "Elapsed",
+    "coverage_type": "BOTH",
+    "insured_id_num": "184081"
+  },
+  "0019.IN2": {
+    "insured_social_security_num": "999-99-9999",
+    "mail_claim_party": "Payor Plan",
+    "patient_member_num": "30023329900"
+  },
+  "0020.ZIN": {
+    "guarantor_id": "121307"
+  }
+}
