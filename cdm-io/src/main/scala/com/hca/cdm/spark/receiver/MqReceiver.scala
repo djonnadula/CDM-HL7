@@ -72,7 +72,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}")
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
-        MQAcker(app,"appTLMRESPONSE")(mqHosts, mqManager, mqChannel)
+        MQAcker(app,"appTLMRESPONSE")(mqHosts, mqManager, mqChannel,ackQueue.get)
         tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
         info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }

@@ -117,10 +117,10 @@ object HL7Receiver extends Logg with App {
     }
     stream foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
-      val rejectOut = rejectedTopic
-      val auditOut = auditTopic
-      val prodConf = kafkaProducerConf
-      val confFile = config_file
+      val rejectOut = self.rejectedTopic
+      val auditOut = self.auditTopic
+      val prodConf = self.kafkaProducerConf
+      val confFile = self.config_file
       val maxMessageSize = self.maxMessageSize
       val hl7QueueMapping = self.hl7QueueMapping
       val hl7KafkaOut = self.hl7KafkaOut
@@ -129,6 +129,7 @@ object HL7Receiver extends Logg with App {
       val tracker = new ListBuffer[FutureAction[Unit]]
       tracker += rdd foreachPartitionAsync (dataItr => {
         if (dataItr nonEmpty) {
+          info(confFile)
           propFile = confFile
           val kafkaOut = KProducer()(prodConf)
           val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)

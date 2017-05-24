@@ -229,7 +229,7 @@ object HL7Job extends Logg with App {
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
-              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"))
+              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.queueResponse"))
               tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)

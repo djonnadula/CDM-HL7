@@ -1,6 +1,5 @@
 package com.hca.cdm.mq.publisher
 
-import java.util.concurrent.TimeUnit.{SECONDS, MINUTES}
 import javax.jms.{ExceptionListener, JMSException, MessageProducer}
 import com.hca.cdm._
 import com.hca.cdm.exception.MqException
@@ -9,17 +8,14 @@ import com.hca.cdm.mq.MqConnector
 import com.hca.cdm.utils.RetryHandler
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Future => async}
-import scala.concurrent.Await._
-import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
+
 
 case class TLMResponse(stage: String, active: Boolean, dest: String)
 
 /**
   * Created by Devaraj Jonnadula on 3/6/2017.
   */
-class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String) extends Logg with MqConnector {
+class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String,queueMappingForResponse : String) extends Logg with MqConnector {
 
   self =>
   private lazy val batchSize = 5000
@@ -27,7 +23,7 @@ class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, 
   private lazy val restartInterval = 30000
   @volatile private var activeConnection: ConnectionMeta = _
   private var producer: Map[String, MessageProducer] = _
-  private val ackQueuesActive = lookUpProp("mq.queueResponse").split(",", -1).map(dest => {
+  private val ackQueuesActive = queueMappingForResponse.split(",", -1).map(dest => {
     val temp = dest.split(":", -1)
     temp(0) -> (temp(2).toBoolean, temp(1))
   }).toMap
@@ -126,10 +122,10 @@ object MQAcker {
   private var connections = new ArrayBuffer[MQAcker]
 
   @throws(classOf[MqException])
-  def apply(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, numberOfIns: Int = 1): Unit = {
+  def apply(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, queueMappingForResponse : String, numberOfIns: Int = 1): Unit = {
     maxCon = numberOfIns
     def createIfNotExist = new (() => MQAcker) {
-      override def apply(): MQAcker = new MQAcker(app, jobDesc)(mqHosts, mqManager, mqChannel)
+      override def apply(): MQAcker = new MQAcker(app, jobDesc)(mqHosts, mqManager, mqChannel,queueMappingForResponse)
     }
 
     createConnection(numberOfIns, createIfNotExist)
