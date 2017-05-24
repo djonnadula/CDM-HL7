@@ -27,7 +27,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
 class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
-                (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
+                (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta, tlmAckStage: String)
   extends Receiver[MqData](storageLevel = StorageLevel.DISK_ONLY) with Logg with MqConnector {
 
   self =>
@@ -72,8 +72,8 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}")
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
-        MQAcker(app, app, ackQueue.get)(mqHosts, mqManager, mqChannel)
-        tlmAckIO = MQAcker.ackMessage(_: String)
+        MQAcker(app,"appTLMRESPONSE")(mqHosts, mqManager, mqChannel)
+        tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
         info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }
       sources.foreach(queue => {
