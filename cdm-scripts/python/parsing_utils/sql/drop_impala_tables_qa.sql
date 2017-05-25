@@ -367,6 +367,8 @@ DROP TABLE hl7_qa.hl7_var_data;
 
 DROP TABLE hl7_qa.hl7_vnd_data;
 
+DROP TABLE hl7_qa.hl7_zai_data;
+
 DROP TABLE hl7_qa.hl7_zao_data;
 
 DROP TABLE hl7_qa.hl7_zap_data;

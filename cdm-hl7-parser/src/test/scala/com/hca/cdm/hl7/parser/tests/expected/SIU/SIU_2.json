@@ -221,6 +221,16 @@
     "duration": "95"
   },
   "0018.ZAI": {
-    "zai_unknown": "GEN^GENERAL^QUADO^Popeye^Ginger^R^^^MD"
+    "anesthesia_type": {
+      "mnemonic": "GEN",
+      "description": "GENERAL"
+    },
+    "anesthesiologist": {
+      "mnemonic": "QUADO",
+      "last_name": "Popeye",
+      "first_name": "Ginger",
+      "middle_name": "R",
+      "degree": "MD"
+    }
   }
 }
