@@ -129,7 +129,6 @@ object HL7Receiver extends Logg with App {
       val tracker = new ListBuffer[FutureAction[Unit]]
       tracker += rdd foreachPartitionAsync (dataItr => {
         if (dataItr nonEmpty) {
-          info(confFile)
           propFile = confFile
           val kafkaOut = KProducer()(prodConf)
           val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)
