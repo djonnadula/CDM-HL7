@@ -191,7 +191,7 @@ package object cdm extends Logg {
     newSingleThreadScheduledExecutor(new Factory(id))
   }
 
-  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = false, state: taskState = CRITICAL): Boolean = {
+  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = true, state: taskState = CRITICAL): Boolean = {
     try {
       fun
       return true

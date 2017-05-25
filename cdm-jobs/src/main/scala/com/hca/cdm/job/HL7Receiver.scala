@@ -107,20 +107,20 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
     else {
       sparkStrCtx.union(numberOfReceivers.map(id => {
-        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
         info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
         stream
       }))
     }
     stream foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
-      val rejectOut = rejectedTopic
-      val auditOut = auditTopic
-      val prodConf = kafkaProducerConf
-      val confFile = config_file
+      val rejectOut = self.rejectedTopic
+      val auditOut = self.auditTopic
+      val prodConf = self.kafkaProducerConf
+      val confFile = self.config_file
       val maxMessageSize = self.maxMessageSize
       val hl7QueueMapping = self.hl7QueueMapping
       val hl7KafkaOut = self.hl7KafkaOut
@@ -129,6 +129,7 @@ object HL7Receiver extends Logg with App {
       val tracker = new ListBuffer[FutureAction[Unit]]
       tracker += rdd foreachPartitionAsync (dataItr => {
         if (dataItr nonEmpty) {
+          info(confFile)
           propFile = confFile
           val kafkaOut = KProducer()(prodConf)
           val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)
