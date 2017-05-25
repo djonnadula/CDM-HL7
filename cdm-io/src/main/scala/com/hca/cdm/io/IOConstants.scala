@@ -22,7 +22,7 @@ object IOConstants {
   val zkSessionTimeout: Int = 6000
   val zkConnectionTimeout: Int = 10000
   val defaultReplication: Int = 3
-  val producerBatch: String = "25000"
+  val producerBatch: String = "80000"
   val producerAck: String = "all"
   val defaultDeSerializer: String = "org.apache.kafka.common.serialization.ByteArrayDeserializer"
   val defaultSerializer: String = "org.apache.kafka.common.serialization.ByteArraySerializer"
