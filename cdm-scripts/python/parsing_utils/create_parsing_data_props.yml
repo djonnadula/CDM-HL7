@@ -23,3 +23,8 @@ add_drop_tables: true
 segment_file_name: 'segments.txt'
 
 template_path: '..\\..\\templates\\'
+
+table_change_reason: 'New 2.8.2 Templates'
+
+table_segments:
+  - 'ALL'

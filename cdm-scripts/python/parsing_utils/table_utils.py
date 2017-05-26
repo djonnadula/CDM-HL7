@@ -55,7 +55,7 @@ class TableUtils:
         return '\nCREATE EXTERNAL TABLE {1}.hl7_{0} ('.format(segment.lower(), db_name)
 
     @staticmethod
-    def hl7_table_suffix(db_path, message_type):
+    def hl7_table_suffix(db_path, message_type, reason):
         """
         The suffix for all create table statements
         :param db_path: hive database name
@@ -67,14 +67,15 @@ class TableUtils:
                '\n\tmessage_type STRING,' \
                '\n\ttransaction_date STRING' \
                '\n)' \
-               '\nCOMMENT \'Table updated on {2}\'' \
+               '\nCOMMENT \'Update Time: {2} | Reason: {3}\'' \
                '\nROW FORMAT DELIMITED' \
                '\nFIELDS TERMINATED BY \'|\'' \
                '\nSTORED AS SEQUENCEFILE' \
                '\nLOCATION \'/user/hive/warehouse/{0}/landing_zone=SEGMENTS/hl7_segment={1}\';\n'.format(
             db_path.lower(),
             message_type,
-            datetime.datetime.now().strftime("%Y-%m-%d"))
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            reason)
 
     @staticmethod
     def clean_comps(comps, index):
@@ -98,3 +99,19 @@ class TableUtils:
     @staticmethod
     def add_comment():
         return ''
+
+    @staticmethod
+    def table_logic(components, add_drop_tables, segment_name, db_name, db_path, change_reason, drop_file, create_file):
+        comp_split = components.split('^')
+        size = len(comp_split)
+        # print segment_name
+        if add_drop_tables:
+            drop_file.write(TableUtils.hl7_drop_table(segment_name, db_name))
+        create_file.write(TableUtils.hl7_table_prefix(segment_name, db_name))
+        create_file.write(TableUtils.common_columns)
+        for element in comp_split:
+            size -= 1
+            comps = element.split('|')
+            cleaned_comps = TableUtils.clean_comps(comps, size)
+            create_file.write(cleaned_comps)
+        create_file.write(TableUtils.hl7_table_suffix(db_path, segment_name, change_reason))

@@ -69,7 +69,7 @@ def main():
             final_string = ''
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
         if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
-                or segment_name == 'SAC' or segment_name == 'ZER' or segment_name == 'AUT' or segment_name == 'FT1'\
+                or segment_name == 'SAC' or segment_name == 'ZER' or segment_name == 'AUT' or segment_name == 'FT1' \
                 or segment_name == 'RF1':
             new_string = SegmentUtils.add_prefix_underscore(new_string)
 
@@ -90,6 +90,8 @@ def main():
     environment = yaml_props.get('environment')
     environments = yaml_props.get('environments')
     add_drop_tables = yaml_props.get('add_drop_tables')
+    change_reason = yaml_props.get('table_change_reason')
+    table_segment = yaml_props.get('table_segments')
     for env in environment:
         db_name = environments.get(env).get('db_name')
         db_path = environments.get(env).get('db_path')
@@ -101,22 +103,22 @@ def main():
                 all_string = row[0]
                 segment_name = row[1]
                 components = row[2]
-                if all_string != 'ALL':
-                    continue
+                for seg in table_segment:
+                    if seg == 'ALL':
+                        if all_string != 'ALL':
+                            continue
+                        else:
+                            TableUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
+                                                   change_reason, f2, f)
                 else:
-                    comp_split = components.split('^')
-                    size = len(comp_split)
-                    # print segment_name
-                    if add_drop_tables:
-                        f2.write(TableUtils.hl7_drop_table(segment_name, db_name))
-                    f.write(TableUtils.hl7_table_prefix(segment_name, db_name))
-                    f.write(TableUtils.common_columns)
-                    for element in comp_split:
-                        size -= 1
-                        comps = element.split('|')
-                        cleaned_comps = TableUtils.clean_comps(comps, size)
-                        f.write(cleaned_comps)
-                    f.write(TableUtils.hl7_table_suffix(db_path, segment_name))
+                    if all_string != 'ALL':
+                        continue
+                    else:
+                        for seg in table_segment:
+                            if segment_name == seg:
+                                TableUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
+                                                   change_reason, f2, f)
+        f2.close()
         f.close()
 
 
