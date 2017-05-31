@@ -70,7 +70,7 @@ def main():
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
         if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
                 or segment_name == 'SAC' or segment_name == 'ZER' or segment_name == 'AUT' or segment_name == 'FT1' \
-                or segment_name == 'RF1':
+                or segment_name == 'ZRX' or segment_name == 'ZIV' or segment_name == 'ZPE' or segment_name == 'ZST':
             new_string = SegmentUtils.add_prefix_underscore(new_string)
 
         if new_string in static_dict:
