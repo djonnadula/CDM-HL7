@@ -538,7 +538,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -868,7 +868,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -890,7 +890,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1100,7 +1100,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1286,7 +1286,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1497,7 +1497,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1698,7 +1698,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1989,7 +1989,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2176,7 +2176,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2295,7 +2295,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2417,7 +2417,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3195,7 +3195,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3290,7 +3290,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3906,7 +3906,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3959,7 +3959,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4028,7 +4028,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4139,7 +4139,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4574,7 +4574,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5228,7 +5228,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5252,7 +5252,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5749,7 +5749,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5914,7 +5914,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6180,7 +6180,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6253,7 +6253,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6768,7 +6768,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7250,7 +7250,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7296,7 +7296,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7365,7 +7365,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7436,7 +7436,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7706,7 +7706,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7775,7 +7775,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8328,7 +8328,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8396,7 +8396,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8764,7 +8764,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8836,7 +8836,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8949,7 +8949,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9382,7 +9382,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9454,7 +9454,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10246,7 +10246,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10338,7 +10338,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10880,7 +10880,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10903,7 +10903,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10931,7 +10931,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11028,7 +11028,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11075,7 +11075,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11333,7 +11333,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11381,7 +11381,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11477,7 +11477,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11724,7 +11724,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11903,7 +11903,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12762,7 +12762,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12815,7 +12815,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14079,7 +14079,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14102,7 +14102,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14421,7 +14421,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14565,7 +14565,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14888,7 +14888,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -16584,7 +16584,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17559,7 +17559,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17650,7 +17650,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17864,7 +17864,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17941,7 +17941,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -19499,7 +19499,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -21450,7 +21450,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22410,7 +22410,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22767,7 +22767,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22883,7 +22883,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22976,7 +22976,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -23044,7 +23044,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -23668,7 +23668,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24463,7 +24463,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24836,7 +24836,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24927,7 +24927,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25054,7 +25054,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25164,7 +25164,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25417,7 +25417,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25799,7 +25799,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25962,7 +25962,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26014,7 +26014,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26063,7 +26063,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26217,7 +26217,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26269,7 +26269,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26722,7 +26722,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26773,7 +26773,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26788,7 +26788,6 @@ CREATE EXTERNAL TABLE hl7_qa.hl7_msh (
 	medical_record_urn STRING,
 	patient_account_num STRING,
 	unknown STRING,
-	field_separator STRING,
 	encoding_characters STRING,
 	sending_application STRING,
 	sending_application_namespace_id STRING,
@@ -26990,7 +26989,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -27012,7 +27011,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -27081,7 +27080,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28493,7 +28492,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28574,7 +28573,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28638,7 +28637,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28674,7 +28673,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28860,7 +28859,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30224,7 +30223,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30949,7 +30948,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31018,7 +31017,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31086,7 +31085,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32009,7 +32008,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32199,7 +32198,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32337,7 +32336,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32562,7 +32561,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32608,7 +32607,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32632,7 +32631,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -33038,7 +33037,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -33164,7 +33163,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34560,7 +34559,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34812,7 +34811,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35135,7 +35134,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35264,7 +35263,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35403,7 +35402,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35669,7 +35668,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36240,7 +36239,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36582,7 +36581,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36770,7 +36769,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -37236,7 +37235,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -37628,7 +37627,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38802,7 +38801,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38957,7 +38956,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39396,7 +39395,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39627,7 +39626,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40315,7 +40314,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40541,7 +40540,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40934,7 +40933,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41163,7 +41162,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41824,7 +41823,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42405,7 +42404,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42470,7 +42469,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42577,7 +42576,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -43474,7 +43473,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -43538,7 +43537,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -43636,7 +43635,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45370,7 +45369,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46103,7 +46102,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46399,7 +46398,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46448,7 +46447,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46493,7 +46492,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46539,7 +46538,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46788,7 +46787,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46867,7 +46866,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46935,7 +46934,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47011,7 +47010,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47037,7 +47036,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47059,7 +47058,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47512,7 +47511,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48028,7 +48027,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48053,7 +48052,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48099,7 +48098,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48167,7 +48166,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48706,7 +48705,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48778,7 +48777,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49003,7 +49002,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49586,7 +49585,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49750,7 +49749,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -50477,7 +50476,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -51585,7 +51584,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -52272,7 +52271,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53287,7 +53286,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53446,7 +53445,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53735,7 +53734,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -54424,7 +54423,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55450,7 +55449,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56677,7 +56676,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56798,7 +56797,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56878,7 +56877,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56944,7 +56943,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56967,7 +56966,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56990,7 +56989,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57163,7 +57162,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57232,7 +57231,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57270,7 +57269,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57898,7 +57897,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58762,7 +58761,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58875,7 +58874,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59163,7 +59162,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59252,7 +59251,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59484,7 +59483,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59551,7 +59550,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60415,7 +60414,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60469,7 +60468,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60653,7 +60652,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60812,7 +60811,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61010,7 +61009,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61088,7 +61087,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61267,7 +61266,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61323,7 +61322,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61355,7 +61354,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61393,7 +61392,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61424,7 +61423,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61448,7 +61447,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61474,7 +61473,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61507,7 +61506,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61532,7 +61531,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61563,7 +61562,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61595,7 +61594,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61636,7 +61635,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61662,7 +61661,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61688,7 +61687,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61726,7 +61725,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61755,7 +61754,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61783,7 +61782,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61811,7 +61810,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61836,7 +61835,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61908,7 +61907,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61931,7 +61930,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61956,7 +61955,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61979,7 +61978,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62008,7 +62007,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62069,7 +62068,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62109,7 +62108,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62144,7 +62143,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62183,7 +62182,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62218,7 +62217,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62275,7 +62274,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62298,7 +62297,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62416,7 +62415,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62439,7 +62438,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62472,7 +62471,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62502,7 +62501,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62532,7 +62531,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62560,7 +62559,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62590,7 +62589,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62627,7 +62626,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62652,7 +62651,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62709,7 +62708,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62735,7 +62734,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62780,7 +62779,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62808,7 +62807,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62832,7 +62831,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62867,7 +62866,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62890,7 +62889,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62923,7 +62922,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -63076,7 +63075,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -63100,7 +63099,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -63123,7 +63122,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -63150,7 +63149,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-05-26 13:19:17 | Reason: New 2.8.2 Templates'
+COMMENT 'Update Time: 2017-06-01 15:46:38 | Reason: New 2.8.2 Templates'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE

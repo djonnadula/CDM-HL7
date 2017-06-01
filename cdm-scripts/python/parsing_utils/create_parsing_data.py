@@ -67,6 +67,8 @@ def main():
                 f.write(message_type_header)
             current_segment = segment_name
             final_string = ''
+        if segment_name == 'MSH' and field == 'field_separator':
+            continue
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
         if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
                 or segment_name == 'SAC' or segment_name == 'ZER' or segment_name == 'AUT' or segment_name == 'FT1' \
