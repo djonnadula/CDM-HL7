@@ -16,7 +16,7 @@ import scala.collection.mutable
   *
   * Breaks HL7 Data at Segment level and applies Schema for each Registered Segments and Special Cases for SCRI, CDI projects...
   */
-private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = "|")
+private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = PIPE_DELIMITED_STR)
   extends Logg with Serializable {
   logIdent = "for HL7 Type :: " + reqMsgType.toString
   private lazy val notValid = Hl7SegmentTrans(Right(notValidStr))
