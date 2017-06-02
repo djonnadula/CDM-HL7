@@ -84,7 +84,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       })
       con addErrorListener new ExceptionReporter
       consumers foreach {
-        consumer => consumerPool submit new ConsumeData(consumer._1, consumer._2)
+        consumer => consumerPool submit new DataConsumer(consumer._1, consumer._2)
       }
       con resume()
     }
@@ -214,7 +214,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
     registerHook(newThread(s"$id-$app-SHook", runnable(close())))
   }
 
-  private class ConsumeData(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
+  private class DataConsumer(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
     var storeReceived = true
     var timeOut: Long = currMillis
 
