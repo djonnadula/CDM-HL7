@@ -1,4 +1,4 @@
-package com.hca.cdm.job.FieldOps
+package com.hca.cdm.job.fieldops
 
 import com.hca.cdm._
 import com.hca.cdm.log.Logg

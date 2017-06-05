@@ -22,7 +22,7 @@ add_drop_tables: true
 
 segment_file_name: 'segments.txt'
 
-template_path: '..\\..\\templates\\'
+template_path: '..\\..\\..\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
 
 table_change_reason: 'New 2.8.2 Templates'
 
