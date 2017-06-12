@@ -26,14 +26,14 @@ object EastFloridaMedAdminJob extends Logg with App {
   private val config_file = args(0)
   info("config_file: " + config_file)
   propFile = config_file
-  private val app = lookUpProp("EFMedAdmin.app")
+  private val app = lookUpProp("hl7.app")
   private val checkpointEnable = lookUpProp("EFMedAdmin.spark.checkpoint.enable").toBoolean
   private val checkPoint = lookUpProp("EFMedAdmin.checkpoint")
-  private val defaultPar = lookUpProp("EFMedAdmin.spark.default.parallelism")
-  private val sparkConf = sparkUtil.getConf(lookUpProp("EFMedAdmin.app"), defaultPar)
-  private val batchCycle = lookUpProp("EFMedAdmin.batch.interval").toInt
-  private val maxPartitions = defaultPar.toInt * lookUpProp("EFMedAdmin.spark.dynamicAllocation.maxExecutors").toInt
-  private val batchDuration = sparkUtil batchCycle(lookUpProp("EFMedAdmin.batch.time.unit"), batchCycle)
+  private val defaultPar = lookUpProp("hl7.spark.default.parallelism")
+  private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
+  private val batchCycle = lookUpProp("hl7.batch.interval").toInt
+  private val maxPartitions = defaultPar.toInt * lookUpProp("hl7.spark.dynamicAllocation.maxExecutors").toInt
+  private val batchDuration = sparkUtil batchCycle(lookUpProp("hl7.batch.time.unit"), batchCycle)
   private val consumerGroup = lookUpProp("EFMedAdmin.group")
   private val kafkaConsumerProp = (consumerConf(consumerGroup) asScala) toMap
   private val topicsToSubscribe = Set(lookUpProp("EFMedAdmin.kafka.source"))
@@ -71,25 +71,27 @@ object EastFloridaMedAdminJob extends Logg with App {
     info("kafkaConsumerProp: " + kafkaConsumerProp)
     info("subscribed topics: " + topicsToSubscribe.mkString(","))
     info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
-    streamLine foreachRDD (rdd => {
-      info("in rdd zone")
-      var messagesInRDD = 0L
-      rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
-        debug("Got RDD " + rdd.id + " from Topic :: "
-          + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
-          + range.fromOffset + " To :: " + range.untilOffset)
-        messagesInRDD = inc(messagesInRDD, range.count())
-      })
-      if (messagesInRDD > 0L) {
-        info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
-        info(s"rdd: ${rdd.toString()}")
-        rdd.collect().foreach(x => println("collected rdd: " + x))
-        val ssqlCtx = new SQLContext(rdd.sparkContext)
-        val dataFrame = ssqlCtx.createDataFrame(rdd)
-        val f = dataFrame.first()
-        info(s"f: $f")
+    streamLine foreachRDD (rdd =>
+      {
+        info("in rdd zone")
+        var messagesInRDD = 0L
+        rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
+          debug("Got RDD " + rdd.id + " from Topic :: "
+            + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
+            + range.fromOffset + " To :: " + range.untilOffset)
+          messagesInRDD = inc(messagesInRDD, range.count())
+        })
+        if (messagesInRDD > 0L) {
+          info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
+          info(s"rdd: ${rdd.toString()}")
+          rdd.collect().foreach(x => println("collected rdd: " + x))
+          val ssqlCtx = new SQLContext(rdd.sparkContext)
+          val dataFrame = ssqlCtx.createDataFrame(rdd)
+          val f = dataFrame.first()
+          info(s"f: $f")
+        }
       }
-    })
+     )
     //TODO: write data to sql-server or wsmq
   }
 
