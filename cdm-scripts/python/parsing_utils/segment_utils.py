@@ -30,6 +30,10 @@ class SegmentUtils:
                   'hl7MapMT6_2.4.csv', 'hl7MapMT6_2.5.1.csv', 'hl7MapMT6_2.5.csv', 'hl7MapMT_2.1.csv',
                   'hl7MapMT_2.2.csv', 'hl7MapMT_2.4.csv', 'hl7MapMT_2.5.csv', 'hl7MapNextGen2.3.csv']
 
+    underscore_dict = {'MSA', 'NTE', 'PSL', 'RF1', 'SAC', 'ZER', 'AUT', 'FT1', 'ZRX', 'ZIV', 'ZPE', 'ZST'}
+
+    skip_dict = {'MSH:field_separator'}
+
     @staticmethod
     def get_parent_directory(directory):
         """
@@ -46,8 +50,8 @@ class SegmentUtils:
         :return: location of the templates used for creating segments
         """
         cwd = os.getcwd()
-        base_path = SegmentUtils.get_parent_directory(SegmentUtils.get_parent_directory(cwd))
-        return base_path + '\\' + 'templates' + '\\'
+        base_path = SegmentUtils.get_parent_directory(SegmentUtils.get_parent_directory(SegmentUtils.get_parent_directory(cwd)))
+        return base_path + '\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
 
     @staticmethod
     def construct_parsing_format(field1, field2, field3):

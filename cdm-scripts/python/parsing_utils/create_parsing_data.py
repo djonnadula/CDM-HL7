@@ -56,6 +56,7 @@ def main():
     # Main program logic - writes the formatted lines to segments.txt
     f = open(segment_file_name, 'w')
     for i in final_set:
+        skip_flag = 0
         segment_name = i[0]
         field = i[1]
         component = i[2]
@@ -67,12 +68,16 @@ def main():
                 f.write(message_type_header)
             current_segment = segment_name
             final_string = ''
-        if segment_name == 'MSH' and field == 'field_separator':
+        for pair in SegmentUtils.skip_dict:
+            split_pair = pair.split(':')
+            sp_name = split_pair[0]
+            sp_field = split_pair[1]
+            if segment_name == sp_name and field == sp_field:
+                skip_flag = 1
+        if skip_flag == 1:
             continue
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
-        if segment_name == 'MSA' or segment_name == 'NTE' or segment_name == 'PSL' or segment_name == 'RF1' \
-                or segment_name == 'SAC' or segment_name == 'ZER' or segment_name == 'AUT' or segment_name == 'FT1' \
-                or segment_name == 'ZRX' or segment_name == 'ZIV' or segment_name == 'ZPE' or segment_name == 'ZST':
+        if segment_name in SegmentUtils.underscore_dict:
             new_string = SegmentUtils.add_prefix_underscore(new_string)
 
         if new_string in static_dict:
@@ -94,6 +99,8 @@ def main():
     add_drop_tables = yaml_props.get('add_drop_tables')
     change_reason = yaml_props.get('table_change_reason')
     table_segment = yaml_props.get('table_segments')
+    last_table_format_change_date = yaml_props.get('last_table_format_change_date')
+
     for env in environment:
         db_name = environments.get(env).get('db_name')
         db_path = environments.get(env).get('db_path')
@@ -111,7 +118,7 @@ def main():
                             continue
                         else:
                             TableUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
-                                                   change_reason, f2, f)
+                                                   change_reason, f2, f, last_table_format_change_date)
                 else:
                     if all_string != 'ALL':
                         continue
@@ -119,7 +126,7 @@ def main():
                         for seg in table_segment:
                             if segment_name == seg:
                                 TableUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
-                                                   change_reason, f2, f)
+                                                       change_reason, f2, f, last_table_format_change_date)
         f2.close()
         f.close()
 

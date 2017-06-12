@@ -26,5 +26,7 @@ template_path: '..\\..\\..\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
 
 table_change_reason: 'New 2.8.2 Templates'
 
+last_table_format_change_date: '2017-05-23 12:00:00'
+
 table_segments:
   - 'ALL'

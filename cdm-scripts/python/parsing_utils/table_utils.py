@@ -55,7 +55,7 @@ class TableUtils:
         return '\nCREATE EXTERNAL TABLE {1}.hl7_{0} ('.format(segment.lower(), db_name)
 
     @staticmethod
-    def hl7_table_suffix(db_path, message_type, reason):
+    def hl7_table_suffix(db_path, message_type, reason, format_change_time):
         """
         The suffix for all create table statements
         :param db_path: hive database name
@@ -67,7 +67,7 @@ class TableUtils:
                '\n\tmessage_type STRING,' \
                '\n\ttransaction_date STRING' \
                '\n)' \
-               '\nCOMMENT \'Update Time: {2} | Reason: {3}\'' \
+               '\nCOMMENT \'Update Time: {2} | Reason: {3} | Last Column Format Change Time: {4}\'' \
                '\nROW FORMAT DELIMITED' \
                '\nFIELDS TERMINATED BY \'|\'' \
                '\nSTORED AS SEQUENCEFILE' \
@@ -75,7 +75,8 @@ class TableUtils:
             db_path.lower(),
             message_type,
             datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            reason)
+            reason,
+            format_change_time)
 
     @staticmethod
     def clean_comps(comps, index):
@@ -101,7 +102,8 @@ class TableUtils:
         return ''
 
     @staticmethod
-    def table_logic(components, add_drop_tables, segment_name, db_name, db_path, change_reason, drop_file, create_file):
+    def table_logic(components, add_drop_tables, segment_name, db_name, db_path, change_reason, drop_file, create_file,
+                    last_table_format_change_date):
         comp_split = components.split('^')
         size = len(comp_split)
         # print segment_name
@@ -114,4 +116,5 @@ class TableUtils:
             comps = element.split('|')
             cleaned_comps = TableUtils.clean_comps(comps, size)
             create_file.write(cleaned_comps)
-        create_file.write(TableUtils.hl7_table_suffix(db_path, segment_name, change_reason))
+        create_file.write(
+            TableUtils.hl7_table_suffix(db_path, segment_name, change_reason, last_table_format_change_date))
