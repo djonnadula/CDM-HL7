@@ -1,5 +1,5 @@
-ACC.1.1,,accident_date_time,
-ACC.1.2,,n_a,
+ACC.1.1,accident_date_time,accident_date,
+ACC.1.2,accident_date_time,accident_time,
 DG1.11,bill_amt,,
 DG1.12,total_charge_amt,,
 GT1.15,guarantor_employer_name,,

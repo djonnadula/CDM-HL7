@@ -1,15 +1,3 @@
-MT_2.1_ACC.1.1,2.1,,ACC.1.1,accident_date_time,accident_date,,ACC.1,accident_date_time,,,merge
-MT_2.1_ACC.1.2,2.1,,ACC.1.2,accident_date_time,accident_time,,ACC.1,accident_date_time,,,merge
-MT_2.3_ACC.1.1,2.1,,ACC.1.1,accident_date_time,accident_date,,ACC.1,accident_date_time,,,merge
-MT_2.3_ACC.1.2,2.1,,ACC.1.2,accident_date_time,accident_time,,ACC.1,accident_date_time,,,merge
-MT_2.3.1_ACC.1.1,2.1,,ACC.1.1,accident_date_time,accident_date,,ACC.1,accident_date_time,,,merge
-MT_2.3.1_ACC.1.2,2.1,,ACC.1.2,accident_date_time,accident_time,,ACC.1,accident_date_time,,,merge
-MT_2.4_ACC.1.1,2.1,,ACC.1.1,accident_date_time,accident_date,,ACC.1,accident_date_time,,,merge
-MT_2.4_ACC.1.2,2.1,,ACC.1.2,accident_date_time,accident_time,,ACC.1,accident_date_time,,,merge
-MT_2.5_ACC.1.1,2.1,,ACC.1.1,accident_date_time,accident_date,,ACC.1,accident_date_time,,,merge
-MT_2.5_ACC.1.2,2.1,,ACC.1.2,accident_date_time,accident_time,,ACC.1,accident_date_time,,,merge
-MT_2.5.1_ACC.1.1,2.1,,ACC.1.1,accident_date_time,accident_date,,ACC.1,accident_date_time,,,merge
-MT_2.5.1_ACC.1.2,2.1,,ACC.1.2,accident_date_time,accident_time,,ACC.1,accident_date_time,,,merge
 MT6_2.4_OBR.32.1,2.4,,OBR.32.1,principal_result_interpreter,person_id,,OBR.32.1.1,principal_result_interpreter,name,id_num,move
 MT6_2.4_OBR.32.2,2.4,,OBR.32.2,principal_result_interpreter,last_name,,OBR.32.1.2,principal_result_interpreter,name,family_name,move
 MT6_2.4_OBR.32.3,2.4,,OBR.32.3,principal_result_interpreter,first_name,,OBR.32.1.3,principal_result_interpreter,name,given_name,move

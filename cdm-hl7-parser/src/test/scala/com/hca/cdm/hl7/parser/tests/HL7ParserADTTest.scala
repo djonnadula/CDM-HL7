@@ -1,6 +1,7 @@
 package com.hca.cdm.hl7.parser.tests
 
 import com.hca.cdm.hl7.constants.HL7Types
+import com.hca.cdm.log.Logg
 import org.scalatest.FlatSpec
 
 /**
@@ -8,12 +9,11 @@ import org.scalatest.FlatSpec
   *
   * ADT Message Parsing Unit Tests
   */
-class HL7ParserADTTest extends FlatSpec {
+class HL7ParserADTTest extends FlatSpec with Logg {
 
     val messageType = HL7Types.ADT
     val hl7TestSetup = new HL7ParserTestSetup(messageType)
     val testFileBasePath = "/src/test/scala/com/hca/cdm/hl7/parser/tests/"
-    hl7TestSetup.loadProperties("Hl7TestConfig.properties")
 
     val messageName1 = "ADT_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType)
@@ -250,7 +250,7 @@ class HL7ParserADTTest extends FlatSpec {
         assert(res29 === expected29)
     }
 
-    //MT.2.4 Test
+    //Missing ADT ACC data test
     val messageName30 = "ADT_30"
     val msg30 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName30, messageType)
     val res30 = hl7TestSetup.parse(msg30)
@@ -267,4 +267,5 @@ class HL7ParserADTTest extends FlatSpec {
     "ADT Message Test 31 (ADT_31)" should "have a match for the parsed output" in {
         assert(res31 === expected31)
     }
+
 }

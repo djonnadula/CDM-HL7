@@ -1,6 +1,7 @@
 package com.hca.cdm.hl7.parser.tests
 
 import com.hca.cdm.hl7.constants.HL7Types
+import com.hca.cdm.log.Logg
 import org.scalatest.FlatSpec
 
 /**
@@ -8,12 +9,11 @@ import org.scalatest.FlatSpec
   *
   * SIU Message Parsing Unit Tests
   */
-class HL7ParserSIUTest extends FlatSpec{
+class HL7ParserSIUTest extends FlatSpec with Logg {
 
     val messageType = HL7Types.SIU
     val hl7TestSetup = new HL7ParserTestSetup(messageType)
     val testFileBasePath = "/src/test/scala/com/hca/cdm/hl7/parser/tests/"
-    hl7TestSetup.loadProperties("Hl7TestConfig.properties")
 
     val messageName1 = "SIU_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType)
@@ -66,4 +66,12 @@ class HL7ParserSIUTest extends FlatSpec{
         assert(res6 === expected6)
     }
 
+    // MT.2.4 Test
+    val messageName7 = "SIU_7"
+    val msg7 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName7, messageType)
+    val res7 = hl7TestSetup.parse(msg7)
+    val expected7 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName7, messageType)
+    "SIU Message Test 7 (SIU_7)" should "have a match for the parsed output" in {
+        assert(res7 === expected7)
+    }
 }
