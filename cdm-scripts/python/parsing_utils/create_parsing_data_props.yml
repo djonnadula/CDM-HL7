@@ -24,9 +24,18 @@ segment_file_name: 'segments.txt'
 
 template_path: '..\\..\\..\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
 
-table_change_reason: 'New 2.8.2 Templates'
+table_change_reason: 'EBA-769'
 
-last_table_format_change_date: '2017-05-23 12:00:00'
+last_table_format_change_date: '2017-06-23 12:00:00'
 
 table_segments:
-  - 'ALL'
+  - 'AUT'
+  - 'NTE'
+  - 'PSL'
+  - 'RF1'
+  - 'SAC'
+  - 'ZER'
+  - 'ZIV'
+  - 'ZPE'
+  - 'ZRX'
+  - 'ZST'

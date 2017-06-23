@@ -92,9 +92,9 @@ class TableUtils:
         elif len(comps) >= 2:
             column_name = joiner.join(comps)
         if index == 0:
-            res = '\t{0} STRING\n'.format(column_name)
+            res = '\t`{0}` STRING\n'.format(column_name)
         else:
-            res = '\t{0} STRING,\n'.format(column_name)
+            res = '\t`{0}` STRING,\n'.format(column_name)
         return res
 
     @staticmethod

@@ -74,7 +74,7 @@ class SegmentUtils:
         """
         Reads a csv file and removes any strange characters
         :param utf8_data: file to read
-        :param dialect: specific dialet for parsing
+        :param dialect: specific dialect for parsing
         :param kwargs: extra arguments
         :returns: unicode encoded rows from csv file
         """
@@ -83,8 +83,7 @@ class SegmentUtils:
             yield [unicode(cell, 'utf-8-sig') for cell in row]
 
     @staticmethod
-    def add_prefix_underscore(string):
-        dup_dict = {'comment', 'transaction_date', 'message_control_id', 'location', 'referral_reason_text'}
+    def add_prefix_underscore(string, dup_dict):
         if string in dup_dict:
             return '_' + string
         else:

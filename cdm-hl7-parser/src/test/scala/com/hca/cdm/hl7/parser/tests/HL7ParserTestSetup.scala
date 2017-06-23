@@ -49,18 +49,14 @@ class HL7ParserTestSetup(msgType: HL7) extends Logg {
     }
 
     def outio(k: String, v: String) = {
-        info("outio: " + k)
     }
 
     def reject(k: String, v: String) = {
-        info("reject: " + k)
     }
 
     def audit(k: String, v: String) = {
-        info("audit: " + k)
     }
 
     def adhocDestination(k: String, v: String, dest: String) = {
-        info("adhocDestination: " + k)
     }
 }

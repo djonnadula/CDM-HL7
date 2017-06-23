@@ -23,6 +23,7 @@ def main():
     segments_list = []
     static_dict = {'etl_firstinsert_datetime', 'field_sequence_num', 'sending_facility', 'message_control_id',
                    'medical_record_num', 'medical_record_urn', 'patient_account_num', 'message_type'}
+    dup_dict = {'transaction_date', 'message_control_id'}
 
     '''
     Segments.txt Logic
@@ -78,7 +79,7 @@ def main():
             continue
         new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
         if segment_name in SegmentUtils.underscore_dict:
-            new_string = SegmentUtils.add_prefix_underscore(new_string)
+            new_string = SegmentUtils.add_prefix_underscore(new_string, dup_dict)
 
         if new_string in static_dict:
             continue

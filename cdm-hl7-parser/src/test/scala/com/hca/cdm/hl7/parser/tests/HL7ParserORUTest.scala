@@ -127,4 +127,13 @@ class HL7ParserORUTest extends FlatSpec with Logg {
     "ORU Message Test 14 (ORU_14)" should "have a match for the parsed output" in {
         assert(res14 === expected14)
     }
+
+    // ORU NTE test
+    val messageName15 = "ORU_15"
+    val msg15 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName15, messageType)
+    val res15 = hl7TestSetup.parse(msg15)
+    val expected15 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName15, messageType)
+    "ORU Message Test 15 (ORU_15)" should "have a match for the parsed output" in {
+        assert(res15 === expected15)
+    }
 }
