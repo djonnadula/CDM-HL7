@@ -10,6 +10,8 @@ import LocalDateTime._
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm._
+import com.hca.cdm.auth.LoginRenewer
+import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.audit.AuditConstants._
@@ -138,7 +140,6 @@ object HL7Job extends Logg with App {
 
   private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
-  private var credentials: String = _
   initialise(sparkStrCtx)
   startStreams()
 
@@ -168,12 +169,9 @@ object HL7Job extends Logg with App {
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
     registerHook(sHook)
-    /* if (isSecured) {
-       val tempCrd = credentialFile(s"$appHomeDir$FS$stagingDir")
-       credentials = tempCrd.getName
-       scheduleGenCredentials(6,tempCrd, sparkConf.get("spark.yarn.principal",lookUpProp("hl7.spark.yarn.principal")),
-         sparkConf.get("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab")), haNameNodes(sparkConf))
-     } */
+    hdpConf.set("hadoop.security.authentication", "Kerberos")
+    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
+    LoginRenewer.scheduleRenewal(master = true)
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
   }
@@ -221,6 +219,7 @@ object HL7Job extends Logg with App {
         tracker += rdd foreachPartitionAsync (dataItr => {
           if (dataItr nonEmpty) {
             propFile = confFile
+            LoginRenewer.scheduleRenewal()
             val kafkaOut = KProducer()(prodConf)
             val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
             val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
@@ -261,7 +260,7 @@ object HL7Job extends Logg with App {
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String,_:String)) else None)(_, _)
+                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _)
                 Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>

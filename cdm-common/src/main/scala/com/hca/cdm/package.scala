@@ -125,7 +125,10 @@ package object cdm extends Logg {
     prop getOrElse(key, EMPTYSTR)
   }
 
-  def isConfigDefined(key: String): Boolean = prop isDefinedAt key
+  def isConfigDefined(key: String): Boolean = {
+    if(prop == null) return false
+    prop isDefinedAt key
+  }
 
   def printConfig(): Unit = {
     outStream.println("******************************************************************************************")

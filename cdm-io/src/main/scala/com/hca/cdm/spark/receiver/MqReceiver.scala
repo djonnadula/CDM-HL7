@@ -14,6 +14,7 @@ import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit._
+import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.mq.publisher.MQAcker
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
@@ -26,7 +27,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
 /**
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
-class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
+class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta, tlmAckStage: String)
   extends Receiver[MqData](storageLevel = StorageLevel.DISK_ONLY) with Logg with MqConnector {
 
@@ -51,6 +52,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
       activeConnection set con
       init()
+      LoginRenewer.scheduleRenewal(master = false,nameNodes)
     } catch {
       case t: Throwable =>
         self.restart(s"Unable to Start Receiver with Id $app will make an attempt to Start Again", t, restartTimeInterval * 2)
@@ -72,7 +74,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}")
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
-        MQAcker(app,"appTLMRESPONSE")(mqHosts, mqManager, mqChannel,ackQueue.get)
+        MQAcker(app, "appTLMRESPONSE")(mqHosts, mqManager, mqChannel, ackQueue.get)
         tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
         info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }
@@ -101,6 +103,7 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
       consumerPool shutdown()
     }
     currentConnection foreach (closeResource(_))
+    LoginRenewer.stop()
   }
 
   @throws(classOf[MqException])

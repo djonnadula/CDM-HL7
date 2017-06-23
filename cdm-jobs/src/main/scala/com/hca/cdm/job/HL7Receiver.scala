@@ -3,7 +3,9 @@ package com.hca.cdm.job
 
 import java.lang.System.{getenv => fromEnv}
 import java.util.Date
+
 import com.hca.cdm.Models.MSGMeta
+
 import scala.Int.MaxValue
 import com.hca.cdm._
 import com.hca.cdm.spark.receiver.{MqReceiver => receiver}
@@ -21,9 +23,14 @@ import org.apache.spark.FutureAction
 import org.apache.spark.streaming.StreamingContext
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
+import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import AuditConstants._
+import com.hca.cdm.auth.LoginRenewer
+import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
+import com.hca.cdm.job.HL7Job.hdpConf
 import com.hca.cdm.utils.RetryHandler
 
 /**
@@ -78,6 +85,10 @@ object HL7Receiver extends Logg with App {
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
   }
+  if (checkpointEnable) {
+    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures", "30")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "180")
+  }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
   }
@@ -97,6 +108,9 @@ object HL7Receiver extends Logg with App {
   private def initContext: StreamingContext = {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+    hdpConf.set("hadoop.security.authentication", "Kerberos")
+    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
+    LoginRenewer.scheduleRenewal(master = true)
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
   }
@@ -107,10 +121,10 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
+    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), 0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
     else {
       sparkStrCtx.union(numberOfReceivers.map(id => {
-        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
+        val stream = sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
         info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
         stream
       }))
