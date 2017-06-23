@@ -3,9 +3,7 @@ package com.hca.cdm.job
 
 import java.lang.System.{getenv => fromEnv}
 import java.util.Date
-
 import com.hca.cdm.Models.MSGMeta
-
 import scala.Int.MaxValue
 import com.hca.cdm._
 import com.hca.cdm.spark.receiver.{MqReceiver => receiver}
@@ -24,14 +22,13 @@ import org.apache.spark.streaming.StreamingContext
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
-
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import AuditConstants._
 import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
-import com.hca.cdm.job.HL7Job.hdpConf
 import com.hca.cdm.utils.RetryHandler
+
 
 /**
   * Created by Devaraj Jonnadula on 12/14/2016.
@@ -101,7 +98,7 @@ object HL7Receiver extends Logg with App {
       ctx
     }
   }
-
+  private val hdpConf = hdpUtil.conf
   private var sparkStrCtx: StreamingContext = initContext
   startStreams()
 
