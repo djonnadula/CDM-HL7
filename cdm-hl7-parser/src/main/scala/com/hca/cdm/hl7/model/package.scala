@@ -330,7 +330,7 @@ package object model {
 
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
-  def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
+  def loadSegments(segments: String, delimitedBy: String = COMMA): Map[String, List[(String, String)]] = {
     val reader = readFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
