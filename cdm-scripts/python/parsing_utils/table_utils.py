@@ -42,7 +42,7 @@ class TableUtils:
         # if segment == 'BUI' or segment == 'DON' or segment == 'DPS':
         #     return ''
         # else:
-        return '\nDROP TABLE {1}.hl7_{0}_data;\n'.format(segment.lower(), db_name)
+        return '\nDROP TABLE {1}.hl7_{0};\n'.format(segment.lower(), db_name)
 
     @staticmethod
     def hl7_table_prefix(segment, db_name):

@@ -1,8 +1,5 @@
 environment:
   - 'production'
-  - 'reg_test'
-  - 'qa'
-  - 'dev'
 
 environments:
   production:
@@ -24,18 +21,9 @@ segment_file_name: 'segments.txt'
 
 template_path: '..\\..\\..\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
 
-table_change_reason: 'EBA-769'
+table_change_reason: 'EBA-805: 2.8.2 template update'
 
-last_table_format_change_date: '2017-06-23 12:00:00'
+last_table_format_change_date: 'Same as update time'
 
 table_segments:
-  - 'AUT'
-  - 'NTE'
-  - 'PSL'
-  - 'RF1'
-  - 'SAC'
-  - 'ZER'
-  - 'ZIV'
-  - 'ZPE'
-  - 'ZRX'
-  - 'ZST'
+  - 'ALL'
