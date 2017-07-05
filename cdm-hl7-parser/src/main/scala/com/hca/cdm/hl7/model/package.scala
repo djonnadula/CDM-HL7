@@ -233,10 +233,10 @@ package object model {
     } else NONE
   }
 
-  private def dataAtIndex(segment: Array[String], delim: String = "\\" + caret)(index: Int, dataAtIndex: Int = 0): String = {
-    if (valid(segment, index)) {
-      if (segment(index) contains caret) (segment(index) split delim) (dataAtIndex)
-      else segment(index)
+  private def dataAtIndex(segment: Array[String], delim: String = "\\" + caret)(firstIndex: Int, secondaryIndex: Int = 0): String = {
+    if (valid(segment, firstIndex)) {
+      if (segment(firstIndex) contains caret) (segment(firstIndex) split delim) (secondaryIndex)
+      else segment(firstIndex)
     } else EMPTYSTR
   }
 
