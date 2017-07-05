@@ -226,7 +226,9 @@ package object model {
       val msh = rawSplit(0)
       val tempMsh = PIPER split msh
       val tempPid = PIPER split findSeg(rawSplit, PID)
-      Try(MSGMeta(tempMsh(9), tempMsh(6), dataAtIndex(tempPid)(3), dataAtIndex(tempPid)(4), dataAtIndex(tempPid)(18, 1), dataAtIndex(tempMsh)(3, 1), dataAtIndex(tempMsh)(8, 1))) match {
+      Try(MSGMeta(tempMsh(9), tempMsh(6), tryAndReturnDefaultValue(asFunc(dataAtIndex(tempPid)(3)), EMPTYSTR), tryAndReturnDefaultValue(asFunc(dataAtIndex(tempPid)(4)), EMPTYSTR),
+        tryAndReturnDefaultValue(asFunc(dataAtIndex(tempPid)(18, 1)), EMPTYSTR), tryAndReturnDefaultValue(asFunc(dataAtIndex(tempMsh)(3, 1)), EMPTYSTR),
+        tryAndReturnDefaultValue(asFunc(dataAtIndex(tempMsh)(8, 1)), EMPTYSTR))) match {
         case Success(me) => me
         case _ => NONE
       }

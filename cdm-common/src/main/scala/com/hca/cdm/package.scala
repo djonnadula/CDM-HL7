@@ -126,7 +126,7 @@ package object cdm extends Logg {
   }
 
   def isConfigDefined(key: String): Boolean = {
-    if(prop == null) return false
+    if (prop == null) return false
     prop isDefinedAt key
   }
 
@@ -250,6 +250,8 @@ package object cdm extends Logg {
   def tryAndReturnDefaultValue[T](fun: () => T, default: T): T = {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse default
   }
+
+  def asFunc[T](action: => T): () => T = () => action
 
   def abend(code: Int = -1): Unit = System exit code
 
