@@ -50,7 +50,7 @@ private[cdm] object LoginRenewer extends Logg {
         hdfsConf.set("hadoop.security.authentication", "Kerberos")
         fs = FileSystem.get(hdfsConf)
         loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))
-        ), startFrom, MILLISECONDS.convert(startFrom, MINUTES), MILLISECONDS)
+        ), startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
         sHook()
         scheduled = true
       }
@@ -67,7 +67,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   def scheduleGenCredentials(startFrom: Long = 1, credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
     loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(genCredentials(credentialsFile, principal, keytab, nns), error(_: Throwable)))
-      , startFrom, MILLISECONDS.convert(startFrom, MINUTES), MILLISECONDS)
+      , startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
     sHook()
   }
 
