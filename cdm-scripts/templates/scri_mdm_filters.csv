@@ -1,3 +1,0 @@
-TXA,document_type|id,PATH,CONTAINS,OR
-TXA,filler_order_num,PATH,CONTAINS,OR
-TXA,filler_order_num|entity_id,PATH,CONTAINS,NONE

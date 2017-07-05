@@ -1,7 +1,0 @@
-OBX.5,observation_value,,
-OBX.5.1,observation_value,primary_id,
-OBX.5.2,observation_value,data_type,
-OBX.5.3,observation_value,data_subtype,
-OBX.5.4,observation_value,encoding_scheme,
-OBX.5.5,observation_value,data,
-AL1.6.1,identification_date,identification_date,
