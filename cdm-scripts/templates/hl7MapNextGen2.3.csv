@@ -1,0 +1,7 @@
+OBX.5,obsv_value,,
+OBX.5.1,obsv_value,primary_id,
+OBX.5.2,obsv_value,data_type,
+OBX.5.3,obsv_value,data_subtype,
+OBX.5.4,obsv_value,encoding_scheme,
+OBX.5.5,obsv_value,data,
+AL1.6.1,identification_date,identification_date,
