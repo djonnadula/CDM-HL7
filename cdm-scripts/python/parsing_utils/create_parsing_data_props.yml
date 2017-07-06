@@ -19,7 +19,7 @@ add_drop_tables: true
 
 segment_file_name: 'segments.txt'
 
-template_path: '..\\..\\..\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
+template_path: '\\cdm-hl7-parser\\src\\main\\resources\\templates\\'
 
 table_change_reason: 'EBA-805: 2.8.2 template update'
 
@@ -27,3 +27,59 @@ last_table_format_change_date: 'Same as update time'
 
 table_segments:
   - 'ALL'
+
+static_dict:
+  - 'etl_firstinsert_datetime'
+  - 'field_sequence_num'
+  - 'sending_facility'
+  - 'message_control_id'
+  - 'medical_record_num'
+  - 'medical_record_urn'
+  - 'patient_account_num'
+  - 'message_type'
+
+dup_dict:
+  - 'transaction_date'
+  - 'message_control_id'
+
+file_names:
+  - 'hl7MapStandard2.8.2.csv'
+  - 'hl7MapEcw2.3.1.csv'
+  - 'hl7MapEpic2.1.csv'
+  - 'hl7MapEpic2.3.1.csv'
+  - 'hl7MapEpic2.3.csv'
+  - 'hl7MapIpeople2.5.csv'
+  - 'hl7MapMT6_2.4.csv'
+  - 'hl7MapMT6_2.5.1.csv'
+  - 'hl7MapMT6_2.5.csv'
+  - 'hl7MapMT_2.1.csv'
+  - 'hl7MapMT_2.2.csv'
+  - 'hl7MapMT_2.4.csv'
+  - 'hl7MapMT_2.5.csv'
+  - 'hl7MapNextGen2.3.csv'
+
+underscore_dict:
+  - 'MSA'
+  - 'NTE'
+  - 'PSL'
+  - 'RF1'
+  - 'SAC'
+  - 'ZER'
+  - 'AUT'
+  - 'FT1'
+  - 'ZRX'
+  - 'ZIV'
+  - 'ZPE'
+  - 'ZST'
+
+skip_dict:
+  - 'MSH:field_separator'
+
+common_columns:
+  - 'etl_firstinsert_datetime STRING'
+  - 'field_sequence_num STRING'
+  - 'sending_facility STRING'
+  - 'message_control_id STRING'
+  - 'medical_record_num STRING'
+  - 'medical_record_urn STRING'
+  - 'patient_account_num STRING'
