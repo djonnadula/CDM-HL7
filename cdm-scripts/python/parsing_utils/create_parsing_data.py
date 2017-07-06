@@ -1,8 +1,8 @@
-from python.parsing_utils.segment_utils import SegmentUtils
-from python.parsing_utils.table_utils import TableUtils
 from python.parsing_utils.ordered_set import OrderedSet
 from python.parsing_utils.segment import Segment
+from python.parsing_utils.parsing_utils import ParsingUtils
 import csv
+from constants import *
 
 
 def main():
@@ -11,32 +11,52 @@ def main():
     Creates both the segments.txt and hl7 impala tables
     """
 
-    yaml_props = TableUtils.read_props('create_parsing_data_props.yml')
+    yaml_props = ParsingUtils.read_props('create_parsing_data_props.yml')
     segment_file_name = yaml_props.get('segment_file_name')
-    message_type_header = SegmentUtils.adhoc_elements
-    cur_message_type = SegmentUtils.default_msg_type_apply
+    static_dict = yaml_props.get('static_dict')
+    dup_dict = yaml_props.get('dup_dict')
+    file_names = yaml_props.get('file_names')
+    underscore_dict = yaml_props.get('underscore_dict')
+    skip_dict = yaml_props.get('skip_dict')
+    template_path = yaml_props.get('template_path')
 
-    # Local variables
     final_string = ''
     current_segment = ''
     templates_dict = {}
     segments_list = []
-    static_dict = {'etl_firstinsert_datetime', 'field_sequence_num', 'sending_facility', 'message_control_id',
-                   'medical_record_num', 'medical_record_urn', 'patient_account_num', 'message_type'}
-    dup_dict = {'transaction_date', 'message_control_id'}
+    adhoc_segments = ""
+    adhoc_list = []
 
     '''
     Segments.txt Logic
     '''
     # Add a 1 or 2 to filenames and create a dictionary so that they are easy to sort
-    for filename in SegmentUtils.file_names:
-        with open(SegmentUtils.get_templates_dir() + filename, 'rU') as csvFile:
-            reader = SegmentUtils.unicode_csv_reader(csvFile, delimiter=',')
+    for filename in file_names:
+        with open(ParsingUtils.get_templates_dir(template_path) + filename, 'rU') as csvFile:
+            reader = ParsingUtils.unicode_csv_reader(csvFile, delimiter=COMMA)
             reslist = list(reader)
-            if filename == 'hl7MapStandard2.8.2.csv':
-                templates_dict['1' + filename] = reslist
+            # Control the order of files so that segments do get added to the middle of the schema
+            if filename == STANDARD_MAP:
+                templates_dict['1' + filename] = reslist\
+            # Forgot these in original files
+            elif filename == EPIC21_MAP or filename == EPIC231_MAP:
+                templates_dict['3' + filename] = reslist
             else:
                 templates_dict['2' + filename] = reslist
+
+    # Read segments.txt for ADHOC segments
+    with open(ParsingUtils.get_templates_dir(template_path) + SEGMENTS_FILE, 'rU') as segment_file:
+        reader = ParsingUtils.unicode_csv_reader(segment_file, delimiter=COMMA)
+        for row in reader:
+            if row[1].__contains__(ADHOC):
+                adhoc_list.append(row)
+
+    joiner = COMMA
+    for ele in adhoc_list:
+        t = joiner.join(ele)
+        adhoc_segments += t + NEWLINE
+
+    message_type_header = adhoc_segments
 
     # Format data into new list
     for row in templates_dict:
@@ -64,12 +84,12 @@ def main():
         sub_component = i[3]
         if current_segment != segment_name:
             if current_segment != '':
-                f.write(cur_message_type + ',' + final_string + '\n')
+                f.write(ALL + COMMA + final_string + NEWLINE)
             else:
                 f.write(message_type_header)
             current_segment = segment_name
             final_string = ''
-        for pair in SegmentUtils.skip_dict:
+        for pair in skip_dict:
             split_pair = pair.split(':')
             sp_name = split_pair[0]
             sp_field = split_pair[1]
@@ -77,9 +97,9 @@ def main():
                 skip_flag = 1
         if skip_flag == 1:
             continue
-        new_string = SegmentUtils.construct_parsing_format(field, component, sub_component)
-        if segment_name in SegmentUtils.underscore_dict:
-            new_string = SegmentUtils.add_prefix_underscore(new_string, dup_dict)
+        new_string = ParsingUtils.construct_parsing_format(field, component, sub_component)
+        if segment_name in underscore_dict:
+            new_string = ParsingUtils.add_prefix_underscore(new_string, dup_dict)
 
         if new_string in static_dict:
             continue
@@ -89,7 +109,7 @@ def main():
             else:
                 final_string = '{0}^{1}'.format(final_string, new_string)
 
-    f.write(cur_message_type + ',' + final_string + '\n')
+    f.write(ALL + COMMA + final_string + NEWLINE)
     f.close()
 
     '''
@@ -101,6 +121,7 @@ def main():
     change_reason = yaml_props.get('table_change_reason')
     table_segment = yaml_props.get('table_segments')
     last_table_format_change_date = yaml_props.get('last_table_format_change_date')
+    common_columns = ParsingUtils.create_common_columns(yaml_props.get('common_columns'))
 
     for env in environment:
         db_name = environments.get(env).get('db_name')
@@ -108,26 +129,26 @@ def main():
         f = open('sql/create_impala_tables_{0}.sql'.format(env), 'w')
         f2 = open('sql/drop_impala_tables_{0}.sql'.format(env), 'w')
         with open(segment_file_name, 'rU') as csv_file:
-            reader = csv.reader(csv_file, delimiter=',')
+            reader = csv.reader(csv_file, delimiter=COMMA)
             for row in reader:
                 all_string = row[0]
                 segment_name = row[1]
                 components = row[2]
                 for seg in table_segment:
-                    if seg == 'ALL':
-                        if all_string != 'ALL':
+                    if seg == ALL:
+                        if all_string != ALL:
                             continue
                         else:
-                            TableUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
-                                                   change_reason, f2, f, last_table_format_change_date)
+                            ParsingUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
+                                                   change_reason, f2, f, last_table_format_change_date, common_columns)
                 else:
-                    if all_string != 'ALL':
+                    if all_string != ALL:
                         continue
                     else:
                         for seg in table_segment:
                             if segment_name == seg:
-                                TableUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
-                                                       change_reason, f2, f, last_table_format_change_date)
+                                ParsingUtils.table_logic(components, add_drop_tables, segment_name, db_name, db_path,
+                                                       change_reason, f2, f, last_table_format_change_date,common_columns)
         f2.close()
         f.close()
 
