@@ -71,7 +71,8 @@ trait MqConnector extends Logg with AutoCloseable {
   case class ConnectionMeta(private val factory: MQConnectionFactory, private val connection: Connection) extends AutoCloseable {
     @throws[CdmException]
     def addEventListener(listener: SourceListener): Unit = {
-      val consumer =  createConsumer(listener.getSource)
+      val consumer = tryAndThrow[MessageConsumer](createSession(listener.getSource).createConsumer(new MQDestination(listener.getSource)), error(_: Throwable))
+      createConsumer(listener.getSource)
       consumer setMessageListener listener
       info(s"Listener Added for Queue ${listener.getSource} with Consumer $consumer")
     }

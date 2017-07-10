@@ -1,0 +1,143 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "MT6_FRNK_ORU_161609597",
+    "medical_record_num": "K000078104",
+    "medical_record_urn": "K73136",
+    "patient_account_num": "FR0801065749"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "ITS",
+    "sending_facility": "FRNK",
+    "date_time_of_message": "201704061204",
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "MT6_FRNK_ORU_161609597",
+    "processing_id": "P",
+    "version_id": "2.4"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": [
+      {
+        "id_num": "K000078104",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "407-39-3773",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "K73136",
+        "id_type_code": "PI",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A00176199",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
+      }
+    ],
+    "patient_name": [
+      {
+        "family_name": "MORGAN",
+        "given_name": "LAURA",
+        "second_and_further_given_names_or_initials_thereof": "E",
+        "name_type_code": "L"
+      },
+      {
+        "family_name": "VITTETOW",
+        "given_name": "LAURA",
+        "second_and_further_given_names_or_initials_thereof": "E",
+        "name_type_code": "M"
+      }
+    ],
+    "mother_maiden_name": "REBECCA",
+    "date_time_of_birth": "19900120",
+    "administrative_sex": "F",
+    "race": "W",
+    "patient_address": {
+      "street_address": "205 OLD PEAKS MILL ROAD",
+      "city": "FRANKFORT",
+      "state_or_province": "KY",
+      "zip_or_postal_code": "40601"
+    },
+    "phone_num_home": "(502)545-4300",
+    "marital_status": "S",
+    "religion": "CHR",
+    "patient_account_num": "FR0801065749"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": "FR.ER",
+    "admission_type": "EM",
+    "attending_doctor": {
+      "person_id": "DXU9585",
+      "family_name": "Montalvo",
+      "given_name": "Jaime",
+      "degree": "MD"
+    },
+    "referring_doctor": {
+      "person_id": "SELF",
+      "family_name": "Referred",
+      "given_name": "Self"
+    },
+    "admit_source": "PR",
+    "patient_type": "ER",
+    "financial_class": "08",
+    "discharge_disposition": "HOM",
+    "servicing_facility": "FRNK",
+    "account_status": "DEP",
+    "admit_date_time": "201301231609",
+    "discharge_date_time": "201301232013"
+  },
+  "0004.OBR": {
+    "set_id": "1",
+    "filler_order_num": "201702FRNK",
+    "requested_date_time": "201301232004",
+    "obsv_date_time_num": "201301232004",
+    "obsv_end_date_time_num": "201301232004",
+    "relevant_clinical_information": "FR",
+    "filler_field_1": "HIM",
+    "lab_site": "ERDC",
+    "result_status": "S",
+    "quantity_timing": {
+      "eff_from_date_time": "201301232004"
+    },
+    "principal_result_interpreter": {
+      "name": {
+        "id_num": "DXU9585",
+        "family_name": "Montalvo",
+        "given_name": "Jaime",
+        "degree": "MD",
+        "source_table": "201301232004"
+      }
+    },
+    "transcriptionist": {
+      "name": {
+        "id_num": "DXU9585",
+        "family_name": "Montalvo",
+        "given_name": "Jaime",
+        "second_and_further_given_names_or_initials_thereof": "E"
+      }
+    }
+  },
+  "0005.ZAP": {
+    "set_id": "1",
+    "other_dictated_by_signed_date_time": {
+      "signed_by_provider_mnemonic": "CIJ9890",
+      "last_name": "Wilkins",
+      "first_name": "Gina",
+      "middle_name": "C",
+      "degree": "MD",
+      "signed_date_and_time": "201301232004"
+    }
+  }
+}

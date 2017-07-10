@@ -12,74 +12,98 @@ import com.hca.cdm._
 import com.hca.cdm.exception.MqException
 import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
-import scala.util.{Failure, Success, Try}
-import java.lang.System.{getenv => fromEnv}
-import java.util.concurrent.TimeoutException
-
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit._
+import com.hca.cdm.auth.LoginRenewer
+import com.hca.cdm.mq.publisher.MQAcker
+import scala.collection.mutable
+import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Future => async}
+import scala.concurrent.Await._
 
 case class MqData(source: String, data: String, msgMeta: MSGMeta)
 
 /**
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
-class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
-                (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta)
-  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_AND_DISK_2) with Logg with MqConnector {
+class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
+                (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta, tlmAckStage: String)
+  extends Receiver[MqData](storageLevel = StorageLevel.DISK_ONLY) with Logg with MqConnector {
 
   self =>
   private val mqHosts = lookUpProp("mq.hosts")
   private val mqManager = lookUpProp("mq.manager")
   private val mqChannel = lookUpProp("mq.channel")
-  private val ackQueue = {
-    val tem = lookUpProp("mq.queueResponse")
-    if (tem != EMPTYSTR) Some(tem)
-    else None
-  }
+  private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
-  sHook()
+  private var consumerPool: ThreadPoolExecutor = _
+  private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
+  @volatile private var hookInit = false
+  @volatile private var pauseConsuming = false
 
 
   def getCurrentConnection: ConnectionMeta = activeConnection.get()
 
-  override def onStart(): Unit = {
+  override def onStart(): Unit = synchronized {
     try {
       val con = handleConsumer()
       if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
       activeConnection set con
       init()
+      LoginRenewer.scheduleRenewal(master = false,nameNodes)
     } catch {
       case t: Throwable =>
         self.restart(s"Unable to Start Receiver with Id $app will make an attempt to Start Again", t, restartTimeInterval * 2)
     }
   }
 
-  override def onStop(): Unit = {
+  override def onStop(): Unit = synchronized {
     close()
   }
 
 
   private def init(): Unit = {
+    if (!hookInit) {
+      sHook()
+      hookInit = true
+    }
     val con = activeConnection.get()
     if (con != null) {
-      var prod: MessageProducer = null
-      if (ackQueue isDefined) {
-        prod = con createProducer ackQueue.get
-        info(s"Created Initial Queue ${ackQueue.get} to Send TLM ACKS from Producer $prod")
+      consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}")
+      var tlmAckIO: (String) => Unit = null
+      if (ackQueue.isDefined) {
+        MQAcker(app, "appTLMRESPONSE")(mqHosts, mqManager, mqChannel, ackQueue.get)
+        tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
+        info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }
       sources.foreach(queue => {
+        val consumer = con createConsumer queue
         if (ackQueue isDefined) {
-          con addEventListener EventListener(queue, con sendMessage(_: String, prod))
-        } else con addEventListener EventListener(queue, null)
+          consumers += consumer -> EventListener(queue, tlmAckIO)
+        } else consumers += consumer -> EventListener(queue, null)
       })
       con addErrorListener new ExceptionReporter
+      consumers foreach {
+        consumer => consumerPool submit new DataConsumer(consumer._1, consumer._2)
+      }
       con resume()
-
     }
   }
 
   override def close(): Unit = {
-    closeResource(activeConnection.get())
+    info(s"Stopping $this ${self.id}")
+    consumers foreach {
+      con => closeResource(con._1)
+    }
+    consumers clear()
+    if (valid(consumerPool)) {
+      consumerPool awaitTermination(1, HOURS)
+      consumerPool shutdown()
+    }
+    currentConnection foreach (closeResource(_))
+    LoginRenewer.stop()
   }
 
   @throws(classOf[MqException])
@@ -113,28 +137,39 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
   }
 
   private case class EventListener(source: String, tlmAcknowledge: (String) => Unit) extends SourceListener {
-    override def onMessage(message: Message): Unit = {
+
+    override def handleMessage(message: Message): Boolean = {
       val msg = message.asInstanceOf[TextMessage]
       val data = msg.getText.replaceAll("[\r\n]+", "\r\n")
       val meta = metaFromRaw(data)
-      Try(self.store(MqData(source, data, meta))) match {
-        case Success(x) =>
-          handleAcks(message, source, meta, tlmAcknowledge)
-        case Failure(t) =>
-          error(s"Cannot Write Message into Spark Memory, will Try with Retry Mechanism ${msg.getJMSMessageID}", t)
-          val retry = RetryHandler()
-          def job(): Unit = self.store(MqData(source, data, meta))
-          if (tryAndLogErrorMes(retry.retryOperation(job), error(_: Throwable))) handleAcks(message, source, meta, tlmAcknowledge)
-          else {
-            self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}", t)
-            t match {
-              case timeOut: TimeoutException =>
-                self.currentConnection.foreach(_.pause())
-                self.restart(s"Cannot Write Message into Spark Memory Due to bad Response Times from HDFS, will replay Message with ID ${msg.getJMSMessageID}, Restarting Receiver ${self.id}", t)
-              case _ =>
-            }
-          }
+      var persisted = false
+      var th: Throwable = null
+      try {
+        result(async {
+          self.store(MqData(source, data, meta))
+          persisted = true
+        }(executionContext), Duration(3, MINUTES))
+        // if (self.pauseConsuming) self.pauseConsuming = false
+      } catch {
+        case t: Throwable =>
+          error(s"Cannot Store message to Spark Storage ${msg.getJMSMessageID}", t)
+          th = t
+          self.pauseConsuming = true
       }
+      if (!persisted) {
+        self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
+        self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
+      } else {
+        tryAndLogThr(result(async {
+          handleAcks(message, source, meta, tlmAcknowledge)
+          persisted = true
+        }(executionContext), Duration(45, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
+      }
+      persisted
+    }
+
+    override def onMessage(message: Message): Unit = {
+      handleMessage(message)
     }
 
     override def getSource: String = source
@@ -180,6 +215,27 @@ class MqReceiver(id: Int, app: String, jobDesc: String, batchInterval: Int, batc
 
   private def sHook(): Unit = {
     registerHook(newThread(s"$id-$app-SHook", runnable(close())))
+  }
+
+  private class DataConsumer(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
+    var storeReceived = true
+    var timeOut: Long = currMillis
+
+    override def run(): Unit = {
+      while (!self.isStopped()) {
+        if (storeReceived && !self.pauseConsuming) {
+          val msg = consumer.receiveNoWait
+          if (valid(msg)) {
+            storeReceived = sourceListener handleMessage msg
+          }
+        } else {
+          if (currMillis - timeOut >= 50000) {
+            error("Consuming Data Stopped from WSMQ due to Data cannot be stored into Spark Storage")
+            timeOut = currMillis
+          }
+        }
+      }
+    }
   }
 
 }

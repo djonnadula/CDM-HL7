@@ -36,6 +36,18 @@ class HiveConnector extends Logg with AutoCloseable {
   }
 
   @throws[CdmException]
+  def sql(query: String): Unit = {
+    tryAndThrow(client.createStatement().executeQuery(query), debug(_: Throwable))
+
+  }
+
+  def multiQueries(sql: Seq[String]): Unit = {
+    val statement = client.createStatement()
+    sql.foreach(query => tryAndLogErrorMes(statement.executeQuery(query), debug(_: Throwable)))
+  }
+
+
+  @throws[CdmException]
   def tables(dbName: String): Seq[String] = {
     import Converters._
     val statement = client.createStatement()
@@ -47,7 +59,10 @@ class HiveConnector extends Logg with AutoCloseable {
     import Converters._
     val meta = resultSet.getMetaData
     resultSet.lazyStream.map(rs => {
-      rs.getString(primaryKey) -> Range(1, meta.getColumnCount).map(columnIndex => meta.getColumnName(columnIndex) -> rs.getString(columnIndex)).toMap
+      rs.getString(primaryKey) -> Range(1, meta.getColumnCount).map(columnIndex => {
+        val column = meta.getColumnName(columnIndex)
+        column.substring(column.indexOf(".") + 1) -> rs.getString(columnIndex)
+      }).toMap
     }).toMap
   }
 
@@ -69,9 +84,9 @@ class HiveConnector extends Logg with AutoCloseable {
     implicit class ResultSetStream(rs: ResultSet) {
       def lazyStream: Stream[ResultSet] = {
         new Iterator[ResultSet] {
-          def hasNext = rs.next()
+          def hasNext: Boolean = rs.next()
 
-          def next() = rs
+          def next(): ResultSet = rs
         }.toStream
       }
     }
@@ -79,9 +94,9 @@ class HiveConnector extends Logg with AutoCloseable {
     implicit class ExtractSingleColumn(rs: ResultSet) {
       def asSeq: Seq[String] = {
         new Iterator[String] {
-          def hasNext = rs.next()
+          def hasNext: Boolean = rs.next()
 
-          def next() = rs.getString(1)
+          def next(): String = rs.getString(1)
         }.toSeq
       }
     }

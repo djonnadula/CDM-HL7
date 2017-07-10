@@ -15,7 +15,7 @@ package object notification {
   private lazy val SMTP_HOST = lookUpProp("smtp.host")
   private lazy val emailTo = lookUpProp("notificationList").split(",")
   private lazy val emailFrom = lookUpProp("notificationFrom")
-  private lazy val bounhceAddress = lookUpProp("bounceNotifier")
+  private lazy val bounceAddress = lookUpProp("bounceNotifier")
 
   object TaskState extends Enumeration {
     type taskState = Value
@@ -32,9 +32,10 @@ package object notification {
   def sendMail(subject: String, messageBody: String, state: taskState = WARNING, statsReport: Boolean = false, monitorUnit: Array[String] = Array[String]()): Unit = {
     val properties = System.getProperties
     properties.setProperty("mail.smtp.host", SMTP_HOST)
-    val mail = statsReport match {
-      case true => new HtmlEmail
-      case _ => new SimpleEmail
+    val mail = if (statsReport) {
+      new HtmlEmail
+    } else {
+      new SimpleEmail
     }
     try {
       state match {
@@ -44,14 +45,13 @@ package object notification {
       }
       mail setSentDate new Date()
       mail setHostName SMTP_HOST
-      mail setBounceAddress bounhceAddress
+      mail setBounceAddress bounceAddress
       mail setFrom emailFrom
-      monitorUnit nonEmpty match {
-        case true =>
-          monitorUnit foreach (to => mail addTo to)
-          emailTo foreach (cc => mail addCc cc)
-        case _ =>
-          emailTo foreach (to => mail addTo to)
+      if (monitorUnit nonEmpty) {
+        monitorUnit foreach (to => mail addTo to)
+        emailTo foreach (cc => mail addCc cc)
+      } else {
+        emailTo foreach (to => mail addTo to)
       }
       mail setSubject subject
       mail setMsg messageBody

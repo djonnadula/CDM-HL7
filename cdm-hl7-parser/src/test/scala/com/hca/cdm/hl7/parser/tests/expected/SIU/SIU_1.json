@@ -1,0 +1,136 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_SIU_SCQ1A.161005.2",
+    "medical_record_num": "J000426315",
+    "medical_record_urn": "J502922",
+    "patient_account_num": "J00021040499"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201611090942",
+    "message_type": {
+      "message_code": "SIU",
+      "trigger_event": "S18"
+    },
+    "message_control_id": "IP_COQ1A_SIU_SCQ1A.161005.2",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000426315",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": "J502922",
+    "patient_name": {
+      "family_name": "BIVENS",
+      "given_name": "INSTANCE"
+    },
+    "date_time_of_birth": "19801109",
+    "administrative_sex": "M",
+    "patient_account_num": "J00021040499"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "P",
+    "assigned_patient_location": {
+      "point_of_care": "J.SURG",
+      "facility": "COCQA1A"
+    },
+    "attending_doctor": {
+      "person_id": "DR.TERESA",
+      "family_name": "Sartain",
+      "given_name": "Teresa"
+    },
+    "patient_type": "IN",
+    "account_status": "PRE"
+  },
+  "0004.SCH": {
+    "unique_case_id": "5527",
+    "unique_appointment_id": "21523",
+    "operation_type": "P",
+    "update_type": "NEW",
+    "patient_doctor": {
+      "provider_id": "DR.TERESA",
+      "last_name": "Sartain",
+      "first_name": "Teresa"
+    },
+    "patient_service": "RT",
+    "patient_facility": "COCQA1A",
+    "operating_room": {
+      "room_id": "J.OR03",
+      "room_desc": "MAIN OR OPERATING ROOM 3"
+    },
+    "principal_surgeon": {
+      "provider_id": "DR.TERESA",
+      "last_name": "Sartain",
+      "first_name": "Teresa"
+    },
+    "operation_date_time": "201611091000",
+    "operation_entered": {
+      "entered_date_time": "201611090941",
+      "entered_by": "1PDDRL1170"
+    },
+    "operation_scheduled_date_time": "201611091000",
+    "placer_contact_location": "INCOMPLETE"
+  },
+  "0005.ZTM": {
+    "case_pre_1_time": "PT ARRIVES OPS",
+    "case_pre_2_time": "PT READY",
+    "case_hold_1_time": "PT ARRIVES HOLDING",
+    "case_hold_2_time": "PT READY",
+    "case_operating_room_1_time": "ANESTHESIA START",
+    "case_operating_room_2_time": "PT IN ROOM",
+    "case_operating_room_3_time": "SURGEON IN ROOM",
+    "case_operating_room_4_time": "PROCEDURE START",
+    "case_operating_room_5_time": "PROCEDURE END",
+    "case_operating_room_6_time": "SURGEON LEAVES ROOM",
+    "case_operating_room_7_time": "PT LEAVES ROOM",
+    "case_pacu_1_time": "PT ARRIVES PACU",
+    "case_pacu_2_time": "ANESTHESIA END",
+    "case_pacu_3_time": "PT DISCHARGE PHASE 1",
+    "case_pacu_4_time": "PT PACU HOLDING OUT",
+    "case_phase2_1_time": "PT ARRIVES PHASE 2",
+    "case_phase2_2_time": "PT DISCHARGE PHASE 2"
+  },
+  "0006.ZPP": {
+    "counter": "1",
+    "operation_identifier": {
+      "operation_code": "J.GEDEBRID",
+      "operation_desc": "DEBRIDEMENT OF LOWER EXTREMITY",
+      "operation_name": "DEBRIDEMENT OF LOWER EXTREMITY"
+    },
+    "procedure_type": "P",
+    "severity": {
+      "severity_code": "MAJ",
+      "severity_desc": "MAJOR"
+    },
+    "surgeon": {
+      "person_id": "DR.TERESA",
+      "last_name": "Sartain",
+      "first_name": "Teresa"
+    },
+    "props_opr_duration": "60"
+  },
+  "0007.ZST": {
+    "counter": "1",
+    "staff_type": {
+      "type_code": "STFANT",
+      "type_description": "Anesthesiologist"
+    }
+  }
+}

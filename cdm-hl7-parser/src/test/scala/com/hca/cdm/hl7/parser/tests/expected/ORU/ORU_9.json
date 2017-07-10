@@ -1,0 +1,164 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCAR",
+    "message_control_id": "MT6_COCAR_ORU_ARGTPACS.1.1180582",
+    "medical_record_num": "I000356699",
+    "medical_record_urn": "I279000",
+    "patient_account_num": "I00970395034"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCAR",
+    "date_time_of_message": "201701130201",
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "MT6_COCAR_ORU_ARGTPACS.1.1180582",
+    "processing_id": "P",
+    "version_id": "2.4"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": "I000356699",
+    "alternate_patient_id": "I279000",
+    "patient_name": {
+      "family_name": "KIPKER KEPLER",
+      "given_name": "JAKET"
+    },
+    "date_time_of_birth": "19451105",
+    "administrative_sex": "F",
+    "patient_account_num": "I00970395034",
+    "ssn_num_patient": "060-00-5601"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "DIS",
+      "room": "I.400",
+      "bed": "A"
+    },
+    "attending_doctor": {
+      "person_id": "TANZA",
+      "family_name": "Tanimu",
+      "given_name": "Zakari",
+      "prefix": "MD",
+      "id_type_code": "214-217-1900"
+    },
+    "referring_doctor": {
+      "person_id": ".SELF",
+      "family_name": "REFERRED",
+      "given_name": "SELF"
+    },
+    "consulting_doctor": {
+      "person_id": "NOPTH",
+      "family_name": "Nophsker",
+      "given_name": "Theodore",
+      "second_and_further_given_names_or_initials_thereof": "R",
+      "suffix": "DO"
+    },
+    "admitting_doctor": {
+      "person_id": "TANZA",
+      "family_name": "Tanimu",
+      "given_name": "Zakari",
+      "suffix": "MD",
+      "check_digit_scheme": "214-217-1900"
+    },
+    "patient_type": "IN",
+    "servicing_facility": "COCAR",
+    "account_status": "DIS",
+    "primary_care_doctor": [
+      {
+        "person_id": "DILER",
+        "last_name": "Dilley",
+        "first_name": "Ermilo",
+        "middle_name": "Duane",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "GRAMI",
+        "last_name": "Graceffo",
+        "first_name": "Michael",
+        "middle_name": "A",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "OSOAY",
+        "last_name": "Osowo",
+        "first_name": "Ayodele",
+        "middle_name": "T",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "YANWE01",
+        "last_name": "Yan",
+        "first_name": "Wei",
+        "person_prefix": "MD"
+      }
+    ]
+  },
+  "0004.ORC": {
+    "order_control": "RE",
+    "order_status": "S",
+    "response_flag": "N",
+    "enterer_location": {
+      "point_of_care": "COCAR",
+      "room": "ARL"
+    }
+  },
+  "0005.OBR": {
+    "set_id": "1",
+    "placer_order_num": "001922764&N&N",
+    "filler_order_num": " - CHEST 1 VIEW PORTABLE",
+    "universal_service_id": {
+      "id": "CHEP",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_system": "RAD"
+    },
+    "priority": "R",
+    "requested_date_time": "201701030000",
+    "obsv_date_time_num": "201701030747",
+    "obsv_end_date_time_num": "201701030750",
+    "ordering_provider": "DILER",
+    "order_callback_phone_num": "817-465-5881",
+    "placer_field_1": ".SELF~DILER~YANWE01",
+    "result_status": "F",
+    "reason_for_study": "copd",
+    "principal_result_interpreter": {
+      "name": {
+        "id_num": "L.PHY.MAS",
+        "source_table": "201701030750"
+      }
+    },
+    "scheduled_date_time": "201701030400"
+  },
+  "0006.ZUR": {
+    "set_id": "1",
+    "information": "I772951"
+  },
+  "0007.ZUR": {
+    "set_id": "2",
+    "information": "I001922764"
+  },
+  "0008.ZUR": {
+    "set_id": "3",
+    "information": "FWDCGEWEB02.HCA.CORPAD.NET"
+  },
+  "0009.ZUR": {
+    "set_id": "4",
+    "information": "COCAR"
+  },
+  "0010.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "001922764",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_system": "CHEP"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": " ~ MEDICAL CENTER OF ARLINGTON Name: KIPLER KELLER,JANET ~ 3301 MATLOCK ROAD Phys: Dilley,Ermilo Duane MD ~ ARLINGTON,TX 76015 DOB: 11/05/1945 Age: 71 Sex: F~ Acct: I00970395034 Loc: I.400 A ~ PHONE #: 817-472-4873 Exam Date: 01/03/2017 Status: DIS IN ~ FAX #: 469-713-8222 Radiology No: ~ Unit No: I000356699 ~ ~ ~ ~ EXAMS: CPT CODE: 001922764 CHEST 1 VIEW PORTABLE 71010 ~ ~ COMPARISON: 12/31/16 0446 hours ~ ~ CLINICAL INFORMATION: COPD. ~ ~ FINDINGS: ~ ~ Bones are similar and appropriate for age including evidence for a ~ remote vertebroplasty in the upper mid thoracic vertebral body. ~ Mildly enlarged cardiomediastinal silhouette is stable. ~ ~ Lungs display stable emphysematous changes. There is a partially ~ calcified nodule in the right midlung field measuring approximately ~ 10 x 12 mm, unchanged in the interval and probably represents a ~ calcified granuloma in the right lower lobe. Previously described ~ reticular interstitial lung opacities have improved in the interval ~ and most consistent with resolving edema/fluid overload superimposed ~ on previously described pulmonary emphysema and chronic interstitial ~ changes. Blunted costophrenic angles remain similar. ~ ~ IMPRESSION: ~ ~ 1. FINDINGS CONSISTENT WITH RESOLVING EDEMA/INTERSTITIAL PNEUMONITIS ~ SUPERIMPOSED ON CHRONIC CHANGES, AS DESCRIBED ABOVE. ~ ~ 2. STABLE MILD CARDIOMEGALY. ~ ~ 3. EVIDENCE FOR OLD GRANULOMATOUS DISEASE. ~ ~ AFC- 99053 ~ ~ RL-501 ~ ______________________________________ ~ ~ Electronically signed by: M SALAM ~ Date: 01/03/17 ~ Time: 07:50 ~ ~ ~ ** Electronically Signed by M.D. SALAM MAQBOOL ** ~ ** on 01/03/2017 at 0750 ** ~ Reported and signed by: SALAM MAQBOOL, M.D. ~ ~ ~ ~ ~ ~ ~PAGE 1 Signed Report (CONTINUED) ~ ~ MEDICAL CENTER OF ARLINGTON Name: KIPLER KELLER,JANET ~ 3301 MATLOCK ROAD Phys: Dilley,Ermilo Duane MD ~ ARLINGTON,TX 76015 DOB: 11/05/1945 Age: 71 Sex: F~ Acct: I00970395034 Loc: I.400 A ~ PHONE #: 817-472-4873 Exam Date: 01/03/2017 Status: DIS IN ~ FAX #: 469-713-8222 Radiology No: ~ Unit No: I000356699 ~ ~ ~ ~ EXAMS: CPT CODE: 001922764 CHEST 1 VIEW PORTABLE 71010 ~ <CONTINUED> ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~CC: SELF REFERRED; Ermilo Duane Dilley MD; Wei Yan MD ~ ~Dictated Date/Time: 01/03/2017 (0747)~Technologist: MAIN XRAY PORTABLE B; PHONG HO RT(R) ~Transcribed Date/Time: 01/03/2017 (0750)~Transcriptionist: L.PHY.MAS ~Electronic Signature Date/Time: 01/03/2017 (0750)~Printed Date/Time: 01/13/2017 (0201) BATCH NO: N/A ~ ~PAGE 2 Signed Report"
+  }
+}

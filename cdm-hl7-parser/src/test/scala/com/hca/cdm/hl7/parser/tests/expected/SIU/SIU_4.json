@@ -1,0 +1,442 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "IP_FRNK_SIU_20170202-SIU-26",
+    "medical_record_num": "K000024611",
+    "medical_record_urn": "K22728",
+    "patient_account_num": "FR0804431435"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201702021310",
+    "message_type": {
+      "message_code": "SIU",
+      "trigger_event": "S18"
+    },
+    "message_control_id": "IP_FRNK_SIU_20170202-SIU-26",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
+      "network_id": "HCACRD",
+      "unit_number": "0059"
+    }
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "K000024611",
+      "assigning_authority": "FRNK",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": "K22728",
+    "patient_name": {
+      "family_name": "TOWNSEND",
+      "given_name": "DONALD",
+      "second_and_further_given_names_or_initials_thereof": "T",
+      "suffix": "SR"
+    },
+    "date_time_of_birth": "19531225",
+    "administrative_sex": "M",
+    "patient_account_num": "FR0804431435"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "O",
+    "assigned_patient_location": {
+      "point_of_care": "FR.ENDO",
+      "facility": "FRNK"
+    },
+    "admission_type": "EL",
+    "attending_doctor": {
+      "person_id": "YTR1291",
+      "family_name": "Patterson",
+      "given_name": "John"
+    },
+    "patient_type": "SDC",
+    "account_status": "DEP"
+  },
+  "0004.SCH": {
+    "unique_case_id": "50898",
+    "unique_appointment_id": "179889",
+    "operation_type": "P",
+    "update_type": "NEW",
+    "patient_doctor": {
+      "provider_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    },
+    "patient_service": "208800000X",
+    "patient_facility": "FRNK",
+    "operating_room": {
+      "room_id": "H1.EN1-02",
+      "room_desc": "ENDO Room 2"
+    },
+    "principal_surgeon": {
+      "provider_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    },
+    "operation_date_time": "201701301300",
+    "operation_entered": {
+      "entered_date_time": "201612120950",
+      "entered_by": "FHI8051"
+    },
+    "operation_scheduled_date_time": "201701301300"
+  },
+  "0005.ZTM": {
+    "case_pre_1_time": {
+      "time_desc": "Pt Arrives OPS",
+      "pre_date_time": "201701301217"
+    },
+    "case_pre_2_time": "Anesth. Pre-op Comp",
+    "case_pre_3_time": {
+      "time_desc": "Pt Ready",
+      "pre_date_time": "201701301300"
+    },
+    "case_hold_1_time": "Pt Arrives Holding",
+    "case_hold_2_time": "Anesth. Pre-op Comp",
+    "case_hold_3_time": "Pt Ready",
+    "case_operating_room_1_time": "Anesthesia Start",
+    "case_operating_room_2_time": {
+      "time_desc": "Pt In Room",
+      "or_date_time": "201701301304"
+    },
+    "case_operating_room_3_time": {
+      "time_desc": "Surgeon In Room",
+      "or_date_time": "201701301320"
+    },
+    "case_operating_room_4_time": {
+      "time_desc": "Pt Positioned",
+      "or_date_time": "201701301320"
+    },
+    "case_operating_room_5_time": {
+      "time_desc": "Procedure Start",
+      "or_date_time": "201701301327"
+    },
+    "case_operating_room_6_time": "Incision",
+    "case_operating_room_7_time": "Pt Re-Positioned",
+    "case_operating_room_8_time": {
+      "time_desc": "Procedure End",
+      "or_date_time": "201701301337"
+    },
+    "case_operating_room_9_time": {
+      "time_desc": "Surgeon Leaves Room",
+      "or_date_time": "201701301342"
+    },
+    "case_operating_room_10_time": {
+      "time_desc": "Pt Leaves Room",
+      "or_date_time": "201701301342"
+    },
+    "case_pacu_1_time": "Pt Arrives PACU",
+    "case_pacu_2_time": "Anesthesia End",
+    "case_pacu_3_time": "Pt Discharge Phase 1",
+    "case_pacu_4_time": "Pt PACU Holding Out",
+    "case_phase2_1_time": {
+      "time_desc": "Pt Arrives Phase 2",
+      "phase2_date_time": "201701301345"
+    },
+    "case_phase2_2_time": {
+      "time_desc": "Pt Discharge Phase 2",
+      "phase2_date_time": "201701301430"
+    }
+  },
+  "0006.ZPO": {
+    "anesthetic_type": {
+      "type_code": "MOD",
+      "type_desc": "Moderate sedation"
+    },
+    "anesthetic_pre_op_asa": {
+      "asa_code": "3",
+      "asa_desc": "3 Severe disease"
+    },
+    "surgery_outcome": {
+      "outcome_code": "CO",
+      "outcome_desc": "Completed"
+    }
+  },
+  "0007.ZTF": {
+    "counter": "1",
+    "transfer_type": "PRE",
+    "transfer_method": {
+      "transfer_method_code": "STR",
+      "transfer_method_desc": "Stretcher"
+    },
+    "destination": {
+      "destination_identifier": "PR",
+      "destination_desc": "Procedure room"
+    }
+  },
+  "0008.ZTF": {
+    "counter": "2",
+    "transfer_type": "HOLD"
+  },
+  "0009.ZTF": {
+    "counter": "3",
+    "transfer_type": "OR",
+    "transfer_method": {
+      "transfer_method_code": "STRWO2",
+      "transfer_method_desc": "Stretcher w/O2"
+    },
+    "destination": {
+      "destination_identifier": "PHASE2",
+      "destination_desc": "PACU phase 2"
+    },
+    "user": {
+      "person_id": "NDX2964",
+      "last_name": "Anglin",
+      "first_name": "Melissa"
+    }
+  },
+  "0010.ZTF": {
+    "counter": "4",
+    "transfer_type": "PACU"
+  },
+  "0011.ZTF": {
+    "counter": "5",
+    "transfer_type": "PHASE2",
+    "transfer_method": {
+      "transfer_method_code": "WC",
+      "transfer_method_desc": "Wheelchair"
+    },
+    "destination": {
+      "destination_identifier": "HOME",
+      "destination_desc": "Home"
+    }
+  },
+  "0012.ZAO": {
+    "counter": "1",
+    "operation_identifier": {
+      "operation_code": "H1GABIPR",
+      "operation_desc": "Biopsy Prostate",
+      "operation_name": "Biopsy Prostate"
+    },
+    "procedure_type": "P",
+    "severity": {
+      "severity_code": "0",
+      "severity_desc": "Level 0"
+    },
+    "surgeon": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    },
+    "wound_status": "CL"
+  },
+  "0013.ZPP": {
+    "counter": "1",
+    "operation_identifier": {
+      "operation_code": "H1GABIPR",
+      "operation_desc": "Biopsy Prostate",
+      "operation_name": "Biopsy Prostate"
+    },
+    "procedure_type": "P",
+    "severity": {
+      "severity_code": "0",
+      "severity_desc": "Level 0"
+    },
+    "surgeon": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0014.ZRX": {
+    "counter": "1",
+    "medication_type": "MED",
+    "medication": {
+      "medication_code": "FENT50VI3",
+      "medication_name": "fentaNYL Citrate/PF*"
+    },
+    "date_time": "201701301320",
+    "dose": "25",
+    "route": {
+      "route_code": "IV",
+      "route_name": "INTRAVEN"
+    },
+    "user": "NDX2964",
+    "dosage_units": "MCG",
+    "ordering_physician": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0015.ZRX": {
+    "counter": "2",
+    "medication_type": "MED",
+    "medication": {
+      "medication_code": "MIDA1VIA2",
+      "medication_name": "Versed-"
+    },
+    "date_time": "201701301320",
+    "dose": "2.5",
+    "route": {
+      "route_code": "IV",
+      "route_name": "INTRAVEN"
+    },
+    "user": "NDX2964",
+    "dosage_units": "MG",
+    "ordering_physician": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0016.ZRX": {
+    "counter": "3",
+    "medication_type": "MED",
+    "medication": {
+      "medication_code": "FENT50VI3",
+      "medication_name": "fentaNYL Citrate/PF*"
+    },
+    "date_time": "201701301323",
+    "dose": "25",
+    "route": {
+      "route_code": "IV",
+      "route_name": "INTRAVEN"
+    },
+    "user": "NDX2964",
+    "dosage_units": "MCG",
+    "ordering_physician": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0017.ZRX": {
+    "counter": "4",
+    "medication_type": "MED",
+    "medication": {
+      "medication_code": "MIDA1VIA2",
+      "medication_name": "Versed-"
+    },
+    "date_time": "201701301323",
+    "dose": "2.5",
+    "route": {
+      "route_code": "IV",
+      "route_name": "INTRAVEN"
+    },
+    "user": "NDX2964",
+    "dosage_units": "MG",
+    "ordering_physician": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0018.ZRX": {
+    "counter": "5",
+    "medication_type": "MED",
+    "medication": {
+      "medication_code": "MIDA1VIA2",
+      "medication_name": "Versed-"
+    },
+    "date_time": "201701301326",
+    "dose": "2.5",
+    "route": {
+      "route_code": "IV",
+      "route_name": "INTRAVEN"
+    },
+    "user": "NDX2964",
+    "dosage_units": "MG",
+    "ordering_physician": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0019.ZRX": {
+    "counter": "6",
+    "medication_type": "MED",
+    "medication": {
+      "medication_code": "FENT50VI3",
+      "medication_name": "fentaNYL Citrate/PF*"
+    },
+    "date_time": "201701301335",
+    "dose": "50",
+    "route": {
+      "route_code": "IV",
+      "route_name": "INTRAVEN"
+    },
+    "user": "NDX2964",
+    "dosage_units": "MCG",
+    "ordering_physician": {
+      "person_id": "YTR1291",
+      "last_name": "Patterson",
+      "first_name": "John"
+    }
+  },
+  "0020.ZCT": {
+    "counter": "1",
+    "count_type": "Sponges"
+  },
+  "0021.ZCT": {
+    "counter": "2",
+    "count_type": "Sharps"
+  },
+  "0022.ZCT": {
+    "counter": "3",
+    "count_type": "Instrument"
+  },
+  "0023.ZDV": {
+    "counter": "1",
+    "device": {
+      "device_mnemonic": "TABSTR",
+      "device_description": "Table stretcher"
+    }
+  },
+  "0024.ZEQ": {
+    "counter": "1",
+    "equipment": {
+      "equipment_mnemonic": "H1.ENBASIC",
+      "equipment_description": "Basic equipment endoscopy"
+    }
+  },
+  "0025.ZE1": {
+    "id": "1",
+    "counter": "1",
+    "observation_identifier": {
+      "equipment_query_mnemonic": "5ORM09027A",
+      "query_text": "Endoscope serial number(s)"
+    },
+    "observation_sub_id": "1",
+    "observation_value": "T952:1847952 (TRUS PROBE)"
+  },
+  "0026.ZPS": {
+    "counter": "1",
+    "position": {
+      "position_mnemonic": "LATL",
+      "position_description": "Lateral left side down"
+    }
+  },
+  "0027.ZTX": {
+    "counter": "1",
+    "type_of_text_comment_values": "PHASE2-NOTE",
+    "text_line": "01/30/17 1456 - Melissa Faye Anglin - Registered Nurse: PT OUT VIA W/C AT 1430"
+  },
+  "0028.ZTX": {
+    "counter": "2",
+    "type_of_text_comment_values": "PRE",
+    "text_line": "ELEVATED PSA"
+  },
+  "0029.ZTX": {
+    "counter": "3",
+    "type_of_text_comment_values": "PST",
+    "text_line": "S/P TRUS WITH PROSTATE BIOPSY"
+  },
+  "0030.ZTX": {
+    "counter": "4",
+    "type_of_text_comment_values": "SPE",
+    "text_line": "RIGHT PROSTATE BX X6"
+  },
+  "0031.ZTX": {
+    "counter": "5",
+    "type_of_text_comment_values": "SPE",
+    "text_line": "LEFT PROSTATE BX X6"
+  }
+}

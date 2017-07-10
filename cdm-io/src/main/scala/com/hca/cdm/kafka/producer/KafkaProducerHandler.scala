@@ -39,9 +39,10 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
   initialise()
 
   private def validate(topicToProduce: String, publishToMultiTopic: Boolean): (Boolean, String) = {
-    val validReq = publishToMultiTopic match {
-      case true => true
-      case _ => topicToProduce != null && !topicToProduce.trim.isEmpty
+    val validReq = if (publishToMultiTopic) {
+      true
+    } else {
+      topicToProduce != null && !topicToProduce.trim.isEmpty
     }
     if (validReq) {
       info("Producer Initialisation Started To produce data to Topic :: " + topicToProduce)
@@ -74,27 +75,27 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
 
   private def handleData(data: AnyRef, header: Any, topic: String, sizeThreshold: Int, overSizeHandler: OverSizeHandler): Unit = {
-    if (valid(data) & valid(topic) & !topic.trim.isEmpty) {
-      if (!IOCanHandle(data, sizeThreshold) & overSizeHandler != null) {
+    if (valid(data) && valid(topic) && !topic.trim.isEmpty) {
+      if (!IOCanHandle(data, sizeThreshold) && overSizeHandler != null) {
         info("Record cannot be deal with this handler :: " + getClass + "  So Delivering to OversizeHandler :: " + overSizeHandler)
         overSizeHandler handle data
         return
       }
-      valid(header) match {
-        case true => (header, data) match {
+      if (valid(header)) {
+        (header, data) match {
           case (k: String, v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k.getBytes(UTF8), v.getBytes(UTF8)))
           case (k: Array[Byte], v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v))
           case (k: Array[Byte], v: String) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k, v.getBytes(UTF8)))
           case (k: String, v: Array[Byte]) => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, k.getBytes(UTF8), v))
-          case _ => throw new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
+          case _ => throw new UnsupportedOperationException("This Operation not supported for this Type " + data + " with Header :: " + header)
         }
-        case _ => data match {
+      } else {
+        data match {
           case v: String => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, v.getBytes(UTF8)))
           case v: Array[Byte] => produceData(new ProducerRecord[Array[Byte], Array[Byte]](topic, v))
-          case _ => throw new UnsupportedOperationException("This Type of Operation not supported for this Type " + data + " with Header :: " + header)
+          case _ => throw new UnsupportedOperationException("This Operation not supported for this Type " + data + " with Header :: " + header)
 
         }
-
       }
     }
     else throw new CDMKafkaException("Cannot Send Invalid Data to Kafka ::  " + data + " with Header :: " + header + " to Topic :: " + topic)
@@ -121,13 +122,14 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
   @throws(classOf[CDMKafkaException])
   private def initialise(): Unit = {
-    if (publishToMultiTopic match {
-      case true => true
-      case _ => if (!topicToProduce.trim.isEmpty) {
+    if (if (publishToMultiTopic) {
+      true
+    } else {
+      if (!topicToProduce.trim.isEmpty) {
         topicUtil.createTopicIfNotExist(topicToProduce)
         topicsToProduce += topicToProduce -> true
       }
-        true
+      true
     }) {
       handleProducer()
       if (this.producer != null && this.producerStarted) {
@@ -223,12 +225,12 @@ object KafkaProducerHandler extends AutoCloseable {
 
   private def createProducer(createIfNotExist: () => KafkaProducerHandler): KafkaProducerHandler = {
     lock.synchronized(
-      producer == null match {
-        case true =>
-          producer = createIfNotExist()
-          info(s"Created Kafka Producer handler $producer")
-          producer
-        case _ => producer
+      if (producer == null) {
+        producer = createIfNotExist()
+        info(s"Created Kafka Producer handler $producer")
+        producer
+      } else {
+        producer
       })
   }
 

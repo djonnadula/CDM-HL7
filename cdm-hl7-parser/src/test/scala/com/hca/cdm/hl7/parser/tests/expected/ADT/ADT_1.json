@@ -1,0 +1,324 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCSZ",
+    "message_control_id": "MT_COCSZ_ADT_SZGTADM.1.32377292",
+    "medical_record_num": "D002403639",
+    "medical_record_urn": "D1676444",
+    "patient_account_num": "D00115310916"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCSZ",
+    "date_time_of_message": "201702072335",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A08"
+    },
+    "message_control_id": "MT_COCSZ_ADT_SZGTADM.1.32377292",
+    "processing_id": "P",
+    "version_id": "2.1"
+  },
+  "0002.EVN": {
+    "event_type_code": "A08",
+    "recorded_date_time": "201702072335",
+    "operator_id": {
+      "person_id": "R.SZ.GDE",
+      "family_name": "ESTILLORE",
+      "given_name": "GERELI",
+      "second_and_further_given_names_or_initials_thereof": "D"
+    }
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "medical_record_num": "D002403639",
+    "medical_record_urn": "D1676444",
+    "patient_name": {
+      "family_name": "JONES",
+      "given_name": "ZAYQUAN",
+      "second_and_further_given_names_or_initials_thereof": "A"
+    },
+    "date_time_of_birth": "19970109",
+    "administrative_sex": "M",
+    "patient_alias": {},
+    "race": "B",
+    "patient_address": {
+      "street_address": "999 UNKNOWN ADDRESS",
+      "city": "LAS VEGAS",
+      "state_or_province": "NV",
+      "zip_or_postal_code": "89104",
+      "country": "USA",
+      "county_parish_code": "CLARK"
+    },
+    "phone_num_home": "(702)999-9999",
+    "phone_num_business": "(702)999-9999",
+    "primary_language": "ENG",
+    "marital_status": "S",
+    "religion": "NON",
+    "patient_account_num": "D00115310916",
+    "ssn_num_patient": "777-77-7777"
+  },
+  "0004.NK1": {
+    "set_id": "1",
+    "name": {
+      "family_name": "UNKNOWN",
+      "given_name": "UNKNOW"
+    },
+    "relationship": "SP",
+    "address": {
+      "street_address": "999 UNKNOWN ADDRESS",
+      "city": "LAS VEGAS",
+      "state_or_province": "NV",
+      "zip_or_postal_code": "89104",
+      "country": "USA",
+      "county_parish_code": "CLARK"
+    },
+    "phone_num": "(702)999-9999"
+  },
+  "0005.NK1": {
+    "set_id": "2",
+    "name": {
+      "family_name": "UNKNOWN",
+      "given_name": "UNKNOW"
+    },
+    "relationship": "SP",
+    "address": {
+      "street_address": "999 UNKNOWN ADDRESS",
+      "city": "LAS VEGAS",
+      "state_or_province": "NV",
+      "zip_or_postal_code": "89104",
+      "country": "USA",
+      "county_parish_code": "CLARK"
+    },
+    "phone_num": "(702)999-9999"
+  },
+  "0006.PV1": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": {
+      "point_of_care": "D.ER"
+    },
+    "admission_type": "EM",
+    "attending_doctor": {
+      "person_id": "EMEGA",
+      "family_name": "Emery",
+      "given_name": "Garrett",
+      "second_and_further_given_names_or_initials_thereof": "J",
+      "degree": "MD"
+    },
+    "referring_doctor": {
+      "person_id": ".SELF",
+      "family_name": "REFERRED",
+      "given_name": "SELF"
+    },
+    "primary_care_doctor": {
+      "person_id": ".NO PCP",
+      "last_name": "PHYSICIAN",
+      "first_name": "NO",
+      "middle_name": "PRIMARY OR FAMILY"
+    },
+    "hospital_service": "ERS",
+    "admit_source": "PR",
+    "mode_of_arrival": "AMB",
+    "vip_indicator": "N",
+    "patient_type": "ER",
+    "financial_class": "99",
+    "servicing_facility": "COCSZ",
+    "reason_for_visit": "FRENCH FRY IN THROAT, ABCD WNL, ACUITY 3",
+    "account_status": "REG",
+    "admit_date_time": "201702072215"
+  },
+  "0007.AL1": {
+    "set_id": "1",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F001900388",
+      "text": "No Known Allergies",
+      "name_of_coding_system": "No Known Allergies"
+    },
+    "allergy_severity_code": "U",
+    "identification_date": "20170207"
+  },
+  "0008.ACC": {
+    "accident_date_time": {},
+    "accident_code": "11"
+  },
+  "0009.GT1": {
+    "set_id": "1",
+    "guarantor_name": {
+      "family_name": "JONES",
+      "given_name": "ZAYQUAN",
+      "second_and_further_given_names_or_initials_thereof": "A"
+    },
+    "guarantor_address": {
+      "street_address": "999 UNKNOWN ADDRESS",
+      "city": "LAS VEGAS",
+      "state_or_province": "NV",
+      "zip_or_postal_code": "89104",
+      "country": "USA",
+      "county_parish_code": "CLARK"
+    },
+    "guarantor_phone_num_home": "(702)999-9999",
+    "guarantor_date_time_of_birth": "19970109",
+    "guarantor_administrative_sex": "M",
+    "guarantor_relationship": "SA",
+    "guarantor_ssn": "777-77-7777",
+    "guarantor_employer_name": "UNKNOWN",
+    "guarantor_employer_address": {
+      "street_address1": "UNKNOWNN",
+      "city": "LAS VEGAS",
+      "state_province": "NV",
+      "zip_postal_code": "89148"
+    },
+    "guarantor_employer_phone_num": "(702)999-9999",
+    "gt1_unknown": "",
+    "guarantor_employment_status": "N"
+  },
+  "0010.GT1": {
+    "set_id": "2",
+    "guarantor_name": {},
+    "guarantor_address": {},
+    "guarantor_employer_address": {}
+  },
+  "0011.IN1": {
+    "set_id": "1",
+    "health_plan_id": "MEDNVPA",
+    "insurance_company_name": "MEDICAID PENDING",
+    "insurance_company_address": {
+      "street_address": ".",
+      "city": ".",
+      "state_or_province": "NV",
+      "zip_or_postal_code": ".",
+      "country": "USA"
+    },
+    "insurance_company_phone_num": ".",
+    "group_num": "99999",
+    "group_name": "NONE",
+    "name_of_insured": {
+      "family_name": "JONES",
+      "given_name": "ZAYQUAN",
+      "second_and_further_given_names_or_initials_thereof": "A"
+    },
+    "insured_relationship_to_patient": "01",
+    "insured_date_of_birth": "19970109",
+    "policy_num": "777777777",
+    "insured_administrative_sex": "M"
+  },
+  "0012.IN1": {
+    "set_id": "2",
+    "health_plan_id": "CHAX050",
+    "insurance_company_name": "CHARITY PENDING",
+    "insurance_company_address": {
+      "street_address": ".",
+      "city": ".",
+      "state_or_province": "NV",
+      "zip_or_postal_code": ".",
+      "country": "USA"
+    },
+    "insurance_company_phone_num": ".",
+    "group_num": "99999",
+    "group_name": "NONE",
+    "name_of_insured": {
+      "family_name": "JONES",
+      "given_name": "ZAYQUAN",
+      "second_and_further_given_names_or_initials_thereof": "A"
+    },
+    "insured_relationship_to_patient": "01",
+    "insured_date_of_birth": "19970109",
+    "policy_num": "777777777",
+    "insured_administrative_sex": "M"
+  },
+  "0013.IN1": {
+    "set_id": "3",
+    "health_plan_id": "UNINSURED",
+    "insurance_company_name": "UNINSURED DISCOUNT PLAN",
+    "insurance_company_address": {
+      "street_address": ".",
+      "city": ".",
+      "state_or_province": "NV",
+      "zip_or_postal_code": ".",
+      "country": "USA"
+    },
+    "insurance_company_phone_num": ".",
+    "group_num": "99999",
+    "group_name": "NONE",
+    "name_of_insured": {
+      "family_name": "JONES",
+      "given_name": "ZAYQUAN",
+      "second_and_further_given_names_or_initials_thereof": "A"
+    },
+    "insured_relationship_to_patient": "01",
+    "insured_date_of_birth": "19970109",
+    "policy_num": "777777777",
+    "insured_administrative_sex": "M"
+  },
+  "0014.ZCD": {
+    "set_id": "1",
+    "query_data": {
+      "mnem": "ETHNICITY",
+      "text": "ETHNICITY",
+      "response": "2"
+    }
+  },
+  "0015.ZCD": {
+    "set_id": "2",
+    "query_data": {
+      "mnem": "ZSS.DEPREQ",
+      "text": "DEPOSIT REQ?",
+      "response": "N"
+    }
+  },
+  "0016.ZCD": {
+    "set_id": "3",
+    "query_data": {
+      "mnem": "ZSS.ESTCHG",
+      "text": "EST PT DUE",
+      "response": "200.00"
+    }
+  },
+  "0017.ZCD": {
+    "set_id": "4",
+    "query_data": {
+      "mnem": "ZSS.UNABLE",
+      "text": "Comment if FULL amt requested NOT collected",
+      "response": "PAY AT FAC"
+    }
+  },
+  "0018.ZIN": {
+    "set_id": "1",
+    "insured_id": "SP",
+    "insurance_mail_to_name": "MEDICAID PENDING",
+    "insurance_verification_ind": "N",
+    "authorization_precertification_required": "N",
+    "insurance_plan_id": "MEDNVPA"
+  },
+  "0019.ZIN": {
+    "set_id": "2",
+    "insured_id": "SP",
+    "insurance_mail_to_name": "SELF PAY",
+    "insurance_verification_ind": "N",
+    "authorization_precertification_required": "N",
+    "insurance_plan_id": "CHAX050"
+  },
+  "0020.ZIN": {
+    "set_id": "3",
+    "insured_id": "SP",
+    "insurance_mail_to_name": "UNINSURED DISCOUNT PLAN",
+    "insurance_verification_ind": "N",
+    "authorization_precertification_required": "N",
+    "insurance_plan_id": "UNINSURED"
+  },
+  "0021.ZCS": {
+    "patient_employer": "UNK",
+    "patient_employer_address": {
+      "street_address1": "UNKNOWN",
+      "city": "LAS VEGAS",
+      "state_province": "NV",
+      "zip_postal_code": "89148"
+    },
+    "patient_employment_status": "N",
+    "patient_e_mail_address": "NONE",
+    "guarantor_e_mail_address": "NONE",
+    "patient_accounting_facility_id": "01541\\t"
+  }
+}

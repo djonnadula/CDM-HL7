@@ -1,0 +1,371 @@
+{
+  "0000.COMN": {
+    "sending_facility": "AKAR",
+    "message_control_id": "EPIC_AKAR_ORU_7F454_43AA06_0_FB78",
+    "medical_record_num": "1001604196",
+    "medical_record_urn": "",
+    "patient_account_num": "27645518"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": {
+      "namespace_id": "13",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.2.695071",
+      "universal_id_type": "ISO"
+    },
+    "sending_facility": "AKAR",
+    "date_time_of_message": "20170403000205",
+    "security": "LABBACKGROUND",
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "EPIC_AKAR_ORU_7F454_43AA06_0_FB78",
+    "processing_id": "P",
+    "version_id": "2.1",
+    "continuation_pointer": "Epic_Mountain_PRD",
+    "country_code": "USA",
+    "message_profile_id": {
+      "entity_id": "PHLabReport-Ack",
+      "universal_id": "2.16.840.1.114222.4.10.3",
+      "universal_id_type": "ISO"
+    }
+  },
+  "0002.SFT": {
+    "software_vendor_organization": {
+      "organization_name": "Epic Systems Corporation",
+      "organization_name_type_code": "L",
+      "assigning_authority": {
+        "namespace_id": "ANSI",
+        "universal_id": "1.2.840",
+        "universal_id_type": "ISO"
+      },
+      "id_type_code": "XX",
+      "organization_id": "1.2.840.114350"
+    },
+    "software_certified_version_or_release_num": "Epic 2015 ",
+    "software_product_name": "Bridges",
+    "software_binary_id": "8.2.2.0",
+    "software_install_date": "20161103091226"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "1001604196",
+      "assigning_authority": {
+        "namespace_id": "EPIC",
+        "universal_id": "1.2.840.114350.1.13.340.2.7.5.698084.0",
+        "universal_id_type": "ISO"
+      },
+      "id_type_code": "MRN"
+    },
+    "patient_name": {
+      "family_name": "Stansberry",
+      "given_name": "Kenneth",
+      "second_and_further_given_names_or_initials_thereof": "Wayman"
+    },
+    "date_time_of_birth": "19320922",
+    "administrative_sex": "M",
+    "race": "W",
+    "patient_address": {
+      "street_address": "10810 ANVIK CIR",
+      "city": "EAGLE RIVER",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99577",
+      "country": "USA",
+      "address_type": "P"
+    },
+    "phone_num_home": {
+      "telephone_num": "(907)694-9454",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H",
+      "area_city_code": "907",
+      "local_num": "6949454"
+    },
+    "patient_account_num": "27645518",
+    "ethnic_group": "Not Hispanic",
+    "patient_death_indicator": "N",
+    "last_update_date_time": "20151109174823",
+    "last_update_facility": {
+      "namespace_id": "1",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.2.696570",
+      "universal_id_type": "ISO"
+    }
+  },
+  "0004.NK1": {
+    "set_id": "1",
+    "name": {
+      "family_name": "STANSBERRY",
+      "given_name": "KEN",
+      "suffix": "JR"
+    },
+    "relationship": "G8",
+    "address": {
+      "street_address": "10810 ANVIK CIR",
+      "city": "EAGLE RIVER",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99577",
+      "country": "USA"
+    },
+    "phone_num": [
+      {
+        "telephone_num": "(907)694-9454",
+        "telecommunication_equipment_type": "H",
+        "area_city_code": "907",
+        "local_num": "6949454"
+      },
+      {
+        "telephone_num": "(907)632-3046",
+        "telecommunication_equipment_type": "M",
+        "area_city_code": "907",
+        "local_num": "6323046"
+      }
+    ]
+  },
+  "0005.NK1": {
+    "set_id": "2",
+    "address": {
+      "country": "USA"
+    },
+    "organization_name": "USM"
+  },
+  "0006.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "AKARMU",
+      "room": "L.ONC629",
+      "bed": "L.ONC629A",
+      "facility": "AKAR"
+    },
+    "admission_type": "E",
+    "attending_doctor": {
+      "person_id": "QCI8597",
+      "family_name": "MRAZ",
+      "given_name": "MICHAEL",
+      "second_and_further_given_names_or_initials_thereof": "K",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR"
+    },
+    "referring_doctor": {
+      "person_id": ".SELF",
+      "family_name": "REFERRED",
+      "given_name": "SELF",
+      "assigning_authority": "PROVID",
+      "id_type_code": "PROVID"
+    },
+    "consulting_doctor": {
+      "person_id": "HVU9768",
+      "family_name": "DUDLEY",
+      "given_name": "MATTHEW",
+      "second_and_further_given_names_or_initials_thereof": "J",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR"
+    },
+    "hospital_service": "MED",
+    "admitting_doctor": {
+      "person_id": "QCI8597",
+      "family_name": "MRAZ",
+      "given_name": "MICHAEL",
+      "second_and_further_given_names_or_initials_thereof": "K",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR"
+    },
+    "visit_num": "27645518",
+    "admit_date_time": "20170402093700"
+  },
+  "0007.ORC": {
+    "order_control": "RE",
+    "placer_order_num": {
+      "entity_id": "57210986",
+      "namespace_id": "EPIC",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.2.798268",
+      "universal_id_type": "ISO"
+    },
+    "filler_order_num": {
+      "entity_id": "AK09217M0007",
+      "namespace_id": "Beaker",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.3.798268.320",
+      "universal_id_type": "ISO"
+    },
+    "placer_group_num": {
+      "entity_id": "AK09217M0007",
+      "filler_assigned_id": "Beaker",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.3.798268.320",
+      "universal_id_type": "ISO"
+    },
+    "ordering_provider": {
+      "person_id": "IHT9873",
+      "family_name": "WINKLE",
+      "given_name": "R",
+      "second_and_further_given_names_or_initials_thereof": "KEITH",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR"
+    },
+    "call_back_phone_num": {
+      "telephone_num": "(907)264-1222",
+      "area_city_code": "907",
+      "local_num": "2641222"
+    },
+    "ordering_facility_name": {
+      "organization_name": "MTN AKAR",
+      "organization_name_type_code": "D",
+      "assigning_authority": {
+        "namespace_id": "MOUNTAIN PRD",
+        "universal_id": "1.2.840.114350.1.13.340.2.7.2.696570",
+        "universal_id_type": "ISO"
+      },
+      "id_type_code": "XX",
+      "organization_id": "400"
+    },
+    "ordering_facility_address": {
+      "street_address": "2801 DEBARR ROAD",
+      "city": "ANCHORAGE",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
+      "country": "USA",
+      "address_type": "B",
+      "county_parish_code": "ANCHORAGE"
+    },
+    "ordering_provider_address": {
+      "street_address": "2801 DEBARR ROAD",
+      "city": "ANCHORAGE",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
+      "country": "USA",
+      "address_type": "C",
+      "county_parish_code": "ANCHORAGE"
+    }
+  },
+  "0008.OBR": {
+    "set_id": "1",
+    "placer_order_num": {
+      "entity_id": "57210986",
+      "namespace_id": "EPIC",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.2.798268",
+      "universal_id_type": "ISO"
+    },
+    "filler_order_num": {
+      "entity_id": "AK09217M0007",
+      "namespace_id": "Beaker",
+      "universal_id": "1.2.840.114350.1.13.340.2.7.3.798268.320",
+      "universal_id_type": "ISO"
+    },
+    "universal_service_id": {
+      "id": "LAB12710",
+      "text": "CULTURE BLOOD",
+      "name_of_coding_system": "EPICPROC"
+    },
+    "obsv_date_time_num": "20170402110000",
+    "specimen_action_code": "Unit Collect",
+    "relevant_clinical_information": "Draw for blood culture #2.",
+    "ordering_provider": {
+      "person_id": "IHT9873",
+      "family_name": "WINKLE",
+      "given_name": "R",
+      "second_and_further_given_names_or_initials_thereof": "KEITH",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR"
+    },
+    "order_callback_phone_num": {
+      "telephone_num": "(907)264-1222",
+      "area_city_code": "907",
+      "local_num": "2641222"
+    },
+    "results_rpt_status_chng_date_time": "20170403000200",
+    "diagnostic_service_section_id": "Mic",
+    "result_status": "P",
+    "principal_result_interpreter": "&Yang&Min&C&"
+  },
+  "0009.TQ1": {
+    "set_id": "1",
+    "start_date_time": "20170402094200",
+    "priority": "STAT"
+  },
+  "0010.OBX": {
+    "set_id": "1",
+    "value_type": "ST",
+    "obsv_id": {
+      "id": "1206627",
+      "text": "CULTURE BLOOD",
+      "name_of_coding_system": "EPICCOMP"
+    },
+    "obsv_value": "Culture received and in progress. Preliminary results to follow.",
+    "obsv_result_status": "P",
+    "date_time_of_the_obsv": "20170402110000",
+    "date_time_of_the_analysis": "20170403000200",
+    "performing_organization_name": {
+      "organization_name": "ALASKA REGIONAL HOSPITAL LABORATORY",
+      "organization_name_type_code": "D",
+      "organization_id": "AKAR"
+    },
+    "performing_organization_address": {
+      "street_address": "2801 DEBARR ROAD",
+      "city": "ANCHORAGE",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
+      "country": "USA",
+      "address_type": "B"
+    }
+  },
+  "0011.OBX": {
+    "set_id": "2",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "1206627",
+      "text": "CULTURE BLOOD",
+      "name_of_coding_system": "EPICCOMP"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": {
+      "primary_id": "123004",
+      "text": "GRAM NEGATIVE BACILLI",
+      "data_5": "GRAM NEGATIVE BACILLI"
+    },
+    "interpretation_codes": "AA",
+    "obsv_result_status": "P",
+    "date_time_of_the_obsv": "20170402110000",
+    "date_time_of_the_analysis": "20170403000200",
+    "performing_organization_name": {
+      "organization_name": "ALASKA REGIONAL HOSPITAL LABORATORY",
+      "organization_name_type_code": "D",
+      "organization_id": "AKAR"
+    },
+    "performing_organization_address": {
+      "street_address": "2801 DEBARR ROAD",
+      "city": "ANCHORAGE",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99508",
+      "country": "USA",
+      "address_type": "B"
+    }
+  },
+  "0012.NTE": {
+    "set_id": "1",
+    "source_of_comment": "L",
+    "comment": "Culture Positive for Gram negative bacilli"
+  },
+  "0013.SPM": {
+    "set_id": "1",
+    "specimen_id": {
+      "filler_assigned_id": {
+        "entity_id": "AK09217M0007",
+        "namespace_id": "Beaker",
+        "universal_id": "1.2.840.114350.1.13.340.2.7.3.798268.320",
+        "universal_id_type": "ISO"
+      }
+    },
+    "specimen_type": {
+      "id": "Blood",
+      "text": "Blood"
+    },
+    "specimen_source_site": {
+      "id": "R AC",
+      "text": "Right AC",
+      "alternate_id": "  "
+    },
+    "specimen_collection_date_time": "20170402110000",
+    "specimen_received_date_time": "20170402112138"
+  }
+}

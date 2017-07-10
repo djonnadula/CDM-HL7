@@ -1,0 +1,276 @@
+{
+  "0000.COMN": {
+    "sending_facility": "MSLP",
+    "message_control_id": "EPIC_MSLP_ADT_233590",
+    "medical_record_num": "79849874",
+    "medical_record_urn": "2258031",
+    "patient_account_num": "100001421"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "EPIC_MSLP",
+    "sending_facility": "MSLP",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20160808170453",
+    "security": "BSV5218",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A02"
+    },
+    "message_control_id": "EPIC_MSLP_ADT_233590",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "Epic_MountainQA",
+    "message_profile_id": "UTA"
+  },
+  "0002.EVN": {
+    "event_type_code": "A02",
+    "recorded_date_time": "20160808170452",
+    "event_reason_code": "ADT_EVENT",
+    "operator_id": {
+      "person_id": "BSV5218",
+      "family_name": "FITISEMANU",
+      "given_name": "JENNIFER",
+      "assigning_authority": "MTNUT",
+      "assigning_facility": "MSLP"
+    },
+    "event_occured": "20160808152400"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": "79849874",
+    "alternate_patient_id": "2258031",
+    "patient_name": {
+      "family_name": "DIVSINT",
+      "given_name": "TWO",
+      "second_and_further_given_names_or_initials_thereof": "THERAPYTWO"
+    },
+    "date_time_of_birth": "19610728",
+    "administrative_sex": "M",
+    "race": "W",
+    "patient_address": {
+      "street_address": "123 SINKERBALL RD",
+      "city": "BLUFFDALE",
+      "state_or_province": "UT",
+      "zip_or_postal_code": "84065",
+      "country": "USA",
+      "address_type": "P",
+      "county_parish_code": "SALT LAKE"
+    },
+    "county_code": "SALT LAKE",
+    "phone_num_home": {
+      "telephone_num": "(801)263-1673",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H",
+      "area_city_code": "801",
+      "local_num": "2631673"
+    },
+    "primary_language": "ENGLISH",
+    "marital_status": "M",
+    "religion": "LDS",
+    "patient_account_num": "100001421",
+    "ssn_num_patient": "777-77-7777",
+    "ethnic_group": "NOT HISPANIC",
+    "patient_death_indicator": "N"
+  },
+  "0004.ZPD": {
+    "pregnancy_flag": "N"
+  },
+  "0005.PD1": {
+    "patient_primary_facility": {
+      "organization_name": "ST. MARK'S HOSPITAL",
+      "id_num": "10001001"
+    },
+    "patient_primary_care_provider_name_and_id_num": [
+      {
+        "person_id": "1508881640",
+        "last_name": "KUO",
+        "first_name": "DAVID",
+        "assgn_authr": "NPI",
+        "identifier_type_code": "NPI"
+      },
+      {
+        "person_id": "KUODA",
+        "last_name": "KUO",
+        "first_name": "DAVID",
+        "assgn_authr": "PROVID",
+        "identifier_type_code": "PROVID"
+      },
+      {
+        "person_id": "RYI9897",
+        "last_name": "KUO",
+        "first_name": "DAVID",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      }
+    ]
+  },
+  "0006.PV1": {
+    "set_id": "1",
+    "patient_class": "O",
+    "assigned_patient_location": {
+      "point_of_care": "MSLPMDSG",
+      "room": "LP.M417",
+      "bed": "LP.M417A",
+      "facility": "MSLP"
+    },
+    "admission_type": "L",
+    "prior_patient_location": {
+      "point_of_care": "MSLPICU",
+      "room": "LP.M413",
+      "bed": "LP.M413A",
+      "facility": "MSLP"
+    },
+    "attending_doctor": [
+      {
+        "person_id": "1100199995",
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
+      },
+      {
+        "person_id": "20001",
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "ABC1231",
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "referring_doctor": [
+      {
+        "person_id": "1508881640",
+        "family_name": "KUO",
+        "given_name": "DAVID",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
+      },
+      {
+        "person_id": "KUODA",
+        "family_name": "KUO",
+        "given_name": "DAVID",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "RYI9897",
+        "family_name": "KUO",
+        "given_name": "DAVID",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "hospital_service": "IV",
+    "admit_source": "2",
+    "vip_indicator": "n",
+    "admitting_doctor": [
+      {
+        "person_id": "1100199995",
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
+      },
+      {
+        "person_id": "20001",
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "ABC1231",
+        "family_name": "INPATIENT",
+        "given_name": "ATTENDING",
+        "second_and_further_given_names_or_initials_thereof": "PHYSICIAN",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "visit_num": "10136580",
+    "financial_class": "99",
+    "account_status": {
+      "id": "Adm",
+      "text": "Conf"
+    },
+    "admit_date_time": "20160803095900",
+    "alternate_visit_id": "10136580"
+  },
+  "0007.PV2": {
+    "accommodation_code": "SC",
+    "expected_admit_date_time": "20160803095800",
+    "visit_publicity_code": "n",
+    "visit_protection_indicator": "N"
+  },
+  "0008.ZPV": {
+    "first_outpatient_occurence_date_time": "20160803095900"
+  },
+  "0009.OBX": {
+    "set_id": "1",
+    "value_type": "NM",
+    "obsv_id": {
+      "id": "HT",
+      "text": "HEIGHT"
+    },
+    "obsv_value": "5' 5\"",
+    "units": "ft",
+    "date_time_of_the_obsv": "20160803"
+  },
+  "0010.OBX": {
+    "set_id": "2",
+    "value_type": "NM",
+    "obsv_id": {
+      "id": "WT",
+      "text": "WEIGHT"
+    },
+    "obsv_value": "2574.97",
+    "units": "oz",
+    "date_time_of_the_obsv": "20160803"
+  },
+  "0011.OBX": {
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ADMSRCDETAIL",
+      "text": "POINT OF ORIGIN"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "2",
+    "date_time_of_the_obsv": "20160803"
+  },
+  "0012.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT1",
+      "text": "ADT: PATIENT STATUS"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "Adm",
+    "date_time_of_the_obsv": "20160803"
+  },
+  "0013.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT2",
+      "text": "HOSPITAL - ADMIT CONFIRMATION STATUS"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "Conf",
+    "date_time_of_the_obsv": "20160803"
+  }
+}

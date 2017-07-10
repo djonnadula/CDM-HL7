@@ -1,0 +1,157 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_ORU_EDMQC.161102.19",
+    "medical_record_num": "J000426114",
+    "medical_record_urn": "J502719",
+    "patient_account_num": "J00021037132"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201610251403",
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "IP_COQ1A_ORU_EDMQC.161102.19",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000426114",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": "J502719",
+    "patient_name": {
+      "family_name": "Test",
+      "given_name": "KM82100"
+    },
+    "date_time_of_birth": "19430920",
+    "administrative_sex": "M",
+    "patient_account_num": "J00021037132"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": {
+      "point_of_care": "D.ER",
+      "facility": "COCQA1A"
+    },
+    "admission_type": "EM",
+    "attending_doctor": {
+      "person_id": "1CSMMW6007",
+      "family_name": "WILLIAMS",
+      "given_name": "NP"
+    },
+    "patient_type": "ER",
+    "account_status": "REG"
+  },
+  "0004.ORC": {
+    "order_control": "NEW",
+    "filler_order_num": "J00021037132-VITALS-20161025-1401-1"
+  },
+  "0005.OBR": {
+    "set_id": "1",
+    "placer_order_num": "VITALS",
+    "filler_order_num": "J00021037132-VITALS-20161025-1401-1",
+    "universal_service_id": {
+      "id": "VITALS",
+      "text": "MIS CLINICAL VITALS"
+    },
+    "obsv_date_time_num": "201610251401",
+    "specimen_received_date_time": "201610251403",
+    "ordering_provider": "1PKLUD7997",
+    "placer_field_1": "QEDMVITALSIGNS"
+  },
+  "0006.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10004",
+      "text": "Temperature:"
+    },
+    "obsv_value": "101.9",
+    "obsv_result_status": "N"
+  },
+  "0007.OBX": {
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10006",
+      "text": "Pulse:"
+    },
+    "obsv_value": "31",
+    "obsv_result_status": "N"
+  },
+  "0008.OBX": {
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10008",
+      "text": "Respirations:"
+    },
+    "obsv_value": "31",
+    "obsv_result_status": "N"
+  },
+  "0009.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10014",
+      "text": "Blood Pressure:"
+    },
+    "obsv_value": "131/71",
+    "obsv_result_status": "N"
+  },
+  "0010.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10018",
+      "text": "Ht-Ft:"
+    },
+    "obsv_value": "5",
+    "obsv_result_status": "N"
+  },
+  "0011.OBX": {
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10018A",
+      "text": "Ht-In:"
+    },
+    "obsv_value": "10",
+    "obsv_result_status": "N"
+  },
+  "0012.OBX": {
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "NUR10020",
+      "text": "Wt-Lbs:"
+    },
+    "obsv_value": "177",
+    "obsv_result_status": "N"
+  },
+  "0013.ZER": {
+    "arrival_date_time": "201610241023",
+    "current_status_event": {
+      "event_code": "REG",
+      "event_desc": "Registration"
+    }
+  }
+}

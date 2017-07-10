@@ -31,37 +31,35 @@ object FilterUtility {
             case Success(filter) => filter
             case _ => NOFILTER
           }
-          left != NOFILTER match {
-            case true =>
-              if (right != NOFILTER) {
-                val leftExp = findReqSegment(data, left.segment) match {
-                  case EMPTYSTR => false
-                  case seg => matchCriteria(data(seg), left.filter._1, left.path._2, left.matchPath)
-                }
-                val rightExp = findReqSegment(data, right.segment) match {
-                  case EMPTYSTR => false
-                  case seg => matchCriteria(data(seg), right.filter._1, right.path._2, right.matchPath)
-                }
-                left.filter._2 match {
-                  case AND =>
-                    expression = leftExp && rightExp
-                  case OR =>
-                    expression = leftExp || rightExp
-                  case NONE => expression = rightExp
-                }
-              } else {
-                val leftCond = findReqSegment(data, left.segment) match {
-                  case EMPTYSTR => false
-                  case seg => matchCriteria(data(seg), left.filter._1, left.path._2, left.matchPath)
-                }
-                val temp = expression
-                filters(index - 1).filter._2 match {
-                  case AND => expression = temp && leftCond
-                  case OR => expression = temp || leftCond
-                  case NONE => expression = temp
-                }
+          if (left != NOFILTER) {
+            if (right != NOFILTER) {
+              val leftExp = findReqSegment(data, left.segment) match {
+                case EMPTYSTR => false
+                case seg => matchCriteria(data(seg), left.filter._1, left.path._2, left.matchPath)
               }
-            case _ =>
+              val rightExp = findReqSegment(data, right.segment) match {
+                case EMPTYSTR => false
+                case seg => matchCriteria(data(seg), right.filter._1, right.path._2, right.matchPath)
+              }
+              left.filter._2 match {
+                case AND =>
+                  expression = leftExp && rightExp
+                case OR =>
+                  expression = leftExp || rightExp
+                case NONE => expression = rightExp
+              }
+            } else {
+              val leftCond = findReqSegment(data, left.segment) match {
+                case EMPTYSTR => false
+                case seg => matchCriteria(data(seg), left.filter._1, left.path._2, left.matchPath)
+              }
+              val temp = expression
+              filters(index - 1).filter._2 match {
+                case AND => expression = temp && leftCond
+                case OR => expression = temp || leftCond
+                case NONE => expression = temp
+              }
+            }
           }
         }
       case 1 =>

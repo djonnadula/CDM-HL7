@@ -19,7 +19,7 @@ object TopicUtil extends Logg {
     info("Creating Topic :: " + topic + " with Partitions Config :: "
       + (if (segmentPartitions) defaultSegmentPartitions else defaultHL7Partitions))
     var success: Boolean = false
-    val zkUtils = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
+    val zkUtils = createZkUtil
     try {
       (checkTopicExists(zkUtils, topic), segmentPartitions) match {
         case (true, _) => success = true
@@ -36,12 +36,11 @@ object TopicUtil extends Logg {
   }
 
   def changePartitions(topic: String, newPartitions: Int): Int = synchronized {
-    val zkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
+    val zkUtil = createZkUtil
     try {
-      checkTopicExists(zkUtil, topic) match {
-        case true => admin.addPartitions(zkUtil, topic, newPartitions)
-          return newPartitions
-        case _ =>
+      if (checkTopicExists(zkUtil, topic)) {
+        admin.addPartitions(zkUtil, topic, newPartitions)
+        return newPartitions
       }
     } catch {
       case e: Exception => throw new CDMKafkaException("Unable to Delete Topic : " + topic, e)
@@ -52,12 +51,11 @@ object TopicUtil extends Logg {
 
   def deleteTopic(topic: String): Boolean = synchronized {
     var success: Boolean = false
-    val zkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
+    val zkUtil = createZkUtil
     try {
-      checkTopicExists(zkUtil, topic) match {
-        case true => admin.deleteTopic(zkUtil, topic)
-          success = true
-        case _ =>
+      if (checkTopicExists(zkUtil, topic)) {
+        admin.deleteTopic(zkUtil, topic)
+        success = true
       }
     } catch {
       case e: Exception => throw new CDMKafkaException("Unable to Delete Topic : " + topic, e)
@@ -71,7 +69,7 @@ object TopicUtil extends Logg {
 
 
   def topicExists(topic: String): Boolean = synchronized {
-    val zkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
+    val zkUtil = createZkUtil
     var topicExists = false
     try {
       topicExists = admin.topicExists(zkUtil, topic)
@@ -85,4 +83,16 @@ object TopicUtil extends Logg {
     zk.createZkClient(zkUrl, sessionTimeout, connectionTimeout)
   }
 
+  private def createZkUtil = zk(zkHosts, zkSessionTimeout, zkConnectionTimeout, isZkSecurityEnabled = false)
+
+  def topicPartitions(topics: Seq[String]): Map[String, Int] = {
+    val zkUtil = createZkUtil
+    var partitionsMapping: Map[String, Int] = Map()
+    try {
+      partitionsMapping = zkUtil.getPartitionsForTopics(topics).map({ case (k, v) => k -> v.max }).toMap
+    } catch {
+      case e: Exception => throw new CDMKafkaException("Unable To check  Topic Partitions for Topics ::  " + topics, e)
+    } finally zkUtil.close
+    partitionsMapping
+  }
 }

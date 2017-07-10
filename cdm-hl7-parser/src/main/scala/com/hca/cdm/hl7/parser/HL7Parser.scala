@@ -1,17 +1,17 @@
 package com.hca.cdm.hl7.parser
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm
 import com.hca.cdm._
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
-import com.hca.cdm.hl7.constants.HL7Constants.{underScore, _}
+import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.HL7
 import com.hca.cdm.hl7.constants.FileMappings._
 import com.hca.cdm.hl7.exception.{InvalidHl7FormatException, InvalidTemplateFormatException, TemplateInfoException}
 import com.hca.cdm.hl7.model.HL7State._
 import com.hca.cdm.hl7.model._
+import com.hca.cdm.hl7.overrides.OverrideHandle
+import com.hca.cdm.hl7.overrides.overrides._
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.hl7.validation.ValidationUtil.{hasMultiMSH => msgHasmultiMSH, isValidMsg => metRequirement}
 import com.hca.cdm.log.Logg
@@ -32,9 +32,9 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   require(msgType != null, s"Cannot Register Parser for $msgType")
   require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
-  private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
+  private lazy val toJson = jsonHandler()
   private lazy val EMPTY = Array.empty[String]
-  private lazy val MAP = Map.empty[String, Array[String]]
+  private lazy val NONE = Map.empty[String, Array[String]]
   private val metrics = new TrieMap[String, Long]
   private val hl7 = msgType.toString
   HL7State.values.foreach(state => metrics += s"$hl7$COLON${state.toString}" -> 0L)
@@ -57,6 +57,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
     Try(transform(hl7Message split delim)) match {
       case Success(parsed) =>
+        handleGtMriOverride(parsed.data)
         handleCommonSegments(parsed.data)
         val meta = msgMeta(parsed.data)
         if (parsed.missingMappings != EMPTYSTR) {
@@ -65,7 +66,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         }
         metRequirement(meta) status match {
           case Left(true) =>
-            if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException(s"Message has Multiple MSH Segments. This is not Expected.")
+            if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException(s"Message has Multiple MSH Segment. This is not Expected.")
             Try(toJson(parsed.data)) match {
               case Success(json) =>
                 updateMetrics(PROCESSED)
@@ -86,7 +87,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         }
       case Failure(t) =>
         t match {
-          case x: TemplateInfoException =>
+          case _: TemplateInfoException =>
             updateMetrics(REJECTED)
           case _ =>
             updateMetrics(FAILED)
@@ -152,6 +153,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                 case str: String =>
                   if (str != EMPTYSTR) str
                   else findData(data, path tail)
+                case None => findData(data, path tail)
                 case subMap: mapType =>
                   if (subMap isDefinedAt x._2) {
                     subMap(x._2) match {
@@ -201,11 +203,20 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
   }
 
-  private case class Segments(var componentData: String = EMPTYSTR, var realignColStatus: Boolean = false, var realignColValue: String = EMPTYSTR,
-                              var realignFieldName: String = EMPTYSTR, var realignCompName: String = EMPTYSTR, var realignSubCompName: String = EMPTYSTR, var realignColOption: String = EMPTYSTR)
+  private def handleGtMriOverride(data: mapType, handle: OverrideHandle = Interface_GtMriOverride()): Unit = {
+    val mshNode = findReqSegment(data, MSH)
+    if (!handle.isInterfaceSpecific(data(mshNode).asInstanceOf[mapType].getOrElse(Control_Id_key, EMPTYSTR).asInstanceOf[String])) return
+    val pidNode = findReqSegment(data, PID)
+    if (!(handle.mappings.map(key => findData(data(pidNode), key._2)).toSet.size > 1)) {
+      handle.applyOverride(data(pidNode).asInstanceOf[mapType])
+    }
+  }
 
-  private case class VersionData(var controlId: String = EMPTYSTR, var hl7Version: String = EMPTYSTR, var srcSystem: Map[String, Array[String]] = MAP,
-                                 var standardMapping: Map[String, Array[String]] = MAP, var realignment: Map[String, Array[String]] = MAP)
+  private case class Segment(var mapping: String = EMPTYSTR, var realignColStatus: Boolean = false, var realignColValue: String = EMPTYSTR,
+                             var realignFieldName: String = EMPTYSTR, var realignCompName: String = EMPTYSTR, var realignSubCompName: String = EMPTYSTR, var realignColOption: String = EMPTYSTR)
+
+  private case class VersionData(var controlId: String = EMPTYSTR, var hl7Version: String = EMPTYSTR, facility: String = EMPTYSTR, var srcSystem: Map[String, Array[String]] = NONE,
+                                 var standardMapping: Map[String, Array[String]] = NONE, var realignment: Map[String, Array[String]] = NONE, var facilityOverRides: Map[String, Array[String]] = NONE)
 
   private case class HL7Parsed(data: mapType, sourceSystem: String, srcVersion: String, var missingMappings: String = EMPTYSTR)
 
@@ -216,17 +227,18 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     dataLayout += commonNodeStr -> commonNode.clone().transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
     val delimiters = new mutable.HashMap[String, String]()
     if (!(rawSplit(0) startsWith MSH)) throw new InvalidHl7FormatException(s"Expecting First Segment in HL7 as MSH but found :: ${rawSplit(0)}")
-    delimiters.put(FIELD_DELIM, if (rawSplit(0).charAt(3) + EMPTYSTR == PIPE_DELIMITED) "|" else (rawSplit(0).charAt(3) + EMPTYSTR).trim)
+    delimiters.put(FIELD_DELIM, if (rawSplit(0).charAt(3) + EMPTYSTR == PIPE_DELIMITED_STR) "|" else (rawSplit(0).charAt(3) + EMPTYSTR).trim)
     delimiters.put(CMPNT_DELIM, if (rawSplit(0).charAt(4) + EMPTYSTR == caret) "^" else (rawSplit(0).charAt(4) + EMPTYSTR).trim)
     delimiters.put(REPTN_DELIM, (rawSplit(0).charAt(5) + EMPTYSTR).trim)
     delimiters.put(ESC_DELIM, if (rawSplit(0).charAt(6) + EMPTYSTR == ESCAPE) ESCAPE else (rawSplit(0).charAt(6) + EMPTYSTR).trim)
     delimiters.put(SUBCMPNT_DELIM, (rawSplit(0).charAt(7) + EMPTYSTR).trim)
-    delimiters.put(TRUNC_DELIM, if (rawSplit(0).charAt(8) + EMPTYSTR != PIPE_DELIMITED) (rawSplit(0).charAt(8) + EMPTYSTR).trim else "//")
-    var segment: Segments = null
+    delimiters.put(TRUNC_DELIM, if (rawSplit(0).charAt(8) + EMPTYSTR != PIPE_DELIMITED_STR) (rawSplit(0).charAt(8) + EMPTYSTR).trim else "//")
+    var segment: Segment = null
     var versionData: VersionData = null
     val missingMappings = new TemplateUnknownMapping
-    val segmentMapping = mapSegments(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf("_")) + "_" + versionData.hl7Version + "_"
-      , versionData.srcSystem, versionData.standardMapping, versionData.realignment)(versionData.controlId, missingMappings)
+    val segmentMapping = getMapping(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.hl7Version + underScore,
+      versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.facility + underScore + versionData.hl7Version + underScore
+      , versionData.srcSystem, versionData.standardMapping, versionData.realignment, versionData.facilityOverRides)(versionData.controlId, missingMappings)
     rawSplit.view.zipWithIndex foreach { case (msgSegment, segIndex) =>
       val whichSegment = msgSegment substring(0, 3)
       val segmentIndex = s"${lPad(s"${inc(segIndex)}$EMPTYSTR", preNumLen, ZEROStr)}$DOT$whichSegment"
@@ -240,12 +252,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         if (msgSegment.length > 4) fields = msgSegment.substring(4, msgSegment.length).split(ESCAPE + delimiters(FIELD_DELIM))
         else fields = msgSegment.split(ESCAPE + delimiters(FIELD_DELIM))
       }
-      val moveToUnknown = moveUnknown(fieldLayout, unknownKey(whichSegment), _: String)
+      val moveToUnknown = moveUnknown(fieldLayout, unknownKey, _: String)
       if (valid(fields)) {
         fields.view.zipWithIndex foreach { case (field, fieldIndex) =>
           val fieldKey = s"$whichSegment$DOT${inc(fieldIndex)}"
           segment = segmentMapping(fieldKey)._1
-          val fieldMapping = segment.componentData
+          val fieldMapping = segment.mapping
           if (!(whichSegment == MSH && inc(fieldIndex) == 2)) {
             val multiFields = if (whichSegment == OBX_SEG && inc(fieldIndex) == 5) Array(field) else field.split(ESCAPE + delimiters(REPTN_DELIM), -1)
             val fieldList = new mutable.ListBuffer[Any]
@@ -258,7 +270,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                   components.view.zipWithIndex foreach { case (component, componentIndex) =>
                     val componentIndexKey = s"$fieldKey$DOT${inc(componentIndex)}"
                     segment = segmentMapping(componentIndexKey)._1
-                    componentMapping = segment.componentData
+                    componentMapping = segment.mapping
                     var subComponents: Array[String] = EMPTY
                     if (segment.realignColStatus) {
                       segment.realignColOption match {
@@ -276,8 +288,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       val subComponentLayout = new mutable.LinkedHashMap[String, Any]()
                       subComponents.view.zipWithIndex foreach { case (subComponent, subComponentIndex) =>
                         val tempSegments = segmentMapping(s"$componentIndexKey$DOT${inc(subComponentIndex)}")._1
-                        if (tempSegments.componentData == UNKNOWN) moveToUnknown(subComponent)
-                        else subComponentLayout += tempSegments.componentData -> getOrNone(subComponent)
+                        if (tempSegments.mapping == UNKNOWN) moveToUnknown(subComponent)
+                        else subComponentLayout += tempSegments.mapping -> getOrNone(subComponent)
                       }
                       if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
                       if (segment.realignColStatus && segment.realignColOption == MOVE) {
@@ -309,8 +321,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
             }
           } else {
             segment = segmentMapping(fieldKey)._1
-            if (segment.componentData == UNKNOWN) moveToUnknown(field)
-            else fieldLayout += segment.componentData -> getOrNone(field)
+            if (segment.mapping == UNKNOWN) moveToUnknown(field)
+            else fieldLayout += segment.mapping -> getOrNone(field)
           }
         }
       }
@@ -327,20 +339,15 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
   }
 
-
   private def moveUnknown(layout: mapType, mapping: String, data: String): Unit = {
     addUnknownEntry(mapping, layout)
     handleUnKnown(mapping, data, layout)
   }
 
-  private def getOrNone(key: String) = if (nonEmpty(key)) key else EMPTYSTR
-
   private def handleUnKnown(mapping: String, data: String, underlying: mapType): Unit = {
-    underlying isDefinedAt mapping match {
-      case true =>
-        if (underlying(mapping) == EMPTYSTR) underlying update(mapping, data)
-        else underlying update(mapping, s"${underlying(mapping)}$caret$data")
-      case _ =>
+    if (underlying isDefinedAt mapping) {
+      if (underlying(mapping) == EMPTYSTR) underlying update(mapping, data)
+      else underlying update(mapping, s"${underlying(mapping)}$caret$data")
     }
   }
 
@@ -350,80 +357,97 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   private def unknownKey(segment: String): String = s"${segment.toLowerCase}_$UNKNOWN"
 
+  private def unknownKey: String = UNKNOWN
+
   private def inc(v: Int, step: Int = 1) = v + step
 
   private def getVersionData(fieldList: Array[String], templateData: Map[String, Map[String, Array[String]]]): VersionData = {
     val hl7Version = fieldList(11)
     val controlId = fieldList(9)
+    require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
-    val mapped_index = Match match {
-      case mt_mt6 if mt_mt6(MT_) || mt_mt6(MT6_) =>
-        if (hl7Version == HL7_2_1) templateData(hl7MEDITECH21Map)
-        else if (hl7Version == HL7_2_4 || hl7Version == HL7_2_5_1) templateData(hl7MEDITECH24Map)
-        else templateData(hl7StandardMap)
-      case epic if epic(EPIC_) => templateData(hl7EpicMap)
+    val sourceSystem = Match match {
+      case mt6 if mt6(MT6_) =>
+        if (hl7Version == HL7_2_4) templateData(hl7MT6_2_4Map)
+        else if (hl7Version == HL7_2_5_1) templateData(hl7MT6_2_5_1Map)
+        else if (hl7Version == HL7_2_5) templateData(hl7MT6_2_5Map)
+        else NONE
+      case mt if mt(MT_) =>
+        if (hl7Version == HL7_2_1) templateData(hl7MT_2_1Map)
+        else if (hl7Version == HL7_2_2) templateData(hl7MT_2_2Map)
+        else if (hl7Version == HL7_2_4) templateData(hl7MT_2_4Map)
+        else if (hl7Version == HL7_2_5) templateData(hl7MT_2_5Map)
+        else NONE
+      case epic if epic(EPIC_) =>
+        if (hl7Version == HL7_2_1) templateData(hl7Epic_2_1Map)
+        else if (hl7Version == HL7_2_3) templateData(hl7Epic_2_3Map)
+        else if (hl7Version == HL7_2_3_1) templateData(hl7Epic_2_3_1Map)
+        else NONE
       case ecw if ecw(ECW_) => templateData(hl7eCWMap)
       case ng if ng(NG_) => templateData(hl7NextGenMap)
       case ip if ip(IP_) => templateData(hl7IpeopleMap)
-      case _ => MAP
+      case _ => NONE
     }
-    VersionData(controlId, hl7Version, mapped_index, templateData(hl7StandardMap),
-      templateData(hl7MapAlignXWalk))
+
+    def facility = () => fieldList(3)
+
+    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), sourceSystem, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk), templateData(hl7FacilityMap))
   }
 
-  private def matcher(in: String, seq: String) = in != null & in.contains(seq)
+  private def matcher(in: String, seq: String) = in != null & in.startsWith(seq)
 
 
-  private def mapSegments(segmentIndex: String, controlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segments, TemplateUnknownMapping) = {
-    val segment = new Segments
+  private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
+                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
+    val segment = new Segment
     var mappedColumnData = EMPTYSTR
     try {
-      val realignColumnValues = lookUp(realignment, controlVersion + segmentIndex)
-      realignColumnValues.nonEmpty match {
-        case true =>
-          segment.realignColStatus = true
-          segment.realignFieldName = realignColumnValues(7)
-          segment.realignCompName = realignColumnValues(8)
-          segment.realignSubCompName = realignColumnValues(9)
-          if (mappingExist(9, realignColumnValues) && nonEmpty(realignColumnValues(9))) mappedColumnData = realignColumnValues(9)
-          else if (mappingExist(8, realignColumnValues) && nonEmpty(realignColumnValues(8))) mappedColumnData = realignColumnValues(8)
-          else if (mappingExist(7, realignColumnValues) && nonEmpty(realignColumnValues(7))) mappedColumnData = realignColumnValues(7)
-          segment.realignColOption = realignColumnValues(10)
-          segment.componentData = mappedColumnData
-          (segment, missingMappings)
-        case _ =>
-          segment.realignColStatus = false
-          val standardMappedValues = lookUp(standardMapping, segmentIndex)
-          val srcSystemValues = lookUp(srcSystemMapping, segmentIndex)
-          mappedColumnData = segmentIndex
-          standardMappedValues.nonEmpty match {
-            case true =>
-              if (mappingExist(5, standardMappedValues) && nonEmpty(standardMappedValues(5))) mappedColumnData = standardMappedValues(5)
-              else if (mappingExist(4, standardMappedValues) && nonEmpty(standardMappedValues(4))) mappedColumnData = standardMappedValues(4)
-              else if (mappingExist(3, standardMappedValues) && nonEmpty(standardMappedValues(3))) mappedColumnData = standardMappedValues(3)
-              else if (mappingExist(2, standardMappedValues) && nonEmpty(standardMappedValues(2))) mappedColumnData = standardMappedValues(2)
-              else if (mappingExist(1, standardMappedValues) && nonEmpty(standardMappedValues(1))) mappedColumnData = standardMappedValues(1)
-              else if (mappingExist(0, standardMappedValues) && nonEmpty(standardMappedValues(0))) mappedColumnData = standardMappedValues(0)
-            case _ =>
+      val realignColumnValues = lookUp(realignment, s"$controlVersion$segmentIndex")
+      if (realignColumnValues.nonEmpty) {
+        segment.realignColStatus = true
+        segment.realignFieldName = realignColumnValues(7)
+        segment.realignCompName = realignColumnValues(8)
+        segment.realignSubCompName = realignColumnValues(9)
+        if (mappingExist(9, realignColumnValues) && nonEmpty(realignColumnValues(9))) mappedColumnData = realignColumnValues(9)
+        else if (mappingExist(8, realignColumnValues) && nonEmpty(realignColumnValues(8))) mappedColumnData = realignColumnValues(8)
+        else if (mappingExist(7, realignColumnValues) && nonEmpty(realignColumnValues(7))) mappedColumnData = realignColumnValues(7)
+        segment.realignColOption = realignColumnValues(10)
+        segment.mapping = mappedColumnData
+        (segment, missingMappings)
+      } else {
+        segment.realignColStatus = false
+        val standardMappedValues = lookUp(standardMapping, segmentIndex)
+        val srcSystemValues = lookUp(srcSystemMapping, segmentIndex)
+        val facilityOverRideValues = lookUp(facilityOverRides, s"$facilityControlVersion$segmentIndex")
+        mappedColumnData = EMPTYSTR
+        if (facilityOverRideValues nonEmpty) {
+          if (mappingExist(2, facilityOverRideValues) && nonEmpty(facilityOverRideValues(2))) mappedColumnData = facilityOverRideValues(2)
+          else if (mappingExist(1, facilityOverRideValues) && nonEmpty(facilityOverRideValues(1))) mappedColumnData = facilityOverRideValues(1)
+          else if (mappingExist(0, facilityOverRideValues) && nonEmpty(facilityOverRideValues(0))) mappedColumnData = facilityOverRideValues(0)
+        }
+        else if (srcSystemValues nonEmpty) {
+          if (mappingExist(2, srcSystemValues) && nonEmpty(srcSystemValues(2))) mappedColumnData = srcSystemValues(2)
+          else if (mappingExist(1, srcSystemValues) && nonEmpty(srcSystemValues(1))) mappedColumnData = srcSystemValues(1)
+          else if (mappingExist(0, srcSystemValues) && nonEmpty(srcSystemValues(0))) mappedColumnData = srcSystemValues(0)
+        }
+        else if (standardMappedValues nonEmpty) {
+          if (mappingExist(5, standardMappedValues) && nonEmpty(standardMappedValues(5))) mappedColumnData = standardMappedValues(5)
+          else if (mappingExist(4, standardMappedValues) && nonEmpty(standardMappedValues(4))) mappedColumnData = standardMappedValues(4)
+          else if (mappingExist(3, standardMappedValues) && nonEmpty(standardMappedValues(3))) mappedColumnData = standardMappedValues(3)
+          else if (mappingExist(2, standardMappedValues) && nonEmpty(standardMappedValues(2))) mappedColumnData = standardMappedValues(2)
+          else if (mappingExist(1, standardMappedValues) && nonEmpty(standardMappedValues(1))) mappedColumnData = standardMappedValues(1)
+          else if (mappingExist(0, standardMappedValues) && nonEmpty(standardMappedValues(0))) mappedColumnData = standardMappedValues(0)
+        }
+        if (mappedColumnData == EMPTYSTR || mappedColumnData.contains(DOT) ||
+          (mappedColumnData.length > 2 && mappedColumnData.substring(3) == segmentIndex.substring(3))) {
+          mappedColumnData = UNKNOWN
+          if (missingMappings.unknownMappings == null) {
+            missingMappings.unknownMappings = new mutable.HashSet[String]
           }
-          srcSystemValues.nonEmpty match {
-            case true =>
-              if (mappingExist(2, srcSystemValues) && nonEmpty(srcSystemValues(2))) mappedColumnData = srcSystemValues(2)
-              else if (mappingExist(1, srcSystemValues) && nonEmpty(srcSystemValues(1))) mappedColumnData = srcSystemValues(1)
-              else if (mappingExist(0, srcSystemValues) && nonEmpty(srcSystemValues(0))) mappedColumnData = srcSystemValues(0)
-            case _ =>
-          }
-          if (mappedColumnData == EMPTYSTR || mappedColumnData.contains(DOT) ||
-            (mappedColumnData.length > 2 && mappedColumnData.substring(3) == segmentIndex.substring(3))) {
-            mappedColumnData = UNKNOWN
-            if (missingMappings.unknownMappings == null) {
-              missingMappings.unknownMappings = new mutable.HashSet[String]
-            }
-            missingMappings.unknownMappings += segmentIndex
-          }
-          segment.componentData = mappedColumnData
-          (segment, missingMappings)
+          missingMappings.unknownMappings += segmentIndex
+        }
+        segment.mapping = mappedColumnData
+        (segment, missingMappings)
       }
     } catch {
       case t: Throwable =>
@@ -431,19 +455,28 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
   }
 
-  private def resetSegment(segment: Segments): Segments = {
-    segment.componentData = EMPTYSTR
-    segment.realignColStatus = false
-    segment.realignColValue = EMPTYSTR
-    segment.realignColOption = EMPTYSTR
-    segment.realignFieldName = EMPTYSTR
-    segment.realignCompName = EMPTYSTR
-    segment.realignSubCompName = EMPTYSTR
-    segment.realignColOption = EMPTYSTR
-    segment
+  private def mkCopy(data: mapType): mapType = {
+    val copy = data ++: new mutable.LinkedHashMap[String, Any]
+    filterNone(copy)
+    copy
+  }
+
+  private def filterNone(data: mapType): Unit = {
+    def remove(k: String): Unit = data remove k
+
+    data.foreach({ case (k, v) =>
+      v match {
+        case None => remove(k)
+        case map: mapType => filterNone(map)
+        case list: listType => list.foreach(filterNone)
+        case _ =>
+      }
+    })
   }
 
   private def nonEmpty(key: String) = key != null & key != EMPTYSTR
+
+  private def getOrNone(key: String) = if (nonEmpty(key)) key else None
 
   private def mappingExist(index: Int, template: Array[String]) = template != null && index > -1 && template.isDefinedAt(index)
 

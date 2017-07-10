@@ -1,0 +1,566 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_ORU_NURQA.161007.9693",
+    "medical_record_num": "J000425961",
+    "medical_record_urn": "J502566",
+    "patient_account_num": "J00021035470"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201611091447",
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "IP_COQ1A_ORU_NURQA.161007.9693",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000425961",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": "J502566",
+    "patient_name": {
+      "family_name": "PARKER",
+      "given_name": "MAY",
+      "second_and_further_given_names_or_initials_thereof": "R"
+    },
+    "date_time_of_birth": "19620105",
+    "administrative_sex": "F",
+    "patient_account_num": "J00021035470"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "J.8E",
+      "room": "J.CCU",
+      "bed": "7",
+      "facility": "COCQA1A"
+    },
+    "admission_type": "EL",
+    "attending_doctor": {
+      "person_id": "DRBRI",
+      "family_name": "DOCTOR",
+      "given_name": "BRITTANY"
+    },
+    "patient_type": "IN",
+    "account_status": "ADM"
+  },
+  "0004.ORC": {
+    "order_control": "NEW",
+    "filler_order_num": "J00021035470-220400-1-20161109-1441-2"
+  },
+  "0005.OBR": {
+    "set_id": "1",
+    "placer_order_num": "220400",
+    "filler_order_num": "J00021035470-220400-1-20161109-1441-2",
+    "universal_service_id": {
+      "id": "220400",
+      "text": "Vitals/Ht/ Wt/ Measurements +"
+    },
+    "priority": "3",
+    "obsv_date_time_num": "201611091441",
+    "specimen_received_date_time": "201611091445",
+    "ordering_provider": "1TSQBE8554",
+    "placer_field_1": "HCAEBVSSGNASTOB"
+  },
+  "0006.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL1",
+      "text": "          -"
+    },
+    "obsv_value": "- VITAL SIGNS - -",
+    "obsv_result_status": "N"
+  },
+  "0007.OBX": {
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K3301A001A",
+      "text": "Document vital signs:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0008.OBX": {
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010003A",
+      "text": "Temperature F:"
+    },
+    "obsv_value": "98.5",
+    "obsv_result_status": "N"
+  },
+  "0009.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010004A",
+      "text": "Temperature source:"
+    },
+    "obsv_value": "Oral:Oral",
+    "obsv_result_status": "N"
+  },
+  "0010.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010006A",
+      "text": "Pulse:"
+    },
+    "obsv_value": "80",
+    "obsv_result_status": "N"
+  },
+  "0011.OBX": {
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010008A",
+      "text": "Pulse location:"
+    },
+    "obsv_value": "Radial:Radial",
+    "obsv_result_status": "N"
+  },
+  "0012.OBX": {
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010010A",
+      "text": "Pulse source:"
+    },
+    "obsv_value": "Palpation:Palpation",
+    "obsv_result_status": "N"
+  },
+  "0013.OBX": {
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010016A",
+      "text": "Respiratory rate:"
+    },
+    "obsv_value": "18",
+    "obsv_result_status": "N"
+  },
+  "0014.OBX": {
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010018A",
+      "text": "Respiratory source:"
+    },
+    "obsv_value": "Observed:Observed",
+    "obsv_result_status": "N"
+  },
+  "0015.OBX": {
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010012A",
+      "text": "Vital signs position:"
+    },
+    "obsv_value": "Lying:Lying",
+    "obsv_result_status": "N"
+  },
+  "0016.OBX": {
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010024A",
+      "text": "Blood pressure:"
+    },
+    "obsv_value": "120/80",
+    "obsv_result_status": "N"
+  },
+  "0017.OBX": {
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010026A",
+      "text": "Blood pressure location:"
+    },
+    "obsv_value": "Arm left:Arm left",
+    "obsv_result_status": "N"
+  },
+  "0018.OBX": {
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010028A",
+      "text": "Blood pressure source:"
+    },
+    "obsv_value": "Manualcuff:Manual cuff",
+    "obsv_result_status": "N"
+  },
+  "0019.OBX": {
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L35010001A",
+      "text": "SPO2 %:"
+    },
+    "obsv_value": "99",
+    "obsv_result_status": "N"
+  },
+  "0020.OBX": {
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L35020009A",
+      "text": "Oxygen detail:"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "Humidfied:Humidified",
+    "obsv_result_status": "N"
+  },
+  "0021.OBX": {
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L35020010A",
+      "text": "Oxygen delivery devices:"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "NC:Nasal cannula",
+    "obsv_result_status": "N"
+  },
+  "0022.OBX": {
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L35020016A",
+      "text": "O2 liters per minute:"
+    },
+    "obsv_value": "02",
+    "obsv_result_status": "N"
+  },
+  "0023.OBX": {
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaMEWS01",
+      "text": "LOC:"
+    },
+    "obsv_value": "Alert:Alert",
+    "obsv_result_status": "N"
+  },
+  "0024.OBX": {
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaMEWS02",
+      "text": "MEWS score:"
+    },
+    "obsv_value": "1",
+    "obsv_result_status": "N"
+  },
+  "0025.OBX": {
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010029A",
+      "text": "MEWS change:"
+    },
+    "obsv_value": "1",
+    "obsv_result_status": "N"
+  },
+  "0026.OBX": {
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL2",
+      "text": "          -"
+    },
+    "obsv_value": "- HEIGHT/WEIGHT - -",
+    "obsv_result_status": "N"
+  },
+  "0027.OBX": {
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K3301A002A",
+      "text": "Document height/weight measurements:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0028.OBX": {
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010007A",
+      "text": "Height ft:"
+    },
+    "obsv_value": "5",
+    "obsv_result_status": "N"
+  },
+  "0029.OBX": {
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010008A",
+      "text": "Height in:"
+    },
+    "obsv_value": "5",
+    "obsv_result_status": "N"
+  },
+  "0030.OBX": {
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010009A",
+      "text": "Height source:"
+    },
+    "obsv_value": "Stated:Stated/Reported",
+    "obsv_result_status": "N"
+  },
+  "0031.OBX": {
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010003A",
+      "text": "Weight kg:"
+    },
+    "obsv_value": "69.00",
+    "obsv_result_status": "N"
+  },
+  "0032.OBX": {
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010005A",
+      "text": "Weight source:"
+    },
+    "obsv_value": "Stated:Stated/Reported",
+    "obsv_result_status": "N"
+  },
+  "0033.OBX": {
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31420006A",
+      "text": "BSA calculated - sq m:"
+    },
+    "obsv_value": "1.79",
+    "obsv_result_status": "N"
+  },
+  "0034.OBX": {
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31420007A",
+      "text": "BMI calculated:"
+    },
+    "obsv_value": "25.3",
+    "obsv_result_status": "N"
+  },
+  "0035.OBX": {
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31420008A",
+      "text": "IBW calculated:"
+    },
+    "obsv_value": "125",
+    "obsv_result_status": "N"
+  },
+  "0036.OBX": {
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31420010A",
+      "text": "Weight in lb to have BMI equal to 25:"
+    },
+    "obsv_value": "149.7",
+    "obsv_result_status": "N"
+  },
+  "0037.OBX": {
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL4",
+      "text": "          -"
+    },
+    "obsv_value": "- ORTHOSTATIC VITAL SIGNS - -",
+    "obsv_result_status": "N"
+  },
+  "0038.OBX": {
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K3301A004A",
+      "text": "Document orthostatic vital signs:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0039.OBX": {
+    "set_id": "34",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010200A",
+      "text": "Blood pressure lying:"
+    },
+    "obsv_value": "120/80",
+    "obsv_result_status": "N"
+  },
+  "0040.OBX": {
+    "set_id": "35",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010201A",
+      "text": "Heart rate lying:"
+    },
+    "obsv_value": "80",
+    "obsv_result_status": "N"
+  },
+  "0041.OBX": {
+    "set_id": "36",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010202A",
+      "text": "Blood pressure sitting:"
+    },
+    "obsv_value": "120/80",
+    "obsv_result_status": "N"
+  },
+  "0042.OBX": {
+    "set_id": "37",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010203A",
+      "text": "Heart rate sitting:"
+    },
+    "obsv_value": "80",
+    "obsv_result_status": "N"
+  },
+  "0043.OBX": {
+    "set_id": "38",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010204A",
+      "text": "Blood pressure standing:"
+    },
+    "obsv_value": "110/70",
+    "obsv_result_status": "N"
+  },
+  "0044.OBX": {
+    "set_id": "39",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010205A",
+      "text": "Heart rate standing:"
+    },
+    "obsv_value": "70",
+    "obsv_result_status": "N"
+  },
+  "0045.OBX": {
+    "set_id": "40",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010206A",
+      "text": "Does patient complain of dizziness when standing:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0046.OBX": {
+    "set_id": "41",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010207A",
+      "text": "Positive tilt test:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0047.OBX": {
+    "set_id": "42",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K3301A005A",
+      "text": "Document ICP/CPP monitoring:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0048.OBX": {
+    "set_id": "43",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAEBDL6",
+      "text": "          -"
+    },
+    "obsv_value": "- ARTERIAL LINE MONITORING - -",
+    "obsv_result_status": "N"
+  },
+  "0049.OBX": {
+    "set_id": "44",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K3301A006A",
+      "text": "Document arterial line monitoring:"
+    },
+    "obsv_value": "Yes:Yes",
+    "obsv_result_status": "N"
+  },
+  "0050.OBX": {
+    "set_id": "45",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "F79000034A",
+      "text": "Arterial line blood pressure:"
+    },
+    "obsv_value": "120/80",
+    "obsv_result_status": "N"
+  },
+  "0051.OBX": {
+    "set_id": "46",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "F79000035A",
+      "text": "Arterial line MAP:"
+    },
+    "obsv_value": "1",
+    "obsv_result_status": "N"
+  },
+  "0052.OBX": {
+    "set_id": "47",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "F79000036A",
+      "text": "Arterial line location:"
+    },
+    "obsv_value": "LFemoral:Femoral left",
+    "obsv_result_status": "N"
+  },
+  "0053.OBX": {
+    "set_id": "48",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "F79000037A",
+      "text": "Arterial line waveform:"
+    },
+    "obsv_value": "Appropriat:Appropriate waveforms",
+    "obsv_result_status": "N"
+  }
+}

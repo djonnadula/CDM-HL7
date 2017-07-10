@@ -1,0 +1,193 @@
+{
+  "0000.COMN": {
+    "sending_facility": "AKAR",
+    "message_control_id": "EPIC_AKAR_ADT_234973",
+    "medical_record_num": "74981",
+    "medical_record_urn": "2255080",
+    "patient_account_num": "98781"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "EPIC_AKAR",
+    "sending_facility": "AKAR",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20160824070609",
+    "security": "ORSCHED",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A11"
+    },
+    "message_control_id": "EPIC_AKAR_ADT_234973",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "Epic_MountainQA",
+    "message_profile_id": "AKA"
+  },
+  "0002.EVN": {
+    "event_type_code": "A11",
+    "recorded_date_time": "20160824070608",
+    "event_reason_code": "OR_CANCEL",
+    "operator_id": {
+      "person_id": "ORSCHED",
+      "family_name": "OPTIME",
+      "given_name": "SCHEDULER",
+      "assigning_authority": "MTN A",
+      "assigning_facility": "AKAR"
+    }
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": "74981",
+    "alternate_patient_id": "2255080",
+    "patient_name": {
+      "family_name": "TEST",
+      "given_name": "LUCY"
+    },
+    "date_time_of_birth": "19000511",
+    "administrative_sex": "F",
+    "race": "AMIN",
+    "patient_address": {
+      "street_address": "123RD STREET",
+      "city": "NASHVILLE",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37204",
+      "country": "USA",
+      "address_type": "P",
+      "county_parish_code": "DAVIDSON"
+    },
+    "county_code": "DAVIDSON",
+    "phone_num_home": {
+      "telephone_num": "(615)344-1171",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H",
+      "area_city_code": "615",
+      "local_num": "3441171"
+    },
+    "primary_language": "ENGLISH",
+    "marital_status": "M",
+    "patient_account_num": "98781",
+    "ssn_num_patient": "101-29-3847",
+    "ethnic_group": "DECLINE TO S",
+    "patient_death_indicator": "N"
+  },
+  "0004.ZPD": {
+    "pregnancy_flag": "N"
+  },
+  "0005.PD1": {
+    "patient_primary_facility": {
+      "organization_name": "ST. MARK'S HOSPITAL",
+      "id_num": "10001001"
+    },
+    "patient_primary_care_provider_name_and_id_num": [
+      {
+        "person_id": "SMIGA",
+        "last_name": "SMITH",
+        "first_name": "GARRETT",
+        "assgn_authr": "PROVID",
+        "identifier_type_code": "PROVID"
+      },
+      {
+        "person_id": "1669587630",
+        "last_name": "SMITH",
+        "first_name": "GARRETT",
+        "assgn_authr": "NPI",
+        "identifier_type_code": "NPI"
+      },
+      {
+        "person_id": "QTI9505",
+        "last_name": "SMITH",
+        "first_name": "GARRETT",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      }
+    ]
+  },
+  "0006.PV1": {
+    "set_id": "1",
+    "patient_class": "S",
+    "assigned_patient_location": {
+      "point_of_care": "AKAROR",
+      "facility": "AKAR"
+    },
+    "attending_doctor": [
+      {
+        "person_id": "1053304766",
+        "family_name": "KAVANAUGH",
+        "given_name": "TIM",
+        "second_and_further_given_names_or_initials_thereof": "S",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
+      },
+      {
+        "person_id": "JXU9864",
+        "family_name": "KAVANAUGH",
+        "given_name": "TIM",
+        "second_and_further_given_names_or_initials_thereof": "S",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "hospital_service": "SURG",
+    "admitting_doctor": [
+      {
+        "person_id": "1053304766",
+        "family_name": "KAVANAUGH",
+        "given_name": "TIM",
+        "second_and_further_given_names_or_initials_thereof": "S",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
+      },
+      {
+        "person_id": "JXU9864",
+        "family_name": "KAVANAUGH",
+        "given_name": "TIM",
+        "second_and_further_given_names_or_initials_thereof": "S",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      },
+      {
+        "person_id": "1201032241",
+        "family_name": "KAVANAUGH",
+        "given_name": "TIM",
+        "second_and_further_given_names_or_initials_thereof": "S",
+        "assigning_authority": "EPICPROVID",
+        "id_type_code": "EPICPROVID"
+      }
+    ],
+    "visit_num": "10141737",
+    "financial_class": "99",
+    "account_status": {
+      "id": "Pre",
+      "text": "Pend"
+    },
+    "alternate_visit_id": "10141737"
+  },
+  "0007.PV2": {
+    "expected_admit_date_time": "20160825080500",
+    "visit_protection_indicator": "N"
+  },
+  "0008.ZPV": {},
+  "0009.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT1",
+      "text": "ADT: PATIENT STATUS"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "Pre",
+    "date_time_of_the_obsv": "20160824"
+  },
+  "0010.OBX": {
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "ACCSTAT2",
+      "text": "HOSPITAL - ADMIT CONFIRMATION STATUS"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "Pend",
+    "date_time_of_the_obsv": "20160824"
+  }
+}

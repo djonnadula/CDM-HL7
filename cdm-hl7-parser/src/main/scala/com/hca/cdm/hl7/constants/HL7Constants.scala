@@ -1,6 +1,7 @@
 package com.hca.cdm.hl7.constants
 
 import scala.collection.mutable
+import scala.util.matching.Regex
 /**
   * Created by Devaraj Jonnadula on 8/10/2016.
   *
@@ -28,12 +29,16 @@ object HL7Constants {
   lazy val REPEAT_ZERO_STAR = "^0*"
   lazy val NO_COLUMN_ASSIGNED = "no_column_assigned"
   lazy val HL7_2_1 = "2.1"
-  lazy val HL7_2_5_1 = "2.5.1"
+  lazy val HL7_2_2 = "2.2"
+  lazy val HL7_2_3 = "2.3"
+  lazy val HL7_2_3_1 = "2.3.1"
   lazy val HL7_2_4 = "2.4"
-  lazy val PIPER = "\\|".r
-  lazy val COMMAR = ",".r
+  lazy val HL7_2_5 = "2.5"
+  lazy val HL7_2_5_1 = "2.5.1"
+  lazy val PIPER: Regex = "\\|".r
+  lazy val COMMAR: Regex = ",".r
   lazy val COMMA = ","
-  lazy val PIPE_DELIMITED = "|"
+  lazy val PIPE_DELIMITED_STR = "|"
   lazy val COLON = ":"
   lazy val UNKNOWN = "unknown"
   lazy val underScore = "_"

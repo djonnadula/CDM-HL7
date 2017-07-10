@@ -1,0 +1,81 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCCT",
+    "message_control_id": "MT_COCCT_ADT_TNAGTMRI.1.7133217",
+    "medical_record_num": "M001990632",
+    "medical_record_urn": "M992779",
+    "patient_account_num": ""
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCCT",
+    "date_time_of_message": "201702082050",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A31"
+    },
+    "message_control_id": "MT_COCCT_ADT_TNAGTMRI.1.7133217",
+    "processing_id": "P",
+    "version_id": "2.1"
+  },
+  "0002.EVN": {
+    "event_type_code": "A31",
+    "recorded_date_time": "201702082050",
+    "event_reason_code": "E"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "medical_record_num": "M001990632",
+    "medical_record_urn": "M992779",
+    "patient_name": {
+      "family_name": "BUTLER",
+      "given_name": "DEARIUS",
+      "second_and_further_given_names_or_initials_thereof": "LASHAWN"
+    },
+    "mother_maiden_name": "RICKEITA MAXINE",
+    "date_time_of_birth": "20160829",
+    "administrative_sex": "M",
+    "patient_alias": {
+      "last_name": "BUTLER",
+      "first_name": "BB-RICKEITA",
+      "middle_name": "MAXINE"
+    },
+    "race": "B",
+    "patient_address": {
+      "street_address": "702 APT A SOUTH 8TH ST",
+      "city": "NASHVILLE",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37206",
+      "country": "USA",
+      "county_parish_code": "DAVIDS.TN"
+    },
+    "phone_num_home": "615-299-6367",
+    "primary_language": "ENG",
+    "marital_status": "S",
+    "religion": "NON",
+    "ssn_num_patient": "990-42-4073"
+  },
+  "0004.IN1": {
+    "set_id": "1",
+    "health_plan_id": "TC.AMGRP",
+    "insurance_company_name": "TNCARE AMERIGROUP",
+    "insurance_company_address": {
+      "street_address": "PO BOX 61010",
+      "other_designation": "TN CLAIMS",
+      "city": "VIRGINIA BEACH",
+      "state_or_province": "VA",
+      "zip_or_postal_code": "23466-1010"
+    },
+    "insurance_company_phone_num": "800-454-3730",
+    "group_num": "TNMCD000",
+    "plan_effective_date": "20160829",
+    "name_of_insured": {
+      "family_name": "BUTLER",
+      "given_name": "DE'ARIUS",
+      "second_and_further_given_names_or_initials_thereof": "LASHAWN"
+    },
+    "insured_relationship_to_patient": "01",
+    "policy_num": "722798275"
+  }
+}

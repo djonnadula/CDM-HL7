@@ -1,0 +1,129 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "MT6_FRNK_ADT_137522262",
+    "medical_record_num": "K000329379",
+    "medical_record_urn": "41354134351354856",
+    "patient_account_num": "FR0804087476"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "ADM",
+    "sending_facility": "FRNK",
+    "date_time_of_message": "201607211519",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A05"
+    },
+    "message_control_id": "MT6_FRNK_ADT_137522262",
+    "processing_id": "P",
+    "version_id": "2.4"
+  },
+  "0002.EVN": {
+    "recorded_date_time": "201607211519",
+    "operator_id": {
+      "person_id": "SHZ2579",
+      "family_name": "Gaines",
+      "given_name": "Angel",
+      "second_and_further_given_names_or_initials_thereof": "M"
+    },
+    "event_occured": "201607221100"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": [
+      {
+        "id_num": "K000329379",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "403-98-0839",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A1-B20160721141913229",
+        "id_type_code": "PI",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A00236041",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
+      }
+    ],
+    "alternate_patient_id": "41354134351354856",
+    "patient_name": {
+      "family_name": "BROOKS",
+      "given_name": "LYNN",
+      "name_type_code": "L"
+    },
+    "date_time_of_birth": "19741229",
+    "administrative_sex": "F",
+    "patient_address": {
+      "address_type": "P"
+    },
+    "phone_num_home": "(502)750-2382",
+    "patient_account_num": "FR0804087476",
+    "ssn_num_patient": "403-98-0839"
+  },
+  "0004.PV1": {
+    "set_id": "1",
+    "patient_class": "P",
+    "assigned_patient_location": "FR.SURG",
+    "attending_doctor": {
+      "person_id": "GHM1617",
+      "family_name": "Vallance",
+      "given_name": "Steven",
+      "second_and_further_given_names_or_initials_thereof": "R.",
+      "id_type_code": "XX"
+    },
+    "patient_type": "SDC",
+    "financial_class": "08",
+    "servicing_facility": "FRNK",
+    "account_status": "PRE",
+    "admit_date_time": "201607221100"
+  },
+  "0005.PV2": {
+    "admit_reason": "GALL STONES",
+    "newborn_baby_indicator": "N"
+  },
+  "0006.ROL": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
+      "person_id": "GHM1617",
+      "family_name": "Vallance",
+      "given_name": "Steven",
+      "second_and_further_given_names_or_initials_thereof": "R.",
+      "id_type_code": "XX"
+    }
+  },
+  "0007.DRG": {
+    "diagnostic_related_group": "33"
+  },
+  "0008.IN1": {
+    "set_id": "1",
+    "health_plan_id": "BAPTISHLTH",
+    "insurance_company_name": "BAPTIST HEALTH NETWORK",
+    "name_of_insured": {
+      "family_name": "BROOKS",
+      "given_name": "LYNN"
+    },
+    "insured_relationship_to_patient": "SA",
+    "insured_date_of_birth": "19741229",
+    "insured_address": {
+      "address_type": "P"
+    },
+    "policy_num": "403980839",
+    "insured_administrative_sex": "F"
+  },
+  "0009.IN2": {
+    "set_id": "1",
+    "insured_social_security_num": "403-98-0839",
+    "insured_phone_num_home": "(502)750-2382"
+  }
+}

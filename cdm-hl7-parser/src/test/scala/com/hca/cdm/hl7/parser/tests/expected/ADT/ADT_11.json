@@ -1,0 +1,1848 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "MT_FRNK_ADT_1114108.",
+    "medical_record_num": "K000002378",
+    "medical_record_urn": "A0-B20151103134433868",
+    "patient_account_num": "FR0000121392"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "date_time_of_message": "20151211163500-0600",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A03"
+    },
+    "message_control_id": "MT_FRNK_ADT_1114108.",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "continuation_pointer": "KYB"
+  },
+  "0002.EVN": {
+    "event_type_code": "A03",
+    "recorded_date_time": "201512111634",
+    "operator_id": {
+      "person_id": "QBE8554",
+      "family_name": "Hammock",
+      "given_name": "Brittany"
+    },
+    "event_occured": "201512111634"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": [
+      {
+        "id_num": "K000002378",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "206-11-2015",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A00002349",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
+      }
+    ],
+    "alternate_patient_id": {
+      "identifier_num": "A0-B20151103134433868",
+      "identifier_type_code": "URN",
+      "assgn_facility": "FRNK"
+    },
+    "patient_name": [
+      {
+        "family_name": "Osborn",
+        "given_name": "Harry",
+        "name_type_code": "L"
+      },
+      {
+        "family_name": "Osborn",
+        "given_name": "Harold",
+        "name_type_code": "M"
+      }
+    ],
+    "mother_maiden_name": "Osborn,Emily",
+    "date_time_of_birth": "19411029",
+    "administrative_sex": "M",
+    "race": "W",
+    "patient_address": {
+      "street_address": "234 MARVEL",
+      "city": "FRANKLIN",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064",
+      "address_type": "P",
+      "county_parish_code": "TN187"
+    },
+    "phone_num_home": "(615)555-6309",
+    "phone_num_business": "(502)695-0070",
+    "marital_status": "S",
+    "religion": "NON",
+    "patient_account_num": "FR0000121392",
+    "ssn_num_patient": "206-11-2015"
+  },
+  "0004.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "FR.TR",
+      "room": "FR.TR4",
+      "bed": "A"
+    },
+    "admission_type": "EL",
+    "attending_doctor": {
+      "person_id": "DR.ATND01",
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    },
+    "referring_doctor": {
+      "person_id": "DR.OTH01",
+      "family_name": "Other01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    },
+    "hospital_service": "GP",
+    "admit_source": "CR",
+    "admitting_doctor": {
+      "person_id": "DR.ADM01",
+      "family_name": "Admitting01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    },
+    "patient_type": "IN",
+    "financial_class": "05",
+    "discharge_disposition": "HOM",
+    "servicing_facility": "FRNK",
+    "account_status": "DIS",
+    "admit_date_time": "201512111111",
+    "discharge_date_time": "201512111634",
+    "other_healthcare_provider": {
+      "person_id": "DR.FAM01",
+      "last_name": "Family01",
+      "first_name": "Provider",
+      "identifier_type_code": "XX"
+    }
+  },
+  "0005.PV2": {
+    "accommodation_code": {
+      "id": "P",
+      "text": "Private Room"
+    },
+    "admit_reason": "LACERATION OF RIGHT HAND",
+    "estimated_length_of_inpatient_stay": "1",
+    "actual_length_of_inpatient_stay": "1",
+    "visit_priority_code": "EL",
+    "newborn_baby_indicator": "N",
+    "patient_condition_code": {
+      "id": "71",
+      "text": "Full Care in Unit"
+    }
+  },
+  "0006.ROL": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
+      "person_id": "DR.ATND01",
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    }
+  },
+  "0007.ROL": {
+    "role_instance_id": "2",
+    "action_code": "AD",
+    "role_rol": "RP",
+    "role_person": {
+      "person_id": "DR.OTH01",
+      "family_name": "Other01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    }
+  },
+  "0008.ROL": {
+    "role_instance_id": "3",
+    "action_code": "AD",
+    "role_rol": "AD",
+    "role_person": {
+      "person_id": "DR.ADM01",
+      "family_name": "Admitting01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    }
+  },
+  "0009.ROL": {
+    "role_instance_id": "4",
+    "action_code": "AD",
+    "role_rol": "FHCP",
+    "role_person": {
+      "person_id": "DR.FAM01",
+      "family_name": "Family01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    }
+  },
+  "0010.ROL": {
+    "role_instance_id": "5",
+    "action_code": "AD",
+    "role_rol": "PP",
+    "role_person": {
+      "person_id": "DR.PCP01",
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "id_type_code": "XX"
+    }
+  },
+  "0011.ROL": {
+    "role_instance_id": "6",
+    "action_code": "AD",
+    "role_rol": "CP",
+    "role_person": {
+      "person_id": "DR.CONS01",
+      "family_name": "Consulting01",
+      "given_name": "Provider"
+    }
+  },
+  "0012.OBX": {
+    "set_id": "1",
+    "value_type": "ST",
+    "obsv_id": {
+      "id": "1010.1",
+      "text": "WEIGHT",
+      "name_of_coding_system": "CPT4"
+    },
+    "obsv_value": "77.110703",
+    "units": "kg",
+    "obsv_result_status": "F"
+  },
+  "0013.OBX": {
+    "set_id": "2",
+    "value_type": "ST",
+    "obsv_id": {
+      "id": "1010.3",
+      "text": "HEIGHT",
+      "name_of_coding_system": "CPT4"
+    },
+    "obsv_value": "177.8",
+    "units": "cm",
+    "obsv_result_status": "F"
+  },
+  "0014.OBX": {
+    "set_id": "3",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "1ORD01000A",
+      "text": "Mode of Transportation",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "W",
+      "text": "Wheelchair"
+    },
+    "obsv_result_status": "F"
+  },
+  "0015.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F010A",
+      "text": "Deposit Req?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0016.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F011A",
+      "text": "Est Amt Due",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0017.OBX": {
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F012A",
+      "text": "Amt Rec",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0018.OBX": {
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F014A",
+      "text": "Collected by",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0019.OBX": {
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F016A",
+      "text": "Pt Advised of Financial Responsibility   Resources, Refer to",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0020.OBX": {
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F017A",
+      "text": "Discharge Financial Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0021.OBX": {
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F031A",
+      "text": "Amt Req",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0022.OBX": {
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F330A",
+      "text": "Electronic Patient Statements",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0023.OBX": {
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F331A",
+      "text": "Use Guarantor Cell Phone for Text/SMS Messaging",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0024.OBX": {
+    "set_id": "13",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "1PAO0G010A",
+      "text": "Patient Confidential Address/Phone or Guar Temp Address?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "T",
+      "text": "Guarantor Temp Address"
+    },
+    "obsv_result_status": "F"
+  },
+  "0025.OBX": {
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G011A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "1 Guarantor Address",
+    "obsv_result_status": "F"
+  },
+  "0026.OBX": {
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G012A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0027.OBX": {
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G013A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Nashville",
+    "obsv_result_status": "F"
+  },
+  "0028.OBX": {
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G014A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "TN",
+    "obsv_result_status": "F"
+  },
+  "0029.OBX": {
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G015A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "37203",
+    "obsv_result_status": "F"
+  },
+  "0030.OBX": {
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G016A",
+      "text": "County",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "TN037",
+    "obsv_result_status": "F"
+  },
+  "0031.OBX": {
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G017A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "US",
+    "obsv_result_status": "F"
+  },
+  "0032.OBX": {
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G018A",
+      "text": "Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "615-555-6311",
+    "obsv_result_status": "F"
+  },
+  "0033.OBX": {
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G019A",
+      "text": "Temporary Address Until:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "20151211",
+    "obsv_result_status": "F"
+  },
+  "0034.OBX": {
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G020A",
+      "text": "Comment",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0035.OBX": {
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G021A",
+      "text": "Preferred Language",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "ENG",
+    "obsv_result_status": "F"
+  },
+  "0036.OBX": {
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G022A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "US",
+    "obsv_result_status": "F"
+  },
+  "0037.OBX": {
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G050A",
+      "text": "Does Guarantor Have Additional Employment?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0038.OBX": {
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G051A",
+      "text": "Name:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "BLUEGRCA",
+    "obsv_result_status": "F"
+  },
+  "0039.OBX": {
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G052A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "214 E COURT ST",
+    "obsv_result_status": "F"
+  },
+  "0040.OBX": {
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G053A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0041.OBX": {
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G054A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "LAWRENCEBURG",
+    "obsv_result_status": "F"
+  },
+  "0042.OBX": {
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G055A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "KY",
+    "obsv_result_status": "F"
+  },
+  "0043.OBX": {
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G056A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "40342",
+    "obsv_result_status": "F"
+  },
+  "0044.OBX": {
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G057A",
+      "text": "Work Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "(502)839-7102",
+    "obsv_result_status": "F"
+  },
+  "0045.OBX": {
+    "set_id": "34",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G058A",
+      "text": "Guar Occup",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "TECh",
+    "obsv_result_status": "F"
+  },
+  "0046.OBX": {
+    "set_id": "35",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G059A",
+      "text": "Emp Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "F",
+    "obsv_result_status": "F"
+  },
+  "0047.OBX": {
+    "set_id": "36",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G060A",
+      "text": "Description",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "BLUEGRASS COMMUNITY ACTI",
+    "obsv_result_status": "F"
+  },
+  "0048.OBX": {
+    "set_id": "37",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O010A",
+      "text": "Do You Wish to Identify Another Guarantor?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0049.OBX": {
+    "set_id": "38",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O011A",
+      "text": "Name:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0050.OBX": {
+    "set_id": "39",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O012A",
+      "text": "Birthdate",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0051.OBX": {
+    "set_id": "40",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O013A",
+      "text": "Sex",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0052.OBX": {
+    "set_id": "41",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O014A",
+      "text": "Social Security #",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0053.OBX": {
+    "set_id": "42",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O015A",
+      "text": "Relationship to Patient",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0054.OBX": {
+    "set_id": "43",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O016A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0055.OBX": {
+    "set_id": "44",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O017A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0056.OBX": {
+    "set_id": "45",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O018A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0057.OBX": {
+    "set_id": "46",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O019A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0058.OBX": {
+    "set_id": "47",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O020A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0059.OBX": {
+    "set_id": "48",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O021A",
+      "text": "County",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0060.OBX": {
+    "set_id": "49",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O022A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0061.OBX": {
+    "set_id": "50",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O023A",
+      "text": "Home Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0062.OBX": {
+    "set_id": "51",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O025A",
+      "text": "Name:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0063.OBX": {
+    "set_id": "52",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O026A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0064.OBX": {
+    "set_id": "53",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O027A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0065.OBX": {
+    "set_id": "54",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O028A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0066.OBX": {
+    "set_id": "55",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O029A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0067.OBX": {
+    "set_id": "56",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O030A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0068.OBX": {
+    "set_id": "57",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O031A",
+      "text": "Work Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0069.OBX": {
+    "set_id": "58",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O032A",
+      "text": "Other Guarantor Occupation",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0070.OBX": {
+    "set_id": "59",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O033A",
+      "text": "Emp Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0071.OBX": {
+    "set_id": "60",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0O034A",
+      "text": "Description",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0072.OBX": {
+    "set_id": "61",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P010A",
+      "text": "Does the Patient Have Temporary Address?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0073.OBX": {
+    "set_id": "62",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P011A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "1 Temporary Address",
+    "obsv_result_status": "F"
+  },
+  "0074.OBX": {
+    "set_id": "63",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P012A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0075.OBX": {
+    "set_id": "64",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P013A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "City",
+    "obsv_result_status": "F"
+  },
+  "0076.OBX": {
+    "set_id": "65",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P014A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "TN",
+    "obsv_result_status": "F"
+  },
+  "0077.OBX": {
+    "set_id": "66",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P015A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "37203",
+    "obsv_result_status": "F"
+  },
+  "0078.OBX": {
+    "set_id": "67",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P016A",
+      "text": "Home PH",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "615-555-6309",
+    "obsv_result_status": "F"
+  },
+  "0079.OBX": {
+    "set_id": "68",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P017A",
+      "text": "County",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "TN037",
+    "obsv_result_status": "F"
+  },
+  "0080.OBX": {
+    "set_id": "69",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P018A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "US",
+    "obsv_result_status": "F"
+  },
+  "0081.OBX": {
+    "set_id": "70",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P019A",
+      "text": "Temporary Address Until?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "20151211",
+    "obsv_result_status": "F"
+  },
+  "0082.OBX": {
+    "set_id": "71",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P020A",
+      "text": "Comment",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0083.OBX": {
+    "set_id": "72",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P050A",
+      "text": "Does Patient Have Additional Employment?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0084.OBX": {
+    "set_id": "73",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P051A",
+      "text": "Name:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "ARTS",
+    "obsv_result_status": "F"
+  },
+  "0085.OBX": {
+    "set_id": "74",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P052A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "411 HOLMES STREET",
+    "obsv_result_status": "F"
+  },
+  "0086.OBX": {
+    "set_id": "75",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P053A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0087.OBX": {
+    "set_id": "76",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P054A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "FRANKFORT",
+    "obsv_result_status": "F"
+  },
+  "0088.OBX": {
+    "set_id": "77",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P055A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "KY",
+    "obsv_result_status": "F"
+  },
+  "0089.OBX": {
+    "set_id": "78",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P056A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "40601",
+    "obsv_result_status": "F"
+  },
+  "0090.OBX": {
+    "set_id": "79",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P057A",
+      "text": "Work Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "(502)223-5754",
+    "obsv_result_status": "F"
+  },
+  "0091.OBX": {
+    "set_id": "80",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P058A",
+      "text": "Occupation",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Tech",
+    "obsv_result_status": "F"
+  },
+  "0092.OBX": {
+    "set_id": "81",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P059A",
+      "text": "Emp Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "F",
+    "obsv_result_status": "F"
+  },
+  "0093.OBX": {
+    "set_id": "82",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P060A",
+      "text": "Preferred Language",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "ENG",
+    "obsv_result_status": "F"
+  },
+  "0094.OBX": {
+    "set_id": "83",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P061A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "US",
+    "obsv_result_status": "F"
+  },
+  "0095.OBX": {
+    "set_id": "84",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P062A",
+      "text": "Description",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "ARTS ELECTRIC INC FRANKF",
+    "obsv_result_status": "F"
+  },
+  "0096.OBX": {
+    "set_id": "85",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PCSOBS001",
+      "text": "Care begin date",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "20151211",
+    "obsv_result_status": "F"
+  },
+  "0097.OBX": {
+    "set_id": "86",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "1REG0M229A",
+      "text": "Ethnicity",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "NOTHISPLAT",
+      "text": "Not Hispanic or Latino"
+    },
+    "obsv_result_status": "F"
+  },
+  "0098.OBX": {
+    "set_id": "87",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0M230A",
+      "text": "Additional Race",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "W",
+    "obsv_result_status": "F"
+  },
+  "0099.OBX": {
+    "set_id": "88",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R020A",
+      "text": "Do You Have an Advance Directive?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0100.OBX": {
+    "set_id": "89",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R021A",
+      "text": "If No, do You Want Information?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0101.OBX": {
+    "set_id": "90",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R022A",
+      "text": "If Yes, Have You Provided the Hospital with a Current Copy?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0102.OBX": {
+    "set_id": "91",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R023A",
+      "text": "Do You Have a Durable Power of Attorney for Health Care?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0103.OBX": {
+    "set_id": "92",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R024A",
+      "text": "If No, do You Want Information?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0104.OBX": {
+    "set_id": "93",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R025A",
+      "text": "If Yes, Have You Provided the Hospital with a Current Copy?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0105.OBX": {
+    "set_id": "94",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R027A",
+      "text": "Are you currently participating in a research study",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0106.OBX": {
+    "set_id": "95",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "1REG0R048A",
+      "text": "have Ebola",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "NO",
+      "text": "No"
+    },
+    "obsv_result_status": "F"
+  },
+  "0107.OBX": {
+    "set_id": "96",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "E13010001A",
+      "text": "Preferred name",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Harry",
+    "obsv_result_status": "F"
+  },
+  "0108.OBX": {
+    "set_id": "97",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "E13010038A",
+      "text": "Immediate religious, spiritual, or cultural considerations",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "NONE",
+    "obsv_result_status": "F"
+  },
+  "0109.OBX": {
+    "set_id": "98",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "E13010042A",
+      "text": "Hearing impaired",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0110.OBX": {
+    "set_id": "99",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "HCAVAC0006",
+      "text": "Comorbid factors:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "1",
+    "obsv_result_status": "F"
+  },
+  "0111.OBX": {
+    "set_id": "100",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010001A",
+      "text": "Weight",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "2720",
+    "obsv_result_status": "F"
+  },
+  "0112.OBX": {
+    "set_id": "101",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "K31010004A",
+      "text": "Weight source",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "STATED",
+      "text": "Stated/Reported"
+    },
+    "obsv_result_status": "F"
+  },
+  "0113.OBX": {
+    "set_id": "102",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010006A",
+      "text": "Height",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "70",
+    "obsv_result_status": "F"
+  },
+  "0114.OBX": {
+    "set_id": "103",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "K31010007A",
+      "text": "Height source",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "STATED",
+      "text": "Stated/Reported"
+    },
+    "obsv_result_status": "F"
+  },
+  "0115.OBX": {
+    "set_id": "104",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010008A",
+      "text": "Body mass index",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "24.4",
+    "obsv_result_status": "F"
+  },
+  "0116.OBX": {
+    "set_id": "105",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31010010A",
+      "text": "Body surface area",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "1.96",
+    "obsv_result_status": "F"
+  },
+  "0117.OBX": {
+    "set_id": "106",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020118A",
+      "text": "Heart disease",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0118.OBX": {
+    "set_id": "107",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020120A",
+      "text": "Stroke",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0119.OBX": {
+    "set_id": "108",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020122A",
+      "text": "Colon cancer",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0120.OBX": {
+    "set_id": "109",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020124A",
+      "text": "Breast cancer",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0121.OBX": {
+    "set_id": "110",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020126A",
+      "text": "Diabetes",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0122.OBX": {
+    "set_id": "111",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010002A",
+      "text": "Temperature",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "98.6",
+    "obsv_result_status": "F"
+  },
+  "0123.OBX": {
+    "set_id": "112",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "K33010004A",
+      "text": "Temperature source",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "O",
+      "text": "Oral"
+    },
+    "obsv_result_status": "F"
+  },
+  "0124.OBX": {
+    "set_id": "113",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010006A",
+      "text": "Pulse",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "80",
+    "obsv_result_status": "F"
+  },
+  "0125.OBX": {
+    "set_id": "114",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010016A",
+      "text": "Respiratory rate",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "18",
+    "obsv_result_status": "F"
+  },
+  "0126.OBX": {
+    "set_id": "115",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "K33010018A",
+      "text": "Respiratory source",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "O",
+      "text": "Observed"
+    },
+    "obsv_result_status": "F"
+  },
+  "0127.OBX": {
+    "set_id": "116",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K33010024A",
+      "text": "Blood pressure",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "120/80",
+    "obsv_result_status": "F"
+  },
+  "0128.OBX": {
+    "set_id": "117",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "K33010026A",
+      "text": "Blood pressure location",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "AR",
+      "text": "Right arm"
+    },
+    "obsv_result_status": "F"
+  },
+  "0129.OBX": {
+    "set_id": "118",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "K33010028A",
+      "text": "Blood pressure source",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "MANUAL",
+      "text": "Manual cuff"
+    },
+    "obsv_result_status": "F"
+  },
+  "0130.OBX": {
+    "set_id": "119",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "L35010001A",
+      "text": "Bedside pulse oximetry/SpO2",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "99",
+    "obsv_result_status": "F"
+  },
+  "0131.OBX": {
+    "set_id": "120",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N40010012A",
+      "text": "Smokeless tobacco used",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0132.OBX": {
+    "set_id": "121",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N40010043A",
+      "text": "Tobacco cessation aids in current use",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "NONE",
+    "obsv_result_status": "F"
+  },
+  "0133.OBX": {
+    "set_id": "122",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010134A",
+      "text": "Patient reports prior history of TB or positive TB skin test",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0134.OBX": {
+    "set_id": "123",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010136A",
+      "text": "Patient reports close contact with a person who has TB",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0135.OBX": {
+    "set_id": "124",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010138A",
+      "text": "Close contact with any person having flu-like illness",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0136.OBX": {
+    "set_id": "125",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010140A",
+      "text": "TB Point of entry screen",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "NEGATIVE",
+    "obsv_result_status": "F"
+  },
+  "0137.OBX": {
+    "set_id": "126",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010142A",
+      "text": "Contagious respiratory infection point of entry screen",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "NEGATIVE",
+    "obsv_result_status": "F"
+  },
+  "0138.OBX": {
+    "set_id": "127",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010146A",
+      "text": "Fever greater than 37.8 C (100.4 F)",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0139.OBX": {
+    "set_id": "128",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010147A",
+      "text": "Cough (not related to allergy or COPD)",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0140.OBX": {
+    "set_id": "129",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010170A",
+      "text": "Sore throat",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0141.OBX": {
+    "set_id": "130",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010171A",
+      "text": "Night sweats",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0142.OBX": {
+    "set_id": "131",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010172A",
+      "text": "Unexplained weight loss",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0143.OBX": {
+    "set_id": "132",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010173A",
+      "text": "Fatigue (Tiredness)",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0144.OBX": {
+    "set_id": "133",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010174A",
+      "text": "Body aches",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0145.OBX": {
+    "set_id": "134",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010175A",
+      "text": "Rash",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0146.OBX": {
+    "set_id": "135",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010176A",
+      "text": "Nasal congestion (not related to allergies/sinus infection)",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0147.OBX": {
+    "set_id": "136",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N42010179A",
+      "text": "Travel outside of the US in the past 3 weeks",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0148.OBX": {
+    "set_id": "137",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N4201A0100",
+      "text": "Is patient present",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0149.OBX": {
+    "set_id": "138",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N4201A0118",
+      "text": "Able to perform TB/respiratory point of entry screen",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "Y",
+    "obsv_result_status": "F"
+  },
+  "0150.OBX": {
+    "set_id": "139",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N4201A0120",
+      "text": "Reason unable to perform screen",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_result_status": "F"
+  },
+  "0151.OBX": {
+    "set_id": "140",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "N4201A0141B",
+      "text": "Resided in or traveled to a W African Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "NO",
+      "text": "None"
+    },
+    "obsv_result_status": "F"
+  },
+  "0152.OBX": {
+    "set_id": "141",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "N4201A0143A",
+      "text": "Had contact with anyone who has been to a W African Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "NO",
+      "text": "No"
+    },
+    "obsv_result_status": "F"
+  },
+  "0153.OBX": {
+    "set_id": "142",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N4201A0148A",
+      "text": "Fever greater than 37.8 C (100.4 F)",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0154.OBX": {
+    "set_id": "143",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "U760000016A",
+      "text": "Unable to Assess",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0155.OBX": {
+    "set_id": "144",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "U76000010A",
+      "text": "Patient or caregiver refuses to receive PNEUMOCOCCAL vaccine",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0156.OBX": {
+    "set_id": "145",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "U76000012A",
+      "text": "Influenza vaccination status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "CANDIDATE",
+      "text": "Candidate"
+    },
+    "obsv_result_status": "F"
+  },
+  "0157.OBX": {
+    "set_id": "146",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "U76000013A",
+      "text": "Pneumococcal vaccination status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": {
+      "primary_id": "CANDIDATE",
+      "text": "Candidate"
+    },
+    "obsv_result_status": "F"
+  },
+  "0158.OBX": {
+    "set_id": "147",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "U76000014A",
+      "text": "Physician refusing to have patient receive vaccines",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "N",
+    "obsv_result_status": "F"
+  },
+  "0159.DG1": {
+    "set_id": "1",
+    "diagnosis_code": {
+      "id": "S61.411A",
+      "text": "LACERATION WITHOUT FOREIGN BODY OF RIGHT HAND, INIT ENCNTR",
+      "name_of_coding_system": "I10"
+    },
+    "diagnosis_type": "Other"
+  },
+  "0160.DRG": {
+    "diagnostic_related_group": "33"
+  }
+}

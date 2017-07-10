@@ -1,0 +1,81 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "ABS_FRNK_ADT_bba98aea-c2cc-4aed-aa42-ee8b0f82602f",
+    "medical_record_num": "894546879",
+    "medical_record_urn": "A1-B20151231084340697",
+    "patient_account_num": "FR0000121939"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "date_time_of_message": "201602081354-0600",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A24"
+    },
+    "message_control_id": "ABS_FRNK_ADT_bba98aea-c2cc-4aed-aa42-ee8b0f82602f",
+    "processing_id": "P",
+    "version_id": "2.5",
+    "continuation_pointer": "KYB"
+  },
+  "0002.EVN": {
+    "event_type_code": "A24",
+    "recorded_date_time": "20160122"
+  },
+  "0003.PID": {
+    "patient_id_list": "894546879",
+    "alternate_patient_id": {
+      "identifier_num": "A1-B20151231084340697",
+      "assgn_authr": "KYB",
+      "identifier_type_code": "URN"
+    },
+    "patient_name": {
+      "family_name": "Cage"
+    },
+    "patient_account_num": "FR0000121939"
+  },
+  "0004.PV1": {
+    "set_id": "1",
+    "admit_date_time": "20160106",
+    "discharge_date_time": "20160106"
+  },
+  "0005.DG1": {
+    "set_id": "1",
+    "diagnosis_coding_method": "33",
+    "diagnosis_code": "J69.0",
+    "diagnosis_description": "PNEUMONITIS DUE TO INHALATION OF FOOD AND VOMIT",
+    "diagnosis_date_time": "20160106",
+    "diagnosis_type": "A"
+  },
+  "0006.DG1": {
+    "set_id": "1",
+    "diagnosis_code": "J69.0",
+    "diagnosis_description": "PNEUMONITIS DUE TO INHALATION OF FOOD AND VOMIT",
+    "diagnosis_date_time": "20160106",
+    "diagnosis_type": "W"
+  },
+  "0007.PR1": {
+    "set_id": "1",
+    "procedure_code": {
+      "id": "71551",
+      "name_of_coding_system": "C4"
+    },
+    "procedure_description": "MRI CHEST W/DYE",
+    "procedure_date_time": "20160106",
+    "procedure_code_modifier": "~~~~"
+  },
+  "0008.PR1": {
+    "set_id": "2",
+    "procedure_code": {
+      "id": "71260",
+      "name_of_coding_system": "C4"
+    },
+    "procedure_description": "CT THORAX W/DYE",
+    "procedure_date_time": "20160106",
+    "procedure_code_modifier": "~~~~"
+  }
+}

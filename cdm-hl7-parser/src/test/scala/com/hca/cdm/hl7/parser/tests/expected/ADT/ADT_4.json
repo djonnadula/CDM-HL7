@@ -1,0 +1,160 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "MT6_FRNK_ADT_137523803",
+    "medical_record_num": "K000102025",
+    "medical_record_urn": "1234567",
+    "patient_account_num": "FR0804087583"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "ADM",
+    "sending_facility": "FRNK",
+    "date_time_of_message": "201607211540",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A08"
+    },
+    "message_control_id": "MT6_FRNK_ADT_137523803",
+    "processing_id": "P",
+    "version_id": "2.4"
+  },
+  "0002.EVN": {
+    "recorded_date_time": "201607211540",
+    "operator_id": {
+      "person_id": "SHZ2579",
+      "family_name": "Gaines",
+      "given_name": "Angel",
+      "second_and_further_given_names_or_initials_thereof": "M"
+    },
+    "event_occured": "201608261100"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id_list": [
+      {
+        "id_num": "K000102025",
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "403-23-8060",
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "K96519",
+        "id_type_code": "PI",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A00200382",
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
+      }
+    ],
+    "alternate_patient_id": "1234567",
+    "patient_name": [
+      {
+        "family_name": "RUSSELL",
+        "given_name": "KATHY",
+        "second_and_further_given_names_or_initials_thereof": "LYNN",
+        "name_type_code": "L"
+      },
+      {
+        "family_name": "RUSSELL",
+        "given_name": "KATHY",
+        "second_and_further_given_names_or_initials_thereof": "L",
+        "name_type_code": "M"
+      }
+    ],
+    "mother_maiden_name": "DIANE",
+    "date_time_of_birth": "19760920",
+    "administrative_sex": "F",
+    "race": "U",
+    "patient_address": {
+      "address_type": "P"
+    },
+    "phone_num_home": "(502)517-5291",
+    "patient_account_num": "FR0804087583",
+    "ssn_num_patient": "403-23-8060"
+  },
+  "0004.PV1": {
+    "set_id": "1",
+    "patient_class": "P",
+    "assigned_patient_location": "FR.SURG",
+    "attending_doctor": {
+      "person_id": "BYG2418",
+      "family_name": "Wainwright",
+      "given_name": "Mark",
+      "second_and_further_given_names_or_initials_thereof": "A.",
+      "id_type_code": "XX"
+    },
+    "patient_type": "SDC",
+    "financial_class": "09",
+    "servicing_facility": "FRNK",
+    "account_status": "PRE",
+    "admit_date_time": "201608261100"
+  },
+  "0005.PV2": {
+    "admit_reason": "IRREG BLEEDING",
+    "newborn_baby_indicator": "N"
+  },
+  "0006.ROL": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
+      "person_id": "BYG2418",
+      "family_name": "Wainwright",
+      "given_name": "Mark",
+      "second_and_further_given_names_or_initials_thereof": "A.",
+      "id_type_code": "XX"
+    }
+  },
+  "0007.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1CWS0P093A",
+      "text": "CPT code",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_value": "58563",
+    "obsv_result_status": "F"
+  },
+  "0008.DRG": {
+    "diagnostic_related_group": "33"
+  },
+  "0009.IN1": {
+    "set_id": "1",
+    "health_plan_id": "BCANTHMCD",
+    "insurance_company_name": "BC ANTHEM MEDICAID KY",
+    "insurance_company_address": {
+      "street_address": "PO BOX 61010",
+      "other_designation": "ATTN CLAIMS",
+      "city": "VIRGINIA BEACH",
+      "state_or_province": "VA",
+      "zip_or_postal_code": "23456-1010"
+    },
+    "insurance_company_phone_num": "(855)661-2028",
+    "name_of_insured": {
+      "family_name": "RUSSELL",
+      "given_name": "KATHY",
+      "second_and_further_given_names_or_initials_thereof": "LYNN"
+    },
+    "insured_relationship_to_patient": "SA",
+    "insured_date_of_birth": "19760920",
+    "insured_address": {
+      "address_type": "P"
+    },
+    "policy_num": "403238060",
+    "insured_administrative_sex": "F"
+  },
+  "0010.IN2": {
+    "set_id": "1",
+    "insured_social_security_num": "403-23-8060",
+    "insured_phone_num_home": "(502)517-5291"
+  }
+}

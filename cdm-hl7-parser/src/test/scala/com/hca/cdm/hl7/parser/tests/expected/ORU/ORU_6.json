@@ -1,0 +1,92 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COQ1A_ORU_NURQA.161006.9593",
+    "medical_record_num": "J000425955",
+    "medical_record_urn": "J502560",
+    "patient_account_num": "J00021034468"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201610241750",
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "IP_COQ1A_ORU_NURQA.161006.9593",
+    "processing_id": " ",
+    "version_id": "T",
+    "sequence_num": "2.5",
+    "msh_unknown": "KYA^04446",
+    "application_acknowledgement_type": "ER",
+    "country_code": "NE"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "J000425955",
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": "J502560",
+    "patient_name": {
+      "family_name": "VACCINE",
+      "given_name": "MOM"
+    },
+    "date_time_of_birth": "19950515",
+    "administrative_sex": "F",
+    "patient_account_num": "J00021034468"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "L.LD",
+      "room": "L.LD1",
+      "bed": "A",
+      "facility": "COCQA1A"
+    },
+    "admission_type": "UR",
+    "attending_doctor": {
+      "person_id": "GRESH",
+      "family_name": "GREER",
+      "given_name": "SHERRY"
+    },
+    "patient_type": "IN",
+    "account_status": "DIS"
+  },
+  "0004.ORC": {
+    "order_control": "NEW",
+    "filler_order_num": "J00021034468-71456-1-20161025-0000-358"
+  },
+  "0005.OBR": {
+    "set_id": "1",
+    "placer_order_num": "71456",
+    "filler_order_num": "J00021034468-71456-1-20161025-0000-358",
+    "universal_service_id": {
+      "id": "71456",
+      "text": "CPN: Intervention +",
+      "alternate_text": "CPN: Assessment"
+    },
+    "priority": "99",
+    "obsv_date_time_num": "201610250000",
+    "specimen_received_date_time": "201610241749",
+    "ordering_provider": "CPNINTRFC",
+    "placer_field_1": "hcaCPN"
+  },
+  "0006.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "hcaCPN33",
+      "text": "EGA Truncated:"
+    },
+    "obsv_value": "41",
+    "obsv_result_status": "N"
+  }
+}

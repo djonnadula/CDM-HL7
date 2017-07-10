@@ -1,0 +1,213 @@
+{
+  "0000.COMN": {
+    "sending_facility": "STMH",
+    "message_control_id": "EPIC_STMH_MDM_15098418",
+    "medical_record_num": "1000846691",
+    "medical_record_urn": "W000614671",
+    "patient_account_num": "502883390"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "STMH",
+    "date_time_of_message": "20170301115155",
+    "security": "EDITRANS",
+    "message_type": {
+      "message_code": "MDM",
+      "trigger_event": "T08"
+    },
+    "message_control_id": "EPIC_STMH_MDM_15098418",
+    "processing_id": "P",
+    "version_id": "2.1",
+    "continuation_pointer": "Epic_Mountain_PRD"
+  },
+  "0002.EVN": {
+    "event_type_code": "T08",
+    "recorded_date_time": "20170301115155",
+    "event_reason_code": "UPDATE_NOTE",
+    "operator_id": {
+      "person_id": "EDITRANS",
+      "family_name": "INTERFACE",
+      "given_name": "TRANSCRIPTION",
+      "second_and_further_given_names_or_initials_thereof": "INCOMING",
+      "assigning_authority": "MTNUT"
+    }
+  },
+  "0003.PID": {
+    "patient_id": {
+      "identifier_num": "W692029",
+      "assgn_authr": "SLCURN",
+      "identifier_type_code": "SLCURN"
+    },
+    "patient_id_list": {
+      "id_num": "1000846691",
+      "assigning_authority": "EPIC",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": [
+      {
+        "identifier_num": "W000614671",
+        "assgn_authr": "SMHP",
+        "identifier_type_code": "SMHP"
+      },
+      {
+        "identifier_num": "Z000277041",
+        "assgn_authr": "TRH",
+        "identifier_type_code": "TRH"
+      }
+    ],
+    "patient_name": {
+      "family_name": "GARDNER",
+      "given_name": "CORENA"
+    },
+    "date_time_of_birth": "19620407",
+    "administrative_sex": "F",
+    "race": "W",
+    "patient_address": {
+      "street_address": "9277 S OQUIRRH MEADOWS DRIVE",
+      "city": "WEST JORDAN",
+      "state_or_province": "UT",
+      "zip_or_postal_code": "84088",
+      "country": "USA",
+      "address_type": "P",
+      "county_parish_code": "SALT LAKE"
+    },
+    "county_code": "SALT LAKE",
+    "phone_num_home": {
+      "telephone_num": "(208)406-9727",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H"
+    },
+    "primary_language": "ENGLISH",
+    "marital_status": "D",
+    "religion": "LDS",
+    "patient_account_num": "502883390",
+    "ssn_num_patient": "520-58-5923",
+    "ethnic_group": "NOT HISPANIC",
+    "patient_death_indicator": "N"
+  },
+  "0004.PD1": {
+    "patient_primary_facility": {
+      "organization_name": "ST. MARK'S HOSPITAL",
+      "id_num": "10001001"
+    },
+    "patient_primary_care_provider_name_and_id_num": [
+      {
+        "person_id": "UNDEFINED",
+        "last_name": "FOUND",
+        "first_name": "PROVIDER",
+        "middle_name": "UNKNOWN OR NOT",
+        "assgn_authr": "PROVID",
+        "identifier_type_code": "PROVID"
+      },
+      {
+        "person_id": "UNK1111",
+        "last_name": "FOUND",
+        "first_name": "PROVIDER",
+        "middle_name": "UNKNOWN OR NOT",
+        "assgn_authr": "THREEFOUR",
+        "identifier_type_code": "THREEFOUR"
+      }
+    ]
+  },
+  "0005.PV1": {
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "STMHORTH",
+      "room": "W.5W07",
+      "bed": "W.5W07A",
+      "facility": "STMH"
+    },
+    "attending_doctor": [
+      {
+        "person_id": "HUNKA",
+        "family_name": "HUNTSMAN",
+        "given_name": "KADE",
+        "second_and_further_given_names_or_initials_thereof": "T",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "EYJ9771",
+        "family_name": "HUNTSMAN",
+        "given_name": "KADE",
+        "second_and_further_given_names_or_initials_thereof": "T",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "referring_doctor": [
+      {
+        "person_id": "HUNKA",
+        "family_name": "HUNTSMAN",
+        "given_name": "KADE",
+        "second_and_further_given_names_or_initials_thereof": "T",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "EYJ9771",
+        "family_name": "HUNTSMAN",
+        "given_name": "KADE",
+        "second_and_further_given_names_or_initials_thereof": "T",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "hospital_service": "SURG",
+    "admitting_doctor": [
+      {
+        "person_id": "HUNKA",
+        "family_name": "HUNTSMAN",
+        "given_name": "KADE",
+        "second_and_further_given_names_or_initials_thereof": "T",
+        "assigning_authority": "PROVID",
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "EYJ9771",
+        "family_name": "HUNTSMAN",
+        "given_name": "KADE",
+        "second_and_further_given_names_or_initials_thereof": "T",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "visit_num": "26087331",
+    "admit_date_time": "20170227"
+  },
+  "0006.TXA": {
+    "set_id": "1",
+    "document_type": {
+      "id": "Case Managem",
+      "text": "Case Management"
+    },
+    "document_content_presentation": "TX",
+    "activity_date_time": "20170301125100",
+    "origination_date_time": "20170301115100",
+    "transcription_date_time": "20170301115100",
+    "edit_date_time": "20170301115100",
+    "unique_document_num": "MIDAS090444994",
+    "document_completion_status": "AU",
+    "document_availability_status": "AV",
+    "authentication_person_time_stamp": {
+      "person_id": "GZA8103",
+      "family_name": "TAKKE",
+      "given_name": "KARYN",
+      "assigning_authority": "THREEFOUR",
+      "id_type_code": "THREEFOUR",
+      "date_time_action_performed": "20170228164207"
+    }
+  },
+  "0007.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "85200",
+      "text": "Transcription Authentication Interface Message Text"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "--------------------------------------------------------------------------------~HCM SUPPORT SERVICES~~No HCM Support Services data on file for this encounter in MIDAS+~--------------------------------------------------------------------------------~HCM DISCHARGE PLANNING~--------------------------------------------------------------------------------~HCM Discharge Planning Comments:~~---2/28/2017 1639 by Karyn Takke---~Patient lives alone in a one level house.  Entrance does have steps.  patient~owns a front wheel walker.  She is independent with ADLs, with transfers, with~ambulation and she drives.  Patient is retired from the Army.  Patient's goal~is to have decreased eye and back pain.  therapy recommendation is home health.~Patient will not need additional DME.~~~--------------------------------------------------------------------------------~HCM DISCHARGE PLANNING EVALUATION~--------------------------------------------------------------------------------~Case Workers:   Takke,Karyn M~Living Status:  Alone~Setting:        Home-residence~~HCM Discharge Planning User Fields:~~Community Services Prior to Admission:  Outpatient Services~~Current Mental Status/Cognition:  Alert and Oriented~~Information obtained from:  Medical Records~~Discharge Barriers, select all that apply:  None or NA~~Patient goals and preferences after discharge:  decrease eye and back pain~~Based on information gathered, is it likely that the patient's care needs can~be met in the environment from which he/she entered the hospital?:  Yes~~Proposed Discharge Plan, select one:  Home~~Home Services needed:  Home Health~~If a caregiver is needed, is there a caregiver available, willing and capable~to provide care?:  Not Needed~~Community services needed:  None~~New DME required at discharge:  None or NA~~If new DME is required, is patient able to obtain DME?:  Yes~~Home Modifications required:  None or NA~~If home modifications are required, is patient able to obtain them?:  Not~Applicable~~Transportation needs at discharge:  TBD~~Discharge Plan Discussed with:  Patient~~Have you discussed with the patient how his/her care needs may change over~time?:  No~~Discussed expected insurance coverage and/or out of pocket expenses:  No~~Comments:~Evaluated by: Takke,Karyn M Date / Time: 2/28/2017 4:41 PM~~================================================================================~Updated by:     INTERFACE,HIS (HISINTFC) - 3/1/2017 11:51 AM~================================================================================~~~",
+    "obsv_result_status": "F"
+  }
+}

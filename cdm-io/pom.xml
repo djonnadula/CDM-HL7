@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdm-io</artifactId>
@@ -13,11 +13,6 @@
     <name>CDM I/O</name>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-launcher_2.10</artifactId>
-            <version>${spark.version}-${cdh.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.hca</groupId>
@@ -28,6 +23,13 @@
         <dependency>
             <groupId>org.apache.flume</groupId>
             <artifactId>flume-ng-core</artifactId>
+            <version>${flume.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.flume.flume-ng-sources</groupId>
+            <artifactId>flume-kafka-source</artifactId>
             <version>${flume.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -47,38 +49,44 @@
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-jdbc</artifactId>
-            <version>1.1.0-${cdh.version}</version>
+            <version>${hive.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hive.hcatalog</groupId>
             <artifactId>hive-hcatalog-core</artifactId>
-            <version>1.1.0-${cdh.version}</version>
+            <version>${hive.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>spark-client</artifactId>
-            <version>1.1.0-${cdh.version}</version>
+            <version>${hive.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-yarn_2.10</artifactId>
-            <version>1.6.0-${cdh.version}</version>
+            <version>${spark.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-spark</artifactId>
-            <version>1.2.0-${cdh.version}</version>
+            <version>${hbase.version}-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.kudu</groupId>
+            <artifactId>kudu-spark_${scala.binary.version}</artifactId>
+            <version>${kudu.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
