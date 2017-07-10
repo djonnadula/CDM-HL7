@@ -37,7 +37,7 @@ def main():
             reslist = list(reader)
             # Control the order of files so that segments do get added to the middle of the schema
             if filename == STANDARD_MAP:
-                templates_dict['1' + filename] = reslist\
+                templates_dict['1' + filename] = reslist
             # Forgot these in original files
             elif filename == EPIC21_MAP or filename == EPIC231_MAP:
                 templates_dict['3' + filename] = reslist
