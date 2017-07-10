@@ -85,8 +85,13 @@ object PsgAcoAdtJob extends Logg with App {
               case Success(splitted) =>
                 splitted.foreach(segment => {
                   if (segment.startsWith(IN1)) {
-                    val retVal = splitAndReturn(segment, "\\|", 36, "policy_num")
-                    if (retVal != null) insuranceIds += retVal
+                    info(s"segment: $segment")
+                    splitAndReturn(segment, "\\|", 36) match {
+                      case Success(id) =>
+                        info(s"Found policy_num: $id")
+                        insuranceIds += id
+                      case Failure(t) => warn(s"No policy_num for segment")
+                    }
                   }
                 })
               case Failure(t) => error(s"Failed to split message: $t")
@@ -107,34 +112,9 @@ object PsgAcoAdtJob extends Logg with App {
     })
   }
 
-  def splitAndReturn(segment: String, delimiter: String, returnIndex: Int, segInfo: String): String = {
-    info(s"segment: $segment")
-    Try(segment.split(delimiter)(returnIndex)) match {
-      case Success(id) =>
-        info(s"Found $segInfo: $id")
-        id
-      case Failure(t) =>
-        warn(s"No $segInfo for segment")
-        null
-    }
+  def splitAndReturn(segment: String, delimiter: String, returnIndex: Int): Try[String] = {
+    Try(segment.split(delimiter)(returnIndex))
   }
-
-//  def splitAndReturn2(segment: String, delimiter: String, returnIndex: Int, segInfo: String): Option[String] = {
-//    info(s"segment: $segment")
-//    try {
-//      Some(segment.split(delimiter)(returnIndex))
-//    } catch {
-//      case e: Exception => None
-//    }
-////    Try(segment.split(delimiter)(returnIndex)) match {
-////      case Success(id) =>
-////        info(s"Found $segInfo: $id")
-////        id
-////      case Failure(t) =>
-////        warn(s"No $segInfo for segment")
-////        None
-////    }
-//  }
 
   private def startStreams() = {
     try {
