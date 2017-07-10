@@ -398,7 +398,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
 
   private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
+                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
     val segment = new Segment
     var mappedColumnData = EMPTYSTR
     try {

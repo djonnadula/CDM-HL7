@@ -158,7 +158,7 @@ trait MqConnector extends Logg with AutoCloseable {
       closeResource(prod)
     }
 
-     def createSession(source: String): MQSession = {
+    def createSession(source: String): MQSession = {
       if (sessions isDefinedAt source) sessions(source)
       else {
         val session = connection.createSession(false, CLIENT_ACKNOWLEDGE).asInstanceOf[MQSession]
