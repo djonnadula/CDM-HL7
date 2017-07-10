@@ -14,7 +14,6 @@ import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
 
 import scala.collection.JavaConverters._
-import scala.collection.concurrent.TrieMap
 import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success, Try}
 
@@ -83,20 +82,24 @@ object PsgAcoAdtJob extends Logg with App {
             val delim = if (message contains "\r\n") "\r\n" else "\n"
             val insuranceIds = new ArrayBuffer[String]
             Try(message.split(delim)) match {
-              case Success(splitted) => {
-                info("success")
+              case Success(splitted) =>
                 splitted.foreach(segment => {
-                  if (segment.startsWith(IN1)) insuranceIds += splitAndReturn(segment, "\\|", 36)
+                  if (segment.startsWith(IN1)) {
+                    val retVal = splitAndReturn(segment, "\\|", 36, "policy_num")
+                    if (retVal != null) insuranceIds += retVal
+                  }
                 })
-                if (insuranceIds.nonEmpty) {
-                  info("insuranceIds: " + insuranceIds.toString())
-                } else {
-                  info(s"Message: $message does not contain both MSH and IN1")
+              case Failure(t) => error(s"Failed to split message: $t")
+            }
+            if (insuranceIds.nonEmpty) {
+              insuranceIds.foreach(id => {
+                if (id.nonEmpty) {
+                  info(s"id: $id")
+                  // Filter insurance IDs
+                  // Write message to file or send?
+                  //                    info(s"Message: $message")
                 }
-              }
-              case Failure(t) => {
-                error("failed")
-              }
+              })
             }
           }
         })
@@ -104,10 +107,34 @@ object PsgAcoAdtJob extends Logg with App {
     })
   }
 
-  def splitAndReturn(segment: String, delimiter: String, returnIndex: Int): String = {
+  def splitAndReturn(segment: String, delimiter: String, returnIndex: Int, segInfo: String): String = {
     info(s"segment: $segment")
-    segment.split(delimiter)(returnIndex)
+    Try(segment.split(delimiter)(returnIndex)) match {
+      case Success(id) =>
+        info(s"Found $segInfo: $id")
+        id
+      case Failure(t) =>
+        warn(s"No $segInfo for segment")
+        null
+    }
   }
+
+//  def splitAndReturn2(segment: String, delimiter: String, returnIndex: Int, segInfo: String): Option[String] = {
+//    info(s"segment: $segment")
+//    try {
+//      Some(segment.split(delimiter)(returnIndex))
+//    } catch {
+//      case e: Exception => None
+//    }
+////    Try(segment.split(delimiter)(returnIndex)) match {
+////      case Success(id) =>
+////        info(s"Found $segInfo: $id")
+////        id
+////      case Failure(t) =>
+////        warn(s"No $segInfo for segment")
+////        None
+////    }
+//  }
 
   private def startStreams() = {
     try {
