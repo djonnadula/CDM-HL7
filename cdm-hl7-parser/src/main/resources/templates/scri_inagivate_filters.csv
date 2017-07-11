@@ -1,0 +1,3 @@
+MSH,message_control_id,MT,STARTSWITH,OR
+MSH,message_control_id,EPIC,STARTSWITH,NONE
+ 
