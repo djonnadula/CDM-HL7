@@ -72,13 +72,6 @@ package object model {
     commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
 
-  private lazy val templateBuildPath = {
-    val basePath = Paths.get(new java.io.File(".").getAbsolutePath).getParent
-      //  .getParent
-    val templatePath = "cdm-scripts" + FS + "templates"
-    Paths.get(basePath.toString, templatePath)
-  }
-
   def hl7Type(data: mapType): HL7 = {
     Try(data.getOrElse(MSH_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Type_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Code, "UNKNOWN")) match {
       case Success(any) => whichHl7(any.asInstanceOf[String])
@@ -480,20 +473,9 @@ package object model {
   }
 
   def readFile(file: String): BufferedSource = {
-    if (lookUpProp("hl7.env") == "BUILD") {
-      fromFile(templateBuildPath.toString + FS + file)
+    if (lookUpProp("hl7.env") == "LOCAL") {
+      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(file))
     } else fromFile(file)
-  }
-
-
-  def determineTemplatePath(os: String): String = {
-    if (getOS.toLowerCase().contains("windows")) {
-      info("Using Windows path for templates")
-      "hl7.qa.config.windows"
-    } else {
-      info("Using Linux path for templates.")
-      "hl7.qa.config.cdhvm"
-    }
   }
 
 }
