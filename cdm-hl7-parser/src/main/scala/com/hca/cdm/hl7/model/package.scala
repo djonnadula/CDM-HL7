@@ -11,6 +11,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
+import com.hca.cdm.hl7.model.Destinations.Destination
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
@@ -72,8 +73,8 @@ package object model {
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
 
   private lazy val templateBuildPath = {
-    val basePath = Paths.get(new java.io.File(".").getAbsolutePath)
-    //.getParent.getParent
+    val basePath = Paths.get(new java.io.File(".").getAbsolutePath).getParent
+      //  .getParent
     val templatePath = "cdm-scripts" + FS + "templates"
     Paths.get(basePath.toString, templatePath)
   }
@@ -172,6 +173,13 @@ package object model {
 
   }
 
+  object Destinations extends Enumeration {
+    type Destination = Value
+    val KAFKA = Value("KAFKA")
+    val WSMQ = Value("WSMQ")
+    val DEFAULT = Value("KAFKA")
+  }
+
   def applyAvroData(container: Record, key: String, value: AnyRef): Unit = {
     tryAndLogErrorMes(container.put(key, value), error(_: Throwable), Some(s"Cannot insert key $key  into Avro Schema ${container.getSchema}"))
   }
@@ -262,6 +270,8 @@ package object model {
         if (valid(adhoc, 3)) {
           def access(index: Int, store: Array[String] = adhoc) = () => store(index)
 
+          def destination(out: String) = tryAndReturnDefaultValue(asFunc(Destinations.withName(out)), Destinations.KAFKA)
+
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
@@ -271,11 +281,12 @@ package object model {
           var index = -1
           outFormats.map(outFormat => {
             index += 1
+            val dest = outDest(index) split "\\&"
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains JSON.toString) {
-              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -291,7 +302,9 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
+  case class DestinationSystem(destination: Destination = Destinations.KAFKA, route: String)
+
+  case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 

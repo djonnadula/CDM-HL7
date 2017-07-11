@@ -35,7 +35,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   private val mqHosts = lookUpProp("mq.hosts")
   private val mqManager = lookUpProp("mq.manager")
   private val mqChannel = lookUpProp("mq.channel")
-  private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
+  private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
   private var consumerPool: ThreadPoolExecutor = _
