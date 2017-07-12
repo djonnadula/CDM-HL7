@@ -19,6 +19,12 @@
             <version>${cdm.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.hca</groupId>
+            <artifactId>cdm-io</artifactId>
+            <version>1.0.5-Snapshot</version>
+        </dependency>
+
     </dependencies>
 
 

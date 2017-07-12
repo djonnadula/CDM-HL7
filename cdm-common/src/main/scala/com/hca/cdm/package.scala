@@ -37,6 +37,7 @@ package object cdm extends Logg {
   private var prop: scala.collection.mutable.Map[String, String] = _
   var propFile = "CDMHL7.properties"
   lazy val EMPTYSTR = ""
+  lazy val SPACE = " "
   lazy val AMPERSAND = "&"
   lazy val emptyArray = Array.empty[Any]
   lazy val FS: String = File separator

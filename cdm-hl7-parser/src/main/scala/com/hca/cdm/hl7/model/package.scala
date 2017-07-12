@@ -277,9 +277,9 @@ package object model {
             val dest = outDest(index) split "\\&"
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains JSON.toString) {
-              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -299,6 +299,32 @@ package object model {
 
   case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
+  }
+
+  private case class FieldSelector(fieldsCriteria: List[((String, String), String)] = Nil) {
+
+    def selectFieldsBasedOnCriteria(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      fieldsCriteria.foreach {
+        case (criteria, modify) => if ((layout isDefinedAt criteria._1) && (layout isDefinedAt modify)) {
+          layout(criteria._1).split(caret)
+            .view.zipWithIndex.foreach(dataPoint => if (dataPoint._1 == criteria._2) layout update(modify,
+            tryAndReturnDefaultValue(asFunc(layout(modify).split(caret)(dataPoint._2)), EMPTYSTR)))
+        }
+      }
+
+    }
+  }
+
+  private case class FieldsAggregator(fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
+
+    def aggregate(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      fieldsToAggregate.foreach {
+        case (criteria, modify) =>
+          if (layout isDefinedAt modify)
+            layout update(modify, criteria.map(field => layout.getOrElse(field, EMPTYSTR)).mkString(delimitedBy))
+      }
+    }
+
   }
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR,
