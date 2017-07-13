@@ -146,7 +146,7 @@ object HL7Job extends Logg with App {
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
-      if ((model.adhoc isDefined) && (model.adhoc.get.destination.destination == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
+      if ((model.adhoc isDefined) && (model.adhoc.get.destination.system == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
     })))
     createTopic(hl7JsonTopic, segmentPartitions = false)
     createTopic(segTopic, segmentPartitions = false)

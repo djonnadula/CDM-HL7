@@ -295,13 +295,13 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class DestinationSystem(destination: Destination = Destinations.KAFKA, route: String)
+  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
   case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
-  private case class FieldSelector(fieldsCriteria: List[((String, String), String)] = Nil) {
+  private[model] case class FieldSelector(fieldsCriteria: List[((String, String), String)] = Nil) {
 
     def selectFieldsBasedOnCriteria(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsCriteria.foreach {
@@ -315,7 +315,7 @@ package object model {
     }
   }
 
-  private case class FieldsAggregator(fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
+  private[model] case class FieldsAggregator(fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
 
     def aggregate(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToAggregate.foreach {
