@@ -474,7 +474,7 @@ package object model {
 
   def readFile(file: String): BufferedSource = {
     if (lookUpProp("hl7.env") == "LOCAL") {
-      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(file))
+      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(s"templates$FS$file"))
     } else fromFile(file)
   }
 
