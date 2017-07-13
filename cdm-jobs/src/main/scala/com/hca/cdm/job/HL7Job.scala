@@ -45,6 +45,7 @@ import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -146,7 +147,7 @@ object HL7Job extends Logg with App {
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
-      if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
+      if ((model.adhoc isDefined) && (model.adhoc.get.destination.system == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
     })))
     createTopic(hl7JsonTopic, segmentPartitions = false)
     createTopic(segTopic, segmentPartitions = false)
@@ -528,10 +529,12 @@ object HL7Job extends Logg with App {
     */
   private class MetricsListener(sparkStrCtx: StreamingContext) extends SparkListener {
     val stageTracker = new TrieMap[Int, StageInfo]()
+    val stagesSubmitted = new mutable.Queue[StageInfo]
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
-      runningStage = stageSubmitted.stageInfo
+      stagesSubmitted += stageSubmitted.stageInfo
+      if (runningStage.completionTime isDefined) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else null
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")

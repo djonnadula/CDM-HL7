@@ -295,7 +295,7 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class DestinationSystem(destination: Destination = Destinations.KAFKA, route: String)
+  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
   case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)

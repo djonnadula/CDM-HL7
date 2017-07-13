@@ -88,7 +88,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                     if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) {
                       tlmAckMessages += Tuple2(tlmAuditor(segment.tlmAckApplication, meta), segment.tlmAckApplication)
                     }
-                    if (segment.dest.get.destination == Destinations.WSMQ && (tlmAckIO isDefined)) {
+                    if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
                       tlmAckMessages += Tuple2(rec, segment.headerKey)
                     } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route), s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                       if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
