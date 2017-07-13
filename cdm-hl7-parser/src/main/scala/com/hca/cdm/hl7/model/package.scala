@@ -297,8 +297,13 @@ package object model {
 
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
-  case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
-    val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
+  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsAggregator, validator: FieldsValidator)
+
+  case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)]
+                   , reqNoAppends: Array[String] = Array.empty[String],
+                   ackApplication: String = EMPTYSTR, transformer: Option[FieldsTransformer] = None) {
+    val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).
+      map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
   private[model] case class FieldSelector(fieldsCriteria: List[((String, String), String)] = Nil) {
@@ -311,7 +316,6 @@ package object model {
             tryAndReturnDefaultValue(asFunc(layout(modify).split(caret)(dataPoint._2)), EMPTYSTR)))
         }
       }
-
     }
   }
 
@@ -324,7 +328,17 @@ package object model {
             layout update(modify, criteria.map(field => layout.getOrElse(field, EMPTYSTR)).mkString(delimitedBy))
       }
     }
+  }
 
+  private[model] case class FieldsValidator(fieldsToValidate: List[(String, String)] = Nil, replaceWith: String = EMPTYSTR) {
+
+    def validate(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      fieldsToValidate.foreach {
+        case (criteria, check) =>
+          if (layout.getOrElse(criteria, EMPTYSTR).contains(check))
+            layout update(criteria, replaceWith)
+      }
+    }
   }
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR,
