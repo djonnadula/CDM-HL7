@@ -94,6 +94,7 @@ object HL7Receiver extends Logg with App {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
       info(s"New Checkpoint Created for $app $ctx")
+      ctx.remember(batchDuration * 2)
       runJob(ctx)
       ctx
     }
