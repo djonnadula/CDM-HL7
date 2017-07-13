@@ -297,7 +297,14 @@ package object model {
 
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
-  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsAggregator, validator: FieldsValidator)
+  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsAggregator, validator: FieldsValidator) {
+
+    def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
+      selector selectFieldsBasedOnCriteria data
+      aggregator aggregate data
+      validator validate data
+    }
+  }
 
   case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)]
                    , reqNoAppends: Array[String] = Array.empty[String],
@@ -306,7 +313,7 @@ package object model {
       map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
-  private[model] case class FieldSelector(fieldsCriteria: List[((String, String), String)] = Nil) {
+  private[model] case class FieldSelector(private val fieldsCriteria: List[((String, String), String)] = Nil) {
 
     def selectFieldsBasedOnCriteria(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsCriteria.foreach {
@@ -319,7 +326,7 @@ package object model {
     }
   }
 
-  private[model] case class FieldsAggregator(fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
+  private[model] case class FieldsAggregator(private val fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
 
     def aggregate(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToAggregate.foreach {
@@ -330,7 +337,7 @@ package object model {
     }
   }
 
-  private[model] case class FieldsValidator(fieldsToValidate: List[(String, String)] = Nil, replaceWith: String = EMPTYSTR) {
+  private[model] case class FieldsValidator(private val fieldsToValidate: List[(String, String)] = Nil, replaceWith: String = EMPTYSTR) {
 
     def validate(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToValidate.foreach {
