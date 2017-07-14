@@ -15,6 +15,8 @@ object Filters {
     val LTE = Value("LTE")
     val CONTAINS = Value("CONTAINS")
     val STARTSWITH = Value("STARTSWITH")
+    val COMPARE_IGNORE_CASE_EQUAL = Value("COMPARE_IGNORE_CASE_EQUAL")
+    val COMPARE = Value("COMPARE")
   }
 
   object Expressions extends Enumeration {

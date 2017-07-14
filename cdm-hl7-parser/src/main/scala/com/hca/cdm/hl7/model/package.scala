@@ -1,6 +1,5 @@
 package com.hca.cdm.hl7
 
-import java.nio.file.Paths
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -268,6 +267,7 @@ package object model {
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
+          val etlTransformations = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val segStruct = adhoc take 2 mkString COLON
           val outFormats = adhoc(2) split "\\^"
           val outDest = adhoc(3) split "\\^"
@@ -297,12 +297,13 @@ package object model {
 
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
-  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsAggregator, validator: FieldsValidator) {
+  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsAggregator, validator: FieldsValidator, staticOperator: FieldsStaticOperator) {
 
     def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
-      selector selectFieldsBasedOnCriteria data
-      aggregator aggregate data
-      validator validate data
+      selector apply data
+      aggregator apply data
+      validator apply data
+      staticOperator apply data
     }
   }
 
@@ -315,7 +316,7 @@ package object model {
 
   private[model] case class FieldSelector(private val fieldsCriteria: List[((String, String), String)] = Nil) {
 
-    def selectFieldsBasedOnCriteria(layout: mutable.LinkedHashMap[String, String]): Unit = {
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsCriteria.foreach {
         case (criteria, modify) => if ((layout isDefinedAt criteria._1) && (layout isDefinedAt modify)) {
           layout(criteria._1).split(caret)
@@ -328,7 +329,7 @@ package object model {
 
   private[model] case class FieldsAggregator(private val fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
 
-    def aggregate(layout: mutable.LinkedHashMap[String, String]): Unit = {
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToAggregate.foreach {
         case (criteria, modify) =>
           if (layout isDefinedAt modify)
@@ -339,11 +340,21 @@ package object model {
 
   private[model] case class FieldsValidator(private val fieldsToValidate: List[(String, String)] = Nil, replaceWith: String = EMPTYSTR) {
 
-    def validate(layout: mutable.LinkedHashMap[String, String]): Unit = {
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToValidate.foreach {
         case (criteria, check) =>
           if (layout.getOrElse(criteria, EMPTYSTR).contains(check))
             layout update(criteria, replaceWith)
+      }
+    }
+  }
+
+  private[model] case class FieldsStaticOperator(private val staticFields: List[(String, String)] = Nil) {
+
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      staticFields.foreach {
+        case (criteria, updateWith) =>
+          if (layout isDefinedAt criteria) layout update(criteria, updateWith)
       }
     }
   }

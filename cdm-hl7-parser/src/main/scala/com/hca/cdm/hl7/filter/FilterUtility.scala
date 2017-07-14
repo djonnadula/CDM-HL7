@@ -131,6 +131,8 @@ object FilterUtility {
       case GTE => toMatch.compareTo(in) >= 0
       case LTE => toMatch.compareTo(in) <= 0
       case STARTSWITH => in.startsWith(toMatch)
+      case COMPARE => (in compareTo toMatch) == 0
+      case COMPARE_IGNORE_CASE_EQUAL => (in compareToIgnoreCase  toMatch) == 0
       case _ => false
 
     }
