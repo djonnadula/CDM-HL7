@@ -253,6 +253,13 @@ package object model {
     temp
   }
 
+  private[model] def loadEtlConfig(active: Boolean, request: String): Option[FieldsTransformer] = {
+    if (!active) return None
+
+
+    None
+  }
+
   def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR): Hl7Segments = {
     import OutFormats._
     Hl7Segments(msgType, segments flatMap (seg => {
@@ -267,7 +274,7 @@ package object model {
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
-          val etlTransformations = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
+          val etlTransformations = tryAndReturnDefaultValue(access(5), EMPTYSTR) == "ETL"
           val segStruct = adhoc take 2 mkString COLON
           val outFormats = adhoc(2) split "\\^"
           val outDest = adhoc(3) split "\\^"
@@ -277,9 +284,13 @@ package object model {
             val dest = outDest(index) split "\\&"
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains JSON.toString) {
-              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication),
+                loadFilters(filterFile), loadEtlConfig(etlTransformations, adhoc(0)))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication)
+                , loadFilters(filterFile), loadEtlConfig(etlTransformations, adhoc(0)))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -425,9 +436,8 @@ package object model {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
-        readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
-          case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
-        } toArray
+        readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map (
+          x => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))) toArray
     }
   }
 
