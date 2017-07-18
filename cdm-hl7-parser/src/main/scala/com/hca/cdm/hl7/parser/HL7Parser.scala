@@ -293,7 +293,17 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       }
                       if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
                       if (segment.realignColStatus && segment.realignColOption == MOVE) {
-                        fieldLayout += fieldMapping -> componentLayout
+                        if (fieldLayout isDefinedAt fieldMapping) {
+                          val fieldList = new mutable.ListBuffer[Any]
+                          fieldLayout(fieldMapping) match {
+                            case _: mutable.ListBuffer[Any] =>
+                              fieldLayout(fieldMapping).asInstanceOf[mutable.ListBuffer[Any]].foreach(fieldList += _)
+                            case _ =>
+                              fieldList += fieldLayout(fieldMapping)
+                          }
+                          fieldList += componentLayout
+                          fieldLayout update(fieldMapping, fieldList)
+                        } else fieldLayout += fieldMapping -> componentLayout
                         break
                       }
                     } else {
@@ -398,7 +408,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
 
   private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
+                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
     val segment = new Segment
     var mappedColumnData = EMPTYSTR
     try {
