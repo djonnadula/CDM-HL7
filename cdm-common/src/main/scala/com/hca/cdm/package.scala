@@ -2,6 +2,7 @@ package com.hca
 
 import java.io.{File, InputStream, PrintStream, Serializable}
 import java.lang.Runtime.{getRuntime => rt}
+import scala.reflect.runtime.universe._
 import java.lang.Thread.UncaughtExceptionHandler
 import java.net.{InetAddress, URL, URLClassLoader}
 import java.nio.charset.StandardCharsets
@@ -118,6 +119,12 @@ package object cdm extends Logg {
       info(s"Env on $host")
       sys.env.foreach({ case (k, v) => info(s"$k :: $v") })
     }
+  }
+
+  def loadConfig(config_file: String): Properties = {
+    val config = new Properties()
+    config.load(Source.fromFile(config_file).reader())
+    config
   }
 
   def lookUpProp(key: String): String = {
@@ -270,6 +277,8 @@ package object cdm extends Logg {
     if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
+
+  def typeFromClass[T](clazz: Class[T])(implicit mirror: Mirror): Type = mirror.classSymbol(clazz).toType
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 

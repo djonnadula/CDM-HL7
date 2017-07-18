@@ -14,6 +14,7 @@ import com.hca.cdm.hl7.model.Destinations.Destination
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
+import com.hca.cdm.utils.Filters.MultiValues.{withName => multiValueRange}
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
@@ -253,10 +254,15 @@ package object model {
     temp
   }
 
-  private[model] def loadEtlConfig(active: Boolean, request: String): Option[FieldsTransformer] = {
-    if (!active) return None
-
-
+  private[model] def loadEtlConfig(noOps: Boolean, request: String): Option[FieldsTransformer] = {
+    if (!noOps) return None
+    val config = loadConfig(lookUpProp("hl7.adhoc-etl"))
+    config.getOrDefault(s"request$COLON${"fields.selection"}", EMPTYSTR)
+    config.getOrDefault(s"request$COLON${"fields.combine"}", EMPTYSTR)
+    config.getOrDefault(s"request$COLON${"fields.validate"}", EMPTYSTR)
+    config.getOrDefault(s"request$COLON${"fields.static"}", EMPTYSTR)
+    config.getOrDefault(s"request$COLON${"reference.data"}", EMPTYSTR)
+    config.getOrDefault(s"request$COLON${"fields.lookup"}", EMPTYSTR)
     None
   }
 
@@ -308,7 +314,7 @@ package object model {
 
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
-  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsAggregator, validator: FieldsValidator, staticOperator: FieldsStaticOperator) {
+  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator) {
 
     def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
       selector apply data
@@ -325,7 +331,8 @@ package object model {
       map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
-  private[model] case class FieldSelector(private val fieldsCriteria: List[((String, String), String)] = Nil) {
+  private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
+    private val fieldsCriteria: List[((String, String), String)] = Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsCriteria.foreach {
@@ -338,29 +345,56 @@ package object model {
     }
   }
 
-  private[model] case class FieldsAggregator(private val fieldsToAggregate: List[(Array[String], String)] = Nil, delimitedBy: String = SPACE) {
+  private[model] case class FieldsCombiner(combineFields: String = EMPTYSTR) {
+    private val fieldsToCombine: List[(Array[String], String, String, String)] = if (combineFields != EMPTYSTR)
+      combineFields.split(caret).toList.map {
+        x =>
+          val temp = x.split(COLON)
+          (temp(0).split(AMPERSAND), temp(1), tryAndReturnDefaultValue(asFunc(temp(2)), SPACE), tryAndReturnDefaultValue(asFunc(temp(2)), "DELETE"))
+      }
+    else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
-      fieldsToAggregate.foreach {
-        case (criteria, modify) =>
-          if (layout isDefinedAt modify)
+      fieldsToCombine.foreach {
+        case (criteria, modify, delimitedBy, action) =>
+          if (layout isDefinedAt modify) {
             layout update(modify, criteria.map(field => layout.getOrElse(field, EMPTYSTR)).mkString(delimitedBy))
+            action match {
+              case "KEEP" =>
+              case "DELETE" => criteria foreach (layout remove)
+              case any => throw new DataModelException(s" $any operation is not known.")
+            }
+          }
       }
     }
   }
 
-  private[model] case class FieldsValidator(private val fieldsToValidate: List[(String, String)] = Nil, replaceWith: String = EMPTYSTR) {
+  private[model] case class FieldsValidator(validateFields: String = EMPTYSTR) {
+    private val fieldsToValidate: List[(String, String, String)] = if (validateFields != EMPTYSTR)
+      validateFields.split(caret).toList.map {
+        x =>
+          val temp = x.split(COLON)
+          (temp(0), temp(1), tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
+      }
+    else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToValidate.foreach {
-        case (criteria, check) =>
+        case (criteria, check, replaceWith) =>
           if (layout.getOrElse(criteria, EMPTYSTR).contains(check))
             layout update(criteria, replaceWith)
       }
     }
   }
 
-  private[model] case class FieldsStaticOperator(private val staticFields: List[(String, String)] = Nil) {
+  private[model] case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
+    private val staticFields: List[(String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
+      fieldsWithStaticOp.split(caret).toList.map {
+        x =>
+          val temp = x.split(COLON)
+          (temp(0), temp(1))
+      }
+    else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       staticFields.foreach {
@@ -436,8 +470,14 @@ package object model {
     file match {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
-        readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map (
-          x => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))) toArray
+        readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
+          x =>
+            if (x.length == 5) FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))), None)
+            else if (x.length == 6) FILTER(x(0), (x(1), x(5)), (matchCriteria(x(3)),
+              relationWithNextFilter(x(4))), Some(multiValueRange(x(2))))
+            else throw new DataModelException(s"Invalid Config for Filter Defined $x")
+        } toArray
+
     }
   }
 
@@ -478,7 +518,7 @@ package object model {
 
   def loadFileAsList(file: String, delimitedBy: String = COMMA, keyIndex: Int = 0): mutable.LinkedHashSet[(String, String)] = {
     val store = new mutable.LinkedHashSet[(String, String)]()
-    readFile(file).getLines().filter(valid(_)).foreach(temp => {
+    readFile(file).getLines().filter(valid(_)).filter(_ != EMPTYSTR).foreach(temp => {
       val splitD = temp split delimitedBy
       if (splitD.nonEmpty) store += ((splitD(keyIndex), splitD(keyIndex + 1)))
     })
@@ -542,7 +582,7 @@ package object model {
 
   def readFile(file: String): BufferedSource = {
     if (lookUpProp("hl7.env") == "LOCAL") {
-      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(file))
+      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(s"templates$FS$file"))
     } else fromFile(file)
   }
 
