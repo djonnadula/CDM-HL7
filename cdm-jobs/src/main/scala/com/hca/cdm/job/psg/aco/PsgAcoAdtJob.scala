@@ -1,6 +1,8 @@
 package com.hca.cdm.job.psg.aco
 
+import java.io.{BufferedReader, BufferedWriter, InputStreamReader, OutputStreamWriter}
 import java.lang.System.{getenv => fromEnv}
+import java.util
 import java.util.Date
 
 import com.hca.cdm._
@@ -9,12 +11,13 @@ import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.hl7.constants.HL7Constants._
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.fs.FileSystem
+import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
+import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -37,9 +40,15 @@ object PsgAcoAdtJob extends Logg with App {
   private val checkPoint = lookUpProp("PSGACOADT.checkpoint")
   private val topicsToSubscribe = Set(lookUpProp("PSGACOADT.kafka.source"))
   private val kafkaConsumerProp = (consumerConf(consumerGroup) asScala) toMap
-  private val fileSystem = FileSystem.get(new Configuration())
+  private lazy val fileSystem = FileSystem.get(new Configuration())
   private val appHomeDir = fileSystem.getHomeDirectory.toString
   private val stagingDir = fromEnv("SPARK_YARN_STAGING_DIR")
+  private lazy val adtTypes = lookUpProp("PSGACOADT.adt.types").split(",")
+  private lazy val insuranceFileLocation = new Path(lookUpProp("PSGACOADT.insurance.file.location"))
+  private lazy val facFileLocation = new Path(lookUpProp("PSGACOADT.fac.file.location"))
+  private lazy val insuranceArray = readFile(insuranceFileLocation)
+  private lazy val facArray = readFile(facFileLocation)
+  private lazy val outputFile = new Path(lookUpProp("PSGACOADT.output.file.location"))
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()
@@ -61,6 +70,7 @@ object PsgAcoAdtJob extends Logg with App {
     sparkStrCtx
   }
 
+  // TODO: Remove social information
   def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     info("kafkaConsumerProp: " + kafkaConsumerProp)
@@ -83,28 +93,66 @@ object PsgAcoAdtJob extends Logg with App {
             val insuranceIds = new ArrayBuffer[String]
             Try(message.split(delim)) match {
               case Success(splitted) =>
-                splitted.foreach(segment => {
-                  if (segment.startsWith(IN1)) {
-                    info(s"segment: $segment")
-                    splitAndReturn(segment, "\\|", 36) match {
-                      case Success(id) =>
-                        info(s"Found policy_num: $id")
-                        insuranceIds += id
-                      case Failure(t) => warn(s"No policy_num for segment")
+                val matchMessageEventType: Boolean = segment(splitted, MSH) match {
+                  case Some(segment) =>
+                    splitAndReturn(segment, "\\|", 8) match {
+                      case Success(messageType) =>
+                        splitAndReturn(messageType, "\\^", 1) match {
+                          case Success(eventType) =>
+                            info(s"Found an event type: $eventType")
+                            adtTypes.contains(eventType)
+                          case Failure(t) =>
+                            warn("MSH Segment does not contain an event type")
+                            false
+                        }
+                      case Failure(t) =>
+                        error("MSH Segment does not contain a message type")
+                        false
+                    }
+                  case None =>
+                    error("Message does not contain MSH segment")
+                    false
+                }
+                if (matchMessageEventType) {
+                  info(s"Message event type matches")
+                  val matchFacility: Boolean = segment(splitted, PV1) match {
+                    case Some(segment) =>
+                      splitAndReturn(segment, "\\|", 39) match {
+                        case Success(facility) =>
+                          info(s"Found a facility: $facility")
+                          facArray.contains(facility)
+                        case Failure(t) =>
+                          warn("PV1 Segment does not contain correct facility")
+                          false
+                      }
+                    case None =>
+                      warn("PV1 Segment does not contain PV1 segment")
+                      false
+                  }
+                  if (matchFacility) {
+                    info("Message facility type matches")
+                    splitted.foreach(segment => {
+                      if (segment.startsWith(IN1)) {
+                        splitAndReturn(segment, "\\|", 36) match {
+                          case Success(res) =>
+                            info(s"Found policy_num: $res")
+                            insuranceIds += res
+                          case Failure(t) => warn(s"No policy_num for segment")
+                        }
+                      }
+                    })
+                    if (insuranceIds.nonEmpty) {
+                      insuranceIds.foreach(id => {
+                        if (id.nonEmpty && insuranceArray.contains(id)) {
+                          info(s"Found HICN: $id")
+                          info(s"Message to send: $message")
+                          writeToFile(outputFile, message)
+                        }
+                      })
                     }
                   }
-                })
-              case Failure(t) => error(s"Failed to split message: $t")
-            }
-            if (insuranceIds.nonEmpty) {
-              insuranceIds.foreach(id => {
-                if (id.nonEmpty) {
-                  info(s"id: $id")
-                  // Filter insurance IDs
-                  // Write message to file or send?
-                  //                    info(s"Message: $message")
                 }
-              })
+              case Failure(t) => error(s"Failed to split message: $t")
             }
           }
         })
@@ -114,6 +162,20 @@ object PsgAcoAdtJob extends Logg with App {
 
   def splitAndReturn(segment: String, delimiter: String, returnIndex: Int): Try[String] = {
     Try(segment.split(delimiter)(returnIndex))
+  }
+
+  def segment(message: Array[String], segType: String): Option[String] = {
+    message.find(segment => segment.startsWith(segType))
+  }
+
+  def readFile(path: Path): Array[AnyRef] = {
+    val br = new BufferedReader(new InputStreamReader(fileSystem.open(path)))
+    br.lines().toArray
+  }
+
+  def writeToFile(path: Path, line: String): Unit = {
+    val br = new BufferedWriter(new OutputStreamWriter(fileSystem.append(path)))
+    br.write(line)
   }
 
   private def startStreams() = {
@@ -128,5 +190,7 @@ object PsgAcoAdtJob extends Logg with App {
       info("finally")
     }
   }
+
+  case class interestedFields(messageType: String, facility: String, insuranceIds: ArrayBuffer[String])
 
 }

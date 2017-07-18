@@ -14,6 +14,7 @@ object HL7Constants {
   lazy val MSH = "MSH"
   lazy val PID = "PID"
   lazy val IN1 = "IN1"
+  lazy val PV1 = "PV1"
   lazy val RAW = "RAW"
   lazy val REPTN_DELIM = "reptn_delim"
   lazy val CMPNT_DELIM = "cmpnt_delim"
