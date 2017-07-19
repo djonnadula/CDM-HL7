@@ -537,7 +537,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -866,7 +866,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -887,7 +887,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1096,7 +1096,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1281,7 +1281,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1491,7 +1491,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1691,7 +1691,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -1981,7 +1981,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2167,7 +2167,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2285,7 +2285,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -2406,7 +2406,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3183,7 +3183,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3277,7 +3277,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3892,7 +3892,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -3944,7 +3944,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4012,7 +4012,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4122,7 +4122,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -4556,7 +4556,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5209,7 +5209,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5232,7 +5232,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5728,7 +5728,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -5892,7 +5892,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6157,7 +6157,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6229,7 +6229,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -6743,7 +6743,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7224,7 +7224,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7269,7 +7269,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7337,7 +7337,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7407,7 +7407,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7676,7 +7676,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -7744,7 +7744,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8296,7 +8296,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8363,7 +8363,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8730,7 +8730,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8801,7 +8801,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -8913,7 +8913,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9345,7 +9345,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -9416,7 +9416,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10207,7 +10207,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10298,7 +10298,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10839,7 +10839,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10861,7 +10861,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10888,7 +10888,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -10984,7 +10984,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11030,7 +11030,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11287,7 +11287,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11334,7 +11334,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11429,7 +11429,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11675,7 +11675,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -11853,7 +11853,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12711,7 +12711,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -12763,7 +12763,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14026,7 +14026,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14048,7 +14048,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14366,7 +14366,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14509,7 +14509,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -14831,7 +14831,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -16526,7 +16526,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17500,7 +17500,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17590,7 +17590,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17803,7 +17803,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -17879,7 +17879,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -19436,7 +19436,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -21386,7 +21386,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22345,7 +22345,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22701,7 +22701,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22816,7 +22816,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22908,7 +22908,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -22975,7 +22975,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -23598,7 +23598,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24392,7 +24392,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24764,7 +24764,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24854,7 +24854,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -24980,7 +24980,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25089,7 +25089,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25341,7 +25341,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25722,7 +25722,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25884,7 +25884,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25935,7 +25935,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -25983,7 +25983,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26136,7 +26136,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26187,7 +26187,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26639,7 +26639,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26689,7 +26689,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26904,7 +26904,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26925,7 +26925,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -26993,7 +26993,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28404,7 +28404,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28484,7 +28484,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28547,7 +28547,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28582,7 +28582,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -28767,7 +28767,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30150,7 +30150,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30874,7 +30874,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -30942,7 +30942,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31009,7 +31009,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -31931,7 +31931,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32120,7 +32120,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32257,7 +32257,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32481,7 +32481,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32526,7 +32526,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32549,7 +32549,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -32954,7 +32954,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -33079,7 +33079,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34474,7 +34474,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -34725,7 +34725,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35047,7 +35047,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35175,7 +35175,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35313,7 +35313,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -35578,7 +35578,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36148,7 +36148,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36489,7 +36489,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -36676,7 +36676,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -37141,7 +37141,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -37532,7 +37532,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38705,7 +38705,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -38859,7 +38859,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39297,7 +39297,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -39527,7 +39527,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40214,7 +40214,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40439,7 +40439,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -40831,7 +40831,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41059,7 +41059,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -41719,7 +41719,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42299,7 +42299,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42363,7 +42363,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -42469,7 +42469,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -43365,7 +43365,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -43428,7 +43428,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -43525,7 +43525,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45258,7 +45258,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -45990,7 +45990,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46285,7 +46285,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46333,7 +46333,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46377,7 +46377,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46422,7 +46422,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46670,7 +46670,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46748,7 +46748,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46815,7 +46815,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46890,7 +46890,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46915,7 +46915,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -46936,7 +46936,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47388,7 +47388,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47903,7 +47903,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47927,7 +47927,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -47972,7 +47972,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48039,7 +48039,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48577,7 +48577,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48648,7 +48648,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -48872,7 +48872,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49454,7 +49454,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -49617,7 +49617,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -50343,7 +50343,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -51450,7 +51450,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -52136,7 +52136,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53150,7 +53150,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53308,7 +53308,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -53596,7 +53596,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -54284,7 +54284,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -55309,7 +55309,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56535,7 +56535,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56655,7 +56655,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56734,7 +56734,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56799,7 +56799,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56821,7 +56821,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -56843,7 +56843,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57015,7 +57015,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57083,7 +57083,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57120,7 +57120,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -57747,7 +57747,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58610,7 +58610,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -58722,7 +58722,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59009,7 +59009,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59097,7 +59097,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59328,7 +59328,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -59394,7 +59394,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60257,7 +60257,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60310,7 +60310,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60493,7 +60493,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60651,7 +60651,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60848,7 +60848,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -60925,7 +60925,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61103,7 +61103,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61158,7 +61158,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61189,7 +61189,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61226,7 +61226,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61256,7 +61256,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61279,7 +61279,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61304,7 +61304,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61336,7 +61336,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61360,7 +61360,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61390,7 +61390,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61421,7 +61421,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61461,7 +61461,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61486,7 +61486,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61511,7 +61511,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61548,7 +61548,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61576,7 +61576,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61603,7 +61603,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61630,7 +61630,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61654,7 +61654,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61725,7 +61725,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61747,7 +61747,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61771,7 +61771,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61793,7 +61793,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61821,7 +61821,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61881,7 +61881,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61920,7 +61920,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61954,7 +61954,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -61992,7 +61992,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62026,7 +62026,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62082,7 +62082,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62104,7 +62104,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62221,7 +62221,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62243,7 +62243,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62275,7 +62275,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62304,7 +62304,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62333,7 +62333,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62360,7 +62360,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62389,7 +62389,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62425,7 +62425,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62449,7 +62449,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62505,7 +62505,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62530,7 +62530,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62574,7 +62574,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62601,7 +62601,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62624,7 +62624,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62658,7 +62658,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62680,7 +62680,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62712,7 +62712,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62864,7 +62864,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62887,7 +62887,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62909,7 +62909,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
@@ -62935,7 +62935,7 @@ PARTITIONED BY (
 	message_type STRING,
 	transaction_date STRING
 )
-COMMENT 'Update Time: 2017-07-06 15:51:58 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
+COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template update | Last Column Format Change Time: Same as update time'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
