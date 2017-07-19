@@ -10,6 +10,7 @@ import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.mq.publisher.MQAcker
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.kafka.HasOffsetRanges
@@ -49,6 +50,7 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val insuranceArray = readFile(insuranceFileLocation)
   private lazy val facArray = readFile(facFileLocation)
   private lazy val outputFile = new Path(lookUpProp("PSGACOADT.output.file.location"))
+  private lazy val mqQueue = enabled(lookUpProp("mq.queueResponse"))
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()
@@ -85,6 +87,8 @@ object PsgAcoAdtJob extends Logg with App {
         messagesInRDD = inc(messagesInRDD, range.count())
       })
       if (messagesInRDD > 0L) {
+        val wsmqQueue = self.mqQueue
+        val appName = self.app
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
         rdd foreachPartitionAsync (dataItr => {
           if (dataItr.nonEmpty) {
@@ -146,7 +150,26 @@ object PsgAcoAdtJob extends Logg with App {
                         if (id.nonEmpty && insuranceArray.contains(id)) {
                           info(s"Found HICN: $id")
                           info(s"Message to send: $message")
-                          writeToFile(outputFile, message)
+                          val msg = message.split(delim)
+                          segment(splitted, PID) match {
+                            case Some(segment) =>
+                              splitAndReturn(segment, "\\|", 39) match {
+                                case Success(facility) =>
+                                  info(s"Found a facility: $facility")
+                                  facArray.contains(facility)
+                                case Failure(t) =>
+                                  warn("PV1 Segment does not contain correct facility")
+                                  false
+                              }
+                            case None =>
+                              warn("PV1 Segment does not contain PV1 segment")
+                              false
+                          }
+//                          writeToFile(outputFile, message)
+                          if (wsmqQueue.isDefined) {
+                            MQAcker(appName, appName, wsmqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
+                            MQAcker.ackMessage(message)
+                          }
                         }
                       })
                     }
@@ -162,6 +185,10 @@ object PsgAcoAdtJob extends Logg with App {
 
   def splitAndReturn(segment: String, delimiter: String, returnIndex: Int): Try[String] = {
     Try(segment.split(delimiter)(returnIndex))
+  }
+
+  def splitAndReplace(segment: String, delimiter: String, replaceIndex: Int, replaceValue: String): Try[Any] = {
+    Try(segment.split(delimiter)(replaceIndex).replace(_, replaceValue))
   }
 
   def segment(message: Array[String], segType: String): Option[String] = {
