@@ -30,20 +30,20 @@ object PsgAcoAdtJob extends Logg with App {
   private val config_file = args(0)
   info("config_file: " + config_file)
   propFile = config_file
-  private val app = lookUpProp("hl7.app")
-  private val defaultPar = lookUpProp("hl7.spark.default.parallelism")
-  private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
-  private val batchCycle = lookUpProp("hl7.batch.interval").toInt
-  private val maxPartitions = defaultPar.toInt * lookUpProp("hl7.spark.dynamicAllocation.maxExecutors").toInt
-  private val batchDuration = sparkUtil batchCycle(lookUpProp("hl7.batch.time.unit"), batchCycle)
-  private val consumerGroup = lookUpProp("PSGACOADT.group")
-  private val checkpointEnable = lookUpProp("PSGACOADT.spark.checkpoint.enable").toBoolean
-  private val checkPoint = lookUpProp("PSGACOADT.checkpoint")
-  private val topicsToSubscribe = Set(lookUpProp("PSGACOADT.kafka.source"))
-  private val kafkaConsumerProp = (consumerConf(consumerGroup) asScala) toMap
+  private lazy val app = lookUpProp("hl7.app")
+  private lazy val defaultPar = lookUpProp("hl7.spark.default.parallelism")
+  private lazy val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
+  private lazy val batchCycle = lookUpProp("hl7.batch.interval").toInt
+  private lazy val maxPartitions = defaultPar.toInt * lookUpProp("hl7.spark.dynamicAllocation.maxExecutors").toInt
+  private lazy val batchDuration = sparkUtil batchCycle(lookUpProp("hl7.batch.time.unit"), batchCycle)
+  private lazy val consumerGroup = lookUpProp("PSGACOADT.group")
+  private lazy val checkpointEnable = lookUpProp("PSGACOADT.spark.checkpoint.enable").toBoolean
+  private lazy val checkPoint = lookUpProp("PSGACOADT.checkpoint")
+  private lazy val topicsToSubscribe = Set(lookUpProp("PSGACOADT.kafka.source"))
+  private lazy val kafkaConsumerProp = (consumerConf(consumerGroup) asScala) toMap
   private lazy val fileSystem = FileSystem.get(new Configuration())
-  private val appHomeDir = fileSystem.getHomeDirectory.toString
-  private val stagingDir = fromEnv("SPARK_YARN_STAGING_DIR")
+  private lazy val appHomeDir = fileSystem.getHomeDirectory.toString
+  private lazy val stagingDir = fromEnv("SPARK_YARN_STAGING_DIR")
   private lazy val adtTypes = lookUpProp("PSGACOADT.adt.types").split(",")
   private lazy val insuranceFileLocation = new Path(lookUpProp("PSGACOADT.insurance.file.location"))
   private lazy val facFileLocation = new Path(lookUpProp("PSGACOADT.fac.file.location"))
@@ -87,8 +87,6 @@ object PsgAcoAdtJob extends Logg with App {
         messagesInRDD = inc(messagesInRDD, range.count())
       })
       if (messagesInRDD > 0L) {
-        val wsmqQueue = self.mqQueue
-        val appName = self.app
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
         rdd foreachPartitionAsync (dataItr => {
           if (dataItr.nonEmpty) {
@@ -97,6 +95,8 @@ object PsgAcoAdtJob extends Logg with App {
             val insuranceIds = new ArrayBuffer[String]
             Try(message.split(delim)) match {
               case Success(splitted) =>
+                info("MSH: " + segment(splitted, MSH))
+                info("PV1: " + segment(splitted, PV1))
                 val matchMessageEventType: Boolean = segment(splitted, MSH) match {
                   case Some(segment) =>
                     splitAndReturn(segment, "\\|", 8) match {
@@ -119,18 +119,18 @@ object PsgAcoAdtJob extends Logg with App {
                 }
                 if (matchMessageEventType) {
                   info(s"Message event type matches")
-                  val matchFacility: Boolean = segment(splitted, PV1) match {
+                  val matchFacility: Boolean = segment(splitted, MSH) match {
                     case Some(segment) =>
-                      splitAndReturn(segment, "\\|", 39) match {
+                      splitAndReturn(segment, "\\|", 3) match {
                         case Success(facility) =>
                           info(s"Found a facility: $facility")
                           facArray.contains(facility)
                         case Failure(t) =>
-                          warn("PV1 Segment does not contain correct facility")
+                          warn("MSH Segment does not contain correct facility")
                           false
                       }
                     case None =>
-                      warn("PV1 Segment does not contain PV1 segment")
+                      error("Message does not contain MSH segment")
                       false
                   }
                   if (matchFacility) {
@@ -149,26 +149,24 @@ object PsgAcoAdtJob extends Logg with App {
                       insuranceIds.foreach(id => {
                         if (id.nonEmpty && insuranceArray.contains(id)) {
                           info(s"Found HICN: $id")
-                          info(s"Message to send: $message")
-                          val msg = message.split(delim)
-                          segment(splitted, PID) match {
-                            case Some(segment) =>
-                              splitAndReturn(segment, "\\|", 39) match {
-                                case Success(facility) =>
-                                  info(s"Found a facility: $facility")
-                                  facArray.contains(facility)
-                                case Failure(t) =>
-                                  warn("PV1 Segment does not contain correct facility")
-                                  false
-                              }
+                          val newPid: String = segment(splitted, PID) match {
+                            case Some(pid) =>
+                              info(s"current pid: $pid")
+                              val splitPid = pid.split("\\|")
+                              splitPid.update(19,"")
+                              splitPid.mkString("|")
                             case None =>
-                              warn("PV1 Segment does not contain PV1 segment")
-                              false
+                              error("Message does not contain PID segment")
+                              ""
                           }
-//                          writeToFile(outputFile, message)
-                          if (wsmqQueue.isDefined) {
-                            MQAcker(appName, appName, wsmqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
-                            MQAcker.ackMessage(message)
+                          info(s"newPid: $newPid")
+                          splitted.update(splitted.indexWhere(segment => segment.startsWith(PID)), newPid)
+                          val cleanMessage = splitted.mkString("\n")
+                          info(s"Old message: $message")
+                          info(s"Message to send: $cleanMessage")
+                          if (mqQueue.isDefined) {
+                            MQAcker(app, app, mqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
+                            MQAcker.ackMessage(cleanMessage)
                           }
                         }
                       })
@@ -185,10 +183,6 @@ object PsgAcoAdtJob extends Logg with App {
 
   def splitAndReturn(segment: String, delimiter: String, returnIndex: Int): Try[String] = {
     Try(segment.split(delimiter)(returnIndex))
-  }
-
-  def splitAndReplace(segment: String, delimiter: String, replaceIndex: Int, replaceValue: String): Try[Any] = {
-    Try(segment.split(delimiter)(replaceIndex).replace(_, replaceValue))
   }
 
   def segment(message: Array[String], segType: String): Option[String] = {
