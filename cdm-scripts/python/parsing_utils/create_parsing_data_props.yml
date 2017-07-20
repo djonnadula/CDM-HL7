@@ -1,5 +1,6 @@
 environment:
   - 'production'
+  - 'dev'
 
 environments:
   production:
@@ -41,6 +42,7 @@ static_dict:
 dup_dict:
   - 'transaction_date'
   - 'message_control_id'
+  - 'referral_reason_text'
 
 file_names:
   - 'hl7MapStandard2.8.2.csv'
