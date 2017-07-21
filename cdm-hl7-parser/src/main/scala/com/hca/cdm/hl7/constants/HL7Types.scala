@@ -21,6 +21,9 @@ object HL7Types extends Enumeration {
   val ORM = Value("ORM")
   val ORMORDERS = Value("ORMORDERS")
   val IPLORDERS = Value("IPLORDERS")
+  val CRNADT = Value("CRNADT")
+  val CRNORU = Value("CRNORU")
+  val CRNORM = Value("CRNORM")
   val UNKNOWN = Value("UNKNOWN")
   val ALL = Value("ALL")
 
