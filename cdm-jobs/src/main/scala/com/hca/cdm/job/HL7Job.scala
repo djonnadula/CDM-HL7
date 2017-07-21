@@ -534,7 +534,7 @@ object HL7Job extends Logg with App {
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
       stagesSubmitted += stageSubmitted.stageInfo
-      if (runningStage.completionTime isDefined) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else null
+      if (valid(runningStage) && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")
