@@ -14,7 +14,7 @@ import org.apache.log4j.PropertyConfigurator._
   *
   * HL7 Parser Test Utils
   */
-package object HL7ParserTestUtils extends Logg {
+object HL7ParserTestUtils extends Logg {
 
     /**
       * Reads an HL7 message from the message directory and returns it as a String
