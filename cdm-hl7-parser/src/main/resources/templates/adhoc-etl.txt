@@ -1,6 +1,0 @@
-ADHOC:SCRIRADIOLOGY:JSON:fields.selection=
-ADHOC:SCRIRADIOLOGY:JSON:fields.combine=
-ADHOC:SCRIRADIOLOGY:JSON:fields.validate=
-ADHOC:SCRIRADIOLOGY:JSON:fields.static=message_flag_static:RAD
-ADHOC:SCRIRADIOLOGY:JSON:reference.data=
-ADHOC:SCRIRADIOLOGY:JSON:fields.lookup=
