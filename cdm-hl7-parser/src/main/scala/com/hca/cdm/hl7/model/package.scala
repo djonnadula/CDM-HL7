@@ -305,11 +305,11 @@ package object model {
             else if (outFormat contains JSON.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
                 DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)),
-                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON")), loadFilters(filterFile))
+                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON")), loadFilters(filterFile))
             } else {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
                 DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends,
-                tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED")), loadFilters(filterFile))
+                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED")), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -347,23 +347,27 @@ package object model {
   }
 
   private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
-    private val selectCriteria: List[(String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
+    private val selectCriteria: List[(String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
       selectFieldsCriteria.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1))
+          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2))
       }
     else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       selectCriteria.foreach {
-        case (lookUpField, criteria, modify) =>
-          if ((layout isDefinedAt lookUpField) && (layout isDefinedAt modify)) {
-            layout(lookUpField).split(caret)
+        case (lookUpField, criteria, selectFrom, modify) =>
+          if ((layout isDefinedAt lookUpField) && (layout isDefinedAt selectFrom) && (layout isDefinedAt modify)) {
+            layout(lookUpField).split("\\" + caret)
               .view.zipWithIndex.foreach { dataPoint =>
               if (dataPoint._1 == criteria) {
-                val temp = tryAndReturnDefaultValue(asFunc(layout(modify).split(caret)(dataPoint._2)), EMPTYSTR)
-                if (temp ne EMPTYSTR) layout update(modify, temp)
+                val temp = tryAndReturnDefaultValue(asFunc(layout(selectFrom).split("\\" + caret)(dataPoint._2)), EMPTYSTR)
+                if (temp ne EMPTYSTR) {
+                  layout update(modify, temp)
+                  layout update(lookUpField, EMPTYSTR)
+                  layout update(selectFrom, EMPTYSTR)
+                }
               }
             }
           }
