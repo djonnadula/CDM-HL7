@@ -24,7 +24,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   private lazy val filtered = new mutable.LinkedHashMap[String, Throwable] += (filteredStr -> null)
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
 
-  def applyModel(whichSeg: String, model: Model)(data: mapType): Hl7SegmentTrans = {
+  def applyModel(whichSeg: String, model: Model)(data: mapType, rawHl7: String): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
     if (modelFilter.isEmpty | (reqMsgType != IPLORU && reqMsgType != ORMORDERS && !isRequiredType(data, reqMsgType))) return notValid
     var layout = model.EMPTY
@@ -42,12 +42,15 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 adhoc.outFormat match {
                   case JSON =>
                     handleCommonSegments(data, layout)
+                    adhoc.transformer.foreach(_.applyTransformations(layout))
                     val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
                     if (timeStampReq) temp += ((timeStampKey, timeStamp))
                     out._2 += (toJson(temp) -> null)
                   case DELIMITED =>
                     handleCommonSegments(data, layout)
                     out._2 += (makeFinal(layout) -> null)
+                  case RAWHL7 =>
+                    rawHl7 -> null
                 }
               }
               out._2
@@ -76,7 +79,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                     handleCommonSegments(data, layout)
                     if (layout isDefinedAt fieldSeqNum) layout update(fieldSeqNum, node._1.substring(0, node._1.indexOf(DOT)))
                     if (layout isDefinedAt timeStampKey) layout update(timeStampKey, timeStamp)
-                    (makeFinal(layout,etlTimeReq = false), null)
+                    (makeFinal(layout, etlTimeReq = false), null)
                   } else {
                     (skippedStr, null)
                   }
@@ -142,7 +145,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @param layout
     * @return
     */
-  private def makeFinal(layout: mutable.LinkedHashMap[String, String],etlTimeReq : Boolean = timeStampReq): String = {
+  private def makeFinal(layout: mutable.LinkedHashMap[String, String], etlTimeReq: Boolean = timeStampReq): String = {
     val builder = new StringBuilder(layout.size * 40)
     layout.foreach({ case (k, v) => builder append (v + outDelim) })
     if (etlTimeReq) builder append timeStamp
