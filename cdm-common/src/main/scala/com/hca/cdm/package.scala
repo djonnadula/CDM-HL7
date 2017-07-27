@@ -22,7 +22,8 @@ import org.apache.commons.lang3.SerializationUtils.{deserialize => des, serializ
 import TimeZone._
 import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
-import scala.io.Source
+import scala.io.{BufferedSource, Source}
+import scala.io.Source.fromFile
 import scala.language.postfixOps
 import scala.util.{Random, Try}
 
@@ -44,6 +45,9 @@ package object cdm extends Logg {
   lazy val FS: String = File separator
   lazy val outStream: PrintStream = System out
   private lazy val random = new Random()
+  private val CR: Char = 0x0D.toChar
+  private val LF: Char = 0x0A.toChar
+  lazy val CRLF = s"$EMPTYSTR$CR$LF"
 
 
   def randomString: String = randomUUID.toString
@@ -121,9 +125,16 @@ package object cdm extends Logg {
     }
   }
 
+  def readFile(file: String): BufferedSource = {
+    if (lookUpProp("hl7.env") == "LOCAL") {
+      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(file))
+    } else fromFile(file)
+  }
+
+
   def loadConfig(config_file: String): Properties = {
     val config = new Properties()
-    config.load(Source.fromFile(config_file).reader())
+    config.load(readFile(config_file).reader())
     config
   }
 
@@ -275,13 +286,16 @@ package object cdm extends Logg {
 
   def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
     if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
-    currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
+     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
 
   def typeFromClass[T](clazz: Class[T])(implicit mirror: Mirror): Type = mirror.classSymbol(clazz).toType
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
+  def readFile(file : String, delimitedBy: String) ={
+
+  }
   private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
 
