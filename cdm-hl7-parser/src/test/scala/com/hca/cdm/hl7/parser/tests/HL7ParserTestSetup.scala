@@ -40,7 +40,7 @@ class HL7ParserTestSetup(msgType: HL7) {
             case Success(map) =>
                 map match {
                     case Left(out) =>
-                        segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination)(out._2, out._3)
+                        segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination)(out._2,null, out._3)
                         info(out._1)
                         out._1
                     case Right(t) =>
