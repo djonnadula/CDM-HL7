@@ -41,12 +41,15 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
 
   override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
     if ((layout isDefinedAt facilityKey) && (facilityRef isDefinedAt layout(facilityKey))) {
-      val crossRefFac = (layout isDefinedAt patientLocation) && applyCrossRef(layout(facilityKey), layout(patientLocation), layout)
-      if ((layout isDefinedAt patientLocation) && !crossRefFac) {
+      if ((layout isDefinedAt patientLocation) && !isCrossRefFac(layout)) {
         if (facilityRef(layout(facilityKey)).get(layout(patientLocation)).isDefined) layout update(coidRefLookUp, facilityRef(layout(facilityKey)).getOrElse(layout(patientLocation), EMPTYSTR))
         else facilityRef(layout(facilityKey)).headOption.foreach(locCoid => layout update(coidRefLookUp, locCoid._2))
       }
     }
+  }
+
+  private def isCrossRefFac(layout: mutable.LinkedHashMap[String, String]): Boolean = {
+    (layout isDefinedAt patientLocation) && applyCrossRef(layout(facilityKey), layout(patientLocation), layout)
   }
 
   private def applyCrossRef(facility: String, locationCode: String, layout: mutable.LinkedHashMap[String, String]): Boolean = {
