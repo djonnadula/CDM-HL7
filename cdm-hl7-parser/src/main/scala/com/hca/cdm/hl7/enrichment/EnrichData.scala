@@ -9,7 +9,7 @@ import scala.language.postfixOps
 /**
   * Created by Devaraj Jonnadula on 7/24/2017.
   */
-trait EnrichData {
+trait EnrichData extends Serializable {
 
   def close(): Unit
 
@@ -17,14 +17,19 @@ trait EnrichData {
 
 }
 
+ class NoEnricher() extends EnrichData {
+  override def close(): Unit = {}
+
+  override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {}
+}
 
 private[enrichment] class FacilityCoidHandler(files: Array[String]) extends EnrichData {
 
   private case class CrossFacilityReference(reqCoid: String, reqFacility: String)
 
-  private val facilityKey = "sending_facility"
-  private val coidRefLookUp = "coid_ref_look_up"
-  private val patientLocation = "patientLocation"
+  private lazy val facilityKey = "sending_facility"
+  private lazy val coidRefLookUp = "coid_ref_look_up"
+  private lazy val patientLocation = "patientLocation"
   private val facilityRef = {
     val temp = new mutable.HashMap[String, mutable.Map[String, String]]
     readFile(files(0)).getLines().takeWhile(valid(_)).map(temp => temp split COMMA).filter(valid(_, 3)).foreach { x =>
