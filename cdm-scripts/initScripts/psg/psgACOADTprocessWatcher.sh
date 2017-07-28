@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# /etc/init.d/hl7ProcessWatcher
+# /etc/init.d/hl7ReceiverWatcher
 # version 1.0.0 2016-10-20 (YYYY-MM-DD)
 #
 # chkconfig: - 86 06
-# description: Watches hl7process Running On Spark
+# description: Watches hl7Receiver Running On Spark
 #
 ### BEGIN INIT INFO
-# Provides:          hl7ProcessWatcher
+# Provides:          hl7ReceiverWatcher
 # Required-Stop:     $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Checks with Yarn resource Manager where hl7process Running or Not
-# Description:       Checks with Yarn resource Manager where hl7process Running or Not. Zeeke will trigger this and Appropriate Action will be taken in case of Failures
+# Short-Description: Checks with Yarn resource Manager where hl7Receiver Running or Not
+# Description:       Checks with Yarn resource Manager where hl7Receiver Running or Not. Zeeke will trigger this and Appropriate Action will be taken in case of Failures
 
 ### END INIT INFO
 
@@ -42,7 +42,7 @@ fi
 cd /hadoop/cdm/bin
 
 # Spark Job name
-NAME="CDM-HL7-Process"
+NAME="PSG-ACO-ADT"
 now=$(date +"%Y-%m-%d %T")
 echo "Date and Time : $now"
 Running_Jobs=$NAME".log"
@@ -66,7 +66,7 @@ do
     if (( $returnvalue > 0 )); then
       ExitCode=0
       break
-    else  
+    else
       if [[ "$Counter" -eq 3 ]];then
 	        echo " Tried for 3 times...";
       else
@@ -75,7 +75,7 @@ do
       fi
       ExitCode=1
     fi
-    let Counter=Counter+1  
+    let Counter=Counter+1
 done
 echo "End of script..."
 if [[ "$ExitCode" -eq 1 ]];then

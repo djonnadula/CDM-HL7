@@ -64,7 +64,7 @@ object SimpleMQConsumer extends Logg with App {
       info(s"New Checkpoint Created for $app $ctx")
       runJob(ctx)
       ctx
-    }
+   }
   }
 
   private def initContext: StreamingContext = {

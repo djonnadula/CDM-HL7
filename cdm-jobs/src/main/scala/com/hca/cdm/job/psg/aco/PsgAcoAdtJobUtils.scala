@@ -4,6 +4,7 @@ import java.io.{BufferedReader, InputStreamReader}
 
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.log.Logg
 import org.apache.hadoop.fs.{FileSystem, Path}
 
 import scala.collection.mutable.ArrayBuffer
@@ -12,7 +13,7 @@ import scala.util.{Failure, Success, Try}
 /**
   * Created by dof7475 on 7/20/2017.
   */
-object PsgAcoAdtJobUtils {
+object PsgAcoAdtJobUtils extends Logg {
 
   def splitAndReturn(segment: String, delimiter: String, returnIndex: Int): Try[String] = {
     Try(segment.split(delimiter)(returnIndex))
@@ -54,7 +55,7 @@ object PsgAcoAdtJobUtils {
     }
   }
 
-  def singleFieldMatch(segment: Option[String], compareArray: Array[AnyRef], delimiter: String, index: Int): Boolean = {
+  def singleFieldMatch[T](segment: Option[String], compareArray: Array[T], delimiter: String, index: Int): Boolean = {
     segment match {
       case Some(seg) =>
         splitAndReturn(seg, delimiter, index) match {
@@ -63,6 +64,23 @@ object PsgAcoAdtJobUtils {
             compareArray.contains(targetIndex)
           case Failure(t) =>
             warn("Segment does not contain target index")
+            false
+        }
+      case None =>
+        error("Message does not contain segment type")
+        false
+    }
+  }
+
+  def stringMatcher[T](segment: Option[String], compareArray: Array[T], delimiter: String, index: Int): Boolean = {
+    segment match {
+      case Some(seg) =>
+        splitAndReturn(seg, delimiter, index) match {
+          case Success(targetIndex) =>
+            info(s"Found index: $targetIndex")
+            compareArray.exists(t => targetIndex.toUpperCase().contains(t.toString.toUpperCase()))
+          case Failure(t) =>
+            warn("Segment does not contain matching string name")
             false
         }
       case None =>

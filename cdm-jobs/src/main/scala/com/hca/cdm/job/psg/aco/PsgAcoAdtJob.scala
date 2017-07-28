@@ -1,22 +1,30 @@
 package com.hca.cdm.job.psg.aco
 
+import java.lang.Exception
 import java.lang.System.{getenv => fromEnv}
 import java.util.Date
 
 import com.hca.cdm._
+import com.hca.cdm.hl7.audit.AuditConstants._
+import com.hca.cdm.hl7.audit._
 import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.job.HL7Job._
 import com.hca.cdm.mq.publisher.MQAcker
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
 import com.hca.cdm.job.psg.aco.PsgAcoAdtJobUtils._
+import com.hca.cdm.kafka.config.HL7ProducerConfig._
+import com.hca.cdm.kafka.producer.KafkaProducerHandler
+import com.hca.cdm.kafka.util.TopicUtil._
+import com.hca.cdm.utils.RetryHandler
 
 import scala.collection.JavaConverters._
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 
 /**
   * Created by dof7475 on 6/1/2017.
@@ -49,6 +57,10 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val facArray = readFile(facFileLocation, fileSystem)
   private lazy val outputFile = new Path(lookUpProp("PSGACOADT.output.file.location"))
   private lazy val mqQueue = enabled(lookUpProp("mq.queueResponse"))
+  private lazy val insuranceNameMatcher = lookUpProp("PSGACOADT.insurance.name.match").split(",")
+  private lazy val auditTopic = lookUpProp("hl7.audit")
+  private lazy val maxMessageSize = lookUpProp("hl7.message.max") toInt
+  private lazy val kafkaProducerConf = createConfig(auditTopic)
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()
@@ -67,6 +79,7 @@ object PsgAcoAdtJob extends Logg with App {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     if (!checkpointEnable) runJob(sparkStrCtx)
+    //createTopicIfNotExist(auditTopic, segmentPartitions = false)
     sparkStrCtx
   }
 
@@ -89,6 +102,11 @@ object PsgAcoAdtJob extends Logg with App {
         rdd foreachPartitionAsync (dataItr => {
           if (dataItr.nonEmpty) {
             propFile = confFile
+//            val auditOut = auditTopic
+//            val maxMessageSize = self.maxMessageSize
+//            val prodConf = kafkaProducerConf
+//            val kafkaOut = KafkaProducerHandler()(prodConf)
+//            val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val message = dataItr.next()._2
             val delim = if (message contains "\r\n") "\r\n" else "\n"
             trySplit(message, delim) match {
@@ -98,12 +116,15 @@ object PsgAcoAdtJob extends Logg with App {
                 val primaryIn1 = segment(splitted, PRIMARY_IN1)
                 info(s"MSH: $msh")
                 info(s"PV1: $pv1")
+                info(s"IN1: $primaryIn1")
                 if (eventTypeMatch(msh, adtTypes)) {
                   info(s"Message event type matches")
                   if (singleFieldMatch(msh, facArray, "\\|", 3)) {
                     info("Message facility type matches")
-                    if (singleFieldMatch(primaryIn1, insuranceArray, "\\|", 36)) {
-                      info(s"Patient primary insurance Id is present")
+                    if (singleFieldMatch(primaryIn1, insuranceArray, "\\|", 36) &&
+                      (stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 4) ||
+                      stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 9))) {
+                      info(s"Patient primary insurance Id is present and name matches")
                       val newPid = removeField(segment(splitted, PID), "\\|", 19)
                       info(s"newPid: $newPid")
                       splitted.update(splitted.indexWhere(segment => segment.startsWith(PID)), newPid)
@@ -111,8 +132,13 @@ object PsgAcoAdtJob extends Logg with App {
                       info(s"Old message: $message")
                       info(s"Message to send: $cleanMessage")
                       if (mqQueue.isDefined) {
-                        MQAcker(app, app, mqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
-                        MQAcker.ackMessage(cleanMessage)
+                        try{
+                          MQAcker(app, app, mqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
+                          MQAcker.ackMessage(cleanMessage)
+                          // tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"ADT-PSG-ACO", error(_: Throwable))
+                        } catch {
+                          case e: Exception => error(e)
+                        }
                       }
                     }
                   }
@@ -125,8 +151,6 @@ object PsgAcoAdtJob extends Logg with App {
     })
   }
 
-
-
   private def startStreams() = {
     try {
       sparkStrCtx start()
@@ -137,7 +161,13 @@ object PsgAcoAdtJob extends Logg with App {
 
     } finally {
       info("finally")
+      shutDown()
     }
+  }
+
+  private def shutDown(): Unit = {
+    sparkUtil shutdownEverything sparkStrCtx
+    closeResource(fileSystem)
   }
 
 }

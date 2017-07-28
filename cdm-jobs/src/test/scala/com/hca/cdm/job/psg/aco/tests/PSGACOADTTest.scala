@@ -1,7 +1,10 @@
 package com.hca.cdm.job.psg.aco.tests
 
+import com.hca.cdm._
+import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.job.psg.aco.PsgAcoAdtJobUtils._
 import com.hca.cdm.log.Logg
+import org.apache.log4j.PropertyConfigurator._
 import org.scalatest.FlatSpec
 
 /**
@@ -9,7 +12,7 @@ import org.scalatest.FlatSpec
   */
 class PSGACOADTTest extends FlatSpec with Logg {
 
-  val p = PSGACOADTTestUtils.loadProperties()
+  configure(currThread.getContextClassLoader.getResource("jobs-test-log4j.properties"))
 
   // splitAndReturn
   val seg = "MSH|^~\\&||COCBR|"
@@ -42,7 +45,7 @@ class PSGACOADTTest extends FlatSpec with Logg {
   val segtest = Array[String]("MSH|^~\\&||COCLW|||201707201534||ADT^A04|MT_COCLW_ADT_LWGTADM.1.1|P|2.1\n",
     "EVN|A04|201707201534|||TEST123^TEST^TEST^^^^\n",
     "PID|1||TEST123456|T123456|TEST^TEST^^^^||19400819|F|TEST^TEST^^^^|W|100 TEST ST^^TEST^FL^34222^USA^^^MAN||(999)999-9999|.|ENG|D|BAP|TEST987654321|999-99-9999|||\n",
-    "IN1|1|BLOPPC||BC OUT OF STATE PPC|PO BOX 1798^^JACKSONVILLE^FL^32231-0014^||(999)999-9999|999999|HARBOR FREIGHT TOOLS|||20170101||||^^^^^|01|19990101||||||||||||||||||12345678|||||||M")
+    "IN1|1|BLOPPC||Medicare Advantage|PO BOX 1798^^JACKSONVILLE^FL^32231-0014^||(999)999-9999|999999|HARBOR FREIGHT TOOLS|||20170101||||^^^^^|01|19990101||||||||||||||||||12345678|||||||M")
 
   val searchPos = "PID"
   val segPos = segment(segtest, searchPos)
@@ -86,7 +89,7 @@ class PSGACOADTTest extends FlatSpec with Logg {
   }
 
   // removeField
-  val removeSSNPos = removeField(segment(segtest, "PID|1|"), "\\|", 19)
+  val removeSSNPos = removeField(segment(segtest, PID), "\\|", 19)
   "removeField (positive test)" should "remove the SSN from the PID segment" in {
     assert(removeSSNPos == "PID|1||TEST123456|T123456|TEST^TEST^^^^||19400819|F|TEST^TEST^^^^|W|100 TEST ST^^TEST^FL^34222^USA^^^MAN||(999)999-9999|.|ENG|D|BAP|TEST987654321||||\n")
   }
@@ -96,7 +99,7 @@ class PSGACOADTTest extends FlatSpec with Logg {
     "PID|1||TEST123456|T123456|TEST^TEST^^^^||19400819|F|TEST^TEST^^^^|W|100 TEST ST^^TEST^FL^34222^USA^^^MAN||(999)999-9999|.|ENG|D|BAP|TEST987654321||||\n",
     "IN1|1|BLOPPC||BC OUT OF STATE PPC|PO BOX 1798^^JACKSONVILLE^FL^32231-0014^||(999)999-9999|999999|HARBOR FREIGHT TOOLS|||20170101||||^^^^^|01|19990101||||||||||||||||||12345678|||||||M")
 
-  val removeSSNNeg = removeField(segment(segtest2, "PID|1|"), "\\|", 19)
+  val removeSSNNeg = removeField(segment(segtest2, PID), "\\|", 19)
   "removeField (positive test)" should "remove the SSN from the PID segment" in {
     assert(removeSSNNeg == "PID|1||TEST123456|T123456|TEST^TEST^^^^||19400819|F|TEST^TEST^^^^|W|100 TEST ST^^TEST^FL^34222^USA^^^MAN||(999)999-9999|.|ENG|D|BAP|TEST987654321||||\n")
   }
@@ -105,8 +108,15 @@ class PSGACOADTTest extends FlatSpec with Logg {
     "EVN|A04|201707201534|||TEST123^TEST^TEST^^^^\n",
     "IN1|1|BLOPPC||BC OUT OF STATE PPC|PO BOX 1798^^JACKSONVILLE^FL^32231-0014^||(999)999-9999|999999|HARBOR FREIGHT TOOLS|||20170101||||^^^^^|01|19990101||||||||||||||||||12345678|||||||M")
 
-  val removeSSNNeg2 = removeField(segment(segtest2, "PID|1|"), "\\|", 19)
+  val removeSSNNeg2 = removeField(segment(segtest2, PID), "\\|", 19)
   "removeField (positive test)" should "remove the SSN from the PID segment" in {
     assert(removeSSNNeg == "")
+  }
+
+  // stringMatcher
+  val stringMatcherArrayPos = "Medicare".split(",")
+  val stringMatcherPos = stringMatcher(segment(segtest, PRIMARY_IN1), stringMatcherArrayPos, "\\|", 4)
+  "stringMatcher (positive test)" should "match Medicare" in {
+    assert(stringMatcherPos)
   }
 }
