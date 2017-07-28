@@ -475,7 +475,7 @@ package object model {
   def loadSegments(segments: String, delimitedBy: String = COMMA): Map[String, List[(String, String)]] = {
     val reader = readFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
-      val splits = seg split delimitedBy
+      val splits = seg split(delimitedBy,-1)
       if (valid(splits, 3)) {
         splits(0) -> (splits(1), splits(2))
       } else {
