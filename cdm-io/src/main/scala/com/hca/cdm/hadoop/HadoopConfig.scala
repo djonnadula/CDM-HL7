@@ -3,13 +3,14 @@ package com.hca.cdm.hadoop
 
 import java.io.File
 import com.hca.cdm._
+import com.hca.cdm.log.Logg
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.hive.conf.HiveConf
 
 /**
   * Created by Devaraj Jonnadula on 2/14/2017.
   */
-private[cdm] object HadoopConfig {
+private[cdm] object HadoopConfig extends Logg{
 
   def loadConfig(configDir: String): Configuration = {
     getConfigFiles(configDir).foreach(file => info(file.getAbsolutePath))

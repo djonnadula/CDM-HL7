@@ -197,7 +197,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
 }
 
-object KafkaProducerHandler extends AutoCloseable {
+object KafkaProducerHandler extends AutoCloseable with Logg{
 
   private var producer: KafkaProducerHandler = _
   private val lock = new Object()
