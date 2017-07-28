@@ -1,6 +1,7 @@
 package com.hca.cdm
 
 import java.util.Date
+import com.hca.cdm.log.Logg
 import org.apache.commons.mail.{EmailException, HtmlEmail, SimpleEmail}
 import scala.language.postfixOps
 
@@ -9,7 +10,7 @@ import scala.language.postfixOps
   *
   * Sends Emails as per Config
   */
-package object notification {
+package object notification extends  Logg{
 
 
   private lazy val SMTP_HOST = lookUpProp("smtp.host")
