@@ -286,16 +286,13 @@ package object cdm extends Logg {
 
   def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
     if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
-     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
+    currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
 
   def typeFromClass[T](clazz: Class[T])(implicit mirror: Mirror): Type = mirror.classSymbol(clazz).toType
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
-  def readFile(file : String, delimitedBy: String) ={
-
-  }
   private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
 

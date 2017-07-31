@@ -14,6 +14,7 @@ import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
+import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
@@ -35,6 +36,7 @@ import com.hca.cdm.utils.RetryHandler
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.AccumulatorParam.LongAccumulatorParam
+import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.scheduler._
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
@@ -88,7 +90,7 @@ object HL7Job extends Logg with App {
   private val topicsToSubscribe = hl7MsgMeta.map(hl7Type => hl7Type._2.kafka) toSet
   private val hl7TypesMapping = hl7MsgMeta.map(hl7Type => hl7Type._1.toString -> hl7Type._1)
   private val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
-  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")), messageTypes)
+  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")) ++ loadSegments(lookUpProp("hl7.adhoc-segments")), messageTypes)
   private val modelsForHl7 = hl7MsgMeta.map(msgType => msgType._1 -> segmentsForHl7Type(msgType._1, segmentsMapping(msgType._1.toString)))
   private val registeredSegmentsForHl7 = modelsForHl7.mapValues(_.models.keySet)
   private val hl7Parsers = hl7MsgMeta map (hl7 => hl7._1 -> new HL7Parser(hl7._1, templatesMapping))
@@ -99,6 +101,7 @@ object HL7Job extends Logg with App {
   private val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
     allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAckMsg(hl7._1.toString, applicationReceiving, HDFS, _: String)(_: MSGMeta)))
   private val ensureStageCompleted = new AtomicBoolean(false)
+  private var cachedTransformers: Broadcast[EnrichCacheManager] = _
   private var runningStage: StageInfo = _
   private val jsonOverSized = OverSizeHandler(jsonStage, lookUpProp("hl7.direct.json"))
   private val segOverSized = OverSizeHandler(segmentStage, lookUpProp("hl7.direct.segment"))
@@ -148,6 +151,7 @@ object HL7Job extends Logg with App {
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
       if ((model.adhoc isDefined) && (model.adhoc.get.destination.system == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
     })))
+    cachedTransformers = sparkStrCtx.sparkContext.broadcast(EnrichCacheManager())
     createTopic(hl7JsonTopic, segmentPartitions = false)
     createTopic(segTopic, segmentPartitions = false)
     createTopic(auditTopic, segmentPartitions = false)
@@ -184,6 +188,8 @@ object HL7Job extends Logg with App {
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
+    val parsersBdc = sparkStrCtx.sparkContext.broadcast(hl7Parsers)
+    val segHandlersBdc = sparkStrCtx.sparkContext.broadcast(segmentsHandler)
     streamLine foreachRDD (rdd => {
       var messagesInRDD = 0L
       rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
@@ -220,6 +226,7 @@ object HL7Job extends Logg with App {
           if (dataItr nonEmpty) {
             propFile = confFile
             LoginRenewer.scheduleRenewal()
+            EnrichCacheManager(cachedTransformers.value.getcachedUnits)
             val kafkaOut = KProducer()(prodConf)
             val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
             val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)

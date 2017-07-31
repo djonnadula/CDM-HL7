@@ -3,6 +3,7 @@ package com.hca.cdm.hl7.model
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm._
+import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
 import com.hca.cdm.hl7.filter.FilterUtility.{filterTransaction => filterRec}
@@ -42,7 +43,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 adhoc.outFormat match {
                   case JSON =>
                     handleCommonSegments(data, layout)
-                    adhoc.transformer.foreach(_.applyTransformations(layout))
+                    EnrichCacheManager().getEnRicher(adhoc.transformer).foreach(_.applyTransformations(layout))
                     val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
                     if (timeStampReq) temp += ((timeStampKey, timeStamp))
                     out._2 += (toJson(temp) -> null)

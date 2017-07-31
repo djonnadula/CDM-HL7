@@ -9,9 +9,11 @@ import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
-import com.hca.cdm.hl7.enrichment.EnrichData
+import com.hca.cdm.hl7.enrichment.{EnrichData, NoEnricher}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
+import com.hca.cdm.hl7.model.Hl7Segments
+import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
@@ -19,6 +21,7 @@ import com.hca.cdm.utils.Filters.MultiValues.{withName => multiValueRange}
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
+import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.io.BufferedSource
 import scala.io.Source._
@@ -30,7 +33,7 @@ import scala.util.{Failure, Success, Try}
   *
   * Package with Utilities for Loading Templates, Segments ...
   */
-package object model {
+package object model extends Logg {
 
   lazy val MSH_Segment = "0001.MSH"
   lazy val Message_Type_Segment = "message_type"
@@ -256,10 +259,10 @@ package object model {
     temp
   }
 
-  private[model] def loadEtlConfig(noOps: Boolean, request: String): Option[FieldsTransformer] = {
-    if (!noOps) return None
+  private[model] def loadEtlConfig(noOps: Boolean, request: String): String = {
+    if (!noOps) return EMPTYSTR
     val config = loadConfig(lookUpProp("hl7.adhoc-etl"))
-    Some(FieldsTransformer(
+    EnrichCacheManager().cache(request, FieldsTransformer(
       FieldSelector(config.getOrDefault(s"$request$DOT${"fields.selection"}", EMPTYSTR).asInstanceOf[String]),
       FieldsCombiner(config.getOrDefault(s"$request$DOT${"fields.combine"}", EMPTYSTR).asInstanceOf[String]),
       FieldsValidator(config.getOrDefault(s"$request$DOT${"fields.validate"}", EMPTYSTR).asInstanceOf[String]),
@@ -272,6 +275,7 @@ package object model {
         } else None
       }
     ))
+    request
   }
 
   def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR): Hl7Segments = {
@@ -341,13 +345,13 @@ package object model {
 
   case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)]
                    , reqNoAppends: Array[String] = Array.empty[String],
-                   ackApplication: String = EMPTYSTR, transformer: Option[FieldsTransformer] = None) {
+                   ackApplication: String = EMPTYSTR, transformer: String) {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).
       map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
   private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
-    private val selectCriteria: List[(String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
+    private lazy val selectCriteria: List[(String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
       selectFieldsCriteria.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
@@ -376,7 +380,7 @@ package object model {
   }
 
   private[model] case class FieldsCombiner(combineFields: String = EMPTYSTR) {
-    private val fieldsToCombine: List[(Array[String], String, String, String)] = if (combineFields != EMPTYSTR)
+    private lazy val fieldsToCombine: List[(Array[String], String, String, String)] = if (combineFields != EMPTYSTR)
       combineFields.split(COMMA).toList.map {
         x =>
           val split = x.split(COLON)
@@ -400,7 +404,7 @@ package object model {
   }
 
   private[model] case class FieldsValidator(validateFields: String = EMPTYSTR) {
-    private val fieldsToValidate: List[(String, String, String)] = if (validateFields != EMPTYSTR)
+    private lazy val fieldsToValidate: List[(String, String, String)] = if (validateFields != EMPTYSTR)
       validateFields.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
@@ -418,7 +422,7 @@ package object model {
   }
 
   private[model] case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
-    private val staticFields: List[(String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
+    private lazy val staticFields: List[(String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
       fieldsWithStaticOp.split(caret).toList.map {
         x =>
           val temp = x.split(COLON)
@@ -475,7 +479,7 @@ package object model {
   def loadSegments(segments: String, delimitedBy: String = COMMA): Map[String, List[(String, String)]] = {
     val reader = readFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
-      val splits = seg split(delimitedBy,-1)
+      val splits = seg split(delimitedBy, -1)
       if (valid(splits, 3)) {
         splits(0) -> (splits(1), splits(2))
       } else {
@@ -570,7 +574,7 @@ package object model {
   def getMsgTypeMeta(msgType: HL7, sourceIn: String): MsgTypeMeta = MsgTypeMeta(msgType, sourceIn)
 
   def getReceiverMeta(msgType: HL7, sourceIn: String, out: String): ReceiverMeta =
-    ReceiverMeta(msgType, sourceIn.split(COMMA).toSet, out)
+    ReceiverMeta(msgType, sourceIn.split(COMMA, -1).toSet, out)
 
   def handleAnyRef(data: AnyRef): String = {
     data match {
@@ -612,3 +616,41 @@ package object model {
     layout
   }
 }
+
+class EnrichCacheManager extends Logg {
+
+  import com.hca.cdm.hl7.model.FieldsTransformer
+
+  @volatile private var init: Boolean = false
+  private var cacheStore = new TrieMap[String, FieldsTransformer]()
+
+  def cache(unit: String, enricher: FieldsTransformer): Unit = cacheStore += unit -> enricher
+
+  def getEnRicher(unit: String): Option[FieldsTransformer] = cacheStore.get(unit)
+
+  def getcachedUnits: TrieMap[String, FieldsTransformer] = cacheStore
+
+}
+
+object EnrichCacheManager {
+
+  import com.hca.cdm.hl7.model.FieldsTransformer
+
+  private var instance: EnrichCacheManager = _
+  private val lock = new Object()
+
+  def apply(): EnrichCacheManager = lock.synchronized {
+    if (instance == null) instance = new EnrichCacheManager()
+    instance
+  }
+
+  def apply(cache: TrieMap[String, FieldsTransformer]): EnrichCacheManager = lock.synchronized {
+    if (instance == null) {
+      instance = new EnrichCacheManager()
+      cache.foreach(x => instance.cache(x._1, x._2))
+    }
+    instance
+  }
+
+}
+
