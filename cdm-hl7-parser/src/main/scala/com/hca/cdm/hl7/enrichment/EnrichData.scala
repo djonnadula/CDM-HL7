@@ -17,7 +17,7 @@ trait EnrichData extends Serializable {
 
 }
 
- class NoEnricher() extends EnrichData {
+class NoEnricher() extends EnrichData {
   override def close(): Unit = {}
 
   override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {}
@@ -25,7 +25,6 @@ trait EnrichData extends Serializable {
 
 private[enrichment] class FacilityCoidHandler(files: Array[String]) extends EnrichData {
 
-  private case class CrossFacilityReference(reqCoid: String, reqFacility: String)
 
   private lazy val facilityKey = "sending_facility"
   private lazy val coidRefLookUp = "coid_ref_look_up"
@@ -39,7 +38,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
     temp.toMap
   }
   private val coidCrossRef = readFile(files(1)).getLines().takeWhile(valid(_)).map(temp => temp split COMMA) filter (valid(_, 5)) map {
-    x => s"${x(1)}${x(2)}" -> CrossFacilityReference(x(3), x(4))
+    x => s"${x(1)}${x(2)}" -> (x(3), x(4))
   } toMap
 
   override def close(): Unit = {}
@@ -60,8 +59,8 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
   private def applyCrossRef(facility: String, locationCode: String, layout: mutable.LinkedHashMap[String, String]): Boolean = {
     val key = s"$facility$locationCode"
     if (coidCrossRef isDefinedAt key) {
-      layout update(facilityKey, coidCrossRef(key).reqFacility)
-      layout update(coidRefLookUp, coidCrossRef(key).reqCoid)
+      layout update(facilityKey, coidCrossRef(key)._2)
+      layout update(coidRefLookUp, coidCrossRef(key)._1)
       return true
     }
     false
