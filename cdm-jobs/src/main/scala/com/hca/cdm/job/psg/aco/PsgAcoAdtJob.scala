@@ -24,6 +24,7 @@ import com.hca.cdm.kafka.util.TopicUtil._
 import com.hca.cdm.utils.RetryHandler
 
 import scala.collection.JavaConverters._
+import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -79,7 +80,7 @@ object PsgAcoAdtJob extends Logg with App {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     if (!checkpointEnable) runJob(sparkStrCtx)
-    //createTopicIfNotExist(auditTopic, segmentPartitions = false)
+    // createTopicIfNotExist(auditTopic, segmentPartitions = false)
     sparkStrCtx
   }
 
@@ -114,9 +115,9 @@ object PsgAcoAdtJob extends Logg with App {
                 val msh = segment(splitted, MSH)
                 val pv1 = segment(splitted, PV1)
                 val primaryIn1 = segment(splitted, PRIMARY_IN1)
-                info(s"MSH: $msh")
-                info(s"PV1: $pv1")
-                info(s"IN1: $primaryIn1")
+                msh.foreach(seg => info("MSH: " + seg))
+                pv1.foreach(seg => info("PV1: " + seg))
+                primaryIn1.foreach(seg => info("IN1: " + seg))
                 if (eventTypeMatch(msh, adtTypes)) {
                   info(s"Message event type matches")
                   if (singleFieldMatch(msh, facArray, "\\|", 3)) {
@@ -125,16 +126,43 @@ object PsgAcoAdtJob extends Logg with App {
                       (stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 4) ||
                       stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 9))) {
                       info(s"Patient primary insurance Id is present and name matches")
-                      val newPid = removeField(segment(splitted, PID), "\\|", 19)
+
+                      // PID SSN removal
+                      val pidSegment = segment(splitted, PID)
+                      val ssn = getField(pidSegment, "\\|", 19)
+                      val newPid = removeField(pidSegment, "\\|", 19)
                       info(s"newPid: $newPid")
                       splitted.update(splitted.indexWhere(segment => segment.startsWith(PID)), newPid)
+
+                      // GT1 SSN removal
+                      val newGT1s = new ArrayBuffer[String]
+                      val gt1Segment = segment(splitted, GT1)
+                      gt1Segment.foreach(seg => {
+                        val splitSeg = seg.split("\\|")
+                        if (splitSeg(12).nonEmpty) {
+                          splitSeg.update(12, "")
+                          newGT1s += splitSeg.mkString("|")
+                        } else {
+                          info(s"Segment contains no value at index: 12")
+                          newGT1s += seg
+                        }
+                      })
+                      newGT1s.foreach(gt1 => info("newGT1: " + gt1))
+                      for (gt1 <- newGT1s) {
+                        splitted.update(splitted.indexWhere(segment => {
+                          segment.startsWith(GT1 + "|" + (newGT1s.indexOf(gt1) + 1))
+                        }), gt1)
+                      }
                       val cleanMessage = splitted.mkString("\n")
+
+                      // Search entire message for SSN
+                      val finalMessage = cleanMessage.replace(ssn, "")
                       info(s"Old message: $message")
-                      info(s"Message to send: $cleanMessage")
+                      info(s"Message to send: $finalMessage")
                       if (mqQueue.isDefined) {
                         try{
                           MQAcker(app, app, mqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
-                          MQAcker.ackMessage(cleanMessage)
+                          MQAcker.ackMessage(finalMessage)
                           // tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"ADT-PSG-ACO", error(_: Throwable))
                         } catch {
                           case e: Exception => error(e)

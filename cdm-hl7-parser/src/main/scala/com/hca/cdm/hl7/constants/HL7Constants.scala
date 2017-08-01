@@ -13,6 +13,7 @@ object HL7Constants {
   lazy val MOVE = "move"
   lazy val MSH = "MSH"
   lazy val PID = "PID"
+  lazy val GT1 = "GT1"
   lazy val PRIMARY_IN1 = "IN1|1|"
   lazy val IN1 = "IN1"
   lazy val PV1 = "PV1"

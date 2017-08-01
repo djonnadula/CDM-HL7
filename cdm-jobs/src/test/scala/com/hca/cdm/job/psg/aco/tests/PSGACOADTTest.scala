@@ -53,7 +53,7 @@ class PSGACOADTTest extends FlatSpec with Logg {
     assert(segPos.nonEmpty)
   }
   it should s"return the $searchPos" in {
-    assert(segPos.get == "PID|1||TEST123456|T123456|TEST^TEST^^^^||19400819|F|TEST^TEST^^^^|W|100 TEST ST^^TEST^FL^34222^USA^^^MAN||(999)999-9999|.|ENG|D|BAP|TEST987654321|999-99-9999|||\n")
+    assert(segPos.head == "PID|1||TEST123456|T123456|TEST^TEST^^^^||19400819|F|TEST^TEST^^^^|W|100 TEST ST^^TEST^FL^34222^USA^^^MAN||(999)999-9999|.|ENG|D|BAP|TEST987654321|999-99-9999|||\n")
   }
 
   val searchNeg = "GAH"

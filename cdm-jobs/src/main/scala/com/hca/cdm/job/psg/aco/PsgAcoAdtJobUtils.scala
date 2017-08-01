@@ -19,8 +19,8 @@ object PsgAcoAdtJobUtils extends Logg {
     Try(segment.split(delimiter)(returnIndex))
   }
 
-  def segment(message: Array[String], segType: String): Option[String] = {
-    message.find(segment => segment.startsWith(segType))
+  def segment(message: Array[String], segType: String): Array[String] = {
+    message.filter(segment => segment.startsWith(segType))
   }
 
   def readFile(path: Path, fileSystem: FileSystem): Array[AnyRef] = {
@@ -32,8 +32,8 @@ object PsgAcoAdtJobUtils extends Logg {
     Try(message.split(delimiter))
   }
 
-  def eventTypeMatch(mshSegment: Option[String], adtTypes: Array[String]): Boolean = {
-    mshSegment match {
+  def eventTypeMatch(mshSegment: Array[String], adtTypes: Array[String]): Boolean = {
+    mshSegment.headOption match {
       case Some(segment) =>
         splitAndReturn(segment, "\\|", 8) match {
           case Success(messageType) =>
@@ -55,8 +55,8 @@ object PsgAcoAdtJobUtils extends Logg {
     }
   }
 
-  def singleFieldMatch[T](segment: Option[String], compareArray: Array[T], delimiter: String, index: Int): Boolean = {
-    segment match {
+  def singleFieldMatch[T](segment: Array[String], compareArray: Array[T], delimiter: String, index: Int): Boolean = {
+    segment.headOption match {
       case Some(seg) =>
         splitAndReturn(seg, delimiter, index) match {
           case Success(targetIndex) =>
@@ -72,8 +72,8 @@ object PsgAcoAdtJobUtils extends Logg {
     }
   }
 
-  def stringMatcher[T](segment: Option[String], compareArray: Array[T], delimiter: String, index: Int): Boolean = {
-    segment match {
+  def stringMatcher[T](segment: Array[String], compareArray: Array[T], delimiter: String, index: Int): Boolean = {
+    segment.headOption match {
       case Some(seg) =>
         splitAndReturn(seg, delimiter, index) match {
           case Success(targetIndex) =>
@@ -89,8 +89,8 @@ object PsgAcoAdtJobUtils extends Logg {
     }
   }
 
-  def removeField(segment: Option[String], delimiter: String, index: Int): String = {
-    segment match {
+  def removeField(segment: Array[String], delimiter: String, index: Int): String = {
+    segment.headOption match {
       case Some(seg) =>
         info(s"current seg: $seg")
         val splitSeg = seg.split(delimiter)
@@ -100,6 +100,24 @@ object PsgAcoAdtJobUtils extends Logg {
         } else {
           info(s"Segment contains no value at index: $index")
           seg
+        }
+      case None =>
+        error("Message does not contain segment")
+        ""
+    }
+  }
+
+  def getField(segment: Array[String], delimiter: String, index: Int): String = {
+    segment.headOption match {
+      case Some(seg) =>
+        info(s"current seg: $seg")
+        splitAndReturn(seg, delimiter, index) match {
+          case Success(targetIndex) =>
+            info(s"Found index: $targetIndex")
+            targetIndex
+          case Failure(t) =>
+            warn(s"Segment does not contain value at $index")
+            ""
         }
       case None =>
         error("Message does not contain segment")
