@@ -147,10 +147,9 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @return
     */
   private def makeFinal(layout: mutable.LinkedHashMap[String, String], etlTimeReq: Boolean = timeStampReq): String = {
-    val builder = new StringBuilder(layout.size * 40)
-    layout.foreach({ case (k, v) => builder append (v + outDelim) })
-    if (etlTimeReq) builder append timeStamp
-    builder.toString
+    var builder = layout.values.mkString(outDelim)
+    if (etlTimeReq) builder += outDelim + timeStamp
+    builder
   }
 
   private def handleCommonSegments(data: mapType, layout: mutable.LinkedHashMap[String, String]) = {
