@@ -312,8 +312,10 @@ package object model extends Logg {
                 fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON")), loadFilters(filterFile))
             } else {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends,
-                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED")), loadFilters(filterFile))
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)),
+                tryAndReturnDefaultValue(asFunc(loadFileAsList(outFormSplit(1))), empty), fieldWithNoAppends,
+                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED")),
+                loadFilters(tryAndReturnDefaultValue(asFunc(filterFile), EMPTYSTR)))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -605,6 +607,7 @@ package object model extends Logg {
   private def modelLayout(segmentData: String, delimitedBy: String, modelFieldDelim: String,
                           isAdhoc: Boolean = false): mutable.LinkedHashMap[String, String] = synchronized {
     val layout = new mutable.LinkedHashMap[String, String]
+    if (segmentData == EMPTYSTR) return layout
     if (!isAdhoc) {
       // Storing Which Segment for Every Record makes Redundant data. Which already exist in Partition
       // layout += commonSegkey -> whichSeg
