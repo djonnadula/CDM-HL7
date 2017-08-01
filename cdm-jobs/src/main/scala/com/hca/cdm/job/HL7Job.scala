@@ -188,8 +188,6 @@ object HL7Job extends Logg with App {
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
-    val parsersBdc = sparkStrCtx.sparkContext.broadcast(hl7Parsers)
-    val segHandlersBdc = sparkStrCtx.sparkContext.broadcast(segmentsHandler)
     streamLine foreachRDD (rdd => {
       var messagesInRDD = 0L
       rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
