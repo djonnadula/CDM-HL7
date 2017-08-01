@@ -27,7 +27,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   def applyModel(whichSeg: String, model: Model)(data: mapType, rawHl7: String): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
-    if (modelFilter.isEmpty | (reqMsgType != IPLORU && reqMsgType != ORMORDERS && !isRequiredType(data, reqMsgType))) return notValid
+   if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && !isRequiredType(data, reqMsgType)) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
@@ -51,7 +51,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                     handleCommonSegments(data, layout)
                     out._2 += (makeFinal(layout) -> null)
                   case RAWHL7 =>
-                    rawHl7 -> null
+                    out._2 += (rawHl7 -> null)
                 }
               }
               out._2
@@ -114,7 +114,9 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @return
     */
   private def nodesTraversal(data: mapType, model: Model, layout: mutable.LinkedHashMap[String, String], modelFilter: Map[String, mutable.Set[String]],
-                             dataHandler: (String, String, String) => Unit, allNodes: Boolean = true, whichSeg: String = EMPTYSTR) = {
+                             dataHandler: (String, String, String) => Unit,
+                             allNodes: Boolean = true, whichSeg: String = EMPTYSTR): (Boolean, mutable.LinkedHashMap[String, Throwable]) = {
+    if (layout isEmpty) return (true, new mutable.LinkedHashMap[String,Throwable])
     var dataExist = false
     val temp = data.map(node => {
       try {
