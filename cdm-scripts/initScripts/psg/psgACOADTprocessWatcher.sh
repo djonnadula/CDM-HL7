@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# /etc/init.d/hl7ReceiverWatcher
+# /etc/init.d/psgACOADTWatcher
 # version 1.0.0 2016-10-20 (YYYY-MM-DD)
 #
 # chkconfig: - 86 06
-# description: Watches hl7Receiver Running On Spark
+# description: Watches PSG-ACO-ADT Running On Spark
 #
 ### BEGIN INIT INFO
-# Provides:          hl7ReceiverWatcher
+# Provides:          PSG-ACO-ADT watcher
 # Required-Stop:     $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Checks with Yarn resource Manager where hl7Receiver Running or Not
-# Description:       Checks with Yarn resource Manager where hl7Receiver Running or Not. Zeeke will trigger this and Appropriate Action will be taken in case of Failures
+# Short-Description: Checks with Yarn resource Manager where PSG-ACO-ADT Running or Not
+# Description:       Checks with Yarn resource Manager where PSG-ACO-ADT Running or Not. Zeeke will trigger this and Appropriate Action will be taken in case of Failures
 
 ### END INIT INFO
 

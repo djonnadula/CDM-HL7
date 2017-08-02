@@ -2,7 +2,6 @@ package com.hca.cdm.job.psg.aco
 
 import java.io.{BufferedReader, InputStreamReader}
 
-import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.log.Logg
 import org.apache.hadoop.fs.{FileSystem, Path}
@@ -98,13 +97,12 @@ object PsgAcoAdtJobUtils extends Logg {
   def removeField(segment: Array[String], delimiter: String, index: Int): String = {
     segment.headOption match {
       case Some(seg) =>
-        info(s"current seg: $seg")
         val splitSeg = seg.split(delimiter)
         if (splitSeg(index).nonEmpty) {
           splitSeg.update(index, "")
           splitSeg.mkString("|")
         } else {
-//          info(s"Segment contains no value at index: $index")
+          info(s"Segment contains no value at index: $index")
           seg
         }
       case None =>
@@ -126,24 +124,9 @@ object PsgAcoAdtJobUtils extends Logg {
             ""
         }
       case None =>
-        error("Message does not contain segment")
+        warn("Message does not contain segment")
         ""
     }
   }
 
-  @deprecated
-  def findInsuranceIds(splitted: Array[String]): ArrayBuffer[String] = {
-    val insuranceIds = new ArrayBuffer[String]
-    splitted.foreach(segment => {
-      if (segment.startsWith(IN1)) {
-        splitAndReturn(segment, "\\|", 36) match {
-          case Success(res) =>
-            info(s"Found policy_num: $res")
-            insuranceIds += res
-          case Failure(t) => warn(s"No policy_num for segment")
-        }
-      }
-    })
-    insuranceIds
-  }
 }
