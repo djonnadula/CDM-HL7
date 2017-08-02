@@ -131,7 +131,7 @@ object PsgAcoAdtJob extends Logg with App {
                       val pidSegment = segment(splitted, PID)
                       val ssn = getField(pidSegment, "\\|", 19)
                       val newPid = removeField(pidSegment, "\\|", 19)
-                      info(s"newPid: $newPid")
+                      debug(s"newPid: $newPid")
                       splitted.update(splitted.indexWhere(segment => segment.startsWith(PID)), newPid)
 
                       // GT1 SSN removal
@@ -147,12 +147,19 @@ object PsgAcoAdtJob extends Logg with App {
                           newGT1s += seg
                         }
                       })
-                      newGT1s.foreach(gt1 => info("newGT1: " + gt1))
+
                       for (gt1 <- newGT1s) {
-                        splitted.update(splitted.indexWhere(segment => {
-                          segment.startsWith(GT1 + "|" + (newGT1s.indexOf(gt1) + 1))
-                        }), gt1)
+                        try {
+                          splitted.update(splitted.indexWhere(segment => {
+                            val index = GT1 + "|" + (newGT1s.indexOf(gt1) + 1)
+                            val ind = segment.startsWith(index)
+                            ind
+                          }), gt1)
+                        } catch {
+                          case e: Exception => error(e)
+                        }
                       }
+
                       val cleanMessage = splitted.mkString("\n")
 
                       // Search entire message for SSN

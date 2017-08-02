@@ -40,7 +40,9 @@ object PsgAcoAdtJobUtils extends Logg {
             splitAndReturn(messageType, "\\^", 1) match {
               case Success(eventType) =>
                 info(s"Found an event type: $eventType")
-                adtTypes.contains(eventType)
+                val indexExists = adtTypes.contains(eventType)
+                info(s"indexExists: $indexExists")
+                indexExists
               case Failure(t) =>
                 warn("MSH Segment does not contain an event type")
                 false
@@ -61,13 +63,15 @@ object PsgAcoAdtJobUtils extends Logg {
         splitAndReturn(seg, delimiter, index) match {
           case Success(targetIndex) =>
             info(s"Found index: $targetIndex")
-            compareArray.contains(targetIndex)
+            val indexExists = compareArray.contains(targetIndex)
+            info(s"indexExists: $indexExists")
+            indexExists
           case Failure(t) =>
             warn("Segment does not contain target index")
             false
         }
       case None =>
-        error("Message does not contain segment type")
+        warn("Message does not contain segment type")
         false
     }
   }
@@ -78,13 +82,15 @@ object PsgAcoAdtJobUtils extends Logg {
         splitAndReturn(seg, delimiter, index) match {
           case Success(targetIndex) =>
             info(s"Found index: $targetIndex")
-            compareArray.exists(t => targetIndex.toUpperCase().contains(t.toString.toUpperCase()))
+            val indexExists = compareArray.exists(t => targetIndex.toUpperCase().contains(t.toString.toUpperCase()))
+            info(s"indexExists: $indexExists")
+            indexExists
           case Failure(t) =>
             warn("Segment does not contain matching string name")
             false
         }
       case None =>
-        error("Message does not contain segment type")
+        warn("Message does not contain segment type")
         false
     }
   }
@@ -98,11 +104,11 @@ object PsgAcoAdtJobUtils extends Logg {
           splitSeg.update(index, "")
           splitSeg.mkString("|")
         } else {
-          info(s"Segment contains no value at index: $index")
+//          info(s"Segment contains no value at index: $index")
           seg
         }
       case None =>
-        error("Message does not contain segment")
+        warn("Message does not contain segment")
         ""
     }
   }
@@ -113,7 +119,7 @@ object PsgAcoAdtJobUtils extends Logg {
         info(s"current seg: $seg")
         splitAndReturn(seg, delimiter, index) match {
           case Success(targetIndex) =>
-            info(s"Found index: $targetIndex")
+            info(s"Found targetIndex")
             targetIndex
           case Failure(t) =>
             warn(s"Segment does not contain value at $index")
