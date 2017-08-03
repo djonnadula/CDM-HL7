@@ -62,6 +62,7 @@ private[cdm] object LoginRenewer extends Logg {
     info(s"Logging $principal with KeyTab $keyTab")
     config.foreach(cfg => UGI.setConfiguration(cfg))
     val currUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keyTab)
+    UGI.getCurrentUser.addCredentials(currUser.getCredentials)
     if (currUser != null) return true
     false
   }
