@@ -4,15 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm.Models.MSGMeta
-import com.hca.cdm._
+import com.hca.cdm.{tryAndReturnDefaultValue, _}
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.hl7.constants.HL7Types
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
 import com.hca.cdm.hl7.enrichment.{EnrichData, NoEnricher}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
-import com.hca.cdm.hl7.model.Hl7Segments
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
@@ -21,10 +21,8 @@ import com.hca.cdm.utils.Filters.MultiValues.{withName => multiValueRange}
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
-import scala.collection.concurrent.TrieMap
+import java.util.regex.Pattern
 import scala.collection.mutable
-import scala.io.BufferedSource
-import scala.io.Source._
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 
@@ -269,10 +267,10 @@ package object model extends Logg {
       FieldsStaticOperator(config.getOrDefault(s"$request$DOT${"fields.static"}", EMPTYSTR).asInstanceOf[String]), {
         val impl = config.getOrDefault(s"$request$DOT${"reference.handle"}", EMPTYSTR).asInstanceOf[String]
         if (impl != EMPTYSTR) {
-          Some(tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
+          tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
             config.getOrDefault(s"$request$DOT${"reference.props"}", EMPTYSTR).asInstanceOf[String].split(COMMA)).asInstanceOf[EnrichData], error(_: Throwable)
-            , Some(s"Impl for $impl cannot be initiated")))
-        } else None
+            , Some(s"Impl for $impl cannot be initiated"))
+        } else new NoEnricher
       }
     ))
     request
@@ -292,7 +290,10 @@ package object model extends Logg {
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
-          val etlTransformations = tryAndReturnDefaultValue(access(7), EMPTYSTR) == "TRANSFORMATIONS"
+          val transformationsReq = tryAndReturnDefaultValue(access(7), EMPTYSTR).split("\\&")
+          val etlTransformations = valid(transformationsReq) && transformationsReq(0) == "TRANSFORMATIONS"
+          val etlTransMultiReq = if (tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR) != EMPTYSTR)
+            s"$DOT${tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)}" else tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)
           val segStruct = adhoc take 2 mkString COLON
           val outFormats = adhoc(2) split "\\^"
           val outDest = adhoc(3) split "\\^"
@@ -304,17 +305,17 @@ package object model extends Logg {
             if (outFormat contains RAWHL7.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(RAWHL7,
                 DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends,
-                tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED")), loadFilters(filterFile))
+                tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")), loadFilters(filterFile))
             }
             else if (outFormat contains JSON.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
                 DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)),
-                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON")), loadFilters(filterFile))
+                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON$etlTransMultiReq")), loadFilters(filterFile))
             } else {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
                 DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)),
                 tryAndReturnDefaultValue(asFunc(loadFileAsList(outFormSplit(1))), empty), fieldWithNoAppends,
-                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED")),
+                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")),
                 loadFilters(tryAndReturnDefaultValue(asFunc(filterFile), EMPTYSTR)))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
@@ -334,14 +335,14 @@ package object model extends Logg {
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
-                               dataEnRicher: Option[EnrichData]) {
+                               dataEnRicher: EnrichData) {
 
     def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
       selector apply data
       aggregator apply data
       staticOperator apply data
       validator apply data
-      dataEnRicher foreach (_.apply(data))
+      dataEnRicher apply data
     }
   }
 
@@ -406,18 +407,19 @@ package object model extends Logg {
   }
 
   private[model] case class FieldsValidator(validateFields: String = EMPTYSTR) {
-    private lazy val fieldsToValidate: List[(String, String, String)] = if (validateFields != EMPTYSTR)
+    private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
       validateFields.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0), temp(1), tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
+          (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_:CharSequence).find()
+            , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
       }
     else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToValidate.foreach {
         case (criteria, check, replaceWith) =>
-          if (layout.getOrElse(criteria, EMPTYSTR).contains(check))
+          if (check(layout.getOrElse(criteria, EMPTYSTR)))
             layout update(criteria, replaceWith)
       }
     }
@@ -624,18 +626,18 @@ class EnrichCacheManager extends Logg {
 
   import com.hca.cdm.hl7.model.FieldsTransformer
 
-  @volatile private var init: Boolean = false
-  private var cacheStore = new TrieMap[String, FieldsTransformer]()
+  private lazy val cacheStore = new mutable.HashMap[String, FieldsTransformer]()
 
   def cache(unit: String, enricher: FieldsTransformer): Unit = cacheStore += unit -> enricher
 
   def getEnRicher(unit: String): Option[FieldsTransformer] = cacheStore.get(unit)
 
-  def getcachedUnits: TrieMap[String, FieldsTransformer] = cacheStore
+  def getCacheSer: Array[Byte] = serialize(cacheStore)
+
 
 }
 
-object EnrichCacheManager {
+object EnrichCacheManager extends Logg {
 
   import com.hca.cdm.hl7.model.FieldsTransformer
 
@@ -647,10 +649,25 @@ object EnrichCacheManager {
     instance
   }
 
-  def apply(cache: TrieMap[String, FieldsTransformer]): EnrichCacheManager = lock.synchronized {
+  def apply(cacheSer: Array[Byte]): EnrichCacheManager = lock.synchronized {
     if (instance == null) {
       instance = new EnrichCacheManager()
-      cache.foreach(x => instance.cache(x._1, x._2))
+      deSerialize(cacheSer).asInstanceOf[mutable.HashMap[String, FieldsTransformer]].foreach(x => instance.cache(x._1, x._2))
+    }
+    instance
+  }
+
+  def apply(adhocConfig: String, hl7Types: Array[String]): EnrichCacheManager = lock.synchronized {
+    if (instance == null) {
+      instance = new EnrichCacheManager()
+      val adhocSeg = model.applySegmentsToAll(model.loadSegments(adhocConfig), hl7Types)
+      println(adhocConfig)
+      println(hl7Types)
+      println(adhocSeg)
+      println(instance.cacheStore)
+      tryAndThrow(asFunc(hl7Types.foreach { hl7 => model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7))
+      }), fatal(_: Throwable))
+      println(instance.cacheStore)
     }
     instance
   }
