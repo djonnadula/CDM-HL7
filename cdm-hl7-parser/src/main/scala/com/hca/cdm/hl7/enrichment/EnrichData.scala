@@ -29,15 +29,17 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
   private lazy val facilityKey = "sending_facility"
   private lazy val coidRefLookUp = "coid_ref_look_up"
   private lazy val patientLocation = "patientLocation"
-  private val facilityRef = {
+  private val facilityRefData = readFile(files(0)).getLines().toList
+  private val coidCrossRefData = readFile(files(1)).getLines().toList
+  private lazy val facilityRef = {
     val temp = new mutable.HashMap[String, mutable.Map[String, String]]
-    readFile(files(0)).getLines().takeWhile(valid(_)).map(temp => temp split COMMA).filter(valid(_, 3)).foreach { x =>
+    facilityRefData.takeWhile(valid(_)).map(temp => temp split COMMA).filter(valid(_, 3)).foreach { x =>
       if (temp isDefinedAt x(0)) temp update(x(0), temp(x(0)) += Tuple2(x(1), x(2)))
       else temp += (x(0) -> mutable.Map[String, String](Tuple2(x(1), x(2))))
     }
     temp.toMap
   }
-  private val coidCrossRef = readFile(files(1)).getLines().takeWhile(valid(_)).map(temp => temp split COMMA) filter (valid(_, 5)) map {
+  private lazy val coidCrossRef = coidCrossRefData.takeWhile(valid(_)).map(temp => temp split COMMA) filter (valid(_, 5)) map {
     x => s"${x(1)}${x(2)}" -> (x(3), x(4))
   } toMap
 
