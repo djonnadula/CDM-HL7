@@ -411,7 +411,7 @@ package object model extends Logg {
       validateFields.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_:CharSequence).find()
+          (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
             , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
       }
     else Nil
@@ -661,13 +661,7 @@ object EnrichCacheManager extends Logg {
     if (instance == null) {
       instance = new EnrichCacheManager()
       val adhocSeg = model.applySegmentsToAll(model.loadSegments(adhocConfig), hl7Types)
-      println(adhocConfig)
-      println(hl7Types)
-      println(adhocSeg)
-      println(instance.cacheStore)
-      tryAndThrow(asFunc(hl7Types.foreach { hl7 => model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7))
-      }), fatal(_: Throwable))
-      println(instance.cacheStore)
+      hl7Types.foreach { hl7 => model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7)) }
     }
     instance
   }
