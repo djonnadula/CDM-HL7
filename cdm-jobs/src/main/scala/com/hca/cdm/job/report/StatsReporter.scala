@@ -28,7 +28,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
   private val tdDataEnd = "</td>"
   private val defNotes = new StringBuilder
   SegmentsState.values.foreach {
-    case PROCESSED => defNotes append ("<p>" + PROCESSED + " : Hl7 has been Successfully Processed in specific stage and Written to Kafka</p>")
+    case PROCESSED => defNotes append ("<p>" + PROCESSED + " : Hl7 has been Successfully Processed in specific stage and Written to Kafka or WSMQ Destination System Configured</p>")
     case SKIPPED => defNotes append ("<p>" + SKIPPED + " : Segment doesn't have atleast one Column to be populated. So this Segments is Skipped</p>")
     case FAILED => defNotes append ("<p>" + FAILED + " : Transaction Failed at specific Stage and this log can be found in Rejected Messages with detail message of Failure at Runtime</p>")
     case INVALID => defNotes append ("<p>" + INVALID + " : Invalid Data has been Received</p>")
