@@ -7,6 +7,8 @@ import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
+import com.hca.cdm.log.Logg
+import org.apache.log4j.PropertyConfigurator._
 
 import scala.util.{Success, Try}
 
@@ -15,12 +17,9 @@ import scala.util.{Success, Try}
   *
   * HL7 Unit Test Setup
   */
-class HL7ParserTestSetup(msgType: HL7) {
-
-    def loadProperties(properties: String): Unit = {
-        reload(null, Some(currThread.getContextClassLoader.getResourceAsStream(properties)))
-    }
-    loadProperties("Hl7TestConfig.properties")
+class HL7ParserTestSetup(msgType: HL7) extends Logg {
+    
+    HL7ParserTestUtils.loadProperties("Hl7TestConfig.properties")
     val res = ""
     val messageTypes = lookUpProp("hl7.messages.type") split ","
     val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
@@ -50,18 +49,14 @@ class HL7ParserTestSetup(msgType: HL7) {
     }
 
     def outio(k: String, v: String) = {
-        info("outio: " + k)
     }
 
     def reject(k: String, v: String) = {
-        info("reject: " + k)
     }
 
     def audit(k: String, v: String) = {
-        info("audit: " + k)
     }
 
     def adhocDestination(k: String, v: String, dest: String) = {
-        info("adhocDestination: " + k)
     }
 }

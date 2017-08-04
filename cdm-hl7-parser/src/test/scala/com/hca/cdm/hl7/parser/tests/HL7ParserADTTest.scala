@@ -1,6 +1,7 @@
 package com.hca.cdm.hl7.parser.tests
 
 import com.hca.cdm.hl7.constants.HL7Types
+import com.hca.cdm.log.Logg
 import org.scalatest.FlatSpec
 
 /**
@@ -8,12 +9,11 @@ import org.scalatest.FlatSpec
   *
   * ADT Message Parsing Unit Tests
   */
-class HL7ParserADTTest extends FlatSpec {
+class HL7ParserADTTest extends FlatSpec with Logg {
 
     val messageType = HL7Types.ADT
     val hl7TestSetup = new HL7ParserTestSetup(messageType)
     val testFileBasePath = "/src/test/scala/com/hca/cdm/hl7/parser/tests/"
-    hl7TestSetup.loadProperties("Hl7TestConfig.properties")
 
     val messageName1 = "ADT_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType)
@@ -23,6 +23,7 @@ class HL7ParserADTTest extends FlatSpec {
         assert(res1 === expected1)
     }
 
+    // MT 2.5 test
     val messageName2 = "ADT_2"
     val msg2 =  HL7ParserTestUtils.getMessage(testFileBasePath, messageName2, messageType)
     val res2 = hl7TestSetup.parse(msg2)
@@ -230,4 +231,41 @@ class HL7ParserADTTest extends FlatSpec {
     "ADT Message Test 27 (ADT_27)" should "have a match for the parsed output" in {
         assert(res27 === expected27)
     }
+
+    //EPIC.2.3 MRG 4.3 && 4.2
+    val messageName28 = "ADT_28"
+    val msg28 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName28, messageType)
+    val res28 = hl7TestSetup.parse(msg28)
+    val expected28 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName28, messageType)
+    "ADT Message Test 28 (ADT_28)" should "have a match for the parsed output" in {
+        assert(res28 === expected28)
+    }
+
+    //MT.2.1 Test
+    val messageName29 = "ADT_29"
+    val msg29 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName29, messageType)
+    val res29 = hl7TestSetup.parse(msg29)
+    val expected29 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName29, messageType)
+    "ADT Message Test 29 (ADT_29)" should "have a match for the parsed output" in {
+        assert(res29 === expected29)
+    }
+
+    //Missing ADT ACC data test
+    val messageName30 = "ADT_30"
+    val msg30 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName30, messageType)
+    val res30 = hl7TestSetup.parse(msg30)
+    val expected30 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName30, messageType)
+    "ADT Message Test 30 (ADT_30)" should "have a match for the parsed output" in {
+        assert(res30 === expected30)
+    }
+
+    //EPIC.2.3 AL1.7, AL1.8 Test
+    val messageName31 = "ADT_31"
+    val msg31 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName31, messageType)
+    val res31 = hl7TestSetup.parse(msg31)
+    val expected31 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName31, messageType)
+    "ADT Message Test 31 (ADT_31)" should "have a match for the parsed output" in {
+        assert(res31 === expected31)
+    }
+
 }

@@ -113,9 +113,9 @@
     },
     "primary_care_doctor": {
       "person_id": ".NO PCP",
-      "last_name": "PHYSICIAN",
-      "first_name": "NO",
-      "middle_name": "PRIMARY OR FAMILY"
+      "family_name": "PHYSICIAN",
+      "given_name": "NO",
+      "second_and_further_given_names_or_initials_thereof": "PRIMARY OR FAMILY"
     },
     "hospital_service": "ERS",
     "admit_source": "PR",
@@ -140,7 +140,9 @@
     "identification_date": "20170207"
   },
   "0008.ACC": {
-    "accident_date_time": {},
+    "accident_date_time": {
+      "accident_date": "20170207"
+    },
     "accident_code": "11"
   },
   "0009.GT1": {
@@ -165,13 +167,12 @@
     "guarantor_ssn": "777-77-7777",
     "guarantor_employer_name": "UNKNOWN",
     "guarantor_employer_address": {
-      "street_address1": "UNKNOWNN",
+      "street_address": "UNKNOWNN",
       "city": "LAS VEGAS",
-      "state_province": "NV",
-      "zip_postal_code": "89148"
+      "state_or_province": "NV",
+      "zip_or_postal_code": "89148"
     },
     "guarantor_employer_phone_num": "(702)999-9999",
-    "gt1_unknown": "",
     "guarantor_employment_status": "N"
   },
   "0010.GT1": {

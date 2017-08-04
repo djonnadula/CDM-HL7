@@ -1,6 +1,7 @@
 package com.hca.cdm.hl7.parser.tests
 
 import com.hca.cdm.hl7.constants.HL7Types
+import com.hca.cdm.log.Logg
 import org.scalatest.FlatSpec
 
 /**
@@ -8,12 +9,11 @@ import org.scalatest.FlatSpec
   *
   * ORU Message Parsing Unit Tests
   */
-class HL7ParserORUTest extends FlatSpec{
+class HL7ParserORUTest extends FlatSpec with Logg {
 
     val messageType = HL7Types.ORU
     val hl7TestSetup = new HL7ParserTestSetup(messageType)
     val testFileBasePath = "/src/test/scala/com/hca/cdm/hl7/parser/tests/"
-    hl7TestSetup.loadProperties("Hl7TestConfig.properties")
 
     val messageName1 = "ORU_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType)
@@ -109,5 +109,31 @@ class HL7ParserORUTest extends FlatSpec{
     val expected12 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName12, messageType)
     "ORU Message Test 12 (ORU_12)" should "have a match for the parsed output" in {
         assert(res12 === expected12)
+    }
+
+    val messageName13 = "ORU_13"
+    val msg13 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName13, messageType)
+    val res13 = hl7TestSetup.parse(msg13)
+    val expected13 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName13, messageType)
+    "ORU Message Test 13 (ORU_13)" should "have a match for the parsed output" in {
+        assert(res13 === expected13)
+    }
+
+    // EPIC 2.1 OBR.33, OBR.34, OBR.35 test
+    val messageName14 = "ORU_14"
+    val msg14 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName14, messageType)
+    val res14 = hl7TestSetup.parse(msg14)
+    val expected14 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName14, messageType)
+    "ORU Message Test 14 (ORU_14)" should "have a match for the parsed output" in {
+        assert(res14 === expected14)
+    }
+
+    // ORU NTE test
+    val messageName15 = "ORU_15"
+    val msg15 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName15, messageType)
+    val res15 = hl7TestSetup.parse(msg15)
+    val expected15 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName15, messageType)
+    "ORU Message Test 15 (ORU_15)" should "have a match for the parsed output" in {
+        assert(res15 === expected15)
     }
 }

@@ -636,7 +636,7 @@ object HL7Job extends Logg with App {
     }
 
 
-    override def toString = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
+    override def toString: String = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
   }
 
 }

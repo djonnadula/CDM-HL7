@@ -30,7 +30,7 @@
     "date_time_of_birth": "19920715",
     "administrative_sex": "F",
     "patient_alias": {
-      "type_code": "M"
+      "name_type_code": "M"
     },
     "race": "U",
     "patient_address": {
@@ -65,10 +65,10 @@
     },
     "primary_care_doctor": {
       "person_id": ".NO PCP",
-      "last_name": "Physician",
-      "first_name": "No",
-      "middle_name": "Primary or Family",
-      "identifier_type_code": "XX"
+      "family_name": "Physician",
+      "given_name": "No",
+      "second_and_further_given_names_or_initials_thereof": "Primary or Family",
+      "id_type_code": "XX"
     },
     "hospital_service": "LD",
     "admit_source": "CR",
@@ -86,10 +86,10 @@
     "admit_date_time": "201703272100",
     "consulting_doctor": {
       "person_id": "GUDMA",
-      "last_name": "Gudipaty",
-      "first_name": "Madhuri",
+      "family_name": "Gudipaty",
+      "given_name": "Madhuri",
       "degree": "MD",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     }
   },
   "0004.TXA": {
