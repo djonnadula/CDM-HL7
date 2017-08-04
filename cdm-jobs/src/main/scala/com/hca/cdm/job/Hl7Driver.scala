@@ -123,6 +123,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.streaming.gracefulStopTimeout", "400000")
     .setConf("spark.streaming.concurrentJobs", lookUpProp("hl7.con.jobs"))
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
+    .setConf("spark.yarn.access.namenodes", lookUpProp("secure.name.nodes"))
   private lazy val extraConfig = () => lookUpProp("spark.extra.config")
   tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
     if (valid(conf)) {
@@ -131,8 +132,8 @@ object Hl7Driver extends App with Logg {
     }
   })
   if (ENV != "PROD") {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
-      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app")
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
   } else {
     sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
       .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")

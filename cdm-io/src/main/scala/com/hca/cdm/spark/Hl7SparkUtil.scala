@@ -18,7 +18,7 @@ import org.apache.spark.storage.StorageLevel
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   */
-object Hl7SparkUtil extends Logg{
+object Hl7SparkUtil extends Logg {
 
   private lazy val hookManager: Class[_] = {
     Try(className("org.apache.spark.util.ShutdownHookManager")) match {
@@ -38,8 +38,10 @@ object Hl7SparkUtil extends Logg{
       .set("spark.streaming.backpressure.enabled", lookUpProp("hl7.rate.control"))
       .set("spark.streaming.backpressure.pid.minRate", rate.toString)
       .set("spark.streaming.backpressure.pid.derived", "0.1")
-      .set("spark.streaming.kafka.maxRetries", "30")
-    if (kafkaConsumer) conf.set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+    if (kafkaConsumer) {
+      conf.set("spark.streaming.kafka.maxRatePerPartition", (rate + (rate / 8)).toString)
+      conf.set("spark.streaming.kafka.maxRetries", tryAndReturnDefaultValue[String](asFunc(lookUpProp("hl7.spark.kafka.retries")), "15"))
+    }
     conf
   }
 

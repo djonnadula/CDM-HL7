@@ -16,7 +16,7 @@ import scala.collection.mutable
   *
   * Breaks HL7 Data at Segment level and applies Schema for each Registered Segments and Special Cases for SCRI, CDI projects...
   */
-private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = "|")
+private[model] class DataModeler(private val reqMsgType: HL7, private val timeStampReq: Boolean = true, private val outDelim: String = PIPE_DELIMITED_STR)
   extends Logg with Serializable {
   logIdent = "for HL7 Type :: " + reqMsgType.toString
   private lazy val notValid = Hl7SegmentTrans(Right(notValidStr))
@@ -26,7 +26,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   def applyModel(whichSeg: String, model: Model)(data: mapType): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
-    if (modelFilter.isEmpty | (reqMsgType != IPLORU && reqMsgType != ORMORDERS && !isRequiredType(data, reqMsgType))) return notValid
+    if (modelFilter.isEmpty | (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && !isRequiredType(data, reqMsgType))) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
@@ -74,8 +74,9 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   layout = model.layoutCopy
                   if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                     handleCommonSegments(data, layout)
-                    val out = s"${makeFinal(layout)}$PIPE_DELIMITED_STR${node._1.substring(0, node._1.indexOf(DOT)).toInt}"
-                    (out, null)
+                    if (layout isDefinedAt fieldSeqNum) layout update(fieldSeqNum, node._1.substring(0, node._1.indexOf(DOT)))
+                    if (layout isDefinedAt timeStampKey) layout update(timeStampKey, timeStamp)
+                    (makeFinal(layout, etlTimeReq = false), null)
                   } else {
                     (skippedStr, null)
                   }
@@ -141,10 +142,10 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @param layout
     * @return
     */
-  private def makeFinal(layout: mutable.LinkedHashMap[String, String]): String = {
+  private def makeFinal(layout: mutable.LinkedHashMap[String, String], etlTimeReq: Boolean = timeStampReq): String = {
     val builder = new StringBuilder(layout.size * 40)
     layout.foreach({ case (k, v) => builder append (v + outDelim) })
-    if (timeStampReq) builder append timeStamp
+    if (etlTimeReq) builder append timeStamp
     builder.toString
   }
 

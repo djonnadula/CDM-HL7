@@ -11,6 +11,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
+import com.hca.cdm.hl7.model.Destinations.Destination
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
@@ -46,6 +47,7 @@ package object model {
   lazy val skippedStr = "SKIPPED"
   lazy val filteredStr = "FILTERED"
   lazy val timeStampKey = "etl_firstinsert_datetime"
+  lazy val fieldSeqNum = "field_seq_num"
   lazy val NA = "Not Applicable"
   private lazy val toJson = jsonHandler()
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
@@ -69,12 +71,6 @@ package object model {
   lazy val PIDMappings: mutable.HashMap[String, Array[(String, String, String, String)]] = synchronized(
     commonSegmentMappings(lookUpProp("common.elements.pid.mappings")))
   private val DUMMY_CONTAINER = new mutable.LinkedHashMap[String, Any]
-
-  private lazy val templateBuildPath = {
-    val basePath = Paths.get(new java.io.File(".").getAbsolutePath)
-    val templatePath = "src" + FS + "main" + FS + "resources" + FS + "templates"
-    Paths.get(basePath.toString, templatePath)
-  }
 
   def hl7Type(data: mapType): HL7 = {
     Try(data.getOrElse(MSH_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Type_Segment, DUMMY_CONTAINER).asInstanceOf[mapType].getOrElse(Message_Code, "UNKNOWN")) match {
@@ -170,6 +166,13 @@ package object model {
 
   }
 
+  object Destinations extends Enumeration {
+    type Destination = Value
+    val KAFKA = Value("KAFKA")
+    val WSMQ = Value("WSMQ")
+    val DEFAULT = Value("KAFKA")
+  }
+
   def applyAvroData(container: Record, key: String, value: AnyRef): Unit = {
     tryAndLogErrorMes(container.put(key, value), error(_: Throwable), Some(s"Cannot insert key $key  into Avro Schema ${container.getSchema}"))
   }
@@ -224,17 +227,19 @@ package object model {
       val msh = rawSplit(0)
       val tempMsh = PIPER split msh
       val tempPid = PIPER split findSeg(rawSplit, PID)
-      Try(MSGMeta(tempMsh(9), tempMsh(6), dataAtIndex(tempPid)(3), dataAtIndex(tempPid)(4), dataAtIndex(tempPid)(18, 1), dataAtIndex(tempMsh)(3, 1), dataAtIndex(tempMsh)(8, 1))) match {
+      Try(MSGMeta(tempMsh(9), tempMsh(6), tryAndReturnDefaultValue(asFunc(dataAtIndex(tempPid)(3)), EMPTYSTR), tryAndReturnDefaultValue(asFunc(dataAtIndex(tempPid)(4)), EMPTYSTR),
+        tryAndReturnDefaultValue(asFunc(dataAtIndex(tempPid)(18, 1)), EMPTYSTR), tryAndReturnDefaultValue(asFunc(dataAtIndex(tempMsh)(3, 1)), EMPTYSTR),
+        tryAndReturnDefaultValue(asFunc(dataAtIndex(tempMsh)(8, 1)), EMPTYSTR))) match {
         case Success(me) => me
         case _ => NONE
       }
     } else NONE
   }
 
-  private def dataAtIndex(segment: Array[String], delim: String = "\\" + caret)(index: Int, dataAtIndex: Int = 0): String = {
-    if (valid(segment, index)) {
-      if (segment(index) contains caret) (segment(index) split delim) (dataAtIndex)
-      else segment(index)
+  private def dataAtIndex(segment: Array[String], delim: String = "\\" + caret)(firstIndex: Int, secondaryIndex: Int = 0): String = {
+    if (valid(segment, firstIndex)) {
+      if (segment(firstIndex) contains caret) (segment(firstIndex) split delim) (secondaryIndex)
+      else segment(firstIndex)
     } else EMPTYSTR
   }
 
@@ -258,6 +263,8 @@ package object model {
         if (valid(adhoc, 3)) {
           def access(index: Int, store: Array[String] = adhoc) = () => store(index)
 
+          def destination(out: String) = tryAndReturnDefaultValue(asFunc(Destinations.withName(out)), Destinations.KAFKA)
+
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
@@ -267,11 +274,12 @@ package object model {
           var index = -1
           outFormats.map(outFormat => {
             index += 1
+            val dest = outDest(index) split "\\&"
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains JSON.toString) {
-              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, outDest(index), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, outDest(index), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -287,7 +295,9 @@ package object model {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class ADHOC(outFormat: OutFormat, dest: String, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
+  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
+
+  case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
     val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
@@ -328,7 +338,7 @@ package object model {
 
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
 
-  def loadSegments(segments: String, delimitedBy: String = ","): Map[String, List[(String, String)]] = {
+  def loadSegments(segments: String, delimitedBy: String = COMMA): Map[String, List[(String, String)]] = {
     val reader = readFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split delimitedBy
@@ -454,6 +464,8 @@ package object model {
     if (!isAdhoc) {
       // Storing Which Segment for Every Record makes Redundant data. Which already exist in Partition
       // layout += commonSegkey -> whichSeg
+      layout += timeStampKey -> EMPTYSTR
+      layout += fieldSeqNum -> EMPTYSTR
       commonNode.clone() transform ((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v) foreach (ele => layout += ele)
     }
     (segmentData split(delimitedBy, -1)) foreach (ele => layout += ele -> EMPTYSTR)
@@ -461,20 +473,9 @@ package object model {
   }
 
   def readFile(file: String): BufferedSource = {
-    if (lookUpProp("hl7.env") == "BUILD") {
-      fromFile(templateBuildPath.toString + FS + file)
+    if (lookUpProp("hl7.env") == "LOCAL") {
+      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(s"templates$FS$file"))
     } else fromFile(file)
-  }
-
-
-  def determineTemplatePath(os: String): String = {
-    if (getOS.toLowerCase().contains("windows")) {
-      info("Using Windows path for templates")
-      "hl7.qa.config.windows"
-    } else {
-      info("Using Linux path for templates.")
-      "hl7.qa.config.cdhvm"
-    }
   }
 
 }

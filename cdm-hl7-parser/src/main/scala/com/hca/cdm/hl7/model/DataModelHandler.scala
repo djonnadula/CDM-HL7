@@ -39,7 +39,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   logIdent = s"$hl7-Model Handler  "
   private lazy val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
 
-  private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: String = EMPTYSTR, auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
+  private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: Option[DestinationSystem], auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
 
   private val metrics = new TrieMap[String, Long]
   private val dataModeler = DataModeler(hl7Segments.msgType)
@@ -47,7 +47,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
     val temp = new mutable.ArrayBuffer[Segment]
     hl7Segments.models.foreach({ case (seg, models) =>
       models.foreach(model => {
-        temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType), model.adhoc.isDefined, if (model.adhoc.isDefined) model.adhoc.get.dest else EMPTYSTR,
+        temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType), model.adhoc.isDefined, if (model.adhoc.isDefined) Some(model.adhoc.get.destination) else None,
           if (model.adhoc.isDefined) seg substring ((seg indexOf COLON) + 1) else EMPTYSTR,
           if (model.adhoc.isDefined) seg.replaceAll(COLON, "-") else EMPTYSTR,
           if (model.adhoc.isDefined) model.adhoc.get.ackApplication else EMPTYSTR)
@@ -61,8 +61,8 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   private lazy val nonAdhocSegments = segRef map (seg => if (!seg.adhoc) seg.seg else EMPTYSTR) filter (_ != EMPTYSTR)
 
   private def runModel(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
-                       adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit = {
-    val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[String] else null
+                       adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit = {
+    val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[(String, String)] else null
     segRef map (seg => seg -> run(seg, data)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
       case Success(tranCompleted) =>
         tranCompleted.trans match {
@@ -85,8 +85,12 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
-                    if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) tlmAckMessages += tlmAuditor(segment.tlmAckApplication, meta)
-                    if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest), s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
+                    if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) {
+                      tlmAckMessages += Tuple2(tlmAuditor(segment.tlmAckApplication, meta), segment.tlmAckApplication)
+                    }
+                    if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
+                      tlmAckMessages += Tuple2(rec, segment.headerKey)
+                    } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route), s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                       if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                         s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
                         updateMetrics(segment.seg, PROCESSED)
@@ -142,8 +146,8 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
     if (segRef.nonEmpty) tryAndLogThr(auditIO(segmentsInHl7Auditor(segmentsInMsg(allSegmentsForHl7, data), meta), header(hl7, auditHeader, Left(meta))),
       s"$hl7$COLON nonAdhocSegments-auditIO-segmentsInHl7Auditor", error(_: Throwable))
     if (tlmAckIO isDefined) {
-      tlmAckMessages.foreach(tlmAckIO.get)
-      tlmAckIO.get(tlmAuditor(segmentsInHL7, meta))
+      tlmAckMessages.foreach(msg => tlmAckIO.get(msg._1, msg._2))
+      tlmAckIO.get(tlmAuditor(segmentsInHL7, meta), segmentsInHL7)
     }
   }
 
@@ -165,7 +169,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
 
   override def handleSegments(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
-                              adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit =
+                              adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit =
     runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO)(data, meta): Unit
 
 

@@ -21,10 +21,14 @@ import org.apache.spark.FutureAction
 import org.apache.spark.streaming.StreamingContext
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7}
+import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import AuditConstants._
+import com.hca.cdm.auth.LoginRenewer
+import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.utils.RetryHandler
+
 
 /**
   * Created by Devaraj Jonnadula on 12/14/2016.
@@ -78,6 +82,10 @@ object HL7Receiver extends Logg with App {
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
     sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
   }
+  if (checkpointEnable) {
+    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures", "30")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "180")
+  }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
   }
@@ -90,13 +98,16 @@ object HL7Receiver extends Logg with App {
       ctx
     }
   }
-
+  private val hdpConf = hdpUtil.conf
   private var sparkStrCtx: StreamingContext = initContext
   startStreams()
 
   private def initContext: StreamingContext = {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+    hdpConf.set("hadoop.security.authentication", "Kerberos")
+    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
+    LoginRenewer.scheduleRenewal(master = true)
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
   }
@@ -107,20 +118,20 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), 0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
     else {
       sparkStrCtx.union(numberOfReceivers.map(id => {
-        val stream = sparkStrCtx.receiverStream(new receiver(id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String)))
+        val stream = sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
         info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
         stream
       }))
     }
     stream foreachRDD (rdd => {
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
-      val rejectOut = rejectedTopic
-      val auditOut = auditTopic
-      val prodConf = kafkaProducerConf
-      val confFile = config_file
+      val rejectOut = self.rejectedTopic
+      val auditOut = self.auditTopic
+      val prodConf = self.kafkaProducerConf
+      val confFile = self.config_file
       val maxMessageSize = self.maxMessageSize
       val hl7QueueMapping = self.hl7QueueMapping
       val hl7KafkaOut = self.hl7KafkaOut
@@ -169,16 +180,19 @@ object HL7Receiver extends Logg with App {
       info(s"Started Spark Streaming Context Execution :: ${new Date()}")
       sparkStrCtx awaitTermination()
     } catch {
-      case t: Throwable => error("Spark Context Starting Failed ", t)
-        val retry = RetryHandler()
+      case t: Throwable =>
+        if (!t.isInstanceOf[InterruptedException]) {
+          error("Spark Context Starting Failed ", t)
+          val retry = RetryHandler()
 
-        def retryStart(): Unit = {
-          sparkStrCtx start()
-          info(s"Started Spark Streaming Context Execution :: ${new Date()}")
-          sparkStrCtx awaitTermination()
+          def retryStart(): Unit = {
+            sparkStrCtx start()
+            info(s"Started Spark Streaming Context Execution :: ${new Date()}")
+            sparkStrCtx awaitTermination()
+          }
+
+          tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
         }
-
-        tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
     } finally {
       close()
     }
