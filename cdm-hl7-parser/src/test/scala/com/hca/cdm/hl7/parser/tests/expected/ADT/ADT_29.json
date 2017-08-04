@@ -20,7 +20,7 @@
     "version_id": "2.1 EVN",
     "sequence_num": "A04",
     "continuation_pointer": "201705171527",
-    "msh_unknown": "QNI7782^RAMOS^CLARISSA^^^^"
+    "unknown": "QNI7782^RAMOS^CLARISSA^^^^"
   },
   "0002.PID": {
     "set_id": "1",
@@ -131,7 +131,7 @@
     },
     "service_episode_description": "1",
     "service_episode_id": "DA",
-    "pv1_unknown": "F001900388^No Known Allergies^^^allergy.id^U^^20160120 ACC^20170517^^11"
+    "unknown": "F001900388^No Known Allergies^^^allergy.id^U^^20160120 ACC^20170517^^11"
   },
   "0006.GT1": {
     "set_id": "1",
@@ -192,42 +192,42 @@
     "insured_administrative_sex": "F"
   },
   "0009.ZMR": {
-    "zmr_unknown": "1^N00685624~W00949651^N00685624~W00949651"
+    "unknown": "1^N00685624~W00949651^N00685624~W00949651"
   },
   "0010.ZCD": {
-    "zcd_unknown": "1^1PAO0V020A^Does the patient wish to OPT OUT of HASA?^N"
+    "unknown": "1^1PAO0V020A^Does the patient wish to OPT OUT of HASA?^N"
   },
   "0011.ZCD": {
-    "zcd_unknown": "2^1PAO0V021A^Patient has elected to revoke OPT OUT?^N"
+    "unknown": "2^1PAO0V021A^Patient has elected to revoke OPT OUT?^N"
   },
   "0012.ZCD": {
-    "zcd_unknown": "3^1REG0M031A^4. Illness/injury due to work related accident/condition?^N"
+    "unknown": "3^1REG0M031A^4. Illness/injury due to work related accident/condition?^N"
   },
   "0013.ZCD": {
-    "zcd_unknown": "4^1REG0M041A^1. Was illness/injury due to a non-work related accident?^NO"
+    "unknown": "4^1REG0M041A^1. Was illness/injury due to a non-work related accident?^NO"
   },
   "0014.ZCD": {
-    "zcd_unknown": "5^1REG0M065A^Occurrence Code:^11"
+    "unknown": "5^1REG0M065A^Occurrence Code:^11"
   },
   "0015.ZCD": {
-    "zcd_unknown": "6^1REG0M066A^Date:^20170517"
+    "unknown": "6^1REG0M066A^Date:^20170517"
   },
   "0016.ZCD": {
-    "zcd_unknown": "7^1REG0M234A^FC1:^OC"
+    "unknown": "7^1REG0M234A^FC1:^OC"
   },
   "0017.ZCD": {
-    "zcd_unknown": "8^1REG0R041A^Was the PT referred from, or is the PCP an Urgent Care Center?^N"
+    "unknown": "8^1REG0R041A^Was the PT referred from, or is the PCP an Urgent Care Center?^N"
   },
   "0018.ZCD": {
-    "zcd_unknown": "9^ETHNICITY^ETHNICITY^1"
+    "unknown": "9^ETHNICITY^ETHNICITY^1"
   },
   "0019.ZCD": {
-    "zcd_unknown": "10^Z.ADDLRACE^ADDITIONAL RACE^W"
+    "unknown": "10^Z.ADDLRACE^ADDITIONAL RACE^W"
   },
   "0020.ZIN": {
-    "zin_unknown": "1^SP^MEDICAID SUPERIOR HEALTH^Y^20170517^PPI^^Y^^^^^MECD.SUPH"
+    "unknown": "1^SP^MEDICAID SUPERIOR HEALTH^Y^20170517^PPI^^Y^^^^^MECD.SUPH"
   },
   "0021.ZCS": {
-    "zcs_unknown": "UNEM^NONE^^BISMARK^TX^78219^NE^NONE^NONE^01578"
+    "unknown": "UNEM^NONE^^BISMARK^TX^78219^NE^NONE^NONE^01578"
   }
 }

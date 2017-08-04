@@ -247,26 +247,50 @@
     "reason_for_study": {
       "text": "screening"
     },
-    "principal_result_interpreter": {
-      "name": {
-        "id_num": "BAZ9276",
-        "family_name": "WEISS",
-        "given_name": "PAUL",
-        "second_and_further_given_names_or_initials_thereof": "N",
-        "assigning_authority_namespace_id": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+    "principal_result_interpreter": [
+      {
+        "name": {
+          "id_num": "WEIPA",
+          "family_name": "WEISS",
+          "given_name": "PAUL",
+          "second_and_further_given_names_or_initials_thereof": "N",
+          "assigning_authority_namespace_id": "PROVID",
+          "identifier_type_code": "PROVID"
+        }
+      },
+      {
+        "name": {
+          "id_num": "BAZ9276",
+          "family_name": "WEISS",
+          "given_name": "PAUL",
+          "second_and_further_given_names_or_initials_thereof": "N",
+          "assigning_authority_namespace_id": "THREEFOUR",
+          "identifier_type_code": "THREEFOUR"
+        }
       }
-    },
-    "assistant_result_interpreter": {
-      "name": {
-        "id_num": "ADT1039",
-        "family_name": "ZANTER",
-        "given_name": "RAGNOTHOR",
-        "second_and_further_given_names_or_initials_thereof": "P",
-        "assigning_authority_namespace_id": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+    ],
+    "assistant_result_interpreter": [
+      {
+        "name": {
+          "id_num": "NAAJO",
+          "family_name": "ZANTER",
+          "given_name": "RAGNOTHOR",
+          "second_and_further_given_names_or_initials_thereof": "P",
+          "assigning_authority_namespace_id": "PROVID",
+          "identifier_type_code": "PROVID"
+        }
+      },
+      {
+        "name": {
+          "id_num": "ADT1039",
+          "family_name": "ZANTER",
+          "given_name": "RAGNOTHOR",
+          "second_and_further_given_names_or_initials_thereof": "P",
+          "assigning_authority_namespace_id": "THREEFOUR",
+          "identifier_type_code": "THREEFOUR"
+        }
       }
-    },
+    ],
     "technician": {
       "name": {
         "id_num": "XBT0000",

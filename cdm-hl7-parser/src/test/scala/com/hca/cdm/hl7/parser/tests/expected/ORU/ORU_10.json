@@ -219,7 +219,7 @@
     "visit_user_code": "FR17:B0003636R",
     "expected_discharge_date_time": "N",
     "visit_description": "201602131351",
-    "pv2_unknown": "BSI0553^Jeremiah^Handler^^^^MD^^Frankfort Regional Med Center^FRNK^L^Main Lab^ML^L^^^^^^502^2267565",
+    "unknown": "BSI0553^Jeremiah^Handler^^^^MD^^Frankfort Regional Med Center^FRNK^L^Main Lab^ML^L^^^^^^502^2267565",
     "patient_status_code": {
       "id": "Main Lab",
       "text": "L",

@@ -305,25 +305,48 @@
     "reason_for_study": {
       "text": "rule out stroke"
     },
-    "principal_result_interpreter": {
-      "name": {
-        "id_num": "OAV9753",
-        "family_name": "O'NEIL",
-        "given_name": "MATHLETE",
-        "assigning_authority_namespace_id": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+    "principal_result_interpreter": [
+      {
+        "name": {
+          "id_num": "MATHE",
+          "family_name": "O'NEIL",
+          "given_name": "MATHLETE",
+          "assigning_authority_namespace_id": "PROVID",
+          "identifier_type_code": "PROVID"
+        }
+      },
+      {
+        "name": {
+          "id_num": "OAV9753",
+          "family_name": "O'NEIL",
+          "given_name": "MATHLETE",
+          "assigning_authority_namespace_id": "THREEFOUR",
+          "identifier_type_code": "THREEFOUR"
+        }
       }
-    },
-    "assistant_result_interpreter": {
-      "name": {
-        "id_num": "DUH8364",
-        "family_name": "HORTICULTURE",
-        "given_name": "DELEROAN",
-        "second_and_further_given_names_or_initials_thereof": "V",
-        "assigning_authority_namespace_id": "THREEFOUR",
-        "identifier_type_code": "THREEFOUR"
+    ],
+    "assistant_result_interpreter": [
+      {
+        "name": {
+          "id_num": "HOLLA",
+          "family_name": "HORTICULTURE",
+          "given_name": "DELEROAN",
+          "second_and_further_given_names_or_initials_thereof": "V",
+          "assigning_authority_namespace_id": "PROVID",
+          "identifier_type_code": "PROVID"
+        }
+      },
+      {
+        "name": {
+          "id_num": "DUH8364",
+          "family_name": "HORTICULTURE",
+          "given_name": "DELEROAN",
+          "second_and_further_given_names_or_initials_thereof": "V",
+          "assigning_authority_namespace_id": "THREEFOUR",
+          "identifier_type_code": "THREEFOUR"
+        }
       }
-    },
+    ],
     "technician": {
       "name": {
         "id_num": "XSR0000",
