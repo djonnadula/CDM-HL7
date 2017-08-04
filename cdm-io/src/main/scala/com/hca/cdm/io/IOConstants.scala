@@ -22,7 +22,7 @@ object IOConstants {
   val zkSessionTimeout: Int = 6000
   val zkConnectionTimeout: Int = 10000
   val defaultReplication: Int = 3
-  val producerBatch: String = "25000"
+  val producerBatch: String = "80000"
   val producerAck: String = "all"
   val defaultDeSerializer: String = "org.apache.kafka.common.serialization.ByteArrayDeserializer"
   val defaultSerializer: String = "org.apache.kafka.common.serialization.ByteArraySerializer"
@@ -34,7 +34,7 @@ object IOConstants {
   val metadataFetchTimeout: String = "3000"
   val defaultSendRetries: Int = 10
   val defaultHeartBeat: String = "20000"
-  val defaultRequestTimeOut: String = "40000"
+  val defaultRequestTimeOut: String = "120000"
   val defaultHeartBeatTimeOut: String = "20000"
   val producerBufferMemory: String = (128 * 1024 * 1024).toString
   val sendBuffer: String = "1048576"

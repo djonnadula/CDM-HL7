@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.5-Snapshot</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <name>Scripts Repo</name>

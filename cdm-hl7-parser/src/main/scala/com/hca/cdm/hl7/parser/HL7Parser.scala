@@ -34,7 +34,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
   private lazy val toJson = jsonHandler()
   private lazy val EMPTY = Array.empty[String]
-  private lazy val MAP = Map.empty[String, Array[String]]
+  private lazy val NONE = Map.empty[String, Array[String]]
   private val metrics = new TrieMap[String, Long]
   private val hl7 = msgType.toString
   HL7State.values.foreach(state => metrics += s"$hl7$COLON${state.toString}" -> 0L)
@@ -215,8 +215,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private case class Segment(var mapping: String = EMPTYSTR, var realignColStatus: Boolean = false, var realignColValue: String = EMPTYSTR,
                              var realignFieldName: String = EMPTYSTR, var realignCompName: String = EMPTYSTR, var realignSubCompName: String = EMPTYSTR, var realignColOption: String = EMPTYSTR)
 
-  private case class VersionData(var controlId: String = EMPTYSTR, var hl7Version: String = EMPTYSTR, facility: String = EMPTYSTR, var srcSystem: Map[String, Array[String]] = MAP,
-                                 var standardMapping: Map[String, Array[String]] = MAP, var realignment: Map[String, Array[String]] = MAP, var facilityOverRides: Map[String, Array[String]] = MAP)
+  private case class VersionData(var controlId: String = EMPTYSTR, var hl7Version: String = EMPTYSTR, facility: String = EMPTYSTR, var srcSystem: Map[String, Array[String]] = NONE,
+                                 var standardMapping: Map[String, Array[String]] = NONE, var realignment: Map[String, Array[String]] = NONE, var facilityOverRides: Map[String, Array[String]] = NONE)
 
   private case class HL7Parsed(data: mapType, sourceSystem: String, srcVersion: String, var missingMappings: String = EMPTYSTR)
 
@@ -236,7 +236,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var segment: Segment = null
     var versionData: VersionData = null
     val missingMappings = new TemplateUnknownMapping
-    val segmentMapping = mapSegments(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.hl7Version + underScore,
+    val segmentMapping = getMapping(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.hl7Version + underScore,
       versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.facility + underScore + versionData.hl7Version + underScore
       , versionData.srcSystem, versionData.standardMapping, versionData.realignment, versionData.facilityOverRides)(versionData.controlId, missingMappings)
     rawSplit.view.zipWithIndex foreach { case (msgSegment, segIndex) =>
@@ -252,7 +252,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         if (msgSegment.length > 4) fields = msgSegment.substring(4, msgSegment.length).split(ESCAPE + delimiters(FIELD_DELIM))
         else fields = msgSegment.split(ESCAPE + delimiters(FIELD_DELIM))
       }
-      val moveToUnknown = moveUnknown(fieldLayout, unknownKey(whichSegment), _: String)
+      val moveToUnknown = moveUnknown(fieldLayout, unknownKey, _: String)
       if (valid(fields)) {
         fields.view.zipWithIndex foreach { case (field, fieldIndex) =>
           val fieldKey = s"$whichSegment$DOT${inc(fieldIndex)}"
@@ -293,7 +293,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       }
                       if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
                       if (segment.realignColStatus && segment.realignColOption == MOVE) {
-                        fieldLayout += fieldMapping -> componentLayout
+                        if (fieldLayout isDefinedAt fieldMapping) {
+                          val fieldList = new mutable.ListBuffer[Any]
+                          fieldList += fieldLayout(fieldMapping)
+                          fieldList += componentLayout
+                          fieldLayout update(fieldMapping, fieldList)
+                        } else fieldLayout += fieldMapping -> componentLayout
                         break
                       }
                     } else {
@@ -357,6 +362,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
   private def unknownKey(segment: String): String = s"${segment.toLowerCase}_$UNKNOWN"
 
+  private def unknownKey: String = UNKNOWN
+
   private def inc(v: Int, step: Int = 1) = v + step
 
   private def getVersionData(fieldList: Array[String], templateData: Map[String, Map[String, Array[String]]]): VersionData = {
@@ -364,33 +371,39 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     val controlId = fieldList(9)
     require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
-    val mapped_index = Match match {
-      case mt624 if mt624(MT6_) && (hl7Version == HL7_2_4) => templateData(hl7MT6_2_4Map)
-      case mt6251 if mt6251(MT6_) && (hl7Version == HL7_2_5_1) => templateData(hl7MT6_2_5_1Map)
-      case mt625 if mt625(MT6_) && (hl7Version == HL7_2_5) => templateData(hl7MT6_2_5Map)
-      case mt21 if mt21(MT_) && (hl7Version == HL7_2_1) => templateData(hl7MT_2_1Map)
-      case mt22 if mt22(MT_) && (hl7Version == HL7_2_2) => templateData(hl7MT_2_2Map)
-      case mt24 if mt24(MT_) && (hl7Version == HL7_2_4) => templateData(hl7MT_2_4Map)
-      case mt25 if mt25(MT_) && (hl7Version == HL7_2_5) => templateData(hl7MT_2_5Map)
-      case epic21 if epic21(EPIC_) && (hl7Version == HL7_2_1) => templateData(hl7Epic_2_1Map)
-      case epic23 if epic23(EPIC_) && (hl7Version == HL7_2_3) => templateData(hl7Epic_2_3Map)
-      case epic231 if epic231(EPIC_) && (hl7Version == HL7_2_3_1) => templateData(hl7Epic_2_3_1Map)
+    val sourceSystem = Match match {
+      case mt6 if mt6(MT6_) =>
+        if (hl7Version == HL7_2_4) templateData(hl7MT6_2_4Map)
+        else if (hl7Version == HL7_2_5_1) templateData(hl7MT6_2_5_1Map)
+        else if (hl7Version == HL7_2_5) templateData(hl7MT6_2_5Map)
+        else NONE
+      case mt if mt(MT_) =>
+        if (hl7Version == HL7_2_1) templateData(hl7MT_2_1Map)
+        else if (hl7Version == HL7_2_2) templateData(hl7MT_2_2Map)
+        else if (hl7Version == HL7_2_4) templateData(hl7MT_2_4Map)
+        else if (hl7Version == HL7_2_5) templateData(hl7MT_2_5Map)
+        else NONE
+      case epic if epic(EPIC_) =>
+        if (hl7Version == HL7_2_1) templateData(hl7Epic_2_1Map)
+        else if (hl7Version == HL7_2_3) templateData(hl7Epic_2_3Map)
+        else if (hl7Version == HL7_2_3_1) templateData(hl7Epic_2_3_1Map)
+        else NONE
       case ecw if ecw(ECW_) => templateData(hl7eCWMap)
       case ng if ng(NG_) => templateData(hl7NextGenMap)
       case ip if ip(IP_) => templateData(hl7IpeopleMap)
-      case _ => MAP
+      case _ => NONE
     }
 
     def facility = () => fieldList(3)
 
-    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), mapped_index, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk), templateData(hl7FacilityMap))
+    VersionData(controlId, hl7Version, tryAndReturnDefaultValue[String](facility, EMPTYSTR), sourceSystem, templateData(hl7StandardMap), templateData(hl7MapAlignXWalk), templateData(hl7FacilityMap))
   }
 
   private def matcher(in: String, seq: String) = in != null & in.startsWith(seq)
 
 
-  private def mapSegments(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
+  private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
+                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
     val segment = new Segment
     var mappedColumnData = EMPTYSTR
     try {
@@ -416,10 +429,6 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
           if (mappingExist(2, facilityOverRideValues) && nonEmpty(facilityOverRideValues(2))) mappedColumnData = facilityOverRideValues(2)
           else if (mappingExist(1, facilityOverRideValues) && nonEmpty(facilityOverRideValues(1))) mappedColumnData = facilityOverRideValues(1)
           else if (mappingExist(0, facilityOverRideValues) && nonEmpty(facilityOverRideValues(0))) mappedColumnData = facilityOverRideValues(0)
-        } else if (srcSystemValues nonEmpty) {
-          if (mappingExist(2, srcSystemValues) && nonEmpty(srcSystemValues(2))) mappedColumnData = srcSystemValues(2)
-          else if (mappingExist(1, srcSystemValues) && nonEmpty(srcSystemValues(1))) mappedColumnData = srcSystemValues(1)
-          else if (mappingExist(0, srcSystemValues) && nonEmpty(srcSystemValues(0))) mappedColumnData = srcSystemValues(0)
         }
         else if (srcSystemValues nonEmpty) {
           if (mappingExist(2, srcSystemValues) && nonEmpty(srcSystemValues(2))) mappedColumnData = srcSystemValues(2)

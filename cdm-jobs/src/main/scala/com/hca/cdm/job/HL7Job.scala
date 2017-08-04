@@ -10,6 +10,8 @@ import LocalDateTime._
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm._
+import com.hca.cdm.auth.LoginRenewer
+import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.audit.AuditConstants._
@@ -43,6 +45,7 @@ import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+import scala.collection.mutable
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -120,7 +123,7 @@ object HL7Job extends Logg with App {
     })
     temp
   }
-  private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
+  private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
 
   // ******************************************************** Spark Part ***********************************************
   private val checkPoint = lookUpProp("hl7.checkpoint")
@@ -138,14 +141,13 @@ object HL7Job extends Logg with App {
 
   private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
-  private var credentials: String = _
   initialise(sparkStrCtx)
   startStreams()
 
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
-      if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
+      if ((model.adhoc isDefined) && (model.adhoc.get.destination.system == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
     })))
     createTopic(hl7JsonTopic, segmentPartitions = false)
     createTopic(segTopic, segmentPartitions = false)
@@ -159,7 +161,7 @@ object HL7Job extends Logg with App {
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), monitorInterval + 600, minToSec(monitorInterval), TimeUnit.SECONDS)
+    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), minToSec(monitorInterval) + 2, minToSec(monitorInterval), TimeUnit.SECONDS)
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
@@ -168,12 +170,9 @@ object HL7Job extends Logg with App {
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
     registerHook(sHook)
-    /* if (isSecured) {
-       val tempCrd = credentialFile(s"$appHomeDir$FS$stagingDir")
-       credentials = tempCrd.getName
-       scheduleGenCredentials(6,tempCrd, sparkConf.get("spark.yarn.principal",lookUpProp("hl7.spark.yarn.principal")),
-         sparkConf.get("spark.yarn.keytab", lookUpProp("hl7.spark.yarn.keytab")), haNameNodes(sparkConf))
-     } */
+    hdpConf.set("hadoop.security.authentication", "Kerberos")
+    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
+    LoginRenewer.scheduleRenewal(master = true)
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
   }
@@ -221,18 +220,19 @@ object HL7Job extends Logg with App {
         tracker += rdd foreachPartitionAsync (dataItr => {
           if (dataItr nonEmpty) {
             propFile = confFile
+            LoginRenewer.scheduleRenewal()
             val kafkaOut = KProducer()(prodConf)
             val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
             val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-            var tlmAckIO: (String) => Unit = null
+            var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
-              TLMAcknowledger(appName, appName, tlmAckQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"),numberOfIns = 2)
-              tlmAckIO = TLMAcknowledger.ackMessage(_: String)
+              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"))
+              tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
-            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta))
+            val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)
             dataItr foreach (hl7 => {
               var msgType: HL7 = UNKNOWN
               try {
@@ -261,7 +261,7 @@ object HL7Job extends Logg with App {
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String)) else None)(_, _)
+                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _)
                 Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
@@ -320,17 +320,19 @@ object HL7Job extends Logg with App {
       info(s"Started Spark Streaming Context Execution :: ${new Date()}")
       sparkStrCtx awaitTermination()
     } catch {
-      case t: Throwable => error("Spark Context Starting Failed will try with Retry Policy", t)
-        val retry = RetryHandler()
+      case t: Throwable =>
+        if (!t.isInstanceOf[InterruptedException]) {
+          error("Spark Context Starting Failed will try with Retry Policy", t)
+          val retry = RetryHandler()
 
-        def retryStart(): Unit = {
-          sparkStrCtx start()
-          info(s"Started Spark Streaming Context Execution :: ${new Date()}")
-          sparkStrCtx awaitTermination()
+          def retryStart(): Unit = {
+            sparkStrCtx start()
+            info(s"Started Spark Streaming Context Execution :: ${new Date()}")
+            sparkStrCtx awaitTermination()
+          }
+
+          tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
         }
-
-        tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
-
     } finally {
       shutDown()
       close()
@@ -527,10 +529,12 @@ object HL7Job extends Logg with App {
     */
   private class MetricsListener(sparkStrCtx: StreamingContext) extends SparkListener {
     val stageTracker = new TrieMap[Int, StageInfo]()
+    val stagesSubmitted = new mutable.Queue[StageInfo]
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
-      runningStage = stageSubmitted.stageInfo
+      stagesSubmitted += stageSubmitted.stageInfo
+      if (runningStage.completionTime isDefined) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else null
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")

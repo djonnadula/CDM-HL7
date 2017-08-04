@@ -116,7 +116,7 @@ object SegmentsValidation extends Logg with App {
       info("---------------------------------------------------------------------------")
       tables.map(table => {
         async {
-          table.substring(table.indexOf("_") + 1, table.lastIndexOf("_")) -> client.sql(generateQuery(table), uniqueId)
+          table.substring(table.indexOf("_") + 1) -> client.sql(generateQuery(table), uniqueId)
         }(poolContext)
       }).map(tryForTaskExe).map {
         case Success(data) => data._1 -> data._2
