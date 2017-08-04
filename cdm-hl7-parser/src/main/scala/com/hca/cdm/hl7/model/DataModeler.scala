@@ -50,9 +50,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   case DELIMITED =>
                     handleCommonSegments(data, layout)
                     EnrichCacheManager().getEnRicher(adhoc.transformer).foreach(_.applyTransformations(layout))
-                    val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
-                    if (timeStampReq) temp += ((timeStampKey, timeStamp))
-                    out._2 += (makeFinal(layout) -> null)
+                    out._2 += (makeFinal(model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)) -> null)
                   case RAWHL7 =>
                     out._2 += (rawHl7 -> null)
                 }
