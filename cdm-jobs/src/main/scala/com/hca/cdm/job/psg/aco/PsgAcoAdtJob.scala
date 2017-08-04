@@ -168,8 +168,8 @@ object PsgAcoAdtJob extends Logg with App {
                       info(s"Message to send: $finalMessage")
                       if (mqQueue.isDefined) {
                         try{
-                          MQAcker(app, app, mqQueue.get)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), numberOfIns = 2)
-                          MQAcker.ackMessage(finalMessage)
+                          MQAcker(app, app)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), mqQueue.get, numberOfIns = 2)
+                          MQAcker.ackMessage(finalMessage, "PSG-ACO-ADT")
                           // tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"ADT-PSG-ACO", error(_: Throwable))
                         } catch {
                           case e: Exception => error(e)
