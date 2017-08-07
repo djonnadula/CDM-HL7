@@ -1,26 +1,28 @@
 package com.hca.cdm.hl7
 
-import java.nio.file.Paths
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm.Models.MSGMeta
-import com.hca.cdm._
+import com.hca.cdm.{tryAndReturnDefaultValue, _}
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.hl7.constants.HL7Types
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
+import com.hca.cdm.hl7.enrichment.{EnrichData, NoEnricher}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
+import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
+import com.hca.cdm.utils.Filters.MultiValues.{withName => multiValueRange}
 import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
+import java.util.regex.Pattern
 import scala.collection.mutable
-import scala.io.BufferedSource
-import scala.io.Source._
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 
@@ -29,7 +31,7 @@ import scala.util.{Failure, Success, Try}
   *
   * Package with Utilities for Loading Templates, Segments ...
   */
-package object model {
+package object model extends Logg {
 
   lazy val MSH_Segment = "0001.MSH"
   lazy val Message_Type_Segment = "message_type"
@@ -163,6 +165,7 @@ package object model {
     val JSON = Value("JSON")
     val DELIMITED = Value("DELIMITED")
     val AVRO = Value("AVRO")
+    val RAWHL7 = Value("RAWHL7")
 
   }
 
@@ -254,6 +257,25 @@ package object model {
     temp
   }
 
+  private[model] def loadEtlConfig(noOps: Boolean, request: String): String = {
+    if (!noOps) return EMPTYSTR
+    val config = loadConfig(lookUpProp("hl7.adhoc-etl"))
+    EnrichCacheManager().cache(request, FieldsTransformer(
+      FieldSelector(config.getOrDefault(s"$request$DOT${"fields.selection"}", EMPTYSTR).asInstanceOf[String]),
+      FieldsCombiner(config.getOrDefault(s"$request$DOT${"fields.combine"}", EMPTYSTR).asInstanceOf[String]),
+      FieldsValidator(config.getOrDefault(s"$request$DOT${"fields.validate"}", EMPTYSTR).asInstanceOf[String]),
+      FieldsStaticOperator(config.getOrDefault(s"$request$DOT${"fields.static"}", EMPTYSTR).asInstanceOf[String]), {
+        val impl = config.getOrDefault(s"$request$DOT${"reference.handle"}", EMPTYSTR).asInstanceOf[String]
+        if (impl != EMPTYSTR) {
+          tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
+            config.getOrDefault(s"$request$DOT${"reference.props"}", EMPTYSTR).asInstanceOf[String].split(COMMA)).asInstanceOf[EnrichData], error(_: Throwable)
+            , Some(s"Impl for $impl cannot be initiated"))
+        } else new NoEnricher
+      }
+    ))
+    request
+  }
+
   def segmentsForHl7Type(msgType: HL7, segments: List[(String, String)], delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR): Hl7Segments = {
     import OutFormats._
     Hl7Segments(msgType, segments flatMap (seg => {
@@ -268,6 +290,10 @@ package object model {
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
+          val transformationsReq = tryAndReturnDefaultValue(access(7), EMPTYSTR).split("\\&")
+          val etlTransformations = valid(transformationsReq) && transformationsReq(0) == "TRANSFORMATIONS"
+          val etlTransMultiReq = if (tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR) != EMPTYSTR)
+            s"$DOT${tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)}" else tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)
           val segStruct = adhoc take 2 mkString COLON
           val outFormats = adhoc(2) split "\\^"
           val outDest = adhoc(3) split "\\^"
@@ -276,10 +302,21 @@ package object model {
             index += 1
             val dest = outDest(index) split "\\&"
             val outFormSplit = outFormat split AMPERSAND
-            if (outFormat contains JSON.toString) {
-              (segStruct + COLON + outFormSplit(0), ADHOC(JSON, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)), fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+            if (outFormat contains RAWHL7.toString) {
+              (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(RAWHL7,
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends,
+                tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")), loadFilters(filterFile))
+            }
+            else if (outFormat contains JSON.toString) {
+              (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)),
+                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON$etlTransMultiReq")), loadFilters(filterFile))
             } else {
-              (segStruct + COLON + outFormSplit(0), ADHOC(DELIMITED, DestinationSystem(destination(if(valid(dest,2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends, tlmAckApplication), loadFilters(filterFile))
+              (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)),
+                tryAndReturnDefaultValue(asFunc(loadFileAsList(outFormSplit(1))), empty), fieldWithNoAppends,
+                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")),
+                loadFilters(tryAndReturnDefaultValue(asFunc(filterFile), EMPTYSTR)))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -297,8 +334,112 @@ package object model {
 
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
 
-  case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)], reqNoAppends: Array[String] = Array.empty[String], ackApplication: String = EMPTYSTR) {
-    val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
+  case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
+                               dataEnRicher: EnrichData) {
+
+    def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
+      selector apply data
+      aggregator apply data
+      staticOperator apply data
+      validator apply data
+      dataEnRicher apply data
+    }
+  }
+
+  case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)]
+                   , reqNoAppends: Array[String] = Array.empty[String],
+                   ackApplication: String = EMPTYSTR, transformer: String) {
+    val multiColumnLookUp: Map[String, Map[String, String]] = outKeyNames.groupBy(_._2).filter(_._2.size > 1).
+      map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
+  }
+
+  private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
+    private lazy val selectCriteria: List[(String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
+      selectFieldsCriteria.split(COMMA).toList.map {
+        x =>
+          val temp = x.split(COLON)
+          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2))
+      }
+    else Nil
+
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      selectCriteria.foreach {
+        case (lookUpField, criteria, selectFrom, modify) =>
+          if ((layout isDefinedAt lookUpField) && (layout isDefinedAt selectFrom) && (layout isDefinedAt modify)) {
+            layout(lookUpField).split("\\" + caret)
+              .view.zipWithIndex.foreach { dataPoint =>
+              if (dataPoint._1 == criteria) {
+                val temp = tryAndReturnDefaultValue(asFunc(layout(selectFrom).split("\\" + caret)(dataPoint._2)), EMPTYSTR)
+                if (temp ne EMPTYSTR) {
+                  layout update(modify, temp)
+                  layout update(lookUpField, EMPTYSTR)
+                  layout update(selectFrom, EMPTYSTR)
+                }
+              }
+            }
+          }
+      }
+    }
+  }
+
+  private[model] case class FieldsCombiner(combineFields: String = EMPTYSTR) {
+    private lazy val fieldsToCombine: List[(Array[String], String, String, String)] = if (combineFields != EMPTYSTR)
+      combineFields.split(COMMA).toList.map {
+        x =>
+          val split = x.split(COLON)
+          val temp = split.splitAt(split.length - 3)
+          (temp._1(0).split(AMPERSAND), temp._2(0), temp._2(1),
+            tryAndReturnDefaultValue(asFunc(temp._2(2)), "DELETE"))
+      }
+    else Nil
+
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      fieldsToCombine.foreach {
+        case (criteria, modify, delimitedBy, action) =>
+          layout update(modify, criteria.map(field => layout.getOrElse(field, EMPTYSTR)).mkString(delimitedBy))
+          action match {
+            case "KEEP" =>
+            case "DELETE" => criteria foreach (layout remove)
+            case any => throw new DataModelException(s" $any operation is not supported.")
+          }
+      }
+    }
+  }
+
+  private[model] case class FieldsValidator(validateFields: String = EMPTYSTR) {
+    private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
+      validateFields.split(COMMA).toList.map {
+        x =>
+          val temp = x.split(COLON,-1)
+          (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
+            , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
+      }
+    else Nil
+
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      fieldsToValidate.foreach {
+        case (criteria, check, replaceWith) =>
+          if (check(layout.getOrElse(criteria, EMPTYSTR)))
+            layout update(criteria, replaceWith)
+      }
+    }
+  }
+
+  private[model] case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
+    private lazy val staticFields: List[(String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
+      fieldsWithStaticOp.split(caret).toList.map {
+        x =>
+          val temp = x.split(COLON)
+          (temp(0), temp(1))
+      }
+    else Nil
+
+    def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      staticFields.foreach {
+        case (criteria, updateWith) =>
+          if (layout isDefinedAt criteria) layout update(criteria, updateWith)
+      }
+    }
   }
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR,
@@ -306,7 +447,7 @@ package object model {
     lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
     lazy val EMPTY: mutable.LinkedHashMap[String, String] = mutable.LinkedHashMap.empty[String, String]
 
-    override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(reqSeg, segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
+    override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
 
     def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if ((k ne commonSegkey) & (v ne EMPTYSTR)) EMPTYSTR else v)
 
@@ -315,7 +456,8 @@ package object model {
       val store = new mutable.LinkedHashMap[String, String]
       keyNames.foreach { case (k, v) =>
         if (exists(multiColumnLookUp, v) && !(store isDefinedAt v)) store += v -> getDataFromMultiLocations(multiColumnLookUp(v), layout)
-        else store += v -> layout(k)
+        else if (!(store isDefinedAt v)) store += v -> layout(k)
+        else store update(v, store(v) + layout(k))
       }
       store
     }
@@ -336,12 +478,12 @@ package object model {
 
   case class MsgTypeMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, kafka: String)
 
-  case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: String, kafka: String)
+  case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: Set[String], kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = COMMA): Map[String, List[(String, String)]] = {
     val reader = readFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
-      val splits = seg split delimitedBy
+      val splits = seg split(delimitedBy, -1)
       if (valid(splits, 3)) {
         splits(0) -> (splits(1), splits(2))
       } else {
@@ -368,8 +510,13 @@ package object model {
       case EMPTYSTR => Array.empty[FILTER]
       case _ =>
         readFile(file).getLines().takeWhile(valid(_)).map(temp => temp split delimitedBy) filter (valid(_, 5)) map {
-          case x@ele => FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))))
+          x =>
+            if (x.length == 5) FILTER(x(0), (x(1), x(2)), (matchCriteria(x(3)), relationWithNextFilter(x(4))), None)
+            else if (x.length == 6) FILTER(x(0), (x(1), x(5)), (matchCriteria(x(3)),
+              relationWithNextFilter(x(4))), Some(multiValueRange(x(2))))
+            else throw new DataModelException(s"Invalid Config for Filter Defined $x")
         } toArray
+
     }
   }
 
@@ -410,7 +557,7 @@ package object model {
 
   def loadFileAsList(file: String, delimitedBy: String = COMMA, keyIndex: Int = 0): mutable.LinkedHashSet[(String, String)] = {
     val store = new mutable.LinkedHashSet[(String, String)]()
-    readFile(file).getLines().filter(valid(_)).foreach(temp => {
+    readFile(file).getLines().filter(valid(_)).filter(_ != EMPTYSTR).foreach(temp => {
       val splitD = temp split delimitedBy
       if (splitD.nonEmpty) store += ((splitD(keyIndex), splitD(keyIndex + 1)))
     })
@@ -430,7 +577,8 @@ package object model {
 
   def getMsgTypeMeta(msgType: HL7, sourceIn: String): MsgTypeMeta = MsgTypeMeta(msgType, sourceIn)
 
-  def getReceiverMeta(msgType: HL7, sourceIn: String, out: String): ReceiverMeta = ReceiverMeta(msgType, sourceIn, out)
+  def getReceiverMeta(msgType: HL7, sourceIn: String, out: String): ReceiverMeta =
+    ReceiverMeta(msgType, sourceIn.split(COMMA, -1).toSet, out)
 
   def handleAnyRef(data: AnyRef): String = {
     data match {
@@ -458,9 +606,10 @@ package object model {
   }
 
 
-  private def modelLayout(whichSeg: String, segmentData: String, delimitedBy: String, modelFieldDelim: String,
+  private def modelLayout(segmentData: String, delimitedBy: String, modelFieldDelim: String,
                           isAdhoc: Boolean = false): mutable.LinkedHashMap[String, String] = synchronized {
     val layout = new mutable.LinkedHashMap[String, String]
+    if (segmentData == EMPTYSTR) return layout
     if (!isAdhoc) {
       // Storing Which Segment for Every Record makes Redundant data. Which already exist in Partition
       // layout += commonSegkey -> whichSeg
@@ -471,11 +620,51 @@ package object model {
     (segmentData split(delimitedBy, -1)) foreach (ele => layout += ele -> EMPTYSTR)
     layout
   }
+}
 
-  def readFile(file: String): BufferedSource = {
-    if (lookUpProp("hl7.env") == "LOCAL") {
-      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(s"templates$FS$file"))
-    } else fromFile(file)
+class EnrichCacheManager extends Logg {
+
+  import com.hca.cdm.hl7.model.FieldsTransformer
+
+  private lazy val cacheStore = new mutable.HashMap[String, FieldsTransformer]()
+
+  def cache(unit: String, enricher: FieldsTransformer): Unit = cacheStore += unit -> enricher
+
+  def getEnRicher(unit: String): Option[FieldsTransformer] = cacheStore.get(unit)
+
+  def getCacheSer: Array[Byte] = serialize(cacheStore)
+
+
+}
+
+object EnrichCacheManager extends Logg {
+
+  import com.hca.cdm.hl7.model.FieldsTransformer
+
+  private var instance: EnrichCacheManager = _
+  private val lock = new Object()
+
+  def apply(): EnrichCacheManager = lock.synchronized {
+    if (instance == null) instance = new EnrichCacheManager()
+    instance
+  }
+
+  def apply(cacheSer: Array[Byte]): EnrichCacheManager = lock.synchronized {
+    if (instance == null) {
+      instance = new EnrichCacheManager()
+      deSerialize(cacheSer).asInstanceOf[mutable.HashMap[String, FieldsTransformer]].foreach(x => instance.cache(x._1, x._2))
+    }
+    instance
+  }
+
+  def apply(adhocConfig: String, hl7Types: Array[String]): EnrichCacheManager = lock.synchronized {
+    if (instance == null) {
+      instance = new EnrichCacheManager()
+      val adhocSeg = model.applySegmentsToAll(model.loadSegments(adhocConfig), hl7Types)
+      hl7Types.foreach { hl7 => model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7)) }
+    }
+    instance
   }
 
 }
+

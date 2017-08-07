@@ -39,7 +39,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   logIdent = s"$hl7-Model Handler  "
   private lazy val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
 
-  private case class Segment(seg: String, apply: (mapType) => Hl7SegmentTrans, adhoc: Boolean, dest: Option[DestinationSystem], auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
+  private case class Segment(seg: String, apply: (mapType, String) => Hl7SegmentTrans, adhoc: Boolean, dest: Option[DestinationSystem], auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
 
   private val metrics = new TrieMap[String, Long]
   private val dataModeler = DataModeler(hl7Segments.msgType)
@@ -47,7 +47,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
     val temp = new mutable.ArrayBuffer[Segment]
     hl7Segments.models.foreach({ case (seg, models) =>
       models.foreach(model => {
-        temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType), model.adhoc.isDefined, if (model.adhoc.isDefined) Some(model.adhoc.get.destination) else None,
+        temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType, _: String), model.adhoc.isDefined, if (model.adhoc.isDefined) Some(model.adhoc.get.destination) else None,
           if (model.adhoc.isDefined) seg substring ((seg indexOf COLON) + 1) else EMPTYSTR,
           if (model.adhoc.isDefined) seg.replaceAll(COLON, "-") else EMPTYSTR,
           if (model.adhoc.isDefined) model.adhoc.get.ackApplication else EMPTYSTR)
@@ -61,9 +61,9 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   private lazy val nonAdhocSegments = segRef map (seg => if (!seg.adhoc) seg.seg else EMPTYSTR) filter (_ != EMPTYSTR)
 
   private def runModel(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
-                       adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit = {
+                       adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, rawHl7: String, meta: MSGMeta): Unit = {
     val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[(String, String)] else null
-    segRef map (seg => seg -> run(seg, data)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
+    segRef map (seg => seg -> run(seg, data, rawHl7)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
       case Success(tranCompleted) =>
         tranCompleted.trans match {
           case Left(out) =>
@@ -151,9 +151,9 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
     }
   }
 
-  private def run(segment: Segment, data: mapType) =
+  private def run(segment: Segment, data: mapType, rawHl7: String) =
     async {
-      segment apply data
+      segment apply(data, rawHl7)
     }(executionContext)
 
 
@@ -169,8 +169,8 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
 
   override def handleSegments(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
-                              adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, meta: MSGMeta): Unit =
-    runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO)(data, meta): Unit
+                              adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
+    runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO)(data, rawHl7, meta): Unit
 
 
   override def metricsRegistry: TrieMap[String, Long] = metrics

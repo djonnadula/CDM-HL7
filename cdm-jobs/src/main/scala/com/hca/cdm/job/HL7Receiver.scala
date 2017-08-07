@@ -61,10 +61,10 @@ object HL7Receiver extends Logg with App {
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => mtyp -> getReceiverMeta(hl7(mtyp), lookUpProp(s"$mtyp.wsmq.source"), lookUpProp(s"$mtyp.kafka"))).toMap
-  private val hl7QueueMapping = hl7MsgMeta.map(x => x._2.wsmq -> x._1)
+  private val hl7QueueMapping = hl7MsgMeta.flatMap(x => x._2.wsmq.map(que => que -> x._1))
   private val hl7KafkaOut = hl7MsgMeta.map(x => x._1 -> x._2.kafka)
-  private val hl7Queues = hl7MsgMeta.map(_._2.wsmq).toSet
-  private val tlmAuditor = hl7MsgMeta map (x => x._2.wsmq -> (tlmAckMsg(x._1, applicationSending, WSMQ, HDFS)(_: MSGMeta)))
+  private val hl7Queues = hl7MsgMeta.flatMap(_._2.wsmq).toSet
+  private val tlmAuditor = hl7QueueMapping.map (x =>  x._2 -> (tlmAckMsg(x._1, applicationSending, WSMQ, HDFS)(_: MSGMeta)))
   private val rawOverSized = OverSizeHandler(rawStage, lookUpProp("hl7.direct.raw"))
   private val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
   initialise()
@@ -118,10 +118,12 @@ object HL7Receiver extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), 0, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
+    val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), 0,
+      app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
     else {
       sparkStrCtx.union(numberOfReceivers.map(id => {
-        val stream = sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), id, app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
+        val stream = sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), id,
+          app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
         info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
         stream
       }))

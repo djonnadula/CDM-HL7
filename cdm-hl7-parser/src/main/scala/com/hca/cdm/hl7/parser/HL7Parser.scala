@@ -295,7 +295,12 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       if (segment.realignColStatus && segment.realignColOption == MOVE) {
                         if (fieldLayout isDefinedAt fieldMapping) {
                           val fieldList = new mutable.ListBuffer[Any]
-                          fieldList += fieldLayout(fieldMapping)
+                          fieldLayout(fieldMapping) match {
+                            case _: mutable.ListBuffer[Any] =>
+                              fieldLayout(fieldMapping).asInstanceOf[mutable.ListBuffer[Any]].foreach(fieldList += _)
+                            case _ =>
+                              fieldList += fieldLayout(fieldMapping)
+                          }
                           fieldList += componentLayout
                           fieldLayout update(fieldMapping, fieldList)
                         } else fieldLayout += fieldMapping -> componentLayout

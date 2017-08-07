@@ -15,6 +15,7 @@
         <module>cdm-io</module>
         <module>cdm-scripts</module>
         <module>cdm-jobs</module>
+        <module>cdm-models</module>
     </modules>
 
 

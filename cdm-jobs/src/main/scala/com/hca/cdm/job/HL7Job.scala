@@ -14,6 +14,7 @@ import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
+import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
@@ -89,7 +90,7 @@ object HL7Job extends Logg with App {
   private val topicsToSubscribe = hl7MsgMeta.map(hl7Type => hl7Type._2.kafka) toSet
   private val hl7TypesMapping = hl7MsgMeta.map(hl7Type => hl7Type._1.toString -> hl7Type._1)
   private val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
-  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")), messageTypes)
+  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")) ++ loadSegments(lookUpProp("hl7.adhoc-segments")), messageTypes)
   private val modelsForHl7 = hl7MsgMeta.map(msgType => msgType._1 -> segmentsForHl7Type(msgType._1, segmentsMapping(msgType._1.toString)))
   private val registeredSegmentsForHl7 = modelsForHl7.mapValues(_.models.keySet)
   private val hl7Parsers = hl7MsgMeta map (hl7 => hl7._1 -> new HL7Parser(hl7._1, templatesMapping))
@@ -196,15 +197,16 @@ object HL7Job extends Logg with App {
       })
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
-        val parserS = hl7Parsers
-        val segHandlers = segmentsHandler
-        val jsonAudits = jsonAuditor
-        val jsonOut = hl7JsonTopic
-        val rejectOut = rejectedTopic
-        val segOut = segTopic
-        val auditOut = auditTopic
-        val prodConf = kafkaProducerConf
-        val hl7TypesMappings = hl7TypesMapping
+        val hl7s = self.messageTypes
+        val parserS = self.hl7Parsers
+        val segHandlers = self.segmentsHandler
+        val jsonAudits = self.jsonAuditor
+        val jsonOut = self.hl7JsonTopic
+        val rejectOut = self.rejectedTopic
+        val segOut = self.segTopic
+        val auditOut = self.auditTopic
+        val prodConf = self.kafkaProducerConf
+        val hl7TypesMappings = self.hl7TypesMapping
         val segmentsAccumulators = self.segmentsAccumulators
         val parserAccumulators = self.parserAccumulators
         val maxMessageSize = self.maxMessageSize
@@ -213,7 +215,7 @@ object HL7Job extends Logg with App {
         val rejectOverSized = self.rejectOverSized
         val adhocOverSized = self.adhocOverSized
         val sizeCheck = checkSize(maxMessageSize)(_, _)
-        val confFile = config_file
+        val confFile = self.config_file
         val tlmAckQueue = self.ackQueue
         val appName = self.app
         val tracker = new ListBuffer[FutureAction[Unit]]
@@ -227,6 +229,7 @@ object HL7Job extends Logg with App {
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
+            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s)
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
               TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"))
@@ -261,12 +264,12 @@ object HL7Job extends Logg with App {
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _)
+                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _, _)
                 Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
                       ackTlm(out._3, hl7Str)
-                      segHandlerIO(out._2, out._3)
+                      segHandlerIO(out._2, hl7._2, out._3)
                       sizeCheck(out._1, parserS(msgType))
                       if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
                         tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
@@ -534,7 +537,7 @@ object HL7Job extends Logg with App {
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
       stagesSubmitted += stageSubmitted.stageInfo
-      if (runningStage.completionTime isDefined) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else null
+      if (valid(runningStage) && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")
