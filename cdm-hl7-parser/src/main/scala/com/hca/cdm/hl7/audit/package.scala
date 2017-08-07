@@ -39,9 +39,9 @@ package object audit {
     NONE
   }
 
-  private def getDefault(data: Any) = {
+  private def getDefault(data : Any) ={
     data match {
-      case s: String => s
+      case s :String => s
       case _ => EMPTYSTR
     }
   }
