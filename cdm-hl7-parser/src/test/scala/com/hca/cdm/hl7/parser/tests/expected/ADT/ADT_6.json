@@ -1,7 +1,7 @@
 {
   "0000.COMN": {
     "sending_facility": "FRNK",
-    "message_control_id": "MT_FRNK_ADT_1129698.",
+    "message_control_id": "MT6_FRNK_ADT_1129698.",
     "medical_record_num": "K000002378",
     "medical_record_urn": "A0-B20151103134433868",
     "patient_account_num": "FR0000121541"
@@ -9,7 +9,7 @@
   "0001.MSH": {
     "field_separator": "|",
     "encoding_characters": "^~\\&",
-    "sending_application": "MT_FRNK",
+    "sending_application": "MT6_FRNK",
     "sending_facility": "FRNK",
     "receiving_application": "DBM",
     "date_time_of_message": "20151221135400-0600",
@@ -17,7 +17,7 @@
       "message_code": "ADT",
       "trigger_event": "A38"
     },
-    "message_control_id": "MT_FRNK_ADT_1129698.",
+    "message_control_id": "MT6_FRNK_ADT_1129698.",
     "processing_id": "D",
     "version_id": "2.5",
     "continuation_pointer": "KYB"
@@ -52,9 +52,9 @@
       }
     ],
     "alternate_patient_id": {
-      "identifier_num": "A0-B20151103134433868",
-      "identifier_type_code": "URN",
-      "assgn_facility": "FRNK"
+      "id_num": "A0-B20151103134433868",
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
     },
     "patient_name": [
       {
@@ -473,7 +473,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NOTHISPLAT",
+      "id": "NOTHISPLAT",
       "text": "Not Hispanic or Latino"
     },
     "obsv_result_status": "F"

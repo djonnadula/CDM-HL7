@@ -35,10 +35,10 @@
     "date_time_of_birth": "20031230",
     "administrative_sex": "F",
     "patient_alias": {
-      "last_name": "CAGE",
-      "first_name": "JESSICA",
-      "middle_name": "CAMPBELL JONES",
-      "type_code": "M"
+      "family_name": "CAGE",
+      "given_name": "JESSICA",
+      "second_and_further_given_names_or_initials_thereof": "CAMPBELL JONES",
+      "name_type_code": "M"
     },
     "race": "U",
     "patient_address": {
@@ -66,7 +66,7 @@
       "given_name": "DOCTOR",
       "id_type_code": "XX"
     },
-    "consulting_doctor": {
+    "primary_care_doctor": {
       "person_id": "DRBRI",
       "family_name": "DOCTOR",
       "given_name": "BRITTANY",
@@ -81,12 +81,12 @@
     "account_status": "DEP",
     "admit_date_time": "201601190932",
     "discharge_date_time": "201601191455",
-    "other_healthcare_provider": {
+    "consulting_doctor": {
       "person_id": "DR.ADAM",
-      "last_name": "SAUNDERS",
-      "first_name": "ADAM",
+      "family_name": "SAUNDERS",
+      "given_name": "ADAM",
       "degree": "M.D.",
-      "identifier_type_code": "XX"
+      "id_type_code": "XX"
     }
   },
   "0004.TXA": {

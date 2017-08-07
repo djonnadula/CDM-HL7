@@ -60,7 +60,7 @@ do
     KeyTab_Check
     timeout 60 yarn application -appStates RUNNING -list | grep "SPARK" > $Running_Jobs
     echo "Log file is created"
-    cat $ $Running_Jobs
+    cat $Running_Jobs
     # returnvalue=$(timeout 60 yarn application -appStates RUNNING -list | grep -w ${NAME} | wc -l)
     returnvalue=$(grep -w ${NAME} $Running_Jobs | wc -l)
     if (( $returnvalue > 0 )); then

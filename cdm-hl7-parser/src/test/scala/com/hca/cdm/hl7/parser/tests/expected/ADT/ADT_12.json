@@ -1,7 +1,7 @@
 {
   "0000.COMN": {
     "sending_facility": "FRNK",
-    "message_control_id": "MT_FRNK_ADT_1129645.",
+    "message_control_id": "MT6_FRNK_ADT_1129645.",
     "medical_record_num": "K000002378",
     "medical_record_urn": "A0-B20151103134433868",
     "patient_account_num": "FR0000121392"
@@ -9,7 +9,7 @@
   "0001.MSH": {
     "field_separator": "|",
     "encoding_characters": "^~\\&",
-    "sending_application": "MT_FRNK",
+    "sending_application": "MT6_FRNK",
     "sending_facility": "FRNK",
     "receiving_application": "DBM",
     "date_time_of_message": "20151221132800-0600",
@@ -17,7 +17,7 @@
       "message_code": "ADT",
       "trigger_event": "A44"
     },
-    "message_control_id": "MT_FRNK_ADT_1129645.",
+    "message_control_id": "MT6_FRNK_ADT_1129645.",
     "processing_id": "D",
     "version_id": "2.5",
     "continuation_pointer": "KYB"
@@ -48,9 +48,9 @@
       }
     ],
     "alternate_patient_id": {
-      "identifier_num": "A0-B20151103134433868",
-      "identifier_type_code": "URN",
-      "assgn_facility": "FRNK"
+      "id_num": "A0-B20151103134433868",
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
     },
     "patient_name": [
       {
@@ -125,7 +125,7 @@
     "account_status": "DIS",
     "admit_date_time": "201512111111",
     "discharge_date_time": "201512111634",
-    "other_healthcare_provider": {
+    "primary_care_doctor": {
       "person_id": "DR.FAM01",
       "last_name": "Family01",
       "first_name": "Provider",
@@ -256,7 +256,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "W",
+      "id": "W",
       "text": "Wheelchair"
     },
     "obsv_result_status": "F"
@@ -363,7 +363,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "T",
+      "id": "T",
       "text": "Guarantor Temp Address"
     },
     "obsv_result_status": "F"
@@ -1136,7 +1136,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NOTHISPLAT",
+      "id": "NOTHISPLAT",
       "text": "Not Hispanic or Latino"
     },
     "obsv_result_status": "F"
@@ -1246,7 +1246,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NO",
+      "id": "NO",
       "text": "No"
     },
     "obsv_result_status": "F"
@@ -1314,7 +1314,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "STATED",
+      "id": "STATED",
       "text": "Stated/Reported"
     },
     "obsv_result_status": "F"
@@ -1339,7 +1339,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "STATED",
+      "id": "STATED",
       "text": "Stated/Reported"
     },
     "obsv_result_status": "F"
@@ -1441,7 +1441,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "O",
+      "id": "O",
       "text": "Oral"
     },
     "obsv_result_status": "F"
@@ -1477,7 +1477,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "O",
+      "id": "O",
       "text": "Observed"
     },
     "obsv_result_status": "F"
@@ -1502,7 +1502,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "AR",
+      "id": "AR",
       "text": "Right arm"
     },
     "obsv_result_status": "F"
@@ -1516,7 +1516,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "MANUAL",
+      "id": "MANUAL",
       "text": "Manual cuff"
     },
     "obsv_result_status": "F"
@@ -1759,7 +1759,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NO",
+      "id": "NO",
       "text": "None"
     },
     "obsv_result_status": "F"
@@ -1773,7 +1773,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "NO",
+      "id": "NO",
       "text": "No"
     },
     "obsv_result_status": "F"
@@ -1820,7 +1820,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "CANDIDATE",
+      "id": "CANDIDATE",
       "text": "Candidate"
     },
     "obsv_result_status": "F"
@@ -1834,7 +1834,7 @@
       "name_of_coding_system": "ADM"
     },
     "obsv_value": {
-      "primary_id": "CANDIDATE",
+      "id": "CANDIDATE",
       "text": "Candidate"
     },
     "obsv_result_status": "F"

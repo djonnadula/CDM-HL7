@@ -4,14 +4,17 @@ import java.io.{BufferedReader, FileReader}
 import java.nio.file.Paths
 
 import com.google.gson.JsonParser
+import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Types.HL7
+import com.hca.cdm.log.Logg
+import org.apache.log4j.PropertyConfigurator._
 
 /**
   * Created by Peter James on 2/27/2017.
   *
   * HL7 Parser Test Utils
   */
-package object HL7ParserTestUtils {
+object HL7ParserTestUtils extends Logg {
 
     /**
       * Reads an HL7 message from the message directory and returns it as a String
@@ -113,5 +116,10 @@ package object HL7ParserTestUtils {
       */
     def getOS: String = {
         System.getProperty("os.name")
+    }
+
+    def loadProperties(properties: String): Unit = {
+        configure(currThread.getContextClassLoader.getResource("test-log4j.properties"))
+        reload(null, Some(currThread.getContextClassLoader.getResourceAsStream(properties)))
     }
 }
