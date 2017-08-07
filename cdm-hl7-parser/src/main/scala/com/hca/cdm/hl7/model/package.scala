@@ -410,7 +410,7 @@ package object model extends Logg {
     private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
       validateFields.split(COMMA).toList.map {
         x =>
-          val temp = x.split(COLON)
+          val temp = x.split(COLON,-1)
           (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
             , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
       }
