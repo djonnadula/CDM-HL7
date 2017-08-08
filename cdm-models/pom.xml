@@ -10,10 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
     <version>${cdm.version}</version>
     <artifactId>cdm-models</artifactId>
-
+    <name>CDM Models</name>
 
     <dependencies>
-
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-common</artifactId>
