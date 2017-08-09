@@ -5,9 +5,9 @@ set hive.exec.max.dynamic.partitions=10000;
 set hive.exec.max.dynamic.partitions.pernode=10000;
 set hive.stats.autogather = false;
 
-Drop Table if exists cdm_scri.scri_patient_id_history_3 PURGE;
+Drop  Table if exists cdm_scri.scri_patient_id_history_3 PURGE;
 
-CREATE TABLE cdm_scri.scri_patient_id_history_3(
+CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history_3(
   msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',
   msh_sending_facility STRING COMMENT 'Mnemonic that is associated to the sending facility of the message',
   pid_medical_record_num STRING COMMENT 'MRN associated to the message',
@@ -90,7 +90,9 @@ txa_document_type_text as txa_document_type_text,
 txa_document_type_name_of_coding_sys as txa_document_type_name_of_coding_sys,
 txa_document_completion_status as txa_document_completion_status,
 obx_observation_value as obx_observation_value,
-CASE WHEN pid_pat_social_security_num = '' THEN pid_pat_id_list_identifier_num  else pid_pat_social_security_num END AS pid_pat_social_security_num,
+CASE WHEN pid_pat_social_security_num = '' THEN
+( CASE WHEN split(pid_pat_id_list_identifier_type_code,"^")[1] = 'SS' THEN split(pid_pat_id_list_identifier_num,"^")[1] else '' END ) else
+split_part(pid_pat_id_list_identifier_num,"^",2) else pid_pat_social_security_num END AS pid_pat_social_security_num,
 pid_pat_address_street_address1 as pid_pat_address_street_address1,
 pid_pat_address_street_address2 as pid_pat_address_street_address2,
 pid_pat_address_city as pid_pat_address_city,
@@ -106,7 +108,7 @@ pid_pat_address_zip_postal_code as pid_pat_address_zip_postal_code,
 etl_insert_date_time as etl_insert_date_time,
 message_type as message_type,
 transaction_date as transaction_date
-FROM cdm_scri.scri_patient_id_history where transaction_date <= "2017-07-27";
+FROM cdm_scri.scri_patient_id_history ;
 
 
 

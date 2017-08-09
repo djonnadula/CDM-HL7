@@ -2,7 +2,9 @@ package com.hca.cdm.kafka.config
 
 import java.util.{Properties => prop}
 
+import org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG
 import com.hca.cdm.io.IOConstants._
+import com.hca.cdm.{asFunc, lookUpProp, tryAndReturnDefaultValue}
 import org.apache.kafka.clients.consumer.ConsumerConfig._
 
 /**
@@ -32,7 +34,10 @@ object HL7ConsumerConfig {
     prop.put(FETCH_MIN_BYTES_CONFIG, fetchMinBytes)
     prop.put(FETCH_MAX_WAIT_MS_CONFIG, fetchMinWait)
     prop.put(CLIENT_ID_CONFIG, defaultClientId + jobConsumer)
-    prop.put("fetch.message.max.bytes",fetchBytes)
+    prop.put("fetch.message.max.bytes", fetchBytes)
+    if (tryAndReturnDefaultValue(asFunc(lookUpProp("sasl.enabled").toBoolean), false) == true) {
+      prop.put(SECURITY_PROTOCOL_CONFIG, "SASL_SSL")
+    }
     prop
   }
 }

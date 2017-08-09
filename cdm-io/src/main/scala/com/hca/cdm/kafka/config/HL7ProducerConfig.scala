@@ -1,9 +1,10 @@
 package com.hca.cdm.kafka.config
 
 import java.util.{Properties => prop}
-import com.hca.cdm.EMPTYSTR
+import com.hca.cdm._
 import com.hca.cdm.io.IOConstants._
 import org.apache.kafka.clients.producer.ProducerConfig._
+import org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -30,6 +31,9 @@ object HL7ProducerConfig {
     prop.put(RECEIVE_BUFFER_CONFIG, receiveBuffer)
     prop.put(PARTITIONER_CLASS_CONFIG, defaultPartitioner)
     prop.put(MAX_REQUEST_SIZE_CONFIG, requestMaxSize)
+    if(tryAndReturnDefaultValue(asFunc(lookUpProp("sasl.enabled").toBoolean),false) == true) {
+      prop.put(SECURITY_PROTOCOL_CONFIG,"SASL_SSL")
+    }
     prop
   }
 }
