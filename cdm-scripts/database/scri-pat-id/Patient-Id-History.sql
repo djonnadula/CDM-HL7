@@ -91,8 +91,8 @@ txa_document_type_name_of_coding_sys as txa_document_type_name_of_coding_sys,
 txa_document_completion_status as txa_document_completion_status,
 obx_observation_value as obx_observation_value,
 CASE WHEN pid_pat_social_security_num = '' THEN
-CASE WHEN split(pid_pat_id_list_identifier_type_code,'^')[1] = 'SS' THEN split(pid_pat_id_list_identifier_num,'^')[1]
-else split(pid_pat_id_list_identifier_num,'^')[1] END
+CASE WHEN  split(pid_pat_id_list_identifier_type_code,'\\^')[1] = 'SS' THEN  split(pid_pat_id_list_identifier_num,'\\^')[1]
+else pid_pat_id_list_identifier_num END
 else pid_pat_social_security_num END AS pid_pat_social_security_num,
 pid_pat_address_street_address1 as pid_pat_address_street_address1,
 pid_pat_address_street_address2 as pid_pat_address_street_address2,
