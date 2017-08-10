@@ -91,7 +91,8 @@ txa_document_type_name_of_coding_sys as txa_document_type_name_of_coding_sys,
 txa_document_completion_status as txa_document_completion_status,
 obx_observation_value as obx_observation_value,
 CASE WHEN pid_pat_social_security_num = '' THEN
-CASE WHEN split(pid_pat_id_list_identifier_type_code,'^')[1] = 'SS'THEN split(pid_pat_id_list_identifier_num,'^')[1] else pid_pat_id_list_identifier_num END
+CASE WHEN split(pid_pat_id_list_identifier_type_code,'^')[1] = 'SS' THEN split(pid_pat_id_list_identifier_num,'^')[1]
+else split(pid_pat_id_list_identifier_num,'^')[1] END
 else pid_pat_social_security_num END AS pid_pat_social_security_num,
 pid_pat_address_street_address1 as pid_pat_address_street_address1,
 pid_pat_address_street_address2 as pid_pat_address_street_address2,
@@ -103,12 +104,12 @@ pid_pat_address_zip_postal_code as pid_pat_address_zip_postal_code,
 '' as primary_care_physician,
 '' as pcp_phone,
 '' as message_created_date_time,
-'' as message_flag,
+'PAT' as message_flag,
 '' as attending_physician,
 etl_insert_date_time as etl_insert_date_time,
 message_type as message_type,
 transaction_date as transaction_date
-FROM cdm_scri.scri_patient_id_history where transaction_date <= "2017-07-27";
+FROM cdm_scri.scri_patient_id_history where transaction_date <= "2017-08-08";
 
 
 
