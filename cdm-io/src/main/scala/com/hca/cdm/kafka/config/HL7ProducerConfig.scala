@@ -31,7 +31,7 @@ object HL7ProducerConfig {
     prop.put(RECEIVE_BUFFER_CONFIG, receiveBuffer)
     prop.put(PARTITIONER_CLASS_CONFIG, defaultPartitioner)
     prop.put(MAX_REQUEST_SIZE_CONFIG, requestMaxSize)
-    if(tryAndReturnDefaultValue(asFunc(lookUpProp("sasl.enabled").toBoolean),false) == true) {
+    if(tryAndReturnDefaultValue(asFunc(lookUpProp("sasl.enabled").toBoolean), false)) {
       prop.put(SECURITY_PROTOCOL_CONFIG,"SASL_SSL")
     }
     prop

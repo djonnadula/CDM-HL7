@@ -35,7 +35,7 @@ object HL7ConsumerConfig {
     prop.put(FETCH_MAX_WAIT_MS_CONFIG, fetchMinWait)
     prop.put(CLIENT_ID_CONFIG, defaultClientId + jobConsumer)
     prop.put("fetch.message.max.bytes", fetchBytes)
-    if (tryAndReturnDefaultValue(asFunc(lookUpProp("sasl.enabled").toBoolean), false) == true) {
+    if (tryAndReturnDefaultValue(asFunc(lookUpProp("sasl.enabled").toBoolean), false)) {
       prop.put(SECURITY_PROTOCOL_CONFIG, "SASL_SSL")
     }
     prop
