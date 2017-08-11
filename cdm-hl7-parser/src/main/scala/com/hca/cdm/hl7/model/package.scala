@@ -363,6 +363,7 @@ package object model extends Logg {
     else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      var applied = false
       selectCriteria.foreach {
         case (lookUpField, criteria, selectFrom, modify) =>
           if ((layout isDefinedAt lookUpField) && (layout isDefinedAt selectFrom) && (layout isDefinedAt modify)) {
@@ -371,11 +372,16 @@ package object model extends Logg {
               if (dataPoint._1 == criteria) {
                 val temp = tryAndReturnDefaultValue(asFunc(layout(selectFrom).split("\\" + caret)(dataPoint._2)), EMPTYSTR)
                 if (temp ne EMPTYSTR) {
+                  applied = true
                   layout update(modify, temp)
                   layout update(lookUpField, EMPTYSTR)
                   layout update(selectFrom, EMPTYSTR)
                 }
               }
+            }
+            if (!applied) {
+              layout update(lookUpField, EMPTYSTR)
+              layout update(selectFrom, EMPTYSTR)
             }
           }
       }
@@ -410,7 +416,7 @@ package object model extends Logg {
     private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
       validateFields.split(COMMA).toList.map {
         x =>
-          val temp = x.split(COLON,-1)
+          val temp = x.split(COLON, -1)
           (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
             , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
       }
