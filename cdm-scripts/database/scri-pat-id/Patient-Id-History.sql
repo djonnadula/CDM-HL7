@@ -109,7 +109,7 @@ pid_pat_address_zip_postal_code as pid_pat_address_zip_postal_code,
 etl_insert_date_time as etl_insert_date_time,
 message_type as message_type,
 transaction_date as transaction_date
-FROM cdm_scri.scri_patient_id_history where transaction_date <= "2017-08-08";
+FROM cdm_scri.scri_patient_id_history;
 
 
 
