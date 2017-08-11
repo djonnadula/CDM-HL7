@@ -108,7 +108,7 @@ package object model extends Logg {
   private case object RejectAvroSchema {
     lazy val schema: Schema = new Schema.Parser().parse(toJson(getRejectSchema))
 
-    def avroRejectRecord = new Record(schema)
+    def avroRejectRecord: Record = new Record(schema)
   }
 
 

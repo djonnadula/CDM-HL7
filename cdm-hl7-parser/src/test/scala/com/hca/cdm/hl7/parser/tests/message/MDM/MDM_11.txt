@@ -1,17 +1,17 @@
 MSH|^~\&||COCOH|||201609261121||MDM^T02|MT_COCOH_MDM_OHDPTO.1.3798745|P|2.1|||||
-PID|1||K000317710|Y236557|PULLAN^MARIE||19530524|F|^^^^^^M|W|6150 NEWMARK ST^^SPRING HILL^FL^34606|HERN|(352)688-0530|.||M|CHR|K00058440456|136-46-8450
-PV1|1|I|K.2N^K.268^A|EM|||NAVSAN^Navadia^Sanjay^H^^^MD^^^^^^XX|.SELF^Referred^Self^^^^^^^^^^XX|HUBMA^Hubsher^Mason^I^^^MD^^^^^^XX|ICU||||PR|||NAVSAN^Navadia^Sanjay^H^^^MD^^^^^^XX|IN||08PPO|||||||||||||||||||COCOH||ADM|||201609140926||||||||SHANAG^Sharma^Nagaraja^D^^^MD^^^^^^XX
-TXA||PDPNCTS^Thoracic Surgery Progress Note|201609261121|201609261114||201609261114|201609261114||ZZZKOEJE^Koeller^Jennifer^^^^PA~RATNA^Rattehalli^Narayana^Murthy S||YJKK^Koeller^Jennifer^K|K.PDOC20160926-0167|||K.PDOC|PDPNCTS|Signed|||||ZZZKOEJE^Koeller^Jennifer^^^^PA^^^^^^^^201609261114
+PID|1||K101241231|Y512542|ANNIE^HALL||19500101|F|^^^^^^M|W|1 RD^^KNOB TOWN^FL^11111|HERN|(999)999-9999|.||M|CHR|K01412321312|999-99-9999
+PV1|1|I|K.2N^K.268^A|EM|||NAVSAN^Clouderia^Sanjay^H^^^MD^^^^^^XX|.SELF^Referred^Self^^^^^^^^^^XX|HUBMA^Hubsher^Mason^I^^^MD^^^^^^XX|ICU||||PR|||NAVSAN^Clouderia^Sanjay^H^^^MD^^^^^^XX|IN||08PPO|||||||||||||||||||COCOH||ADM|||201609140926||||||||SHANAG^Sharma^Nagaraja^D^^^MD^^^^^^XX
+TXA||PDPNCTS^Thoracic Surgery Progress Note|201609261121|201609261114||201609261114|201609261114||ZZZKOEJE^Molars^Kerry^^^^PA~RATNA^Rattehalli^Narayana^Murthy S||YJKK^Molars^Kerry^K|K.PDOC20160926-0167|||K.PDOC|PDPNCTS|Signed|||||ZZZKOEJE^Molars^Kerry^^^^PA^^^^^^^^201609261114
 OBX|1|TX||| 
 OBX|2|TX|||OAK HILL HOSPITAL (COCOH)
 OBX|3|TX|||Thoracic Surgery Progress Note
 OBX|4|TX|||REPORT#:0926-0167  REPORT STATUS: Signed
 OBX|5|TX|||DATE:09/26/16 TIME: 1114
 OBX|6|TX|||  
-OBX|7|TX|||PATIENT: PULLAN,MARIE                   UNIT #: K000317710
-OBX|8|TX|||ACCOUNT#: K00058440456                  ROOM/BED: K.268-A
-OBX|9|TX|||AGE: 63      SEX: F                     ATTEND: Navadia,Sanjay H  MD
-OBX|10|TX|||ADM DT: 09/14/16                        AUTHOR: Koeller,Jennifer  PA
+OBX|7|TX|||PATIENT: ANNIE,HALL                   UNIT #: K101241231
+OBX|8|TX|||ACCOUNT#: K01412321312                  ROOM/BED: K.268-A
+OBX|9|TX|||AGE: 63      SEX: F                     ATTEND: Clouderia,Sanjay H  MD
+OBX|10|TX|||ADM DT: 01/24/15                        AUTHOR: Molars,Kerry  PA
 OBX|11|TX|||REP SRV DT: 09/26/16                    REP SRV TM: 1114
 OBX|12|TX|||* ALL edits or amendments must be made on the electronic/computer document *
 OBX|13|TX||| 
@@ -221,6 +221,6 @@ OBX|216|TX|||c/o mouth pain from blisters/ulcers- magic mouth wash has been give
 OBX|217|TX|||CXR- Bilateral small pleural effusions;
 OBX|218|TX|||ambulate in halls with PT, continue IS
 OBX|219|TX||| 
-OBX|220|TX|||Electronically Signed by Koeller,Jennifer  PA on 09/26/16 at 1121
+OBX|220|TX|||Electronically Signed by Molars,Kerry  PA on 09/26/16 at 1121
 OBX|221|TX|||RPT#:0926-0167
 OBX|222|TX|||***END OF REPORT***

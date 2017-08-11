@@ -1,0 +1,200 @@
+{
+  "0000.COMN": {
+    "sending_facility": "AKAR",
+    "message_control_id": "EPIC_AKAR_VXU_123867",
+    "medical_record_num": "1001437157",
+    "medical_record_urn": "L000238869",
+    "patient_account_num": ""
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "145",
+    "sending_facility": "AKAR",
+    "receiving_application": "1013",
+    "receiving_facility": "UT0000",
+    "date_time_of_message": "20170517010917",
+    "security": "GPI8476",
+    "message_type": {
+      "message_code": "VXU",
+      "trigger_event": "V04"
+    },
+    "message_control_id": "EPIC_AKAR_VXU_123867",
+    "processing_id": "P",
+    "version_id": "2.3.1",
+    "continuation_pointer": "Epic_Mountain_PRD"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": {
+      "id_num": "1001437157",
+      "assigning_authority": "EPIC",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": {
+      "id_num": "L000238869",
+      "assigning_authority": "AKARP",
+      "id_type_code": "AKARP"
+    },
+    "patient_name": {
+      "family_name": "MCDONAL",
+      "given_name": "SHABOOYA",
+      "second_and_further_given_names_or_initials_thereof": "MARITUQE"
+    },
+    "date_time_of_birth": "19540222",
+    "administrative_sex": "M",
+    "patient_alias": {
+      "family_name": "MCDONAL",
+      "given_name": "SHABOOYA",
+      "second_and_further_given_names_or_initials_thereof": "C"
+    },
+    "race": "2106-3",
+    "patient_address": {
+      "street_address": "6300 HABICHT CT",
+      "city": "ANCHORAGE",
+      "state_or_province": "AK",
+      "zip_or_postal_code": "99504",
+      "country": "USA",
+      "address_type": "P"
+    },
+    "phone_num_home": [
+      {
+        "telephone_num": "(999)999-9999",
+        "telecommunication_use_code": "P",
+        "telecommunication_equipment_type": "H"
+      },
+      {
+        "telephone_num": "(999)999-2678",
+        "telecommunication_use_code": "P",
+        "telecommunication_equipment_type": "M"
+      }
+    ],
+    "phone_num_business": {
+      "telephone_num": "(907)999-9999",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "W"
+    },
+    "primary_language": "EN",
+    "marital_status": "M",
+    "religion": "PRO",
+    "ssn_num_patient": "999-99-9999",
+    "ethnic_group": "N",
+    "patient_death_indicator": "N"
+  },
+  "0003.PV1": {
+    "patient_class": "R",
+    "assigned_patient_location": {
+      "facility": "AKAR"
+    }
+  },
+  "0004.ORC": {
+    "order_control": "OK",
+    "placer_order_num": {
+      "entity_id": "49466240",
+      "namespace_id": "EPC"
+    },
+    "filler_order_num": "1787589",
+    "quantity_timing": {
+      "start_date_time": "20170516231500"
+    },
+    "date_time_of_transaction": "20170516230200",
+    "entered_by": {
+      "person_id": "LNO8939",
+      "family_name": "CHAN",
+      "given_name": "JACK"
+    },
+    "ordering_provider": [
+      {
+        "person_id": "LNO8939",
+        "family_name": "CHAN",
+        "given_name": "JACK",
+        "assigning_authority": "THREEFOUR",
+        "id_type_code": "THREEFOUR"
+      },
+      {
+        "person_id": "1376741256",
+        "family_name": "CHAN",
+        "given_name": "JACK",
+        "assigning_authority": "NPI",
+        "id_type_code": "NPI"
+      }
+    ],
+    "enterer_location": {
+      "facility": "AKAR"
+    },
+    "call_back_phone_num": "(907)258-9272",
+    "entering_device": {
+      "id": "AKARHED2DS75",
+      "text": "AKARHED2DS75",
+      "alternate_id": "40001001015",
+      "alternate_text": "AKAR EMERGENCY"
+    },
+    "order_type": "I"
+  },
+  "0005.RXA": {
+    "give_sub_id_counter": "0",
+    "administration_sub_id_counter": "999",
+    "date_time_start_of_administration": "20170516",
+    "date_time_end_of_administration": "20170516",
+    "administered_code": {
+      "id": "115",
+      "text": "TDAP",
+      "name_of_coding_system": "CVX"
+    },
+    "administered_amt": "999",
+    "administration_notes": [
+      {
+        "id": "00",
+        "text": "New immunization record",
+        "name_of_coding_system": "NIP001"
+      },
+      {
+        "text": "VIS date: 2/24/2015"
+      }
+    ],
+    "administering_provider": {
+      "person_id": "GPI8476",
+      "family_name": "KEOGH",
+      "given_name": "KASEY",
+      "second_and_further_given_names_or_initials_thereof": "L"
+    },
+    "administered_at_location": {
+      "facility": "AKAR"
+    },
+    "substance_lot_num": "U5604AA",
+    "substance_manufacturer_name": "PMC",
+    "completion_status": "CP",
+    "action_code": "A",
+    "system_entry_date_time": "20170516230912"
+  },
+  "0006.RXR": {
+    "route": "IM",
+    "administration_site": "LD"
+  },
+  "0007.OBX": {
+    "set_id": "1",
+    "value_type": "TS",
+    "obsv_id": {
+      "id": "29768-9",
+      "text": "VIS Publication Date",
+      "name_of_coding_system": "LN"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "20150224",
+    "obsv_result_status": "F",
+    "date_time_of_the_obsv": "20170516"
+  },
+  "0008.OBX": {
+    "set_id": "2",
+    "value_type": "TS",
+    "obsv_id": {
+      "id": "29769-7",
+      "text": "VIS Presentation Date",
+      "name_of_coding_system": "LN"
+    },
+    "obsv_sub_id": "1",
+    "obsv_value": "20170516",
+    "obsv_result_status": "F",
+    "date_time_of_the_obsv": "20170516"
+  }
+}

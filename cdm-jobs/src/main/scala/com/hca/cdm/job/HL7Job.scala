@@ -129,6 +129,7 @@ object HL7Job extends Logg with App {
   // ******************************************************** Spark Part ***********************************************
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
+  sparkConf set("spark.task.cpus","3")
   private val hdpConf = hdpUtil.conf
   private val restoreFromChk = new AtomicBoolean(true)
 
@@ -639,7 +640,7 @@ object HL7Job extends Logg with App {
     }
 
 
-    override def toString = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
+    override def toString: String = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
   }
 
 }
