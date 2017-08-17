@@ -76,15 +76,15 @@ object HL7Receiver extends Logg with App {
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
   if (walEnabled) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
-    sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "30")
+    sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "100")
     // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
-    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "180")
+    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "600")
   }
   if (checkpointEnable) {
-    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures", "30")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "180")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures", "100")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "600")
   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
