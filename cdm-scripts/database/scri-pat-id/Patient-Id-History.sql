@@ -49,6 +49,7 @@ CREATE TABLE cdm_scri.scri_patient_id_history_3(
   message_created_date_time STRING,
   message_flag STRING,
   attending_physician STRING,
+  meditech_network_ID STRING,
   etl_insert_date_time STRING COMMENT 'The date and time the record was inserted by the Extract Transform and Load (ETL) job.'
   )
 PARTITIONED BY (
@@ -106,10 +107,11 @@ pid_pat_address_zip_postal_code as pid_pat_address_zip_postal_code,
 '' as message_created_date_time,
 'PAT' as message_flag,
 '' as attending_physician,
+'' as meditech_network_ID,
 etl_insert_date_time as etl_insert_date_time,
 message_type as message_type,
 transaction_date as transaction_date
-FROM cdm_scri.scri_patient_id_history where transaction_date <= "2017-08-08";
+FROM cdm_scri.scri_patient_id_history ;
 
 
 
