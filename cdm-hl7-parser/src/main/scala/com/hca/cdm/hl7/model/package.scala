@@ -450,7 +450,7 @@ package object model extends Logg {
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
-    lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
+    lazy val modelFilter: Map[String, mutable.Set[String]] = segFilter(segStr, delimitedBy, modelFieldDelim)
     lazy val EMPTY: mutable.LinkedHashMap[String, String] = mutable.LinkedHashMap.empty[String, String]
 
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
@@ -594,7 +594,7 @@ package object model extends Logg {
     }
   }
 
-  private def segFilter(segmentData: String, delimitedBy: String, modelFieldDelim: String): Map[String, mutable.Set[String]] = synchronized {
+  private def segFilter(segmentData: String, delimitedBy: String, modelFieldDelim: String): Map[String, mutable.Set[String]] = {
     val temp = new mutable.HashMap[String, mutable.Set[String]] with mutable.MultiMap[String, String]
     (segmentData split(delimitedBy, -1)).filter(_ != EMPTYSTR) foreach (ele => {
       if (ele contains modelFieldDelim) {
