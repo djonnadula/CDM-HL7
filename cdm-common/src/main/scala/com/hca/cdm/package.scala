@@ -293,6 +293,8 @@ package object cdm extends Logg {
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
+  def trimStr(in :String): String = if(valid(in)) in.trim else EMPTYSTR
+
   private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
 
