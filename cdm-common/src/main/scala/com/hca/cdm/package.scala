@@ -24,7 +24,7 @@ import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
 import scala.io.{BufferedSource, Source}
 import scala.io.Source.fromFile
-import scala.language.postfixOps
+import scala.language.{implicitConversions, postfixOps}
 import scala.util.{Random, Try}
 
 /**

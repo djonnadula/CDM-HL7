@@ -20,7 +20,7 @@ ordering_provider|second_and_further_given_names_or_initials_thereof,provider_au
 ordering_provider|suffix,provider_author_suffix
 ordering_provider|prefix,provider_author_prefix
 ordering_provider|degree,provider_author_degree
-result_status,note_type
+diagnostic_service_section_id,note_type
 universal_service_id|id,document_type_identifier
 universal_service_id|text,document_type_text
 universal_service_id|name_of_coding_system,document_type_name_of_coding_sys
@@ -41,3 +41,4 @@ attending_doctor|name_context,pcp_phone
 date_time_of_message,message_created_date_time
 message_flag_static,message_flag
 orp,attending_physician
+meditech_network_ID,meditech_network_ID
