@@ -39,13 +39,13 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
   private lazy val facilityRef = {
     val temp = new mutable.HashMap[String, mutable.Map[String, FacilityReference]]
     facilityRefData.takeWhile(valid(_)).map(temp => temp split COMMA).filter(valid(_, 4)).foreach { x =>
-      if (temp isDefinedAt x(0)) temp update(x(0), temp(x(0)) += Tuple2(x(1), FacilityReference(x(2), x(3))))
-      else temp += (x(0) -> mutable.Map[String, FacilityReference](Tuple2(x(1), FacilityReference(x(2), x(3)))))
+      if (temp isDefinedAt trimStr(x(0))) temp update(trimStr(x(0)), temp(trimStr(x(0))) += Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)))))
+      else temp += (trimStr(x(0)) -> mutable.Map[String, FacilityReference](Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3))))))
     }
     temp.toMap
   }
   private lazy val coidCrossRef = coidCrossRefData.takeWhile(valid(_)).map(temp => temp split COMMA) filter (valid(_, 5)) map {
-    x => s"${x(1)}${x(2)}" -> CrossFacilityReference(x(3), x(4), x(5))
+    x => s"${trimStr(x(1))}${trimStr(x(2))}" -> CrossFacilityReference(trimStr(x(3)), trimStr(x(4)), trimStr(x(5)))
   } toMap
 
   override def close(): Unit = {}
