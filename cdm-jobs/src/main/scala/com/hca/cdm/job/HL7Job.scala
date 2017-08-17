@@ -47,6 +47,7 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable
+import  TimeUnit._
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -536,16 +537,21 @@ object HL7Job extends Logg with App {
   private class MetricsListener(sparkStrCtx: StreamingContext) extends SparkListener {
     val stageTracker = new TrieMap[Int, StageInfo]()
     val stagesSubmitted = new mutable.Queue[StageInfo]
+    var firstStage = true
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
+      if(firstStage) {
+        runningStage = stageSubmitted.stageInfo
+        firstStage = false
+      }
       stagesSubmitted += stageSubmitted.stageInfo
-      if (valid(runningStage) && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
+      if (!firstStage && valid(runningStage) && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")
       if (stageTracker.size > 20) {
-        if (sparkStrCtx.sparkContext.requestExecutors(2)) stageTracker.clear()
+        sparkStrCtx.sparkContext.requestExecutors(2)
       }
     }
 
@@ -570,7 +576,7 @@ object HL7Job extends Logg with App {
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
-    val timeCheck: Long = timeInterval * 60000L
+    val timeCheck: Long = MILLISECONDS.convert(timeInterval,MINUTES)
     val lowFrequencyHl7AlertInterval: Int = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
@@ -607,8 +613,8 @@ object HL7Job extends Logg with App {
         error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
-            " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check Immediately" +
-            " What is happening with this Job. Maximum Execution time Expected :: " + batchCycle + " seconds" + "\n\n" + EVENT_TIME
+            " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check " +
+            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds,MILLISECONDS)+ " seconds" + "\n\n" + EVENT_TIME
           , CRITICAL)
       }
     }
@@ -626,7 +632,7 @@ object HL7Job extends Logg with App {
 
     private def noDataAlert(hl7: HL7, whichSource: String, howLong: Int = timeInterval): Unit = {
       mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for HL7 Stream " + hl7,
-        app + " Job has not Received any Data in last " + howLong + " minutes. Some one has to Check Immediately What is happening with Receiver Job for HL7 Message Type "
+        app + " Job has not Received any Data in last " + howLong + " minutes. Some one has to Check What is happening with Receiver Job for HL7 Message Type "
           + hl7 + ".\nSource for this Stream " + whichSource + "\n\n" + EVENT_TIME
         , CRITICAL)
     }
@@ -635,7 +641,7 @@ object HL7Job extends Logg with App {
       mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for HL7 Stream " + hl7,
         "Production Control,\n\n   " +
           app + " Job has not Received any Data in last " + howLong + " minutes. Please contact On Call person from CDM-BD Group and " +
-          "notify about this Event to Check Immediately what is happening with Receiver Job for HL7 Message Type " + hl7 + ".\n Source for this Stream " + whichSource +
+          "notify about this Event to Check what is happening with Receiver Job for HL7 Message Type " + hl7 + ".\n Source for this Stream " + whichSource +
           "\n\n   Thanks,\n   CDM-BD Team  " +
           "\n\n" + EVENT_TIME
         , CRITICAL, statsReport = false, lookUpProp("monitoring.notify.group").split(COMMA))
