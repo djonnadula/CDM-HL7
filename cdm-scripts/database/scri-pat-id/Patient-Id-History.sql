@@ -7,7 +7,7 @@ set hive.stats.autogather = false;
 
 Drop Table if exists cdm_scri.scri_patient_id_history_3 PURGE;
 
-CREATE TABLE cdm_scri.scri_patient_id_history_3(
+CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history_3(
   msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',
   msh_sending_facility STRING COMMENT 'Mnemonic that is associated to the sending facility of the message',
   pid_medical_record_num STRING COMMENT 'MRN associated to the message',
