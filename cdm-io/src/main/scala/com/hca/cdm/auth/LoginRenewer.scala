@@ -118,7 +118,10 @@ private[cdm] object LoginRenewer extends Logg {
       try {
         val token = dfs.addDelegationTokens(renewer, credentials)
         info(s"Refreshed Tokens for File System $node ")
-        token.foreach { tkn => info(s"Refreshed Tokens ${tkn.getService} ${tkn.getKind} ${tkn.getIdentifier.mkString}") }
+        token.foreach { tkn =>
+          info(s"Refreshed Tokens ${tkn.getService} ${tkn.getKind} ${tkn.getIdentifier.mkString}")
+          credentials.addToken(tkn.getService, tkn)
+        }
       }
       catch {
         case t: Throwable => debug(s"cannot Refresh Tokens for $node & FileSystem $dfs", t)
