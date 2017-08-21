@@ -1,9 +1,11 @@
 package com.hca.cdm.kafka.config
 
 import java.util.{Properties => prop}
-import com.hca.cdm.EMPTYSTR
+import com.hca.cdm._
+import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.io.IOConstants._
 import org.apache.kafka.clients.producer.ProducerConfig._
+import org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -30,6 +32,15 @@ object HL7ProducerConfig {
     prop.put(RECEIVE_BUFFER_CONFIG, receiveBuffer)
     prop.put(PARTITIONER_CLASS_CONFIG, defaultPartitioner)
     prop.put(MAX_REQUEST_SIZE_CONFIG, requestMaxSize)
+    if (tryAndReturnDefaultValue(asFunc(lookUpProp("kafka.security.protocol")), EMPTYSTR) != EMPTYSTR) {
+      lookUpProp("kafka.security.protocol") match {
+        case "SSL" =>
+          prop.put(SECURITY_PROTOCOL_CONFIG, lookUpProp("kafka.security.protocol"))
+          prop.put("ssl.truststore.location",lookUpProp("ssl.truststore.location"))
+          prop.put("ssl.truststore.password",lookUpProp("ssl.truststore.password"))
+        case _ => throw  new CDMKafkaException("Not yet available kafka.security.protocol")
+      }
+    }
     prop
   }
 }

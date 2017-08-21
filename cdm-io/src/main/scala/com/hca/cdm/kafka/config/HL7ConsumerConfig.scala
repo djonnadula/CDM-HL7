@@ -2,7 +2,10 @@ package com.hca.cdm.kafka.config
 
 import java.util.{Properties => prop}
 
+import com.hca.cdm.exception.CDMKafkaException
+import org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG
 import com.hca.cdm.io.IOConstants._
+import com.hca.cdm.{EMPTYSTR, asFunc, lookUpProp, tryAndReturnDefaultValue}
 import org.apache.kafka.clients.consumer.ConsumerConfig._
 
 /**
@@ -32,7 +35,17 @@ object HL7ConsumerConfig {
     prop.put(FETCH_MIN_BYTES_CONFIG, fetchMinBytes)
     prop.put(FETCH_MAX_WAIT_MS_CONFIG, fetchMinWait)
     prop.put(CLIENT_ID_CONFIG, defaultClientId + jobConsumer)
-    prop.put("fetch.message.max.bytes",fetchBytes)
+    prop.put(RECONNECT_BACKOFF_MS_CONFIG, reconnectBackoff)
+    prop.put("fetch.message.max.bytes", fetchBytes)
+    if (tryAndReturnDefaultValue(asFunc(lookUpProp("kafka.security.protocol")), EMPTYSTR) != EMPTYSTR) {
+      lookUpProp("kafka.security.protocol") match {
+        case "SSL" =>
+          prop.put(SECURITY_PROTOCOL_CONFIG, lookUpProp("kafka.security.protocol"))
+          prop.put("ssl.truststore.location",lookUpProp("ssl.truststore.location"))
+          prop.put("ssl.truststore.password",lookUpProp("ssl.truststore.password"))
+        case _ => throw  new CDMKafkaException("Not yet available kafka.security.protocol")
+      }
+    }
     prop
   }
 }

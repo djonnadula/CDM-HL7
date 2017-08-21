@@ -5,7 +5,7 @@ set hive.exec.max.dynamic.partitions=10000;
 set hive.exec.max.dynamic.partitions.pernode=10000;
 set hive.stats.autogather = false;
 
-Drop Table if exists cdm_scri.scri_patient_id_history_3 PURGE;
+Drop  Table if exists cdm_scri.scri_patient_id_history_3 PURGE;
 
 CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history_3(
   msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',
