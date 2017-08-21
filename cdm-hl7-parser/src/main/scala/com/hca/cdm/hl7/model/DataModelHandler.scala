@@ -77,11 +77,11 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                   debug(s"Segment Skipped :: $msg")
                 case `filteredStr` =>
                   updateMetrics(segment.seg, FILTERED)
-                  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
                   // This Check Added After Discussing this Log is not Required as of now So commenting.
+                 /*  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
                   sizeCheck(msg, segment.seg)
                   tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
-                  debug(s"Segment Filtered :: $msg")
+                  debug(s"Segment Filtered :: $msg") */
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {

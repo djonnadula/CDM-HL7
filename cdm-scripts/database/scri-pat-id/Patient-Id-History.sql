@@ -49,6 +49,7 @@ CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history_3(
   message_created_date_time STRING,
   message_flag STRING,
   attending_physician STRING,
+  meditech_network_ID STRING,
   etl_insert_date_time STRING COMMENT 'The date and time the record was inserted by the Extract Transform and Load (ETL) job.'
   )
 PARTITIONED BY (
@@ -91,8 +92,9 @@ txa_document_type_name_of_coding_sys as txa_document_type_name_of_coding_sys,
 txa_document_completion_status as txa_document_completion_status,
 obx_observation_value as obx_observation_value,
 CASE WHEN pid_pat_social_security_num = '' THEN
-( CASE WHEN split(pid_pat_id_list_identifier_type_code,"^")[1] = 'SS' THEN split(pid_pat_id_list_identifier_num,"^")[1] else '' END ) else
-split_part(pid_pat_id_list_identifier_num,"^",2) else pid_pat_social_security_num END AS pid_pat_social_security_num,
+CASE WHEN  split(pid_pat_id_list_identifier_type_code,'\\^')[1] = 'SS' THEN  split(pid_pat_id_list_identifier_num,'\\^')[1]
+else pid_pat_id_list_identifier_num END
+else pid_pat_social_security_num END AS pid_pat_social_security_num,
 pid_pat_address_street_address1 as pid_pat_address_street_address1,
 pid_pat_address_street_address2 as pid_pat_address_street_address2,
 pid_pat_address_city as pid_pat_address_city,
@@ -103,8 +105,9 @@ pid_pat_address_zip_postal_code as pid_pat_address_zip_postal_code,
 '' as primary_care_physician,
 '' as pcp_phone,
 '' as message_created_date_time,
-'' as message_flag,
+'PAT' as message_flag,
 '' as attending_physician,
+'' as meditech_network_ID,
 etl_insert_date_time as etl_insert_date_time,
 message_type as message_type,
 transaction_date as transaction_date

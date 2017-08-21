@@ -28,11 +28,11 @@ import scala.util.{Failure, Success, Try}
   *
   * Transforms Raw HL7 Message into Required Output formats as Per Templates Provided
   */
-class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]]) extends Logg with Serializable {
+class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]], filterNullMappings: Boolean = false) extends Logg with Serializable {
 
   require(msgType != null, s"Cannot Register Parser for $msgType")
   require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
-  private lazy val toJson = jsonHandler()
+  private lazy val toJson = jsonHandler(filterNullMappings)
   private lazy val EMPTY = Array.empty[String]
   private lazy val NONE = Map.empty[String, Array[String]]
   private val metrics = new TrieMap[String, Long]

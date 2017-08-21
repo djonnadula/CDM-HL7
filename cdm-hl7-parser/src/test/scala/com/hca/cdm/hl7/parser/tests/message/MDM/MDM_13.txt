@@ -1,7 +1,7 @@
-MSH|^~\&||COCRX|||201609260821||MDM^T04|MT_COCRX_MDM_RXDPTO.1.2763995|P|2.1|||||
-PID|1||G000639972|G537076|GLASSER^ALICE^SIBLEY|MARGARET|19250919|F|^^^^^^M|W|5147 CHESEBRO RD^# 215^AGOURA^CA^91301|LA|(818)852-7217|(999)999-9999||W|NON|G00219630286|300-14-0692
-PV1|1|I|G.3TELE^G.3106^A|EM|||ROSMO^Rostami^Mohammadreza^^^^MD^^^^^^XX|.SELF^REFERRED^SELF^^^^^^^^^^XX|UNDEFINED^AAZAMI^HESSAM^^^^^^^^^^XX|MED||||PR|||ROSMO^Rostami^Mohammadreza^^^^MD^^^^^^XX|IN||12||||||||||||||||HOM|||COCRX||DIS|||201609012359|201609061632|||||||SIMGI^Simoni^Gilbert^^^^MD^^^^^^XX
-TXA||OP^OPERATIVE REPORT|201609260821|201609031135||201609030000|201609031238||SIMGI^Simoni^Gilbert^^^^MD||R.NUANCE^TRANSCRIPTON^NUANCE|G.HI20160903-0071^3429344GHI|||G.HI|OP|Signed|||||SIMGI^Simoni^Gilbert^^^^MD^^^^^^^^201609031135
+MSH|^~\&||COCRX|||201604030821||MDM^T04|MT_COCRX_MDM_RXDPTO.1.1241231|P|2.1|||||
+PID|1||G124123123|G515124|RANCOR^JENNY^ROSE|SALLY|19400405|F|^^^^^^M|W|411 RD^LOS ANGELES^CA^11111|LA|(999)999-9999|(999)999-9999||W|NON|G0102301031|999-99-9999
+PV1|1|I|G.3TELE^G.3106^A|EM|||DOMOR^Federici^Henry^^^^MD^^^^^^XX|.SELF^REFERRED^SELF^^^^^^^^^^XX|UNDEFINED^MAZRI^KHARZI^^^^^^^^^^XX|MED||||PR|||DOMOR^Federici^Henry^^^^MD^^^^^^XX|IN||12||||||||||||||||HOM|||COCRX||DIS|||201609012359|201609061632|||||||IGMOR^Igor^Coutinho^^^^MD^^^^^^XX
+TXA||OP^OPERATIVE REPORT|201604030821|201609031135||201609030000|201609031238||IGMOR^Igor^Coutinho^^^^MD||R.NUANCE^TRANSCRIPTON^NUANCE|G.HI20160903-0071^3429344GHI|||G.HI|OP|Signed|||||IGMOR^Igor^Coutinho^^^^MD^^^^^^^^201609031135
 OBX|1|TX||H| 
 OBX|2|TX||H|                              HCA LOS ROBLES HOSPITAL
 OBX|3|TX||H|                                AND MEDICAL CENTER
@@ -9,16 +9,16 @@ OBX|4|TX||H|                              THOUSAND OAKS, CA 91360
 OBX|5|TX||H| 
 OBX|6|TX||H|                              REPORT NAME: OPERATIVE REPORT              
 OBX|7|TX||H| 
-OBX|8|TX||H|PATIENT'S NAME: GLASSER,ALICE SIBLEY                UNIT NO: G000639972
-OBX|9|TX||H|DOB: 09/19/25  SEX/AGE: F  /90                   ACCOUNT NO: G00219630286
-OBX|10|TX||H|ATTENDING PHYS: Rostami,Mohammadreza MD             PT TYPE: DIS IN  
+OBX|8|TX||H|PATIENT'S NAME: RANCOR,JENNY ROSE                UNIT NO: G124123123
+OBX|9|TX||H|DOB: 01/20/33  SEX/AGE: F  /90                   ACCOUNT NO: G0102301031
+OBX|10|TX||H|ATTENDING PHYS: Federici,Henry MD             PT TYPE: DIS IN  
 OBX|11|TX||H|ADMISSION DATE: 09/01/16                           LOCATION: G.3TELE   
 OBX|12|TX||H|DISCHARGE DATE: 09/06/16
 OBX|13|TX||X| 
 OBX|14|TX||X| 
-OBX|15|TX|||DICTATED BY:             Gilbert Simoni, MD 
+OBX|15|TX|||DICTATED BY:             Coutinho Igor, MD 
 OBX|16|TX|||DATE OF SURGERY:         09/03/2016   
-OBX|17|TX|||SURGEON:                 Gilbert Simoni, MD  
+OBX|17|TX|||SURGEON:                 Coutinho Igor, MD  
 OBX|18|TX||| 
 OBX|19|TX|||ENDOSCOPY AND COLONOSCOPY REPORT
 OBX|20|TX||| 
@@ -59,7 +59,7 @@ OBX|54|TX|||Olympus endoscope was advanced through the mouth, through the esopha
 OBX|55|TX|||the GE junction into the stomach, past the pyloric channel, first and second
 OBX|56|TX|||portions of the duodenum, and into the third portion of the duodenum.  Upon
 OBX|57|TX||T| 
-OBX|58|TX||T|PATIENT NAME: GLASSER,ALICE SIBLEY                ACCOUNT #: G00219630286
+OBX|58|TX||T|PATIENT NAME: RANCOR,JENNY ROSE                ACCOUNT #: G0102301031
 OBX|59|TX||X| 
 OBX|60|TX||H|                              
 OBX|61|TX||H|                    
@@ -97,18 +97,18 @@ OBX|92|TX|||patient continues to have anemia or bleeding, we will need a wireles
 OBX|93|TX|||endoscopy which is not available here, we would have to have that done as an
 OBX|94|TX|||outpatient in my office upon discharge.
 OBX|95|TX||| 
-OBX|96|TX|||Dictated By: Gilbert Simoni, MD
+OBX|96|TX|||Dictated By: Coutinho Igor, MD
 OBX|97|TX||| 
 OBX|98|TX|||DD: 09/03/2016 11:35:37
 OBX|99|TX|||DT: 09/03/2016 12:38:42 
 OBX|100|TX|||Document ID:  3429344 / Confirmation#: 226537 
-OBX|101|TX|||Authenticated by Gilbert Simoni On 09/26/2016 10:13:34 AM 
+OBX|101|TX|||Authenticated by Coutinho Igor On 09/26/2016 10:13:34 AM 
 OBX|102|TX||X| 
 OBX|103|TX||X| 
 OBX|104|TX||X| 
 OBX|105|TX||X| 
 OBX|106|TX||X| 
-OBX|107|TX||X|Electronically Signed by Gilbert Simoni, MD for Gilbert Simoni, MD on 09/26/16 a
+OBX|107|TX||X|Electronically Signed by Coutinho Igor, MD for Coutinho Igor, MD on 09/26/16 a
 OBX|108|TX||X| 
 OBX|109|TX||X| 
 OBX|110|TX||X| 
@@ -118,4 +118,4 @@ OBX|113|TX||X|
 OBX|114|TX||X| 
 OBX|115|TX||X| 
 OBX|116|TX||T| 
-OBX|117|TX||T|PATIENT NAME: GLASSER,ALICE SIBLEY                ACCOUNT #: G00219630286
+OBX|117|TX||T|PATIENT NAME: RANCOR,JENNY ROSE                ACCOUNT #: G0102301031

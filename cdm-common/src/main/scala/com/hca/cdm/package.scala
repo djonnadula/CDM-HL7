@@ -24,7 +24,7 @@ import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
 import scala.io.{BufferedSource, Source}
 import scala.io.Source.fromFile
-import scala.language.postfixOps
+import scala.language.{implicitConversions, postfixOps}
 import scala.util.{Random, Try}
 
 /**
@@ -292,6 +292,8 @@ package object cdm extends Logg {
   def typeFromClass[T](clazz: Class[T])(implicit mirror: Mirror): Type = mirror.classSymbol(clazz).toType
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
+
+  def trimStr(in :String): String = if(valid(in)) in.trim else EMPTYSTR
 
   private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)

@@ -35,10 +35,10 @@
     "date_time_of_birth": "20031230",
     "administrative_sex": "F",
     "patient_alias": {
-      "last_name": "CAGE",
-      "first_name": "JESSICA",
-      "middle_name": "CAMPBELL JONES",
-      "type_code": "M"
+      "family_name": "CAGE",
+      "given_name": "JESSICA",
+      "second_and_further_given_names_or_initials_thereof": "CAMPBELL JONES",
+      "name_type_code": "M"
     },
     "race": "U",
     "patient_address": {
@@ -70,7 +70,7 @@
       "given_name": "DOCTOR",
       "id_type_code": "XX"
     },
-    "consulting_doctor": {
+    "primary_care_doctor": {
       "person_id": "DRBRI",
       "family_name": "DOCTOR",
       "given_name": "BRITTANY",

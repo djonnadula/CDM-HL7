@@ -108,7 +108,7 @@ package object model extends Logg {
   private case object RejectAvroSchema {
     lazy val schema: Schema = new Schema.Parser().parse(toJson(getRejectSchema))
 
-    def avroRejectRecord = new Record(schema)
+    def avroRejectRecord: Record = new Record(schema)
   }
 
 
@@ -363,6 +363,7 @@ package object model extends Logg {
     else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+      var applied = false
       selectCriteria.foreach {
         case (lookUpField, criteria, selectFrom, modify) =>
           if ((layout isDefinedAt lookUpField) && (layout isDefinedAt selectFrom) && (layout isDefinedAt modify)) {
@@ -371,11 +372,16 @@ package object model extends Logg {
               if (dataPoint._1 == criteria) {
                 val temp = tryAndReturnDefaultValue(asFunc(layout(selectFrom).split("\\" + caret)(dataPoint._2)), EMPTYSTR)
                 if (temp ne EMPTYSTR) {
+                  applied = true
                   layout update(modify, temp)
                   layout update(lookUpField, EMPTYSTR)
                   layout update(selectFrom, EMPTYSTR)
                 }
               }
+            }
+            if (!applied) {
+              layout update(lookUpField, EMPTYSTR)
+              layout update(selectFrom, EMPTYSTR)
             }
           }
       }
@@ -410,7 +416,7 @@ package object model extends Logg {
     private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
       validateFields.split(COMMA).toList.map {
         x =>
-          val temp = x.split(COLON,-1)
+          val temp = x.split(COLON, -1)
           (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
             , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
       }
@@ -444,7 +450,7 @@ package object model extends Logg {
 
   case class Model(reqSeg: String, segStr: String, delimitedBy: String = s"$ESCAPE$caret", modelFieldDelim: String = PIPE_DELIMITED_STR,
                    adhoc: Option[ADHOC] = None, filters: Option[Array[FILTER]] = None) extends modelLayout {
-    lazy val modelFilter: Map[String, mutable.Set[String]] = synchronized(segFilter(segStr, delimitedBy, modelFieldDelim))
+    lazy val modelFilter: Map[String, mutable.Set[String]] = segFilter(segStr, delimitedBy, modelFieldDelim)
     lazy val EMPTY: mutable.LinkedHashMap[String, String] = mutable.LinkedHashMap.empty[String, String]
 
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
@@ -588,7 +594,7 @@ package object model extends Logg {
     }
   }
 
-  private def segFilter(segmentData: String, delimitedBy: String, modelFieldDelim: String): Map[String, mutable.Set[String]] = synchronized {
+  private def segFilter(segmentData: String, delimitedBy: String, modelFieldDelim: String): Map[String, mutable.Set[String]] = {
     val temp = new mutable.HashMap[String, mutable.Set[String]] with mutable.MultiMap[String, String]
     (segmentData split(delimitedBy, -1)).filter(_ != EMPTYSTR) foreach (ele => {
       if (ele contains modelFieldDelim) {
