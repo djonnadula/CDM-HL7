@@ -51,7 +51,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   @throws(classOf[IllegalArgumentException])
   @throws(classOf[AssertionError])
   @throws(classOf[InvalidTemplateFormatException])
-  def transformHL7(hl7Message: String, invalidTemplateAlert: (String, String) => Unit): HL7TransRec = {
+  def transformHL7(hl7Message: String, invalidTemplateAlert: (AnyRef, String) => Unit): HL7TransRec = {
     require(hl7Message != null && !hl7Message.isEmpty, s"Error Nothing to parse $hl7Message")
     assume(isHL7(hl7Message), s"Not a Valid HL7. Check with Facility :: $hl7Message")
     val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
