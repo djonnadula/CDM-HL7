@@ -15,6 +15,7 @@ import java.security.PrivilegedExceptionAction
 import com.hca.cdm.exception.CdmException
 import org.apache.hadoop.mapred.Master
 import org.apache.spark.SparkConf
+import org.apache.hadoop.security.token.{Token, TokenIdentifier}
 
 /**
   * Created by Devaraj Jonnadula on 2/15/2017.
@@ -74,13 +75,13 @@ private[cdm] object LoginRenewer extends Logg {
   }
 
   private def credentialFile(stagingDir: String, suffix: String = s"Credentials"): Path = {
-        val conf = hdpUtil.conf
-        fs = FileSystem.get(conf)
-        val crPath = new Path(s"$stagingDir$FS$app-$suffix")
-        fs.createNewFile(crPath)
-        hdfsConf = byPassConfig(crPath.toUri.getScheme, hdpUtil.conf)
-        fs = FileSystem.get(hdfsConf)
-        crPath
+    val conf = hdpUtil.conf
+    fs = FileSystem.get(conf)
+    val crPath = new Path(s"$stagingDir$FS$app-$suffix")
+    fs.createNewFile(crPath)
+    hdfsConf = byPassConfig(crPath.toUri.getScheme, hdpUtil.conf)
+    fs = FileSystem.get(hdfsConf)
+    crPath
   }
 
   private def haNameNodes(conf: SparkConf): Set[Path] = {
@@ -120,7 +121,7 @@ private[cdm] object LoginRenewer extends Logg {
         info(s"Refreshed Tokens for File System $node ")
         token.foreach { tkn =>
           info(s"Refreshed Tokens ${tkn.getService} ${tkn.getKind} ${tkn.getIdentifier.mkString}")
-          credentials.addToken(tkn.getService, tkn)
+          credentials.addToken(tkn.getService, tkn.asInstanceOf[Token[TokenIdentifier]])
         }
       }
       catch {
