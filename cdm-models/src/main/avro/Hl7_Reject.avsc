@@ -1,16 +1,15 @@
 {
 "type" : "record",
 "name" : "CdmRejects",
-"namespace" : "com.hcahealthcae.cdm.hl7.reject",
+"namespace" : "com.hcahealthcare.cdm.hl7.reject",
               "fields" : [
               {"name" : "process_name","type" : "string"},
               {"name" : "message_control_id","type" : "string"},
               {"name" : "msg_create_date_time","type" : "string"},
               {"name" : "patient_mrn","type" : "string"},
               {"name" : "patient_urn","type" : "string"},
-{ "name" : "patient_account_number","type" : "string"},
-{ "name" : "reject_reason",   "type" : "string"},
-{ "name" : "rejected_message_data",   "type" : "string"},
-{ "name" : "etl_firstinsert_datetime",   "type" : "string"}
-]
+              { "name" : "patient_account_number","type" : "string"},
+              { "name" : "reject_reason",   "type" : "string"},
+              { "name" : "rejected_message_data",   "type" : "string"},
+              { "name" : "etl_firstinsert_datetime",   "type" : "string"}]
 }
