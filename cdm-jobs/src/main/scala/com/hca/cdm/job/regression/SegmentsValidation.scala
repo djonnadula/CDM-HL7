@@ -4,6 +4,7 @@ import java.util.Date
 import com.hca.cdm.log.Logg
 import com.hca.cdm._
 import com.hca.cdm.auth.LoginRenewer._
+import com.hca.cdm.hadoop.HadoopConfig
 import com.hca.cdm.hive.{HiveConnector => dataFetcher}
 import com.hca.cdm.hadoop.HadoopConfig._
 import com.hca.cdm.notification.TaskState._
@@ -26,7 +27,7 @@ object SegmentsValidation extends Logg with App {
 
   configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
   reload(args(0))
-  private val config = loadConfig(lookUpProp("hl7.config.files"))
+  private val config = HadoopConfig.loadConfig(lookUpProp("hl7.config.files"))
   private val hiveCfg = hiveConf(config)
   private val client = new dataFetcher
   loginFromKeyTab(lookUpProp("hl7.auth.keytab"), lookUpProp("hl7.auth.principal"), Some(config))

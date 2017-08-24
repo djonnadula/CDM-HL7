@@ -14,6 +14,7 @@ import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
+import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
@@ -45,6 +46,8 @@ import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
+import scala.collection.mutable
+import  TimeUnit._
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -88,7 +91,7 @@ object HL7Job extends Logg with App {
   private val topicsToSubscribe = hl7MsgMeta.map(hl7Type => hl7Type._2.kafka) toSet
   private val hl7TypesMapping = hl7MsgMeta.map(hl7Type => hl7Type._1.toString -> hl7Type._1)
   private val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
-  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")), messageTypes)
+  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")) ++ loadSegments(lookUpProp("hl7.adhoc-segments")), messageTypes)
   private val modelsForHl7 = hl7MsgMeta.map(msgType => msgType._1 -> segmentsForHl7Type(msgType._1, segmentsMapping(msgType._1.toString)))
   private val registeredSegmentsForHl7 = modelsForHl7.mapValues(_.models.keySet)
   private val hl7Parsers = hl7MsgMeta map (hl7 => hl7._1 -> new HL7Parser(hl7._1, templatesMapping))
@@ -122,11 +125,12 @@ object HL7Job extends Logg with App {
     })
     temp
   }
-  private val ackQueue = enabled(lookUpProp("mq.queueResponse"))
+  private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
 
   // ******************************************************** Spark Part ***********************************************
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
+  sparkConf set("spark.task.cpus", "3")
   private val hdpConf = hdpUtil.conf
   private val restoreFromChk = new AtomicBoolean(true)
 
@@ -146,7 +150,7 @@ object HL7Job extends Logg with App {
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
     modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
-      if (model.adhoc isDefined) createTopic(model.adhoc.get dest)
+      if ((model.adhoc isDefined) && (model.adhoc.get.destination.system == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
     })))
     createTopic(hl7JsonTopic, segmentPartitions = false)
     createTopic(segTopic, segmentPartitions = false)
@@ -160,7 +164,9 @@ object HL7Job extends Logg with App {
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
     monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
-    monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), minToSec(monitorInterval) + 2, minToSec(monitorInterval), TimeUnit.SECONDS)
+    if (monitorInterval > 0) {
+      monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), minToSec(monitorInterval) + 2, minToSec(monitorInterval), TimeUnit.SECONDS)
+    }
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
@@ -195,15 +201,16 @@ object HL7Job extends Logg with App {
       })
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
-        val parserS = hl7Parsers
-        val segHandlers = segmentsHandler
-        val jsonAudits = jsonAuditor
-        val jsonOut = hl7JsonTopic
-        val rejectOut = rejectedTopic
-        val segOut = segTopic
-        val auditOut = auditTopic
-        val prodConf = kafkaProducerConf
-        val hl7TypesMappings = hl7TypesMapping
+        val hl7s = self.messageTypes
+        val parserS = self.hl7Parsers
+        val segHandlers = self.segmentsHandler
+        val jsonAudits = self.jsonAuditor
+        val jsonOut = self.hl7JsonTopic
+        val rejectOut = self.rejectedTopic
+        val segOut = self.segTopic
+        val auditOut = self.auditTopic
+        val prodConf = self.kafkaProducerConf
+        val hl7TypesMappings = self.hl7TypesMapping
         val segmentsAccumulators = self.segmentsAccumulators
         val parserAccumulators = self.parserAccumulators
         val maxMessageSize = self.maxMessageSize
@@ -212,7 +219,7 @@ object HL7Job extends Logg with App {
         val rejectOverSized = self.rejectOverSized
         val adhocOverSized = self.adhocOverSized
         val sizeCheck = checkSize(maxMessageSize)(_, _)
-        val confFile = config_file
+        val confFile = self.config_file
         val tlmAckQueue = self.ackQueue
         val appName = self.app
         val tracker = new ListBuffer[FutureAction[Unit]]
@@ -222,13 +229,14 @@ object HL7Job extends Logg with App {
             LoginRenewer.scheduleRenewal()
             val kafkaOut = KProducer()(prodConf)
             val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
-            val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+            val hl7RejIO = kafkaOut.writeData(_: AnyRef, _: String, rejectOut)(maxMessageSize, rejectOverSized)
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
+            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s)
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
-              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.queueResponse"))
+              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"))
               tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)
@@ -260,12 +268,12 @@ object HL7Job extends Logg with App {
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _)
+                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _, _)
                 Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
                       ackTlm(out._3, hl7Str)
-                      segHandlerIO(out._2, out._3)
+                      segHandlerIO(out._2, hl7._2, out._3)
                       sizeCheck(out._1, parserS(msgType))
                       if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
                         tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
@@ -528,15 +536,22 @@ object HL7Job extends Logg with App {
     */
   private class MetricsListener(sparkStrCtx: StreamingContext) extends SparkListener {
     val stageTracker = new TrieMap[Int, StageInfo]()
+    val stagesSubmitted = new mutable.Queue[StageInfo]
+    var firstStage = true
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
-      runningStage = stageSubmitted.stageInfo
+      if(firstStage) {
+        runningStage = stageSubmitted.stageInfo
+        firstStage = false
+      }
+      stagesSubmitted += stageSubmitted.stageInfo
+      if (!firstStage && valid(runningStage) && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")
       if (stageTracker.size > 20) {
-        if (sparkStrCtx.sparkContext.requestExecutors(2)) stageTracker.clear()
+        sparkStrCtx.sparkContext.requestExecutors(2)
       }
     }
 
@@ -561,7 +576,7 @@ object HL7Job extends Logg with App {
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
-    val timeCheck: Long = timeInterval * 60000L
+    val timeCheck: Long = MILLISECONDS.convert(timeInterval,MINUTES)
     val lowFrequencyHl7AlertInterval: Int = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
@@ -598,8 +613,8 @@ object HL7Job extends Logg with App {
         error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
-            " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check Immediately" +
-            " What is happening with this Job. Maximum Execution time Expected :: " + batchCycle + " seconds" + "\n\n" + EVENT_TIME
+            " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check " +
+            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds,MILLISECONDS)+ " seconds" + "\n\n" + EVENT_TIME
           , CRITICAL)
       }
     }
@@ -617,7 +632,7 @@ object HL7Job extends Logg with App {
 
     private def noDataAlert(hl7: HL7, whichSource: String, howLong: Int = timeInterval): Unit = {
       mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for HL7 Stream " + hl7,
-        app + " Job has not Received any Data in last " + howLong + " minutes. Some one has to Check Immediately What is happening with Receiver Job for HL7 Message Type "
+        app + " Job has not Received any Data in last " + howLong + " minutes. Some one has to Check What is happening with Receiver Job for HL7 Message Type "
           + hl7 + ".\nSource for this Stream " + whichSource + "\n\n" + EVENT_TIME
         , CRITICAL)
     }
@@ -626,14 +641,14 @@ object HL7Job extends Logg with App {
       mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Not Receiving Data for HL7 Stream " + hl7,
         "Production Control,\n\n   " +
           app + " Job has not Received any Data in last " + howLong + " minutes. Please contact On Call person from CDM-BD Group and " +
-          "notify about this Event to Check Immediately what is happening with Receiver Job for HL7 Message Type " + hl7 + ".\n Source for this Stream " + whichSource +
+          "notify about this Event to Check what is happening with Receiver Job for HL7 Message Type " + hl7 + ".\n Source for this Stream " + whichSource +
           "\n\n   Thanks,\n   CDM-BD Team  " +
           "\n\n" + EVENT_TIME
         , CRITICAL, statsReport = false, lookUpProp("monitoring.notify.group").split(COMMA))
     }
 
 
-    override def toString = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
+    override def toString: String = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
   }
 
 }

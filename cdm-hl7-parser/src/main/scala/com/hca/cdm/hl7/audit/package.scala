@@ -78,7 +78,7 @@ package object audit {
   def tlmAckMsg(hl7: String, appState: String, ackingTo: String, from: String)(meta: MSGMeta): String = {
     def reqHl7: String = hl7 match {
       case "IPLORU" => "ORU"
-      case "ORMORDERS" => "ORM"
+      case "ORMORDERS" | "IPLORDERS" => "ORM"
       case other => other
     }
 

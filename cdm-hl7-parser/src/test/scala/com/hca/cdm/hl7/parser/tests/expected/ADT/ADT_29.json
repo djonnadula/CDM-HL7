@@ -1,0 +1,233 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCMT",
+    "message_control_id": "MT_COCMT_ADT_MTGTADM.1.13306373",
+    "medical_record_num": "M00657905",
+    "medical_record_urn": "W369694",
+    "patient_account_num": "M263801738"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_facility": "COCMT",
+    "date_time_of_message": "201705171527",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A04"
+    },
+    "message_control_id": "MT_COCMT_ADT_MTGTADM.1.13306373",
+    "processing_id": "P",
+    "version_id": "2.1 EVN",
+    "sequence_num": "A04",
+    "continuation_pointer": "201705171527",
+    "unknown": "QNI7782^RAMOS^CLARISSA^^^^"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id_list": "M00657905",
+    "alternate_patient_id": "W369694",
+    "patient_name": {
+      "family_name": "FEZ",
+      "given_name": "STROMEYER"
+    },
+    "mother_maiden_name": "ALBA,DEBRA",
+    "date_time_of_birth": "19880726",
+    "administrative_sex": "F",
+    "patient_alias": {
+      "family_name": "ROBBERT",
+      "given_name": "STROMEYER"
+    },
+    "race": "W",
+    "patient_address": {
+      "street_address": "87 ARRIBICA ST",
+      "city": "BISMARK",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "78207",
+      "country": "USA",
+      "county_parish_code": "BEX"
+    },
+    "phone_num_home": "(999)954-9999",
+    "phone_num_business": "(999)999-9999",
+    "primary_language": "ENG",
+    "marital_status": "M",
+    "religion": "NON",
+    "patient_account_num": "M263801738",
+    "ssn_num_patient": "999-99-9999"
+  },
+  "0003.NK1": {
+    "set_id": "1",
+    "name": {
+      "family_name": "ROBBERT",
+      "given_name": "SPARKLES"
+    },
+    "relationship": "SP",
+    "address": {
+      "street_address": "87 ARRIBICA ST",
+      "city": "BISMARK",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "78207",
+      "country": "USA",
+      "county_parish_code": "BEX"
+    },
+    "phone_num": "(210)954-4017"
+  },
+  "0004.NK1": {
+    "set_id": "2",
+    "name": {
+      "family_name": "ROBBERT",
+      "given_name": "SPARKLES"
+    },
+    "relationship": "SP",
+    "address": {
+      "street_address": "87 ARRIBICA ST",
+      "city": "BISMARK",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "78207",
+      "country": "USA",
+      "county_parish_code": "BEX"
+    },
+    "phone_num": "(210)954-4017"
+  },
+  "0005.PV1": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": {
+      "point_of_care": "M.OBED"
+    },
+    "admission_type": "EM",
+    "attending_doctor": {
+      "person_id": "POROB",
+      "family_name": "Parchesi",
+      "given_name": "Bobblin",
+      "degree": "MD"
+    },
+    "referring_doctor": {
+      "person_id": "POROB",
+      "family_name": "Parchesi",
+      "given_name": "Bobblin",
+      "degree": "MD"
+    },
+    "consulting_doctor": {
+      "person_id": "POROB",
+      "family_name": "Parchesi",
+      "given_name": "Bobblin",
+      "degree": "MD"
+    },
+    "hospital_service": "ERS",
+    "admit_source": "PR",
+    "ambulatory_status": "WI",
+    "vip_indicator": "N",
+    "patient_type": "ER",
+    "financial_class": "OC",
+    "servicing_facility": "COCMT",
+    "bed_status": "PREG- CONTRACTIONS 5-7 MINS",
+    "account_status": "REG",
+    "admit_date_time": "201705171512",
+    "other_healthcare_provider": {
+      "person_id": "POROB",
+      "family_name": "Parchesi",
+      "given_name": "Bobblin",
+      "degree": "MD AL1"
+    },
+    "service_episode_description": "1",
+    "service_episode_id": "DA",
+    "unknown": "F001900388^No Known Allergies^^^allergy.id^U^^20160120 ACC^20170517^^11"
+  },
+  "0006.GT1": {
+    "set_id": "1",
+    "guarantor_name": {
+      "family_name": "ROBBERT",
+      "given_name": "STROMEYER",
+      "second_and_further_given_names_or_initials_thereof": "FEZ"
+    },
+    "guarantor_address": {
+      "street_address": "87 ARRIBICA ST",
+      "city": "BISMARK",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "78207",
+      "country": "USA",
+      "county_parish_code": "BEX"
+    },
+    "guarantor_phone_num_home": "(210)954-4017",
+    "guarantor_date_time_of_birth": "19880726",
+    "guarantor_administrative_sex": "F",
+    "guarantor_relationship": "SA",
+    "guarantor_ssn": "638-03-5552",
+    "guarantor_priority": "UNEMPLOYED",
+    "guarantor_employer_name": {
+      "family_name": "NONE",
+      "second_and_further_given_names_or_initials_thereof": "BISMARK",
+      "suffix": "TX",
+      "prefix": "78219"
+    },
+    "guarantor_employer_address": "(999)999-9999",
+    "guarantor_employment_status": "NE"
+  },
+  "0007.GT1": {
+    "set_id": "2",
+    "guarantor_name": {},
+    "guarantor_address": {},
+    "guarantor_employer_name": {}
+  },
+  "0008.IN1": {
+    "set_id": "1",
+    "health_plan_id": "MECD.SUPH",
+    "insurance_company_name": "MEDICAID SUPERIOR HEALTH PLANS",
+    "insurance_company_address": {
+      "street_address": "PO BOX 3003",
+      "city": "FARMINGTON",
+      "state_or_province": "MO",
+      "zip_or_postal_code": "63640-3803"
+    },
+    "insurance_company_phone_num": "(800)218-7508",
+    "group_name": "MEDICAID",
+    "plan_effective_date": "20170501",
+    "name_of_insured": {
+      "family_name": "FEZ",
+      "given_name": "STROMEYER"
+    },
+    "insured_relationship_to_patient": "01",
+    "insured_date_of_birth": "19880726",
+    "policy_num": "525549022",
+    "insured_administrative_sex": "F"
+  },
+  "0009.ZMR": {
+    "unknown": "1^N00685624~W00949651^N00685624~W00949651"
+  },
+  "0010.ZCD": {
+    "unknown": "1^1PAO0V020A^Does the patient wish to OPT OUT of HASA?^N"
+  },
+  "0011.ZCD": {
+    "unknown": "2^1PAO0V021A^Patient has elected to revoke OPT OUT?^N"
+  },
+  "0012.ZCD": {
+    "unknown": "3^1REG0M031A^4. Illness/injury due to work related accident/condition?^N"
+  },
+  "0013.ZCD": {
+    "unknown": "4^1REG0M041A^1. Was illness/injury due to a non-work related accident?^NO"
+  },
+  "0014.ZCD": {
+    "unknown": "5^1REG0M065A^Occurrence Code:^11"
+  },
+  "0015.ZCD": {
+    "unknown": "6^1REG0M066A^Date:^20170517"
+  },
+  "0016.ZCD": {
+    "unknown": "7^1REG0M234A^FC1:^OC"
+  },
+  "0017.ZCD": {
+    "unknown": "8^1REG0R041A^Was the PT referred from, or is the PCP an Urgent Care Center?^N"
+  },
+  "0018.ZCD": {
+    "unknown": "9^ETHNICITY^ETHNICITY^1"
+  },
+  "0019.ZCD": {
+    "unknown": "10^Z.ADDLRACE^ADDITIONAL RACE^W"
+  },
+  "0020.ZIN": {
+    "unknown": "1^SP^MEDICAID SUPERIOR HEALTH^Y^20170517^PPI^^Y^^^^^MECD.SUPH"
+  },
+  "0021.ZCS": {
+    "unknown": "UNEM^NONE^^BISMARK^TX^78219^NE^NONE^NONE^01578"
+  }
+}

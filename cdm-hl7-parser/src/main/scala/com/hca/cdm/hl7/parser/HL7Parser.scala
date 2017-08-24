@@ -28,11 +28,11 @@ import scala.util.{Failure, Success, Try}
   *
   * Transforms Raw HL7 Message into Required Output formats as Per Templates Provided
   */
-class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]]) extends Logg with Serializable {
+class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[String, Array[String]]], filterNullMappings: Boolean = false) extends Logg with Serializable {
 
   require(msgType != null, s"Cannot Register Parser for $msgType")
   require(templateData != null, s"Cannot Register Parser with Templates  $templateData")
-  private lazy val toJson = jsonHandler()
+  private lazy val toJson = jsonHandler(filterNullMappings)
   private lazy val EMPTY = Array.empty[String]
   private lazy val NONE = Map.empty[String, Array[String]]
   private val metrics = new TrieMap[String, Long]
@@ -51,7 +51,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   @throws(classOf[IllegalArgumentException])
   @throws(classOf[AssertionError])
   @throws(classOf[InvalidTemplateFormatException])
-  def transformHL7(hl7Message: String, invalidTemplateAlert: (String, String) => Unit): HL7TransRec = {
+  def transformHL7(hl7Message: String, invalidTemplateAlert: (AnyRef, String) => Unit): HL7TransRec = {
     require(hl7Message != null && !hl7Message.isEmpty, s"Error Nothing to parse $hl7Message")
     assume(isHL7(hl7Message), s"Not a Valid HL7. Check with Facility :: $hl7Message")
     val delim = if (hl7Message contains "\r\n") "\r\n" else "\n"
@@ -293,7 +293,17 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
                       }
                       if (subComponentLayout nonEmpty) componentLayout += componentMapping -> subComponentLayout
                       if (segment.realignColStatus && segment.realignColOption == MOVE) {
-                        fieldLayout += fieldMapping -> componentLayout
+                        if (fieldLayout isDefinedAt fieldMapping) {
+                          val fieldList = new mutable.ListBuffer[Any]
+                          fieldLayout(fieldMapping) match {
+                            case _: mutable.ListBuffer[Any] =>
+                              fieldLayout(fieldMapping).asInstanceOf[mutable.ListBuffer[Any]].foreach(fieldList += _)
+                            case _ =>
+                              fieldList += fieldLayout(fieldMapping)
+                          }
+                          fieldList += componentLayout
+                          fieldLayout update(fieldMapping, fieldList)
+                        } else fieldLayout += fieldMapping -> componentLayout
                         break
                       }
                     } else {
@@ -398,7 +408,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
 
   private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
+                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
     val segment = new Segment
     var mappedColumnData = EMPTYSTR
     try {

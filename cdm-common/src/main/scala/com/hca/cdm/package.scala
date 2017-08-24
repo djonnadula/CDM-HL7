@@ -2,6 +2,7 @@ package com.hca
 
 import java.io.{File, InputStream, PrintStream, Serializable}
 import java.lang.Runtime.{getRuntime => rt}
+import scala.reflect.runtime.universe._
 import java.lang.Thread.UncaughtExceptionHandler
 import java.net.{InetAddress, URL, URLClassLoader}
 import java.nio.charset.StandardCharsets
@@ -21,8 +22,9 @@ import org.apache.commons.lang3.SerializationUtils.{deserialize => des, serializ
 import TimeZone._
 import java.util.UUID.randomUUID
 import scala.collection.JavaConverters._
-import scala.io.Source
-import scala.language.postfixOps
+import scala.io.{BufferedSource, Source}
+import scala.io.Source.fromFile
+import scala.language.{implicitConversions, postfixOps}
 import scala.util.{Random, Try}
 
 /**
@@ -37,11 +39,15 @@ package object cdm extends Logg {
   private var prop: scala.collection.mutable.Map[String, String] = _
   var propFile = "CDMHL7.properties"
   lazy val EMPTYSTR = ""
+  lazy val SPACE = " "
   lazy val AMPERSAND = "&"
   lazy val emptyArray = Array.empty[Any]
   lazy val FS: String = File separator
   lazy val outStream: PrintStream = System out
   private lazy val random = new Random()
+  private val CR: Char = 0x0D.toChar
+  private val LF: Char = 0x0A.toChar
+  lazy val CRLF = s"$EMPTYSTR$CR$LF"
 
 
   def randomString: String = randomUUID.toString
@@ -117,6 +123,19 @@ package object cdm extends Logg {
       info(s"Env on $host")
       sys.env.foreach({ case (k, v) => info(s"$k :: $v") })
     }
+  }
+
+  def readFile(file: String): BufferedSource = {
+    if (lookUpProp("hl7.env") == "LOCAL") {
+      new BufferedSource(currThread.getContextClassLoader.getResourceAsStream(file))
+    } else fromFile(file)
+  }
+
+
+  def loadConfig(config_file: String): Properties = {
+    val config = new Properties()
+    config.load(readFile(config_file).reader())
+    config
   }
 
   def lookUpProp(key: String): String = {
@@ -251,6 +270,10 @@ package object cdm extends Logg {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse default
   }
 
+  def tryAndFallbackTo[T](fun: () => T, fallbackTo : => T): T = {
+    tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse tryAndThrow(fallbackTo, error(_: Throwable))
+  }
+
   def asFunc[T](action: => T): () => T = () => action
 
   def abend(code: Int = -1): Unit = System exit code
@@ -270,7 +293,11 @@ package object cdm extends Logg {
     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
 
+  def typeFromClass[T](clazz: Class[T])(implicit mirror: Mirror): Type = mirror.classSymbol(clazz).toType
+
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
+
+  def trimStr(in :String): String = if(valid(in)) in.trim else EMPTYSTR
 
   private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)

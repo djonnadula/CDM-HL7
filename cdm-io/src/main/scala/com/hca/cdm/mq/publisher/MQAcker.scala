@@ -114,7 +114,7 @@ class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, 
 
 }
 
-object MQAcker {
+object MQAcker extends Logg{
 
   private val lock = new Object()
   private lazy val randomConn = new Random

@@ -51,6 +51,7 @@ object IOConstants {
   val fetchMinBytes: String = "100"
   val fetchMinWait: String = "3000"
   val maxRecSize = "5242880"
+  val reconnectBackoff = "500"
   val requestMaxSize: String = Int.MaxValue.toString
 
   def defaultClientId: String = "CDM-HL7-" + InetAddress.getLocalHost.getHostName + "-" + random.nextLong

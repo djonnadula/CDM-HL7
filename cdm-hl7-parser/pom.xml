@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdm-hl7-parser</artifactId>
@@ -16,6 +16,18 @@
         <dependency>
             <groupId>com.hca</groupId>
             <artifactId>cdm-common</artifactId>
+            <version>${cdm.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hca</groupId>
+            <artifactId>cdm-io</artifactId>
+            <version>${cdm.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hca</groupId>
+            <artifactId>cdm-models</artifactId>
             <version>${cdm.version}</version>
         </dependency>
 

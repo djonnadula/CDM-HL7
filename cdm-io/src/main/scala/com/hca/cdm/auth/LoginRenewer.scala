@@ -1,5 +1,6 @@
 package com.hca.cdm.auth
 
+import java.io.{DataInputStream, InputStream}
 import java.util.concurrent.TimeUnit._
 import com.hca.cdm.{lookUpProp, _}
 import com.hca.cdm.log.Logg
@@ -14,6 +15,7 @@ import java.security.PrivilegedExceptionAction
 import com.hca.cdm.exception.CdmException
 import org.apache.hadoop.mapred.Master
 import org.apache.spark.SparkConf
+import org.apache.hadoop.security.token.{Token, TokenIdentifier}
 
 /**
   * Created by Devaraj Jonnadula on 2/15/2017.
@@ -61,6 +63,7 @@ private[cdm] object LoginRenewer extends Logg {
     info(s"Logging $principal with KeyTab $keyTab")
     config.foreach(cfg => UGI.setConfiguration(cfg))
     val currUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keyTab)
+    UGI.getCurrentUser.addCredentials(currUser.getCredentials)
     if (currUser != null) return true
     false
   }
@@ -72,17 +75,13 @@ private[cdm] object LoginRenewer extends Logg {
   }
 
   private def credentialFile(stagingDir: String, suffix: String = s"Credentials"): Path = {
-    UGI.getCurrentUser.doAs(new PrivilegedExceptionAction[Path] {
-      override def run(): Path = {
-        val conf = hdpUtil.conf
-        fs = FileSystem.get(conf)
-        val crPath = new Path(s"$stagingDir$FS$app-$suffix")
-        fs.createNewFile(crPath)
-        hdfsConf = byPassConfig(crPath.toUri.getScheme, hdpUtil.conf)
-        fs = FileSystem.get(hdfsConf)
-        crPath
-      }
-    })
+    val conf = hdpUtil.conf
+    fs = FileSystem.get(conf)
+    val crPath = new Path(s"$stagingDir$FS$app-$suffix")
+    fs.createNewFile(crPath)
+    hdfsConf = byPassConfig(crPath.toUri.getScheme, hdpUtil.conf)
+    fs = FileSystem.get(hdfsConf)
+    crPath
   }
 
   private def haNameNodes(conf: SparkConf): Set[Path] = {
@@ -113,14 +112,17 @@ private[cdm] object LoginRenewer extends Logg {
 
   private def refreshFsTokens(nameNodes: Set[Path], credentials: Credentials): Unit = {
     val renewer = yrnUtil.getTokenRenewer(hdfsConf)
-      //Master.getMasterPrincipal(hdfsConf)
+    //Master.getMasterPrincipal(hdfsConf)
     info("Renewer for Credentials " + renewer)
     nameNodes.foreach(node => {
       val dfs = node.getFileSystem(hdfsConf)
       try {
         val token = dfs.addDelegationTokens(renewer, credentials)
         info(s"Refreshed Tokens for File System $node ")
-        token.foreach { tkn => info(s"Refreshed Tokens ${tkn.getService} ${tkn.getKind} ${tkn.getIdentifier.mkString}") }
+        token.foreach { tkn =>
+          info(s"Refreshed Tokens ${tkn.getService} ${tkn.getKind} ${tkn.getIdentifier.mkString}")
+          credentials.addToken(tkn.getService, tkn.asInstanceOf[Token[TokenIdentifier]])
+        }
       }
       catch {
         case t: Throwable => debug(s"cannot Refresh Tokens for $node & FileSystem $dfs", t)
@@ -130,15 +132,18 @@ private[cdm] object LoginRenewer extends Logg {
 
   private def accessCredentials(credentialFile: String): Unit = {
     val credentialPath = new Path(credentialFile)
+    var stream: DataInputStream = null
     if (fs.exists(credentialPath) && fs.getFileStatus(credentialPath).getLen > 0) {
       val cred = new Credentials()
-      cred.readTokenStorageStream(fs.open(credentialPath))
+      stream = fs.open(credentialPath)
+      cred.readTokenStorageStream(stream)
       info(s"Before Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
       info(s"Credentials found ${cred.getAllTokens}")
       UGI.getCurrentUser.addCredentials(cred)
       info(s"After Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
     } else {
       info(s"Credential File $credentialFile not updated will try in next cycle")
+      closeResource(stream)
     }
   }
 
@@ -149,11 +154,11 @@ private[cdm] object LoginRenewer extends Logg {
     loggedUser.doAs(new PrivilegedExceptionAction[Void] {
       override def run(): Void = {
         refreshFsTokens(nns + credentialsFile.getParent, cred)
-        cred.writeTokenStorageFile(credentialsFile, hdfsConf)
-        UGI.getCurrentUser.addCredentials(cred)
         null
       }
     })
+    UGI.getCurrentUser.addCredentials(cred)
+    cred.writeTokenStorageFile(credentialsFile, hdfsConf)
   }
 
   private def sHook(): Unit = registerHook(newThread(s"$app-Login-Renewer-SHook", runnable(stop())))

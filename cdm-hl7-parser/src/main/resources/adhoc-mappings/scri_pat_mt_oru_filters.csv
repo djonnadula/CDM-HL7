@@ -1,0 +1,3 @@
+OBR,result_status,SOUT,CONTAINS,OR
+OBR,result_status,FOUT,CONTAINS,AND
+MSH,message_control_id,MT,STARTSWITH,NONE
