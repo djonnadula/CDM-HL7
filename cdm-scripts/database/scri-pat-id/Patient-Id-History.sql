@@ -107,7 +107,7 @@ pid_pat_address_zip_postal_code as pid_pat_address_zip_postal_code,
 '' as message_created_date_time,
 'PAT' as message_flag,
 '' as attending_physician,
-'' as meditech_network_ID,
+'' as meditech_network_id,
 etl_insert_date_time as etl_insert_date_time,
 message_type as message_type,
 transaction_date as transaction_date
