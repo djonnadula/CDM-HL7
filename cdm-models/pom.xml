@@ -34,8 +34,10 @@
                         </goals>
                         <configuration>
                             <createSetters>true</createSetters>
-                            <sourceDirectory>/src/main/avro/</sourceDirectory>
-                            <outputDirectory>/src/main/java/</outputDirectory>
+                            <fieldVisibility>private</fieldVisibility>
+                            <stringType>String</stringType>
+                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
