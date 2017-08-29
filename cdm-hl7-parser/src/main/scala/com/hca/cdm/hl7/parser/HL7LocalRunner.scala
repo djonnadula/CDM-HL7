@@ -54,7 +54,7 @@ object HL7LocalRunner extends App with Logg {
       map match {
         case Left(out) =>
           info("json: " + out._1)
-          segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination,Some(tlmAckIO))(out._2, out._3)
+          segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination,Some(tlmAckIO))(out._2, "",  out._3)
         case Right(t) =>
           error(t);
       }

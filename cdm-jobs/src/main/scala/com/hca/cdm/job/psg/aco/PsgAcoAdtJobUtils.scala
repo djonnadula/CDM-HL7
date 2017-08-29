@@ -2,11 +2,9 @@ package com.hca.cdm.job.psg.aco
 
 import java.io.{BufferedReader, InputStreamReader}
 
-import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.log.Logg
 import org.apache.hadoop.fs.{FileSystem, Path}
 
-import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -40,7 +38,7 @@ object PsgAcoAdtJobUtils extends Logg {
               case Success(eventType) =>
                 info(s"Found an event type: $eventType")
                 val indexExists = adtTypes.contains(eventType)
-                info(s"indexExists: $indexExists")
+                debug(s"indexExists: $indexExists")
                 indexExists
               case Failure(t) =>
                 warn("MSH Segment does not contain an event type")
@@ -63,7 +61,7 @@ object PsgAcoAdtJobUtils extends Logg {
           case Success(targetIndex) =>
             info(s"Found index: $targetIndex")
             val indexExists = compareArray.contains(targetIndex)
-            info(s"indexExists: $indexExists")
+            debug(s"indexExists: $indexExists")
             indexExists
           case Failure(t) =>
             warn("Segment does not contain target index")
@@ -82,7 +80,7 @@ object PsgAcoAdtJobUtils extends Logg {
           case Success(targetIndex) =>
             info(s"Found index: $targetIndex")
             val indexExists = compareArray.exists(t => targetIndex.toUpperCase().contains(t.toString.toUpperCase()))
-            info(s"indexExists: $indexExists")
+            debug(s"indexExists: $indexExists")
             indexExists
           case Failure(t) =>
             warn("Segment does not contain matching string name")
@@ -114,7 +112,7 @@ object PsgAcoAdtJobUtils extends Logg {
   def getField(segment: Array[String], delimiter: String, index: Int): String = {
     segment.headOption match {
       case Some(seg) =>
-        info(s"current seg: $seg")
+        debug(s"current seg: $seg")
         splitAndReturn(seg, delimiter, index) match {
           case Success(targetIndex) =>
             info(s"Found targetIndex")

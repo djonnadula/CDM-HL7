@@ -571,6 +571,7 @@ package object model extends Logg {
   }
 
   def loadTemplate(template: String = "templateinfo.properties", delimitedBy: String = COMMA): Map[String, Map[String, Array[String]]] = {
+    println("template:" + template)
     loadFile(template).map(file => {
       val reader = readFile(file._2).bufferedReader()
       val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList map (x => x split(delimitedBy, -1)) takeWhile (valid(_)) map (splits => {
