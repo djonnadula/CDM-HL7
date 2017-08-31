@@ -12,9 +12,9 @@ import com.hca.cdm.job.psg.aco.PsgAcoAdtJobUtils._
 import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.kafka.config.HL7ProducerConfig._
 import com.hca.cdm.log.Logg
-import com.hca.cdm.mq.publisher.MQAcker
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.tcp.AkkaTcpClient
+import com.hca.cdm.tcp.AkkaTcpClient.{Ping, SendMessage}
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.StreamingContext
@@ -64,8 +64,27 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val begin_of_message: Char = 0x0b
   private lazy val end_of_segment: Char = 0x1c
   private lazy val end_of_message: Char = 0x0d
-  private lazy val actorSys = ActorSystem.create("PSGActorSystem")
-  private lazy val tcpActor = actorSys.actorOf(AkkaTcpClient.props(new InetSocketAddress(cloverleafAddr, cloverleafPort)), "tcpActor")
+  private lazy val testMessage = "MSH|^~\\&||COCSZ|||201702072335||ADT^A08|MT_COCSZ_ADT_SZGTADM.1.32377292|P|2.1\r" +
+    "EVN|A08|201702072335|||R.SZ.GDE^ESTILLORE^GERELI^D^^^000D\r" +
+    "PID|1||D002403639|D1676444|JONES^ZAYQUAN^A^^^||19970109|M|^^^^^|B|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK||(702)999-9999|(702)999-9999|ENG|S|NON|D00115310916|\r" +
+    "NK1|1|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
+    "NK1|2|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
+    "PV1|1|E|D.ER^^|EM|||EMEGA^Emery^Garrett^J^^^MD|.SELF^REFERRED^SELF^^^^|.NO PCP^PHYSICIAN^NO^PRIMARY OR FAMILY^^^|ERS||||PR|AMB|N||ER||99|||||||||||||||||||COCSZ|FRENCH FRY IN THROAT, ABCD WNL, ACUITY 3|REG|||201702072215\r" +
+    "AL1|1|DA|F001900388^No Known Allergies^No Known Allergies|U||20170207\r" +
+    "ACC|20170207^|11\r" +
+    "GT1|1||JONES^ZAYQUAN^A^^^||999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999||19970109|M||SA||||UNKNOWN|UNKNOWNN^^LAS VEGAS^NV^89148|(702)999-9999|||N\r" +
+    "GT1|2||^^^^^||^^^^^^^^|||||||||||^^^^\r" +
+    "IN1|1|MEDNVPA||MEDICAID PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
+    "IN1|2|CHAX050||CHARITY PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
+    "IN1|3|UNINSURED||UNINSURED DISCOUNT PLAN|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
+    "ZCD|1|ETHNICITY^ETHNICITY^2\r" +
+    "ZCD|2|ZSS.DEPREQ^DEPOSIT REQ?^N\r" +
+    "ZCD|3|ZSS.ESTCHG^EST PT DUE^200.00\r" +
+    "ZCD|4|ZSS.UNABLE^Comment if FULL amt requested NOT collected^PAY AT FAC\r" +
+    "ZIN|1|SP|MEDICAID PENDING|N||||N|||||MEDNVPA\r" +
+    "ZIN|2|SP|SELF PAY|N||||N|||||CHAX050\r" +
+    "ZIN|3|SP|UNINSURED DISCOUNT PLAN|N||||N|||||UNINSURED\r" +
+    "ZCS|UNK|UNKNOWN^^LAS VEGAS^NV^89148|N|NONE|NONE|01541\r"
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()
@@ -93,27 +112,8 @@ object PsgAcoAdtJob extends Logg with App {
     info("kafkaConsumerProp: " + kafkaConsumerProp)
     info("subscribed topics: " + topicsToSubscribe.mkString(","))
     info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
-//    val testMessage = "MSH|^~\\&||COCSZ|||201702072335||ADT^A08|MT_COCSZ_ADT_SZGTADM.1.32377292|P|2.1\r" +
-//      "EVN|A08|201702072335|||R.SZ.GDE^ESTILLORE^GERELI^D^^^000D\r" +
-//      "PID|1||D002403639|D1676444|JONES^ZAYQUAN^A^^^||19970109|M|^^^^^|B|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK||(702)999-9999|(702)999-9999|ENG|S|NON|D00115310916|\r" +
-//      "NK1|1|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
-//      "NK1|2|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
-//      "PV1|1|E|D.ER^^|EM|||EMEGA^Emery^Garrett^J^^^MD|.SELF^REFERRED^SELF^^^^|.NO PCP^PHYSICIAN^NO^PRIMARY OR FAMILY^^^|ERS||||PR|AMB|N||ER||99|||||||||||||||||||COCSZ|FRENCH FRY IN THROAT, ABCD WNL, ACUITY 3|REG|||201702072215\r" +
-//      "AL1|1|DA|F001900388^No Known Allergies^No Known Allergies|U||20170207\r" +
-//      "ACC|20170207^|11\r" +
-//      "GT1|1||JONES^ZAYQUAN^A^^^||999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999||19970109|M||SA||||UNKNOWN|UNKNOWNN^^LAS VEGAS^NV^89148|(702)999-9999|||N\r" +
-//      "GT1|2||^^^^^||^^^^^^^^|||||||||||^^^^\r" +
-//      "IN1|1|MEDNVPA||MEDICAID PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-//      "IN1|2|CHAX050||CHARITY PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-//      "IN1|3|UNINSURED||UNINSURED DISCOUNT PLAN|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-//      "ZCD|1|ETHNICITY^ETHNICITY^2\r" +
-//      "ZCD|2|ZSS.DEPREQ^DEPOSIT REQ?^N\r" +
-//      "ZCD|3|ZSS.ESTCHG^EST PT DUE^200.00\r" +
-//      "ZCD|4|ZSS.UNABLE^Comment if FULL amt requested NOT collected^PAY AT FAC\r" +
-//      "ZIN|1|SP|MEDICAID PENDING|N||||N|||||MEDNVPA\r" +
-//      "ZIN|2|SP|SELF PAY|N||||N|||||CHAX050\r" +
-//      "ZIN|3|SP|UNINSURED DISCOUNT PLAN|N||||N|||||UNINSURED\r" +
-//      "ZCS|UNK|UNKNOWN^^LAS VEGAS^NV^89148|N|NONE|NONE|01541\r"
+
+
 //    val tcpListener = actorSys.actorOf(AkkaTcpListener.props(), "listenerActor")
 //    val msg = new StringBuilder()
 //    msg.append(begin_of_message).append(testMessage).append(end_of_segment).append(end_of_message)
@@ -134,6 +134,11 @@ object PsgAcoAdtJob extends Logg with App {
         rdd foreachPartitionAsync (dataItr => {
           if (dataItr.nonEmpty) {
             propFile = confFile
+            val actorSys = ActorSystem.create("PSGActorSystem")
+            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(new InetSocketAddress(cloverleafAddr, cloverleafPort)), "tcpActor")
+//            val tcpManager = actorSys.actorSelection("akka://PSGActorSystem/system/IO-TCP")
+
+            info("tcpActor.path: " + tcpActor.path.toString)
 //            val auditOut = auditTopic
 //            val maxMessageSize = self.maxMessageSize
 //            val prodConf = kafkaProducerConf
@@ -143,6 +148,7 @@ object PsgAcoAdtJob extends Logg with App {
             val delim = if (message contains "\r\n") "\r\n" else "\n"
             trySplit(message, delim) match {
               case Success(splitted) =>
+
                 val msh = segment(splitted, MSH)
                 val pv1 = segment(splitted, PV1)
                 val primaryIn1 = segment(splitted, PRIMARY_IN1)
@@ -151,17 +157,20 @@ object PsgAcoAdtJob extends Logg with App {
                 primaryIn1.foreach(seg => debug("IN1: " + seg))
                 if (eventTypeMatch(msh, adtTypes)) {
                   info(s"Message event type matches")
+//                  tcpManager ! Connect(new InetSocketAddress(cloverleafAddr, cloverleafPort))
+//                  tcpActor ! Connected(new InetSocketAddress(cloverleafAddr, cloverleafPort), null)
+                  tcpActor ! Ping("ping")
+
+
                   if (singleFieldMatch(msh, facArray, "\\|", 3)) {
                     info("Message facility type matches")
-//                    val promise = Promise[String]()
-                    // val akkaTcpClient = new AkkaTcpClient(new InetSocketAddress(cloverleafAddr, cloverleafPort), "test", promise, replies)
-                   // val akkaProps = Props(classOf[AkkaTcpClient], new InetSocketAddress(cloverleafAddr, cloverleafPort), "test")
+                    val msg1 = new StringBuilder()
+                    msg1.append(begin_of_message).append(testMessage).append(end_of_segment).append(end_of_message)
 
-//                    tcpActor ! Write(ByteString("hello world"))
-//                    promise.future.map { data =>
-//                      tcpActor ! "close"
-//                      info("closed tcpActor")
-//                    }
+                    info("connecting from job")
+//                    tcpManager ! Connect(new InetSocketAddress(cloverleafAddr, cloverleafPort))
+                    tcpActor ! SendMessage(ByteString(msg1.toString()))
+
                     if (singleFieldMatch(primaryIn1, insuranceArray, "\\|", 36) &&
                       (stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 4) ||
                       stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 9))) {
@@ -208,9 +217,9 @@ object PsgAcoAdtJob extends Logg with App {
                       debug(s"Message to send: $finalMessage")
                       if (mqQueue.isDefined) {
                         try{
-                          val msg = new StringBuilder()
-                          msg.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
-                          tcpActor ! ByteString(msg.toString())
+//                          val msg = new StringBuilder()
+//                          msg.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
+//                          tcpActor ! ByteString(msg.toString())
 
 //                          val promise = Promise[String]()
 //                          val akkaProps = Props(classOf[AkkaTcpClient], new InetSocketAddress(cloverleafAddr, cloverleafPort), promise)
@@ -220,8 +229,8 @@ object PsgAcoAdtJob extends Logg with App {
 //                            tcpActor ! "close"
 //                            info("closed tcpActor")
 //                          }
-                          MQAcker(app, app)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), mqQueue.get)
-                          MQAcker.ackMessage(finalMessage, "PSG-ACO-ADT")
+//                          MQAcker(app, app)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), mqQueue.get)
+//                          MQAcker.ackMessage(finalMessage, "PSG-ACO-ADT")
 
                           // tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"ADT-PSG-ACO", error(_: Throwable))
                         } catch {
