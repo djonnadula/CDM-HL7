@@ -15,8 +15,10 @@ import com.hca.cdm.tcp.AkkaTcpClient.{Ping, SendMessage}
 //}
 
 object AkkaTcpClient {
-  def props(remote: InetSocketAddress) = {
-    Props(classOf[AkkaTcpClient], remote)
+  var prop : Props = _
+  def props(host :String,port :Int) = {
+    if(prop == null) prop = Props(classOf[AkkaTcpClient], new InetSocketAddress(host,port))
+    prop
   }
 
   final case class SendMessage(message: ByteString)

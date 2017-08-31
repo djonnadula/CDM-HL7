@@ -135,7 +135,7 @@ object PsgAcoAdtJob extends Logg with App {
           if (dataItr.nonEmpty) {
             propFile = confFile
             val actorSys = ActorSystem.create("PSGActorSystem")
-            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(new InetSocketAddress(cloverleafAddr, cloverleafPort)), "tcpActor")
+            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(cloverleafAddr, cloverleafPort), "tcpActor")
 //            val tcpManager = actorSys.actorSelection("akka://PSGActorSystem/system/IO-TCP")
 
             info("tcpActor.path: " + tcpActor.path.toString)
