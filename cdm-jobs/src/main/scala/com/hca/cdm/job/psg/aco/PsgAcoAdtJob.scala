@@ -134,8 +134,8 @@ object PsgAcoAdtJob extends Logg with App {
         rdd foreachPartitionAsync (dataItr => {
           if (dataItr.nonEmpty) {
             propFile = confFile
-            val actorSys = ActorSystem.create("PSGActorSystem")
-            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(cloverleafAddr, cloverleafPort), "tcpActor")
+            //val actorSys = ActorSystem.create("PSGActorSystem")
+            val tcpActor = AkkaTcpClient.actorSys(cloverleafAddr, cloverleafPort)
 //            val tcpManager = actorSys.actorSelection("akka://PSGActorSystem/system/IO-TCP")
 
             info("tcpActor.path: " + tcpActor.path.toString)
