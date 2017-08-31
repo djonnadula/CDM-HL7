@@ -47,7 +47,7 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable
-import  TimeUnit._
+import TimeUnit._
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -541,7 +541,7 @@ object HL7Job extends Logg with App {
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
-      if(firstStage) {
+      if (firstStage) {
         runningStage = stageSubmitted.stageInfo
         firstStage = false
       }
@@ -576,7 +576,7 @@ object HL7Job extends Logg with App {
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
-    val timeCheck: Long = MILLISECONDS.convert(timeInterval,MINUTES)
+    val timeCheck: Long = MILLISECONDS.convert(timeInterval, MINUTES)
     val lowFrequencyHl7AlertInterval: Int = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
@@ -614,7 +614,7 @@ object HL7Job extends Logg with App {
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
             " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check " +
-            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds,MILLISECONDS)+ " seconds" + "\n\n" + EVENT_TIME
+            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds, MILLISECONDS) + " seconds" + "\n\n" + EVENT_TIME
           , CRITICAL)
       }
     }

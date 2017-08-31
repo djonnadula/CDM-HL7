@@ -9,7 +9,7 @@
 
     <check level="error" class="org.scalastyle.file.WhitespaceEndOfLineChecker" enabled="true"/>
 
-    <check level="error" class="org.scalastyle.file.FileLineLengthChecker" enabled="true">
+    <check level="error" class="org.scalastyle.file.FileLineLengthChecker" enabled="false">
         <parameters>
             <parameter name="maxLineLength"><![CDATA[200]]></parameter>
             <parameter name="tabSize"><![CDATA[2]]></parameter>
@@ -49,7 +49,7 @@
 
     <check level="error" class="org.scalastyle.scalariform.UppercaseLChecker" enabled="true"/>
 
-    <check level="error" class="org.scalastyle.scalariform.IfBraceChecker" enabled="true">
+    <check level="warning" class="org.scalastyle.scalariform.IfBraceChecker" enabled="true">
         <parameters>
             <parameter name="singleLineAllowed"><![CDATA[true]]></parameter>
             <parameter name="doubleLineAllowed"><![CDATA[true]]></parameter>

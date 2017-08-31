@@ -112,7 +112,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   private def refreshFsTokens(nameNodes: Set[Path], credentials: Credentials): Unit = {
     val renewer = yrnUtil.getTokenRenewer(hdfsConf)
-    //Master.getMasterPrincipal(hdfsConf)
+    // Master.getMasterPrincipal(hdfsConf)
     info("Renewer for Credentials " + renewer)
     nameNodes.foreach(node => {
       val dfs = node.getFileSystem(hdfsConf)
