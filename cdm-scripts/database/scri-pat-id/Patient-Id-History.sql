@@ -5,9 +5,9 @@ set hive.exec.max.dynamic.partitions=10000;
 set hive.exec.max.dynamic.partitions.pernode=10000;
 set hive.stats.autogather = false;
 
-Drop  Table if exists cdm_scri.scri_patient_id_history_3 PURGE;
+Drop  Table if exists cdm_scri.scri_patient_id_history_962017 PURGE;
 
-CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history_3(
+CREATE EXTERNAL TABLE cdm_scri.scri_patient_id_history_962017(
   msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',
   msh_sending_facility STRING COMMENT 'Mnemonic that is associated to the sending facility of the message',
   pid_medical_record_num STRING COMMENT 'MRN associated to the message',
@@ -61,7 +61,7 @@ WITH SERDEPROPERTIES ('field.delim'='|','serialization.format'='|')
 STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.SequenceFileInputFormat'
 OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat';
 
-INSERT INTO cdm_scri.scri_patient_id_history_3 PARTITION(message_type,transaction_date)
+INSERT INTO cdm_scri.scri_patient_id_history_962017 PARTITION(message_type,transaction_date)
 SELECT
 msh_msg_control_id as msh_msg_control_id,
 msh_sending_facility as msh_sending_facility,
