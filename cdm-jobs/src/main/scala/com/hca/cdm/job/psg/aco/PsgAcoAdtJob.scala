@@ -1,7 +1,6 @@
 package com.hca.cdm.job.psg.aco
 
 import java.lang.System.{getenv => fromEnv}
-import java.net.InetSocketAddress
 import java.util.Date
 
 import akka.actor.ActorSystem
@@ -14,7 +13,7 @@ import com.hca.cdm.kafka.config.HL7ProducerConfig._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.tcp.AkkaTcpClient
-import com.hca.cdm.tcp.AkkaTcpClient.{Ping, SendMessage}
+import com.hca.cdm.tcp.AkkaTcpClient.SendMessage
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.StreamingContext
@@ -61,6 +60,7 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val kafkaProducerConf = createConfig(auditTopic)
   private lazy val cloverleafAddr = lookUpProp("PSGACOADT.cloverleaf.addr")
   private lazy val cloverleafPort = lookUpProp("PSGACOADT.cloverleaf.port").toInt
+  private lazy val tcpConWaitTime = lookUpProp("PSGACOADT.tcp.conn.wait.time").toLong
   private lazy val begin_of_message: Char = 0x0b
   private lazy val end_of_segment: Char = 0x1c
   private lazy val end_of_message: Char = 0x0d
@@ -84,7 +84,8 @@ object PsgAcoAdtJob extends Logg with App {
     "ZIN|1|SP|MEDICAID PENDING|N||||N|||||MEDNVPA\r" +
     "ZIN|2|SP|SELF PAY|N||||N|||||CHAX050\r" +
     "ZIN|3|SP|UNINSURED DISCOUNT PLAN|N||||N|||||UNINSURED\r" +
-    "ZCS|UNK|UNKNOWN^^LAS VEGAS^NV^89148|N|NONE|NONE|01541\r"
+    "ZCS|UNK|UNKNOWN^^LAS VEGAS^NV^89148|N|NONE|NONE|01541"
+  private var count = 0
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()
@@ -112,14 +113,6 @@ object PsgAcoAdtJob extends Logg with App {
     info("kafkaConsumerProp: " + kafkaConsumerProp)
     info("subscribed topics: " + topicsToSubscribe.mkString(","))
     info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
-
-
-//    val tcpListener = actorSys.actorOf(AkkaTcpListener.props(), "listenerActor")
-//    val msg = new StringBuilder()
-//    msg.append(begin_of_message).append(testMessage).append(end_of_segment).append(end_of_message)
-//    val tcpActor = actorSys.actorOf(AkkaTcpClient.props(new InetSocketAddress(cloverleafAddr, cloverleafPort), msg.toString()), "tcpActor")
-//    info("tcpActor.path: " + tcpActor.path)
-//    tcpListener ! Write(ByteString(msg.toString()))
     streamLine foreachRDD (rdd => {
       val confFile = config_file
       var messagesInRDD = 0L
@@ -131,15 +124,17 @@ object PsgAcoAdtJob extends Logg with App {
       })
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
-        rdd foreachPartitionAsync (dataItr => {
+        rdd foreachPartitionAsync  (dataItr => {
           if (dataItr.nonEmpty) {
             propFile = confFile
+//            val actorSys = actorSystem
+            count += 1
             val actorSys = ActorSystem.create("PSGActorSystem")
-            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(cloverleafAddr, cloverleafPort), "tcpActor")
-//            val tcpManager = actorSys.actorSelection("akka://PSGActorSystem/system/IO-TCP")
-
-            info("tcpActor.path: " + tcpActor.path.toString)
-//            val auditOut = auditTopic
+            val msg2 = new StringBuilder()
+            msg2.append(begin_of_message).append(testMessage).append(count).append("\r").append(end_of_segment).append(end_of_message)
+            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(cloverleafAddr, cloverleafPort, tcpConWaitTime, msg2.toString()) , "tcpActor")
+            info("tcpActor.path: " + tcpActor.path)
+            //            val auditOut = auditTopic
 //            val maxMessageSize = self.maxMessageSize
 //            val prodConf = kafkaProducerConf
 //            val kafkaOut = KafkaProducerHandler()(prodConf)
@@ -157,20 +152,8 @@ object PsgAcoAdtJob extends Logg with App {
                 primaryIn1.foreach(seg => debug("IN1: " + seg))
                 if (eventTypeMatch(msh, adtTypes)) {
                   info(s"Message event type matches")
-//                  tcpManager ! Connect(new InetSocketAddress(cloverleafAddr, cloverleafPort))
-//                  tcpActor ! Connected(new InetSocketAddress(cloverleafAddr, cloverleafPort), null)
-                  tcpActor ! Ping("ping")
-
-
                   if (singleFieldMatch(msh, facArray, "\\|", 3)) {
                     info("Message facility type matches")
-                    val msg1 = new StringBuilder()
-                    msg1.append(begin_of_message).append(testMessage).append(end_of_segment).append(end_of_message)
-
-                    info("connecting from job")
-//                    tcpManager ! Connect(new InetSocketAddress(cloverleafAddr, cloverleafPort))
-                    tcpActor ! SendMessage(ByteString(msg1.toString()))
-
                     if (singleFieldMatch(primaryIn1, insuranceArray, "\\|", 36) &&
                       (stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 4) ||
                       stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 9))) {
@@ -217,6 +200,11 @@ object PsgAcoAdtJob extends Logg with App {
                       debug(s"Message to send: $finalMessage")
                       if (mqQueue.isDefined) {
                         try{
+                          val msg1 = new StringBuilder()
+                          msg1.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
+//                          tcpActor ! Ping("hello")
+                          Thread.sleep(tcpConWaitTime)
+                          tcpActor ! SendMessage(ByteString(msg1.toString()))
 //                          val msg = new StringBuilder()
 //                          msg.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
 //                          tcpActor ! ByteString(msg.toString())
