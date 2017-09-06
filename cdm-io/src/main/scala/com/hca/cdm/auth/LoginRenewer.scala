@@ -16,7 +16,8 @@ import com.hca.cdm.exception.CdmException
 import org.apache.hadoop.mapred.Master
 import org.apache.spark.SparkConf
 import org.apache.hadoop.security.token.{Token, TokenIdentifier}
-
+import org.apache.hadoop.hbase.security.token.TokenUtil._
+import org.apache.hadoop.security.token.{Token, TokenIdentifier}
 /**
   * Created by Devaraj Jonnadula on 2/15/2017.
   */
@@ -151,9 +152,12 @@ private[cdm] object LoginRenewer extends Logg {
     UGI.setConfiguration(hdfsConf)
     val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keytab)
     val cred = loggedUser.getCredentials
+    //noinspection ScalaDeprecation
     loggedUser.doAs(new PrivilegedExceptionAction[Void] {
       override def run(): Void = {
         refreshFsTokens(nns + credentialsFile.getParent, cred)
+        val hBaseToken = obtainToken(hdfsConf)
+        if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
         null
       }
     })

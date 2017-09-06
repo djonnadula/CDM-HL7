@@ -183,6 +183,7 @@ package object model extends Logg {
     val KAFKA = Value("KAFKA")
     val WSMQ = Value("WSMQ")
     val DEFAULT = Value("KAFKA")
+    val HBASE = Value("HBASE")
   }
 
   def applyAvroData(container: Record, key: String, value: AnyRef): Unit = {

@@ -11,7 +11,7 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA}
+import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA, SEMICOLUMN}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.io.Source
@@ -125,7 +125,7 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
     .setConf("spark.yarn.access.namenodes", lookUpProp("secure.name.nodes"))
   private lazy val extraConfig = () => lookUpProp("spark.extra.config")
-  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
+  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(SEMICOLUMN, -1).foreach(conf => {
     if (valid(conf)) {
       val actConf = conf.split(COLON)
       if (valid(actConf, 2)) sparkLauncher.setConf(actConf(0), actConf(1))
