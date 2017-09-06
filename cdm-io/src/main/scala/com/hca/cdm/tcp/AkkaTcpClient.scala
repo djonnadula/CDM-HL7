@@ -2,14 +2,24 @@ package com.hca.cdm.tcp
 
 import java.net.InetSocketAddress
 
-import akka.actor.{Actor, Props}
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.io.{IO, Tcp}
 import akka.util.ByteString
 import com.hca.cdm.log.Logg
+import com.hca.cdm.tcp.AkkaTcpClient.{Ping, SendMessage, sys}
+
+//object AkkaTcpClient {
+//  def props(remote: InetSocketAddress, message: String) = {
+//    Props(classOf[AkkaTcpClient], remote, message)
+//  }
+//}
 
 object AkkaTcpClient {
-  def props(host :String, port :Int, sleepTime: Long, message: String) = {
-    Props(classOf[AkkaTcpClient], new InetSocketAddress(host, port), sleepTime, message)
+  var sys : ActorRef = _
+
+  def actorSys(host :String,port :Int): ActorRef = synchronized{
+      if(sys == null) sys = ActorSystem.create("PSGActorSystem").actorOf(Props(classOf[AkkaTcpClient], new InetSocketAddress(host,port)))
+        sys
   }
 
   final case class SendMessage(message: ByteString)

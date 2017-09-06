@@ -135,6 +135,7 @@ object PsgAcoAdtJob extends Logg with App {
             val tcpActor = actorSys.actorOf(AkkaTcpClient.props(cloverleafAddr, cloverleafPort, tcpConWaitTime, msg2.toString()) , "tcpActor")
             info("tcpActor.path: " + tcpActor.path)
             //            val auditOut = auditTopic
+
 //            val maxMessageSize = self.maxMessageSize
 //            val prodConf = kafkaProducerConf
 //            val kafkaOut = KafkaProducerHandler()(prodConf)
