@@ -2,11 +2,11 @@ package com.hca.cdm.tcp
 
 import java.net.InetSocketAddress
 
-import akka.actor.{Actor, ActorRef, ActorSystem, Props}
+import akka.actor.{Actor, ActorRef, Props}
 import akka.io.{IO, Tcp}
 import akka.util.ByteString
 import com.hca.cdm.log.Logg
-import com.hca.cdm.tcp.AkkaTcpClient.{Ping, SendMessage, sys}
+import com.hca.cdm.tcp.AkkaTcpClient.SendMessage
 
 //object AkkaTcpClient {
 //  def props(remote: InetSocketAddress, message: String) = {
@@ -17,9 +17,8 @@ import com.hca.cdm.tcp.AkkaTcpClient.{Ping, SendMessage, sys}
 object AkkaTcpClient {
   var sys : ActorRef = _
 
-  def actorSys(host :String,port :Int): ActorRef = synchronized{
-      if(sys == null) sys = ActorSystem.create("PSGActorSystem").actorOf(Props(classOf[AkkaTcpClient], new InetSocketAddress(host,port)))
-        sys
+  def props(host: String, port :Int, sleepTime: Long, message: String): Props = {
+    Props(classOf[AkkaTcpClient], new InetSocketAddress(host, port), sleepTime, message)
   }
 
   final case class SendMessage(message: ByteString)
@@ -53,16 +52,16 @@ class AkkaTcpClient(remote: InetSocketAddress, sleepTime: Long, message: String)
       connection ! Register(self, keepOpenOnPeerClosed = true)
 
 //      Thread.sleep(sleepTime)
-      info("Sending message")
-      info(message)
-      connection ! Write(ByteString(message))
-      info("Sleeping for "+ sleepTime)
-      Thread.sleep(sleepTime)
+//      info("Sending message")
+//      info(message)
+//      connection ! Write(ByteString(message))
+//      info("Sleeping for "+ sleepTime)
+//      Thread.sleep(sleepTime)
 
       context become {
-//        case SendMessage(mes) =>
-//          info("Sending message: " + mes.utf8String)
-//          connection ! Write(mes)
+        case SendMessage(mes) =>
+          info("Sending message: " + mes.utf8String)
+          connection ! Write(mes)
 //        case Ping(mes) =>
 //          info("hello: " + mes)
 //        case data: ByteString =>
