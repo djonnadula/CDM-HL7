@@ -2,41 +2,33 @@ package com.hca.cdm.tcp
 
 import java.net.InetSocketAddress
 
-import akka.actor.{Actor, ActorRef, Props}
+import akka.actor.{Actor, Props}
 import akka.io.{IO, Tcp}
 import akka.util.ByteString
 import com.hca.cdm.log.Logg
 import com.hca.cdm.tcp.AkkaTcpClient.SendMessage
 
-//object AkkaTcpClient {
-//  def props(remote: InetSocketAddress, message: String) = {
-//    Props(classOf[AkkaTcpClient], remote, message)
-//  }
-//}
 
+/**
+  * Created by dof7475 on 8/23/2017.
+  */
 object AkkaTcpClient {
-  var sys : ActorRef = _
 
-  def props(host: String, port :Int, sleepTime: Long, message: String): Props = {
-    Props(classOf[AkkaTcpClient], new InetSocketAddress(host, port), sleepTime, message)
+  def props(host: String, port :Int, sleepTime: Long): Props = {
+    Props(classOf[AkkaTcpClient], new InetSocketAddress(host, port), sleepTime)
   }
 
   final case class SendMessage(message: ByteString)
   final case class Ping(message: String)
 }
 
-/**
-  * Created by dof7475 on 8/23/2017.
-  */
-class AkkaTcpClient(remote: InetSocketAddress, sleepTime: Long, message: String) extends Actor with Logg {
+class AkkaTcpClient(remote: InetSocketAddress, sleepTime: Long) extends Actor with Logg {
   import akka.io.Tcp._
   import context.system
 
   info("Connecting to " +  remote.toString)
 
   val manager = IO(Tcp)
-//  val opts = List[SocketOption]
-//  opts += (SO.KeepAlive(true))
   manager ! Connect(remote)
 
   override def receive: Receive = {
@@ -47,26 +39,18 @@ class AkkaTcpClient(remote: InetSocketAddress, sleepTime: Long, message: String)
 
     case c @ Connected(remote, local) =>
       info(s"Connection to $remote succeeded")
+      val handler = context.actorOf(SimplisticHandler.props())
       val connection = sender
-      connection ! Tcp.SO.KeepAlive(true)
-      connection ! Register(self, keepOpenOnPeerClosed = true)
-
-//      Thread.sleep(sleepTime)
-//      info("Sending message")
-//      info(message)
-//      connection ! Write(ByteString(message))
-//      info("Sleeping for "+ sleepTime)
-//      Thread.sleep(sleepTime)
+      connection ! Register(handler, keepOpenOnPeerClosed = true)
+      info("handler.path: " + handler.path)
 
       context become {
         case SendMessage(mes) =>
           info("Sending message: " + mes.utf8String)
           connection ! Write(mes)
-//        case Ping(mes) =>
-//          info("hello: " + mes)
-//        case data: ByteString =>
-//          info("Sending request data: " + data.utf8String)
-//          connection ! Write(data)
+        case data: ByteString =>
+          info("Sending request data: " + data.utf8String)
+          connection ! Write(data)
         case CommandFailed(w: Write) =>
           error("Failed to write request.")
           error(w.failureMessage.toString)
