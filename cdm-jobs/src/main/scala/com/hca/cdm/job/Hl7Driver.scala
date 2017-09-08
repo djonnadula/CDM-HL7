@@ -17,7 +17,7 @@ import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.{CountDownLatch, TimeUnit}
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -77,6 +77,7 @@ object Hl7Driver extends App with Logg {
   private val ENV = lookUpProp("hl7.env")
   private val jobScript = lookUpProp("hl7.runner")
   private var sHook: Thread = _
+  private val appLatch = new CountDownLatch(1)
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
     .setMaster(hl7_spark_master)
@@ -149,13 +150,13 @@ object Hl7Driver extends App with Logg {
   while (job.getAppId == null) {
     sleep(3000)
   }
-  var check = false
-  while (!check) {
+  var appStateRunning = false
+  while (!appStateRunning) {
     job getState match {
       case UNKNOWN => debug(app + " Job State Still Unknown ... ")
       case CONNECTED => info(app + " Job Connected ... Waiting for Resource Manager to Handle ...  " + job.getAppId)
       case SUBMITTED => info(app + " Job Submitted To Resource manager ... with Job ID :: " + job.getAppId)
-      case RUNNING => check = true
+      case RUNNING => appStateRunning = true
         info(app + " Job Running ... with Job ID :: " + job.getAppId)
       case FINISHED | FAILED | KILLED =>
         error(app + " Job Something Wrong ... with Job ID :: " + job.getAppId)
@@ -185,10 +186,11 @@ object Hl7Driver extends App with Logg {
     info(s"$app Driver Shutdown Completed ")
   }))
   registerHook(sHook)
-  while (check) {
+  appLatch await()
+  /*while (appStateRunning) {
     sleep(600000)
     debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
-  }
+  }*/
 
   private[job] object Tracker extends Listener {
     override def infoChanged(handle: SparkAppHandle): Unit = {
@@ -253,10 +255,12 @@ object Hl7Driver extends App with Logg {
   private def startIfNeeded(selfStart: Boolean): Unit = {
     if (selfStart) {
       info(s"Self Start is Requested for $app")
+      appLatch countDown()
       handleDriver("restart")
     } else {
       info(s"No Self Start is Requested So shutting down $app ...")
       handleDriver("stop")
+      appLatch countDown()
       abend(0)
     }
   }

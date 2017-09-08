@@ -274,6 +274,12 @@ package object cdm extends Logg {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse tryAndThrow(fallbackTo, error(_: Throwable))
   }
 
+  def tryAndGoNextAction[T](fun: () => T, nextStep : => Unit): T = {
+    val opOut = tryAndLogErrorMes(fun, debug(_: String, _: Throwable))
+    nextStep
+    opOut.getOrElse(null.asInstanceOf[T])
+  }
+
   def asFunc[T](action: => T): () => T = () => action
 
   def abend(code: Int = -1): Unit = System exit code

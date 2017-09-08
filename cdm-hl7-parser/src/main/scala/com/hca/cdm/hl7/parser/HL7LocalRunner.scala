@@ -19,6 +19,19 @@ object HL7LocalRunner extends App with Logg {
 
   configure(currThread.getContextClassLoader.getResource("local-log4j.properties"))
   reload(null,Some(currThread.getContextClassLoader.getResourceAsStream("Hl7LocalConfig.properties")))
+  private val messageTypesR = lookUpProp("hl7.messages.type") split COMMA
+  private val hl7MsgMetaR = messageTypesR.map(mtyp => mtyp -> getReceiverMeta(hl7(mtyp), lookUpProp(s"$mtyp.wsmq.source"), lookUpProp(s"$mtyp.kafka"))).toMap
+  private val hl7QueueMappingR = hl7MsgMetaR.flatMap(x => x._2.wsmq.map(que => que -> x._1))
+  private val hl7KafkaOutR = hl7MsgMetaR.map(x => x._1 -> x._2.kafka)
+  private val hl7QueuesR = hl7MsgMetaR.flatMap(_._2.wsmq).toSet
+  private val tlmAuditorR = hl7QueueMappingR.map (x =>  x._2 -> (tlmAckMsg(x._1, applicationSending, WSMQ, HDFS)(_: MSGMeta)))
+
+ /* private val messageTypesR = lookUpProp("hl7.messages.type") split COMMA
+  private val hl7MsgMetaR = messageTypesR.map(mtyp => mtyp -> getReceiverMeta(hl7(mtyp), lookUpProp(s"$mtyp.wsmq.source"), lookUpProp(s"$mtyp.kafka"))).toMap
+  private val hl7QueueMappingR = hl7MsgMetaR.map(x => x._2.wsmq -> x._1)
+  private val hl7KafkaOutR = hl7MsgMetaR.map(x => x._1 -> x._2.kafka)
+  private val hl7QueuesR = hl7MsgMetaR.map(_._2.wsmq).toSet
+  private val tlmAuditorR = hl7MsgMetaR map (x => x._2.wsmq -> (tlmAckMsg(x._1, applicationSending, WSMQ, HDFS)(_: MSGMeta)))*/
   val msgType = hl7("ORU")
     // hl7(args(0))
   private val msgs =
