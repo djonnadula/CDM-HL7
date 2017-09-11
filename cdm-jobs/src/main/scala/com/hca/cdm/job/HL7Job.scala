@@ -47,7 +47,10 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable
-import  TimeUnit._
+import TimeUnit._
+import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat
+import org.apache.spark.streaming.dstream.InputDStream
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -126,6 +129,9 @@ object HL7Job extends Logg with App {
     temp
   }
   private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
+  private val inputSource: InputSource.Source = tryAndReturnDefaultValue(asFunc(InputSource.withName(lookUpProp("hl7.data.source"))), InputSource.KAFKA)
+  if (inputSource == InputSource.HDFS) require(messageTypes.size == 1, "When Source is Configured as HDFS only one Message type should be active")
+  private val isKafkaSource: Boolean = (inputSource == InputSource.KAFKA)
 
   // ******************************************************** Spark Part ***********************************************
   private val checkPoint = lookUpProp("hl7.checkpoint")
@@ -188,17 +194,23 @@ object HL7Job extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
-    info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
+    val streamLine = if (isKafkaSource) sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
+    else {
+      val noFilter = (_: Path) => true
+      sparkStrCtx.fileStream[LongWritable, Text, TextInputFormat](lookUpProp("hl7.data.directories"), noFilter, newFilesOnly = false)
+    }
+    info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.asInstanceOf[InputDStream].id}")
     streamLine foreachRDD (rdd => {
       var messagesInRDD = 0L
-      rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
-        debug("Got RDD " + rdd.id + " from Topic :: "
-          + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
-          + range.fromOffset + " To :: " + range.untilOffset)
-        messagesInRDD = inc(messagesInRDD, range.count())
-        self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
-      })
+      if (isKafkaSource) {
+        rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
+          debug("Got RDD " + rdd.id + " from Topic :: "
+            + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
+            + range.fromOffset + " To :: " + range.untilOffset)
+          messagesInRDD = inc(messagesInRDD, range.count())
+          self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
+        })
+      } else messagesInRDD = rdd.count()
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
         val hl7s = self.messageTypes
@@ -222,6 +234,7 @@ object HL7Job extends Logg with App {
         val confFile = self.config_file
         val tlmAckQueue = self.ackQueue
         val appName = self.app
+        val inputSource = self.inputSource
         val tracker = new ListBuffer[FutureAction[Unit]]
         tracker += rdd foreachPartitionAsync (dataItr => {
           if (dataItr nonEmpty) {
@@ -240,14 +253,14 @@ object HL7Job extends Logg with App {
               tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)
-            dataItr foreach (hl7 => {
+            InputSource.convert(inputSource, dataItr) foreach { case (hl7Key, hl7) =>
               var msgType: HL7 = UNKNOWN
               try {
-                msgType = if (hl7._1 != null && hl7._1 != EMPTYSTR) hl7TypesMappings getOrElse(hl7._1 substring(0, hl7._1 indexOf COLON), UNKNOWN) else UNKNOWN
+                msgType = if (hl7Key != null && hl7Key != EMPTYSTR) hl7TypesMappings getOrElse(hl7Key substring(0, hl7Key indexOf COLON), UNKNOWN) else UNKNOWN
                 if (msgType == UNKNOWN) {
-                  info("Message Type Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
-                  val delim = if (hl7._2 contains "\r\n") "\r\n" else "\n"
-                  val rawSplit = hl7._2 split delim
+                  info(s"Message Type Header Not Found in raw HL7 :: $hl7Key Trying To Find In registered HL7 Types")
+                  val delim = if (hl7 contains "\r\n") "\r\n" else "\n"
+                  val rawSplit = hl7 split delim
                   val reqMsgType = if (valid(rawSplit)) {
                     val temp = PIPER split rawSplit(0)
                     if (valid(temp, 9)) {
@@ -263,17 +276,17 @@ object HL7Job extends Logg with App {
                     case any => any
                   }
                   if (msgType == UNKNOWN) throw new UnknownMessageTypeException(hl7TypesMappings.keySet.mkString(caret) +
-                    s" Registered Handlers Cannot Deal With Message Came Into Process :: $reqMsgType  for ${hl7._2}")
+                    s" Registered Handlers Cannot Deal With Message Came Into Process :: $reqMsgType  for $hl7")
                   else info("Able To Find Which Type of HL7 From Message :: " + msgType)
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
                   if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _, _)
-                Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
+                Try(parserS(msgType) transformHL7(hl7, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
                       ackTlm(out._3, hl7Str)
-                      segHandlerIO(out._2, hl7._2, out._3)
+                      segHandlerIO(out._2, hl7, out._3)
                       sizeCheck(out._1, parserS(msgType))
                       if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
                         tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
@@ -284,27 +297,27 @@ object HL7Job extends Logg with App {
                         error("Sending JSON to Kafka Failed :: " + msg)
                       }
                     case Right(t) =>
-                      ackTlm(metaFromRaw(hl7._2), hl7Str)
-                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
+                      ackTlm(metaFromRaw(hl7), hl7Str)
+                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t, stackTrace = false)
                       if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
+                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
                       debug(msg, t)
                   }
                   case Failure(t) =>
-                    ackTlm(metaFromRaw(hl7._2), hl7Str)
-                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
+                    ackTlm(metaFromRaw(hl7), hl7Str)
+                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t, stackTrace = false)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                    tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+                    tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
                     if (!t.isInstanceOf[NotValidHl7Exception]) error(msg)
                 }
               } catch {
-                case t: Throwable => error(s" Processing HL7 failed for Message with header ${hl7._1} & body \n ${hl7._2} \n with error message ${t.getMessage}", t)
-                  ackTlm(metaFromRaw(hl7._2), msgType.toString)
-                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, t.getMessage, t)
+                case t: Throwable => error(s" Processing HL7 failed for Message with header $hl7Key & body \n $hl7 \n with error message ${t.getMessage}", t)
+                  ackTlm(metaFromRaw(hl7), msgType.toString)
+                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7, t.getMessage, t)
                   if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                  tryAndLogThr(hl7RejIO(msg, header(msgType.toString, rejectStage, Right(hl7._2))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+                  tryAndLogThr(hl7RejIO(msg, header(msgType.toString, rejectStage, Right(hl7))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
               }
-            })
+            }
             self.segmentsAccumulators = segmentsAccumulators
             segHandlers.values foreach (handler => collectSegmentMetrics(handler metricsRegistry))
             self.parserAccumulators = parserAccumulators
@@ -541,7 +554,7 @@ object HL7Job extends Logg with App {
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
-      if(firstStage) {
+      if (firstStage) {
         runningStage = stageSubmitted.stageInfo
         firstStage = false
       }
@@ -576,7 +589,7 @@ object HL7Job extends Logg with App {
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
-    val timeCheck: Long = MILLISECONDS.convert(timeInterval,MINUTES)
+    val timeCheck: Long = MILLISECONDS.convert(timeInterval, MINUTES)
     val lowFrequencyHl7AlertInterval: Int = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
@@ -614,7 +627,7 @@ object HL7Job extends Logg with App {
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
             " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check " +
-            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds,MILLISECONDS)+ " seconds" + "\n\n" + EVENT_TIME
+            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds, MILLISECONDS) + " seconds" + "\n\n" + EVENT_TIME
           , CRITICAL)
       }
     }
@@ -649,6 +662,22 @@ object HL7Job extends Logg with App {
 
 
     override def toString: String = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
+  }
+
+
+  private object InputSource extends Enumeration {
+    type Source = Value
+    val KAFKA = Value("KAFKA")
+    val HDFS = Value("HDFS")
+
+    def convert(source: Source, dataItr: Iterator[(Comparable[_ >: String with LongWritable], Comparable[_ >: String with BinaryComparable])]): Iterator[(String, String)] = {
+      source match {
+        case InputSource.KAFKA => dataItr.asInstanceOf[Iterator[(String, String)]]
+        case InputSource.HDFS =>
+          val msgHeader = s"${messageTypes.head}$COLON"
+          dataItr map { case (id, hl7) => (msgHeader, hl7.toString) }
+      }
+    }
   }
 
 }
