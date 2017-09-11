@@ -369,34 +369,27 @@ package object model extends Logg {
   }
 
   private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
-    private lazy val selectCriteria: List[(String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
+    private lazy val selectCriteria: List[(String, String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
       selectFieldsCriteria.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2))
+          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "KEEP"))
       }
     else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
-      var applied = false
       selectCriteria.foreach {
-        case (lookUpField, criteria, selectFrom, modify) =>
+        case (lookUpField, criteria, selectFrom, modify, op) =>
           if ((layout isDefinedAt lookUpField) && (layout isDefinedAt selectFrom) && (layout isDefinedAt modify)) {
             layout(lookUpField).split("\\" + caret)
               .view.zipWithIndex.foreach { dataPoint =>
               if (dataPoint._1 == criteria) {
-                val temp = tryAndReturnDefaultValue(asFunc(layout(selectFrom).split("\\" + caret)(dataPoint._2)), EMPTYSTR)
-                if (temp ne EMPTYSTR) {
-                  applied = true
-                  layout update(modify, temp)
-                  layout update(lookUpField, EMPTYSTR)
-                  layout update(selectFrom, EMPTYSTR)
-                }
+                layout update(modify, tryAndReturnDefaultValue(asFunc(layout(selectFrom).split("\\" + caret)(dataPoint._2)), EMPTYSTR))
               }
             }
-            if (!applied) {
-              layout update(lookUpField, EMPTYSTR)
-              layout update(selectFrom, EMPTYSTR)
+            if (op == "DELETE") {
+              layout remove lookUpField
+              layout remove selectFrom
             }
           }
       }
