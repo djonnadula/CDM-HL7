@@ -1,5 +1,6 @@
 
 package com.hca.cdm.hbase
+
 import java.io.IOException
 import java.util.Properties
 import scala.collection.JavaConverters._
@@ -7,7 +8,7 @@ import com.hca.cdm.log.Logg
 import com.hca.cdm._
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.hbase.HConstants._
-import org.apache.hadoop.hbase.{HTableDescriptor, TableName}
+import org.apache.hadoop.hbase.{HColumnDescriptor, HTableDescriptor, TableName}
 import org.apache.hadoop.hbase.client._
 import org.apache.hadoop.hbase.ipc.RpcControllerFactory
 import scala.collection.concurrent.TrieMap
@@ -17,7 +18,7 @@ import scala.collection.concurrent.TrieMap
   */
 object HBaseConnector extends Logg {
 
-  private[cdm] val cache = new TrieMap[Key, HConnection]()
+  private val cache = new TrieMap[Key, HConnection]()
 
   def getConnection(conf: Configuration): HConnection = {
     cache.getOrElseUpdate(Key(conf), HConnection(ConnectionFactory.createConnection(conf)))
@@ -41,8 +42,7 @@ object HBaseConnector extends Logg {
   }
 
 
-
-  private case class HConnection(private val connection: Connection) {
+  case class HConnection(private val connection: Connection) {
 
     require(valid(connection) && stillAlive, "Invalid Connection")
     registerHook(newThread(s"Shook$connection", runnable({
@@ -71,18 +71,21 @@ object HBaseConnector extends Logg {
       connection.isClosed && connection.isAborted
     }
 
-    def createTable(tableName: String, props: Option[Properties] = None): Unit = {
-      val tableDesc = new HTableDescriptor(TableName.valueOf(tableName))
+    def createTable(tableName: String, props: Option[Properties] = None, families: List[HColumnDescriptor] = Nil): Unit = {
+      val tableDesc =
+        new HTableDescriptor(TableName.valueOf(tableName))
+          .setRegionReplication(3)
+          .setRegionMemstoreReplication(true)
       tableDesc.setCompactionEnabled(true)
-      tableDesc.setDurability(Durability.SYNC_WAL)
       tableDesc.setRegionMemstoreReplication(true)
+      tableDesc.setDurability(Durability.SYNC_WAL)
+      families.foreach(tableDesc.addFamily)
       props.foreach(_.asScala.foreach { case (k, v) => tableDesc.setConfiguration(k, v) })
       val admin = getAdmin
       tryAndGoNextAction(asFunc(admin.createTable(tableDesc)), asFunc(admin.close()))
     }
 
-
-    private case class BatchOperator(table: String) {
+    case class BatchOperator(table: String) {
       private val mutator = connection.getBufferedMutator(TableName.valueOf(table))
 
       @throws[IOException]
@@ -106,11 +109,7 @@ object HBaseConnector extends Logg {
       }
 
       private def supportedMutation(mut: Mutation): Boolean = {
-        mut match {
-          case Put | Delete => true
-          case _ => false
-        }
-
+        mut.isInstanceOf[Put] | mut.isInstanceOf[Delete]
       }
 
     }
@@ -118,4 +117,5 @@ object HBaseConnector extends Logg {
   }
 
 }
+
 
