@@ -98,7 +98,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
         }
       }
     }
-    else throw new CDMKafkaException("Cannot Send Invalid Data to Kafka ::  " + data + " with Header :: " + header + " to Topic :: " + topic)
+    // else throw new CDMKafkaException("Cannot Send Invalid Data to Kafka ::  " + data + " with Header :: " + header + " to Topic :: " + topic)
   }
 
 
