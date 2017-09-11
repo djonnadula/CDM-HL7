@@ -319,16 +319,16 @@ package object model extends Logg {
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains RAWHL7.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(RAWHL7,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), empty, fieldWithNoAppends,
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0), tryAndReturnDefaultValue(asFunc(dest(2)), EMPTYSTR)), empty, fieldWithNoAppends,
                 tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")), loadFilters(filterFile))
             }
             else if (outFormat contains JSON.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)), loadFileAsList(outFormSplit(1)),
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0), tryAndReturnDefaultValue(asFunc(dest(2)), EMPTYSTR)), loadFileAsList(outFormSplit(1)),
                 fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON$etlTransMultiReq")), loadFilters(filterFile))
             } else {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0)),
+                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0), tryAndReturnDefaultValue(asFunc(dest(2)), EMPTYSTR)),
                 tryAndReturnDefaultValue(asFunc(loadFileAsList(outFormSplit(1))), empty), fieldWithNoAppends,
                 tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")),
                 loadFilters(tryAndReturnDefaultValue(asFunc(filterFile), EMPTYSTR)))
@@ -347,7 +347,7 @@ package object model extends Logg {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String)
+  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String, extraConfig: String = EMPTYSTR)
 
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
                                dataEnRicher: EnrichData) {
@@ -495,6 +495,7 @@ package object model extends Logg {
   case class ReceiverMeta(msgType: com.hca.cdm.hl7.constants.HL7Types.HL7, wsmq: Set[String], kafka: String)
 
   def loadSegments(segments: String, delimitedBy: String = COMMA): Map[String, List[(String, String)]] = {
+    if (segments == EMPTYSTR) return Map.empty[String, List[(String, String)]]
     val reader = readFile(segments).bufferedReader()
     val temp = Stream.continually(reader.readLine()).takeWhile(valid(_)).toList.map(seg => {
       val splits = seg split(delimitedBy, -1)
