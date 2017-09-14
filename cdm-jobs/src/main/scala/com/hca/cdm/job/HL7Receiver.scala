@@ -107,7 +107,7 @@ object HL7Receiver extends Logg with App {
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
-    LoginRenewer.scheduleRenewal(master = true)
+    LoginRenewer.scheduleRenewal(master = true,namesNodes = EMPTYSTR,conf = Some(hdpConf))
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
   }
