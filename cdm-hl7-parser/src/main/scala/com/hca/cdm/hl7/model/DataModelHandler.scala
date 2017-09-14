@@ -77,11 +77,11 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                   debug(s"Segment Skipped :: $msg")
                 case `filteredStr` =>
                   updateMetrics(segment.seg, FILTERED)
-                  // This Check Added After Discussing this Log is not Required as of now So commenting.
-                 /*  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
-                  sizeCheck(msg, segment.seg)
-                  tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
-                  debug(s"Segment Filtered :: $msg") */
+                // This Check Added After Discussing this Log is not Required as of now So commenting.
+                /*  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
+                 sizeCheck(msg, segment.seg)
+                 tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
+                 debug(s"Segment Filtered :: $msg") */
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
@@ -90,7 +90,10 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                     }
                     if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
                       tlmAckMessages += Tuple2(rec, segment.headerKey)
-                    } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route), s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
+                    } else if (segment.dest.get.system == Destinations.HBASE) {
+                      //TODO: Add Hbase Int
+                    } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route),
+                      s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                       if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                         s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
                         updateMetrics(segment.seg, PROCESSED)
