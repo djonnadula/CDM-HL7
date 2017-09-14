@@ -7,73 +7,45 @@ import scala.collection.JavaConverters._
 import com.hca.cdm.log.Logg
 import com.hca.cdm._
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.hbase.HConstants._
 import org.apache.hadoop.hbase.{HColumnDescriptor, HTableDescriptor, TableName}
 import org.apache.hadoop.hbase.client._
-import org.apache.hadoop.hbase.ipc.RpcControllerFactory
 import scala.collection.concurrent.TrieMap
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
-object HBaseConnector extends Logg {
+private[cdm] class HBaseConnector(conf: Configuration) extends Logg {
 
-  private val cache = new TrieMap[Key, HConnection]()
+  private val connection = ConnectionFactory.createConnection(conf)
+  private val mutatorStore = new TrieMap[String, BatchOperator]()
 
-  def getConnection(conf: Configuration): HConnection = {
-    cache.getOrElseUpdate(Key(conf), HConnection(ConnectionFactory.createConnection(conf)))
+  def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(tableName))
+
+  def getRegionLocator(tableName: TableName): RegionLocator = connection.getRegionLocator(tableName)
+
+  def isClosed: Boolean = connection.isClosed
+
+  def getAdmin: Admin = connection.getAdmin
+
+  def close(): Unit = {
+    mutatorStore.foreach(_._2.close())
+    closeResource(connection)
   }
 
-  private case class Key(conf: Configuration) {
-    val keyProp =
-      List(ZOOKEEPER_QUORUM, ZOOKEEPER_ZNODE_PARENT, ZOOKEEPER_CLIENT_PORT, ZOOKEEPER_RECOVERABLE_WAITTIME, HBASE_CLIENT_PAUSE, HBASE_CLIENT_RETRIES_NUMBER,
-        HBASE_RPC_TIMEOUT_KEY, HBASE_META_SCANNER_CACHING, HBASE_CLIENT_INSTANCE_ID, RPC_CODEC_CONF_KEY, USE_META_REPLICAS, RpcControllerFactory.CUSTOM_CONTROLLER_CONF_KEY)
-
-    val props: List[String] = keyProp.map(prop => conf.get(prop, EMPTYSTR))
-
-    override def hashCode(): Int = {
-      props.hashCode()
-
-    }
-
-    override def equals(obj: scala.Any): Boolean = {
-      props.equals(obj)
-    }
+  def getBatchOperator(table: String): BatchOperator = {
+    mutatorStore.getOrElseUpdate(table, new BatchOperator(table))
   }
 
+  def stillAlive: Boolean = {
+    connection.isClosed && connection.isAborted
+  }
 
-  case class HConnection(private val connection: Connection) {
-
-    require(valid(connection) && stillAlive, "Invalid Connection")
-    registerHook(newThread(s"Shook$connection", runnable({
-      mutatorStore.values.foreach {
-        _.close()
-      }
-      close()
-    })))
-    private val mutatorStore = new TrieMap[String, BatchOperator]()
-
-    def getTable(tableName: TableName): Table = connection.getTable(tableName)
-
-    def getRegionLocator(tableName: TableName): RegionLocator = connection.getRegionLocator(tableName)
-
-    def isClosed: Boolean = connection.isClosed
-
-    def getAdmin: Admin = connection.getAdmin
-
-    def close(): Unit = closeResource(connection)
-
-    def getBatchOperator(table: String): BatchOperator = {
-      mutatorStore.getOrElseUpdate(table, BatchOperator(table))
-    }
-
-    def stillAlive: Boolean = {
-      connection.isClosed && connection.isAborted
-    }
-
-    def createTable(tableName: String, props: Option[Properties] = None, families: List[HColumnDescriptor] = Nil): Unit = {
+  def createTable(tableName: String, props: Option[Properties] = None, families: List[HColumnDescriptor] = Nil): Unit = {
+    val admin = getAdmin
+    val table = TableName.valueOf("cdm_hl7", tableName)
+    if (!admin.tableExists(table)) {
       val tableDesc =
-        new HTableDescriptor(TableName.valueOf(tableName))
+        new HTableDescriptor(table)
           .setRegionReplication(3)
           .setRegionMemstoreReplication(true)
       tableDesc.setCompactionEnabled(true)
@@ -81,41 +53,76 @@ object HBaseConnector extends Logg {
       tableDesc.setDurability(Durability.SYNC_WAL)
       families.foreach(tableDesc.addFamily)
       props.foreach(_.asScala.foreach { case (k, v) => tableDesc.setConfiguration(k, v) })
-      val admin = getAdmin
       tryAndGoNextAction(asFunc(admin.createTable(tableDesc)), asFunc(admin.close()))
+    } else {
+      closeResource(admin)
+    }
+  }
+
+
+  class BatchOperator(table: String, batchSize: Int = 1000) {
+    @volatile private var batched: Int = 0
+    private val mutator = connection.getBufferedMutator(TableName.valueOf(table))
+
+    @throws[IOException]
+    def mutate(op: Mutation): Unit = {
+      if (supportedMutation(op)) {
+        tryAndThrow(mutator mutate op, error(_: Throwable))
+        batched += 1
+      }
+      if (batched >= batchSize) {
+        submitBatch()
+        batched = 0
+      }
     }
 
-    case class BatchOperator(table: String) {
-      private val mutator = connection.getBufferedMutator(TableName.valueOf(table))
+    @throws[IOException]
+    def mutateMulti(ops: Traversable[Mutation]): Unit = {
+      ops foreach mutate
+    }
 
-      @throws[IOException]
-      def mutate(op: Mutation): Unit = {
-        if (supportedMutation(op)) tryAndThrow(mutator mutate op, error(_: Throwable))
-      }
+    def submitBatch(): Unit = {
+      tryAndThrow(mutator flush(), error(_: Throwable))
+    }
 
-      @throws[IOException]
-      def mutateMulti(ops: Traversable[Mutation]): Unit = {
-        ops foreach mutate
-      }
+    def close(): Unit = {
+      tryAndLogErrorMes(mutator flush(), error(_: Throwable))
+      closeResource(mutator)
+    }
 
-      def submitBatch(): Unit = {
-        tryAndThrow(mutator flush(), error(_: Throwable))
-      }
-
-
-      def close(): Unit = {
-        tryAndLogErrorMes(mutator flush(), error(_: Throwable))
-        closeResource(mutator)
-      }
-
-      private def supportedMutation(mut: Mutation): Boolean = {
-        mut.isInstanceOf[Put] | mut.isInstanceOf[Delete]
-      }
-
+    private def supportedMutation(mut: Mutation): Boolean = {
+      mut.isInstanceOf[Put] | mut.isInstanceOf[Delete]
     }
 
   }
 
 }
+
+object HBaseConnector extends  Logg{
+  private val lock = new Object()
+  private var ins: HBaseConnector = _
+
+  def apply(conf: Configuration): HBaseConnector = {
+    def createIfNotExist = new (() => HBaseConnector) {
+      override def apply(): HBaseConnector = new HBaseConnector(conf)
+    }
+
+    createInstance(createIfNotExist)
+
+  }
+
+  private def createInstance(createIfNotExist: () => HBaseConnector): HBaseConnector = {
+    lock.synchronized(
+      if (ins == null) {
+        ins = createIfNotExist()
+        info(s"Created instance for $this handler $ins")
+        ins
+      } else {
+        ins
+      })
+  }
+}
+
+
 
 
