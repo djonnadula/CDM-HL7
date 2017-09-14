@@ -187,10 +187,6 @@ object Hl7Driver extends App with Logg {
   }))
   registerHook(sHook)
   appLatch await()
-  /*while (appStateRunning) {
-    sleep(600000)
-    debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
-  }*/
 
   private[job] object Tracker extends Listener {
     override def infoChanged(handle: SparkAppHandle): Unit = {
