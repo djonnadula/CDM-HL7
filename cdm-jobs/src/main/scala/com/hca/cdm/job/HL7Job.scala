@@ -51,7 +51,7 @@ import TimeUnit._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
-import  org.apache.hadoop.mapreduce.lib.input._
+import org.apache.spark.rdd.RDD
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -142,8 +142,8 @@ object HL7Job extends Logg with App {
   hdpConf = HBaseConfiguration.create(hdpConf)
   hdpConf.addResource("hbase-site.xml")
   hdpConf.addResource("core-site.xml")
-  hdpConf.set("hbase.rpc.controllerfactory.class","org.apache.hadoop.hbase.ipc.RpcControllerFactory")
- // hdpConf.iterator().asScala.foreach(println(_))
+  hdpConf.set("hbase.rpc.controllerfactory.class", "org.apache.hadoop.hbase.ipc.RpcControllerFactory")
+  // hdpConf.iterator().asScala.foreach(println(_))
 
   private val restoreFromChk = new AtomicBoolean(true)
 
@@ -163,7 +163,7 @@ object HL7Job extends Logg with App {
 
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
-    LoginRenewer.loginFromKeyTab(sparkConf.get("spark.yarn.keytab"),sparkConf.get("spark.yarn.principal"),Some(hdpConf))
+    LoginRenewer.loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
     if (hl7JsonTopic != EMPTYSTR) createTopic(hl7JsonTopic, segmentPartitions = false)
     if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
     if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
@@ -176,7 +176,7 @@ object HL7Job extends Logg with App {
               case Destinations.KAFKA =>
                 createTopic(model.adhoc.get.destination.route)
               case Destinations.HBASE =>
-                //LoginRenewer.performAction(asFunc(HBaseConnector(hdpConf).createTable(model.adhoc.get.destination.route, None, List(HUtils.createFamily(model.adhoc.get.destination.extraConfig)))))
+                LoginRenewer.performAction(asFunc(HBaseConnector(hdpConf).createTable(model.adhoc.get.destination.route, None, List(HUtils.createFamily(model.adhoc.get.destination.extraConfig)))))
               case _ =>
             }
           }
@@ -217,8 +217,7 @@ object HL7Job extends Logg with App {
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = if (isKafkaSource) sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     else {
-      val noFilter = (_: Path) => true
-      sparkStrCtx.fileStream[LongWritable, Text, SequenceFileInputFormat[LongWritable, Text]](lookUpProp("hl7.data.directories"), noFilter, newFilesOnly = false)
+      sparkStrCtx.queueStream(new mutable.Queue[RDD[(LongWritable, Text)]] += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](lookUpProp("hl7.data.directories"), maxPartitions))
     }
     info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.id}")
     streamLine foreachRDD (rdd => {
@@ -274,7 +273,7 @@ object HL7Job extends Logg with App {
               tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)
-            InputSource.convert(inputSource,hl7s.head, dataItr) foreach { case (hl7Key, hl7) =>
+            InputSource.convert(inputSource, hl7s.head, dataItr) foreach { case (hl7Key, hl7) =>
               var msgType: HL7 = UNKNOWN
               try {
                 msgType = if (hl7Key != null && hl7Key != EMPTYSTR) hl7TypesMappings getOrElse(hl7Key substring(0, hl7Key indexOf COLON), UNKNOWN) else UNKNOWN
@@ -319,14 +318,14 @@ object HL7Job extends Logg with App {
                       }
                     case Right(t) =>
                       ackTlm(metaFromRaw(hl7), hl7Str)
-                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t, stackTrace = false)
+                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t)
                       if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                       tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
                       debug(msg, t)
                   }
                   case Failure(t) =>
                     ackTlm(metaFromRaw(hl7), hl7Str)
-                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t, stackTrace = false)
+                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
                     tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
                     if (!t.isInstanceOf[NotValidHl7Exception]) error(msg)
@@ -691,12 +690,12 @@ object HL7Job extends Logg with App {
     val KAFKA = Value("KAFKA")
     val HDFS = Value("HDFS")
 
-    def convert(source: Source, msgType : String ,dataItr: Iterator[(Comparable[_ >: String with LongWritable], Comparable[_ >: String with BinaryComparable])]): Iterator[(String, String)] = {
+    def convert(source: Source, msgType: String, dataItr: Iterator[(Comparable[_ >: String with LongWritable], Comparable[_ >: String with BinaryComparable])]): Iterator[(String, String)] = {
       source match {
         case InputSource.KAFKA => dataItr.asInstanceOf[Iterator[(String, String)]]
         case InputSource.HDFS =>
           val msgHeader = s"$msgType$COLON"
-          dataItr map { case (_, hl7) => (msgHeader, new String(hl7.asInstanceOf[Text].getBytes,UTF8)) }
+          dataItr map { case (_, hl7) => (msgHeader, hl7.toString) }
       }
     }
   }
