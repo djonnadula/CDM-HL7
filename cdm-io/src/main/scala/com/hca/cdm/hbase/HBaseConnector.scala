@@ -14,12 +14,12 @@ import scala.collection.concurrent.TrieMap
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
-private[cdm] class HBaseConnector(conf: Configuration) extends Logg {
+private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg {
 
   private val connection = ConnectionFactory.createConnection(conf)
   private val mutatorStore = new TrieMap[String, BatchOperator]()
 
-  def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(tableName))
+  def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(nameSpace,tableName))
 
   def getRegionLocator(tableName: TableName): RegionLocator = connection.getRegionLocator(tableName)
 
@@ -42,7 +42,7 @@ private[cdm] class HBaseConnector(conf: Configuration) extends Logg {
 
   def createTable(tableName: String, props: Option[Properties] = None, families: List[HColumnDescriptor] = Nil): Unit = {
     val admin = getAdmin
-    val table = TableName.valueOf("cdm_hl7", tableName)
+    val table = TableName.valueOf(nameSpace, tableName)
     if (!admin.tableExists(table)) {
       val tableDesc =
         new HTableDescriptor(table)
@@ -62,7 +62,7 @@ private[cdm] class HBaseConnector(conf: Configuration) extends Logg {
 
   class BatchOperator(table: String, batchSize: Int = 1000) {
     @volatile private var batched: Int = 0
-    private val mutator = connection.getBufferedMutator(TableName.valueOf(table))
+    private val mutator = connection.getBufferedMutator(TableName.valueOf(nameSpace,table))
 
     @throws[IOException]
     def mutate(op: Mutation): Unit = {
@@ -102,9 +102,9 @@ object HBaseConnector extends  Logg{
   private val lock = new Object()
   private var ins: HBaseConnector = _
 
-  def apply(conf: Configuration): HBaseConnector = {
+  def apply(conf: Configuration, nameSpace: String): HBaseConnector = {
     def createIfNotExist = new (() => HBaseConnector) {
-      override def apply(): HBaseConnector = new HBaseConnector(conf)
+      override def apply(): HBaseConnector = new HBaseConnector(conf,nameSpace)
     }
 
     createInstance(createIfNotExist)

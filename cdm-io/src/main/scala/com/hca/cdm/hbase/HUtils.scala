@@ -15,7 +15,7 @@ import scala.collection.mutable
 object HUtils {
 
   private lazy val Replication_Factor: Int = 3
-  private lazy val TTL: Int = 4 * 31 * 24 * 60 * 60 * 1000
+  private lazy val TTL: Int = 1 * 31 * 24 * 60 * 60
   private val EMPTY= mutable.Map.empty[String,String]
 
 

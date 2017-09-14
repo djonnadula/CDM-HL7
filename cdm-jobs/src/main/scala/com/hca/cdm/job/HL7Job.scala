@@ -39,7 +39,7 @@ import org.apache.spark.AccumulatorParam.LongAccumulatorParam
 import org.apache.spark.scheduler._
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
-import org.apache.spark.{Accumulator, FutureAction}
+import org.apache.spark._
 import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable.ListBuffer
@@ -135,17 +135,17 @@ object HL7Job extends Logg with App {
   private val isKafkaSource: Boolean = inputSource == InputSource.KAFKA
 
   // ******************************************************** Spark Part ***********************************************
+  private val restoreFromChk = new AtomicBoolean(true)
+  private val checkpointEnable = if (!isKafkaSource) {
+    restoreFromChk set false
+    false
+  } else lookUpProp("hl7.spark.checkpoint.enable").toBoolean
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
   sparkConf set("spark.task.cpus", "3")
   private var hdpConf = hdpUtil.conf
   hdpConf = HBaseConfiguration.create(hdpConf)
   hdpConf.addResource("hbase-site.xml")
-  hdpConf.addResource("core-site.xml")
-  hdpConf.set("hbase.rpc.controllerfactory.class", "org.apache.hadoop.hbase.ipc.RpcControllerFactory")
-  // hdpConf.iterator().asScala.foreach(println(_))
-
-  private val restoreFromChk = new AtomicBoolean(true)
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
@@ -156,7 +156,7 @@ object HL7Job extends Logg with App {
     }
   }
 
-  private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
+  private val sparkStrCtx: StreamingContext = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   initialise(sparkStrCtx)
   startStreams()
@@ -164,7 +164,7 @@ object HL7Job extends Logg with App {
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
-    LoginRenewer.scheduleRenewal(master = true,namesNodes = EMPTYSTR,conf = Some(hdpConf))
+    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     if (hl7JsonTopic != EMPTYSTR) createTopic(hl7JsonTopic, segmentPartitions = false)
     if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
     if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
@@ -177,7 +177,7 @@ object HL7Job extends Logg with App {
               case Destinations.KAFKA =>
                 createTopic(model.adhoc.get.destination.route)
               case Destinations.HBASE =>
-                LoginRenewer.performAction(asFunc(HBaseConnector(hdpConf).createTable(model.adhoc.get.destination.route, None, List(HUtils.createFamily(model.adhoc.get.destination.extraConfig)))))
+                LoginRenewer.performAction(asFunc(HBaseConnector(hdpConf, lookUpProp("cdm.hl7.hbase.namespace")).createTable(model.adhoc.get.destination.route, None, List(HUtils.createFamily(model.adhoc.get.destination.extraConfig)))))
               case _ =>
             }
           }
@@ -215,7 +215,9 @@ object HL7Job extends Logg with App {
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = if (isKafkaSource) sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     else {
-      sparkStrCtx.queueStream(new mutable.Queue[RDD[(LongWritable, Text)]] += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](lookUpProp("hl7.data.directories"), maxPartitions))
+      val RDDS = new mutable.Queue[RDD[(LongWritable, Text)]]
+      lookUpProp("hl7.data.directories").split(COMMA, -1).foreach(dir => RDDS += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](dir, maxPartitions))
+      sparkStrCtx.queueStream(RDDS)
     }
     info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.id}")
     streamLine foreachRDD (rdd => {
@@ -683,7 +685,7 @@ object HL7Job extends Logg with App {
   }
 
 
-  private[this] object InputSource extends Enumeration {
+  private[this] object InputSource extends Enumeration with Logg {
     type Source = Value
     val KAFKA = Value("KAFKA")
     val HDFS = Value("HDFS")
@@ -696,6 +698,33 @@ object HL7Job extends Logg with App {
           dataItr map { case (_, hl7) => (msgHeader, hl7.toString) }
       }
     }
+
+
+    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(LongWritable, Text)](sparkCtx, Nil) {
+      self =>
+      info(s"FileBase Rdd initiated for $dir with Max Partitions $maxPartitions & $sparkCtx")
+      self.setName(dir)
+      private val data: RDD[(LongWritable, Text)] = sparkCtx.sequenceFile[LongWritable, Text](dir, maxPartitions)
+
+      override def compute(split: Partition, context: TaskContext): Iterator[(LongWritable, Text)] = {
+        info(context)
+        info(split)
+        data.iterator(split, context)
+      }
+
+      override protected def getPartitions: Array[Partition] = {
+        val temp = new Array[Partition](maxPartitions)
+        for (part <- 0 until maxPartitions) {
+          temp(part) = new Partition {
+            override def index: Int = {
+              part
+            }
+          }
+        }
+        temp
+      }
+    }
+
   }
 
 }

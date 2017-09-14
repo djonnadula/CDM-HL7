@@ -129,7 +129,13 @@ object Hl7Driver extends App with Logg {
   tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(SEMICOLUMN, -1).foreach(conf => {
     if (valid(conf)) {
       val actConf = conf.split(COLON)
-      if (valid(actConf, 2)) sparkLauncher.setConf(actConf(0), actConf(1))
+      if (valid(actConf, 2)) {
+        actConf(0) match {
+          case "--files" => sparkLauncher.addFile(new File(actConf(1)).getPath)
+          case "--jars" => sparkLauncher.addJar(new File(actConf(1)).getPath)
+          case _ => sparkLauncher.setConf(actConf(0), actConf(1))
+        }
+      }
     }
   })
   if (ENV != "PROD") {
@@ -182,7 +188,7 @@ object Hl7Driver extends App with Logg {
   sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
     shutDown()
-    handleDriver("stop")
+    startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
     info(s"$app Driver Shutdown Completed ")
   }))
   registerHook(sHook)
@@ -255,8 +261,8 @@ object Hl7Driver extends App with Logg {
       handleDriver("restart")
     } else {
       info(s"No Self Start is Requested So shutting down $app ...")
-      handleDriver("stop")
       appLatch countDown()
+      handleDriver("stop")
       abend(0)
     }
   }
