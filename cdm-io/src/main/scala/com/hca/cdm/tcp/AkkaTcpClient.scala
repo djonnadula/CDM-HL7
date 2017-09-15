@@ -5,52 +5,72 @@ import java.net.InetSocketAddress
 import akka.actor.{Actor, Props}
 import akka.io.{IO, Tcp}
 import akka.util.ByteString
+import com.hca.cdm._
 import com.hca.cdm.log.Logg
-import com.hca.cdm.tcp.AkkaTcpClient.SendMessage
-
 
 /**
   * Created by dof7475 on 8/23/2017.
   */
 object AkkaTcpClient {
 
-  def props(host: String, port :Int, sleepTime: Long): Props = {
-    Props(classOf[AkkaTcpClient], new InetSocketAddress(host, port), sleepTime)
+  def props(remote: InetSocketAddress): Props = {
+    Props(classOf[AkkaTcpClient], remote)
   }
-
-  final case class SendMessage(message: ByteString)
-  final case class Ping(message: String)
 }
 
-class AkkaTcpClient(remote: InetSocketAddress, sleepTime: Long) extends Actor with Logg {
+class AkkaTcpClient(remote: InetSocketAddress) extends Actor with Logg {
   import akka.io.Tcp._
   import context.system
 
-  info("Connecting to " +  remote.toString)
+  var reconnectCount = 0L
+  var ackCount = 0L
+  var sendCount = 0L
 
+  case object Ack extends Event
   val manager = IO(Tcp)
   manager ! Connect(remote)
+
+  override def preRestart(reason: Throwable, message: Option[Any]) = {
+    info("Restarting")
+    super.preRestart(reason, message)
+  }
+
+  override def postRestart(reason: Throwable) = {
+    info("Restart completed!")
+    super.postRestart(reason)
+  }
+
+  override def preStart() = info("TcpClient is alive")
+  override def postStop() = info("TcpClient has shutdown")
 
   override def receive: Receive = {
     case CommandFailed(con: Connect) =>
       error("Connection failed")
       error(con.failureMessage.toString)
-      context stop self
+      if (reconnectCount > 10L) {
+        error(s"Stopping context after trying to reconnect after $reconnectCount times")
+        throw new RestartMeException
+        context stop self
+      } else {
+        reconnectCount = inc(reconnectCount, 1)
+        warn(s"Trying to reconnect: $reconnectCount")
+        manager ! Connect(remote)
+        Thread.sleep(2000)
+      }
 
     case c @ Connected(remote, local) =>
       info(s"Connection to $remote succeeded")
-      val handler = context.actorOf(SimplisticHandler.props())
+      reconnectCount = 0
       val connection = sender
+      val handler = context.actorOf(SimpleEchoHandler.props(connection, remote))
       connection ! Register(handler, keepOpenOnPeerClosed = true)
-      info("handler.path: " + handler.path)
 
-      context become {
-        case SendMessage(mes) =>
-          info("Sending message: " + mes.utf8String)
-          connection ! Write(mes)
+      context become ({
         case data: ByteString =>
+          sendCount = inc(sendCount, 1)
           info("Sending request data: " + data.utf8String)
-          connection ! Write(data)
+          info("Send count: " + sendCount)
+          handler ! data
         case CommandFailed(w: Write) =>
           error("Failed to write request.")
           error(w.failureMessage.toString)
@@ -60,17 +80,16 @@ class AkkaTcpClient(remote: InetSocketAddress, sleepTime: Long) extends Actor wi
         case "close" =>
           info("Closing connection")
           connection ! Close
-        case e: Exception =>
-          error(e.printStackTrace().toString)
-        case t: Throwable =>
-          error(t)
+        case Ack =>
+          ackCount = inc(ackCount, 1)
+          info("Received ACK, count:" + ackCount)
         case _: ConnectionClosed =>
           info("Connection closed by server.")
+          throw new RestartMeException
           context stop self
-      }
+      }, discardOld = false)
 
     case _ =>
       error("Something else is happening")
-
   }
 }

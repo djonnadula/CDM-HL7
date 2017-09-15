@@ -20,11 +20,15 @@ object SimplisticHandler {
 
 class SimplisticHandler extends Actor with Logg {
   import Tcp._
+  case object Ack extends Event
+
   override def receive: Receive = {
     case Hello(msg) => info("hello")
     case Received(data) =>
       info("received response")
       info("response data: " + data.utf8String)
+    case Ack =>
+      info("received ACK")
     case PeerClosed     =>
       info("handler says peer closed")
       context stop self
