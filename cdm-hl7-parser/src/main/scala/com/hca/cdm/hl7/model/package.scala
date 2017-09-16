@@ -26,6 +26,7 @@ import java.util.regex.Pattern
 import org.apache.avro.generic._
 import org.apache.avro.io._
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 
@@ -300,8 +301,6 @@ package object model extends Logg {
         if (valid(adhoc, 3)) {
           def access(index: Int, store: Array[String] = adhoc) = () => store(index)
 
-          def destination(out: String) = tryAndReturnDefaultValue(asFunc(Destinations.withName(out)), Destinations.KAFKA)
-
           val filterFile = tryAndReturnDefaultValue(access(4), EMPTYSTR)
           val fieldWithNoAppends = tryAndReturnDefaultValue(access(5), EMPTYSTR).split("\\&", -1)
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
@@ -316,19 +315,25 @@ package object model extends Logg {
           outFormats.map(outFormat => {
             index += 1
             val dest = outDest(index) split "\\&"
+            val destSys = tryAndReturnDefaultValue(asFunc(Destinations.withName(dest(1))), Destinations.KAFKA)
+            val hBaseConfig = if (destSys == Destinations.HBASE) {
+              val keys = new ListBuffer[String]
+              dest(3).split(SEMICOLUMN, -1).foreach(keys += _)
+              Some(HBaseConfig(dest(2), keys))
+            } else None
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains RAWHL7.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(RAWHL7,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0), tryAndReturnDefaultValue(asFunc(dest(2)), EMPTYSTR)), empty, fieldWithNoAppends,
+                DestinationSystem(destSys, dest(0), hBaseConfig), empty, fieldWithNoAppends,
                 tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")), loadFilters(filterFile))
             }
             else if (outFormat contains JSON.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0), tryAndReturnDefaultValue(asFunc(dest(2)), EMPTYSTR)), loadFileAsList(outFormSplit(1)),
+                DestinationSystem(destSys, dest(0), hBaseConfig), loadFileAsList(outFormSplit(1)),
                 fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON$etlTransMultiReq")), loadFilters(filterFile))
             } else {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
-                DestinationSystem(destination(if (valid(dest, 2)) dest(1) else EMPTYSTR), dest(0), tryAndReturnDefaultValue(asFunc(dest(2)), EMPTYSTR)),
+                DestinationSystem(destSys, dest(0), hBaseConfig),
                 tryAndReturnDefaultValue(asFunc(loadFileAsList(outFormSplit(1))), empty), fieldWithNoAppends,
                 tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")),
                 loadFilters(tryAndReturnDefaultValue(asFunc(filterFile), EMPTYSTR)))
@@ -347,7 +352,9 @@ package object model extends Logg {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String, extraConfig: String = EMPTYSTR)
+  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String, hbaseConfig: Option[HBaseConfig] = None)
+
+  case class HBaseConfig(familiy: String, key: ListBuffer[String])
 
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
                                dataEnRicher: EnrichData) {
@@ -667,7 +674,7 @@ object EnrichCacheManager extends Logg {
   def apply(cacheSer: Array[Byte]): EnrichCacheManager = lock.synchronized {
     if (instance == null) {
       instance = new EnrichCacheManager()
-      deSerialize(cacheSer).asInstanceOf[mutable.HashMap[String, FieldsTransformer]].foreach(x => instance.cache(x._1, x._2))
+      deSerialize[mutable.HashMap[String, FieldsTransformer]](cacheSer).foreach(x => instance.cache(x._1, x._2))
     }
     instance
   }
