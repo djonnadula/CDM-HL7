@@ -164,10 +164,10 @@ package object cdm extends Logg {
   def serialize(data: Serializable): Array[Byte] = ser(data)
 
   @throws[SerializationException]
-  def deSerialize(data: AnyRef): Object = {
+  def deSerialize[T](data: AnyRef): T = {
     data match {
-      case x: Array[Byte] => des(x)
-      case x: InputStream => des(x)
+      case x: Array[Byte] => des(x).asInstanceOf[T]
+      case x: InputStream => des(x).asInstanceOf[T]
     }
   }
 
@@ -213,7 +213,8 @@ package object cdm extends Logg {
     newSingleThreadScheduledExecutor(new Factory(id))
   }
 
-  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = true, state: taskState = CRITICAL): Boolean = {
+  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = tryAndReturnDefaultValue(asFunc(lookUpProp("cdm.notify.errors").toBoolean), true),
+                   state: taskState = CRITICAL): Boolean = {
     try {
       fun
       return true
@@ -270,11 +271,11 @@ package object cdm extends Logg {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse default
   }
 
-  def tryAndFallbackTo[T](fun: () => T, fallbackTo : => T): T = {
+  def tryAndFallbackTo[T](fun: () => T, fallbackTo: => T): T = {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse tryAndThrow(fallbackTo, error(_: Throwable))
   }
 
-  def tryAndGoNextAction[T](fun: () => T, nextStep : => Unit): T = {
+  def tryAndGoNextAction[T](fun: () => T, nextStep: => Unit): T = {
     val opOut = tryAndLogErrorMes(fun, debug(_: String, _: Throwable))
     nextStep
     opOut.getOrElse(null.asInstanceOf[T])
@@ -303,7 +304,7 @@ package object cdm extends Logg {
 
   def getOS: String = sys.env.getOrElse("os.name", EMPTYSTR)
 
-  def trimStr(in :String): String = if(valid(in)) in.trim else EMPTYSTR
+  def trimStr(in: String): String = if (valid(in)) in.trim else EMPTYSTR
 
   private[cdm] class Factory(id: String) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)

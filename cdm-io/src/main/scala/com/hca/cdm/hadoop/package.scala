@@ -65,7 +65,7 @@ package object hadoop extends Logg {
         val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime)
         if (status.nonEmpty) {
           val reader = new BufferedInputStream(fs.open(status.head.getPath))
-          data = deSerialize(reader).asInstanceOf[T]
+          data = deSerialize[T](reader)
           reader close()
           if (cleanUp) fs.listStatus(temp).filter(_.isFile).foreach(file => fs.delete(file.getPath, false))
         }
