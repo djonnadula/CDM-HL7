@@ -2,9 +2,7 @@
 package com.hca.cdm.hbase
 
 import java.io.IOException
-import java.util.Properties
 import java.util.concurrent.TimeUnit
-import scala.collection.JavaConverters._
 import com.hca.cdm.log.Logg
 import com.hca.cdm._
 import com.hca.cdm.utils.RetryHandler
@@ -13,14 +11,18 @@ import org.apache.hadoop.hbase.{HBaseConfiguration, HColumnDescriptor, HTableDes
 import org.apache.hadoop.hbase.client._
 import scala.collection.concurrent.TrieMap
 import scala.language.postfixOps
+import collection.JavaConverters._
+import com.hca.cdm.auth.LoginRenewer.performAction
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
 private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg {
 
-  private val connection = ConnectionFactory.createConnection(conf)
+  private val connection = performAction(asFunc(ConnectionFactory.createConnection(conf)))
+  println(connection)
   private val mutatorStore = new TrieMap[String, BatchOperator]()
+  private lazy val regionReplication = tryAndReturnDefaultValue0(lookUpProp("hbase.regions.replication").toInt,1)
 
   def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(nameSpace, tableName))
 
@@ -43,21 +45,20 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
     !connection.isClosed && !connection.isAborted
   }
 
-  def createTable(tableName: String, props: Option[Properties] = None, families: List[HColumnDescriptor] = Nil): Unit = {
+  def createTable(tableName: String, props: Option[Map[String, String]] = None, families: List[HColumnDescriptor] = Nil): Unit = {
     val admin = getAdmin
     val table = TableName.valueOf(nameSpace, tableName)
     if (!admin.tableExists(table)) {
       val tableDesc =
         new HTableDescriptor(table)
-          .setRegionReplication(3)
+          .setRegionReplication(regionReplication)
           .setRegionMemstoreReplication(true)
       tableDesc.setCompactionEnabled(true)
-      tableDesc.setRegionMemstoreReplication(true)
       tableDesc.setDurability(Durability.FSYNC_WAL)
       families.foreach(tableDesc.addFamily)
-      tableDesc.setConfiguration("hbase.regionserver.storefile.refresh.period","500")
-      props.foreach(_.asScala.foreach { case (k, v) => tableDesc.setConfiguration(k, v) })
-      tryAndGoNextAction(asFunc(admin.createTable(tableDesc)), asFunc(admin.close()))
+      tableDesc.setConfiguration("hbase.regionserver.storefile.refresh.period", "500")
+      props.foreach(_.foreach { case (k, v) => tableDesc.setConfiguration(k, v) })
+      tryAndGoNextAction0(admin.createTable(tableDesc), closeResource(admin))
     } else {
       closeResource(admin)
     }
@@ -67,13 +68,13 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
     tables.map { table => table -> getBatchOperator(table, batchSize) } toMap
   }
 
-  /* def findBatch[T](request: List[(String, Get)], responseHandler: (Result) => T): List[(String, Array[T])] = {
-     request.groupBy(_._1).map {
-       case (table, req) =>
-         val Table = getTable(table)
-         (table, tryAndGoNextAction(asFunc(Table.get(req.map(_._2).asJava).map(responseHandler)), closeResource(Table)))
-     }.toList
-   }*/
+  def findBatch[T](request: List[(String, Get)], responseHandler: (Result) => T): List[(String, List[T])] = {
+    request.groupBy(_._1).map {
+      case (table, req) =>
+        val Table = getTable(table)
+        (table, tryAndGoNextAction0(Table.get(req.map(_._2).asJava).map(responseHandler).toList, closeResource(Table)))
+    }.toList
+  }
 
   def findRow[T](table: String, request: Get, responseHandler: (Result) => T): T = {
     val Table = getTable(table)
@@ -84,7 +85,7 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
 private[cdm] class BatchOperator(nameSpace: String, table: String, connection: Connection, batchSize: Int = 1000) extends Logg {
   require(valid(table) && !table.trim.isEmpty, s"Cannot Operate on Table $table")
   @volatile private var batched: Int = 0
-  private val batchRunner = newDaemonScheduler(s"$table-BatchRunner")
+  private val batchRunner = newDaemonScheduler(s"$table-BatchRunner-$connection")
   batchRunner scheduleAtFixedRate(newThread(s"$table-BatchTask", runnable(asFunc(runBatch()))), 1, 1, TimeUnit.SECONDS)
   private val mutator = connection.getBufferedMutator(TableName.valueOf(nameSpace, table))
 
@@ -110,7 +111,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
   }
 
   private def runBatch(): Unit = {
-    if(batched >0) tryAndThrow(mutator flush(), error(_: Throwable))
+    if (batched > 0) tryAndThrow(mutator flush(), error(_: Throwable))
   }
 
   def close(): Unit = {
@@ -153,6 +154,15 @@ object HBaseConnector extends Logg {
     createInstance(createIfNotExist).batchOperators(tables, batchSize)
 
 
+  }
+
+  def apply(nameSpace: String = "hl7"): HBaseConnector = {
+    def createIfNotExist = new (() => HBaseConnector) {
+      val conf: Configuration = HBaseConfiguration.create()
+      conf.addResource("hbase-site.xml")
+      override def apply(): HBaseConnector = new HBaseConnector(conf, nameSpace)
+    }
+    createInstance(createIfNotExist)
   }
 
   private def createInstance(createIfNotExist: () => HBaseConnector): HBaseConnector = {

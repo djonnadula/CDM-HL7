@@ -24,10 +24,10 @@ import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.job.report.StatsReporter
-import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
-import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
-import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
+import com.hca.cdm.kfka.config.HL7ConsumerConfig.{createConfig => consumerConf}
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
+import com.hca.cdm.kfka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.mq.publisher.{MQAcker => TLMAcknowledger}
 import com.hca.cdm.notification.TaskState._
@@ -49,6 +49,7 @@ import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable
 import TimeUnit._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
+import com.hca.cdm.kfka.util.OffsetManager
 import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
 import org.apache.spark.rdd.RDD
@@ -135,19 +136,17 @@ object HL7Job extends Logg with App {
   private val isKafkaSource: Boolean = inputSource == InputSource.KAFKA
 
   // ******************************************************** Spark Part ***********************************************
-  private val restoreFromChk = new AtomicBoolean(true)
-  private val checkpointEnable = if (!isKafkaSource) {
-    restoreFromChk set false
-    false
-  } else lookUpProp("hl7.spark.checkpoint.enable").toBoolean
+  private val checkpointEnabled = isCheckPointEnabled
+  private val restoreFromChk = new AtomicBoolean(checkpointEnabled)
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
- // sparkConf set("spark.task.cpus", "3")
   private var hdpConf = hdpUtil.conf
   hdpConf = HBaseConfiguration.create(hdpConf)
   hdpConf.addResource("hbase-site.xml")
+  hdpConf.asScala foreach { x =>   info(x.getKey + " :: " + x.getValue) }
   private val hTables = new mutable.HashSet[String]
-
+  private var offSetManager: OffsetManager = _
+  private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
@@ -158,15 +157,15 @@ object HL7Job extends Logg with App {
     }
   }
 
-  private val sparkStrCtx: StreamingContext = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
+  private val sparkStrCtx: StreamingContext = if (checkpointEnabled) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   initialise(sparkStrCtx)
   startStreams()
 
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
+    hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
-    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     if (hl7JsonTopic != EMPTYSTR) createTopic(hl7JsonTopic, segmentPartitions = false)
     if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
     if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
@@ -181,13 +180,16 @@ object HL7Job extends Logg with App {
               case Destinations.HBASE =>
                 hTables += model.adhoc.get.destination.route
                 LoginRenewer.performAction(asFunc(HBaseConnector(hdpConf, lookUpProp("cdm.hl7.hbase.namespace")).createTable(model.adhoc.get.destination.route, None,
-                  List(HUtils.createFamily(model.adhoc.get.destination.hbaseConfig.get.familiy)))))
+                  List(HUtils.createFamily(model.adhoc.get.destination.offHeapConfig.get.family)))))
               case _ =>
             }
           }
         }
       }
     }
+    println("appManagesOffset" +appManagesOffset)
+    //if (appManagesOffset)
+      offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
     sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
     segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)
     segmentsDriverMetrics = driverSegmentsMetric()
@@ -195,7 +197,9 @@ object HL7Job extends Logg with App {
     parserDriverMetrics = driverParserMetric()
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
-    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
+    if (tryAndReturnDefaultValue0(lookUpProp("cdm.stats.generate").toBoolean, true)) {
+      monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
+    }
     if (monitorInterval > 0) {
       monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), minToSec(monitorInterval) + 2, minToSec(monitorInterval), TimeUnit.SECONDS)
     }
@@ -206,6 +210,7 @@ object HL7Job extends Logg with App {
       shutDown()
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
+    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     registerHook(sHook)
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
@@ -217,7 +222,11 @@ object HL7Job extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val streamLine = if (isKafkaSource) sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
+    val streamLine = if (appManagesOffset) {
+      sparkUtil stream(sparkStrCtx, kafkaConsumerProp, offSetManager.appStarted(topicsToSubscribe, kafkaConsumerProp))
+    } else if (!appManagesOffset) {
+      sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
+    }
     else {
       val rdds = new mutable.Queue[RDD[(LongWritable, Text)]]
       dataDirecotories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](dir, maxPartitions))
@@ -271,9 +280,9 @@ object HL7Job extends Logg with App {
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s)
             val hBaseWriter = HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"), hTables, lookUpProp("cdm.hl7.hbase.batch.write.size").toInt).
               map { case (dest, operator) => dest -> (HUtils.sendRequestFromJson(operator)(_: String, _: ListBuffer[String], _: String)) }
+            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s, offHeapHandlers(HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"))))
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
               TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"))
@@ -354,6 +363,7 @@ object HL7Job extends Logg with App {
         tryAndLogErrorMes(tracker.foreach(_.get()), error(_: Throwable))
         info(s"Processing Completed for RDD :: ${rdd.id} Messages Count :: $messagesInRDD")
       } else info(s"Batch was Empty So Skipping RDD :: ${rdd.id}")
+      if (self.appManagesOffset) self.offSetManager.batchCompleted(rdd)
     })
   }
 
@@ -585,6 +595,38 @@ object HL7Job extends Logg with App {
     dataDirs
   }
 
+  private def isCheckPointEnabled: Boolean = {
+    val appChk = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
+    if (appChk) {
+      inputSource match {
+        case InputSource.HDFS => false
+        case InputSource.KAFKA => true
+      }
+    }
+    else false
+  }
+
+  private var offHeapHandlesInit: Object = _
+
+  private def offHeapHandlers(hBaseConnector: HBaseConnector): ((Any, Any, Any, Any)) => Any = synchronized {
+    (HUtils.transformRow(_: Any, _: Any, _: Any, _: Any)(hBaseConnector)).tupled
+    /*if (offHeapHandlesInit == null) {
+      offHeapHandlesInit = new Object
+      val temp = new mutable.HashMap[String, ((Any, Any, Any, Any)) => Any]()
+      modelsForHl7.foreach(_._2.models.foreach(_._2.foreach {
+        model =>
+          if (model.adhoc.isDefined) {
+            val adhoc = model.adhoc.get
+            val handler = (HUtils.transformRow(_: Any, _: Any, _: Any, _: Any)(hBaseConnector)).tupled
+            temp += (adhoc.transformer -> handler)
+            EnrichCacheManager().getEnRicher(adhoc.transformer).foreach(_.offHeapDataEnricher.init(handler))
+          }
+      }))
+      return temp.toMap
+    }
+    null*/
+  }
+
   /**
     * Listener For Spark Events
     *
@@ -745,5 +787,6 @@ object HL7Job extends Logg with App {
   }
 
 }
+
 
 

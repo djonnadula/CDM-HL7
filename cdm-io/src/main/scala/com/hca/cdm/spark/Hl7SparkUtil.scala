@@ -1,6 +1,8 @@
 package com.hca.cdm.spark
 
 import kafka.serializer.StringDecoder
+import kafka.common.TopicAndPartition
+import kafka.message.MessageAndMetadata
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka.{KafkaUtils => KConsumer}
 import org.apache.spark.streaming._
@@ -11,7 +13,7 @@ import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import java.lang.Class.{forName => className}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
-import com.hca.cdm.kafka.util.TopicUtil._
+import com.hca.cdm.kfka.util.TopicUtil._
 import com.hca.cdm.log.Logg
 import org.apache.spark.storage.StorageLevel
 
@@ -63,6 +65,14 @@ object Hl7SparkUtil extends Logg {
     */
   def getSparkCtx(conf: SparkConf): SparkContext = new SparkContext(conf)
 
+  /**
+    * Creates Streams by polling Data from Kafka
+    */
+  def stream(sparkStrCtx: StreamingContext, kafkaConsumerProp: Map[String, String],
+             offsets: Map[TopicAndPartition, Long]): InputDStream[(String, String)] = {
+    val handle = (meta: MessageAndMetadata[String, String]) => (meta.key, meta.message)
+    KConsumer.createDirectStream[String, String, StringDecoder, StringDecoder, (String, String)](sparkStrCtx, kafkaConsumerProp, offsets, handle)
+  }
 
   /**
     * Creates Streams by polling Data from Kafka

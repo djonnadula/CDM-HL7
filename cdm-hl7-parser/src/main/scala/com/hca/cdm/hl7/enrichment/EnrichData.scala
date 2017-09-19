@@ -3,6 +3,8 @@ package enrichment
 
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.log.Logg
+
 import scala.collection.mutable
 import scala.language.postfixOps
 
@@ -17,10 +19,26 @@ trait EnrichData extends Serializable {
 
 }
 
-class NoEnricher() extends EnrichData {
+trait EnrichDataFromOffHeap extends EnrichData with Serializable {
+
+  protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
+
+  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Unit
+
+  def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
+    enrichDataPartFun = offHeapHandler
+  }
+
+}
+
+case class NoEnricher() extends EnrichData with EnrichDataFromOffHeap {
   override def close(): Unit = {}
 
   override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {}
+
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {}
+
+
 }
 
 private[enrichment] class FacilityCoidHandler(files: Array[String]) extends EnrichData {
@@ -84,4 +102,42 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
     }
     false
   }
+}
+
+private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichDataFromOffHeap with Logg{
+  self =>
+
+  private val enrichSourceToRefMapping = com.hca.cdm.hl7.model.loadFileAsList(config(1))
+  private val enrichAttributes = enrichSourceToRefMapping.map(_._2).toSet
+  private val cfg: OffHeapConfig = {
+    val dest = config(0) split "\\&"
+    OffHeapConfig(dest(0), dest(2), dest(3).split("\\;", -1).toSet)
+  }
+
+  override def close(): Unit = {}
+
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {
+    val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[Map[String, String]]
+    enrichSourceToRefMapping.foreach {
+      case (enrichField, _) =>
+        if ((layout isDefinedAt enrichField) && layout(enrichField) != EMPTYSTR) layout update(enrichField, res.getOrElse(enrichField, EMPTYSTR))
+    }
+
+  }
+
+  override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+    info(self.enrichDataPartFun)
+    info(enrichSourceToRefMapping)
+    info(enrichAttributes)
+    info(cfg)
+    info(layout)
+    apply(self.enrichDataPartFun, layout)
+  }
+}
+
+private case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) {
+
+  def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
+
+
 }

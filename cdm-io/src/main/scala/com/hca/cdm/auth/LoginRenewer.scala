@@ -35,6 +35,7 @@ private[cdm] object LoginRenewer extends Logg {
   def scheduleRenewal(master: Boolean = false, namesNodes: String = EMPTYSTR, conf: Option[Configuration] = None): Boolean = synchronized {
     if (!scheduled && isSecured) {
       hdfsConf = conf.getOrElse(new Configuration())
+      hdfsConf.set("hadoop.security.authentication", "kerberos")
       fs = FileSystem.get(hdfsConf)
       val appHomeDir = fs.getHomeDirectory
       hdfsConf = byPassConfig(appHomeDir.toUri.getScheme, hdfsConf)
@@ -53,8 +54,8 @@ private[cdm] object LoginRenewer extends Logg {
     lock.synchronized {
       if (!scheduled) {
         info(s"Credentials File set to $credentialsFile and Staging Dir $stagingDIr")
-        loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))
-        ), startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
+        loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))),
+          startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
         sHook()
         scheduled = true
       }
@@ -139,21 +140,23 @@ private[cdm] object LoginRenewer extends Logg {
   }
 
   private def accessCredentials(credentialFile: String): Unit = {
-    val credentialPath = new Path(credentialFile)
-    var stream: DataInputStream = null
-    if (fs.exists(credentialPath) && fs.getFileStatus(credentialPath).getLen > 0) {
-      val cred = new Credentials()
-      stream = fs.open(credentialPath)
-      cred.readTokenStorageStream(stream)
-      info(s"Before Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
-      info(s"Credentials found ${cred.getAllTokens}")
-      UGI.getCurrentUser.addCredentials(cred)
-      UGI.getLoginUser.addCredentials(cred)
-      info(s"After Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
-    } else {
-      info(s"Credential File $credentialFile not updated will try in next cycle")
-      closeResource(stream)
-    }
+    performAction(asFunc({
+      val credentialPath = new Path(credentialFile)
+      var stream: DataInputStream = null
+      if (fs.exists(credentialPath) && fs.getFileStatus(credentialPath).getLen > 0) {
+        val cred = new Credentials()
+        stream = fs.open(credentialPath)
+        cred.readTokenStorageStream(stream)
+        info(s"Before Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
+        info(s"Credentials found ${cred.getAllTokens}")
+        UGI.getCurrentUser.addCredentials(cred)
+        UGI.getLoginUser.addCredentials(cred)
+        info(s"After Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
+      } else {
+        info(s"Credential File $credentialFile not updated will try in next cycle")
+        closeResource(stream)
+      }
+    }))
   }
 
   private def genCredentials(credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
