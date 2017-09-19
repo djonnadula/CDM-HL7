@@ -1,4 +1,4 @@
-package com.hca.cdm.kafka.config
+package com.hca.cdm.kfka.config
 
 import java.util.{Properties => prop}
 import com.hca.cdm._

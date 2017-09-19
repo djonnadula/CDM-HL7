@@ -62,7 +62,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   private def runModel(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                        adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
-                       hbaseIO: Map[String, (String, ListBuffer[String], String) => Unit])
+                       hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])
                       (data: mapType, rawHl7: String, meta: MSGMeta): Unit = {
     val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[(String, String)] else null
     segRef map (seg => seg -> run(seg, data, rawHl7)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
@@ -94,7 +94,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                       tlmAckMessages += Tuple2(rec, segment.headerKey)
                       updateMetrics(segment.seg, PROCESSED)
                     } else if (segment.dest.get.system == Destinations.HBASE) {
-                      if (tryAndLogThr(hbaseIO(segment.dest.get.route).apply(segment.dest.get.hbaseConfig.get.familiy, segment.dest.get.hbaseConfig.get.key, rec),
+                      if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, segment.dest.get.offHeapConfig.get.key, rec),
                         s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                         updateMetrics(segment.seg, PROCESSED)
                       }
@@ -179,8 +179,8 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   override def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                               adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
-                              hbaseIO: Map[String, (String, ListBuffer[String], String) => Unit])(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
-    runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO, hbaseIO)(data, rawHl7, meta): Unit
+                              hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
+    runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO, hBaseIO)(data, rawHl7, meta): Unit
 
 
   override def metricsRegistry: TrieMap[String, Long] = metrics
