@@ -38,7 +38,7 @@ private[cdm] class DigitalReasonDataTransformer(delimiter: String, outboundSchem
 
   override def intercept(event: Event): Event = {
     val data = mapper(event.getBody)
-    tryAndLogErrorMes(event.setBody(outboundSchema.clone().transform { case (k, v) => data.getOrElse(k, EMPTYSTR) }.mkString(delimiter).getBytes), error(_: Throwable))
+    tryAndLogErrorMes(event.setBody(outboundSchema.clone().transform { case (k, _) => data.getOrElse(k, EMPTYSTR) }.values.mkString(delimiter).getBytes), error(_: Throwable))
     event
   }
 
