@@ -4,24 +4,25 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm._
 import com.hca.cdm.log.Logg
+import com.hca.cdm.utils.RetryHandler
 import org.apache.hadoop.hbase.client._
 import org.apache.hadoop.hbase.{HColumnDescriptor, KeepDeletedCells}
 import org.apache.hadoop.hbase.io.compress.Compression
 import org.apache.hadoop.hbase.regionserver.BloomType
 import org.apache.hadoop.hbase.util.Bytes._
-import collection.JavaConverters._
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import collection.JavaConverters._
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
-object HUtils extends Logg{
+object HUtils extends Logg {
 
-  private lazy val Replication_Factor: Int = 3
-  private lazy val TTL: Int = 1 * 31 * 24 * 60 * 60
-  private val EMPTY = mutable.Map.empty[String, String]
+  private lazy val Replication_Factor: Short = 3.toShort
+  private lazy val DEFAULT_TTL: Int = 1 * 31 * 24 * 60 * 60
   private val mapper = new ObjectMapper().registerModule(DefaultScalaModule).readValue(_: String, classOf[mutable.Map[String, String]])
+  private lazy val NO_DATA = mutable.Map[String, String]().empty
 
 
   def createFamily(familyName: String, props: Map[String, String] = Map.empty): HColumnDescriptor = {
@@ -34,7 +35,7 @@ object HUtils extends Logg{
       .setCacheIndexesOnWrite(false)
       .setCompactionCompressionType(Compression.Algorithm.SNAPPY)
       .setCompressTags(true)
-      .setDFSReplication(3)
+      .setDFSReplication(Replication_Factor)
       .setEvictBlocksOnClose(false)
       .setInMemory(false)
       .setKeepDeletedCells(KeepDeletedCells.TTL)
@@ -42,7 +43,7 @@ object HUtils extends Logg{
       .setPrefetchBlocksOnOpen(false)
       .setEvictBlocksOnClose(true)
       .setVersions(1, 10)
-      .setTimeToLive(TTL)
+      .setTimeToLive(DEFAULT_TTL)
     props.foreach { case (k, v) => fam.setValue(k, v) }
     fam
   }
@@ -61,16 +62,29 @@ object HUtils extends Logg{
     operator.mutate(addRowRequest(key, family, jsonKV))
   }
 
-  def getRow[T](request: T, operator: (T) => Result): mutable.Map[String, String] = {
+  def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String])(operator: HBaseConnector): mutable.Map[String, String] = {
+    val response = sendGetRequest(getRowRequest(fetchId, family, fetchAttributes), operator.getTable(table))
+    if (valid(response) && !response.isEmpty) {
+      response.getFamilyMap(toBytes(family)).asScala.map({
+        case (k, v) => (new String(k, UTF8), new String(v, UTF8))
+      })
+    } else NO_DATA
 
-    val response = operator(request)
-
-    //if(valid(response)) response.getFamilyMap(request.getf) asScala.map{case(k,v) => (new String(k),new String(v)) }
-    //else
-    EMPTY
+  }
+  def transformRow(table: Any, family: Any, fetchId: Any, fetchAttributes: Any)(operator: HBaseConnector): Any ={
+    transformRow(table.asInstanceOf[String],family.asInstanceOf[String],
+      fetchId.asInstanceOf[String],fetchAttributes.asInstanceOf[ListBuffer[String]])(operator)
   }
 
-  def getRowRequest(key: String, family: String, attributes: Set[String]): Get = {
+  def sendGetRequest(request: Get, table: Table, retry: Boolean = true): Result = {
+    var res: Result = null
+    val op = asFunc(res = table.get(request))
+    if (retry) tryAndGoNextAction0(new RetryHandler().retryOperation(asFunc(op)), closeResource(table))
+    else op()
+    res
+  }
+
+  def getRowRequest(key: String, family: String, attributes: ListBuffer[String]): Get = {
     val get = new Get(toBytes(key))
     val familyBytes = toBytes(family)
     attributes.foreach { case (qualifier) => get.addColumn(familyBytes, toBytes(qualifier)) }
@@ -83,12 +97,5 @@ object HUtils extends Logg{
     attributes.foreach { case (qualifier) => delete.addColumn(familyBytes, toBytes(qualifier)) }
     delete
   }
-
-
-  def persistRow(mut: Put)(operator: Either[Table, BatchOperator]): Unit = {
-
-
-  }
-
 
 }
