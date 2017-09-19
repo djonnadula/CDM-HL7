@@ -5,13 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm.Models.MSGMeta
-import com.hca.cdm.{tryAndReturnDefaultValue, _}
+import com.hca.cdm.{tryAndReturnDefaultValue0, _}
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
-import com.hca.cdm.hl7.enrichment.{EnrichData, NoEnricher}
+import com.hca.cdm.hl7.enrichment.{EnrichData, EnrichDataFromOffHeap, NoEnricher}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
 import com.hca.cdm.log.Logg
@@ -23,8 +23,10 @@ import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
 import java.util.regex.Pattern
+import com.hca.cdm.hbase.HUtils
 import org.apache.avro.generic._
 import org.apache.avro.io._
+import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
@@ -286,7 +288,14 @@ package object model extends Logg {
           tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
             config.getOrDefault(s"$request$DOT${"reference.props"}", EMPTYSTR).asInstanceOf[String].split(COMMA)).asInstanceOf[EnrichData], error(_: Throwable)
             , Some(s"Impl for $impl cannot be initiated"))
-        } else new NoEnricher
+        } else NoEnricher()
+      }, {
+        val impl = config.getOrDefault(s"$request$DOT${"reference.offheap.handle"}", EMPTYSTR).asInstanceOf[String]
+        if (impl != EMPTYSTR) {
+          tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
+            config.getOrDefault(s"$request$DOT${"reference.offheap.props"}", EMPTYSTR).asInstanceOf[String].split(COMMA)).asInstanceOf[EnrichDataFromOffHeap], error(_: Throwable)
+            , Some(s"Impl for $impl cannot be initiated"))
+        } else NoEnricher()
       }
     ))
     request
@@ -352,12 +361,13 @@ package object model extends Logg {
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
-  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String, hbaseConfig: Option[HBaseConfig] = None)
+  case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String, offHeapConfig: Option[HBaseConfig] = None)
 
-  case class HBaseConfig(familiy: String, key: ListBuffer[String])
+  case class HBaseConfig(family: String, key: ListBuffer[String])
 
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
-                               dataEnRicher: EnrichData) {
+                               dataEnRicher: EnrichData, offHeapDataEnricher: EnrichDataFromOffHeap) {
+    private val offHeapManager: TrieMap[String, (Any) => Any] = new TrieMap()
 
     def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
       selector apply data
@@ -365,6 +375,12 @@ package object model extends Logg {
       staticOperator apply data
       validator apply data
       dataEnRicher apply data
+      offHeapDataEnricher apply data
+      //tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
+    }
+
+    def offHeapEnricher(): Any = {
+
     }
   }
 
@@ -679,11 +695,21 @@ object EnrichCacheManager extends Logg {
     instance
   }
 
-  def apply(adhocConfig: String, hl7Types: Array[String]): EnrichCacheManager = lock.synchronized {
+  def apply(adhocConfig: String, hl7Types: Array[String], offHeapHandler: ((Any,Any,Any,Any)) => Any): EnrichCacheManager = lock.synchronized {
     if (instance == null) {
       instance = new EnrichCacheManager()
       val adhocSeg = model.applySegmentsToAll(model.loadSegments(adhocConfig), hl7Types)
-      hl7Types.foreach { hl7 => model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7)) }
+      hl7Types.foreach { hl7 => {
+        model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7))
+          .models.foreach(_._2.foreach { model =>
+          if (model.adhoc.isDefined) {
+            instance.getEnRicher(model.adhoc.get.transformer).foreach(_.offHeapDataEnricher.init(offHeapHandler))
+          }
+        })
+
+      }
+      }
+
     }
     instance
   }

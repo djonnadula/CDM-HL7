@@ -47,7 +47,7 @@ package object cdm extends Logg {
   private lazy val random = new Random()
   private val CR: Char = 0x0D.toChar
   private val LF: Char = 0x0A.toChar
-  lazy val CRLF = s"$EMPTYSTR$CR$LF"
+  lazy val CRLF = s"$CR$LF"
 
 
   def randomString: String = randomUUID.toString
@@ -271,6 +271,10 @@ package object cdm extends Logg {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse default
   }
 
+  def tryAndReturnDefaultValue0[T](fun: => T, default: T): T = {
+    tryAndReturnDefaultValue(asFunc(fun), default)
+  }
+
   def tryAndFallbackTo[T](fun: () => T, fallbackTo: => T): T = {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse tryAndThrow(fallbackTo, error(_: Throwable))
   }
@@ -280,6 +284,11 @@ package object cdm extends Logg {
     nextStep
     opOut.getOrElse(null.asInstanceOf[T])
   }
+
+  def tryAndGoNextAction0[T](fun: => T, nextStep: => Unit): T = {
+    tryAndGoNextAction(asFunc(fun), nextStep)
+  }
+
 
   def asFunc[T](action: => T): () => T = () => action
 
@@ -296,7 +305,8 @@ package object cdm extends Logg {
   }
 
   def loadClass[T](clazz: String, specificJar: Option[String] = None): T = {
-    if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath))).loadClass(clazz).newInstance().asInstanceOf[T]
+    if (specificJar isDefined) return new URLClassLoader(Array[URL](new URL("file:" + new File(specificJar.get).getAbsolutePath)))
+      .loadClass(clazz).newInstance().asInstanceOf[T]
     currThread.getContextClassLoader.loadClass(clazz).newInstance().asInstanceOf[T]
   }
 
