@@ -10,9 +10,9 @@ import com.hca.cdm.spark.receiver.{MqReceiver => receiver}
 import com.hca.cdm.hadoop.OverSizeHandler
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.model._
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
-import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
-import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
+import com.hca.cdm.kfka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import org.apache.hadoop.conf.Configuration
