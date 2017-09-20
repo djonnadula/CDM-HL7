@@ -107,8 +107,8 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
 private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichDataFromOffHeap with Logg {
   self =>
 
-  private val enrichSourceToRefMapping = com.hca.cdm.hl7.model.loadFileAsList(config(1))
-  private val enrichAttributes = enrichSourceToRefMapping.map(_._2).to[ListBuffer]
+  private val enrichSourceToTargetMapping = com.hca.cdm.hl7.model.loadFileAsList(config(1))
+  private val enrichAttributes = enrichSourceToTargetMapping.map(_._2).to[ListBuffer]
   private val cfg: OffHeapConfig = {
     val dest = config(0) split "\\&"
     OffHeapConfig(dest(0), dest(2), dest(3).split("\\;", -1).toSet)
@@ -117,13 +117,21 @@ private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichD
   override def close(): Unit = {}
 
   override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {
+    if (!fetchRequired(layout)) return
     val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, String]]
-    enrichSourceToRefMapping.foreach {
+    enrichSourceToTargetMapping.foreach {
       case (enrichField, _) =>
         if ((layout isDefinedAt enrichField) && layout(enrichField) == EMPTYSTR && res.getOrElse(enrichField, EMPTYSTR) != EMPTYSTR) layout update(enrichField, res(enrichField))
     }
 
   }
+
+  def fetchRequired(layout: mutable.LinkedHashMap[String, String]): Boolean = {
+    enrichSourceToTargetMapping.forall {
+      case (enrichField, _) => layout.getOrElse(enrichField, EMPTYSTR) != EMPTYSTR
+    }
+  }
+
 
   override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
     apply(self.enrichDataPartFun, layout)
@@ -133,6 +141,5 @@ private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichD
 private case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) {
 
   def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
-
 
 }
