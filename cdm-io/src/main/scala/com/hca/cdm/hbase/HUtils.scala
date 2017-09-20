@@ -62,30 +62,39 @@ object HUtils extends Logg {
     operator.mutate(addRowRequest(key, family, jsonKV))
   }
 
-  def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String])(operator: HBaseConnector): mutable.Map[String, String] = {
+  def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String] = ListBuffer.empty[String])(operator: HBaseConnector): mutable.Map[String, String] = {
     val response = sendGetRequest(getRowRequest(fetchId, family, fetchAttributes), operator.getTable(table))
     if (valid(response) && !response.isEmpty) {
       response.getFamilyMap(toBytes(family)).asScala.map({
-        case (k, v) => (new String(k, UTF8), new String(v, UTF8))
+        case (k, v) =>
+          (new String(k, UTF8), new String(v, UTF8))
       })
     } else NO_DATA
 
   }
-  def transformRow(table: Any, family: Any, fetchId: Any, fetchAttributes: Any)(operator: HBaseConnector): Any ={
-    transformRow(table.asInstanceOf[String],family.asInstanceOf[String],
-      fetchId.asInstanceOf[String],fetchAttributes.asInstanceOf[ListBuffer[String]])(operator)
+
+  def transformRow(table: Any, family: Any, fetchId: Any, fetchAttributes: Any)(operator: HBaseConnector): Any = {
+    transformRow(table.asInstanceOf[String], family.asInstanceOf[String],
+      fetchId.asInstanceOf[String], fetchAttributes.asInstanceOf[ListBuffer[String]])(operator)
   }
 
   def sendGetRequest(request: Get, table: Table, retry: Boolean = true): Result = {
     var res: Result = null
-    val op = asFunc(res = table.get(request))
-    if (retry) tryAndGoNextAction0(new RetryHandler().retryOperation(asFunc(op)), closeResource(table))
-    else op()
+
+    def op(): Unit = {
+      res = table.get(request)
+    }
+
+    if (retry) tryAndGoNextAction0(new RetryHandler().retryOperation(op), closeResource(table))
+    else tryAndGoNextAction0(op(), closeResource(table))
     res
+
   }
 
   def getRowRequest(key: String, family: String, attributes: ListBuffer[String]): Get = {
     val get = new Get(toBytes(key))
+    get.setIsolationLevel(IsolationLevel.READ_UNCOMMITTED)
+    get.setId(key)
     val familyBytes = toBytes(family)
     attributes.foreach { case (qualifier) => get.addColumn(familyBytes, toBytes(qualifier)) }
     get
