@@ -18,11 +18,11 @@ import com.hca.cdm.auth.LoginRenewer.performAction
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
 private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg {
-
+  self =>
   private val connection = performAction(asFunc(ConnectionFactory.createConnection(conf)))
-  println(connection)
   private val mutatorStore = new TrieMap[String, BatchOperator]()
   private lazy val regionReplication = tryAndReturnDefaultValue0(lookUpProp("hbase.regions.replication").toInt,1)
+  registerHook(newThread( s"${self.getClass.getName}-sHook-$connection",runnable(close())))
 
   def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(nameSpace, tableName))
 
