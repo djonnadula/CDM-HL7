@@ -1,4 +1,4 @@
-package com.hca.cdm.kafka.util
+package com.hca.cdm.kfka.util
 
 import com.hca.cdm.log.Logg
 import kafka.message.{Message, MessageAndMetadata}

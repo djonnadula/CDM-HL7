@@ -1,4 +1,4 @@
-package com.hca.cdm.kafka.util
+package com.hca.cdm.kfka.util
 
 import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.io.IOConstants._

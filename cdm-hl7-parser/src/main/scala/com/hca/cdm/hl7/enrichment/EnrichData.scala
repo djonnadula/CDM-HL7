@@ -3,7 +3,9 @@ package enrichment
 
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
+import com.hca.cdm.log.Logg
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 
 /**
@@ -17,30 +19,47 @@ trait EnrichData extends Serializable {
 
 }
 
-class NoEnricher() extends EnrichData {
+trait EnrichDataFromOffHeap extends EnrichData with Serializable {
+
+  protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
+
+  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Unit
+
+  def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
+    enrichDataPartFun = offHeapHandler
+  }
+
+}
+
+case class NoEnricher() extends EnrichData with EnrichDataFromOffHeap {
   override def close(): Unit = {}
 
   override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {}
+
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {}
+
+
 }
 
 private[enrichment] class FacilityCoidHandler(files: Array[String]) extends EnrichData {
 
   private case class CrossFacilityReference(reqCoid: String, reqFacility: String, regNetworkMnemonic: String)
 
-  private case class FacilityReference(reqCoid: String, regNetworkMnemonic: String)
+  private case class FacilityReference(reqCoid: String, regNetworkMnemonic: String, facilityDesc: String)
 
 
   private lazy val facilityKey = "sending_facility"
   private lazy val coidRefLookUp = "coid_ref_look_up"
   private lazy val patientLocation = "patientLocation"
   private lazy val networkID = "meditech_network_id"
+  private lazy val facility_desc = "facility_desc"
   private val facilityRefData = readFile(files(0)).getLines().toList
   private val coidCrossRefData = readFile(files(1)).getLines().toList
   private lazy val facilityRef = {
     val temp = new mutable.HashMap[String, mutable.Map[String, FacilityReference]]
     facilityRefData.takeWhile(valid(_)).map(temp => temp split COMMA).filter(valid(_, 4)).foreach { x =>
-      if (temp isDefinedAt trimStr(x(0))) temp update(trimStr(x(0)), temp(trimStr(x(0))) += Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)))))
-      else temp += (trimStr(x(0)) -> mutable.Map[String, FacilityReference](Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3))))))
+      if (temp isDefinedAt trimStr(x(0))) temp update(trimStr(x(0)), temp(trimStr(x(0))) += Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)), trimStr(x(4)))))
+      else temp += (trimStr(x(0)) -> mutable.Map[String, FacilityReference](Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)), trimStr(x(4))))))
     }
     temp.toMap
   }
@@ -57,11 +76,13 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
           facilityRef(layout(facilityKey)).get(layout(patientLocation)).foreach { facRef =>
             layout update(coidRefLookUp, facRef.reqCoid)
             layout update(networkID, facRef.regNetworkMnemonic)
+            layout update(facility_desc, facRef.facilityDesc)
           }
         }
-        else facilityRef(layout(facilityKey)).headOption.foreach { case (loc, facRef) =>
+        else facilityRef(layout(facilityKey)).headOption.foreach { case (_, facRef) =>
           layout update(coidRefLookUp, facRef.reqCoid)
           layout update(networkID, facRef.regNetworkMnemonic)
+          layout update(facility_desc, facRef.facilityDesc)
         }
       }
     }
@@ -81,4 +102,44 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
     }
     false
   }
+}
+
+private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichDataFromOffHeap with Logg {
+  self =>
+
+  private val enrichSourceToTargetMapping = com.hca.cdm.hl7.model.loadFileAsList(config(1))
+  private val enrichAttributes = enrichSourceToTargetMapping.map(_._2).to[ListBuffer]
+  private val cfg: OffHeapConfig = {
+    val dest = config(0) split "\\&"
+    OffHeapConfig(dest(0), dest(2), dest(3).split("\\;", -1).toSet)
+  }
+
+  override def close(): Unit = {}
+
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {
+    if (!fetchRequired(layout)) return
+    val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, String]]
+    enrichSourceToTargetMapping.foreach {
+      case (enrichField, _) =>
+        if ((layout isDefinedAt enrichField) && layout(enrichField) == EMPTYSTR && res.getOrElse(enrichField, EMPTYSTR) != EMPTYSTR) layout update(enrichField, res(enrichField))
+    }
+
+  }
+
+  def fetchRequired(layout: mutable.LinkedHashMap[String, String]): Boolean = {
+    enrichSourceToTargetMapping.forall {
+      case (enrichField, _) => layout.getOrElse(enrichField, EMPTYSTR) != EMPTYSTR
+    }
+  }
+
+
+  override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+    apply(self.enrichDataPartFun, layout)
+  }
+}
+
+private case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) {
+
+  def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
+
 }

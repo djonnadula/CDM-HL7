@@ -35,11 +35,11 @@ class HL7ParserTestSetup(msgType: HL7) extends Logg {
         allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1),null))
 
     def parse(message: String): String = {
-        Try( hl7Parsers(msgType).transformHL7(message, reject) rec ) match {
+        Try( hl7Parsers(msgType).transformHL7(message, null) rec ) match {
             case Success(map) =>
                 map match {
                     case Left(out) =>
-                        segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination)(out._2,null, out._3)
+                        segmentsHandler(msgType).handleSegments(outio, null, audit, adhocDestination,null,null)(out._2,null, out._3)
                         info(out._1)
                         out._1
                     case Right(t) =>

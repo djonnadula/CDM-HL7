@@ -11,13 +11,13 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA}
+import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA, SEMICOLUMN}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.{CountDownLatch, TimeUnit}
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -77,6 +77,7 @@ object Hl7Driver extends App with Logg {
   private val ENV = lookUpProp("hl7.env")
   private val jobScript = lookUpProp("hl7.runner")
   private var sHook: Thread = _
+  private val appLatch = new CountDownLatch(1)
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
     .setMaster(hl7_spark_master)
@@ -125,10 +126,16 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
     .setConf("spark.yarn.access.namenodes", lookUpProp("secure.name.nodes"))
   private lazy val extraConfig = () => lookUpProp("spark.extra.config")
-  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
+  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(SEMICOLUMN, -1).foreach(conf => {
     if (valid(conf)) {
       val actConf = conf.split(COLON)
-      if (valid(actConf, 2)) sparkLauncher.setConf(actConf(0), actConf(1))
+      if (valid(actConf, 2)) {
+        actConf(0) match {
+          case "--files" => sparkLauncher.addFile(new File(actConf(1)).getPath)
+          case "--jars" => sparkLauncher.addJar(new File(actConf(1)).getPath)
+          case _ => sparkLauncher.setConf(actConf(0), actConf(1))
+        }
+      }
     }
   })
   if (ENV != "PROD") {
@@ -149,13 +156,13 @@ object Hl7Driver extends App with Logg {
   while (job.getAppId == null) {
     sleep(3000)
   }
-  var check = false
-  while (!check) {
+  var appStateRunning = false
+  while (!appStateRunning) {
     job getState match {
       case UNKNOWN => debug(app + " Job State Still Unknown ... ")
       case CONNECTED => info(app + " Job Connected ... Waiting for Resource Manager to Handle ...  " + job.getAppId)
       case SUBMITTED => info(app + " Job Submitted To Resource manager ... with Job ID :: " + job.getAppId)
-      case RUNNING => check = true
+      case RUNNING => appStateRunning = true
         info(app + " Job Running ... with Job ID :: " + job.getAppId)
       case FINISHED | FAILED | KILLED =>
         error(app + " Job Something Wrong ... with Job ID :: " + job.getAppId)
@@ -181,14 +188,11 @@ object Hl7Driver extends App with Logg {
   sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
     shutDown()
-    handleDriver("stop")
+    startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
     info(s"$app Driver Shutdown Completed ")
   }))
   registerHook(sHook)
-  while (check) {
-    sleep(600000)
-    debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
-  }
+  appLatch await()
 
   private[job] object Tracker extends Listener {
     override def infoChanged(handle: SparkAppHandle): Unit = {
@@ -253,9 +257,11 @@ object Hl7Driver extends App with Logg {
   private def startIfNeeded(selfStart: Boolean): Unit = {
     if (selfStart) {
       info(s"Self Start is Requested for $app")
+      appLatch countDown()
       handleDriver("restart")
     } else {
       info(s"No Self Start is Requested So shutting down $app ...")
+      appLatch countDown()
       handleDriver("stop")
       abend(0)
     }

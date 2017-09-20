@@ -1,6 +1,6 @@
 package com.hca.cdm.auth
 
-import java.io.{DataInputStream, InputStream}
+import java.io.DataInputStream
 import java.util.concurrent.TimeUnit._
 import com.hca.cdm.{lookUpProp, _}
 import com.hca.cdm.log.Logg
@@ -10,11 +10,11 @@ import org.apache.hadoop.security.{UserGroupInformation => UGI, _}
 import org.apache.spark.deploy.yarn.YarnSparkHadoopUtil.{get => yrnUtil}
 import java.lang.System.{getenv => fromEnv}
 import scala.language.postfixOps
-import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import java.security.PrivilegedExceptionAction
 import com.hca.cdm.exception.CdmException
 import org.apache.hadoop.mapred.Master
 import org.apache.spark.SparkConf
+import org.apache.hadoop.hbase.security.token.TokenUtil._
 import org.apache.hadoop.security.token.{Token, TokenIdentifier}
 
 /**
@@ -26,15 +26,21 @@ private[cdm] object LoginRenewer extends Logg {
   private lazy val loginRenewer = newDaemonScheduler(s"$app-Token-Renewer")
   private lazy val tryRenewal = if (isConfigDefined("hl7.hdfs.token.renewal")) lookUpProp("hl7.hdfs.token.renewal").toBoolean else true
   private var hdfsConf: Configuration = _
+  private var sparkConf: SparkConf = _
   private var fs: FileSystem = _
   private var scheduled = false
   private val lock = new Object
 
-  def scheduleRenewal(master: Boolean = false, namesNodes: String = EMPTYSTR): Boolean = synchronized {
+
+  def scheduleRenewal(master: Boolean = false, namesNodes: String = EMPTYSTR, conf: Option[Configuration] = None): Boolean = synchronized {
     if (!scheduled && isSecured) {
-      val appHomeDir = FileSystem.get(new Configuration()).getHomeDirectory
+      hdfsConf = conf.getOrElse(new Configuration())
+      hdfsConf.set("hadoop.security.authentication", "kerberos")
+      fs = FileSystem.get(hdfsConf)
+      val appHomeDir = fs.getHomeDirectory
+      hdfsConf = byPassConfig(appHomeDir.toUri.getScheme, hdfsConf)
       val tempCrd = credentialFile(s"$appHomeDir$FS${fromEnv("SPARK_YARN_STAGING_DIR")}")
-      val sparkConf = new SparkConf
+      sparkConf = new SparkConf
       if (!master) sparkConf.set("spark.yarn.access.namenodes", if (namesNodes == EMPTYSTR) lookUpProp("secure.name.nodes") else namesNodes)
       if (master) scheduleGenCredentials(2, tempCrd, sparkConf.get("spark.yarn.principal"), sparkConf.get("spark.yarn.keytab"), haNameNodes(sparkConf))
       scheduleLoginFromCredentials(2.1.toLong, tempCrd.getName, fromEnv("SPARK_YARN_STAGING_DIR"))
@@ -48,11 +54,8 @@ private[cdm] object LoginRenewer extends Logg {
     lock.synchronized {
       if (!scheduled) {
         info(s"Credentials File set to $credentialsFile and Staging Dir $stagingDIr")
-        hdfsConf = byPassConfig(new Path(credentialsFile).toUri.getScheme, hdpUtil.conf)
-        hdfsConf.set("hadoop.security.authentication", "Kerberos")
-        fs = FileSystem.get(hdfsConf)
-        loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))
-        ), startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
+        loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))),
+          startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
         sHook()
         scheduled = true
       }
@@ -63,24 +66,29 @@ private[cdm] object LoginRenewer extends Logg {
     info(s"Logging $principal with KeyTab $keyTab")
     config.foreach(cfg => UGI.setConfiguration(cfg))
     val currUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keyTab)
-    UGI.getCurrentUser.addCredentials(currUser.getCredentials)
-    if (currUser != null) return true
+    if (valid(currUser)) {
+      info(s"Login successful for ${currUser.getUserName}")
+      setCredentials(currUser)
+      return true
+    }
     false
   }
 
-  def scheduleGenCredentials(startFrom: Long = 1, credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
+  private def setCredentials(user: UGI): Unit = {
+    UGI.setLoginUser(user)
+    UGI.getCurrentUser.addCredentials(user.getCredentials)
+
+  }
+
+  private def scheduleGenCredentials(startFrom: Long = 1, credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
     loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(genCredentials(credentialsFile, principal, keytab, nns), error(_: Throwable)))
       , startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
     sHook()
   }
 
   private def credentialFile(stagingDir: String, suffix: String = s"Credentials"): Path = {
-    val conf = hdpUtil.conf
-    fs = FileSystem.get(conf)
     val crPath = new Path(s"$stagingDir$FS$app-$suffix")
     fs.createNewFile(crPath)
-    hdfsConf = byPassConfig(crPath.toUri.getScheme, hdpUtil.conf)
-    fs = FileSystem.get(hdfsConf)
     crPath
   }
 
@@ -97,7 +105,8 @@ private[cdm] object LoginRenewer extends Logg {
   @throws[CdmException]
   def performAction[T](fun: () => T): T = {
     tryAndThrow({
-      UGI.getCurrentUser.doAs(new PrivilegedExceptionAction[T] {
+      UGI.getLoginUser.checkTGTAndReloginFromKeytab()
+      UGI.getLoginUser.doAs(new PrivilegedExceptionAction[T] {
         override def run(): T = fun()
       })
     }, error(_: Throwable))
@@ -131,33 +140,39 @@ private[cdm] object LoginRenewer extends Logg {
   }
 
   private def accessCredentials(credentialFile: String): Unit = {
-    val credentialPath = new Path(credentialFile)
-    var stream: DataInputStream = null
-    if (fs.exists(credentialPath) && fs.getFileStatus(credentialPath).getLen > 0) {
-      val cred = new Credentials()
-      stream = fs.open(credentialPath)
-      cred.readTokenStorageStream(stream)
-      info(s"Before Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
-      info(s"Credentials found ${cred.getAllTokens}")
-      UGI.getCurrentUser.addCredentials(cred)
-      info(s"After Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
-    } else {
-      info(s"Credential File $credentialFile not updated will try in next cycle")
-      closeResource(stream)
-    }
+    performAction(asFunc({
+      val credentialPath = new Path(credentialFile)
+      var stream: DataInputStream = null
+      if (fs.exists(credentialPath) && fs.getFileStatus(credentialPath).getLen > 0) {
+        val cred = new Credentials()
+        stream = fs.open(credentialPath)
+        cred.readTokenStorageStream(stream)
+        info(s"Before Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
+        info(s"Credentials found ${cred.getAllTokens}")
+        UGI.getCurrentUser.addCredentials(cred)
+        UGI.getLoginUser.addCredentials(cred)
+        info(s"After Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
+      } else {
+        info(s"Credential File $credentialFile not updated will try in next cycle")
+        closeResource(stream)
+      }
+    }))
   }
 
   private def genCredentials(credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
     UGI.setConfiguration(hdfsConf)
     val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keytab)
     val cred = loggedUser.getCredentials
-    loggedUser.doAs(new PrivilegedExceptionAction[Void] {
-      override def run(): Void = {
-        refreshFsTokens(nns + credentialsFile.getParent, cred)
-        null
+    //noinspection ScalaDeprecation
+    performAction(asFunc({
+      refreshFsTokens(nns + credentialsFile.getParent, cred)
+      if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {
+        val hBaseToken = obtainToken(hdfsConf)
+        if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
       }
-    })
-    UGI.getCurrentUser.addCredentials(cred)
+    }))
+    loggedUser.addCredentials(cred)
+    setCredentials(loggedUser)
     cred.writeTokenStorageFile(credentialsFile, hdfsConf)
   }
 

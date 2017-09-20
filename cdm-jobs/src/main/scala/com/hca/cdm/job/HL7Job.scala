@@ -11,7 +11,7 @@ import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm._
 import com.hca.cdm.auth.LoginRenewer
-import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
+import com.hca.cdm.auth.LoginRenewer.{info, loginFromKeyTab}
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.EnrichCacheManager
@@ -24,10 +24,10 @@ import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
 import com.hca.cdm.hl7.validation.NotValidHl7Exception
 import com.hca.cdm.job.report.StatsReporter
-import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
-import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
-import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
+import com.hca.cdm.kfka.config.HL7ConsumerConfig.{createConfig => consumerConf}
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
+import com.hca.cdm.kfka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.mq.publisher.{MQAcker => TLMAcknowledger}
 import com.hca.cdm.notification.TaskState._
@@ -39,7 +39,7 @@ import org.apache.spark.AccumulatorParam.LongAccumulatorParam
 import org.apache.spark.scheduler._
 import org.apache.spark.streaming.kafka.HasOffsetRanges
 import org.apache.spark.streaming.StreamingContext
-import org.apache.spark.{Accumulator, FutureAction}
+import org.apache.spark._
 import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable.ListBuffer
@@ -47,7 +47,12 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable
-import  TimeUnit._
+import TimeUnit._
+import com.hca.cdm.hbase.{HBaseConnector, HUtils}
+import com.hca.cdm.kfka.util.OffsetManager
+import org.apache.hadoop.hbase.HBaseConfiguration
+import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
+import org.apache.spark.rdd.RDD
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -126,36 +131,63 @@ object HL7Job extends Logg with App {
     temp
   }
   private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
+  private val inputSource: InputSource.Source = tryAndReturnDefaultValue(asFunc(InputSource.withName(lookUpProp("hl7.data.source"))), InputSource.KAFKA)
+  if (inputSource == InputSource.HDFS) require(messageTypes.size == 1, "When Source is Configured as HDFS only one Message type should be active")
+  private val isKafkaSource: Boolean = inputSource == InputSource.KAFKA
 
   // ******************************************************** Spark Part ***********************************************
+  private val checkpointEnabled = isCheckPointEnabled
+  private val restoreFromChk = new AtomicBoolean(checkpointEnabled)
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
-  sparkConf set("spark.task.cpus", "3")
-  private val hdpConf = hdpUtil.conf
-  private val restoreFromChk = new AtomicBoolean(true)
+  private var hdpConf = hdpUtil.conf
+  hdpConf = HBaseConfiguration.create(hdpConf)
+  hdpConf.addResource("hbase-site.xml")
+  private val hTables = new mutable.HashSet[String]
+  private var offSetManager: OffsetManager = _
+  private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled
+  private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
+      info(s"New Context Created $ctx")
       restoreFromChk set false
       ctx
     }
   }
 
-  private val sparkStrCtx: StreamingContext = sparkUtil streamingContext(checkPoint, newCtxIfNotExist)
+  private val sparkStrCtx: StreamingContext = if (checkpointEnabled) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
   initialise(sparkStrCtx)
   startStreams()
 
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
-    modelsForHl7.values foreach (segment => segment.models.values.foreach(models => models.foreach(model => {
-      if ((model.adhoc isDefined) && (model.adhoc.get.destination.system == Destinations.KAFKA)) createTopic(model.adhoc.get.destination.route)
-    })))
-    createTopic(hl7JsonTopic, segmentPartitions = false)
-    createTopic(segTopic, segmentPartitions = false)
-    createTopic(auditTopic, segmentPartitions = false)
-    createTopic(rejectedTopic, segmentPartitions = false)
+    hdpConf.set("hadoop.security.authentication", "Kerberos")
+    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
+    if (hl7JsonTopic != EMPTYSTR) createTopic(hl7JsonTopic, segmentPartitions = false)
+    if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
+    if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
+    if (rejectedTopic != EMPTYSTR) createTopic(rejectedTopic, segmentPartitions = false)
+    modelsForHl7.values foreach { segment =>
+      segment.models.values.foreach { models =>
+        models.foreach { model =>
+          if (model.adhoc isDefined) {
+            model.adhoc.get.destination.system match {
+              case Destinations.KAFKA =>
+                createTopic(model.adhoc.get.destination.route)
+              case Destinations.HBASE =>
+                hTables += model.adhoc.get.destination.route
+                LoginRenewer.performAction(asFunc(HBaseConnector(hdpConf, lookUpProp("cdm.hl7.hbase.namespace")).createTable(model.adhoc.get.destination.route, None,
+                  List(HUtils.createFamily(model.adhoc.get.destination.offHeapConfig.get.family)))))
+              case _ =>
+            }
+          }
+        }
+      }
+    }
+    if (appManagesOffset) offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
     sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
     segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)
     segmentsDriverMetrics = driverSegmentsMetric()
@@ -163,7 +195,9 @@ object HL7Job extends Logg with App {
     parserDriverMetrics = driverParserMetric()
     restoreMetrics()
     monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
-    monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
+    if (tryAndReturnDefaultValue0(lookUpProp("cdm.stats.generate").toBoolean, true)) {
+      monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
+    }
     if (monitorInterval > 0) {
       monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), minToSec(monitorInterval) + 2, minToSec(monitorInterval), TimeUnit.SECONDS)
     }
@@ -174,10 +208,8 @@ object HL7Job extends Logg with App {
       shutDown()
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
+    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     registerHook(sHook)
-    hdpConf.set("hadoop.security.authentication", "Kerberos")
-    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
-    LoginRenewer.scheduleRenewal(master = true)
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
   }
@@ -188,17 +220,27 @@ object HL7Job extends Logg with App {
     * Executes Each RDD Partitions Asynchronously.
     */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
-    val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
-    info(s"Kafka Stream Was Opened Successfully with ID :: ${streamLine.id}")
+    val streamLine = if (appManagesOffset) {
+      sparkUtil stream(sparkStrCtx, kafkaConsumerProp, offSetManager.appStarted(topicsToSubscribe, kafkaConsumerProp))
+    } else if (sparkManagesOffsets) {
+      sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
+    } else {
+      val rdds = new mutable.Queue[RDD[(LongWritable, Text)]]
+      dataDirectories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](dir, maxPartitions))
+      sparkStrCtx queueStream rdds
+    }
+    info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.id}")
     streamLine foreachRDD (rdd => {
       var messagesInRDD = 0L
-      rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
-        debug("Got RDD " + rdd.id + " from Topic :: "
-          + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
-          + range.fromOffset + " To :: " + range.untilOffset)
-        messagesInRDD = inc(messagesInRDD, range.count())
-        self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
-      })
+      if (isKafkaSource) {
+        rdd.asInstanceOf[HasOffsetRanges].offsetRanges.foreach(range => {
+          debug("Got RDD " + rdd.id + " from Topic :: "
+            + range.topic + " , partition :: " + range.partition + " messages Count :: " + range.count + " Offsets From :: "
+            + range.fromOffset + " To :: " + range.untilOffset)
+          messagesInRDD = inc(messagesInRDD, range.count())
+          self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
+        })
+      } else messagesInRDD = rdd.count()
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
         val hl7s = self.messageTypes
@@ -222,6 +264,8 @@ object HL7Job extends Logg with App {
         val confFile = self.config_file
         val tlmAckQueue = self.ackQueue
         val appName = self.app
+        val inputSource = self.inputSource
+        val hTables = self.hTables.toSet
         val tracker = new ListBuffer[FutureAction[Unit]]
         tracker += rdd foreachPartitionAsync (dataItr => {
           if (dataItr nonEmpty) {
@@ -233,21 +277,23 @@ object HL7Job extends Logg with App {
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s)
+            val hBaseWriter = HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"), hTables, lookUpProp("cdm.hl7.hbase.batch.write.size").toInt).
+              map { case (dest, operator) => dest -> (HUtils.sendRequestFromJson(operator)(_: String, _: ListBuffer[String], _: String)) }
+            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s, offHeapHandlers(HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"))))
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
               TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"))
               tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)
-            dataItr foreach (hl7 => {
+            InputSource.convert(inputSource, hl7s.head, dataItr) foreach { case (hl7Key, hl7) =>
               var msgType: HL7 = UNKNOWN
               try {
-                msgType = if (hl7._1 != null && hl7._1 != EMPTYSTR) hl7TypesMappings getOrElse(hl7._1 substring(0, hl7._1 indexOf COLON), UNKNOWN) else UNKNOWN
+                msgType = if (hl7Key != null && hl7Key != EMPTYSTR) hl7TypesMappings getOrElse(hl7Key substring(0, hl7Key indexOf COLON), UNKNOWN) else UNKNOWN
                 if (msgType == UNKNOWN) {
-                  info("Message Type Header Not Found in raw HL7 :: " + hl7._1 + " Trying To Find In registered HL7 Types")
-                  val delim = if (hl7._2 contains "\r\n") "\r\n" else "\n"
-                  val rawSplit = hl7._2 split delim
+                  info(s"Message Type Header Not Found in raw HL7 :: $hl7Key Trying To Find In registered HL7 Types")
+                  val delim = if (hl7 contains "\r\n") "\r\n" else "\n"
+                  val rawSplit = hl7 split delim
                   val reqMsgType = if (valid(rawSplit)) {
                     val temp = PIPER split rawSplit(0)
                     if (valid(temp, 9)) {
@@ -263,17 +309,17 @@ object HL7Job extends Logg with App {
                     case any => any
                   }
                   if (msgType == UNKNOWN) throw new UnknownMessageTypeException(hl7TypesMappings.keySet.mkString(caret) +
-                    s" Registered Handlers Cannot Deal With Message Came Into Process :: $reqMsgType  for ${hl7._2}")
+                    s" Registered Handlers Cannot Deal With Message Came Into Process :: $reqMsgType  for $hl7")
                   else info("Able To Find Which Type of HL7 From Message :: " + msgType)
                 }
                 val hl7Str = msgType.toString
                 val segHandlerIO = segHandlers(msgType).handleSegments(hl7SegIO, hl7RejIO, auditIO, adhocIO,
-                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None)(_, _, _)
-                Try(parserS(msgType) transformHL7(hl7._2, hl7RejIO) rec) match {
+                  if (tlmAckQueue isDefined) Some(tlmAckIO(_: String, _: String)) else None, hBaseWriter)(_, _, _)
+                Try(parserS(msgType) transformHL7(hl7, hl7RejIO) rec) match {
                   case Success(data) => data match {
                     case Left(out) =>
                       ackTlm(out._3, hl7Str)
-                      segHandlerIO(out._2, hl7._2, out._3)
+                      segHandlerIO(out._2, hl7, out._3)
                       sizeCheck(out._1, parserS(msgType))
                       if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
                         tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
@@ -284,27 +330,27 @@ object HL7Job extends Logg with App {
                         error("Sending JSON to Kafka Failed :: " + msg)
                       }
                     case Right(t) =>
-                      ackTlm(metaFromRaw(hl7._2), hl7Str)
-                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
+                      ackTlm(metaFromRaw(hl7), hl7Str)
+                      val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t)
                       if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
+                      tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7))), s"$hl7Str$COLON hl7RejIO-rejectRawMsg${t.getMessage}", error(_: Throwable))
                       debug(msg, t)
                   }
                   case Failure(t) =>
-                    ackTlm(metaFromRaw(hl7._2), hl7Str)
-                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7._2, t.getMessage, t, stackTrace = false)
+                    ackTlm(metaFromRaw(hl7), hl7Str)
+                    val msg = rejectRawMsg(hl7Str, jsonStage, hl7, t.getMessage, t)
                     if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                    tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7._2))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+                    tryAndLogThr(hl7RejIO(msg, header(hl7Str, rejectStage, Right(hl7))), s"$hl7Str$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
                     if (!t.isInstanceOf[NotValidHl7Exception]) error(msg)
                 }
               } catch {
-                case t: Throwable => error(s" Processing HL7 failed for Message with header ${hl7._1} & body \n ${hl7._2} \n with error message ${t.getMessage}", t)
-                  ackTlm(metaFromRaw(hl7._2), msgType.toString)
-                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7._2, t.getMessage, t)
+                case t: Throwable => error(s" Processing HL7 failed for Message with header $hl7Key & body \n $hl7 \n with error message ${t.getMessage}", t)
+                  ackTlm(metaFromRaw(hl7), msgType.toString)
+                  val msg = rejectRawMsg(msgType.toString, jsonStage, hl7, t.getMessage, t)
                   if (msgType != UNKNOWN) sizeCheck(msg, parserS(msgType))
-                  tryAndLogThr(hl7RejIO(msg, header(msgType.toString, rejectStage, Right(hl7._2))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
+                  tryAndLogThr(hl7RejIO(msg, header(msgType.toString, rejectStage, Right(hl7))), s"${msgType.toString}$COLON rejectRawMsg-${t.getMessage}", error(_: Throwable))
               }
-            })
+            }
             self.segmentsAccumulators = segmentsAccumulators
             segHandlers.values foreach (handler => collectSegmentMetrics(handler metricsRegistry))
             self.parserAccumulators = parserAccumulators
@@ -314,6 +360,7 @@ object HL7Job extends Logg with App {
         tryAndLogErrorMes(tracker.foreach(_.get()), error(_: Throwable))
         info(s"Processing Completed for RDD :: ${rdd.id} Messages Count :: $messagesInRDD")
       } else info(s"Batch was Empty So Skipping RDD :: ${rdd.id}")
+      if (self.appManagesOffset) self.offSetManager.batchCompleted(rdd)
     })
   }
 
@@ -396,19 +443,19 @@ object HL7Job extends Logg with App {
     */
   def resetMetrics(): Unit = {
     parserDriverMetrics.synchronized {
-      parserDriverMetrics.transform((k, v) => if (v > 0L) 0L else v)
+      parserDriverMetrics.transform((_, v) => if (v > 0L) 0L else v)
     }
     segmentsDriverMetrics.synchronized {
-      segmentsDriverMetrics.transform((k, v) => if (v > 0L) 0L else v)
+      segmentsDriverMetrics.transform((_, v) => if (v > 0L) 0L else v)
     }
     parserAccumulators.synchronized {
-      parserAccumulators.transform((k, v) => if (v.value > 0L) {
+      parserAccumulators.transform((_, v) => if (v.value > 0L) {
         v.value_=(0L)
         v
       } else v)
     }
     segmentsAccumulators.synchronized {
-      segmentsAccumulators.transform((k, v) => if (v.value > 0L) {
+      segmentsAccumulators.transform((_, v) => if (v.value > 0L) {
         v.value_=(0L)
         v
       } else v)
@@ -530,6 +577,37 @@ object HL7Job extends Logg with App {
     persistSegmentMetrics()
   }
 
+  private def dataDirectories: ListBuffer[String] = {
+    val dirs = lookUpProp("hl7.data.directories")
+    val dateRanges = tryAndReturnDefaultValue(asFunc(lookUpProp("hl7.data.dates")), EMPTYSTR).split(COMMA, -1)
+    val dataDirs = new ListBuffer[String]
+    dateRanges.foreach { dates =>
+      if (dates contains "between") {
+        val from = LocalDate.parse(dates substring(0, dates.indexOf("between")))
+        val to = LocalDate.parse(dates substring (dates.indexOf("between") + "between".length))
+        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
+      } else dataDirs += s"$dirs$dates"
+    }
+    if (dateRanges isEmpty) dataDirs += dirs
+    dataDirs
+  }
+
+  private def isCheckPointEnabled: Boolean = {
+    val appChk = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
+    if (appChk) {
+      inputSource match {
+        case InputSource.HDFS => false
+        case InputSource.KAFKA => true
+      }
+    }
+    else false
+  }
+
+
+  private def offHeapHandlers(hBaseConnector: HBaseConnector): ((Any, Any, Any, Any)) => Any = synchronized {
+    (HUtils.transformRow(_: Any, _: Any, _: Any, _: Any)(hBaseConnector)).tupled
+  }
+
   /**
     * Listener For Spark Events
     *
@@ -541,18 +619,15 @@ object HL7Job extends Logg with App {
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
-      if(firstStage) {
+      if (firstStage) {
         runningStage = stageSubmitted.stageInfo
         firstStage = false
       }
       stagesSubmitted += stageSubmitted.stageInfo
-      if (!firstStage && valid(runningStage) && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
+      if (!firstStage && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")
-      if (stageTracker.size > 20) {
-        sparkStrCtx.sparkContext.requestExecutors(2)
-      }
     }
 
     override def onStageCompleted(stageCompleted: SparkListenerStageCompleted): Unit = {
@@ -576,7 +651,7 @@ object HL7Job extends Logg with App {
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
-    val timeCheck: Long = MILLISECONDS.convert(timeInterval,MINUTES)
+    val timeCheck: Long = MILLISECONDS.convert(timeInterval, MINUTES)
     val lowFrequencyHl7AlertInterval: Int = lookUpProp("hl7.low.frequency.interval").toInt
     val iscMsgAlertFreq: TrieMap[HL7, Int] = {
       val temp = new TrieMap[HL7, Int]()
@@ -614,7 +689,7 @@ object HL7Job extends Logg with App {
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
             " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check " +
-            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds,MILLISECONDS)+ " seconds" + "\n\n" + EVENT_TIME
+            " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds, MILLISECONDS) + " seconds" + "\n\n" + EVENT_TIME
           , CRITICAL)
       }
     }
@@ -651,6 +726,48 @@ object HL7Job extends Logg with App {
     override def toString: String = s"DataFlowMonitor(timeCheck=$timeCheck, lowFrequencyHl7AlertInterval=$lowFrequencyHl7AlertInterval, iscMsgAlertFreq=$iscMsgAlertFreq)"
   }
 
+
+  private[this] object InputSource extends Enumeration with Logg {
+    type Source = Value
+    val KAFKA = Value("KAFKA")
+    val HDFS = Value("HDFS")
+
+    def convert(source: Source, msgType: String, dataItr: Iterator[(Comparable[_ >: String with LongWritable], Comparable[_ >: String with BinaryComparable])]): Iterator[(String, String)] = {
+      source match {
+        case InputSource.KAFKA => dataItr.asInstanceOf[Iterator[(String, String)]]
+        case InputSource.HDFS =>
+          val msgHeader = s"$msgType$COLON"
+          dataItr map { case (_, hl7) => (msgHeader, hl7.toString) }
+      }
+    }
+
+
+    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(LongWritable, Text)](sparkCtx, Nil) {
+      self =>
+      info(s"FileBase Rdd initiated for $dir with Max Partitions $maxPartitions & $sparkCtx")
+      self.setName(dir)
+      private val data: RDD[(LongWritable, Text)] = sparkCtx.sequenceFile[LongWritable, Text](dir, maxPartitions)
+
+      override def compute(split: Partition, context: TaskContext): Iterator[(LongWritable, Text)] = {
+        data.iterator(split, context)
+      }
+
+      override protected def getPartitions: Array[Partition] = {
+        val temp = new Array[Partition](maxPartitions)
+        for (part <- 0 until maxPartitions) {
+          temp(part) = new Partition {
+            override def index: Int = {
+              part
+            }
+          }
+        }
+        temp
+      }
+    }
+
+  }
+
 }
+
 
 
