@@ -62,14 +62,13 @@ class AkkaTcpClient(remote: InetSocketAddress) extends Actor with Logg {
       info(s"Connection to $remote succeeded")
       reconnectCount = 0
       val connection = sender
-      val handler = context.actorOf(SimpleEchoHandler.props(connection, remote))
+      val handler = context.actorOf(SimplisticHandler.props(connection, remote))
       connection ! Register(handler, keepOpenOnPeerClosed = true)
 
       context become ({
         case data: ByteString =>
           sendCount = inc(sendCount, 1)
-          info("Sending request data: " + data.utf8String)
-          info("Send count: " + sendCount)
+          info("Passing data to handler")
           handler ! data
         case CommandFailed(w: Write) =>
           error("Failed to write request.")
@@ -82,7 +81,7 @@ class AkkaTcpClient(remote: InetSocketAddress) extends Actor with Logg {
           connection ! Close
         case Ack =>
           ackCount = inc(ackCount, 1)
-          info("Received ACK, count:" + ackCount)
+          info("Received ACK")
         case _: ConnectionClosed =>
           info("Connection closed by server.")
           throw new RestartMeException

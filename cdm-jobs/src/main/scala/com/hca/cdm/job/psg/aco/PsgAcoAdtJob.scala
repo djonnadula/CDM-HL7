@@ -15,6 +15,7 @@ import com.hca.cdm.kafka.config.HL7ProducerConfig._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.tcp.ActorSupervisor
+import com.hca.cdm.notification.sendMail
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.StreamingContext
@@ -23,6 +24,7 @@ import org.apache.spark.streaming.kafka.HasOffsetRanges
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
+
 
 /**
   * Created by dof7475 on 6/1/2017.
@@ -154,6 +156,7 @@ object PsgAcoAdtJob extends Logg with App {
             val end_of_segment = segment_end
             val end_of_message = message_end
             val tcpConWaitTime = tcpConnectionWaitTime
+            val appName = app
 //            val listener = dlListener
 //            val tmes = testMessage
 //            actorSys.eventStream.subscribe(listener, classOf[DeadLetter])
@@ -220,6 +223,7 @@ object PsgAcoAdtJob extends Logg with App {
                       debug(s"Old message: $message")
                       debug(s"Message to send: $finalMessage")
                       try{
+                        sendMail(appName, "Found message to send", notification.TaskState.NORMAL, statsReport = false, lookUpProp("email.to").split(COMMA))
                         val msg1 = new StringBuilder()
                         msg1.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
                         Thread.sleep(tcpConWaitTime)

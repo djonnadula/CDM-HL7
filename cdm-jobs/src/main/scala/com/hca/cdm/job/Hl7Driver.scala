@@ -86,7 +86,7 @@ object Hl7Driver extends App with Logg {
     .setConf(EXECUTOR_CORES, defaultPar)
     .setConf(DRIVER_MEMORY, hl7_spark_driver_memory)
     .setConf(CHILD_PROCESS_LOGGER_NAME, s"$app-Driver")
-    .setConf("spark.driver.cores", "2")
+    .setConf("spark.driver.cores", lookUpProp("spark.driver.cores"))
     .setConf("spark.num-executors", hl7_spark_num_executors)
     .setConf("spark.dynamicAllocation.initialExecutors", hl7_spark_num_executors)
     .setConf("spark.yarn.queue", hl7_spark_queue)

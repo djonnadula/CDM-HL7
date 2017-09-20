@@ -35,8 +35,9 @@ class SimpleEchoHandler(connection: ActorRef, remote: InetSocketAddress)
         case data: ByteString => Write(data, Ack)
         case Received(data) => buffer(data)
         case Ack            => acknowledge()
-        case PeerClosed     => closing = true
-
+        case PeerClosed     =>
+          info("Peer closed")
+          closing = true
       }, discardOld = false)
     case data: ByteString =>
       buffer(data)
@@ -44,13 +45,16 @@ class SimpleEchoHandler(connection: ActorRef, remote: InetSocketAddress)
       context.become({
         case Received(data) => buffer(data)
         case Ack            => acknowledge()
-        case PeerClosed     => closing = true
+        case PeerClosed     =>
+          info("Peer closed")
+          closing = true
       }, discardOld = false)
     case Ack => acknowledge()
-    case PeerClosed => context stop self
+    case PeerClosed =>
+      info("Peer closed")
+      context stop self
     case _ =>
       info("Echo Handler doesn't know what to do")
-
   }
 
   override def postStop(): Unit = {
@@ -72,7 +76,6 @@ class SimpleEchoHandler(connection: ActorRef, remote: InetSocketAddress)
     stored += data.size
     info("doing some buffering")
     info("data: " + data.utf8String)
-    info(s"storage: $storage")
     info(s"stored: $stored")
     if (stored > maxStored) {
       warn(s"drop connection to [$remote] (buffer overrun)")
@@ -102,6 +105,7 @@ class SimpleEchoHandler(connection: ActorRef, remote: InetSocketAddress)
 
     if (storage.isEmpty) {
       if (closing) {
+        warn("Storage is empty and closing - stopping context")
         context stop self
       } else {
         context.unbecome()
