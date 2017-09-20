@@ -143,10 +143,10 @@ object HL7Job extends Logg with App {
   private var hdpConf = hdpUtil.conf
   hdpConf = HBaseConfiguration.create(hdpConf)
   hdpConf.addResource("hbase-site.xml")
-  hdpConf.asScala foreach { x =>   info(x.getKey + " :: " + x.getValue) }
   private val hTables = new mutable.HashSet[String]
   private var offSetManager: OffsetManager = _
   private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled
+  private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
@@ -187,9 +187,7 @@ object HL7Job extends Logg with App {
         }
       }
     }
-    println("appManagesOffset" +appManagesOffset)
-    //if (appManagesOffset)
-      offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
+    if (appManagesOffset) offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
     sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
     segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)
     segmentsDriverMetrics = driverSegmentsMetric()
@@ -224,12 +222,11 @@ object HL7Job extends Logg with App {
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = if (appManagesOffset) {
       sparkUtil stream(sparkStrCtx, kafkaConsumerProp, offSetManager.appStarted(topicsToSubscribe, kafkaConsumerProp))
-    } else if (!appManagesOffset) {
+    } else if (sparkManagesOffsets) {
       sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
-    }
-    else {
+    } else {
       val rdds = new mutable.Queue[RDD[(LongWritable, Text)]]
-      dataDirecotories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](dir, maxPartitions))
+      dataDirectories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](dir, maxPartitions))
       sparkStrCtx queueStream rdds
     }
     info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.id}")
@@ -580,16 +577,16 @@ object HL7Job extends Logg with App {
     persistSegmentMetrics()
   }
 
-  private def dataDirecotories: ListBuffer[String] = {
+  private def dataDirectories: ListBuffer[String] = {
     val dirs = lookUpProp("hl7.data.directories")
     val dateRanges = tryAndReturnDefaultValue(asFunc(lookUpProp("hl7.data.dates")), EMPTYSTR).split(COMMA, -1)
     val dataDirs = new ListBuffer[String]
     dateRanges.foreach { dates =>
       if (dates contains "between") {
         val from = LocalDate.parse(dates substring(0, dates.indexOf("between")))
-        val to = LocalDate.parse(dates substring dates.indexOf("between"))
-        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$FS$Dt")
-      } else dataDirs += dates
+        val to = LocalDate.parse(dates substring (dates.indexOf("between") + "between".length))
+        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
+      } else dataDirs += s"$dirs$dates"
     }
     if (dateRanges isEmpty) dataDirs += dirs
     dataDirs
@@ -606,25 +603,9 @@ object HL7Job extends Logg with App {
     else false
   }
 
-  private var offHeapHandlesInit: Object = _
 
   private def offHeapHandlers(hBaseConnector: HBaseConnector): ((Any, Any, Any, Any)) => Any = synchronized {
     (HUtils.transformRow(_: Any, _: Any, _: Any, _: Any)(hBaseConnector)).tupled
-    /*if (offHeapHandlesInit == null) {
-      offHeapHandlesInit = new Object
-      val temp = new mutable.HashMap[String, ((Any, Any, Any, Any)) => Any]()
-      modelsForHl7.foreach(_._2.models.foreach(_._2.foreach {
-        model =>
-          if (model.adhoc.isDefined) {
-            val adhoc = model.adhoc.get
-            val handler = (HUtils.transformRow(_: Any, _: Any, _: Any, _: Any)(hBaseConnector)).tupled
-            temp += (adhoc.transformer -> handler)
-            EnrichCacheManager().getEnRicher(adhoc.transformer).foreach(_.offHeapDataEnricher.init(handler))
-          }
-      }))
-      return temp.toMap
-    }
-    null*/
   }
 
   /**

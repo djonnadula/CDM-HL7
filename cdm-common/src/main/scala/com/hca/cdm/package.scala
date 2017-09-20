@@ -48,6 +48,7 @@ package object cdm extends Logg {
   private val CR: Char = 0x0D.toChar
   private val LF: Char = 0x0A.toChar
   lazy val CRLF = s"$CR$LF"
+  private lazy val notifyErrors: Boolean = tryAndReturnDefaultValue(asFunc(lookUpProp("cdm.notify.errors").toBoolean), true)
 
 
   def randomString: String = randomUUID.toString
@@ -213,8 +214,7 @@ package object cdm extends Logg {
     newSingleThreadScheduledExecutor(new Factory(id))
   }
 
-  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = tryAndReturnDefaultValue(asFunc(lookUpProp("cdm.notify.errors").toBoolean), true),
-                   state: taskState = CRITICAL): Boolean = {
+  def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = notifyErrors, state: taskState = CRITICAL): Boolean = {
     try {
       fun
       return true
