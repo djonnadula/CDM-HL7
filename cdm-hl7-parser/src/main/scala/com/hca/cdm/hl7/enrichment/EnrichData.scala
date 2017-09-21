@@ -19,11 +19,15 @@ trait EnrichData extends Serializable {
 
 }
 
-trait EnrichDataFromOffHeap extends EnrichData with Serializable {
+trait EnrichDataFromOffHeap extends Serializable {
 
   protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
 
   def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Unit
+
+  def apply(layout: mutable.LinkedHashMap[String, String]): Unit
+
+  def close(): Unit
 
   def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
     enrichDataPartFun = offHeapHandler
@@ -107,6 +111,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
 private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichDataFromOffHeap with Logg {
   self =>
 
+  private lazy val fieldsToSkip = "patient_address|other_designation"
   private val enrichSourceToTargetMapping = com.hca.cdm.hl7.model.loadFileAsList(config(1))
   private val enrichAttributes = enrichSourceToTargetMapping.map(_._2).to[ListBuffer]
   private val cfg: OffHeapConfig = {
@@ -117,19 +122,26 @@ private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichD
   override def close(): Unit = {}
 
   override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {
-    if (!fetchRequired(layout)) return
-    val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, String]]
-    enrichSourceToTargetMapping.foreach {
-      case (enrichField, _) =>
-        if ((layout isDefinedAt enrichField) && layout(enrichField) == EMPTYSTR && res.getOrElse(enrichField, EMPTYSTR) != EMPTYSTR) layout update(enrichField, res(enrichField))
+    if (fetchRequired(layout)) {
+      val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, Array[Byte]]].map { case (k, v) => k -> new String(v, UTF8) }
+      enrichSourceToTargetMapping.foreach {
+        case (enrichField, reqEnrichField) =>
+          if ((layout isDefinedAt enrichField) && layout(enrichField) == EMPTYSTR && (res isDefinedAt reqEnrichField) && res(reqEnrichField) != EMPTYSTR) {
+            layout update(enrichField, res(reqEnrichField))
+          }
+      }
     }
 
   }
 
   def fetchRequired(layout: mutable.LinkedHashMap[String, String]): Boolean = {
-    enrichSourceToTargetMapping.forall {
-      case (enrichField, _) => layout.getOrElse(enrichField, EMPTYSTR) != EMPTYSTR
+    var fetch = false
+    enrichSourceToTargetMapping.foreach {
+      case (enrichField, _) =>
+        if (enrichField != fieldsToSkip) fetch = layout.getOrElse(enrichField, EMPTYSTR) == EMPTYSTR
+        if (fetch) return true
     }
+    fetch
   }
 
 
