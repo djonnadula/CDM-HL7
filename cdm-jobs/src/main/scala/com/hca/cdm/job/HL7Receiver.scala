@@ -10,9 +10,9 @@ import com.hca.cdm.spark.receiver.{MqReceiver => receiver}
 import com.hca.cdm.hadoop.OverSizeHandler
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.model._
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
-import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
-import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
+import com.hca.cdm.kfka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import org.apache.hadoop.conf.Configuration
@@ -107,7 +107,7 @@ object HL7Receiver extends Logg with App {
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
-    LoginRenewer.scheduleRenewal(master = true)
+    LoginRenewer.scheduleRenewal(master = true,namesNodes = EMPTYSTR,conf = Some(hdpConf))
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
   }
@@ -147,7 +147,7 @@ object HL7Receiver extends Logg with App {
           val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)
           val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(MaxValue)
           val audit = auditMsg(_: String, rawStage)(EMPTYSTR, _: MSGMeta)
-          val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+          val hl7RejIO = kafkaOut.writeData(_: AnyRef, _: String, rejectOut)(maxMessageSize, rejectOverSized)
           dataItr foreach { mqData =>
             if (hl7QueueMapping isDefinedAt mqData.source) {
               val hl7Str = hl7QueueMapping(mqData.source)

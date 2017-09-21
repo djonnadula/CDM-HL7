@@ -52,7 +52,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
       if (con == null) throw new MqException(s"Unable to Start MQ Connection with App Name $app")
       activeConnection set con
       init()
-      LoginRenewer.scheduleRenewal(master = false,nameNodes)
+      LoginRenewer.scheduleRenewal(namesNodes = nameNodes, conf = None)
     } catch {
       case t: Throwable =>
         self.restart(s"Unable to Start Receiver with Id $app will make an attempt to Start Again", t, restartTimeInterval * 2)
@@ -162,7 +162,6 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
       } else {
         tryAndLogThr(result(async {
           handleAcks(message, source, meta, tlmAcknowledge)
-          persisted = true
         }(executionContext), Duration(45, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
       }
       persisted

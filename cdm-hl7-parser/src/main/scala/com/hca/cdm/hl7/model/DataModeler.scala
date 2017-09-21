@@ -27,7 +27,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   def applyModel(whichSeg: String, model: Model)(data: mapType, rawHl7: String): Hl7SegmentTrans = {
     val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
-   if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && !isRequiredType(data, reqMsgType)) return notValid
+   if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && !isRequiredType(data, reqMsgType)) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
