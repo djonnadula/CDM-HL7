@@ -19,15 +19,11 @@ trait EnrichData extends Serializable {
 
 }
 
-trait EnrichDataFromOffHeap extends Serializable {
+trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
   protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
 
   def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Unit
-
-  def apply(layout: mutable.LinkedHashMap[String, String]): Unit
-
-  def close(): Unit
 
   def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
     enrichDataPartFun = offHeapHandler
