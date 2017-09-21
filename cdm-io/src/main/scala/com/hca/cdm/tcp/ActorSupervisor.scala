@@ -17,10 +17,10 @@ object ActorSupervisor {
 }
 
 class ActorSupervisor(remote: InetSocketAddress) extends Actor with Logg {
-  override def preStart() = info("The Supervisor is ready to supervise")
-  override def postStop() = info("Bye Bye from the Supervisor")
+  override def preStart(): Unit = info("The Supervisor is ready to supervise")
+  override def postStop(): Unit = info("Bye Bye from the Supervisor")
 
-  override def supervisorStrategy = OneForOneStrategy() {
+  override def supervisorStrategy: OneForOneStrategy = OneForOneStrategy() {
     case _: RestartMeException => Restart
     case _: ResumeMeException => Resume
     case _: StopMeException => Stop

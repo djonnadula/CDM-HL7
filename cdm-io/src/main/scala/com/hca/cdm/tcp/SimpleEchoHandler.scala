@@ -27,7 +27,7 @@ class SimpleEchoHandler(connection: ActorRef, remote: InetSocketAddress)
 
   case object Ack extends Event
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case Received(data) =>
       buffer(data)
       //      connection ! Write(data, Ack)

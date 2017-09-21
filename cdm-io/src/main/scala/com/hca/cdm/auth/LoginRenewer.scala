@@ -1,21 +1,22 @@
 package com.hca.cdm.auth
 
 import java.io.DataInputStream
+import java.lang.System.{getenv => fromEnv}
+import java.security.PrivilegedExceptionAction
 import java.util.concurrent.TimeUnit._
-import com.hca.cdm.{lookUpProp, _}
+
+import com.hca.cdm.exception.CdmException
 import com.hca.cdm.log.Logg
+import com.hca.cdm.{lookUpProp, _}
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
-import org.apache.hadoop.security.{UserGroupInformation => UGI, _}
-import org.apache.spark.deploy.yarn.YarnSparkHadoopUtil.{get => yrnUtil}
-import java.lang.System.{getenv => fromEnv}
-import scala.language.postfixOps
-import java.security.PrivilegedExceptionAction
-import com.hca.cdm.exception.CdmException
-import org.apache.hadoop.mapred.Master
-import org.apache.spark.SparkConf
 import org.apache.hadoop.hbase.security.token.TokenUtil._
 import org.apache.hadoop.security.token.{Token, TokenIdentifier}
+import org.apache.hadoop.security.{UserGroupInformation => UGI, _}
+import org.apache.spark.SparkConf
+import org.apache.spark.deploy.yarn.YarnSparkHadoopUtil.{get => yrnUtil}
+
+import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 2/15/2017.
@@ -163,7 +164,7 @@ private[cdm] object LoginRenewer extends Logg {
     UGI.setConfiguration(hdfsConf)
     val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keytab)
     val cred = loggedUser.getCredentials
-    //noinspection ScalaDeprecation
+//    noinspection ScalaDeprecation
     performAction(asFunc({
       refreshFsTokens(nns + credentialsFile.getParent, cred)
       if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {

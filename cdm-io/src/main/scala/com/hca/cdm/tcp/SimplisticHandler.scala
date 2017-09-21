@@ -27,7 +27,7 @@ class SimplisticHandler(connection: ActorRef, remote: InetSocketAddress)
 
   case object Ack extends Event
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case Received(data) =>
       info("Received data: \n\t" + data.utf8String)
     case data: ByteString =>

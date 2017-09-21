@@ -36,7 +36,7 @@ class Supervisor extends Actor with Logg {
         Escalate
     }
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case p: Props => sender ! context.actorOf(p)
   }
 }

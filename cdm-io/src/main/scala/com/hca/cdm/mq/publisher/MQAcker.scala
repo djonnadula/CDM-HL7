@@ -110,7 +110,7 @@ class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, 
     registerHook(newThread(s"SHook-${this.getClass.getSimpleName}$app", runnable(close())))
   }
 
-  override def toString = s"MQAcker(mqHosts=$mqHosts, mqManager=$mqManager, mqChannel=$mqChannel, ackQueue=$initialQueues)"
+  override def toString: String = s"MQAcker(mqHosts=$mqHosts, mqManager=$mqManager, mqChannel=$mqChannel, ackQueue=$initialQueues)"
 
 }
 

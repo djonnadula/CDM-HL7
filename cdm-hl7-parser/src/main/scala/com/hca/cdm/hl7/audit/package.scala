@@ -2,11 +2,11 @@ package com.hca.cdm.hl7
 
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm._
-import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
+
 import scala.collection.mutable
 import scala.language.postfixOps
 
@@ -69,9 +69,11 @@ package object audit {
   def auditMsg(hl7Str: String, stage: String)(segments: String = EMPTYSTR, meta: MSGMeta): String = {
     segments match {
       case EMPTYSTR =>
-        s"$hl7Str-$stage$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.medical_record_num}$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR$timeStamp"
+        s"$hl7Str-$stage$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR" +
+          s"${meta.medical_record_num}$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR$timeStamp"
       case _ =>
-        s"$hl7Str-$stage$COLON$segments$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.medical_record_num}$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR$timeStamp"
+        s"$hl7Str-$stage$COLON$segments$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR" +
+          s"${meta.medical_record_num}$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR$timeStamp"
     }
   }
 
@@ -84,7 +86,8 @@ package object audit {
 
     def ecwRegions: String = if (meta.facility startsWith "eCW_") meta.facility.substring(4) else meta.facility
 
-    s"$ackingTo$PIPE_DELIMITED_STR$ecwRegions$PIPE_DELIMITED_STR$reqHl7$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.triggerEvent}$PIPE_DELIMITED_STR$from$PIPE_DELIMITED_STR$timeStamp$PIPE_DELIMITED_STR$appState"
+    s"$ackingTo$PIPE_DELIMITED_STR$ecwRegions$PIPE_DELIMITED_STR$reqHl7$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR" +
+      s"${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.triggerEvent}$PIPE_DELIMITED_STR$from$PIPE_DELIMITED_STR$timeStamp$PIPE_DELIMITED_STR$appState"
   }
 
 

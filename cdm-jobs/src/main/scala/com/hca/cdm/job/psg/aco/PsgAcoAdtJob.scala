@@ -10,8 +10,8 @@ import akka.util.ByteString
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.job.psg.aco.PsgAcoAdtJobUtils._
-import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
-import com.hca.cdm.kafka.config.HL7ProducerConfig._
+import com.hca.cdm.kfka.config.HL7ConsumerConfig.{createConfig => consumerConf}
+import com.hca.cdm.kfka.config.HL7ProducerConfig._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.tcp.ActorSupervisor
@@ -69,34 +69,6 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val message_end: Char = 0x0d
   private lazy val actorSystem = ActorSystem.create("PSGActorSystem")
   private lazy val supervisor = actorSystem.actorOf(ActorSupervisor.props(new InetSocketAddress(cloverleafAddr, cloverleafPort)), "supervisor")
-//  supervisor ! AkkaTcpClient.props(cloverleafAddr, cloverleafPort, tcpConnectionWaitTime)
-//  val tcpActorr =
-//  private lazy val tcpActorr = actorSystem.actorOf(AkkaTcpClient.props(new InetSocketAddress(cloverleafAddr, cloverleafPort)))
-//  private lazy val dlListener = actorSystem.actorOf(DeadLetterListener.props(cloverleafAddr, cloverleafPort))
-//  private lazy val manager = IO(Tcp)
-//  manager ! Connect(new InetSocketAddress(cloverleafAddr, cloverleafPort))
-
-//  private lazy val testMessage = "MSH|^~\\&||COCSZ|||201702072335||ADT^A08|MT_COCSZ_ADT_SZGTADM.1.32377292|P|2.1\r" +
-//    "EVN|A08|201702072335|||R.SZ.GDE^ESTILLORE^GERELI^D^^^000D\r" +
-//    "PID|1||D002403639|D1676444|JONES^ZAYQUAN^A^^^||19970109|M|^^^^^|B|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK||(702)999-9999|(702)999-9999|ENG|S|NON|D00115310916|\r" +
-//    "NK1|1|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
-//    "NK1|2|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
-//    "PV1|1|E|D.ER^^|EM|||EMEGA^Emery^Garrett^J^^^MD|.SELF^REFERRED^SELF^^^^|.NO PCP^PHYSICIAN^NO^PRIMARY OR FAMILY^^^|ERS||||PR|AMB|N||ER||99|||||||||||||||||||COCSZ|FRENCH FRY IN THROAT, ABCD WNL, ACUITY 3|REG|||201702072215\r" +
-//    "AL1|1|DA|F001900388^No Known Allergies^No Known Allergies|U||20170207\r" +
-//    "ACC|20170207^|11\r" +
-//    "GT1|1||JONES^ZAYQUAN^A^^^||999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999||19970109|M||SA||||UNKNOWN|UNKNOWNN^^LAS VEGAS^NV^89148|(702)999-9999|||N\r" +
-//    "GT1|2||^^^^^||^^^^^^^^|||||||||||^^^^\r" +
-//    "IN1|1|MEDNVPA||MEDICAID PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-//    "IN1|2|CHAX050||CHARITY PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-//    "IN1|3|UNINSURED||UNINSURED DISCOUNT PLAN|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-//    "ZCD|1|ETHNICITY^ETHNICITY^2\r" +
-//    "ZCD|2|ZSS.DEPREQ^DEPOSIT REQ?^N\r" +
-//    "ZCD|3|ZSS.ESTCHG^EST PT DUE^200.00\r" +
-//    "ZCD|4|ZSS.UNABLE^Comment if FULL amt requested NOT collected^PAY AT FAC\r" +
-//    "ZIN|1|SP|MEDICAID PENDING|N||||N|||||MEDNVPA\r" +
-//    "ZIN|2|SP|SELF PAY|N||||N|||||CHAX050\r" +
-//    "ZIN|3|SP|UNINSURED DISCOUNT PLAN|N||||N|||||UNINSURED\r" +
-//    "ZCS|UNK|UNKNOWN^^LAS VEGAS^NV^89148|N|NONE|NONE|01541"
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()

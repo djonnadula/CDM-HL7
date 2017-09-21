@@ -1,31 +1,31 @@
 package com.hca.cdm.hl7
 
 import java.io.ByteArrayOutputStream
+import java.util.regex.Pattern
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm.Models.MSGMeta
-import com.hca.cdm.{tryAndReturnDefaultValue0, _}
+import com.hca.cdm._
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types
-import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
-import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
+import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN, withName => whichHl7}
 import com.hca.cdm.hl7.enrichment.{EnrichData, EnrichDataFromOffHeap, NoEnricher}
-import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
+import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import com.hca.cdm.utils.Filters.Conditions.{withName => matchCriteria}
 import com.hca.cdm.utils.Filters.Expressions.{withName => relationWithNextFilter}
-import com.hca.cdm.utils.Filters.MultiValues.{withName => multiValueRange}
 import com.hca.cdm.utils.Filters.FILTER
+import com.hca.cdm.utils.Filters.MultiValues.{withName => multiValueRange}
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
-import java.util.regex.Pattern
-import com.hca.cdm.hbase.HUtils
 import org.apache.avro.generic._
 import org.apache.avro.io._
+
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
@@ -196,7 +196,8 @@ package object model extends Logg {
 
   import OutFormats._
 
-  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): AnyRef = {
+  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null,
+                raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): AnyRef = {
     format match {
       case JSON =>
         val rejectRecord = getRejectSchema
@@ -216,8 +217,8 @@ package object model extends Logg {
           s"$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR" + timeStamp + PIPE_DELIMITED_STR +
           (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED_STR + (if (raw ne null) raw else toJson(data))
       case AVRO =>
-        import rejectSchemaMapping._
         import RejectAvroSchema._
+        import rejectSchemaMapping._
         val rejectRecord = avroRejectRecord
         applyAvroData(rejectRecord, processName, s"$hl7$COLON$stage")
         applyAvroData(rejectRecord, controlID, meta.controlId)
@@ -315,8 +316,13 @@ package object model extends Logg {
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
           val transformationsReq = tryAndReturnDefaultValue(access(7), EMPTYSTR).split("\\&")
           val etlTransformations = valid(transformationsReq) && transformationsReq(0) == "TRANSFORMATIONS"
-          val etlTransMultiReq = if (tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR) != EMPTYSTR)
-            s"$DOT${tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)}" else tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)
+          val etlTransMultiReq = {
+            if (tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR) != EMPTYSTR) {
+              s"$DOT${tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)}"
+            } else {
+              tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)
+            }
+          }
           val segStruct = adhoc take 2 mkString COLON
           val outFormats = adhoc(2) split "\\^"
           val outDest = adhoc(3) split "\\^"
@@ -376,7 +382,7 @@ package object model extends Logg {
       validator apply data
       dataEnRicher apply data
       offHeapDataEnricher apply data
-      //tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
+      // tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
     }
 
     def offHeapEnricher(): Any = {
@@ -392,13 +398,15 @@ package object model extends Logg {
   }
 
   private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
-    private lazy val selectCriteria: List[(String, String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
-      selectFieldsCriteria.split(COMMA).toList.map {
-        x =>
-          val temp = x.split(COLON)
-          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "KEEP"))
-      }
-    else Nil
+    private lazy val selectCriteria: List[(String, String, String, String, String)] = {
+      if (selectFieldsCriteria != EMPTYSTR) {
+        selectFieldsCriteria.split(COMMA).toList.map {
+          x =>
+            val temp = x.split(COLON)
+            (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "KEEP"))
+        }
+      } else Nil
+    }
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       selectCriteria.foreach {
@@ -420,15 +428,17 @@ package object model extends Logg {
   }
 
   private[model] case class FieldsCombiner(combineFields: String = EMPTYSTR) {
-    private lazy val fieldsToCombine: List[(Array[String], String, String, String)] = if (combineFields != EMPTYSTR)
-      combineFields.split(COMMA).toList.map {
-        x =>
-          val split = x.split(COLON)
-          val temp = split.splitAt(split.length - 3)
-          (temp._1(0).split(AMPERSAND), temp._2(0), temp._2(1),
-            tryAndReturnDefaultValue(asFunc(temp._2(2)), "DELETE"))
-      }
-    else Nil
+    private lazy val fieldsToCombine: List[(Array[String], String, String, String)] = {
+      if (combineFields != EMPTYSTR) {
+        combineFields.split(COMMA).toList.map {
+          x =>
+            val split = x.split(COLON)
+            val temp = split.splitAt(split.length - 3)
+            (temp._1(0).split(AMPERSAND), temp._2(0), temp._2(1),
+              tryAndReturnDefaultValue(asFunc(temp._2(2)), "DELETE"))
+        }
+      } else Nil
+    }
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToCombine.foreach {
@@ -444,37 +454,44 @@ package object model extends Logg {
   }
 
   private[model] case class FieldsValidator(validateFields: String = EMPTYSTR) {
-    private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
-      validateFields.split(COMMA).toList.map {
-        x =>
-          val temp = x.split(COLON, -1)
-          (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
-            , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
-      }
-    else Nil
+    private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = {
+      if (validateFields != EMPTYSTR) {
+        validateFields.split(COMMA).toList.map {
+          x =>
+            val temp = x.split(COLON, -1)
+            (temp(0), Pattern.compile(temp(1), Pattern.CASE_INSENSITIVE + Pattern.LITERAL).matcher(_: CharSequence).find()
+              , tryAndReturnDefaultValue(asFunc(temp(2)), EMPTYSTR))
+        }
+      } else Nil
+    }
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       fieldsToValidate.foreach {
         case (criteria, check, replaceWith) =>
-          if (check(layout.getOrElse(criteria, EMPTYSTR)))
+          if (check(layout.getOrElse(criteria, EMPTYSTR))) {
             layout update(criteria, replaceWith)
+          }
       }
     }
   }
 
   private[model] case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
-    private lazy val staticFields: List[(String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
-      fieldsWithStaticOp.split(caret).toList.map {
-        x =>
-          val temp = x.split(COLON)
-          (temp(0), temp(1))
-      }
-    else Nil
+    private lazy val staticFields: List[(String, String)] = {
+      if (fieldsWithStaticOp != EMPTYSTR) {
+        fieldsWithStaticOp.split(caret).toList.map {
+          x =>
+            val temp = x.split(COLON)
+            (temp(0), temp(1))
+        }
+      } else Nil
+    }
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
       staticFields.foreach {
         case (criteria, updateWith) =>
-          if (layout isDefinedAt criteria) layout update(criteria, updateWith)
+          if (layout isDefinedAt criteria) {
+            layout update(criteria, updateWith)
+          }
       }
     }
   }

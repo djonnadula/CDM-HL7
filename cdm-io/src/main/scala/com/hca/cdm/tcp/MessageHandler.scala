@@ -16,7 +16,7 @@ object MessageHandler {
 class MessageHandler(remote: InetSocketAddress) extends Actor with Logg {
   val tcpClient = context.actorOf(AkkaTcpClient.props(remote), "dlTcpActor")
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case w: Write =>
       info("Write: " + w.data.utf8String)
       tcpClient ! w.data

@@ -345,7 +345,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       case _ =>
         HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")),
           versionData.hl7Version,
-          s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version}")
+          s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} &" +
+            s" Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version}")
     }
   }
 
@@ -408,7 +409,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
 
 
   private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
-                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
+                         , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])
+                        (controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
     val segment = new Segment
     var mappedColumnData = EMPTYSTR
     try {
@@ -461,7 +463,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       }
     } catch {
       case t: Throwable =>
-        throw new InvalidTemplateFormatException(s"Template has invalid Format for $segmentIndex & Source System Version $controlVersion & Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
+        throw new InvalidTemplateFormatException(s"Template has invalid Format for $segmentIndex & Source System Version $controlVersion " +
+          s"& Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
     }
   }
 

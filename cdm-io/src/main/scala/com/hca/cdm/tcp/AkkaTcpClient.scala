@@ -30,18 +30,18 @@ class AkkaTcpClient(remote: InetSocketAddress) extends Actor with Logg {
   val manager = IO(Tcp)
   manager ! Connect(remote)
 
-  override def preRestart(reason: Throwable, message: Option[Any]) = {
+  override def preRestart(reason: Throwable, message: Option[Any]): Unit = {
     info("Restarting")
     super.preRestart(reason, message)
   }
 
-  override def postRestart(reason: Throwable) = {
+  override def postRestart(reason: Throwable): Unit = {
     info("Restart completed!")
     super.postRestart(reason)
   }
 
-  override def preStart() = info("TcpClient is alive")
-  override def postStop() = info("TcpClient has shutdown")
+  override def preStart(): Unit = info("TcpClient is alive")
+  override def postStop(): Unit = info("TcpClient has shutdown")
 
   override def receive: Receive = {
     case CommandFailed(con: Connect) =>

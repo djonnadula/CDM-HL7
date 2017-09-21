@@ -14,7 +14,7 @@ object DeadLetterListener {
 class DeadLetterListener(remote: InetSocketAddress) extends Actor with Logg {
   val handler = context.actorOf(MessageHandler.props(remote), "messageHandler")
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case d: DeadLetter =>
       handler ! d.message
     case b: ByteString =>
