@@ -21,8 +21,8 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
   self =>
   private val connection = performAction(asFunc(ConnectionFactory.createConnection(conf)))
   private val mutatorStore = new TrieMap[String, BatchOperator]()
-  private lazy val regionReplication = tryAndReturnDefaultValue0(lookUpProp("hbase.regions.replication").toInt,1)
-  registerHook(newThread( s"${self.getClass.getName}-sHook-$connection",runnable(close())))
+  private lazy val regionReplication = tryAndReturnDefaultValue0(lookUpProp("hbase.regions.replication").toInt, 1)
+  registerHook(newThread(s"$nameSpace-sHook-$connection", runnable(close())))
 
   def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(nameSpace, tableName))
 
@@ -111,7 +111,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
   }
 
   private def runBatch(): Unit = {
-    if (batched > 0) tryAndThrow(mutator flush(), error(_: Throwable))
+    if (batched > 0) tryAndLogErrorMes(mutator flush(), error(_: Throwable))
   }
 
   def close(): Unit = {
@@ -160,8 +160,10 @@ object HBaseConnector extends Logg {
     def createIfNotExist = new (() => HBaseConnector) {
       val conf: Configuration = HBaseConfiguration.create()
       conf.addResource("hbase-site.xml")
+
       override def apply(): HBaseConnector = new HBaseConnector(conf, nameSpace)
     }
+
     createInstance(createIfNotExist)
   }
 

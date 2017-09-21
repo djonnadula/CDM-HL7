@@ -376,7 +376,7 @@ package object model extends Logg {
       validator apply data
       dataEnRicher apply data
       offHeapDataEnricher apply data
-      //tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
+      // tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
     }
 
     def offHeapEnricher(): Any = {
@@ -396,7 +396,7 @@ package object model extends Logg {
       selectFieldsCriteria.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "KEEP"))
+          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "DELETE"))
       }
     else Nil
 
