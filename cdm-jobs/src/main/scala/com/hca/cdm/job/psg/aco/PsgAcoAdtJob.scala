@@ -5,7 +5,6 @@ import java.net.InetSocketAddress
 import java.util.Date
 
 import akka.actor.ActorSystem
-import akka.io.Tcp.Event
 import akka.util.ByteString
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
@@ -13,9 +12,9 @@ import com.hca.cdm.job.psg.aco.PsgAcoAdtJobUtils._
 import com.hca.cdm.kfka.config.HL7ConsumerConfig.{createConfig => consumerConf}
 import com.hca.cdm.kfka.config.HL7ProducerConfig._
 import com.hca.cdm.log.Logg
+import com.hca.cdm.notification.sendMail
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import com.hca.cdm.tcp.ActorSupervisor
-import com.hca.cdm.notification.sendMail
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.StreamingContext
@@ -27,7 +26,10 @@ import scala.util.{Failure, Success}
 
 
 /**
-  * Created by dof7475 on 6/1/2017.
+  * PSG ACO ADT Job
+  * This job reads the HL7CDMADT Kafka topic and does some filtering on the messages
+  * If the message passes all filters, send the message to Cloverleaf via a tcp client
+  *
   */
 object PsgAcoAdtJob extends Logg with App {
 
@@ -74,6 +76,10 @@ object PsgAcoAdtJob extends Logg with App {
   printConfig()
   startStreams()
 
+  /**
+    * Creates a spark streaming context if it does not exist and runs the job
+    * @return returns the streaming context
+    */
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
@@ -83,6 +89,10 @@ object PsgAcoAdtJob extends Logg with App {
     }
   }
 
+  /**
+    * Checkpointing logic
+    * @return spark streaming context
+    */
   private def initContext: StreamingContext = {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
@@ -91,12 +101,10 @@ object PsgAcoAdtJob extends Logg with App {
     sparkStrCtx
   }
 
-//  private def initTcp: Unit = {
-//    manager ! Connect(new InetSocketAddress(cloverleafAddr, cloverleafPort))
-//  }
-
-  case object Ack extends Event
-
+  /**
+    * Main business logic
+    * @param sparkStrCtx spark streaming context to run the business logic in
+    */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     info("kafkaConsumerProp: " + kafkaConsumerProp)
@@ -112,12 +120,12 @@ object PsgAcoAdtJob extends Logg with App {
         messagesInRDD = inc(messagesInRDD, range.count())
       })
       if (messagesInRDD > 0L) {
-        info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
+        info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD +
+          " Executing Asynchronously Each of Them.")
         rdd foreachPartitionAsync  (dataItr => {
           if (dataItr.nonEmpty) {
             propFile = confFile
             val actorSys = actorSystem
-//            val tcpActor = tcpActorr
             val msg1 = new StringBuilder()
             val actorSupervisor = supervisor
             val insuranceArray = insArray
@@ -129,12 +137,6 @@ object PsgAcoAdtJob extends Logg with App {
             val end_of_message = message_end
             val tcpConWaitTime = tcpConnectionWaitTime
             val appName = app
-//            val listener = dlListener
-//            val tmes = testMessage
-//            actorSys.eventStream.subscribe(listener, classOf[DeadLetter])
-//            msg1.append(begin_of_message).append(tmes).append(end_of_segment).append(end_of_message)
-//            Thread.sleep(tcpConWaitTime)
-//            tcpActor ! ByteString("test")
             val message = dataItr.next()._2
             val delim = if (message contains "\r\n") "\r\n" else "\n"
             trySplit(message, delim) match {
@@ -146,15 +148,24 @@ object PsgAcoAdtJob extends Logg with App {
                 msh.foreach(seg => debug("MSH: " + seg))
                 pv1.foreach(seg => debug("PV1: " + seg))
                 primaryIn1.foreach(seg => debug("IN1: " + seg))
+
+                // Check that the message event type is in this list
+                // A01,A02,A03,A04,A05,A06,A07,A08,A09,A10,A11,A12,A13,A18
                 if (eventTypeMatch(msh, adtArray)) {
                   info(s"Message event type matches")
+
+                  // Check that the facility is in this list (Fac_Mnemonic_Roster.txt)
+                  // COCBR,COCDT,COCEH,COCFH,COCGP,COCLR,COCLW,COCMMC,COCNP,COCNS,COCOH,COCPOP,COCSE,COCTAC,COCBP,COCSMC
                   if (singleFieldMatch(msh, faciltyArray, "\\|", 3)) {
                     info("Message facility type matches")
+
+                    // Check that the insurance name matches 'Medicare' and that the Medicare Insurance Number is in the Patient_Roster_PSG_Integral.txt
                     if (singleFieldMatch(primaryIn1, insuranceArray, "\\|", 36) &&
                       (stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 4) ||
                       stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 9))) {
                       info(s"Patient primary insurance Id is present and name matches")
 
+                      // Remove SSNS from PID and GT1 segments
                       // PID SSN removal
                       val pidSegment = segment(splitted, PID)
                       val ssn = getField(pidSegment, "\\|", 19)
@@ -176,6 +187,7 @@ object PsgAcoAdtJob extends Logg with App {
                         }
                       })
 
+                      // Update all GT1s (there could be more than 1 GT1 segment)
                       for (gt1 <- newGT1s) {
                         try {
                           splitted.update(splitted.indexWhere(segment => {
@@ -188,17 +200,22 @@ object PsgAcoAdtJob extends Logg with App {
                         }
                       }
 
+                      // Connect all segments by \r
                       val cleanMessage = splitted.mkString("\r")
 
-                      // Search entire message for SSN
+                      // Search entire message for any other SSNs and replace them with an empty string
                       val finalMessage = cleanMessage.replace(ssn, "")
                       debug(s"Old message: $message")
                       debug(s"Message to send: $finalMessage")
                       try{
-                        sendMail(appName, "Found message to send", notification.TaskState.NORMAL, statsReport = false, lookUpProp("email.to").split(COMMA))
+                        // Send an email saying that a message has been found and is being sent
+                        sendMail(appName, "Found message to send", notification.TaskState.NORMAL, statsReport = false,
+                          lookUpProp("email.to").split(COMMA))
                         val msg1 = new StringBuilder()
+                        // Add the MLLP Procotol message headers/footers (http://camel.apache.org/hl7.html)
                         msg1.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
                         Thread.sleep(tcpConWaitTime)
+                        // Send the message to the Akka tcp message framework
                         actorSupervisor ! ByteString(msg1.toString())
                       } catch {
                         case e: Exception => error(e)
@@ -214,6 +231,9 @@ object PsgAcoAdtJob extends Logg with App {
     })
   }
 
+  /**
+    * Start the spark streaming context
+    */
   private def startStreams() = {
     try {
       sparkStrCtx start()
@@ -228,6 +248,9 @@ object PsgAcoAdtJob extends Logg with App {
     }
   }
 
+  /**
+    * Shutdown the job
+    */
   private def shutDown(): Unit = {
     sparkUtil shutdownEverything sparkStrCtx
     closeResource(fileSystem)

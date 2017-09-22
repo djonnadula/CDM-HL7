@@ -9,15 +9,24 @@ import com.hca.cdm._
 import com.hca.cdm.log.Logg
 
 /**
-  * Created by dof7475 on 8/23/2017.
+  * Factory method to create ActorSupervisor as recommended by the Akka documentation
+  * <a href="http://doc.akka.io/docs/akka/current/scala/actors.html#recommended-practices">Akka Recommended Practices</a>
   */
 object AkkaTcpClient {
-
+  /**
+    * Create props for an actor of this type
+    * @param remote remote client [[InetSocketAddress]]
+    * @return [[Props]] for creating this actor
+    */
   def props(remote: InetSocketAddress): Props = {
     Props(classOf[AkkaTcpClient], remote)
   }
 }
 
+/**
+  * Tcp Client Implementation
+  * @param remote
+  */
 class AkkaTcpClient(remote: InetSocketAddress) extends Actor with Logg {
   import akka.io.Tcp._
   import context.system
@@ -30,20 +39,38 @@ class AkkaTcpClient(remote: InetSocketAddress) extends Actor with Logg {
   val manager = IO(Tcp)
   manager ! Connect(remote)
 
+  /**
+    * Before restart behavior
+    * @param reason reason to restart the actor
+    * @param message possible message
+    */
   override def preRestart(reason: Throwable, message: Option[Any]): Unit = {
     info("Restarting")
     super.preRestart(reason, message)
   }
 
+  /**
+    * After restart behavior
+    * @param reason possible reason
+    */
   override def postRestart(reason: Throwable): Unit = {
     info("Restart completed!")
     super.postRestart(reason)
   }
 
+  /**
+    * Before start behavior
+    */
   override def preStart(): Unit = info("TcpClient is alive")
+
+  /**
+    * After start behavior
+    */
   override def postStop(): Unit = info("TcpClient has shutdown")
 
+  // actor behavior
   override def receive: Receive = {
+    // tries to reconnect 10 times before restarting
     case CommandFailed(con: Connect) =>
       error("Connection failed")
       error(con.failureMessage.toString)

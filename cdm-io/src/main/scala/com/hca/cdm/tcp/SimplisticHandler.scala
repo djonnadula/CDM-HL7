@@ -8,15 +8,26 @@ import akka.util.ByteString
 import com.hca.cdm.log.Logg
 
 /**
-  * Created by dof7475 on 9/11/2017.
+  * Factory method to create ActorSupervisor as recommended by the Akka documentation
+  * <a href="http://doc.akka.io/docs/akka/current/scala/actors.html#recommended-practices">Akka Recommended Practices</a>
   */
-
 object SimplisticHandler {
+  /**
+    * Create props for an actor of this type
+    * @param connection actor used to connect to remote host
+    * @param remote remote client [[InetSocketAddress]]
+    * @return [[Props]] for creating this actor
+    */
   def props(connection: ActorRef, remote: InetSocketAddress): Props = {
     Props(classOf[SimplisticHandler], connection, remote)
   }
 }
 
+/**
+  * Simple tcp message handler
+  * @param connection actor used to connect to remote host
+  * @param remote remote client [[InetSocketAddress]]
+  */
 class SimplisticHandler(connection: ActorRef, remote: InetSocketAddress)
   extends Actor with Logg {
 
@@ -27,6 +38,7 @@ class SimplisticHandler(connection: ActorRef, remote: InetSocketAddress)
 
   case object Ack extends Event
 
+  // actor behavior
   def receive: PartialFunction[Any, Unit] = {
     case Received(data) =>
       info("Received data: \n\t" + data.utf8String)
@@ -46,6 +58,9 @@ class SimplisticHandler(connection: ActorRef, remote: InetSocketAddress)
       info("Echo Handler doesn't know what to do")
   }
 
+  /**
+    * Behavior after stopping
+    */
   override def postStop(): Unit = {
     info(s"transferred $transferred bytes from/to [$remote]")
   }
@@ -60,6 +75,10 @@ class SimplisticHandler(connection: ActorRef, remote: InetSocketAddress)
   val lowWatermark = maxStored * 3 / 10
   var suspended = false
 
+  /**
+    * Not currently using the buffer logic
+    * @param data
+    */
   private def buffer(data: ByteString): Unit = {
     storage :+= data
     stored += data.size
@@ -77,6 +96,9 @@ class SimplisticHandler(connection: ActorRef, remote: InetSocketAddress)
     }
   }
 
+  /**
+    * Not currently using the acknowledge logic
+    */
   private def acknowledge(): Unit = {
     require(storage.nonEmpty, "storage was empty")
 
