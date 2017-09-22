@@ -185,6 +185,7 @@ object HL7Job extends Logg with App {
         }
       }
     }
+    HBaseConnector stop()
     if (appManagesOffset) offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
     sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
     segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)

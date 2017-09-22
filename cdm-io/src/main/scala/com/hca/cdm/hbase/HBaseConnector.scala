@@ -17,7 +17,7 @@ import com.hca.cdm.auth.LoginRenewer.performAction
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
-private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg {
+private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg with AutoCloseable {
   self =>
   private val connection = performAction(asFunc(ConnectionFactory.createConnection(conf)))
   private val mutatorStore = new TrieMap[String, BatchOperator]()
@@ -133,6 +133,11 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
 object HBaseConnector extends Logg {
   private val lock = new Object()
   private var ins: HBaseConnector = _
+
+  def stop(): Unit = {
+    closeResource(ins)
+    ins = _
+  }
 
   def apply(conf: Configuration, nameSpace: String): HBaseConnector = {
     def createIfNotExist = new (() => HBaseConnector) {
