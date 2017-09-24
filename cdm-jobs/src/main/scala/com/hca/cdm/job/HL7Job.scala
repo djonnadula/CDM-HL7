@@ -140,9 +140,7 @@ object HL7Job extends Logg with App {
   private val restoreFromChk = new AtomicBoolean(checkpointEnabled)
   private val checkPoint = lookUpProp("hl7.checkpoint")
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar)
-  private var hdpConf = hdpUtil.conf
-  hdpConf = HBaseConfiguration.create(hdpConf)
-  hdpConf.addResource("hbase-site.xml")
+  private val hdpConf = hadoop.hadoopConf
   private val hTables = new mutable.HashSet[String]
   private var offSetManager: OffsetManager = _
   private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled
@@ -187,6 +185,7 @@ object HL7Job extends Logg with App {
         }
       }
     }
+    HBaseConnector stop()
     if (appManagesOffset) offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
     sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
     segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)

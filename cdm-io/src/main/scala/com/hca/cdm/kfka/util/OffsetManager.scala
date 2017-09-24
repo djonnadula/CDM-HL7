@@ -13,7 +13,9 @@ import kafka.common.TopicAndPartition
 import org.apache.spark.rdd.RDD
 import org.apache.hadoop.hbase.HColumnDescriptor._
 import org.apache.hadoop.hbase.HConstants._
+
 import scala.collection.mutable.ListBuffer
+import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 9/16/2017.
@@ -47,11 +49,11 @@ private[cdm] class OffsetManager(storeNameSpace: String, store: String, appAsRow
       out = response.map { case (k, v) => topicPartitionFromStore(k) -> toLong(v) }.toMap
       info(s"Recovering App State from $appAsRow $out")
       if (valid(out)) {
-        val noOffsetFoundForTopic = out.filterKeys(tp => !topics.contains(tp.topic))
-        if (noOffsetFoundForTopic.nonEmpty) {
-          info(s"Offset Store does not hold Topics metadata will fetch from brokers for topics $noOffsetFoundForTopic")
-          out = out ++ offsetsFromBrokers(noOffsetFoundForTopic.map(_._1.topic).toSet, kafkaParams)
-          info(s"Offset Store does not hold Topics metadata fetched Topic Partiion info from brokers for topics $out")
+        val topicsNotFound = topics diff out.map(_._1.topic).toSet
+        if (topicsNotFound nonEmpty) {
+          info(s"Offset Store does not hold Topics metadata will fetch from brokers for topics $topicsNotFound")
+          out = out ++ offsetsFromBrokers(topicsNotFound, kafkaParams)
+          info(s"Offset Store does not hold Topics metadata fetched Topic Partition info from brokers for topics $out")
         }
         out filterKeys (tp => topics contains tp.topic)
       } else {

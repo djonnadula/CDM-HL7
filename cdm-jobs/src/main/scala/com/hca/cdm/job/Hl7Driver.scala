@@ -17,7 +17,7 @@ import scala.util.{Failure, Success, Try}
 import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
-import java.util.concurrent.{CountDownLatch, TimeUnit}
+import java.util.concurrent.TimeUnit
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -77,7 +77,6 @@ object Hl7Driver extends App with Logg {
   private val ENV = lookUpProp("hl7.env")
   private val jobScript = lookUpProp("hl7.runner")
   private var sHook: Thread = _
-  private val appLatch = new CountDownLatch(1)
   private val sparkLauncher = new SparkLauncher()
     .setAppName(app)
     .setMaster(hl7_spark_master)
@@ -188,11 +187,14 @@ object Hl7Driver extends App with Logg {
   sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
     shutDown()
-    startIfNeeded(lookUpProp("hl7.selfStart") toBoolean)
+    handleDriver("stop")
     info(s"$app Driver Shutdown Completed ")
   }))
   registerHook(sHook)
-  appLatch await()
+  while (appStateRunning) {
+    sleep(600000)
+    debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
+  }
 
   private[job] object Tracker extends Listener {
     override def infoChanged(handle: SparkAppHandle): Unit = {
@@ -257,11 +259,9 @@ object Hl7Driver extends App with Logg {
   private def startIfNeeded(selfStart: Boolean): Unit = {
     if (selfStart) {
       info(s"Self Start is Requested for $app")
-      appLatch countDown()
       handleDriver("restart")
     } else {
       info(s"No Self Start is Requested So shutting down $app ...")
-      appLatch countDown()
       handleDriver("stop")
       abend(0)
     }
