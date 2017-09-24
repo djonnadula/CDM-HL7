@@ -24,7 +24,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   private lazy val app = "HDFS"
   private lazy val loginRenewer = newDaemonScheduler(s"$app-Token-Renewer")
-  private lazy val tryRenewal = if (isConfigDefined("hl7.hdfs.token.renewal")) lookUpProp("hl7.hdfs.token.renewal").toBoolean else true
+  private lazy val tryRenewal = tryAndReturnDefaultValue0(lookUpProp("hl7.hdfs.token.renewal").toBoolean, true)
   private var hdfsConf: Configuration = _
   private var sparkConf: SparkConf = _
   private var fs: FileSystem = _
