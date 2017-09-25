@@ -55,8 +55,8 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val adtTypes = lookUpProp("PSGACOADT.adt.types").split(",")
   private lazy val insuranceFileLocation = new Path(lookUpProp("PSGACOADT.insurance.file.location"))
   private lazy val facFileLocation = new Path(lookUpProp("PSGACOADT.fac.file.location"))
-  private lazy val insArray = PsgAcoAdtJobUtils.readFile(insuranceFileLocation, fileSystem)
-  private lazy val facArray = PsgAcoAdtJobUtils.readFile(facFileLocation, fileSystem)
+  private lazy val insArray = PsgAcoAdtJobUtils.readFileAsArray(insuranceFileLocation, fileSystem)
+  private lazy val facArray = PsgAcoAdtJobUtils.readFileAsArray(facFileLocation, fileSystem)
   private lazy val outputFile = new Path(lookUpProp("PSGACOADT.output.file.location"))
   private lazy val mqQueue = enabled(lookUpProp("mq.queueResponse"))
   private lazy val insNameMatcher = lookUpProp("PSGACOADT.insurance.name.match").split(",")
@@ -169,7 +169,7 @@ object PsgAcoAdtJob extends Logg with App {
                       // PID SSN removal
                       val pidSegment = segment(splitted, PID)
                       val ssn = getField(pidSegment, "\\|", 19)
-                      val newPid = removeField(pidSegment, "\\|", 19)
+                      val newPid = removeField(pidSegment, "|", 19)
                       debug(s"newPid: $newPid")
                       splitted.update(splitted.indexWhere(segment => segment.startsWith(PID)), newPid)
 

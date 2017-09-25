@@ -39,7 +39,7 @@ object PsgAcoAdtJobUtils extends Logg {
     * @param fileSystem filesystem object
     * @return array of lines from the file
     */
-  def readFile(path: Path, fileSystem: FileSystem): Array[AnyRef] = {
+  def readFileAsArray(path: Path, fileSystem: FileSystem): Array[AnyRef] = {
     val br = new BufferedReader(new InputStreamReader(fileSystem.open(path)))
     br.lines().toArray
   }

@@ -18,6 +18,7 @@ class HL7ParserRASTest extends FlatSpec with Logg {
     val messageName1 = "RAS_1"
     val msg1 = HL7ParserTestUtils.getMessage(testFileBasePath, messageName1, messageType)
     val res1 = hl7TestSetup.parse(msg1)
+    info("RAS Parsed")
     val expected1 = HL7ParserTestUtils.getExpected(testFileBasePath, messageName1, messageType)
     "RAS Message Test 1 (RAS_1)" should "have a match for the parsed output" in {
         assert(res1 === expected1)
