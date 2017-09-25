@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm.Models.MSGMeta
-import com.hca.cdm.{tryAndReturnDefaultValue0, _}
+import com.hca.cdm._
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types
@@ -23,7 +23,6 @@ import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
 import java.util.regex.Pattern
-import com.hca.cdm.hbase.HUtils
 import org.apache.avro.generic._
 import org.apache.avro.io._
 import scala.collection.concurrent.TrieMap
