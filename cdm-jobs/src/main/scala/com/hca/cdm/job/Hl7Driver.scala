@@ -130,8 +130,8 @@ object Hl7Driver extends App with Logg {
       val actConf = conf.split(COLON)
       if (valid(actConf, 2)) {
         actConf(0) match {
-          case "--files" => sparkLauncher.addFile(new File(actConf(1)).getPath)
-          case "--jars" => sparkLauncher.addJar(new File(actConf(1)).getPath)
+          case "--files" => actConf(1).split(COMMA, -1).foreach { file => sparkLauncher.addFile(new File(file).getPath) }
+          case "--jars" => actConf(1).split(COMMA, -1).foreach { file => sparkLauncher.addJar(new File(file).getPath) }
           case _ => sparkLauncher.setConf(actConf(0), actConf(1))
         }
       }
