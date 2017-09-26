@@ -112,8 +112,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
 
   private def runBatch(): Unit = {
     if (batched > 0) {
-      tryAndLogErrorMes(mutator flush(), error(_: Throwable))
-      reset()
+      if (tryAndLogErrorMes(mutator flush(), error(_: Throwable))) reset()
     }
   }
 
