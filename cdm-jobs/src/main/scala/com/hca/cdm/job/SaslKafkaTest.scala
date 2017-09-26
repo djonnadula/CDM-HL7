@@ -3,8 +3,8 @@ package com.hca.cdm.job
 import java.util.ArrayList
 
 import com.hca.cdm._
-import com.hca.cdm.kafka.config.{HL7ConsumerConfig, HL7ProducerConfig}
-import com.hca.cdm.kafka.producer.KafkaProducerHandler
+import com.hca.cdm.kfka.config.{HL7ConsumerConfig, HL7ProducerConfig}
+import com.hca.cdm.kfka.producer.KafkaProducerHandler
 import com.hca.cdm.log.Logg
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.log4j.PropertyConfigurator.configure
