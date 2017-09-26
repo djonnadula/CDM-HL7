@@ -17,12 +17,12 @@ import com.hca.cdm.auth.LoginRenewer.performAction
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
   */
-private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg {
+private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7") extends Logg with AutoCloseable {
   self =>
   private val connection = performAction(asFunc(ConnectionFactory.createConnection(conf)))
   private val mutatorStore = new TrieMap[String, BatchOperator]()
-  private lazy val regionReplication = tryAndReturnDefaultValue0(lookUpProp("hbase.regions.replication").toInt,1)
-  registerHook(newThread( s"${self.getClass.getName}-sHook-$connection",runnable(close())))
+  private lazy val regionReplication = tryAndReturnDefaultValue0(lookUpProp("hbase.regions.replication").toInt, 1)
+  registerHook(newThread(s"$nameSpace-sHook-$connection", runnable(close())))
 
   def getTable(tableName: String): Table = connection.getTable(TableName.valueOf(nameSpace, tableName))
 
@@ -84,7 +84,7 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
 
 private[cdm] class BatchOperator(nameSpace: String, table: String, connection: Connection, batchSize: Int = 1000) extends Logg {
   require(valid(table) && !table.trim.isEmpty, s"Cannot Operate on Table $table")
-  @volatile private var batched: Int = 0
+  @volatile private var batched: Long = 0
   private val batchRunner = newDaemonScheduler(s"$table-BatchRunner-$connection")
   batchRunner scheduleAtFixedRate(newThread(s"$table-BatchTask", runnable(asFunc(runBatch()))), 1, 1, TimeUnit.SECONDS)
   private val mutator = connection.getBufferedMutator(TableName.valueOf(nameSpace, table))
@@ -93,7 +93,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
   def mutate(op: Mutation): Unit = {
     if (supportedMutation(op)) {
       tryAndThrow(mutator mutate op, error(_: Throwable))
-      batched += 1
+      batched = inc(batched)
       submitBatch()
     }
   }
@@ -105,13 +105,20 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
 
   def submitBatch(): Unit = {
     if (batched >= batchSize) {
-      batched = 0
       new RetryHandler().retryOperation(asFunc(tryAndThrow(mutator flush(), error(_: Throwable))))
+      reset()
     }
   }
 
   private def runBatch(): Unit = {
-    if (batched > 0) tryAndThrow(mutator flush(), error(_: Throwable))
+    if (batched > 0) {
+      tryAndLogErrorMes(mutator flush(), error(_: Throwable))
+      reset()
+    }
+  }
+
+  private def reset(): Unit = {
+    batched = 0
   }
 
   def close(): Unit = {
@@ -133,6 +140,11 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
 object HBaseConnector extends Logg {
   private val lock = new Object()
   private var ins: HBaseConnector = _
+
+  def stop(): Unit = {
+    closeResource(ins)
+    ins = null
+  }
 
   def apply(conf: Configuration, nameSpace: String): HBaseConnector = {
     def createIfNotExist = new (() => HBaseConnector) {
@@ -160,8 +172,10 @@ object HBaseConnector extends Logg {
     def createIfNotExist = new (() => HBaseConnector) {
       val conf: Configuration = HBaseConfiguration.create()
       conf.addResource("hbase-site.xml")
+
       override def apply(): HBaseConnector = new HBaseConnector(conf, nameSpace)
     }
+
     createInstance(createIfNotExist)
   }
 

@@ -14,7 +14,9 @@ import org.apache.hadoop.hbase.util.Bytes._
 import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaUtils}
 
+
 import scala.collection.mutable.ListBuffer
+import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 9/16/2017.
@@ -29,34 +31,40 @@ private[cdm] class OffsetManager(storeNameSpace: String, store: String, appAsRow
 //    require(!batch.isInstanceOf[HasOffsetRanges], "Currently Only Kafka Impl is supported")
     val table = storeHandler.getTable(store)
     val req = new Put(toBytes(appAsRow))
+    val familyBytes = toBytes(offsetFamily)
     batch.asInstanceOf[HasOffsetRanges].offsetRanges.map { range =>
       TopicAndPartition(range.topic, range.partition) -> PartitionOffset(range.fromOffset, range.untilOffset)
     }.foreach { case (tp, off) =>
-      req.addImmutable(toBytes(offsetFamily), toBytes(storeTopicPart(tp)), toBytes(off.untilOffset))
+      req.addImmutable(familyBytes, toBytes(storeTopicPart(tp)), toBytes(off.untilOffset))
     }
+    info(s"Sending Persist Request for Batch completed with id ${batch.id} ${batch.asInstanceOf[HasOffsetRanges].offsetRanges.mkString(";")}")
     tryAndGoNextAction0(new RetryHandler().retryOperation(asFunc(table.put(req))), closeResource(table))
   }
 
   def appStarted(topics: Set[String], kafkaParams: Map[String, String]): Map[TopicAndPartition, Long] = {
-    val response = HUtils.transformRow(store,offsetFamily,appAsRow,allAttributes)(storeHandler)
+    val storeProps = Map(MIN_VERSIONS -> "0", VERSIONS -> "100")
+    storeHandler.createTable(store, Some(storeProps), List(HUtils.createFamily(offsetFamily)))
+    val response = HUtils.transformRow(store, offsetFamily, appAsRow, allAttributes)(storeHandler)
     var out: Map[TopicAndPartition, Long] = null
     if (valid(response) && response.nonEmpty) {
-      info(s"Recovering App State from $appAsRow $response")
-      out = response.map { case (tp, off) =>
-        topicPartitionFromStore(tp) -> off.toLong
-      }.toMap
+      out = response.map { case (k, v) => topicPartitionFromStore(k) -> toLong(v) }.toMap
+      info(s"Recovering App State from $appAsRow $out")
       if (valid(out)) {
-        val noOffsetFoundForTopic = out.filterKeys(tp => !topics.contains(tp.topic))
-        if (noOffsetFoundForTopic.nonEmpty) out = out ++ offsetsFromBrokers(noOffsetFoundForTopic.map(_._1.topic).toSet, kafkaParams)
-        out filterKeys(tp => topics contains tp.topic)
+        val topicsNotFound = topics diff out.map(_._1.topic).toSet
+        if (topicsNotFound nonEmpty) {
+          info(s"Offset Store does not hold Topics metadata will fetch from brokers for topics $topicsNotFound")
+          out = out ++ offsetsFromBrokers(topicsNotFound, kafkaParams)
+          info(s"Offset Store does not hold Topics metadata fetched Topic Partition info from brokers for topics $out")
+        }
+        out filterKeys (tp => topics contains tp.topic)
       } else {
         offsetsFromBrokers(topics, kafkaParams)
       }
     } else {
       info(s"Looks Like First Time App is Connecting to Offsets Repo, so Fetching Offsets from Broker for $appAsRow")
-      val storeProps = Map(MIN_VERSIONS -> "0", VERSIONS -> "100")
-      storeHandler.createTable(store, Some(storeProps), List(HUtils.createFamily(offsetFamily)))
-      offsetsFromBrokers(topics, kafkaParams)
+      out = offsetsFromBrokers(topics, kafkaParams)
+      info(s"Offsets Fetched from Brokers $out")
+      out
     }
   }
 

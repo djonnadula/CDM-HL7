@@ -22,7 +22,7 @@ object HUtils extends Logg {
   private lazy val Replication_Factor: Short = 3.toShort
   private lazy val DEFAULT_TTL: Int = 1 * 31 * 24 * 60 * 60
   private val mapper = new ObjectMapper().registerModule(DefaultScalaModule).readValue(_: String, classOf[mutable.Map[String, String]])
-  private lazy val NO_DATA = mutable.Map[String, String]().empty
+  private lazy val NO_DATA = mutable.Map[String, Array[Byte]]().empty
 
 
   def createFamily(familyName: String, props: Map[String, String] = Map.empty): HColumnDescriptor = {
@@ -62,12 +62,11 @@ object HUtils extends Logg {
     operator.mutate(addRowRequest(key, family, jsonKV))
   }
 
-  def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String] = ListBuffer.empty[String])(operator: HBaseConnector): mutable.Map[String, String] = {
+  def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String] = ListBuffer.empty[String])(operator: HBaseConnector): mutable.Map[String, Array[Byte]] = {
     val response = sendGetRequest(getRowRequest(fetchId, family, fetchAttributes), operator.getTable(table))
     if (valid(response) && !response.isEmpty) {
       response.getFamilyMap(toBytes(family)).asScala.map({
-        case (k, v) =>
-          (new String(k, UTF8), new String(v, UTF8))
+        case (k, v) => (new String(k, UTF8), v)
       })
     } else NO_DATA
 

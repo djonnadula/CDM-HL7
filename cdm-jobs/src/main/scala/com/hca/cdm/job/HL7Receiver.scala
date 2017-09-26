@@ -98,7 +98,7 @@ object HL7Receiver extends Logg with App {
       ctx
     }
   }
-  private val hdpConf = hdpUtil.conf
+  private val hdpConf = hadoop.hadoopConf
   private var sparkStrCtx: StreamingContext = initContext
   startStreams()
 
