@@ -229,7 +229,7 @@ object HL7Job extends Logg with App {
             LoginRenewer.scheduleRenewal()
             val kafkaOut = KProducer()(prodConf)
             val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
-            val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+            val hl7RejIO = kafkaOut.writeData(_: AnyRef, _: String, rejectOut)(maxMessageSize, rejectOverSized)
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)

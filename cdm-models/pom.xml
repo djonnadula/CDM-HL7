@@ -5,7 +5,7 @@
     <parent>
         <artifactId>cdm-hl7</artifactId>
         <groupId>com.hca</groupId>
-        <version>1.0.5-Snapshot</version>
+        <version>1.0.6-Sanpshot</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>${cdm.version}</version>
@@ -19,6 +19,31 @@
             <version>${cdm.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.7.7</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <createSetters>true</createSetters>
+                            <fieldVisibility>private</fieldVisibility>
+                            <stringType>String</stringType>
+                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

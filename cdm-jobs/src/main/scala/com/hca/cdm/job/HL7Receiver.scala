@@ -147,7 +147,7 @@ object HL7Receiver extends Logg with App {
           val rawOut = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, rawOverSized)
           val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(MaxValue)
           val audit = auditMsg(_: String, rawStage)(EMPTYSTR, _: MSGMeta)
-          val hl7RejIO = kafkaOut.writeData(_: String, _: String, rejectOut)(maxMessageSize, rejectOverSized)
+          val hl7RejIO = kafkaOut.writeData(_: AnyRef, _: String, rejectOut)(maxMessageSize, rejectOverSized)
           dataItr foreach { mqData =>
             if (hl7QueueMapping isDefinedAt mqData.source) {
               val hl7Str = hl7QueueMapping(mqData.source)

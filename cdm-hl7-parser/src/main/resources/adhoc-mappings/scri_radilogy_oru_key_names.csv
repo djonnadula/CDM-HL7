@@ -41,4 +41,4 @@ attending_doctor|name_context,pcp_phone
 date_time_of_message,message_created_date_time
 message_flag_static,message_flag
 orp,attending_physician
-meditech_network_ID,meditech_network_ID
+meditech_network_id,meditech_network_id

@@ -54,7 +54,7 @@ object HL7LocalRunner extends App with Logg {
       map match {
         case Left(out) =>
           info("json: " + out._1)
-          segmentsHandler(msgType).handleSegments(outio, reject, audit, adhocDestination,Some(tlmAckIO))(out._2, "",  out._3)
+          segmentsHandler(msgType).handleSegments(outio, templateerrorReject, audit, adhocDestination,Some(tlmAckIO))(out._2, msgs, out._3)
         case Right(t) =>
           error(t);
       }
@@ -63,13 +63,15 @@ object HL7LocalRunner extends App with Logg {
   }
 
   private def outio(k: String, v: String) = {
-    info("outio: " + k)
+   // info("outio: " + k)
   }
 
-  private def reject(k: String, v: String) = {
+  private def reject(k: AnyRef, v: String) = {
     info("reject: " + k)
   }
-
+  private def templateerrorReject(k: AnyRef, v: String) = {
+    info("reject: " + k+ " " + v)
+  }
   private def audit(k: String, v: String) = {
    // info("audit: " + k)
   }

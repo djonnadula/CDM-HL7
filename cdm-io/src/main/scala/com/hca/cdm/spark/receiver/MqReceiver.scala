@@ -162,7 +162,6 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
       } else {
         tryAndLogThr(result(async {
           handleAcks(message, source, meta, tlmAcknowledge)
-          persisted = true
         }(executionContext), Duration(45, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
       }
       persisted

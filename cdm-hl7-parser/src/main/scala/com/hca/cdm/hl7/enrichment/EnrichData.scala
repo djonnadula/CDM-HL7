@@ -33,7 +33,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
   private lazy val facilityKey = "sending_facility"
   private lazy val coidRefLookUp = "coid_ref_look_up"
   private lazy val patientLocation = "patientLocation"
-  private lazy val networkID = "meditech_network_ID"
+  private lazy val networkID = "meditech_network_id"
   private val facilityRefData = readFile(files(0)).getLines().toList
   private val coidCrossRefData = readFile(files(1)).getLines().toList
   private lazy val facilityRef = {

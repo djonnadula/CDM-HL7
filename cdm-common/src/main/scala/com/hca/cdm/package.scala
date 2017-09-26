@@ -270,6 +270,10 @@ package object cdm extends Logg {
     tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse default
   }
 
+  def tryAndFallbackTo[T](fun: () => T, fallbackTo : => T): T = {
+    tryAndLogErrorMes(fun, debug(_: String, _: Throwable)) getOrElse tryAndThrow(fallbackTo, error(_: Throwable))
+  }
+
   def asFunc[T](action: => T): () => T = () => action
 
   def abend(code: Int = -1): Unit = System exit code

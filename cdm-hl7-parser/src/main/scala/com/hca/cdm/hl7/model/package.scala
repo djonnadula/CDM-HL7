@@ -1,5 +1,6 @@
 package com.hca.cdm.hl7
 
+import java.io.ByteArrayOutputStream
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP_VALUES
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -22,6 +23,8 @@ import com.hca.cdm.utils.Filters.FILTER
 import org.apache.avro.Schema
 import org.apache.avro.generic.GenericData.Record
 import java.util.regex.Pattern
+import org.apache.avro.generic._
+import org.apache.avro.io._
 import scala.collection.mutable
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
@@ -106,9 +109,15 @@ package object model extends Logg {
   private def getRejectSchema = rejectSchema.clone().transform((k, v) => EMPTYSTR)
 
   private case object RejectAvroSchema {
-    lazy val schema: Schema = new Schema.Parser().parse(toJson(getRejectSchema))
+    private lazy val schema: Schema = new Schema.Parser().parse(readFile("HL7_Reject.avro").getLines().mkString(EMPTYSTR))
+    private lazy val encoder = EncoderFactory.get
+    private lazy val writer: GenericDatumWriter[AnyRef] = new GenericDatumWriter(schema)
 
     def avroRejectRecord: Record = new Record(schema)
+
+    def encoderFac: EncoderFactory = encoder
+
+    def datumWriter: GenericDatumWriter[AnyRef] = writer
   }
 
 
@@ -183,43 +192,48 @@ package object model extends Logg {
 
   import OutFormats._
 
-  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): String = {
+  def rejectMsg(hl7: String, stage: String = EMPTYSTR, meta: MSGMeta, reason: String, data: mapType, t: Throwable = null, raw: String = null, stack: Boolean = true, format: OutFormat = DELIMITED): AnyRef = {
     format match {
       case JSON =>
-        val rejectSchema = getRejectSchema
+        val rejectRecord = getRejectSchema
         import rejectSchemaMapping._
-        rejectSchema update(processName, s"$hl7$COLON$stage")
-        rejectSchema update(controlID, meta.controlId)
-        rejectSchema update(tranTime, meta.msgCreateTime)
-        rejectSchema update(mrn, meta.medical_record_num)
-        rejectSchema update(urn, meta.medical_record_urn)
-        rejectSchema update(accntNum, meta.account_num)
-        rejectSchema update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
-        rejectSchema update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
-        rejectSchema update(etlTime, timeStamp)
-        toJson(rejectSchema)
+        rejectRecord update(processName, s"$hl7$COLON$stage")
+        rejectRecord update(controlID, meta.controlId)
+        rejectRecord update(tranTime, meta.msgCreateTime)
+        rejectRecord update(mrn, meta.medical_record_num)
+        rejectRecord update(urn, meta.medical_record_urn)
+        rejectRecord update(accntNum, meta.account_num)
+        rejectRecord update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
+        rejectRecord update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
+        rejectRecord update(etlTime, timeStamp)
+        toJson(rejectRecord)
       case DELIMITED =>
         s"$hl7$COLON$stage$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.medical_record_num}" +
           s"$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR" + timeStamp + PIPE_DELIMITED_STR +
           (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED_STR + (if (raw ne null) raw else toJson(data))
       case AVRO =>
         import rejectSchemaMapping._
-        val rejectSchema = RejectAvroSchema.avroRejectRecord
-        applyAvroData(rejectSchema, processName, s"$hl7$COLON$stage")
-        applyAvroData(rejectSchema, controlID, meta.controlId)
-        applyAvroData(rejectSchema, tranTime, meta.msgCreateTime)
-        applyAvroData(rejectSchema, mrn, meta.medical_record_num)
-        applyAvroData(rejectSchema, urn, meta.medical_record_urn)
-        applyAvroData(rejectSchema, accntNum, meta.account_num)
-        applyAvroData(rejectSchema, rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
-        applyAvroData(rejectSchema, rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
-        applyAvroData(rejectSchema, etlTime, timeStamp)
-        rejectSchema.toString
+        import RejectAvroSchema._
+        val rejectRecord = avroRejectRecord
+        applyAvroData(rejectRecord, processName, s"$hl7$COLON$stage")
+        applyAvroData(rejectRecord, controlID, meta.controlId)
+        applyAvroData(rejectRecord, tranTime, meta.msgCreateTime)
+        applyAvroData(rejectRecord, mrn, meta.medical_record_num)
+        applyAvroData(rejectRecord, urn, meta.medical_record_urn)
+        applyAvroData(rejectRecord, accntNum, meta.account_num)
+        applyAvroData(rejectRecord, rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
+        applyAvroData(rejectRecord, rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
+        applyAvroData(rejectRecord, etlTime, timeStamp)
+        val stream = new ByteArrayOutputStream(256)
+        val encoder = encoderFac.directBinaryEncoder(stream, null)
+        datumWriter.write(rejectRecord, encoder)
+        encoder flush()
+        stream toByteArray
       case _ => throw new CdmException(s"Format $format for Reject not yet Supported")
     }
   }
 
-  def rejectRawMsg(hl7: String, stage: String = EMPTYSTR, raw: String, reason: String, t: Throwable, stackTrace: Boolean = true): String = {
+  def rejectRawMsg(hl7: String, stage: String = EMPTYSTR, raw: String, reason: String, t: Throwable, stackTrace: Boolean = true): AnyRef = {
     rejectMsg(hl7, stage, metaFromRaw(raw), reason, null, t, raw, stackTrace)
   }
 

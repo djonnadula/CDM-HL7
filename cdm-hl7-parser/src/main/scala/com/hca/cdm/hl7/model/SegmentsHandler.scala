@@ -10,7 +10,7 @@ import scala.collection.mutable
 trait SegmentsHandler extends Serializable {
 
 
-  def handleSegments(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
+  def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                      adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String,String) => Unit] = None)(data: mutable.LinkedHashMap[String, Any], rawHl7 :String ,meta: MSGMeta): Unit
 
 

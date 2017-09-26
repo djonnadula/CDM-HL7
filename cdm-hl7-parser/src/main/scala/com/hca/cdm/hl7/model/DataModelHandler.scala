@@ -60,7 +60,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   }
   private lazy val nonAdhocSegments = segRef map (seg => if (!seg.adhoc) seg.seg else EMPTYSTR) filter (_ != EMPTYSTR)
 
-  private def runModel(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
+  private def runModel(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                        adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, rawHl7: String, meta: MSGMeta): Unit = {
     val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[(String, String)] else null
     segRef map (seg => seg -> run(seg, data, rawHl7)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
@@ -168,7 +168,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   }
 
 
-  override def handleSegments(io: (String, String) => Unit, rejectIO: (String, String) => Unit, auditIO: (String, String) => Unit,
+  override def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                               adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
     runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO)(data, rawHl7, meta): Unit
 
