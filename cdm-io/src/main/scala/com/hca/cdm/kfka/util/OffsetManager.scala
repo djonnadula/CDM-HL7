@@ -13,7 +13,6 @@ import kafka.common.TopicAndPartition
 import org.apache.spark.rdd.RDD
 import org.apache.hadoop.hbase.HColumnDescriptor._
 import org.apache.hadoop.hbase.HConstants._
-
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 

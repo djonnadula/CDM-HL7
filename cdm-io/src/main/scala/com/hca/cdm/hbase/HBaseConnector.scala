@@ -112,8 +112,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
 
   private def runBatch(): Unit = {
     if (batched > 0) {
-      tryAndLogErrorMes(mutator flush(), error(_: Throwable))
-      reset()
+      if (tryAndLogErrorMes(mutator flush(), error(_: Throwable))) reset()
     }
   }
 
@@ -157,10 +156,7 @@ object HBaseConnector extends Logg {
 
   def apply(nameSpace: String, tables: Set[String], batchSize: Int): Map[String, BatchOperator] = {
     def createIfNotExist = new (() => HBaseConnector) {
-      val conf: Configuration = HBaseConfiguration.create()
-      conf.addResource("hbase-site.xml")
-
-      override def apply(): HBaseConnector = new HBaseConnector(conf, nameSpace)
+      override def apply(): HBaseConnector = new HBaseConnector(hadoop.hadoopConf, nameSpace)
     }
 
     createInstance(createIfNotExist).batchOperators(tables, batchSize)

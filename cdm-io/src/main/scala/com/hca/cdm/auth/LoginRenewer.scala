@@ -88,7 +88,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   private def credentialFile(stagingDir: String, suffix: String = s"Credentials"): Path = {
     val crPath = new Path(s"$stagingDir$FS$app-$suffix")
-    fs.createNewFile(crPath)
+    performAction(asFunc(fs.createNewFile(crPath)))
     crPath
   }
 
