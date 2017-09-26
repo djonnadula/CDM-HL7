@@ -461,7 +461,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
       }
     } catch {
       case t: Throwable =>
-        throw new InvalidTemplateFormatException(s"Template has invalid Format for $segmentIndex & Source System Version $controlVersion & Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
+        throw new InvalidTemplateFormatException(s"Template has invalid Format for $segmentIndex & Source System Version $controlVersion " +
+          s"& Msg Control Id $controlId . Cannot Apply Template Schema. Correct templates", t)
     }
   }
 

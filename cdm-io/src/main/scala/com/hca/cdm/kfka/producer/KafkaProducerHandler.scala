@@ -1,4 +1,4 @@
-package com.hca.cdm.kafka.producer
+package com.hca.cdm.kfka.producer
 
 import java.util
 import java.util.Properties
@@ -10,8 +10,8 @@ import kafka.utils.SystemTime
 import com.hca.cdm._
 import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.hadoop.OverSizeHandler
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => conf}
-import com.hca.cdm.kafka.util.{TopicUtil => topicUtil}
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => conf}
+import com.hca.cdm.kfka.util.{TopicUtil => topicUtil}
 import com.hca.cdm.utils.RetryHandler
 import org.apache.kafka.clients.producer.ProducerConfig._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
@@ -98,7 +98,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
         }
       }
     }
-    else throw new CDMKafkaException("Cannot Send Invalid Data to Kafka ::  " + data + " with Header :: " + header + " to Topic :: " + topic)
+    // else throw new CDMKafkaException("Cannot Send Invalid Data to Kafka ::  " + data + " with Header :: " + header + " to Topic :: " + topic)
   }
 
 

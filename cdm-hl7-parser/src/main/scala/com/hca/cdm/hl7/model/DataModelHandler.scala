@@ -61,7 +61,9 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   private lazy val nonAdhocSegments = segRef map (seg => if (!seg.adhoc) seg.seg else EMPTYSTR) filter (_ != EMPTYSTR)
 
   private def runModel(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
-                       adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, rawHl7: String, meta: MSGMeta): Unit = {
+                       adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
+                       hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])
+                      (data: mapType, rawHl7: String, meta: MSGMeta): Unit = {
     val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[(String, String)] else null
     segRef map (seg => seg -> run(seg, data, rawHl7)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
       case Success(tranCompleted) =>
@@ -77,11 +79,11 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                   debug(s"Segment Skipped :: $msg")
                 case `filteredStr` =>
                   updateMetrics(segment.seg, FILTERED)
-                  // This Check Added After Discussing this Log is not Required as of now So commenting.
-                 /*  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
-                  sizeCheck(msg, segment.seg)
-                  tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
-                  debug(s"Segment Filtered :: $msg") */
+                // This Check Added After Discussing this Log is not Required as of now So commenting.
+                /*  val msg = rejectMsg(hl7, segment.seg, meta, filteredStr, null)
+                 sizeCheck(msg, segment.seg)
+                 tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
+                 debug(s"Segment Filtered :: $msg") */
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
@@ -90,7 +92,14 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                     }
                     if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
                       tlmAckMessages += Tuple2(rec, segment.headerKey)
-                    } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route), s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
+                      updateMetrics(segment.seg, PROCESSED)
+                    } else if (segment.dest.get.system == Destinations.HBASE) {
+                      if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, segment.dest.get.offHeapConfig.get.key, rec),
+                        s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
+                        updateMetrics(segment.seg, PROCESSED)
+                      }
+                    } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route),
+                      s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                       if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                         s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
                         updateMetrics(segment.seg, PROCESSED)
@@ -169,8 +178,9 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
 
   override def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
-                              adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None)(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
-    runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO)(data, rawHl7, meta): Unit
+                              adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
+                              hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
+    runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO, hBaseIO)(data, rawHl7, meta): Unit
 
 
   override def metricsRegistry: TrieMap[String, Long] = metrics

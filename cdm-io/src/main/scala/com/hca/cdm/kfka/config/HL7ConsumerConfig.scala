@@ -1,11 +1,11 @@
-package com.hca.cdm.kafka.config
+package com.hca.cdm.kfka.config
 
 import java.util.{Properties => prop}
 
 import com.hca.cdm.exception.CDMKafkaException
 import org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG
 import com.hca.cdm.io.IOConstants._
-import com.hca.cdm.{EMPTYSTR, asFunc, lookUpProp, tryAndReturnDefaultValue}
+import com.hca.cdm.{EMPTYSTR, asFunc, lookUpProp, tryAndReturnDefaultValue0}
 import org.apache.kafka.clients.consumer.ConsumerConfig._
 
 /**
@@ -37,7 +37,7 @@ object HL7ConsumerConfig {
     prop.put(CLIENT_ID_CONFIG, defaultClientId + jobConsumer)
     prop.put(RECONNECT_BACKOFF_MS_CONFIG, reconnectBackoff)
     prop.put("fetch.message.max.bytes", fetchBytes)
-    if (tryAndReturnDefaultValue(asFunc(lookUpProp("kafka.security.protocol")), EMPTYSTR) != EMPTYSTR) {
+    if (tryAndReturnDefaultValue0(lookUpProp("kafka.security.protocol"), EMPTYSTR) != EMPTYSTR) {
       lookUpProp("kafka.security.protocol") match {
         case "SSL" =>
           prop.put(SECURITY_PROTOCOL_CONFIG, lookUpProp("kafka.security.protocol"))
