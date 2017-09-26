@@ -154,7 +154,7 @@ object PsgAcoAdtJobUtils extends Logg {
         val splitSeg = seg.split(delimiter)
         if (splitSeg(index).nonEmpty) {
           splitSeg.update(index, "")
-          splitSeg.mkString(delimiter)
+          splitSeg.mkString("""|""")
         } else {
           info(s"Segment contains no value at index: $index")
           seg

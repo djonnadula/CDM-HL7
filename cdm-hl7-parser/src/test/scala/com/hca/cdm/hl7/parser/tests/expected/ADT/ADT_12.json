@@ -12,7 +12,9 @@
     "sending_application": "MT6_FRNK",
     "sending_facility": "FRNK",
     "receiving_application": "DBM",
+    "receiving_facility": null,
     "date_time_of_message": "20151221132800-0600",
+    "security": null,
     "message_type": {
       "message_code": "ADT",
       "trigger_event": "A44"
@@ -20,35 +22,51 @@
     "message_control_id": "MT6_FRNK_ADT_1129645.",
     "processing_id": "D",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": "KYB"
   },
   "0002.EVN": {
     "event_type_code": "A44",
     "recorded_date_time": "201512211328",
+    "date_time_planned_event": null,
+    "event_reason_code": null,
     "operator_id": "FOC BKG",
     "event_occured": "201512111111"
   },
   "0003.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": [
       {
         "id_num": "K000002378",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
         "id_type_code": "MR",
         "assigning_facility": "FRNK"
       },
       {
         "id_num": "206-11-2015",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
         "id_type_code": "SS",
         "assigning_facility": "FRNK"
       },
       {
         "id_num": "A00002349",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
         "id_type_code": "HUB",
         "assigning_facility": "FRNK"
       }
     ],
     "alternate_patient_id": {
       "id_num": "A0-B20151103134433868",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": null,
       "id_type_code": "URN",
       "assigning_facility": "FRNK"
     },
@@ -56,36 +74,55 @@
       {
         "family_name": "Osborn",
         "given_name": "Harry",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
         "name_type_code": "L"
       },
       {
         "family_name": "Goblin",
         "given_name": "Green",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
         "name_type_code": "M"
       }
     ],
     "mother_maiden_name": "Osborn,Emily",
     "date_time_of_birth": "19411029",
     "administrative_sex": "M",
+    "patient_alias": null,
     "race": "W",
     "patient_address": {
       "street_address": "234 MARVEL",
+      "other_designation": null,
       "city": "FRANKLIN",
       "state_or_province": "TN",
       "zip_or_postal_code": "37064",
+      "country": null,
       "address_type": "P",
+      "other_geographic_designation": null,
       "county_parish_code": "TN187"
     },
+    "county_code": null,
     "phone_num_home": "(615)555-6309",
     "phone_num_business": "(502)695-0070",
+    "primary_language": null,
     "marital_status": "S",
     "religion": "NON",
     "patient_account_num": "FR0000121392",
     "ssn_num_patient": "302-21-2015"
   },
   "0004.MRG": {
+    "prior_patient_id_list": null,
+    "prior_alternate_patient_id": null,
     "prior_patient_account_num": {
       "id_num": "K000002505",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": null,
       "id_type_code": "MR"
     }
   },
@@ -98,50 +135,152 @@
       "bed": "A"
     },
     "admission_type": "EL",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": {
       "person_id": "DR.ATND01",
       "family_name": "Attending01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     },
     "referring_doctor": {
       "person_id": "DR.OTH01",
       "family_name": "Other01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     },
+    "consulting_doctor": null,
     "hospital_service": "GP",
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
     "admit_source": "CR",
+    "ambulatory_status": null,
+    "vip_indicator": null,
     "admitting_doctor": {
       "person_id": "DR.ADM01",
       "family_name": "Admitting01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     },
     "patient_type": "IN",
+    "visit_num": null,
     "financial_class": "05",
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
     "discharge_disposition": "HOM",
+    "discharged_to_location": null,
+    "diet_type": null,
     "servicing_facility": "FRNK",
+    "bed_status": null,
     "account_status": "DIS",
+    "pending_location": null,
+    "prior_temporary_location": null,
     "admit_date_time": "201512111111",
     "discharge_date_time": "201512111634",
+    "current_patient_balance": null,
+    "total_charges": null,
+    "total_adjustments": null,
+    "total_payments": null,
+    "alternate_visit_id": null,
+    "visit_indicator": null,
     "primary_care_doctor": {
       "person_id": "DR.FAM01",
       "last_name": "Family01",
       "first_name": "Provider",
+      "middle_name": null,
+      "suffix": null,
+      "person_prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assgn_authr": null,
+      "name_type_code": null,
+      "identifier_check_digit": null,
+      "check_digit_scheme": null,
       "identifier_type_code": "XX"
     }
   },
   "0006.PV2": {
+    "prior_pending_location": null,
     "accommodation_code": {
       "id": "P",
       "text": "Private Room"
     },
     "admit_reason": "LACERATION OF RIGHT HAND",
+    "transfer_reason": null,
+    "patient_valuables": null,
+    "patient_valuables_location": null,
+    "visit_user_code": null,
+    "expected_admit_date_time": null,
+    "expected_discharge_date_time": null,
     "estimated_length_of_inpatient_stay": "1",
     "actual_length_of_inpatient_stay": "1",
+    "visit_description": null,
+    "referral_source_code": null,
+    "previous_service_date": null,
+    "employment_illness_related_indicator": null,
+    "purge_status_code": null,
+    "purge_status_date": null,
+    "special_program_code": null,
+    "retention_indicator": null,
+    "expected_num_of_insurance_plans": null,
+    "visit_publicity_code": null,
+    "visit_protection_indicator": null,
+    "clinic_organization_name": null,
+    "patient_status_code": null,
     "visit_priority_code": "EL",
+    "previous_treatment_date": null,
+    "expected_discharge_disposition": null,
+    "signature_on_file_date": null,
+    "first_similar_illness_date": null,
+    "patient_charge_adjustment_code": null,
+    "recurring_service_code": null,
+    "billing_media_code": null,
+    "expected_surgery_date_and_time": null,
+    "military_partnership_code": null,
+    "military_non_availability_code": null,
     "newborn_baby_indicator": "N",
+    "baby_detained_indicator": null,
     "mode_of_arrival_code": {
       "id": "AMB",
       "text": "Ambulance"
@@ -155,6 +294,15 @@
       "person_id": "DR.ATND01",
       "family_name": "Attending01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     }
   },
@@ -166,6 +314,15 @@
       "person_id": "DR.OTH01",
       "family_name": "Other01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     }
   },
@@ -177,6 +334,15 @@
       "person_id": "DR.ADM01",
       "family_name": "Admitting01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     }
   },
@@ -188,6 +354,15 @@
       "person_id": "DR.FAM01",
       "family_name": "Family01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     }
   },
@@ -199,6 +374,15 @@
       "person_id": "DR.PCP01",
       "family_name": "PrimaryCare01",
       "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "id_type_code": "XX"
     }
   },
@@ -220,8 +404,13 @@
       "text": "WEIGHT",
       "name_of_coding_system": "CPT4"
     },
+    "obsv_sub_id": null,
     "obsv_value": "77.110703",
     "units": "kg",
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0014.OBX": {
@@ -232,8 +421,13 @@
       "text": "HEIGHT",
       "name_of_coding_system": "CPT4"
     },
+    "obsv_sub_id": null,
     "obsv_value": "177.8",
     "units": "cm",
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0015.OBX": {
@@ -244,7 +438,13 @@
       "text": "OB ED?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0016.OBX": {
@@ -255,10 +455,16 @@
       "text": "Mode of Transportation",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "W",
       "text": "Wheelchair"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0017.OBX": {
@@ -269,7 +475,13 @@
       "text": "Deposit Req?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0018.OBX": {
@@ -280,6 +492,13 @@
       "text": "Est Amt Due",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0019.OBX": {
@@ -290,6 +509,13 @@
       "text": "Amt Rec",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0020.OBX": {
@@ -300,6 +526,13 @@
       "text": "Collected by",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0021.OBX": {
@@ -310,6 +543,13 @@
       "text": "Pt Advised of Financial Responsibility   Resources, Refer to",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0022.OBX": {
@@ -320,6 +560,13 @@
       "text": "Discharge Financial Status",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0023.OBX": {
@@ -330,6 +577,13 @@
       "text": "Amt Req",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0024.OBX": {
@@ -340,7 +594,13 @@
       "text": "Electronic Patient Statements",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0025.OBX": {
@@ -351,7 +611,13 @@
       "text": "Use Guarantor Cell Phone for Text/SMS Messaging",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0026.OBX": {
@@ -362,10 +628,16 @@
       "text": "Patient Confidential Address/Phone or Guar Temp Address?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "T",
       "text": "Guarantor Temp Address"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0027.OBX": {
@@ -376,7 +648,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1 Guarantor Address",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0028.OBX": {
@@ -387,6 +665,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0029.OBX": {
@@ -397,7 +682,13 @@
       "text": "City",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Nashville",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0030.OBX": {
@@ -408,7 +699,13 @@
       "text": "State",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "TN",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0031.OBX": {
@@ -419,7 +716,13 @@
       "text": "Zip",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "37203",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0032.OBX": {
@@ -430,7 +733,13 @@
       "text": "County",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "TN037",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0033.OBX": {
@@ -441,7 +750,13 @@
       "text": "Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "US",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0034.OBX": {
@@ -452,7 +767,13 @@
       "text": "Phone",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "615-555-6311",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0035.OBX": {
@@ -463,7 +784,13 @@
       "text": "Temporary Address Until:",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20151211",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0036.OBX": {
@@ -474,6 +801,13 @@
       "text": "Comment",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0037.OBX": {
@@ -484,6 +818,13 @@
       "text": "Preferred Language",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0038.OBX": {
@@ -494,6 +835,13 @@
       "text": "Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0039.OBX": {
@@ -504,7 +852,13 @@
       "text": "Does Guarantor Have Additional Employment?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0040.OBX": {
@@ -515,7 +869,13 @@
       "text": "Name:",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "BLUEGRCA",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0041.OBX": {
@@ -526,7 +886,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "214 E COURT ST",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0042.OBX": {
@@ -537,6 +903,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0043.OBX": {
@@ -547,7 +920,13 @@
       "text": "City",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "LAWRENCEBURG",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0044.OBX": {
@@ -558,7 +937,13 @@
       "text": "State",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "KY",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0045.OBX": {
@@ -569,7 +954,13 @@
       "text": "Zip",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "40342",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0046.OBX": {
@@ -580,7 +971,13 @@
       "text": "Work Phone",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "(502)839-7102",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0047.OBX": {
@@ -591,7 +988,13 @@
       "text": "Guar Occup",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "TECh",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0048.OBX": {
@@ -602,7 +1005,13 @@
       "text": "Emp Status",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "F",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0049.OBX": {
@@ -613,7 +1022,13 @@
       "text": "Description",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "BLUEGRASS COMMUNITY ACTI",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0050.OBX": {
@@ -624,7 +1039,13 @@
       "text": "Do You Wish to Identify Another Guarantor?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0051.OBX": {
@@ -635,6 +1056,13 @@
       "text": "Name:",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0052.OBX": {
@@ -645,6 +1073,13 @@
       "text": "Birthdate",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0053.OBX": {
@@ -655,6 +1090,13 @@
       "text": "Sex",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0054.OBX": {
@@ -665,6 +1107,13 @@
       "text": "Social Security #",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0055.OBX": {
@@ -675,6 +1124,13 @@
       "text": "Relationship to Patient",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0056.OBX": {
@@ -685,6 +1141,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0057.OBX": {
@@ -695,6 +1158,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0058.OBX": {
@@ -705,6 +1175,13 @@
       "text": "City",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0059.OBX": {
@@ -715,6 +1192,13 @@
       "text": "State",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0060.OBX": {
@@ -725,6 +1209,13 @@
       "text": "Zip",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0061.OBX": {
@@ -735,6 +1226,13 @@
       "text": "County",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0062.OBX": {
@@ -745,6 +1243,13 @@
       "text": "Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0063.OBX": {
@@ -755,6 +1260,13 @@
       "text": "Home Phone",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0064.OBX": {
@@ -765,6 +1277,13 @@
       "text": "Name:",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0065.OBX": {
@@ -775,6 +1294,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0066.OBX": {
@@ -785,6 +1311,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0067.OBX": {
@@ -795,6 +1328,13 @@
       "text": "City",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0068.OBX": {
@@ -805,6 +1345,13 @@
       "text": "State",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0069.OBX": {
@@ -815,6 +1362,13 @@
       "text": "Zip",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0070.OBX": {
@@ -825,6 +1379,13 @@
       "text": "Work Phone",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0071.OBX": {
@@ -835,6 +1396,13 @@
       "text": "Other Guarantor Occupation",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0072.OBX": {
@@ -845,6 +1413,13 @@
       "text": "Emp Status",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0073.OBX": {
@@ -855,6 +1430,13 @@
       "text": "Description",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0074.OBX": {
@@ -865,7 +1447,13 @@
       "text": "Does the Patient Have Temporary Address?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0075.OBX": {
@@ -876,7 +1464,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1 Temporary Address",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0076.OBX": {
@@ -887,6 +1481,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0077.OBX": {
@@ -897,7 +1498,13 @@
       "text": "City",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "City",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0078.OBX": {
@@ -908,7 +1515,13 @@
       "text": "State",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "TN",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0079.OBX": {
@@ -919,7 +1532,13 @@
       "text": "Zip",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "37203",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0080.OBX": {
@@ -930,7 +1549,13 @@
       "text": "Home PH",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "615-555-6309",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0081.OBX": {
@@ -941,7 +1566,13 @@
       "text": "County",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "TN037",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0082.OBX": {
@@ -952,7 +1583,13 @@
       "text": "Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "US",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0083.OBX": {
@@ -963,7 +1600,13 @@
       "text": "Temporary Address Until?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20151211",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0084.OBX": {
@@ -974,6 +1617,13 @@
       "text": "Comment",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0085.OBX": {
@@ -984,7 +1634,13 @@
       "text": "Does Patient Have Additional Employment?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0086.OBX": {
@@ -995,7 +1651,13 @@
       "text": "Name:",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "ARTS",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0087.OBX": {
@@ -1006,7 +1668,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "411 HOLMES STREET",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0088.OBX": {
@@ -1017,6 +1685,13 @@
       "text": "Address",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0089.OBX": {
@@ -1027,7 +1702,13 @@
       "text": "City",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "FRANKFORT",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0090.OBX": {
@@ -1038,7 +1719,13 @@
       "text": "State",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "KY",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0091.OBX": {
@@ -1049,7 +1736,13 @@
       "text": "Zip",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "40601",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0092.OBX": {
@@ -1060,7 +1753,13 @@
       "text": "Work Phone",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "(502)223-5754",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0093.OBX": {
@@ -1071,7 +1770,13 @@
       "text": "Occupation",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Tech",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0094.OBX": {
@@ -1082,7 +1787,13 @@
       "text": "Emp Status",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "F",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0095.OBX": {
@@ -1093,6 +1804,13 @@
       "text": "Preferred Language",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0096.OBX": {
@@ -1103,6 +1821,13 @@
       "text": "Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0097.OBX": {
@@ -1113,7 +1838,13 @@
       "text": "Description",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "ARTS ELECTRIC INC FRANKF",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0098.OBX": {
@@ -1124,7 +1855,13 @@
       "text": "Care begin date",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20151211",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0099.OBX": {
@@ -1135,10 +1872,16 @@
       "text": "Ethnicity",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "NOTHISPLAT",
       "text": "Not Hispanic or Latino"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0100.OBX": {
@@ -1149,7 +1892,13 @@
       "text": "Additional Race",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "W",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0101.OBX": {
@@ -1160,7 +1909,13 @@
       "text": "Do You Have an Advance Directive?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0102.OBX": {
@@ -1171,6 +1926,13 @@
       "text": "If No, do You Want Information?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0103.OBX": {
@@ -1181,7 +1943,13 @@
       "text": "If Yes, Have You Provided the Hospital with a Current Copy?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0104.OBX": {
@@ -1192,7 +1960,13 @@
       "text": "Do You Have a Durable Power of Attorney for Health Care?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0105.OBX": {
@@ -1203,7 +1977,13 @@
       "text": "If No, do You Want Information?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0106.OBX": {
@@ -1214,6 +1994,13 @@
       "text": "If Yes, Have You Provided the Hospital with a Current Copy?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0107.OBX": {
@@ -1224,6 +2011,13 @@
       "text": "Are you currently participating in a research study",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0108.OBX": {
@@ -1234,7 +2028,13 @@
       "text": "shared with your PCP and Referring Physician?",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0109.OBX": {
@@ -1245,10 +2045,16 @@
       "text": "have Ebola",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "NO",
       "text": "No"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0110.OBX": {
@@ -1259,6 +2065,13 @@
       "text": "Preferred name",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0111.OBX": {
@@ -1269,7 +2082,13 @@
       "text": "Immediate religious, spiritual, or cultural considerations",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "NONE",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0112.OBX": {
@@ -1280,7 +2099,13 @@
       "text": "Hearing impaired",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0113.OBX": {
@@ -1291,7 +2116,13 @@
       "text": "Comorbid factors:",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0114.OBX": {
@@ -1302,7 +2133,13 @@
       "text": "Weight",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "2720",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0115.OBX": {
@@ -1313,10 +2150,16 @@
       "text": "Weight source",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "STATED",
       "text": "Stated/Reported"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0116.OBX": {
@@ -1327,7 +2170,13 @@
       "text": "Height",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "70",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0117.OBX": {
@@ -1338,10 +2187,16 @@
       "text": "Height source",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "STATED",
       "text": "Stated/Reported"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0118.OBX": {
@@ -1352,7 +2207,13 @@
       "text": "Body mass index",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "24.4",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0119.OBX": {
@@ -1363,7 +2224,13 @@
       "text": "Body surface area",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1.96",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0120.OBX": {
@@ -1374,7 +2241,13 @@
       "text": "Heart disease",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0121.OBX": {
@@ -1385,7 +2258,13 @@
       "text": "Stroke",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0122.OBX": {
@@ -1396,7 +2275,13 @@
       "text": "Colon cancer",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0123.OBX": {
@@ -1407,7 +2292,13 @@
       "text": "Breast cancer",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0124.OBX": {
@@ -1418,7 +2309,13 @@
       "text": "Diabetes",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0125.OBX": {
@@ -1429,7 +2326,13 @@
       "text": "Temperature",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "98.6",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0126.OBX": {
@@ -1440,10 +2343,16 @@
       "text": "Temperature source",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "O",
       "text": "Oral"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0127.OBX": {
@@ -1454,7 +2363,13 @@
       "text": "Pulse",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "80",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0128.OBX": {
@@ -1465,7 +2380,13 @@
       "text": "Respiratory rate",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "18",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0129.OBX": {
@@ -1476,10 +2397,16 @@
       "text": "Respiratory source",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "O",
       "text": "Observed"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0130.OBX": {
@@ -1490,7 +2417,13 @@
       "text": "Blood pressure",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "120/80",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0131.OBX": {
@@ -1501,10 +2434,16 @@
       "text": "Blood pressure location",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "AR",
       "text": "Right arm"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0132.OBX": {
@@ -1515,10 +2454,16 @@
       "text": "Blood pressure source",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "MANUAL",
       "text": "Manual cuff"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0133.OBX": {
@@ -1529,7 +2474,13 @@
       "text": "Bedside pulse oximetry/SpO2",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "99",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0134.OBX": {
@@ -1540,7 +2491,13 @@
       "text": "Smokeless tobacco used",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0135.OBX": {
@@ -1551,6 +2508,13 @@
       "text": "Tobacco cessation aids in current use",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0136.OBX": {
@@ -1561,7 +2525,13 @@
       "text": "Patient reports prior history of TB or positive TB skin test",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0137.OBX": {
@@ -1572,7 +2542,13 @@
       "text": "Patient reports close contact with a person who has TB",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0138.OBX": {
@@ -1583,7 +2559,13 @@
       "text": "Close contact with any person having flu-like illness",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0139.OBX": {
@@ -1594,7 +2576,13 @@
       "text": "TB Point of entry screen",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "NEGATIVE",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0140.OBX": {
@@ -1605,7 +2593,13 @@
       "text": "Contagious respiratory infection point of entry screen",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "NEGATIVE",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0141.OBX": {
@@ -1616,7 +2610,13 @@
       "text": "Fever greater than 37.8 C (100.4 F)",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0142.OBX": {
@@ -1627,7 +2627,13 @@
       "text": "Cough (not related to allergy or COPD)",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0143.OBX": {
@@ -1638,7 +2644,13 @@
       "text": "Sore throat",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0144.OBX": {
@@ -1649,7 +2661,13 @@
       "text": "Night sweats",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0145.OBX": {
@@ -1660,7 +2678,13 @@
       "text": "Unexplained weight loss",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0146.OBX": {
@@ -1671,7 +2695,13 @@
       "text": "Fatigue (Tiredness)",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0147.OBX": {
@@ -1682,7 +2712,13 @@
       "text": "Body aches",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0148.OBX": {
@@ -1693,7 +2729,13 @@
       "text": "Rash",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0149.OBX": {
@@ -1704,7 +2746,13 @@
       "text": "Nasal congestion (not related to allergies/sinus infection)",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0150.OBX": {
@@ -1715,7 +2763,13 @@
       "text": "Travel outside of the US in the past 3 weeks",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0151.OBX": {
@@ -1726,7 +2780,13 @@
       "text": "Is patient present",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0152.OBX": {
@@ -1737,7 +2797,13 @@
       "text": "Able to perform TB/respiratory point of entry screen",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0153.OBX": {
@@ -1748,6 +2814,13 @@
       "text": "Reason unable to perform screen",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0154.OBX": {
@@ -1758,10 +2831,16 @@
       "text": "Resided in or traveled to a W African Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "NO",
       "text": "None"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0155.OBX": {
@@ -1772,10 +2851,16 @@
       "text": "Had contact with anyone who has been to a W African Country",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "NO",
       "text": "No"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0156.OBX": {
@@ -1786,7 +2871,13 @@
       "text": "Fever greater than 37.8 C (100.4 F)",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0157.OBX": {
@@ -1797,7 +2888,13 @@
       "text": "Unable to Assess",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0158.OBX": {
@@ -1808,7 +2905,13 @@
       "text": "Patient or caregiver refuses to receive PNEUMOCOCCAL vaccine",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0159.OBX": {
@@ -1819,10 +2922,16 @@
       "text": "Influenza vaccination status",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "CANDIDATE",
       "text": "Candidate"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0160.OBX": {
@@ -1833,10 +2942,16 @@
       "text": "Pneumococcal vaccination status",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": {
       "id": "CANDIDATE",
       "text": "Candidate"
     },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0161.OBX": {
@@ -1847,16 +2962,25 @@
       "text": "Physician refusing to have patient receive vaccines",
       "name_of_coding_system": "ADM"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F"
   },
   "0162.DG1": {
     "set_id": "1",
+    "diagnosis_coding_method": null,
     "diagnosis_code": {
       "id": "S61.411A",
       "text": "LACERATION WITHOUT FOREIGN BODY OF RIGHT HAND, INIT ENCNTR",
       "name_of_coding_system": "I10"
     },
+    "diagnosis_description": null,
+    "diagnosis_date_time": null,
     "diagnosis_type": "Other"
   },
   "0163.DRG": {

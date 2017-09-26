@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "623541412341",
+    "security": null,
     "message_type": {
       "message_code": "PPR",
       "trigger_event": "PC1"
@@ -21,6 +22,7 @@
     "message_control_id": "IP_COQ1A_PPR_EPSQ1A.1243124.346324521",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
@@ -30,8 +32,11 @@
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "YT1351243",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCQA1A",
       "id_type_code": "MRN"
     },
@@ -41,6 +46,7 @@
       "given_name": "ROCKET",
       "second_and_further_given_names_or_initials_thereof": "R"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19387565",
     "administrative_sex": "F"
   },
@@ -57,13 +63,21 @@
       "name_of_coding_system": "SNOMED"
     },
     "problem_instance_id": "AS1541243-3",
+    "episode_of_care_id": null,
+    "problem_list_priority": null,
     "problem_established_date_time": {
       "date_time": "198871579849",
       "person_id": "7PQOIJQEWR687",
       "provider_id": "DRBRI"
     },
+    "anticipated_problem_resolution_date_time": null,
+    "actual_problem_resolution_date_time": null,
     "problem_classification": "Resolved",
+    "problem_management_discipline": null,
     "problem_persistence": "Resolved",
+    "problem_confirmation_status": null,
+    "problem_lifecycle_status": null,
+    "problem_lifecycle_status_date_time": null,
     "problem_date_of_onset": "20161031"
   }
 }

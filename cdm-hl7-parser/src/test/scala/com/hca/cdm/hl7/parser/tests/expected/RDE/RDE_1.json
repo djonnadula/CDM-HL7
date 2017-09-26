@@ -9,8 +9,12 @@
   "0001.MSH": {
     "field_separator": "|",
     "encoding_characters": "^~\\&",
+    "sending_application": null,
     "sending_facility": "COCYS",
+    "receiving_application": null,
+    "receiving_facility": null,
     "date_time_of_message": "201504870709",
+    "security": null,
     "message_type": {
       "message_code": "RDE",
       "trigger_event": "O01"
@@ -20,21 +24,43 @@
     "version_id": "2.2"
   },
   "0002.PID": {
+    "set_id": null,
+    "lss_encounter_num": null,
     "medical_record_num": "A1251254",
     "medical_record_urn": "G125123",
     "patient_name": {
       "family_name": "BERNATE",
       "given_name": "RACHEL",
-      "second_and_further_given_names_or_initials_thereof": "WIDDOWSON"
+      "second_and_further_given_names_or_initials_thereof": "WIDDOWSON",
+      "suffix": null,
+      "prefix": null,
+      "degree": null
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19750606",
+    "administrative_sex": null,
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
     "patient_account_num": "DSG1251325214"
   },
   "0003.PV1": {
     "set_id": "O",
+    "patient_class": null,
     "assigned_patient_location": {
-      "point_of_care": "K.SD"
+      "point_of_care": "K.SD",
+      "room": null,
+      "bed": null
     },
+    "admission_type": null,
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": {
       "person_id": "BAREDS",
       "family_name": "Oreilyy",
@@ -45,28 +71,50 @@
   "0004.ORC": {
     "order_control": "NW",
     "placer_order_num": "11652761",
+    "filler_order_num": null,
+    "placer_group_num": null,
+    "order_status": null,
+    "response_flag": null,
     "quantity_timing": {
+      "quantity": null,
       "interval": ".Q13H20M",
+      "duration": null,
       "start_date_time": "201504870707",
       "end_date_time": "201504872359",
       "priority": "SCH",
-      "condition": "0"
+      "condition": "0",
+      "text": null
     },
+    "parent_order": null,
+    "date_time_of_transaction": null,
+    "entered_by": null,
+    "verified_by": null,
     "ordering_provider": {
       "person_id": "BAREDS",
       "family_name": "Oreilyy",
       "given_name": "Barry",
       "second_and_further_given_names_or_initials_thereof": "L",
+      "suffix": null,
+      "prefix": null,
       "degree": "DO"
     }
   },
   "0005.RXE": {
+    "quantity_timing": null,
     "give_code": {
       "id": "LACTIL1005",
       "text": "RINGERS SOLUTION,LACTATED 1,000 ML BOT"
     },
+    "give_amt_minimum": null,
+    "give_amt_maximum": null,
     "give_units": "ML",
+    "give_dosage_form": null,
     "provider_administration_instructions": "** PACU ORDER **",
+    "deliver_to_location": null,
+    "substitution_status": null,
+    "dispense_amt": null,
+    "dispense_units": null,
+    "num_of_refills": null,
     "ordering_provider_dea_num": "BS9330844"
   },
   "0006.RXR": {
@@ -74,6 +122,8 @@
       "id": "IV",
       "text": "INTRAVENOUS"
     },
+    "administration_site": null,
+    "administration_device": null,
     "administration_method": {
       "id": "IDUR",
       "text": "DURATION DEPENDENT IV'S"

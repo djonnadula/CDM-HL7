@@ -22,17 +22,23 @@
     "message_control_id": "EPIC_AKAR_VXU_123867",
     "processing_id": "P",
     "version_id": "2.3.1",
+    "sequence_num": null,
     "continuation_pointer": "Epic_Mountain_PRD"
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "1001437157",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "EPIC",
       "id_type_code": "MRN"
     },
     "alternate_patient_id": {
       "id_num": "L000238869",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "AKARP",
       "id_type_code": "AKARP"
     },
@@ -41,22 +47,26 @@
       "given_name": "SHABOOYA",
       "second_and_further_given_names_or_initials_thereof": "MARITUQE"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19540222",
     "administrative_sex": "M",
     "patient_alias": {
       "family_name": "MCDONAL",
       "given_name": "SHABOOYA",
-      "second_and_further_given_names_or_initials_thereof": "C"
+      "second_and_further_given_names_or_initials_thereof": "C",
+      "suffix": null
     },
     "race": "2106-3",
     "patient_address": {
       "street_address": "6300 HABICHT CT",
+      "other_designation": null,
       "city": "ANCHORAGE",
       "state_or_province": "AK",
       "zip_or_postal_code": "99504",
       "country": "USA",
       "address_type": "P"
     },
+    "county_code": null,
     "phone_num_home": [
       {
         "telephone_num": "(999)999-9999",
@@ -77,13 +87,27 @@
     "primary_language": "EN",
     "marital_status": "M",
     "religion": "PRO",
+    "patient_account_num": null,
     "ssn_num_patient": "999-99-9999",
+    "driver_license_num": null,
+    "mother_name": null,
     "ethnic_group": "N",
+    "birth_place": null,
+    "multiple_birth_indicator": null,
+    "birth_order": null,
+    "citizenship": null,
+    "veterans_military_status": null,
+    "nationality": null,
+    "patient_death_date_and_time": null,
     "patient_death_indicator": "N"
   },
   "0003.PV1": {
+    "set_id": null,
     "patient_class": "R",
     "assigned_patient_location": {
+      "point_of_care": null,
+      "room": null,
+      "bed": null,
       "facility": "AKAR"
     }
   },
@@ -94,41 +118,91 @@
       "namespace_id": "EPC"
     },
     "filler_order_num": "1787589",
+    "placer_group_num": null,
+    "order_status": null,
+    "response_flag": null,
     "quantity_timing": {
-      "start_date_time": "20170516231500"
+      "quantity": null,
+      "interval": null,
+      "duration": null,
+      "start_date_time": "20170516231500",
+      "end_date_time": null,
+      "priority": null
     },
+    "parent_order": null,
     "date_time_of_transaction": "20170516230200",
     "entered_by": {
       "person_id": "LNO8939",
       "family_name": "CHAN",
-      "given_name": "JACK"
+      "given_name": "JACK",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null
     },
+    "verified_by": null,
     "ordering_provider": [
       {
         "person_id": "LNO8939",
         "family_name": "CHAN",
         "given_name": "JACK",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "source_table": null,
         "assigning_authority": "THREEFOUR",
+        "name_type_code": null,
+        "id_check_digit": null,
+        "check_digit_scheme": null,
         "id_type_code": "THREEFOUR"
       },
       {
         "person_id": "1376741256",
         "family_name": "CHAN",
         "given_name": "JACK",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "source_table": null,
         "assigning_authority": "NPI",
+        "name_type_code": null,
+        "id_check_digit": null,
+        "check_digit_scheme": null,
         "id_type_code": "NPI"
       }
     ],
     "enterer_location": {
-      "facility": "AKAR"
+      "point_of_care": null,
+      "room": null,
+      "bed": null,
+      "facility": "AKAR",
+      "location_status": null,
+      "person_location_type": null,
+      "building": null,
+      "floor": null,
+      "location_description": null
     },
     "call_back_phone_num": "(907)258-9272",
+    "order_effective_date_time": null,
+    "order_control_code_reason": null,
+    "entering_organization": null,
     "entering_device": {
       "id": "AKARHED2DS75",
       "text": "AKARHED2DS75",
+      "name_of_coding_system": null,
       "alternate_id": "40001001015",
       "alternate_text": "AKAR EMERGENCY"
     },
+    "action_by": null,
+    "advanced_beneficiary_notice_code": null,
+    "ordering_facility_name": null,
+    "ordering_facility_address": null,
+    "ordering_facility_phone_num": null,
+    "ordering_provider_address": null,
+    "order_status_modifier": null,
+    "advanced_beneficiary_notice_override_reason": null,
+    "filler_expected_availability_date_time": null,
+    "confidentiality_code": null,
     "order_type": "I"
   },
   "0005.RXA": {
@@ -142,6 +216,8 @@
       "name_of_coding_system": "CVX"
     },
     "administered_amt": "999",
+    "administered_units": null,
+    "administered_dosage_form": null,
     "administration_notes": [
       {
         "id": "00",
@@ -149,6 +225,7 @@
         "name_of_coding_system": "NIP001"
       },
       {
+        "id": null,
         "text": "VIS date: 2/24/2015"
       }
     ],
@@ -156,13 +233,28 @@
       "person_id": "GPI8476",
       "family_name": "KEOGH",
       "given_name": "KASEY",
-      "second_and_further_given_names_or_initials_thereof": "L"
+      "second_and_further_given_names_or_initials_thereof": "L",
+      "suffix": null
     },
     "administered_at_location": {
-      "facility": "AKAR"
+      "point_of_care": null,
+      "room": null,
+      "bed": null,
+      "facility": "AKAR",
+      "status": null,
+      "person_loc_type": null,
+      "building": null,
+      "loc_floor": null,
+      "street_address1": null
     },
+    "administered_per_time_unit": null,
+    "administered_strength": null,
+    "administered_strength_units": null,
     "substance_lot_num": "U5604AA",
+    "substance_expiration_date": null,
     "substance_manufacturer_name": "PMC",
+    "substance_treatment_refusal_reason": null,
+    "indication": null,
     "completion_status": "CP",
     "action_code": "A",
     "system_entry_date_time": "20170516230912"
@@ -181,7 +273,14 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": "20150224",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F",
+    "effective_date_of_reference_range": null,
+    "user_defined_access_checks": null,
     "date_time_of_the_obsv": "20170516"
   },
   "0008.OBX": {
@@ -194,7 +293,14 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": "20170516",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "F",
+    "effective_date_of_reference_range": null,
+    "user_defined_access_checks": null,
     "date_time_of_the_obsv": "20170516"
   }
 }

@@ -169,7 +169,7 @@ object PsgAcoAdtJob extends Logg with App {
                       // PID SSN removal
                       val pidSegment = segment(splitted, PID)
                       val ssn = getField(pidSegment, "\\|", 19)
-                      val newPid = removeField(pidSegment, "|", 19)
+                      val newPid = removeField(pidSegment, "\\|", 19)
                       debug(s"newPid: $newPid")
                       splitted.update(splitted.indexWhere(segment => segment.startsWith(PID)), newPid)
 
