@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "201610261830",
+    "security": null,
     "message_type": {
       "message_code": "ORU",
       "trigger_event": "R01"
@@ -21,6 +22,7 @@
     "message_control_id": "IP_COQ1A_ORU_NURQA.156596.9593",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
@@ -30,8 +32,11 @@
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "J000425826",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCQA1A",
       "id_type_code": "MRN"
     },
@@ -40,8 +45,18 @@
       "family_name": "BRITTANY",
       "given_name": "PATIENTVIEW3"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19890102",
     "administrative_sex": "F",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
     "patient_account_num": "J00021032502"
   },
   "0003.PV1": {
@@ -54,16 +69,52 @@
       "facility": "COCQA1A"
     },
     "admission_type": "CO",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": "DR.Hamur",
     "referring_doctor": {
+      "person_id": null,
       "family_name": "BRITUANY",
       "given_name": "Hamur"
     },
+    "consulting_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
+    "patient_type": null,
     "visit_num": "IN",
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "bed_status": null,
+    "account_status": null,
     "pending_location": "ADM"
   },
   "0004.ORC": {
     "order_control": "NEW",
+    "placer_order_num": null,
     "filler_order_num": "J00021032502-1010101-1-20161026-1826-1"
   },
   "0005.OBR": {
@@ -73,11 +124,23 @@
     "universal_service_id": {
       "id": "1010101",
       "text": "test screens",
+      "name_of_coding_system": null,
+      "alternate_id": null,
       "alternate_text": "SEPSIS SCREENING V.D"
     },
+    "priority": null,
+    "requested_date_time": null,
     "obsv_date_time_num": "201610261826",
+    "obsv_end_date_time_num": null,
+    "collection_volume": null,
+    "collector_id": null,
+    "specimen_action_code": null,
+    "danger_code": null,
+    "relevant_clinical_information": null,
     "specimen_received_date_time": "201610261829",
+    "specimen_source": null,
     "ordering_provider": "1TSOQS9103",
+    "order_callback_phone_num": null,
     "placer_field_1": "PATIENTVIEWTEST"
   },
   "0006.OBX": {
@@ -87,7 +150,13 @@
       "id": "T59100004A",
       "text": "Dialysis cath placement date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0007.OBX": {
@@ -97,7 +166,13 @@
       "id": "T59100005A",
       "text": "Dialysis cath placement time:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1827",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0008.OBX": {
@@ -107,7 +182,13 @@
       "id": "T59100016A",
       "text": "Removal date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0009.OBX": {
@@ -117,7 +198,13 @@
       "id": "T59100017A",
       "text": "Removal time:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1827",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0010.OBX": {
@@ -127,7 +214,13 @@
       "id": "hcaVAC0004",
       "text": "Estimated influenza vaccine admin date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0011.OBX": {
@@ -137,7 +230,13 @@
       "id": "hcaVAC0022",
       "text": "Estimated pneumococcal PCV13 vaccine admin date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0012.OBX": {
@@ -147,7 +246,13 @@
       "id": "hcaVAC0023",
       "text": "Estimated pneumococcal PPSV23 vaccine admin date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0013.OBX": {
@@ -157,7 +262,13 @@
       "id": "hcaVAC0024",
       "text": "Estimated pneumococcal vaccine admin date type unknown:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0014.OBX": {
@@ -169,6 +280,11 @@
     },
     "obsv_sub_id": "1",
     "obsv_value": "Airborne:Airborne",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0015.OBX": {
@@ -178,7 +294,13 @@
       "id": "N42010500A",
       "text": "MRSA results:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "pv test on 10/25/16",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0016.OBX": {
@@ -188,7 +310,13 @@
       "id": "L36000006A",
       "text": "Intubation date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0017.OBX": {
@@ -198,7 +326,13 @@
       "id": "L36000037A",
       "text": "Extubation removal date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161026",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0018.OBX": {
@@ -208,7 +342,13 @@
       "id": "hcaMU204",
       "text": "Smoking status for patients 13 years old or older:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1:Current every day smoker",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0019.OBX": {
@@ -218,7 +358,13 @@
       "id": "K31100010A",
       "text": "Diabetes:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "History:History of",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   },
   "0020.OBX": {
@@ -228,7 +374,13 @@
       "id": "N33600013A",
       "text": "Is patient at high risk for falls:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
     "obsv_result_status": "N"
   }
 }
