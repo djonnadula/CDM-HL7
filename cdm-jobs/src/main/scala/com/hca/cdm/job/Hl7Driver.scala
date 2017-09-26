@@ -11,7 +11,7 @@ import org.apache.spark.launcher.SparkAppHandle.Listener
 import org.apache.spark.launcher.SparkAppHandle.State._
 import org.apache.spark.launcher.SparkLauncher._
 import org.apache.spark.launcher.{SparkAppHandle, SparkLauncher}
-import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA}
+import com.hca.cdm.hl7.constants.HL7Constants.{COLON, COMMA, SEMICOLUMN}
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.io.Source
@@ -125,15 +125,23 @@ object Hl7Driver extends App with Logg {
     .setConf("spark.hadoop.fs.hdfs.impl.disable.cache", lookUpProp("spark.hdfs.cache"))
     .setConf("spark.yarn.access.namenodes", lookUpProp("secure.name.nodes"))
   private lazy val extraConfig = () => lookUpProp("spark.extra.config")
-  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(COMMA, -1).foreach(conf => {
+  tryAndReturnDefaultValue(extraConfig, EMPTYSTR).split(SEMICOLUMN, -1).foreach(conf => {
     if (valid(conf)) {
       val actConf = conf.split(COLON)
-      if (valid(actConf, 2)) sparkLauncher.setConf(actConf(0), actConf(1))
+      if (valid(actConf, 2)) {
+        actConf(0) match {
+          case "--files" => sparkLauncher.addFile(new File(actConf(1)).getPath)
+          case "--jars" => sparkLauncher.addJar(new File(actConf(1)).getPath)
+          case _ => sparkLauncher.setConf(actConf(0), actConf(1))
+        }
+      }
     }
   })
   if (ENV != "PROD") {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
-      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps " +
+      s"-Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps " +
+        s"-Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
   } else {
     sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
       .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
@@ -149,13 +157,13 @@ object Hl7Driver extends App with Logg {
   while (job.getAppId == null) {
     sleep(3000)
   }
-  var check = false
-  while (!check) {
+  var appStateRunning = false
+  while (!appStateRunning) {
     job getState match {
       case UNKNOWN => debug(app + " Job State Still Unknown ... ")
       case CONNECTED => info(app + " Job Connected ... Waiting for Resource Manager to Handle ...  " + job.getAppId)
       case SUBMITTED => info(app + " Job Submitted To Resource manager ... with Job ID :: " + job.getAppId)
-      case RUNNING => check = true
+      case RUNNING => appStateRunning = true
         info(app + " Job Running ... with Job ID :: " + job.getAppId)
       case FINISHED | FAILED | KILLED =>
         error(app + " Job Something Wrong ... with Job ID :: " + job.getAppId)
@@ -185,7 +193,7 @@ object Hl7Driver extends App with Logg {
     info(s"$app Driver Shutdown Completed ")
   }))
   registerHook(sHook)
-  while (check) {
+  while (appStateRunning) {
     sleep(600000)
     debug(app + " Job with Job Id : " + job.getAppId + " Running State ... " + job.getState)
   }
@@ -267,7 +275,8 @@ object Hl7Driver extends App with Logg {
     process inheritIO()
     Try(process start) match {
       case Success(x) =>
-        if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
+        if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) error(s"${command.toUpperCase} " +
+          s"Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
         else info(s"$app Driver Script ${command.toUpperCase} successfully ${Source.fromInputStream(x.getInputStream).getLines().mkString(COMMA)}")
       case Failure(t) =>
         error(s"${command.toUpperCase} Job $app failed. Try Manually by $jobScript $command", t)

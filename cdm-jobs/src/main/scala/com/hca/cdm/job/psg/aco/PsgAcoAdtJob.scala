@@ -1,6 +1,7 @@
 package com.hca.cdm.job.psg.aco
 
 import java.lang.System.{getenv => fromEnv}
+import java.net.InetSocketAddress
 import java.util.Date
 
 import akka.actor.ActorSystem
@@ -8,12 +9,12 @@ import akka.util.ByteString
 import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.job.psg.aco.PsgAcoAdtJobUtils._
-import com.hca.cdm.kafka.config.HL7ConsumerConfig.{createConfig => consumerConf}
-import com.hca.cdm.kafka.config.HL7ProducerConfig._
+import com.hca.cdm.kfka.config.HL7ConsumerConfig.{createConfig => consumerConf}
+import com.hca.cdm.kfka.config.HL7ProducerConfig._
 import com.hca.cdm.log.Logg
+import com.hca.cdm.notification.sendMail
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
-import com.hca.cdm.tcp.AkkaTcpClient
-import com.hca.cdm.tcp.AkkaTcpClient.SendMessage
+import com.hca.cdm.tcp.ActorSupervisor
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.streaming.StreamingContext
@@ -23,8 +24,12 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 import scala.util.{Failure, Success}
 
+
 /**
-  * Created by dof7475 on 6/1/2017.
+  * PSG ACO ADT Job
+  * This job reads the HL7CDMADT Kafka topic and does some filtering on the messages
+  * If the message passes all filters, send the message to Cloverleaf via a tcp client
+  *
   */
 object PsgAcoAdtJob extends Logg with App {
 
@@ -50,47 +55,31 @@ object PsgAcoAdtJob extends Logg with App {
   private lazy val adtTypes = lookUpProp("PSGACOADT.adt.types").split(",")
   private lazy val insuranceFileLocation = new Path(lookUpProp("PSGACOADT.insurance.file.location"))
   private lazy val facFileLocation = new Path(lookUpProp("PSGACOADT.fac.file.location"))
-  private lazy val insuranceArray = PsgAcoAdtJobUtils.readFile(insuranceFileLocation, fileSystem)
-  private lazy val facArray = PsgAcoAdtJobUtils.readFile(facFileLocation, fileSystem)
+  private lazy val insArray = PsgAcoAdtJobUtils.readFileAsArray(insuranceFileLocation, fileSystem)
+  private lazy val facArray = PsgAcoAdtJobUtils.readFileAsArray(facFileLocation, fileSystem)
   private lazy val outputFile = new Path(lookUpProp("PSGACOADT.output.file.location"))
   private lazy val mqQueue = enabled(lookUpProp("mq.queueResponse"))
-  private lazy val insuranceNameMatcher = lookUpProp("PSGACOADT.insurance.name.match").split(",")
+  private lazy val insNameMatcher = lookUpProp("PSGACOADT.insurance.name.match").split(",")
   private lazy val auditTopic = lookUpProp("hl7.audit")
   private lazy val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private lazy val kafkaProducerConf = createConfig(auditTopic)
   private lazy val cloverleafAddr = lookUpProp("PSGACOADT.cloverleaf.addr")
   private lazy val cloverleafPort = lookUpProp("PSGACOADT.cloverleaf.port").toInt
-  private lazy val tcpConWaitTime = lookUpProp("PSGACOADT.tcp.conn.wait.time").toLong
-  private lazy val begin_of_message: Char = 0x0b
-  private lazy val end_of_segment: Char = 0x1c
-  private lazy val end_of_message: Char = 0x0d
-  private lazy val testMessage = "MSH|^~\\&||COCSZ|||201702072335||ADT^A08|MT_COCSZ_ADT_SZGTADM.1.32377292|P|2.1\r" +
-    "EVN|A08|201702072335|||R.SZ.GDE^ESTILLORE^GERELI^D^^^000D\r" +
-    "PID|1||D002403639|D1676444|JONES^ZAYQUAN^A^^^||19970109|M|^^^^^|B|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK||(702)999-9999|(702)999-9999|ENG|S|NON|D00115310916|\r" +
-    "NK1|1|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
-    "NK1|2|UNKNOWN^UNKNOW^^^^|SP|999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999\r" +
-    "PV1|1|E|D.ER^^|EM|||EMEGA^Emery^Garrett^J^^^MD|.SELF^REFERRED^SELF^^^^|.NO PCP^PHYSICIAN^NO^PRIMARY OR FAMILY^^^|ERS||||PR|AMB|N||ER||99|||||||||||||||||||COCSZ|FRENCH FRY IN THROAT, ABCD WNL, ACUITY 3|REG|||201702072215\r" +
-    "AL1|1|DA|F001900388^No Known Allergies^No Known Allergies|U||20170207\r" +
-    "ACC|20170207^|11\r" +
-    "GT1|1||JONES^ZAYQUAN^A^^^||999 UNKNOWN ADDRESS^^LAS VEGAS^NV^89104^USA^^^CLARK|(702)999-9999||19970109|M||SA||||UNKNOWN|UNKNOWNN^^LAS VEGAS^NV^89148|(702)999-9999|||N\r" +
-    "GT1|2||^^^^^||^^^^^^^^|||||||||||^^^^\r" +
-    "IN1|1|MEDNVPA||MEDICAID PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-    "IN1|2|CHAX050||CHARITY PENDING|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-    "IN1|3|UNINSURED||UNINSURED DISCOUNT PLAN|.^^.^NV^.^USA||.|99999|NONE|||||||JONES^ZAYQUAN^A^^^|01|19970109||||||||||||||||||777777777|||||||M\r" +
-    "ZCD|1|ETHNICITY^ETHNICITY^2\r" +
-    "ZCD|2|ZSS.DEPREQ^DEPOSIT REQ?^N\r" +
-    "ZCD|3|ZSS.ESTCHG^EST PT DUE^200.00\r" +
-    "ZCD|4|ZSS.UNABLE^Comment if FULL amt requested NOT collected^PAY AT FAC\r" +
-    "ZIN|1|SP|MEDICAID PENDING|N||||N|||||MEDNVPA\r" +
-    "ZIN|2|SP|SELF PAY|N||||N|||||CHAX050\r" +
-    "ZIN|3|SP|UNINSURED DISCOUNT PLAN|N||||N|||||UNINSURED\r" +
-    "ZCS|UNK|UNKNOWN^^LAS VEGAS^NV^89148|N|NONE|NONE|01541"
-  private var count = 0
+  private lazy val tcpConnectionWaitTime = lookUpProp("PSGACOADT.tcp.conn.wait.time").toLong
+  private lazy val message_begin: Char = 0x0b
+  private lazy val segment_end: Char = 0x1c
+  private lazy val message_end: Char = 0x0d
+  private lazy val actorSystem = ActorSystem.create("PSGActorSystem")
+  private lazy val supervisor = actorSystem.actorOf(ActorSupervisor.props(new InetSocketAddress(cloverleafAddr, cloverleafPort)), "supervisor")
 
   private var sparkStrCtx: StreamingContext = initContext
   printConfig()
   startStreams()
 
+  /**
+    * Creates a spark streaming context if it does not exist and runs the job
+    * @return returns the streaming context
+    */
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
@@ -100,6 +89,10 @@ object PsgAcoAdtJob extends Logg with App {
     }
   }
 
+  /**
+    * Checkpointing logic
+    * @return spark streaming context
+    */
   private def initContext: StreamingContext = {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
@@ -108,6 +101,10 @@ object PsgAcoAdtJob extends Logg with App {
     sparkStrCtx
   }
 
+  /**
+    * Main business logic
+    * @param sparkStrCtx spark streaming context to run the business logic in
+    */
   private def runJob(sparkStrCtx: StreamingContext): Unit = {
     val streamLine = sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     info("kafkaConsumerProp: " + kafkaConsumerProp)
@@ -123,23 +120,23 @@ object PsgAcoAdtJob extends Logg with App {
         messagesInRDD = inc(messagesInRDD, range.count())
       })
       if (messagesInRDD > 0L) {
-        info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
+        info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD +
+          " Executing Asynchronously Each of Them.")
         rdd foreachPartitionAsync  (dataItr => {
           if (dataItr.nonEmpty) {
             propFile = confFile
-//            val actorSys = actorSystem
-            count += 1
-            val actorSys = ActorSystem.create("PSGActorSystem")
-            val msg2 = new StringBuilder()
-            msg2.append(begin_of_message).append(testMessage).append(count).append("\r").append(end_of_segment).append(end_of_message)
-            val tcpActor = actorSys.actorOf(AkkaTcpClient.props(cloverleafAddr, cloverleafPort, tcpConWaitTime, msg2.toString()) , "tcpActor")
-            info("tcpActor.path: " + tcpActor.path)
-            //            val auditOut = auditTopic
-
-//            val maxMessageSize = self.maxMessageSize
-//            val prodConf = kafkaProducerConf
-//            val kafkaOut = KafkaProducerHandler()(prodConf)
-//            val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
+            val actorSys = actorSystem
+            val msg1 = new StringBuilder()
+            val actorSupervisor = supervisor
+            val insuranceArray = insArray
+            val insuranceNameMatcher = insNameMatcher
+            val faciltyArray = facArray
+            val adtArray = adtTypes
+            val begin_of_message = message_begin
+            val end_of_segment = segment_end
+            val end_of_message = message_end
+            val tcpConWaitTime = tcpConnectionWaitTime
+            val appName = app
             val message = dataItr.next()._2
             val delim = if (message contains "\r\n") "\r\n" else "\n"
             trySplit(message, delim) match {
@@ -151,15 +148,24 @@ object PsgAcoAdtJob extends Logg with App {
                 msh.foreach(seg => debug("MSH: " + seg))
                 pv1.foreach(seg => debug("PV1: " + seg))
                 primaryIn1.foreach(seg => debug("IN1: " + seg))
-                if (eventTypeMatch(msh, adtTypes)) {
+
+                // Check that the message event type is in this list
+                // A01,A02,A03,A04,A05,A06,A07,A08,A09,A10,A11,A12,A13,A18
+                if (eventTypeMatch(msh, adtArray)) {
                   info(s"Message event type matches")
-                  if (singleFieldMatch(msh, facArray, "\\|", 3)) {
+
+                  // Check that the facility is in this list (Fac_Mnemonic_Roster.txt)
+                  // COCBR,COCDT,COCEH,COCFH,COCGP,COCLR,COCLW,COCMMC,COCNP,COCNS,COCOH,COCPOP,COCSE,COCTAC,COCBP,COCSMC
+                  if (singleFieldMatch(msh, faciltyArray, "\\|", 3)) {
                     info("Message facility type matches")
+
+                    // Check that the insurance name matches 'Medicare' and that the Medicare Insurance Number is in the Patient_Roster_PSG_Integral.txt
                     if (singleFieldMatch(primaryIn1, insuranceArray, "\\|", 36) &&
                       (stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 4) ||
                       stringMatcher(primaryIn1, insuranceNameMatcher, "\\|", 9))) {
                       info(s"Patient primary insurance Id is present and name matches")
 
+                      // Remove SSNS from PID and GT1 segments
                       // PID SSN removal
                       val pidSegment = segment(splitted, PID)
                       val ssn = getField(pidSegment, "\\|", 19)
@@ -181,6 +187,7 @@ object PsgAcoAdtJob extends Logg with App {
                         }
                       })
 
+                      // Update all GT1s (there could be more than 1 GT1 segment)
                       for (gt1 <- newGT1s) {
                         try {
                           splitted.update(splitted.indexWhere(segment => {
@@ -193,38 +200,25 @@ object PsgAcoAdtJob extends Logg with App {
                         }
                       }
 
+                      // Connect all segments by \r
                       val cleanMessage = splitted.mkString("\r")
 
-                      // Search entire message for SSN
+                      // Search entire message for any other SSNs and replace them with an empty string
                       val finalMessage = cleanMessage.replace(ssn, "")
                       debug(s"Old message: $message")
                       debug(s"Message to send: $finalMessage")
-                      if (mqQueue.isDefined) {
-                        try{
-                          val msg1 = new StringBuilder()
-                          msg1.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
-//                          tcpActor ! Ping("hello")
-                          Thread.sleep(tcpConWaitTime)
-                          tcpActor ! SendMessage(ByteString(msg1.toString()))
-//                          val msg = new StringBuilder()
-//                          msg.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
-//                          tcpActor ! ByteString(msg.toString())
-
-//                          val promise = Promise[String]()
-//                          val akkaProps = Props(classOf[AkkaTcpClient], new InetSocketAddress(cloverleafAddr, cloverleafPort), promise)
-//                          val sys = ActorSystem.create("PSGActorSystem")
-//                          val tcpActor = sys.actorOf(akkaProps)
-//                          promise.future.map { data =>
-//                            tcpActor ! "close"
-//                            info("closed tcpActor")
-//                          }
-//                          MQAcker(app, app)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), mqQueue.get)
-//                          MQAcker.ackMessage(finalMessage, "PSG-ACO-ADT")
-
-                          // tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"ADT-PSG-ACO", error(_: Throwable))
-                        } catch {
-                          case e: Exception => error(e)
-                        }
+                      try{
+                        // Send an email saying that a message has been found and is being sent
+                        sendMail(appName, "Found message to send", notification.TaskState.NORMAL, statsReport = false,
+                          lookUpProp("email.to").split(COMMA))
+                        val msg1 = new StringBuilder()
+                        // Add the MLLP Procotol message headers/footers (http://camel.apache.org/hl7.html)
+                        msg1.append(begin_of_message).append(finalMessage).append(end_of_segment).append(end_of_message)
+                        Thread.sleep(tcpConWaitTime)
+                        // Send the message to the Akka tcp message framework
+                        actorSupervisor ! ByteString(msg1.toString())
+                      } catch {
+                        case e: Exception => error(e)
                       }
                     }
                   }
@@ -237,6 +231,9 @@ object PsgAcoAdtJob extends Logg with App {
     })
   }
 
+  /**
+    * Start the spark streaming context
+    */
   private def startStreams() = {
     try {
       sparkStrCtx start()
@@ -251,6 +248,9 @@ object PsgAcoAdtJob extends Logg with App {
     }
   }
 
+  /**
+    * Shutdown the job
+    */
   private def shutDown(): Unit = {
     sparkUtil shutdownEverything sparkStrCtx
     closeResource(fileSystem)

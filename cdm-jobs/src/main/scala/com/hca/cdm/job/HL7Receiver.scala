@@ -10,9 +10,9 @@ import com.hca.cdm.spark.receiver.{MqReceiver => receiver}
 import com.hca.cdm.hadoop.OverSizeHandler
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.model._
-import com.hca.cdm.kafka.config.HL7ProducerConfig.{createConfig => producerConf}
-import com.hca.cdm.kafka.producer.{KafkaProducerHandler => KProducer}
-import com.hca.cdm.kafka.util.TopicUtil.{createTopicIfNotExist => createTopic}
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
+import com.hca.cdm.kfka.util.TopicUtil.{createTopicIfNotExist => createTopic}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.spark.{Hl7SparkUtil => sparkUtil}
 import org.apache.hadoop.conf.Configuration
@@ -98,7 +98,7 @@ object HL7Receiver extends Logg with App {
       ctx
     }
   }
-  private val hdpConf = hdpUtil.conf
+  private val hdpConf = hadoop.hadoopConf
   private var sparkStrCtx: StreamingContext = initContext
   startStreams()
 
@@ -107,7 +107,7 @@ object HL7Receiver extends Logg with App {
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
-    LoginRenewer.scheduleRenewal(master = true)
+    LoginRenewer.scheduleRenewal(master = true,namesNodes = EMPTYSTR,conf = Some(hdpConf))
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
   }
@@ -160,7 +160,8 @@ object HL7Receiver extends Logg with App {
                 error(s"Sending Raw to Kafka Failed :: $msg")
               }
             } else {
-              val msg = rejectRawMsg(mqData.source, rawStage, mqData.data, s"Cannot Deal with HL7 Came in $mqData.source . Only Activated these MessageTypes  ${hl7QueueMapping.values.mkString(COMMA)}", null, stackTrace = false)
+              val msg = rejectRawMsg(mqData.source, rawStage, mqData.data, s"Cannot Deal with HL7 Came in $mqData.source . " +
+                s"Only Activated these MessageTypes  ${hl7QueueMapping.values.mkString(COMMA)}", null, stackTrace = false)
               tryAndLogThr(hl7RejIO(msg, header(mqData.source, rejectStage, Left(mqData.msgMeta))), s"${mqData.source}$COLON rejectRawMsg", error(_: Throwable))
             }
           }

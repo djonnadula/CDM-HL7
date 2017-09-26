@@ -78,7 +78,7 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-spark</artifactId>
             <version>${hbase.version}-${cdh.version}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -93,14 +93,6 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>6.1.0.jre8</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-testkit_2.10 -->
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-testkit_2.10</artifactId>
-            <version>2.2.3</version>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>

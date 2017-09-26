@@ -12,7 +12,9 @@
     "sending_application": "MT_COCQA1A",
     "sending_facility": "COCQA1A",
     "receiving_application": "DBM",
+    "receiving_facility": null,
     "date_time_of_message": "201601190838",
+    "security": null,
     "message_type": {
       "message_code": "ADT",
       "trigger_event": "A02"
@@ -20,25 +22,35 @@
     "message_control_id": "MT_COCQA1A_ADT_QA1AGTADM.1.229576.567",
     "processing_id": "D",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": "KYA"
   },
   "0002.EVN": {
     "event_type_code": "A02",
     "recorded_date_time": "201601190838",
+    "date_time_planned_event": null,
+    "event_reason_code": null,
     "operator_id": {
       "person_id": "1TSQBE8554",
       "family_name": "HAMMOCK",
-      "given_name": "BRITTANY"
+      "given_name": "BRITTANY",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null
     }
   },
   "0003.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": "J000423598",
     "alternate_patient_id": "J500217",
     "patient_name": {
       "family_name": "Jones",
       "given_name": "Jessica",
-      "second_and_further_given_names_or_initials_thereof": "Campbell"
+      "second_and_further_given_names_or_initials_thereof": "Campbell",
+      "suffix": null,
+      "prefix": null
     },
     "mother_maiden_name": "UNKNOWN",
     "date_time_of_birth": "20031230",
@@ -46,7 +58,8 @@
     "patient_alias": {
       "family_name": "CAGE",
       "given_name": "JESSICA",
-      "second_and_further_given_names_or_initials_thereof": "CAMPBELL JONES"
+      "second_and_further_given_names_or_initials_thereof": "CAMPBELL JONES",
+      "suffix": null
     },
     "race": "U",
     "patient_address": {
@@ -54,8 +67,10 @@
       "other_designation": "TN",
       "city": "37064",
       "state_or_province": "USA",
+      "zip_or_postal_code": null,
       "country": "WILLIAMSON"
     },
+    "county_code": null,
     "phone_num_home": "(615)555-6261",
     "phone_num_business": "(615)555-6261",
     "primary_language": "ENG",
@@ -73,6 +88,7 @@
       "bed": "A"
     },
     "admission_type": "EL",
+    "pre_admit_num": null,
     "prior_patient_location": {
       "point_of_care": "J.DE2",
       "room": "J.DE2",
@@ -81,27 +97,60 @@
     "attending_doctor": {
       "person_id": "DRFIRST",
       "family_name": "FIRST",
-      "given_name": "DOCTOR"
+      "given_name": "DOCTOR",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null
     },
+    "referring_doctor": null,
     "primary_care_doctor": {
       "person_id": "DRBRI",
       "family_name": "DOCTOR",
-      "given_name": "BRITTANY"
+      "given_name": "BRITTANY",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null
     },
     "hospital_service": "IM",
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
     "admit_source": "ER",
+    "mode_of_arrival": null,
     "vip_indicator": "Y",
     "admitting_doctor": {
       "person_id": "ADMITTING",
       "family_name": "PHYSICIAN",
       "given_name": "TEST",
-      "second_and_further_given_names_or_initials_thereof": "ADMITTING"
+      "second_and_further_given_names_or_initials_thereof": "ADMITTING",
+      "suffix": null,
+      "prefix": null
     },
     "patient_type": "INO",
+    "visit_num": null,
     "financial_class": "08",
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
     "servicing_facility": "COCQA1A",
     "reason_for_visit": "OBSERVATION",
     "account_status": "ADM",
+    "pending_location": null,
+    "prior_temporary_location": null,
     "admit_date_time": "201601190811"
   },
   "0005.AL1": {
@@ -130,17 +179,22 @@
   },
   "0007.ACC": {
     "accident_date_time": {
-      "accident_date": "20160119"
+      "accident_date": "20160119",
+      "accident_time": null
     },
     "accident_code": "11"
   },
   "0008.GT1": {
     "set_id": "1",
+    "guarantor_num": null,
     "guarantor_name": {
       "family_name": "Jones",
       "given_name": "Jessica",
-      "second_and_further_given_names_or_initials_thereof": "Campbell"
+      "second_and_further_given_names_or_initials_thereof": "Campbell",
+      "suffix": null,
+      "prefix": null
     },
+    "guarantor_spouse_name": null,
     "guarantor_address": {
       "street_address": "456 MARVEL STREETFRANKLIN",
       "other_designation": "TN",
@@ -149,23 +203,67 @@
       "zip_or_postal_code": "WILLIAMSON"
     },
     "guarantor_phone_num_home": "(615)555-6261",
+    "guarantor_phone_num_business": null,
     "guarantor_date_time_of_birth": "20031230",
     "guarantor_administrative_sex": "F",
+    "guarantor_type": null,
     "guarantor_relationship": "SA",
     "guarantor_ssn": "302-30-2015",
+    "guarantor_date_begin": null,
+    "guarantor_date_end": null,
     "guarantor_priority": "ALIAS",
-    "guarantor_employer_name": {},
+    "guarantor_employer_name": {
+      "family_name": null,
+      "given_name": null,
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null
+    },
+    "guarantor_employer_address": null,
+    "guarantor_employer_phone_num": null,
+    "guarantor_employee_id_num": null,
     "guarantor_employment_status": "FT"
   },
   "0009.GT1": {
     "set_id": "2",
-    "guarantor_name": {},
-    "guarantor_address": {},
-    "guarantor_employer_name": {}
+    "guarantor_num": null,
+    "guarantor_name": {
+      "family_name": null,
+      "given_name": null,
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null
+    },
+    "guarantor_spouse_name": null,
+    "guarantor_address": {
+      "street_address": null,
+      "other_designation": null,
+      "city": null,
+      "state_or_province": null,
+      "zip_or_postal_code": null,
+      "country": null,
+      "address_type": null
+    },
+    "guarantor_phone_num_home": null,
+    "guarantor_phone_num_business": null,
+    "guarantor_date_time_of_birth": null,
+    "guarantor_administrative_sex": null,
+    "guarantor_type": null,
+    "guarantor_relationship": null,
+    "guarantor_ssn": null,
+    "guarantor_date_begin": null,
+    "guarantor_date_end": null,
+    "guarantor_priority": null,
+    "guarantor_employer_name": {
+      "family_name": null,
+      "given_name": null,
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null
+    }
   },
   "0010.IN1": {
     "set_id": "1",
     "health_plan_id": "AETNA",
+    "insurance_company_id": null,
     "insurance_company_name": "AETNA",
     "insurance_company_address": {
       "street_address": "10 WHITE STREET",
@@ -175,17 +273,50 @@
       "zip_or_postal_code": "00111",
       "country": "USA"
     },
+    "insurance_company_contact_person": null,
     "insurance_company_phone_num": "(615)825-5555",
     "group_num": "AETNA GROUP #",
     "group_name": "AETNA GROUP NAME",
+    "insured_group_emp_id": null,
+    "insured_group_emp_name": null,
+    "plan_effective_date": null,
+    "plan_expiration_date": null,
+    "authorization_information": null,
+    "plan_type": null,
     "name_of_insured": {
       "family_name": "Jones",
       "given_name": "Jessica",
-      "second_and_further_given_names_or_initials_thereof": "Campbell"
+      "second_and_further_given_names_or_initials_thereof": "Campbell",
+      "suffix": null,
+      "prefix": null,
+      "degree": null
     },
     "insured_relationship_to_patient": "01",
     "insured_date_of_birth": "20031230",
+    "insured_address": null,
+    "assignment_of_benefits": null,
+    "coordination_of_benefits": null,
+    "coordination_of_benefits_priority": null,
+    "notice_of_admission_flag": null,
+    "notice_of_admission_date": null,
+    "report_of_eligibility_flag": null,
+    "report_of_eligibility_date": null,
+    "release_information_code": null,
+    "pre_admit_cert_pac": null,
+    "verification_date_time": null,
+    "verification_by": null,
+    "type_of_agreement_code": null,
+    "billing_status": null,
+    "lifetime_reserve_days": null,
+    "delay_before_lifetime_reserve_days": null,
+    "company_plan_code": null,
     "policy_num": "302302015",
+    "policy_deductible": null,
+    "policy_limit_amt": null,
+    "policy_limit_days": null,
+    "room_rate_semi_private": null,
+    "room_rate_private": null,
+    "insured_employment_status": null,
     "insured_administrative_sex": "F"
   },
   "0011.ZCD": {
@@ -241,14 +372,21 @@
     "insured_id": "SP",
     "insurance_mail_to_name": "AETNA INSURANCE",
     "insurance_verification_ind": "N",
+    "insurance_verification_date": null,
     "insurance_verified_by": "AET PRECERT CONTACT",
+    "approved_length_of_stay": null,
     "authorization_precertification_required": "N",
+    "authorization_type": null,
+    "authorized_by": null,
+    "authorization_phone": null,
+    "referral_num": null,
     "insurance_plan_id": "AETNA"
   },
   "0018.ZCS": {
     "patient_employer": "ALIAS",
     "patient_employer_address": {
       "street_address1": "456 MARVEL STREET",
+      "street_address2": null,
       "city": "FRANKLIN",
       "state_province": "TN",
       "zip_postal_code": "37064"

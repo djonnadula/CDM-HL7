@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "201765410950",
+    "security": null,
     "message_type": {
       "message_code": "RAS",
       "trigger_event": "O17"
@@ -21,6 +22,7 @@
     "message_control_id": "IP_COCQ1A_RAS_PHAQ1A.161215.5536",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
@@ -30,8 +32,11 @@
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "HG15124123",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCQA1A",
       "id_type_code": "MRN"
     },
@@ -40,8 +45,18 @@
       "family_name": "TREE",
       "given_name": "JOSHUA"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19875798",
     "administrative_sex": "M",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
     "patient_account_num": "T1325124"
   },
   "0003.PV1": {
@@ -54,26 +69,67 @@
       "facility": "COCQA1A"
     },
     "admission_type": "VO",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": {
       "person_id": "SMUGLAS",
       "family_name": "SMUGLAS",
       "given_name": "LEGOFLAN"
     },
+    "referring_doctor": null,
+    "consulting_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
     "patient_type": "IN",
+    "visit_num": null,
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "bed_status": null,
     "account_status": "ADM"
   },
   "0004.ORC": {
     "order_control": "RE",
     "placer_order_num": "128421",
     "filler_order_num": "040243",
+    "placer_group_num": null,
     "order_status": "AC",
+    "response_flag": null,
     "quantity_timing": {
       "quantity": "0.5",
       "interval": "ONCE",
       "duration": "ONE TIME"
     },
+    "parent_order": null,
     "date_time_of_transaction": "201765410950",
+    "entered_by": null,
+    "verified_by": null,
     "ordering_provider": "DR.TERESA",
+    "enterer_location": null,
+    "call_back_phone_num": null,
     "order_effective_date_time": "201765411000"
   },
   "0005.RXA": {
@@ -97,12 +153,24 @@
     },
     "administration_notes": "101568",
     "administering_provider": "1PDGKT7313",
+    "administered_at_location": null,
+    "administered_per_time_unit": null,
+    "administered_strength": null,
+    "administered_strength_units": null,
+    "substance_lot_num": null,
+    "substance_expiration_date": null,
+    "substance_manufacturer_name": null,
+    "substance_treatment_refusal_reason": null,
     "indication": {
       "id": "N",
       "text": "N"
     },
     "completion_status": "CP",
     "action_code": "D",
+    "system_entry_date_time": null,
+    "administered_drug_strength_volume": null,
+    "administered_drug_strength_volume_units": null,
+    "administered_barcode_id": null,
     "pharmacy_order_type": "MED"
   },
   "0006.RXR": {
@@ -115,6 +183,7 @@
   "0007.NTE": {
     "set_id": "1",
     "source_of_comment": "RC",
+    "comment": null,
     "comment_type": {
       "id": "GIVEN BY LIP",
       "text": "ADMINISTERED BY PHYSICIAN/LIP"
@@ -127,6 +196,7 @@
       "id": "hcaELG.DT",
       "text": "VFC Elig Date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20161104"
   },
   "0009.OBX": {
@@ -136,6 +206,7 @@
       "id": "hcaELG.STS",
       "text": "VFC Elig Status:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "V03:VFC elig - Uninsured"
   },
   "0010.OBX": {
@@ -145,6 +216,7 @@
       "id": "hcaIMM.EXP",
       "text": "Expiration:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20170118"
   },
   "0011.OBX": {
@@ -154,6 +226,7 @@
       "id": "hcaIMM.LOT",
       "text": "Lot Number:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "12345"
   },
   "0012.OBX": {
@@ -163,6 +236,7 @@
       "id": "hcaIMM.MAN",
       "text": "Manfacturer:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "NABI:NABI"
   },
   "0013.OBX": {
@@ -172,6 +246,7 @@
       "id": "hcaIMM.SRS",
       "text": "Series:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "4321"
   },
   "0014.OBX": {
@@ -181,6 +256,7 @@
       "id": "hcaIMM.STE",
       "text": "Admin Site:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "LA:Left Arm"
   },
   "0015.OBX": {
@@ -190,6 +266,7 @@
       "id": "hcaVIS.GDT",
       "text": "VIS Given Date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20176541"
   },
   "0016.OBX": {
@@ -199,6 +276,7 @@
       "id": "hcaVIS.PDT",
       "text": "VIS Publication Date:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20150424"
   }
 }

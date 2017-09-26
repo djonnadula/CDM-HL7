@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "20124151308",
+    "security": null,
     "message_type": {
       "message_code": "SIU",
       "trigger_event": "S18"
@@ -21,6 +22,7 @@
     "message_control_id": "IP_COCGTH_SIU_SCHGTH.12415.8",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": {
       "network_id": "TXI",
       "unit_number": "25067"
@@ -28,8 +30,11 @@
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "V000232919",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCGTH",
       "id_type_code": "MRN"
     },
@@ -39,8 +44,18 @@
       "given_name": "JAMIE",
       "second_and_further_given_names_or_initials_thereof": "ROGUE"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19750402",
     "administrative_sex": "M",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
     "patient_account_num": "SD12315421"
   },
   "0003.PV1": {
@@ -48,15 +63,51 @@
     "patient_class": "O",
     "assigned_patient_location": {
       "point_of_care": "V.AMB",
+      "room": null,
+      "bed": null,
       "facility": "COCGTH"
     },
     "admission_type": "EL",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": {
       "person_id": "WOWOW",
       "family_name": "Wonder",
       "given_name": "Power"
     },
+    "referring_doctor": null,
+    "consulting_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
     "patient_type": "SDC",
+    "visit_num": null,
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "bed_status": null,
     "account_status": "DEP"
   },
   "0004.SCH": {
@@ -80,6 +131,7 @@
       "last_name": "Wonder",
       "first_name": "Power"
     },
+    "principal_anesthesiologist": null,
     "operation_date_time": "201101110900",
     "operation_entered": {
       "entered_date_time": "201101100739",
@@ -97,6 +149,7 @@
       "alternate_id": "PREOP 0021",
       "alternate_text": ":"
     },
+    "obsv_sub_id": null,
     "obsv_value": "0850"
   },
   "0006.OBX": {
@@ -109,6 +162,7 @@
       "alternate_id": "K33010003A",
       "alternate_text": "Temperature F:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "97.8"
   },
   "0007.OBX": {
@@ -121,6 +175,7 @@
       "alternate_id": "K33010024A",
       "alternate_text": "Blood pressure:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "149/81"
   },
   "0008.OBX": {
@@ -133,6 +188,7 @@
       "alternate_id": "K33010016A",
       "alternate_text": "Respiratory rate:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "16"
   },
   "0009.OBX": {
@@ -145,6 +201,7 @@
       "alternate_id": "K33010006A",
       "alternate_text": "Pulse:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "75"
   },
   "0010.OBX": {
@@ -157,6 +214,7 @@
       "alternate_id": "L35010001A",
       "alternate_text": "SPO2 %:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "100"
   },
   "0011.OBX": {
@@ -169,6 +227,7 @@
       "alternate_id": "ORVSTIME1",
       "alternate_text": "Time:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "0850"
   },
   "0012.OBX": {
@@ -181,6 +240,7 @@
       "alternate_id": "ORVSACT1",
       "alternate_text": "Activity:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "2"
   },
   "0013.OBX": {
@@ -193,6 +253,7 @@
       "alternate_id": "ORVSRESP1",
       "alternate_text": "Respirations:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "2"
   },
   "0014.OBX": {
@@ -205,6 +266,7 @@
       "alternate_id": "ORVSCIRC1",
       "alternate_text": "Circulation:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "2"
   },
   "0015.OBX": {
@@ -217,6 +279,7 @@
       "alternate_id": "ORVSCONS1",
       "alternate_text": "Consciousness:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "2"
   },
   "0016.OBX": {
@@ -229,6 +292,7 @@
       "alternate_id": "ORVSSAT1",
       "alternate_text": "02 Sat:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "2"
   },
   "0017.OBX": {
@@ -241,6 +305,7 @@
       "alternate_id": "ORVSTOTL1",
       "alternate_text": "Total:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "10"
   },
   "0018.OBX": {
@@ -253,6 +318,7 @@
       "alternate_id": "NIV0019",
       "alternate_text": "-"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N"
   },
   "0019.OBX": {
@@ -265,6 +331,7 @@
       "alternate_id": "NIV0020",
       "alternate_text": ":"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20110111"
   },
   "0020.OBX": {
@@ -277,6 +344,7 @@
       "alternate_id": "NIV0021",
       "alternate_text": ":"
     },
+    "obsv_sub_id": null,
     "obsv_value": "0903"
   },
   "0021.OBX": {
@@ -289,6 +357,7 @@
       "alternate_id": "NIV0022",
       "alternate_text": ":"
     },
+    "obsv_sub_id": null,
     "obsv_value": "RT CHEST"
   },
   "0022.OBX": {
@@ -301,6 +370,7 @@
       "alternate_id": "NIV0024B",
       "alternate_text": "="
     },
+    "obsv_sub_id": null,
     "obsv_value": "6:Portacath"
   },
   "0023.OBX": {
@@ -313,6 +383,7 @@
       "alternate_id": "NIV0023",
       "alternate_text": ":"
     },
+    "obsv_sub_id": null,
     "obsv_value": "1"
   },
   "0024.OBX": {
@@ -325,6 +396,7 @@
       "alternate_id": "NIV0025",
       "alternate_text": ":"
     },
+    "obsv_sub_id": null,
     "obsv_value": "20"
   },
   "0025.OBX": {
@@ -337,6 +409,7 @@
       "alternate_id": "hcaORL701",
       "alternate_text": "Patient's Age Range:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "65+ Years"
   },
   "0026.OBX": {
@@ -349,6 +422,7 @@
       "alternate_id": "hcaORL703",
       "alternate_text": "Developmental Delay(s):"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N:No"
   },
   "0027.OBX": {
@@ -573,8 +647,12 @@
   "0044.ZTM": {
     "case_pre_1_time": "PT ARRIVES OPS",
     "case_pre_2_time": "PT READY",
+    "case_pre_3_time": null,
+    "case_pre_4_time": null,
     "case_hold_1_time": "PT ARRIVES HOLDING",
     "case_hold_2_time": "PT READY",
+    "case_anesthesia_1_time": null,
+    "case_anesthesia_2_time": null,
     "case_operating_room_1_time": "ANESTHESIA START",
     "case_operating_room_2_time": {
       "time_desc": "PT IN ROOM",
@@ -594,6 +672,7 @@
       "time_desc": "PT LEAVES ROOM",
       "or_date_time": "201101111148"
     },
+    "case_operating_room_8_time": null,
     "case_pacu_1_time": "PT ARRIVES PACU",
     "case_pacu_2_time": "ANESTHESIA ENDS",
     "case_pacu_3_time": "PT DISCHARGE PHASE 1",
@@ -610,6 +689,7 @@
       "type_code": "NONE",
       "type_desc": "NONE"
     },
+    "anesthetic_pre_op_asa": null,
     "surgery_outcome": {
       "outcome_code": "COMP",
       "outcome_desc": "COMPLETED AS PLANNED"
@@ -637,6 +717,7 @@
       "override_desc": "INFUSION IV ASCORBIC ACID"
     },
     "procedure_type": "P",
+    "laterality": null,
     "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
@@ -656,6 +737,7 @@
       "operation_name": "INFUSION IV NON CHEMO 2ND HR"
     },
     "procedure_type": "S",
+    "laterality": null,
     "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
@@ -675,6 +757,7 @@
       "operation_name": "INFUSION IV NON CHEMO 1HR"
     },
     "procedure_type": "P",
+    "laterality": null,
     "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"
@@ -693,6 +776,7 @@
       "operation_name": "INFUSION IV NON CHEMO 2ND HR"
     },
     "procedure_type": "S",
+    "laterality": null,
     "severity": {
       "severity_code": "AMBCARE",
       "severity_desc": "AMBULATORY CARE"

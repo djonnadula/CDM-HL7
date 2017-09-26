@@ -55,11 +55,13 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     }
     }.map { x => x._1 -> x._2.head._2 }
     val segmentsGrp = segmentMetrics.groupBy(x => x._1.substring(0, x._1.indexOf(COLON))).map {
-      case (hl7, segments) => hl7 -> segments.filterNot { case (segState, metric) => segState.substring(segState.lastIndexOf(COLON) + 1) == NOTAPPLICABLE.toString && metric <= processedHl7(hl7) - 100 }
+      case (hl7, segments) => hl7 -> segments.filterNot { case (segState, metric) =>
+        segState.substring(segState.lastIndexOf(COLON) + 1) == NOTAPPLICABLE.toString && metric <= processedHl7(hl7) - 100 }
     }
     val to = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP)
     append("</div></div>")
-    val parserTable = "<div style=color:#0000FF><h3>Hl7 Messages " + parserGrp.keys.toSeq.sortBy(msg => msg).mkString(";") + " Processed from Dates between " + from + " to " + to + " Stats as Follows</h3>" +
+    val parserTable = "<div style=color:#0000FF><h3>Hl7 Messages " + parserGrp.keys.toSeq.sortBy(msg => msg).mkString(";") +
+      " Processed from Dates between " + from + " to " + to + " Stats as Follows</h3>" +
       "<br/><table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:georgia;>" +
       "<thead><tr>" +
       "<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:georgia;>" +
