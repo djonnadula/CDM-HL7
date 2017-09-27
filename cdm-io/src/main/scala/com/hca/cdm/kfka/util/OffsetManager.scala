@@ -4,15 +4,17 @@ import com.hca.cdm._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.RetryHandler
+import kafka.common.TopicAndPartition
 import org.apache.commons.lang3.reflect.MethodUtils
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.hbase.client.{Get, Put, Result}
-import org.apache.hadoop.hbase.util.Bytes._
-import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaUtils}
-import kafka.common.TopicAndPartition
-import org.apache.spark.rdd.RDD
 import org.apache.hadoop.hbase.HColumnDescriptor._
 import org.apache.hadoop.hbase.HConstants._
+import org.apache.hadoop.hbase.client.Put
+import org.apache.hadoop.hbase.util.Bytes._
+import org.apache.spark.rdd.RDD
+import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaUtils}
+
+
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 
@@ -26,7 +28,7 @@ private[cdm] class OffsetManager(storeNameSpace: String, store: String, appAsRow
   private lazy val allAttributes = ListBuffer.empty[String]
 
   def batchCompleted[T](batch: RDD[T]): Unit = {
-    //require(!batch.isInstanceOf[HasOffsetRanges], "Currently Only Kafka Impl is supported")
+//    require(!batch.isInstanceOf[HasOffsetRanges], "Currently Only Kafka Impl is supported")
     val table = storeHandler.getTable(store)
     val req = new Put(toBytes(appAsRow))
     val familyBytes = toBytes(offsetFamily)

@@ -130,16 +130,18 @@ object Hl7Driver extends App with Logg {
       val actConf = conf.split(COLON)
       if (valid(actConf, 2)) {
         actConf(0) match {
-          case "--files" => actConf(1).split(COMMA, -1).foreach { file => sparkLauncher.addFile(new File(file).getPath) }
-          case "--jars" => actConf(1).split(COMMA, -1).foreach { file => sparkLauncher.addJar(new File(file).getPath) }
+          case "--files" => sparkLauncher.addFile(new File(actConf(1)).getPath)
+          case "--jars" => sparkLauncher.addJar(new File(actConf(1)).getPath)
           case _ => sparkLauncher.setConf(actConf(0), actConf(1))
         }
       }
     }
   })
   if (ENV != "PROD") {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
-      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps " +
+      s"-Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps " +
+        s"-Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
   } else {
     sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
       .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
@@ -273,7 +275,8 @@ object Hl7Driver extends App with Logg {
     process inheritIO()
     Try(process start) match {
       case Success(x) =>
-        if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) error(s"${command.toUpperCase} Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
+        if (tryAndLogErrorMes(x.waitFor(2, TimeUnit.MINUTES), error(_: Throwable))) error(s"${command.toUpperCase} " +
+          s"Driver Process for $app failed with Status ${getStatus(x.getInputStream)}. Try Manually by $jobScript $command")
         else info(s"$app Driver Script ${command.toUpperCase} successfully ${Source.fromInputStream(x.getInputStream).getLines().mkString(COMMA)}")
       case Failure(t) =>
         error(s"${command.toUpperCase} Job $app failed. Try Manually by $jobScript $command", t)

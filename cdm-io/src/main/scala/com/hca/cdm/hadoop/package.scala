@@ -24,7 +24,7 @@ package object hadoop extends Logg {
   }
 
   case class OverSizeHandler(stage: String, destination: String) {
-    private lazy val config = hadoopConf
+    private lazy val config = new Configuration()
 
     def handle(data: AnyRef): Unit = overSizedHandle(stage, config, destination, data)
   }

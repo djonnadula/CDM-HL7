@@ -78,7 +78,7 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-spark</artifactId>
             <version>${hbase.version}-${cdh.version}</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -94,6 +94,7 @@
             <version>6.1.0.jre8</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
