@@ -160,8 +160,7 @@ object HL7Receiver extends Logg with App {
                 error(s"Sending Raw to Kafka Failed :: $msg")
               }
             } else {
-              val msg = rejectRawMsg(mqData.source, rawStage, mqData.data, s"Cannot Deal with HL7 Came in $mqData.source . " +
-                s"Only Activated these MessageTypes  ${hl7QueueMapping.values.mkString(COMMA)}", null, stackTrace = false)
+              val msg = rejectRawMsg(mqData.source, rawStage, mqData.data, s"Cannot Deal with HL7 Came in $mqData.source . Only Activated these MessageTypes  ${hl7QueueMapping.values.mkString(COMMA)}", null, stackTrace = false)
               tryAndLogThr(hl7RejIO(msg, header(mqData.source, rejectStage, Left(mqData.msgMeta))), s"${mqData.source}$COLON rejectRawMsg", error(_: Throwable))
             }
           }

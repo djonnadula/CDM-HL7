@@ -24,21 +24,22 @@ object SaslKafkaTest extends Logg with App{
   info("Topics from Brokers :: ")
   consumer.listTopics().asScala.foreach({
     x =>  info(x._1)
-      x._2.asScala.foreach(y =>info(y + EMPTYSTR))
+      x._2.asScala.foreach(y =>info(y+ EMPTYSTR))
   })
 
   val kafkaProducerConf = HL7ProducerConfig.createConfig(writeToTopic)
   val producer =  KafkaProducerHandler(kafkaProducerConf)
   val numberofMsg = lookUpProp("number.messages.to.publish").toInt
-  for (msg <- 0 until numberofMsg ) {
+  for(msg <- 0 until numberofMsg ){
     producer.writeData(s"test$msg",s"test$msg", writeToTopic)(4194304,null)
+
   }
   producer.close()
   val consumeFrom = new ArrayList[String]()
   consumeFrom.add(writeToTopic)
   consumer.subscribe(consumeFrom)
   var toConsume = numberofMsg
-  while (toConsume > 0) {
+  while(toConsume >0){
     val data = consumer.poll(2000)
     data.asScala.foreach(
       x =>{info(s"Message From Topic ${x.value()} partition ${x.partition()}")

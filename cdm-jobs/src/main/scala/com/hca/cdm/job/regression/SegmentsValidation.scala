@@ -161,8 +161,7 @@ object SegmentsValidation extends Logg with App {
             case `noTableInReg` =>
               append(s"<div style=color:#FF4500><h3>No Table Exist for ${segment.toUpperCase} in Regression Data Base</h3><br/>")
             case `noDataInReg` =>
-              append(s"<div style=color:#FF4500><h3>No Data Exist for ${segment.toUpperCase} & Controld Id's ${result.map(_.controlId).mkString(" :: ")} " +
-                s"in Regression Data Base to Compare Against QA</h3><br/>")
+              append(s"<div style=color:#FF4500><h3>No Data Exist for ${segment.toUpperCase} & Controld Id's ${result.map(_.controlId).mkString(" :: ")} in Regression Data Base to Compare Against QA</h3><br/>")
             case `EMPTYSTR` =>
               if (resultsNotMatched(result)) {
                 append(s"<div style=color:#708090><h3>Mismatch Results for Segment ${segment.toUpperCase} from QA to Regression Data Base as follows </h3>")
@@ -199,8 +198,7 @@ object SegmentsValidation extends Logg with App {
         append(s"<div style=color:#0000FF><h3>${segment.toUpperCase} has no Data to Compare </h3></div>")
       }
     })
-    mail("{encrypt} Regression Test Results for HL7 Segments Ran on " +
-      dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP), builder.result(), NORMAL, statsReport = true)
+    mail("{encrypt} Regression Test Results for HL7 Segments Ran on " + dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP), builder.result(), NORMAL, statsReport = true)
   }
 
   private def handleColumnReport(columns: List[Column], controlId: String): Unit = {
