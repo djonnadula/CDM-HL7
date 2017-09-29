@@ -18,13 +18,13 @@ import scala.util.control.Breaks._
 package object hadoop extends Logg {
 
   def hadoopConf : Configuration = {
-   val conf =  HBaseConfiguration.create(hdpUtil.conf)
+    val conf =  HBaseConfiguration.create(hdpUtil.conf)
     conf.addResource("hbase-site.xml")
     conf
   }
 
   case class OverSizeHandler(stage: String, destination: String) {
-    private lazy val config = new Configuration()
+    private lazy val config = hadoopConf
 
     def handle(data: AnyRef): Unit = overSizedHandle(stage, config, destination, data)
   }

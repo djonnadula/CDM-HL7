@@ -39,8 +39,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   logIdent = s"$hl7-Model Handler  "
   private lazy val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
 
-  private case class Segment(seg: String, apply: (mapType, String) => Hl7SegmentTrans,
-                             adhoc: Boolean, dest: Option[DestinationSystem], auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
+  private case class Segment(seg: String, apply: (mapType, String) => Hl7SegmentTrans, adhoc: Boolean, dest: Option[DestinationSystem], auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
 
   private val metrics = new TrieMap[String, Long]
   private val dataModeler = DataModeler(hl7Segments.msgType)

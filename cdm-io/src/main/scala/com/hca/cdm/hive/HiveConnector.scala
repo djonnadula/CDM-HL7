@@ -75,11 +75,8 @@ class HiveConnector extends Logg with AutoCloseable {
   }
 
   private def connectURL(config: HiveConf, hive2WithPort: String, discoveryEnabled: Boolean = false): String = {
-    if (discoveryEnabled) s"jdbc:hive2://${config.get("hive.zookeeper.quorum")}/;" +
-      s"serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=${config.get("hive.zookeeper.namespace")};" +
-      s"principal=${config.get("hive.server2.authentication.kerberos.principal", "hive/_HOST@HCA.CORPAD.NET")}"
-    else s"jdbc:hive2://${config.get("hive2.hosts", "xrdcldbdm010001.unix.medcity.net:10000")}/default;" +
-      s"principal=${config.get("hive.server2.authentication.kerberos.principal", "hive/_HOST@HCA.CORPAD.NET")}"
+    if (discoveryEnabled) s"jdbc:hive2://${config.get("hive.zookeeper.quorum")}/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=${config.get("hive.zookeeper.namespace")};principal=${config.get("hive.server2.authentication.kerberos.principal", "hive/_HOST@HCA.CORPAD.NET")}"
+    else s"jdbc:hive2://${config.get("hive2.hosts", "xrdcldbdm010001.unix.medcity.net:10000")}/default;principal=${config.get("hive.server2.authentication.kerberos.principal", "hive/_HOST@HCA.CORPAD.NET")}"
   }
 
   private[this] object Converters {
