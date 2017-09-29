@@ -45,12 +45,10 @@ import scala.collection.concurrent.TrieMap
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
-import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import scala.collection.mutable
 import TimeUnit._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.kfka.util.OffsetManager
-import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
 import org.apache.spark.rdd.RDD
 
@@ -107,7 +105,7 @@ object HL7Job extends Logg with App {
   private val segmentsHandler = modelsForHl7 map (hl7 => hl7._1 -> new DataModelHandler(hl7._2, registeredSegmentsForHl7(hl7._1), segmentsAuditor(hl7._1),
     allSegmentsInHl7Auditor(hl7._1), adhocAuditor(hl7._1), tlmAckMsg(hl7._1.toString, applicationReceiving, HDFS, _: String)(_: MSGMeta)))
   private val ensureStageCompleted = new AtomicBoolean(false)
-  private var runningStage: StageInfo = _
+  @volatile private var runningStage: StageInfo = _
   private val jsonOverSized = OverSizeHandler(jsonStage, lookUpProp("hl7.direct.json"))
   private val segOverSized = OverSizeHandler(segmentStage, lookUpProp("hl7.direct.segment"))
   private val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
@@ -614,9 +612,9 @@ object HL7Job extends Logg with App {
     *
     */
   private class MetricsListener(sparkStrCtx: StreamingContext) extends SparkListener {
-    val stageTracker = new TrieMap[Int, StageInfo]()
-    val stagesSubmitted = new mutable.Queue[StageInfo]
-    var firstStage = true
+    private val stageTracker = new TrieMap[Int, StageInfo]()
+    private val stagesSubmitted = new mutable.Queue[StageInfo]
+    private var firstStage = true
 
     override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
       super.onStageSubmitted(stageSubmitted)
@@ -625,7 +623,6 @@ object HL7Job extends Logg with App {
         firstStage = false
       }
       stagesSubmitted += stageSubmitted.stageInfo
-      if (!firstStage && (runningStage.completionTime isDefined)) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else stageSubmitted.stageInfo
       ensureStageCompleted set false
       stageTracker += stageSubmitted.stageInfo.stageId -> stageSubmitted.stageInfo
       debug(s"Total Stages so Far ${stageTracker.size}")
@@ -633,6 +630,7 @@ object HL7Job extends Logg with App {
 
     override def onStageCompleted(stageCompleted: SparkListenerStageCompleted): Unit = {
       super.onStageCompleted(stageCompleted)
+      if (runningStage.completionTime isDefined) runningStage = if (stagesSubmitted.nonEmpty) stagesSubmitted.dequeue() else null
       ensureStageCompleted compareAndSet(false, true)
       stageCompleted.stageInfo.failureReason match {
         case Some(x) => error(app + " Stage failed Due to  " + x)
@@ -662,8 +660,7 @@ object HL7Job extends Logg with App {
 
     override def run(): Unit = {
       checkForStageToComplete()
-      if (!(runningStage != null && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined &&
-        ((currMillis - runningStage.submissionTime.get) >= timeCheck))) {
+      if (!runningLong) {
         msgTypeFreq.transform({ case (hl7, rate) =>
           if (lowFrequencyHL7 isDefinedAt rate._1) {
             if (lowFrequencyHL7(rate._1) < lowFrequencyHl7AlertInterval) {
@@ -686,13 +683,18 @@ object HL7Job extends Logg with App {
         })
       }
       else {
-        error("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
+        warn("Stage was not Completed. Running for Long Time with Id " + runningStage.stageId + " Attempt Made so far " + runningStage.attemptId)
         mail("{encrypt} " + app + " with Job ID " + sparkStrCtx.sparkContext.applicationId + " Running Long",
           app + " Batch was Running more than what it Should. Batch running with Stage Id :: " + runningStage.stageId + " and Attempt Made so far :: " + runningStage.attemptId +
             " . \nBatch Submitted Since " + new Date(runningStage.submissionTime.get) + "  has not Completed. Some one has to Check " +
             " What is happening with this Job. Maximum Execution time Expected :: " + SECONDS.convert(batchDuration.milliseconds, MILLISECONDS) + " seconds" + "\n\n" + EVENT_TIME
           , CRITICAL)
       }
+    }
+
+    private def runningLong: Boolean = {
+      valid(runningStage) && runningStage.completionTime.isEmpty && runningStage.submissionTime.isDefined &&
+        ((currMillis - runningStage.submissionTime.get) >= timeCheck)
     }
 
     private def IscAlertCheck(hl7: HL7, source: String, howLong: Int): Unit = {
