@@ -121,7 +121,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   private def refreshFsTokens(nameNodes: Set[Path], credentials: Credentials): Unit = {
     val renewer = yrnUtil.getTokenRenewer(hdfsConf)
-    //Master.getMasterPrincipal(hdfsConf)
+    // Master.getMasterPrincipal(hdfsConf)
     info("Renewer for Credentials " + renewer)
     nameNodes.foreach(node => {
       val dfs = node.getFileSystem(hdfsConf)
@@ -163,7 +163,7 @@ private[cdm] object LoginRenewer extends Logg {
     UGI.setConfiguration(hdfsConf)
     val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keytab)
     val cred = loggedUser.getCredentials
-    //noinspection ScalaDeprecation
+    // noinspection ScalaDeprecation
     performAction(asFunc({
       refreshFsTokens(nns + credentialsFile.getParent, cred)
       if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {

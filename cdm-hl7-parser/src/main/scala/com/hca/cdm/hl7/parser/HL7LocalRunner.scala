@@ -1,3 +1,4 @@
+/*
 package com.hca.cdm.hl7.parser
 
 import com.hca.cdm.Models.MSGMeta
@@ -105,3 +106,4 @@ object HL7LocalRunner extends App with Logg {
 
 
 
+*/
