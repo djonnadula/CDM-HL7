@@ -595,7 +595,9 @@ object HL7Job extends Logg with App {
     val appChk = lookUpProp("hl7.spark.checkpoint.enable").toBoolean
     if (appChk) {
       inputSource match {
-        case InputSource.HDFS => false
+        case InputSource.HDFS =>
+          warn(s"Check pointing is not supported for source $inputSource")
+          false
         case InputSource.KAFKA => true
       }
     }

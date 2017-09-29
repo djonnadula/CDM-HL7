@@ -37,7 +37,7 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
     closeResource(connection)
   }
 
-  def getBatchOperator(table: String, batchSize: Int): BatchOperator = {
+  def getBatchOperator(table: String, batchSize: Int): BatchOperator = synchronized{
     mutatorStore.getOrElseUpdate(table, new BatchOperator(nameSpace, table, connection, batchSize))
   }
 
@@ -166,10 +166,8 @@ object HBaseConnector extends Logg {
 
   def apply(nameSpace: String = "hl7"): HBaseConnector = {
     def createIfNotExist = new (() => HBaseConnector) {
-      val conf: Configuration = HBaseConfiguration.create()
-      conf.addResource("hbase-site.xml")
 
-      override def apply(): HBaseConnector = new HBaseConnector(conf, nameSpace)
+      override def apply(): HBaseConnector = new HBaseConnector(hadoop.hadoopConf, nameSpace)
     }
 
     createInstance(createIfNotExist)

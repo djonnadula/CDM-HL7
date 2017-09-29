@@ -34,7 +34,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   def scheduleRenewal(master: Boolean = false, namesNodes: String = EMPTYSTR, conf: Option[Configuration] = None): Boolean = synchronized {
     if (!scheduled && isSecured) {
-      hdfsConf = conf.getOrElse(new Configuration())
+      hdfsConf = conf.getOrElse(hadoop.hadoopConf)
       hdfsConf.set("hadoop.security.authentication", "kerberos")
       fs = FileSystem.get(hdfsConf)
       val appHomeDir = fs.getHomeDirectory
