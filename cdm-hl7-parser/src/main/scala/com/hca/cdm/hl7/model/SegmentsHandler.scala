@@ -13,8 +13,8 @@ trait SegmentsHandler extends Serializable {
 
   def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                      adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
-                     hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit]
-                    )(data: mutable.LinkedHashMap[String, Any], rawHl7: String, meta: MSGMeta): Unit
+                     hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])
+                     (data: mutable.LinkedHashMap[String, Any], rawHl7: String, meta: MSGMeta): Unit
 
 
   def metricsRegistry: TrieMap[String, Long]
@@ -22,6 +22,5 @@ trait SegmentsHandler extends Serializable {
   def resetMetrics: Boolean
 
   // def collectMetrics(driverMetrics: TrieMap[String, mutable.HashMap[SegState, Long]]): TrieMap[String, mutable.HashMap[SegState, Long]]
-
 
 }

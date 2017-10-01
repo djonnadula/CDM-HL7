@@ -52,6 +52,7 @@ import com.hca.cdm.kfka.util.OffsetManager
 import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
 import org.apache.spark.rdd.RDD
 
+
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
   *

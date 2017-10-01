@@ -314,8 +314,11 @@ package object model extends Logg {
           val tlmAckApplication = tryAndReturnDefaultValue(access(6), EMPTYSTR)
           val transformationsReq = tryAndReturnDefaultValue(access(7), EMPTYSTR).split("\\&")
           val etlTransformations = valid(transformationsReq) && transformationsReq(0) == "TRANSFORMATIONS"
-          val etlTransMultiReq = if (tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR) != EMPTYSTR)
-            s"$DOT${tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)}" else tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)
+          val etlTransMultiReq = if (tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR) != EMPTYSTR) {
+            s"$DOT${tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)}"
+          } else {
+            tryAndReturnDefaultValue(access(1, transformationsReq), EMPTYSTR)
+          }
           val segStruct = adhoc take 2 mkString COLON
           val outFormats = adhoc(2) split "\\^"
           val outDest = adhoc(3) split "\\^"
