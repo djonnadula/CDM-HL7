@@ -1,4 +1,4 @@
-package com.hca.cdm.kafka.producer
+package com.hca.cdm.kfka.producer
 
 import com.hca.cdm.exception.CDMKafkaException
 import com.hca.cdm.io.IOConstants._

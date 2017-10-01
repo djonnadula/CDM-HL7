@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "218799871512",
+    "security": null,
     "message_type": {
       "message_code": "PPR",
       "trigger_event": "PC1"
@@ -21,6 +22,7 @@
     "message_control_id": "IP_COQ1A_PPR_EPSQ1A.21654.4561",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": {
       "network_id": "KYA",
       "unit_number": "04446"
@@ -30,8 +32,11 @@
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "K125412312",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCQA1A",
       "id_type_code": "MRN"
     },
@@ -41,6 +46,7 @@
       "given_name": "VENDDIAHGRAM",
       "second_and_further_given_names_or_initials_thereof": "R"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19872737",
     "administrative_sex": "F"
   },
@@ -57,12 +63,17 @@
       "name_of_coding_system": "SNOMED"
     },
     "problem_instance_id": "PO132541243-5",
+    "episode_of_care_id": null,
+    "problem_list_priority": null,
     "problem_established_date_time": {
       "date_time": "987954564987",
       "person_id": "QADGF1245123",
       "provider_id": "DRBRI"
     },
+    "anticipated_problem_resolution_date_time": null,
+    "actual_problem_resolution_date_time": null,
     "problem_classification": "Deleted",
+    "problem_management_discipline": null,
     "problem_persistence": "Deleted"
   },
   "0004.NTE": {

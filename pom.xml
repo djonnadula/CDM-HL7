@@ -7,7 +7,7 @@
     <groupId>com.hca</groupId>
     <artifactId>cdm-hl7</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <name>CDM HL7</name>
     <modules>
         <module>cdm-common</module>
@@ -46,7 +46,7 @@
 
 
     <properties>
-        <cdm.version>1.0.5</cdm.version>
+        <cdm.version>1.0.6</cdm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -148,6 +148,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-spark</artifactId>
+            <version>${hbase.version}-${cdh.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>1.7.6-${cdh.version}</version>
@@ -193,8 +199,9 @@
                <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
                <version>2.1.0.cloudera1</version>
            </dependency>-->
-
+        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor_2.10 -->
     </dependencies>
+
 
     <build>
         <plugins>

@@ -13,6 +13,8 @@ private[flume] class Hl7FlumeMapperBuilder extends Builder {
     new Hl7FlumeMapper()
   }
 
-  override def configure(context: Context): Unit = {}
+  override def configure(context: Context): Unit = {
+    context.getParameters
+  }
 
 }

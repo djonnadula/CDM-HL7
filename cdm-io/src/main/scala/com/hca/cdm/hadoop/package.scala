@@ -2,9 +2,11 @@ package com.hca.cdm
 
 import java.io._
 import java.net.URI
+import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import com.hca.cdm.log.Logg
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
+import org.apache.hadoop.hbase.HBaseConfiguration
 import scala.util.{Failure, Success, Try}
 import scala.util.control.Breaks._
 
@@ -15,8 +17,14 @@ import scala.util.control.Breaks._
   */
 package object hadoop extends Logg {
 
+  def hadoopConf : Configuration = {
+    val conf =  HBaseConfiguration.create(hdpUtil.conf)
+    conf.addResource("hbase-site.xml")
+    conf
+  }
+
   case class OverSizeHandler(stage: String, destination: String) {
-    private lazy val config = new Configuration()
+    private lazy val config = hadoopConf
 
     def handle(data: AnyRef): Unit = overSizedHandle(stage, config, destination, data)
   }
@@ -65,7 +73,7 @@ package object hadoop extends Logg {
         val status = fs.listStatus(temp).filter(valid(_)).takeWhile(_.getLen > 0L).toList.sortBy(_.getModificationTime)
         if (status.nonEmpty) {
           val reader = new BufferedInputStream(fs.open(status.head.getPath))
-          data = deSerialize(reader).asInstanceOf[T]
+          data = deSerialize[T](reader)
           reader close()
           if (cleanUp) fs.listStatus(temp).filter(_.isFile).foreach(file => fs.delete(file.getPath, false))
         }

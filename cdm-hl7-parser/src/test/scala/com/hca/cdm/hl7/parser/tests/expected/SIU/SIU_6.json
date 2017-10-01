@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "201702170812",
+    "security": null,
     "message_type": {
       "message_code": "SIU",
       "trigger_event": "S18"
@@ -21,12 +22,16 @@
     "message_control_id": "MT_COCQV_SIU_SCHQV.170217.1",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "unknown": "SCA^00104"
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "F000670972",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCQV",
       "id_type_code": "MRN"
     },
@@ -36,8 +41,18 @@
       "given_name": "CHRISTIANO",
       "second_and_further_given_names_or_initials_thereof": "PASQUELA"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19440622",
     "administrative_sex": "M",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
     "patient_account_num": "F01036950890 "
   },
   "0003.PV1": {
@@ -50,16 +65,51 @@
       "facility": "COCQV"
     },
     "admission_type": "EL",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": {
       "person_id": "ARGAS",
       "family_name": "Ramazona",
       "given_name": "Chartruese"
     },
+    "referring_doctor": null,
+    "primary_care_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "mode_of_arrival": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
     "patient_type": "SDC",
+    "visit_num": null,
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "reason_for_visit": null,
     "account_status": "REG "
   },
   "0004.SCH": {
     "placer_appointment_id": "340192",
+    "filler_appointment_id": null,
     "occurrence_num": "E",
     "placer_group_num": "NEW",
     "schedule_id": {
@@ -74,6 +124,7 @@
       "text": "CATH LAB 1"
     },
     "unknown": "ARGAS^Ramazona^Chartruese",
+    "appointment_duration_units": null,
     "appointment_timing_quantity": "201702170642",
     "placer_contact_person": {
       "person_id": "201702170642",

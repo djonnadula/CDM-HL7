@@ -14,6 +14,7 @@
     "receiving_application": "OV",
     "receiving_facility": "OV",
     "date_time_of_message": "201331241003",
+    "security": null,
     "message_type": {
       "message_code": "SIU",
       "trigger_event": "S18"
@@ -21,6 +22,7 @@
     "message_control_id": "IP_COCFPA_SIU_SCHFPA.123124.2",
     "processing_id": "T",
     "version_id": "2.5",
+    "sequence_num": null,
     "continuation_pointer": {
       "network_id": "TXG",
       "unit_number": "26790"
@@ -28,8 +30,11 @@
   },
   "0002.PID": {
     "set_id": "1",
+    "patient_id": null,
     "patient_id_list": {
       "id_num": "BF00024737",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
       "assigning_authority": "COCFPA",
       "id_type_code": "MRN"
     },
@@ -39,8 +44,18 @@
       "given_name": "SANDIE",
       "second_and_further_given_names_or_initials_thereof": "L"
     },
+    "mother_maiden_name": null,
     "date_time_of_birth": "19510511",
     "administrative_sex": "F",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
     "patient_account_num": "DT12131412123"
   },
   "0003.PV1": {
@@ -53,12 +68,46 @@
       "facility": "COCFPA"
     },
     "admission_type": "EL",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
     "attending_doctor": {
       "person_id": "DDOWEIJ4",
       "family_name": "Camilla",
       "given_name": "Jeff"
     },
+    "referring_doctor": null,
+    "consulting_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
     "patient_type": "IN",
+    "visit_num": null,
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "bed_status": null,
     "account_status": "ADM"
   },
   "0004.SCH": {
@@ -117,6 +166,7 @@
       "alternate_id": "hcaORL153",
       "alternate_text": "Drain 1 on arrival:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "N:No"
   },
   "0007.OBX": {
@@ -129,6 +179,7 @@
       "alternate_id": "hcaORL154",
       "alternate_text": "Drain 1 size:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "MEDIUM"
   },
   "0008.OBX": {
@@ -141,6 +192,7 @@
       "alternate_id": "hcaORL278",
       "alternate_text": "Drain 1 location:"
     },
+    "obsv_sub_id": null,
     "obsv_value": "OPSITE"
   },
   "0009.ZTM": {
@@ -152,8 +204,12 @@
       "time_desc": "PT READY",
       "pre_date_time": "201601301314"
     },
+    "case_pre_3_time": null,
+    "case_pre_4_time": null,
     "case_hold_1_time": "PT ARRIVES HOLDING",
     "case_hold_2_time": "PT READY",
+    "case_anesthesia_1_time": null,
+    "case_anesthesia_2_time": null,
     "case_operating_room_1_time": {
       "time_desc": "ANESTHESIA START",
       "or_date_time": "201601301415"
@@ -185,6 +241,7 @@
       "time_desc": "PT LEAVES ROOM",
       "or_date_time": "201601301718"
     },
+    "case_operating_room_8_time": null,
     "case_pacu_1_time": {
       "time_desc": "PT ARRIVES PACU",
       "pacu_date_time": "201601301719"
@@ -313,6 +370,7 @@
       "last_name": "Cornwalis",
       "first_name": "Shark"
     },
+    "comment": null,
     "in_out_range": {
       "sequence_num": "1",
       "range_date": "20160130",
@@ -343,6 +401,7 @@
       "last_name": "SRACHIA",
       "first_name": "SAMMY"
     },
+    "comment": null,
     "in_out_range": {
       "sequence_num": "1",
       "range_date": "20160130",
@@ -361,6 +420,7 @@
       "last_name": "RABID",
       "first_name": "DADBI"
     },
+    "comment": null,
     "in_out_range": {
       "sequence_num": "1",
       "range_date": "20160130",
@@ -379,6 +439,7 @@
       "last_name": "GILFRIED",
       "first_name": "RUMOR"
     },
+    "comment": null,
     "in_out_range": {
       "sequence_num": "1",
       "range_date": "20160130",
@@ -509,10 +570,12 @@
       "iv_description": "LR"
     },
     "date_time": "201601301810",
+    "discontinue_info": null,
     "site": {
       "site_mnemonic": "ARM RIGHT",
       "site_name": "ARM RIGHT"
     },
+    "rate": null,
     "volume": "2100",
     "begin": "3000",
     "end_ltc": "900",
@@ -530,6 +593,7 @@
     },
     "item": {
       "item_mnemonic": "300120",
+      "item_override_description": null,
       "item_dictionary_description": "PADS GROUNDING",
       "item_dictionary_alternate_description": "PADS GROUNDING REGULAR   E7507"
     },
@@ -547,6 +611,7 @@
     },
     "item": {
       "item_mnemonic": "026968",
+      "item_override_description": null,
       "item_dictionary_description": "SPONGE DRSG CRTY GZE L4INXW4IN",
       "item_dictionary_alternate_description": "DRESSING GZE 4X4 12PL NON21426"
     },
@@ -564,6 +629,7 @@
     },
     "item": {
       "item_mnemonic": "047179",
+      "item_override_description": null,
       "item_dictionary_description": "DRESSING ABD PAD 8 X 7 1/2",
       "item_dictionary_alternate_description": "DRESSING ABD PAD      NON21453"
     },
@@ -581,6 +647,7 @@
     },
     "item": {
       "item_mnemonic": "089675",
+      "item_override_description": null,
       "item_dictionary_description": "DRAPE SURG 100X60IN SHLDR FLD",
       "item_dictionary_alternate_description": "DRAPE SHLDR ARTH 100X60  89492"
     },
@@ -598,6 +665,7 @@
     },
     "item": {
       "item_mnemonic": "227852",
+      "item_override_description": null,
       "item_dictionary_description": "DRAPE SURG 77X53IN .75 REINF F",
       "item_dictionary_alternate_description": "DRAPE 3/4 FAN 53X77' DYNJP2416"
     },
@@ -615,6 +683,7 @@
     },
     "item": {
       "item_mnemonic": "227860",
+      "item_override_description": null,
       "item_dictionary_description": "DRAPE SURG REINF ADHES STRP SP",
       "item_dictionary_alternate_description": "DRAPE SPLIT SHEET    DYNJP2498"
     },
@@ -632,6 +701,7 @@
     },
     "item": {
       "item_mnemonic": "227863",
+      "item_override_description": null,
       "item_dictionary_description": "COVER MAYO STAND XL STRL",
       "item_dictionary_alternate_description": "COVER MAYO STAND XL STRL"
     },
@@ -649,6 +719,7 @@
     },
     "item": {
       "item_mnemonic": "365898",
+      "item_override_description": null,
       "item_dictionary_description": "DRAPE IOBAN 6651",
       "item_dictionary_alternate_description": "DRAPE STERI IOBAN 3M    6651EZ"
     },
@@ -666,6 +737,7 @@
     },
     "item": {
       "item_mnemonic": "341493",
+      "item_override_description": null,
       "item_dictionary_description": "HEMOVAC MEDIUM 0043610",
       "item_dictionary_alternate_description": "DRAIN HEMOVAC MEDIUM   0043610"
     },
@@ -683,6 +755,7 @@
     },
     "item": {
       "item_mnemonic": "412264",
+      "item_override_description": null,
       "item_dictionary_description": "GLOVE BIOGEL SURGEON SIZE 8 30",
       "item_dictionary_alternate_description": "GLOVE BIOGEL 8.0         30480"
     },
@@ -700,6 +773,7 @@
     },
     "item": {
       "item_mnemonic": "412312",
+      "item_override_description": null,
       "item_dictionary_description": "GLOVE INDICATOR PF BIOGEL SZ 8",
       "item_dictionary_alternate_description": "GLOVE BIOGEL INDICATE 8  31280"
     },
@@ -717,6 +791,7 @@
     },
     "item": {
       "item_mnemonic": "510396",
+      "item_override_description": null,
       "item_dictionary_description": "*GLOVES, 8 1/2 ORTHO",
       "item_dictionary_alternate_description": "GLOVE ORTHO 8.5         2D7286"
     },
@@ -734,6 +809,7 @@
     },
     "item": {
       "item_mnemonic": "817854",
+      "item_override_description": null,
       "item_dictionary_description": "GOWN SURG XL XLNG IMPRV BRTHBL",
       "item_dictionary_alternate_description": "XL EXTRA LONG GOWN  DYNJP2302P"
     },
@@ -751,6 +827,7 @@
     },
     "item": {
       "item_mnemonic": "817855",
+      "item_override_description": null,
       "item_dictionary_description": "GOWN SURG 2XL IMPRV BRTHBL NS",
       "item_dictionary_alternate_description": "GOWN SURG XL XLNG   DYNJP2303P"
     },
@@ -768,6 +845,7 @@
     },
     "item": {
       "item_mnemonic": "090977",
+      "item_override_description": null,
       "item_dictionary_description": "HANDPIECE INTPLS SUC COAX HFLO",
       "item_dictionary_alternate_description": "HNDPCE INTPLS COAX  0210114100"
     },
@@ -785,6 +863,7 @@
     },
     "item": {
       "item_mnemonic": "026883",
+      "item_override_description": null,
       "item_dictionary_description": "TIP SUC YNKR FLNG RGD CLR STRL",
       "item_dictionary_alternate_description": "YANKAUER TIP SUCTION DYND50140"
     },
@@ -802,6 +881,7 @@
     },
     "item": {
       "item_mnemonic": "037831",
+      "item_override_description": null,
       "item_dictionary_description": "BLADE SAW 90X18X1.27MM S6 SGTL",
       "item_dictionary_alternate_description": "BLADE 18.0X90.X1.27 6118127090"
     },
@@ -819,6 +899,7 @@
     },
     "item": {
       "item_mnemonic": "213073",
+      "item_override_description": null,
       "item_dictionary_description": "GLV SRG PLISPRN 8 BGL ULTRATOU",
       "item_dictionary_alternate_description": "GLOVE ULTRATOUCH BIO 8   41180"
     },
@@ -836,6 +917,7 @@
     },
     "item": {
       "item_mnemonic": "227840",
+      "item_override_description": null,
       "item_dictionary_description": "DRAPE SURG 90X44IN CVR FNFLD R",
       "item_dictionary_alternate_description": "TABLE COVER 44X90 STERILE"
     },
@@ -853,6 +935,7 @@
     },
     "item": {
       "item_mnemonic": "448709",
+      "item_override_description": null,
       "item_dictionary_description": "TIP LNG INTPLS FMCNL COAX PLS",
       "item_dictionary_alternate_description": "TIP LONG FEMORAL    0210007000"
     },
@@ -870,6 +953,7 @@
     },
     "item": {
       "item_mnemonic": "508170",
+      "item_override_description": null,
       "item_dictionary_description": "SPONGE LAB 18X18 STERILE 5PK",
       "item_dictionary_alternate_description": "SPONGE LAP          MDHT241518"
     },
@@ -887,6 +971,7 @@
     },
     "item": {
       "item_mnemonic": "537164",
+      "item_override_description": null,
       "item_dictionary_description": "GLOVE SURG 8 LTX ORTH PF BEAD",
       "item_dictionary_alternate_description": "GLOVE SURG 8       07072D7295I"
     },
@@ -904,6 +989,7 @@
     },
     "item": {
       "item_mnemonic": "727751",
+      "item_override_description": null,
       "item_dictionary_description": "COVER LIGHT HANDLE RIGID 1/PK",
       "item_dictionary_alternate_description": "LIGHT HNDL CVR RIGID  DYNJLHH1"
     },
@@ -921,6 +1007,7 @@
     },
     "item": {
       "item_mnemonic": "894369",
+      "item_override_description": null,
       "item_dictionary_description": "GLOVES SRG 8 BGL PI INDCTR UND",
       "item_dictionary_alternate_description": "GLOVE PI INDICAT BIO 8   41680"
     },
@@ -938,6 +1025,7 @@
     },
     "item": {
       "item_mnemonic": "225772",
+      "item_override_description": null,
       "item_dictionary_description": "DRESSING WRP COBAN L6.5YDXW4IN",
       "item_dictionary_alternate_description": "DRESSING COBAN 4' X 5YD  2084S"
     },
@@ -955,6 +1043,7 @@
     },
     "item": {
       "item_mnemonic": "300016",
+      "item_override_description": null,
       "item_dictionary_description": "PENCIL ELECT-SWITCH",
       "item_dictionary_alternate_description": "ESU HAND CONTROL PENCIL E2515H"
     },
@@ -973,6 +1062,7 @@
     },
     "item": {
       "item_mnemonic": "447434",
+      "item_override_description": null,
       "item_dictionary_description": "TRAY HUMERAL W/LOCK RING SHLDR",
       "item_dictionary_alternate_description": "TRAY HUMERAL W/LOCK RING SHLDR"
     },
@@ -990,6 +1080,7 @@
     },
     "item": {
       "item_mnemonic": "588803",
+      "item_override_description": null,
       "item_dictionary_description": "PACK TOTAL JOINT",
       "item_dictionary_alternate_description": "PACK TOTAL JOINT     DYNJS0830"
     },
@@ -1007,6 +1098,7 @@
     },
     "item": {
       "item_mnemonic": "361733",
+      "item_override_description": null,
       "item_dictionary_description": "STPLR PROXIMATE*RH WIDE SKIN",
       "item_dictionary_alternate_description": "SKIN STAPLER WIDE ROTATNG HEAD"
     },
@@ -1024,6 +1116,7 @@
     },
     "item": {
       "item_mnemonic": "108995",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE FIBERWIRE #2",
       "item_dictionary_alternate_description": "SUTURE FIBERWIRE #2 BL AR-7200"
     },
@@ -1041,6 +1134,7 @@
     },
     "item": {
       "item_mnemonic": "359923",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE #5 ETHIBOND V-37",
       "item_dictionary_alternate_description": "SUT ETHIBOND 5 V-37 30'  MB66G"
     },
@@ -1058,6 +1152,7 @@
     },
     "item": {
       "item_mnemonic": "360484",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE VCL 2-0 CT1 18IN CR BRA",
       "item_dictionary_alternate_description": "SUT-VICRYL 2-0 CT-1 J739 J739D"
     },
@@ -1075,6 +1170,7 @@
     },
     "item": {
       "item_mnemonic": "360765",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE VICRYL 0 CT-1 CR/8 J840",
       "item_dictionary_alternate_description": "SUT #0 VICRYL CT-1 CR/8  J840D"
     },
@@ -1092,6 +1188,7 @@
     },
     "item": {
       "item_mnemonic": "360966",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE ETHILON 3-0 PS-2 1669H",
       "item_dictionary_alternate_description": "SUTURE 3-0 ETHILON PS-2  1669H"
     },
@@ -1109,6 +1206,7 @@
     },
     "item": {
       "item_mnemonic": "538065",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE CT-1 0 27 CT VCRPL ABAC",
       "item_dictionary_alternate_description": "SUT-VICRYL+ 0 CT-1 27' VCP260H"
     },
@@ -1126,6 +1224,7 @@
     },
     "item": {
       "item_mnemonic": "648967",
+      "item_override_description": null,
       "item_dictionary_description": "SUTURE ABSRB 2-0 CT-2 L27IN AN",
       "item_dictionary_alternate_description": "SUT-VICRYL+ 2-0 CT2 27' VCP269"
     },
@@ -1143,6 +1242,7 @@
     },
     "implant_item": {
       "item_mnemonic": "687520",
+      "item_override_description": null,
       "item_dictionary_description": "STEM HUM 14MM PRIM CMPRH MINI",
       "item_dictionary_alternate_description": "STEM HUM 14MM PRIM CMPRH MINI"
     },
@@ -1154,15 +1254,19 @@
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "113634",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20251221",
     "lot_number": "405590",
+    "serial_number": null,
     "implant_site": "OPSITE",
     "implant_size": "14X83MM"
   },
@@ -1178,6 +1282,7 @@
     },
     "implant_item": {
       "item_mnemonic": "548550",
+      "item_override_description": null,
       "item_dictionary_description": "BASEPLATE TIB CMPRH 25MM MINI",
       "item_dictionary_alternate_description": "BASEPLATE TIB CMPRH 25MM MINI"
     },
@@ -1189,15 +1294,19 @@
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "010000589",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20270114",
     "lot_number": "953690",
+    "serial_number": null,
     "implant_site": "OPSITE",
     "implant_size": "25MM"
   },
@@ -1213,6 +1322,7 @@
     },
     "implant_item": {
       "item_mnemonic": "214957",
+      "item_override_description": null,
       "item_dictionary_description": "SCREW LCK 4.75MMX25MM SS CMPR",
       "item_dictionary_alternate_description": "SCREW LCK 4.75MMX25MM SS CMPR"
     },
@@ -1224,17 +1334,27 @@
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "180552",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20261212",
     "lot_number": "330550",
+    "serial_number": null,
     "implant_site": "OPSITE",
     "implant_size": "4.75X25MM",
+    "solution_expiration_date": null,
+    "solution_inventory": null,
+    "solution_lot": null,
+    "solution_prep_by": null,
+    "solution_prep_date_time": null,
+    "solution_comment": null,
     "opened_by_user": "BFOR.BXM",
     "opened_date": "20160130",
     "opened_time": "0027",
@@ -1265,17 +1385,27 @@
       "manufacturer_mnemonic": "BIOMETORTH",
       "manufacturer_name": "BIOMET ORTHOPEDICS LLC"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "115310",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20270117",
     "lot_number": "700000",
+    "serial_number": null,
     "implant_site": "OPSITE",
     "implant_size": "36MM",
+    "solution_expiration_date": null,
+    "solution_inventory": null,
+    "solution_lot": null,
+    "solution_prep_by": null,
+    "solution_prep_date_time": null,
+    "solution_comment": null,
     "opened_by_user": "BFOR.BXM",
     "opened_date": "20160130",
     "opened_time": "0027",
@@ -1306,15 +1436,20 @@
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "180559",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20280331",
     "lot_number": "664910",
+    "serial_number": null,
+    "implant_site": null,
     "implant_size": "3.5MM X 2.5MM"
   },
   "0077.ZM0": {
@@ -1340,15 +1475,20 @@
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "180559",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20260610",
     "lot_number": "488600",
+    "serial_number": null,
+    "implant_site": null,
     "implant_size": "3.5MM X 25MM"
   },
   "0079.ZM0": {
@@ -1374,15 +1514,20 @@
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "115370",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20261220",
     "lot_number": "672670",
+    "serial_number": null,
+    "implant_site": null,
     "implant_size": "44MM"
   },
   "0081.ZM0": {
@@ -1408,15 +1553,20 @@
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "115395",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20261215",
     "lot_number": "485360",
+    "serial_number": null,
+    "implant_site": null,
     "implant_size": "6.5MM X 25MM"
   },
   "0083.ZM0": {
@@ -1442,15 +1592,20 @@
       "manufacturer_mnemonic": "BIOMET",
       "manufacturer_name": "BIOMET"
     },
+    "manufacturer_com": null,
     "implant_surgeon": {
       "surgeon_mnemonic": "DDOWEIJ4",
       "last_name": "Camilla",
       "first_name": "Jeff"
     },
     "catalog_number": "XL-115363",
+    "batch_number": null,
     "count": "1",
+    "culture": null,
     "expiration_date": "20220107",
     "lot_number": "488780",
+    "serial_number": null,
+    "implant_site": null,
     "implant_size": "36MM"
   },
   "0085.ZOU": {
@@ -1545,6 +1700,7 @@
       "equipment_query_mnemonic": "JCAORCCM07",
       "query_text": "Knee-"
     },
+    "observation_sub_id": null,
     "observation_value": "B:Bilateral"
   },
   "0095.ZE1": {
@@ -1554,6 +1710,7 @@
       "equipment_query_mnemonic": "hcaORABV07",
       "query_text": "Exp Date:"
     },
+    "observation_sub_id": null,
     "observation_value": "20181011"
   },
   "0096.ZE1": {
@@ -1563,6 +1720,7 @@
       "equipment_query_mnemonic": "hcaORABV10",
       "query_text": "Coag:"
     },
+    "observation_sub_id": null,
     "observation_value": "30"
   },
   "0097.ZE1": {
@@ -1572,6 +1730,7 @@
       "equipment_query_mnemonic": "hcaORABV11",
       "query_text": "Cut:"
     },
+    "observation_sub_id": null,
     "observation_value": "30"
   },
   "0098.ZE1": {
@@ -1581,6 +1740,7 @@
       "equipment_query_mnemonic": "hcaORABV19",
       "query_text": "Cautery notes:"
     },
+    "observation_sub_id": null,
     "observation_value": "CAUTERY PAD PLACED HIGH ON LEFT LATERAL THIGH DUE TO BILAT KNEE IMPLANTS"
   },
   "0099.ZE1": {
@@ -1590,6 +1750,7 @@
       "equipment_query_mnemonic": "hcaORABV32",
       "query_text": "Pad Lot #:"
     },
+    "observation_sub_id": null,
     "observation_value": "62840163X"
   },
   "0100.ZE1": {
@@ -1599,6 +1760,7 @@
       "equipment_query_mnemonic": "hcaORAPT06",
       "query_text": "Pt position="
     },
+    "observation_sub_id": null,
     "observation_value": "SUPINESITT"
   },
   "0101.ZE1": {
@@ -1608,6 +1770,7 @@
       "equipment_query_mnemonic": "hcaORASC02",
       "query_text": "Unit #:"
     },
+    "observation_sub_id": null,
     "observation_value": "404137487"
   },
   "0102.ZE1": {
@@ -1617,6 +1780,7 @@
       "equipment_query_mnemonic": "hcaORAWM24",
       "query_text": "Comments:"
     },
+    "observation_sub_id": null,
     "observation_value": "WARM BLANKETS X4 INTR OP PER ANESTHESIA"
   },
   "0103.ZE1": {
@@ -1626,6 +1790,7 @@
       "equipment_query_mnemonic": "hcaORCBV20",
       "query_text": "Pad Location="
     },
+    "observation_sub_id": null,
     "observation_value": "THIGHL"
   },
   "0104.ZE1": {
@@ -1635,6 +1800,7 @@
       "equipment_query_mnemonic": "hcaORCBV31",
       "query_text": "Applied by-"
     },
+    "observation_sub_id": null,
     "observation_value": "BFOR.BXM"
   },
   "0105.ZE1": {
@@ -1644,6 +1810,7 @@
       "equipment_query_mnemonic": "hcaOREI01",
       "query_text": "Intermittent Pneumatic Device Notes:"
     },
+    "observation_sub_id": null,
     "observation_value": "ON AND RUNNING PRIOR TO INDUCTION"
   },
   "0106.ZE1": {
@@ -1653,6 +1820,7 @@
       "equipment_query_mnemonic": "hcaORESC03",
       "query_text": "Pressure Setting:"
     },
+    "observation_sub_id": null,
     "observation_value": "40"
   },
   "0107.ZE1": {
@@ -1662,6 +1830,7 @@
       "equipment_query_mnemonic": "hcaORKPOS1",
       "query_text": "First position time-"
     },
+    "observation_sub_id": null,
     "observation_value": "1420"
   },
   "0108.ZE1": {
@@ -1691,6 +1860,7 @@
       "equipment_query_mnemonic": "hcaORL226",
       "query_text": "Reusable pad on table:"
     },
+    "observation_sub_id": null,
     "observation_value": "N:No"
   },
   "0111.ZE1": {
@@ -1700,6 +1870,7 @@
       "equipment_query_mnemonic": "hcaORL227",
       "query_text": "Site hair removed:"
     },
+    "observation_sub_id": null,
     "observation_value": "N:No"
   },
   "0112.ZE1": {
@@ -1709,6 +1880,7 @@
       "equipment_query_mnemonic": "hcaORL604",
       "query_text": "Cautery Unit #-"
     },
+    "observation_sub_id": null,
     "observation_value": "0726"
   },
   "0113.ZE1": {
@@ -1718,6 +1890,7 @@
       "equipment_query_mnemonic": "hcaORL607",
       "query_text": "Transferred to OR bed by:"
     },
+    "observation_sub_id": null,
     "observation_value": "S:BY SELF"
   },
   "0114.ZE1": {
@@ -1727,6 +1900,7 @@
       "equipment_query_mnemonic": "hcaORL608",
       "query_text": "Arm position-"
     },
+    "observation_sub_id": null,
     "observation_value": "AAP:ARMS ARMBOARDS \\T\\ PADDED"
   },
   "0115.ZE1": {
@@ -1736,6 +1910,7 @@
       "equipment_query_mnemonic": "hcaORL609",
       "query_text": "Safety strap-"
     },
+    "observation_sub_id": null,
     "observation_value": "AT:ACROSS ANTERIOR THIGHS"
   },
   "0116.ZPS": {
