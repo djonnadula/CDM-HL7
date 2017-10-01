@@ -164,13 +164,17 @@ private[cdm] object LoginRenewer extends Logg {
     val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keytab)
     val cred = loggedUser.getCredentials
     // noinspection ScalaDeprecation
-    performAction(asFunc({
-      refreshFsTokens(nns + credentialsFile.getParent, cred)
-      if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {
-        val hBaseToken = obtainToken(hdfsConf)
-        if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
+    loggedUser.doAs(new PrivilegedExceptionAction[Void] {
+      override def run(): Void = {
+        info("generating Token for user=" + loggedUser.getUserName + ", authMethod=" + loggedUser.getAuthenticationMethod)
+        refreshFsTokens(nns + credentialsFile.getParent, cred)
+        if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {
+          val hBaseToken = obtainToken(hdfsConf)
+          if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
+        }
+        null
       }
-    }))
+    })
     loggedUser.addCredentials(cred)
     setCredentials(loggedUser)
     cred.writeTokenStorageFile(credentialsFile, hdfsConf)

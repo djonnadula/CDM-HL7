@@ -37,7 +37,7 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
     closeResource(connection)
   }
 
-  def getBatchOperator(table: String, batchSize: Int): BatchOperator = synchronized{
+  def getBatchOperator(table: String, batchSize: Int): BatchOperator = synchronized {
     mutatorStore.getOrElseUpdate(table, new BatchOperator(nameSpace, table, connection, batchSize))
   }
 
@@ -64,7 +64,7 @@ private[cdm] class HBaseConnector(conf: Configuration, nameSpace: String = "hl7"
     }
   }
 
-  def batchOperators(tables: Set[String], batchSize: Int): Map[String, BatchOperator] = {
+  def batchOperators(tables: Set[String], batchSize: Int): Map[String, BatchOperator] = synchronized {
     tables.map { table => table -> getBatchOperator(table, batchSize) } toMap
   }
 
