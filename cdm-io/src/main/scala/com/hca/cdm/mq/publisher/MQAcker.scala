@@ -15,7 +15,7 @@ case class TLMResponse(stage: String, active: Boolean, dest: String)
 /**
   * Created by Devaraj Jonnadula on 3/6/2017.
   */
-class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String,queueMappingForResponse : String) extends Logg with MqConnector {
+class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, queueMappingForResponse: String) extends Logg with MqConnector {
 
   self =>
   private lazy val batchSize = 5000
@@ -110,11 +110,13 @@ class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, 
     registerHook(newThread(s"SHook-${this.getClass.getSimpleName}$app", runnable(close())))
   }
 
+
   override def toString : String= s"MQAcker(mqHosts=$mqHosts, mqManager=$mqManager, mqChannel=$mqChannel, ackQueue=$initialQueues)"
+
 
 }
 
-object MQAcker extends Logg{
+object MQAcker extends Logg {
 
   private val lock = new Object()
   private lazy val randomConn = new Random
@@ -122,10 +124,11 @@ object MQAcker extends Logg{
   private var connections = new ArrayBuffer[MQAcker]
 
   @throws(classOf[MqException])
-  def apply(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, queueMappingForResponse : String, numberOfIns: Int = 1): Unit = {
+  def apply(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, queueMappingForResponse: String, numberOfIns: Int = 1): Unit = {
     maxCon = numberOfIns
+
     def createIfNotExist = new (() => MQAcker) {
-      override def apply(): MQAcker = new MQAcker(app, jobDesc)(mqHosts, mqManager, mqChannel,queueMappingForResponse)
+      override def apply(): MQAcker = new MQAcker(app, jobDesc)(mqHosts, mqManager, mqChannel, queueMappingForResponse)
     }
 
     createConnection(numberOfIns, createIfNotExist)
