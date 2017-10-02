@@ -38,5 +38,10 @@ cp -f $DEPLOYDIR/cdm-hl7-cfg/* $RELEASDIR/cfg
 
 ln -s $RELEASDIR $LINK
 
+chmod -R +x /hadoop/cdm/patient-repository/latest
+
+chown -R corpsrvcdmbtch:entrappedhhl7_rw /var/log/cdm/patient-repository
+
+
 
 
