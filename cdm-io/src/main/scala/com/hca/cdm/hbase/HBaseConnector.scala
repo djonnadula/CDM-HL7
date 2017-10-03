@@ -103,10 +103,16 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
     ops foreach mutate
   }
 
-  def submitBatch(): Unit = {
+  def submitBatch(withRetry: Boolean = false): Unit = {
     if (batched >= batchSize) {
-      new RetryHandler().retryOperation(asFunc(tryAndThrow(mutator flush(), error(_: Throwable))))
-      reset()
+      if (withRetry) {
+        if (new RetryHandler().retryOperation(asFunc(tryAndThrow(mutator flush(), error(_: Throwable))))) reset()
+      }
+      else {
+        tryAndThrow(mutator flush(), error(_: Throwable))
+        reset()
+      }
+
     }
   }
 

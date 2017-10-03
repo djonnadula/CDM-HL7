@@ -380,10 +380,6 @@ package object model extends Logg {
       offHeapDataEnricher apply data
       // tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
     }
-
-    def offHeapEnricher(): Any = {
-
-    }
   }
 
   case class ADHOC(outFormat: OutFormat, destination: DestinationSystem, outKeyNames: mutable.LinkedHashSet[(String, String)]
