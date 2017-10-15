@@ -465,18 +465,18 @@ package object model extends Logg {
   }
 
   private[model] case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
-    private lazy val staticFields: List[(String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
-      fieldsWithStaticOp.split(caret).toList.map {
+    private lazy val staticFields: List[(String, String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
+      fieldsWithStaticOp.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0), temp(1))
+          (temp(0), temp(1), temp(2))
       }
     else Nil
 
     def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
-      staticFields.foreach {
-        case (criteria, updateWith) =>
-          if (layout isDefinedAt criteria) layout update(criteria, updateWith)
+      staticFields foreach {
+        case (field, criteria, updateWith) =>
+          if ((layout isDefinedAt field) && (layout(field) == EMPTYSTR || layout(field) == criteria)) layout update(field, updateWith)
       }
     }
   }
@@ -697,7 +697,7 @@ object EnrichCacheManager extends Logg {
     instance
   }
 
-  def apply(adhocConfig: String, hl7Types: Array[String], offHeapHandler: ((Any,Any,Any,Any)) => Any): EnrichCacheManager = lock.synchronized {
+  def apply(adhocConfig: String, hl7Types: Array[String], offHeapHandler: ((Any, Any, Any, Any)) => Any): EnrichCacheManager = lock.synchronized {
     if (instance == null) {
       instance = new EnrichCacheManager()
       val adhocSeg = model.applySegmentsToAll(model.loadSegments(adhocConfig), hl7Types)
