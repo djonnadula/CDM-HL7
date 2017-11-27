@@ -11,7 +11,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
-import com.hca.cdm.hl7.enrichment.{EnrichData, EnrichDataFromOffHeap, NoEnricher}
+import com.hca.cdm.hl7.enrichment.{EnrichData, EnrichDataFromOffHeap, NoEnRicher}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
 import com.hca.cdm.log.Logg
@@ -25,7 +25,6 @@ import org.apache.avro.generic.GenericData.Record
 import java.util.regex.Pattern
 import org.apache.avro.generic._
 import org.apache.avro.io._
-import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
@@ -111,7 +110,7 @@ package object model extends Logg {
   private def getRejectSchema = rejectSchema.clone().transform((k, v) => EMPTYSTR)
 
   private case object RejectAvroSchema {
-    private lazy val schema: Schema = new Schema.Parser().parse(readFile("HL7_Reject.avro").getLines().mkString(EMPTYSTR))
+    private lazy val schema: Schema = new Schema.Parser().parse(readFile("HL7_Reject.avsc").getLines().mkString(EMPTYSTR))
     private lazy val encoder = EncoderFactory.get
     private lazy val writer: GenericDatumWriter[AnyRef] = new GenericDatumWriter(schema)
 
@@ -225,7 +224,7 @@ package object model extends Logg {
         applyAvroData(rejectRecord, urn, meta.medical_record_urn)
         applyAvroData(rejectRecord, accntNum, meta.account_num)
         applyAvroData(rejectRecord, rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
-        applyAvroData(rejectRecord, rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
+        applyAvroData(rejectRecord, rejectData, if (raw ne null) raw else if (data != null) toJson(data) else EMPTYSTR)
         applyAvroData(rejectRecord, etlTime, timeStamp)
         val stream = new ByteArrayOutputStream(256)
         val encoder = encoderFac.directBinaryEncoder(stream, null)
@@ -287,14 +286,14 @@ package object model extends Logg {
           tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
             config.getOrDefault(s"$request$DOT${"reference.props"}", EMPTYSTR).asInstanceOf[String].split(COMMA)).asInstanceOf[EnrichData], error(_: Throwable)
             , Some(s"Impl for $impl cannot be initiated"))
-        } else NoEnricher()
+        } else NoEnRicher()
       }, {
         val impl = config.getOrDefault(s"$request$DOT${"reference.offheap.handle"}", EMPTYSTR).asInstanceOf[String]
         if (impl != EMPTYSTR) {
           tryAndThrow(currThread.getContextClassLoader.loadClass(impl).getConstructor(classOf[Array[String]]).newInstance(
             config.getOrDefault(s"$request$DOT${"reference.offheap.props"}", EMPTYSTR).asInstanceOf[String].split(COMMA)).asInstanceOf[EnrichDataFromOffHeap], error(_: Throwable)
             , Some(s"Impl for $impl cannot be initiated"))
-        } else NoEnricher()
+        } else NoEnRicher()
       }
     ))
     request
@@ -368,16 +367,15 @@ package object model extends Logg {
   case class HBaseConfig(family: String, key: ListBuffer[String])
 
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
-                               dataEnRicher: EnrichData, offHeapDataEnricher: EnrichDataFromOffHeap) {
-    private val offHeapManager: TrieMap[String, (Any) => Any] = new TrieMap()
+                               dataEnRicher: EnrichData, offHeapDataEnRicher: EnrichDataFromOffHeap) {
 
-    def applyTransformations(data: mutable.LinkedHashMap[String, String]): Unit = {
+    def applyTransformations(data: mutable.LinkedHashMap[String, String]): Any = {
       selector apply data
       aggregator apply data
       staticOperator apply data
       validator apply data
+      offHeapDataEnRicher apply data
       dataEnRicher apply data
-      offHeapDataEnricher apply data
       // tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
     }
   }
@@ -389,7 +387,7 @@ package object model extends Logg {
       map(multi => multi._1 -> multi._2.map(ele => ele._1 -> EMPTYSTR).toMap)
   }
 
-  private[model] case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
+  case class FieldSelector(selectFieldsCriteria: String = EMPTYSTR) {
     private lazy val selectCriteria: List[(String, String, String, String, String)] = if (selectFieldsCriteria != EMPTYSTR)
       selectFieldsCriteria.split(COMMA).toList.map {
         x =>
@@ -417,7 +415,7 @@ package object model extends Logg {
     }
   }
 
-  private[model] case class FieldsCombiner(combineFields: String = EMPTYSTR) {
+  case class FieldsCombiner(combineFields: String = EMPTYSTR) {
     private lazy val fieldsToCombine: List[(Array[String], String, String, String)] = if (combineFields != EMPTYSTR)
       combineFields.split(COMMA).toList.map {
         x =>
@@ -441,7 +439,7 @@ package object model extends Logg {
     }
   }
 
-  private[model] case class FieldsValidator(validateFields: String = EMPTYSTR) {
+  case class FieldsValidator(validateFields: String = EMPTYSTR) {
     private lazy val fieldsToValidate: List[(String, (CharSequence) => Boolean, String)] = if (validateFields != EMPTYSTR)
       validateFields.split(COMMA).toList.map {
         x =>
@@ -460,7 +458,7 @@ package object model extends Logg {
     }
   }
 
-  private[model] case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
+  case class FieldsStaticOperator(fieldsWithStaticOp: String = EMPTYSTR) {
     private lazy val staticFields: List[(String, String, String)] = if (fieldsWithStaticOp != EMPTYSTR)
       fieldsWithStaticOp.split(COMMA).toList.map {
         x =>
@@ -660,13 +658,14 @@ package object model extends Logg {
 
 class EnrichCacheManager extends Logg {
 
-  import com.hca.cdm.hl7.model.FieldsTransformer
+  import com.hca.cdm.hl7.model.{FieldsTransformer, FieldSelector, FieldsCombiner, FieldsStaticOperator, FieldsValidator}
 
+  private lazy val noTransformer = FieldsTransformer(FieldSelector(), FieldsCombiner(), FieldsValidator(), FieldsStaticOperator(), NoEnRicher(), NoEnRicher())
   private lazy val cacheStore = new mutable.HashMap[String, FieldsTransformer]()
 
-  def cache(unit: String, enricher: FieldsTransformer): Unit = cacheStore += unit -> enricher
+  def cache(unit: String, enRicher: FieldsTransformer): Unit = cacheStore += unit -> enRicher
 
-  def getEnRicher(unit: String): Option[FieldsTransformer] = cacheStore.get(unit)
+  def getEnRicher(unit: String): FieldsTransformer = cacheStore getOrElse(unit, noTransformer)
 
   def getCacheSer: Array[Byte] = serialize(cacheStore)
 
@@ -701,10 +700,9 @@ object EnrichCacheManager extends Logg {
         model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7))
           .models.foreach(_._2.foreach { model =>
           if (model.adhoc.isDefined) {
-            instance.getEnRicher(model.adhoc.get.transformer).foreach(_.offHeapDataEnricher.init(offHeapHandler))
+            instance.getEnRicher(model.adhoc.get.transformer).offHeapDataEnRicher.init(offHeapHandler)
           }
         })
-
       }
       }
 

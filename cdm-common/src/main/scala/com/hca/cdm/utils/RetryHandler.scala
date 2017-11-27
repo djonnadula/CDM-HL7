@@ -38,7 +38,7 @@ class RetryHandler(val defaultRetries: Int = 30, private val waitBetweenTries: L
 
   @throws[OperationFailedAfterMaxTriesException]
   def retryOperation(op: () => Unit): Boolean = {
-    var tryCount: Int = 1
+    var tryCount: Int = 0
     while (tryAgain()) {
       try {
         op()

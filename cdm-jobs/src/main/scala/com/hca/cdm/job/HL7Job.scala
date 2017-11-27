@@ -11,7 +11,7 @@ import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm._
 import com.hca.cdm.auth.LoginRenewer
-import com.hca.cdm.auth.LoginRenewer.{info, loginFromKeyTab}
+import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
 import com.hca.cdm.notification.{EVENT_TIME, sendMail => mail}
 import com.hca.cdm.hadoop._
 import com.hca.cdm.hl7.EnrichCacheManager

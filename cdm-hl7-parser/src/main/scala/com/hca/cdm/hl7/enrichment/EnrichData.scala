@@ -15,7 +15,7 @@ trait EnrichData extends Serializable {
 
   def close(): Unit
 
-  def apply(layout: mutable.LinkedHashMap[String, String]): Unit
+  def apply(layout: mutable.LinkedHashMap[String, String]): Any
 
 }
 
@@ -23,7 +23,7 @@ trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
   protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
 
-  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Unit
+  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Any
 
   def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
     enrichDataPartFun = offHeapHandler
@@ -31,12 +31,12 @@ trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
 }
 
-case class NoEnricher() extends EnrichData with EnrichDataFromOffHeap {
+case class NoEnRicher() extends EnrichData with EnrichDataFromOffHeap {
   override def close(): Unit = {}
 
-  override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {}
+  override def apply(layout: mutable.LinkedHashMap[String, String]): Any = layout
 
-  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {}
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Any = layout
 
 
 }
@@ -58,8 +58,8 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
   private lazy val facilityRef = {
     val temp = new mutable.HashMap[String, mutable.Map[String, FacilityReference]]
     facilityRefData.takeWhile(valid(_)).map(temp => temp split COMMA).filter(valid(_, 4)).foreach { x =>
-      if (temp isDefinedAt trimStr(x(0))) temp update(trimStr(x(0)), temp(trimStr(x(0))) += Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)), trimStr(x(4)))))
-      else temp += (trimStr(x(0)) -> mutable.Map[String, FacilityReference](Tuple2(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)), trimStr(x(4))))))
+      if (temp isDefinedAt trimStr(x(0))) temp update(trimStr(x(0)), temp(trimStr(x(0))) += Pair(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)), trimStr(x(4)))))
+      else temp += (trimStr(x(0)) -> mutable.Map[String, FacilityReference](Pair(trimStr(x(1)), FacilityReference(trimStr(x(2)), trimStr(x(3)), trimStr(x(4))))))
     }
     temp.toMap
   }
@@ -69,7 +69,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
 
   override def close(): Unit = {}
 
-  override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
+  override def apply(layout: mutable.LinkedHashMap[String, String]): mutable.LinkedHashMap[String, String] = {
     if ((layout isDefinedAt facilityKey) && (facilityRef isDefinedAt layout(facilityKey))) {
       if ((layout isDefinedAt patientLocation) && !isCrossRefFac(layout)) {
         if (facilityRef(layout(facilityKey)).get(layout(patientLocation)).isDefined) {
@@ -86,6 +86,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
         }
       }
     }
+    layout
   }
 
   private def isCrossRefFac(layout: mutable.LinkedHashMap[String, String]): Boolean = {
@@ -104,7 +105,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
   }
 }
 
-private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichDataFromOffHeap with Logg {
+private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichDataFromOffHeap with Logg {
   self =>
 
   private lazy val fieldsToSkip = "patient_address|other_designation"
@@ -117,7 +118,7 @@ private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichD
 
   override def close(): Unit = {}
 
-  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Unit = {
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): mutable.LinkedHashMap[String, String] = {
     if (fetchRequired(layout)) {
       val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, Array[Byte]]].map { case (k, v) => k -> new String(v, UTF8) }
       enrichSourceToTargetMapping.foreach {
@@ -127,6 +128,7 @@ private[enrichment] class PatientEnricher(config: Array[String]) extends EnrichD
           }
       }
     }
+    layout
 
   }
 

@@ -67,7 +67,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         metRequirement(meta) status match {
           case Left(true) =>
             if (msgHasmultiMSH(parsed.data)) throw new InvalidHl7FormatException(s"Message has Multiple MSH Segment. This is not Expected.")
-            Try(toJson(parsed.data)) match {
+            Try(Json(parsed.data)) match {
               case Success(json) =>
                 updateMetrics(PROCESSED)
                 HL7TransRec(Left((json, parsed.data, meta)))
@@ -94,6 +94,26 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         }
         HL7TransRec(Right(t))
     }
+  }
+
+  @throws[Exception]
+  private def Json(layout: mapType): String = {
+    val copy = new mutable.LinkedHashMap[String, Any]
+    layout foreach { case (k, v) =>
+      val update = k.substring(k.indexOf(DOT) + 1)
+      if (copy isDefinedAt update) {
+        val fieldList = new mutable.ListBuffer[Any]
+        copy(update) match {
+          case list: mutable.ListBuffer[Any] => list foreach (fieldList += _)
+            fieldList += v
+          case any: mapType =>
+            fieldList += any
+            fieldList += v
+        }
+        copy update(update, fieldList)
+      } else copy += update -> v
+    }
+    toJson(copy)
   }
 
   def metricsRegistry: TrieMap[String, Long] = metrics
@@ -236,9 +256,10 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     var segment: Segment = null
     var versionData: VersionData = null
     val missingMappings = new TemplateUnknownMapping
-    val segmentMapping = getMapping(_: String, versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.hl7Version + underScore,
-      versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)) + underScore + versionData.facility + underScore + versionData.hl7Version + underScore
-      , versionData.srcSystem, versionData.standardMapping, versionData.realignment, versionData.facilityOverRides)(versionData.controlId, missingMappings)
+    val segmentMapping = getMapping(_: String, s"${tryAndReturnDefaultValue0(versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)), EMPTYSTR)}$underScore${versionData.hl7Version}$underScore"
+      , s"${tryAndReturnDefaultValue0(versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)), EMPTYSTR)}$underScore${versionData.facility}$underScore${versionData.hl7Version}$underScore",
+      versionData.srcSystem, versionData.standardMapping,
+      versionData.realignment, versionData.facilityOverRides)(versionData.controlId, missingMappings)
     rawSplit.view.zipWithIndex foreach { case (msgSegment, segIndex) =>
       val whichSegment = msgSegment substring(0, 3)
       val segmentIndex = s"${lPad(s"${inc(segIndex)}$EMPTYSTR", preNumLen, ZEROStr)}$DOT$whichSegment"
@@ -340,12 +361,11 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
     }
     missingMappings.unknownMappings match {
       case null =>
-        HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")),
-          versionData.hl7Version)
+        HL7Parsed(dataLayout, tryAndReturnDefaultValue0(versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)), EMPTYSTR), versionData.hl7Version)
       case _ =>
-        HL7Parsed(dataLayout, versionData.controlId.substring(0, versionData.controlId.indexOf("_")),
-          versionData.hl7Version,
-          s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version ${versionData.controlId.substring(0, versionData.controlId.indexOf("_"))}-${versionData.hl7Version}")
+        HL7Parsed(dataLayout, tryAndReturnDefaultValue0(versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)), EMPTYSTR), versionData.hl7Version,
+          s"Template Don't have mappings for ${missingMappings.unknownMappings.mkString(s"$COLON$COLON")} & Source System Version " +
+            s"${s"${tryAndReturnDefaultValue0(versionData.controlId.substring(0, versionData.controlId.indexOf(underScore)), EMPTYSTR)}$underScore${versionData.hl7Version}$underScore"}-${versionData.hl7Version}")
     }
   }
 
@@ -374,7 +394,8 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def getVersionData(fieldList: Array[String], templateData: Map[String, Map[String, Array[String]]]): VersionData = {
     val hl7Version = fieldList(11)
     val controlId = fieldList(9)
-    require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
+    require(controlId != EMPTYSTR, s"Invalid Control Id $controlId")
+    // require((controlId != EMPTYSTR) && (controlId contains underScore), s"Invalid Control Id $controlId")
     val Match = matcher(controlId, _: String)
     val sourceSystem = Match match {
       case mt6 if mt6(MT6_) =>
@@ -405,7 +426,6 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   }
 
   private def matcher(in: String, seq: String) = in != null & in.startsWith(seq)
-
 
   private def getMapping(segmentIndex: String, controlVersion: String, facilityControlVersion: String, srcSystemMapping: Map[String, Array[String]]
                          , standardMapping: Map[String, Array[String]], realignment: Map[String, Array[String]], facilityOverRides: Map[String, Array[String]])(controlId: String, missingMappings: TemplateUnknownMapping): (Segment, TemplateUnknownMapping) = {
@@ -493,10 +513,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   private def isHL7(message: String) = matcher(message, MSH)
 
   private def lookUp(store: Map[String, Array[String]], key: String) = {
-    store get key match {
-      case Some(data) => data
-      case _ => EMPTY
-    }
+    store getOrElse(key, EMPTY)
   }
 
   override def toString: String = s"HL7Parser($hl7, $metrics)"

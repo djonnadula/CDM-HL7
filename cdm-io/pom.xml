@@ -41,6 +41,18 @@
         </dependency>
 
         <dependency>
+            <groupId>com.teradata</groupId>
+            <artifactId>terajdbc4</artifactId>
+            <version>15.0.0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teradata</groupId>
+            <artifactId>tdgssconfig</artifactId>
+            <version>15.0.0.10</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>javax.jms-api</artifactId>
             <version>2.0.1</version>
@@ -105,7 +117,7 @@
                 <version>2.5.2</version>
                 <executions>
                     <execution>
-                        <id>install-external</id>
+                        <id>ibm-mq-install-external</id>
                         <phase>clean</phase>
                         <configuration>
                             <file>${basedir}/externalLib/mq-client-8.0.0.2.jar</file>
@@ -113,6 +125,38 @@
                             <groupId>com.ibm.mq.allclient</groupId>
                             <artifactId>mq-client</artifactId>
                             <version>8.0.0.2</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>tera-jdbc-cfg-install-external</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${basedir}/externalLib/tdgssconfig.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.teradata</groupId>
+                            <artifactId>tdgssconfig</artifactId>
+                            <version>15.0.0.10</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>tera-jdbc-install-external</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${basedir}/externalLib/terajdbc4.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.teradata</groupId>
+                            <artifactId>terajdbc4</artifactId>
+                            <version>15.0.0.10</version>
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                         </configuration>

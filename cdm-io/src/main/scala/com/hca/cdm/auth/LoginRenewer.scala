@@ -25,6 +25,7 @@ private[cdm] object LoginRenewer extends Logg {
   private lazy val app = "HDFS"
   private lazy val loginRenewer = newDaemonScheduler(s"$app-Token-Renewer")
   private lazy val tryRenewal = tryAndReturnDefaultValue0(lookUpProp("hl7.hdfs.token.renewal").toBoolean, true)
+  private lazy val hbaseRenewal = tryAndReturnDefaultValue0(lookUpProp("hl7.hbase.token.renewal").toBoolean, false)
   private var hdfsConf: Configuration = _
   private var sparkConf: SparkConf = _
   private var fs: FileSystem = _
@@ -32,7 +33,7 @@ private[cdm] object LoginRenewer extends Logg {
   private val lock = new Object
 
 
-  def scheduleRenewal(master: Boolean = false, namesNodes: String = EMPTYSTR, conf: Option[Configuration] = None): Boolean = synchronized {
+  def scheduleRenewal(master: Boolean = false, namesNodes: String = EMPTYSTR, conf: Option[Configuration] = None): Boolean = lock.synchronized {
     if (!scheduled && isSecured) {
       hdfsConf = conf.getOrElse(hadoop.hadoopConf)
       hdfsConf.set("hadoop.security.authentication", "kerberos")
@@ -50,15 +51,13 @@ private[cdm] object LoginRenewer extends Logg {
 
   def isSecured: Boolean = UGI.isSecurityEnabled && tryRenewal
 
-  private def scheduleLoginFromCredentials(startFrom: Long = 6, credentialsFile: String, stagingDIr: String): Unit = {
-    lock.synchronized {
-      if (!scheduled) {
-        info(s"Credentials File set to $credentialsFile and Staging Dir $stagingDIr")
-        loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))),
-          startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
-        sHook()
-        scheduled = true
-      }
+  private def scheduleLoginFromCredentials(startFrom: Long = 6, credentialsFile: String, stagingDIr: String): Unit = lock.synchronized {
+    if (!scheduled) {
+      info(s"Credentials File set to $credentialsFile and Staging Dir $stagingDIr")
+      loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(stagingDIr + FS + credentialsFile), error(_: Throwable))),
+        startFrom, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
+      sHook()
+      scheduled = true
     }
   }
 
@@ -169,8 +168,10 @@ private[cdm] object LoginRenewer extends Logg {
         info("generating Token for user=" + loggedUser.getUserName + ", authMethod=" + loggedUser.getAuthenticationMethod)
         refreshFsTokens(nns + credentialsFile.getParent, cred)
         if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {
-          val hBaseToken = obtainToken(hdfsConf)
-          if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
+          if (hbaseRenewal) {
+            val hBaseToken = obtainToken(hdfsConf)
+            if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
+          }
         }
         null
       }

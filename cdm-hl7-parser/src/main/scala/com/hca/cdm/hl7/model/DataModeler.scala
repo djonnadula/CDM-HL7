@@ -3,6 +3,7 @@ package com.hca.cdm.hl7.model
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm._
+import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
@@ -10,7 +11,8 @@ import com.hca.cdm.hl7.filter.FilterUtility.{filterTransaction => filterRec}
 import com.hca.cdm.hl7.model.OutFormats._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
-import scala.collection.mutable
+import scala.collection.mutable.{LinkedHashMap,Set}
+import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -22,12 +24,12 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   logIdent = "for HL7 Type :: " + reqMsgType.toString
   private lazy val notValid = Hl7SegmentTrans(Right(notValidStr))
   private lazy val segmentDoesntExist = Hl7SegmentTrans(Right(NA))
-  private lazy val filtered = new mutable.LinkedHashMap[String, Throwable] += (filteredStr -> null)
+  private lazy val filtered = new LinkedHashMap[String, Throwable] += (filteredStr -> null)
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
 
   def applyModel(whichSeg: String, model: Model)(data: mapType, rawHl7: String): Hl7SegmentTrans = {
-    val modelFilter: Map[String, mutable.Set[String]] = model.modelFilter
-   if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && !isRequiredType(data, reqMsgType)) return notValid
+    val modelFilter: Map[String, Set[String]] = model.modelFilter
+    if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && reqMsgType != VENTORU &&  !isRequiredType(data, reqMsgType)) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
@@ -43,16 +45,10 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 adhoc.outFormat match {
                   case JSON =>
                     handleCommonSegments(data, layout)
-                    EnrichCacheManager().getEnRicher(adhoc.transformer).foreach(_.applyTransformations(layout))
-                    val temp = model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp)
-                    if (timeStampReq) temp += ((timeStampKey, timeStamp))
-                    out._2 += (toJson(temp) -> null)
+                    handleEnrichData(JSON, model, adhoc, EnrichCacheManager().getEnRicher(adhoc transformer) applyTransformations layout)(out._2)
                   case DELIMITED =>
                     handleCommonSegments(data, layout)
-                    EnrichCacheManager().getEnRicher(adhoc.transformer).foreach(_.applyTransformations(layout))
-                    val temp =  if(adhoc.outKeyNames.nonEmpty) model.adhocLayout(layout, adhoc.outKeyNames, adhoc.multiColumnLookUp) else layout
-                    if (timeStampReq) temp += ((timeStampKey, timeStamp))
-                    out._2 += (makeFinal(temp,etlTimeReq = false) -> null)
+                    handleEnrichData(DELIMITED, model, adhoc, EnrichCacheManager().getEnRicher(adhoc transformer) applyTransformations layout)(out._2)
                   case RAWHL7 =>
                     out._2 += (rawHl7 -> null)
                 }
@@ -75,13 +71,13 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 out._2
             } */
           case _ =>
-            data.map(node => {
+            data.map { case (node, struct) =>
               try {
-                if (node._1.substring(node._1.indexOf(DOT) + 1) == model.reqSeg) {
+                if (node.substring(node.indexOf(DOT) + 1) == model.reqSeg) {
                   layout = model.layoutCopy
-                  if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
+                  if (modelData(layout, model)(modelFilter, struct.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
                     handleCommonSegments(data, layout)
-                    if (layout isDefinedAt fieldSeqNum) layout update(fieldSeqNum, node._1.substring(0, node._1.indexOf(DOT)))
+                    if (layout isDefinedAt fieldSeqNum) layout update(fieldSeqNum, node.substring(0, node.indexOf(DOT)))
                     if (layout isDefinedAt timeStampKey) layout update(timeStampKey, timeStamp)
                     (makeFinal(layout, etlTimeReq = false), null)
                   } else {
@@ -94,13 +90,38 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
               catch {
                 case t: Throwable => (null, t)
               }
-            })
+            }
         }
     }
     temp filter (_._1 != EMPTYSTR) match {
       case out => if (valid(out)) Hl7SegmentTrans(Left(out))
       else segmentDoesntExist
     }
+  }
+
+  private def handleEnrichData(outFormat: OutFormat, model: Model, adhoc: ADHOC, layout: Any)(collector: LinkedHashMap[String, Throwable]): Unit = {
+    def formatData(data: LinkedHashMap[String, String]): String = {
+      outFormat match {
+        case JSON =>
+          val temp = model.adhocLayout(data, adhoc.outKeyNames, adhoc.multiColumnLookUp)
+          if (timeStampReq) temp += timeStampKey -> timeStamp
+          toJson(temp)
+        case DELIMITED =>
+          val temp = if (adhoc.outKeyNames.nonEmpty) model.adhocLayout(data, adhoc.outKeyNames, adhoc.multiColumnLookUp) else data
+          if (timeStampReq) temp += timeStampKey -> timeStamp
+          makeFinal(temp, etlTimeReq = false)
+      }
+    }
+
+    layout match {
+      case oneUnit: LinkedHashMap[String, String] =>
+        collector += formatData(oneUnit) -> null
+      case multi: Traversable[LinkedHashMap[String, String]] =>
+        multi foreach { d => collector += formatData(d) -> null }
+      case notImpl => throw new CdmException(s"Not Yet Implemented for $notImpl")
+    }
+
+
   }
 
   /**
@@ -116,19 +137,19 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @param whichSeg
     * @return
     */
-  private def nodesTraversal(data: mapType, model: Model, layout: mutable.LinkedHashMap[String, String], modelFilter: Map[String, mutable.Set[String]],
+  private def nodesTraversal(data: mapType, model: Model, layout: LinkedHashMap[String, String], modelFilter: Map[String, Set[String]],
                              dataHandler: (String, String, String) => Unit,
-                             allNodes: Boolean = true, whichSeg: String = EMPTYSTR): (Boolean, mutable.LinkedHashMap[String, Throwable]) = {
-    if (layout isEmpty) return (true, new mutable.LinkedHashMap[String,Throwable])
+                             allNodes: Boolean = true, whichSeg: String = EMPTYSTR): (Boolean, LinkedHashMap[String, Throwable]) = {
+    if (layout isEmpty) return (true, new LinkedHashMap[String, Throwable])
     var dataExist = false
-    val temp = data.map(node => {
+    val temp = data.map { case (node, struct) =>
       try {
         if (allNodes) {
-          if (node._1 != commonNodeStr) if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
+          if (node != commonNodeStr) if (modelData(layout, model)(modelFilter, struct.asInstanceOf[mapType])(dataHandler, appendSegment = true)) dataExist = true
           (EMPTYSTR, null)
         } else {
-          if (node._1.substring(node._1.indexOf(DOT) + 1) == whichSeg) {
-            if (modelData(layout, model)(modelFilter, node._2.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
+          if (node.substring(node.indexOf(DOT) + 1) == whichSeg) {
+            if (modelData(layout, model)(modelFilter, struct.asInstanceOf[mapType])(dataHandler, appendSegment = true)) {
               dataExist = true
               (EMPTYSTR, null)
             } else (skippedStr, null)
@@ -141,7 +162,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
         case t: Throwable => (null, t)
       }
 
-    })
+    }
     (dataExist, temp)
   }
 
@@ -151,20 +172,20 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @param layout
     * @return
     */
-  private def makeFinal(layout: mutable.LinkedHashMap[String, String], etlTimeReq: Boolean = timeStampReq): String = {
+  private def makeFinal(layout: LinkedHashMap[String, String], etlTimeReq: Boolean = timeStampReq): String = {
     var builder = layout.values.mkString(outDelim)
     if (etlTimeReq) builder += outDelim + timeStamp
     builder
   }
 
-  private def handleCommonSegments(data: mapType, layout: mutable.LinkedHashMap[String, String]) = {
-    if (data isDefinedAt commonNodeStr) data(commonNodeStr).asInstanceOf[mutable.LinkedHashMap[String, String]].foreach({
+  private def handleCommonSegments(data: mapType, layout: LinkedHashMap[String, String]) = {
+    if (data isDefinedAt commonNodeStr) data(commonNodeStr).asInstanceOf[LinkedHashMap[String, String]].foreach({
       case (k, v) =>
         if (layout isDefinedAt k) layout update(k, v)
     })
   }
 
-  private def includeEle(underlying: mutable.LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR): Unit = {
+  private def includeEle(underlying: LinkedHashMap[String, String], key: String, req: String, repeat: String = EMPTYSTR): Unit = {
     if (req == EMPTYSTR && repeat == EMPTYSTR) return
     underlying get key match {
       case Some(x) => x match {
@@ -187,7 +208,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     * @param appendSegment
     * @return
     */
-  private def modelData(underlying: mutable.LinkedHashMap[String, String], model: Model)(filterKeys: Map[String, mutable.Set[String]], data: mapType)
+  private def modelData(underlying: LinkedHashMap[String, String], model: Model)(filterKeys: Map[String, Set[String]], data: mapType)
                        (dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
 
@@ -199,24 +220,24 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
       }
     }
 
-    data.foreach(node => {
-      if (node._1 != null & node._1 != EMPTYSTR & (filterKeys isDefinedAt node._1)) {
-        node._2 match {
-          case str: String => applyData(node._1, str)
-          case None => applyData(node._1)
+    data.foreach { case (node, struct) =>
+      if (node != null & node != EMPTYSTR & (filterKeys isDefinedAt node)) {
+        struct match {
+          case str: String => applyData(node, str)
+          case None => applyData(node)
           case map: mapType =>
-            if (handelMap(map, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
+            if (handelMap(map, node, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
           case list: listType =>
-            if (handleList(list, node._1, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
+            if (handleList(list, node, model)(filterKeys)(underlying, dataHandler, appendSegment)) dataExist = true
           case any: Any => throw new DataModelException("Got an Unhandled Type into Data Modeler " + logIdent + " :: " + any.getClass + " ?? Not Yet Implemented")
         }
       }
-    })
+    }
     dataExist
   }
 
-  private def handelMap(data: mapType, node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
-                       (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
+  private def handelMap(data: mapType, node: String, model: Model)(filterKeys: Map[String, Set[String]])
+                       (underlying: LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
 
     def applyData(key: String, data: String = EMPTYSTR): Unit = {
@@ -244,8 +265,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     dataExist
   }
 
-  private def handleList(data: listType, node: String, model: Model)(filterKeys: Map[String, mutable.Set[String]])
-                        (underlying: mutable.LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
+  private def handleList(data: listType, node: String, model: Model)(filterKeys: Map[String, Set[String]])
+                        (underlying: LinkedHashMap[String, String], dataHandler: (String, String, String) => Unit, appendSegment: Boolean = false): Boolean = {
     var dataExist = false
 
     def applyData(key: String, data: String = EMPTYSTR): Unit = {
@@ -270,7 +291,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     dataExist
   }
 
-  private def isEmpty(key: String, filterKeys: Map[String, mutable.Set[String]]): Boolean = {
+  private def isEmpty(key: String, filterKeys: Map[String, Set[String]]): Boolean = {
     filterKeys get key match {
       case Some(x) => if (x ne null) return x.size > 1
       case _ =>

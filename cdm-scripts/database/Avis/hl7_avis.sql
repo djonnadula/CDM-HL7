@@ -1,0 +1,83 @@
+USE hl7;
+
+Drop Table if exists  hl7_avis;
+
+CREATE EXTERNAL TABLE hl7_avis(
+sending_facility String,
+sending_application String, 
+patient_mrn String, 
+patient_urn String, 
+patient_account_number String,
+date_time_of_birth String,
+patient_family_name String,
+patient_given_name String,
+sex String,
+date_time_of_message String, 
+hl7_type String,
+message_event String,
+message_control_id String,
+processing_id String,
+version_id String,
+character_set String,
+patient_class String,
+assigned_patient_location String,
+obsv_date_time_num String,
+relevant_clinical_information String,
+set_id String,
+value_type String,
+obsv_id String,
+obsv_value String,
+units String,
+obsv_result_status String,
+user_defined_access_checks String,
+date_time_of_the_obsv String,
+deviceType String,
+assigned_patient_location_point_of_care String,
+assigned_patient_location_point_of_care_namespace_id String,
+assigned_patient_location_point_of_care_universal_id String,
+assigned_patient_location_point_of_care_universal_id_type String,
+assigned_patient_location_room String,
+assigned_patient_location_room_namespace_id String,
+assigned_patient_location_room_universal_id String,
+assigned_patient_location_room_universal_id_type String,
+assigned_patient_location_bed String,
+assigned_patient_location_bed_namespace_id String,
+assigned_patient_location_bed_universal_id String,
+assigned_patient_location_bed_universal_id_type String,
+assigned_patient_location_facility String,
+assigned_patient_location_facility_namespace_id String,
+assigned_patient_location_facility_universal_id String,
+assigned_patient_location_facility_universal_id_type String,
+assigned_patient_location_location_status String,
+assigned_patient_location_person_location_type String,
+assigned_patient_location_building String,
+assigned_patient_location_building_namespace_id String,
+assigned_patient_location_building_universal_id String,
+assigned_patient_location_building_universal_id_type String,
+assigned_patient_location_floor String,
+assigned_patient_location_floor_namespace_id String,
+assigned_patient_location_floor_universal_id String,
+assigned_patient_location_floor_universal_id_type String,
+assigned_patient_location_location_description String,
+assigned_patient_location_comprehensive_location_id String,
+assigned_patient_location_comprehensive_location_id_entity_id String,
+assigned_patient_location_comprehensive_location_id_namespace_id String,
+assigned_patient_location_comprehensive_location_id_universal_id String,
+assigned_patient_location_comprehensive_location_id_universal_id_type String,
+assigned_patient_location_assigning_authority_for_location String,
+assigned_patient_location_assigning_authority_for_location_namespace_id String,
+assigned_patient_location_assigning_authority_for_location_universal_id String,
+assigned_patient_location_assigning_authority_for_location_universal_id_type String,
+etl_insert_date_time STRING
+)
+PARTITIONED BY (
+	message_type String,
+	transaction_date String
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|'
+STORED AS SEQUENCEFILE
+LOCATION '/user/hive/warehouse/hl7/landing_zone=ADHOC-AVIS-DELIMITED';
+
+
+

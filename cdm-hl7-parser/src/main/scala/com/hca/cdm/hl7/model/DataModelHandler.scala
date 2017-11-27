@@ -88,10 +88,10 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
                     if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) {
-                      tlmAckMessages += Tuple2(tlmAuditor(segment.tlmAckApplication, meta), segment.tlmAckApplication)
+                      tlmAckMessages += Pair(tlmAuditor(segment.tlmAckApplication, meta), segment.tlmAckApplication)
                     }
                     if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
-                      tlmAckMessages += Tuple2(rec, segment.headerKey)
+                      tlmAckMessages += Pair(rec, segment.headerKey)
                       updateMetrics(segment.seg, PROCESSED)
                     } else if (segment.dest.get.system == Destinations.HBASE) {
                       if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, segment.dest.get.offHeapConfig.get.key, rec),

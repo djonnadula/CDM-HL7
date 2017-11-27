@@ -10,13 +10,14 @@ import org.apache.hadoop.hive.conf.HiveConf
 /**
   * Created by Devaraj Jonnadula on 2/14/2017.
   */
-private[cdm] object HadoopConfig extends Logg{
+private[cdm] object HadoopConfig extends Logg {
 
   def loadConfig(configDir: String): Configuration = {
-    getConfigFiles(configDir).foreach(file => info(file.getAbsolutePath))
+    val resources = getConfigFiles(configDir)
+    resources foreach(file => info(file.getAbsolutePath))
     val conf = new Configuration()
     conf.set("hadoop.security.authentication", "Kerberos")
-    if (valid(configDir)) getConfigFiles(configDir).foreach(res => conf.addResource(new File(res.getAbsolutePath).toURI.toURL))
+    if (valid(configDir)) resources.foreach(res => conf.addResource(new File(res.getAbsolutePath).toURI.toURL))
     conf
   }
 

@@ -1,0 +1,8 @@
+set_id
+value_type
+obsv_id
+obsv_value
+units
+obsv_result_status
+user_defined_access_checks
+date_time_of_the_obsv

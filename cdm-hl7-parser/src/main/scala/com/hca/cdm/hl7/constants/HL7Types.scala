@@ -26,6 +26,7 @@ object HL7Types extends Enumeration {
   val CRNORM = Value("CRNORM")
   val UNKNOWN = Value("UNKNOWN")
   val ALL = Value("ALL")
+  val VENTORU = Value("VENTORU")
 
    def allKnownHL7 : String = self.values.mkString(":")
 }

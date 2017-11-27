@@ -13,4 +13,5 @@ object DateConstants {
   lazy val DATE_WITH_TIMESTAMP: String = "yyyy-MM-dd HH.mm.ss"
   lazy val DATE_PATTERN_MMDDYYYY: String = "MMddyyyy"
   lazy val HL7_DEFAULT ="yyyyMMddHHmmssSSSSSSS"
+  lazy val PATID_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
  }

@@ -64,7 +64,7 @@ object HL7Receiver extends Logg with App {
   private val hl7QueueMapping = hl7MsgMeta.flatMap(x => x._2.wsmq.map(que => que -> x._1))
   private val hl7KafkaOut = hl7MsgMeta.map(x => x._1 -> x._2.kafka)
   private val hl7Queues = hl7MsgMeta.flatMap(_._2.wsmq).toSet
-  private val tlmAuditor = hl7QueueMapping.map (x =>  x._2 -> (tlmAckMsg(x._1, applicationSending, WSMQ, HDFS)(_: MSGMeta)))
+  private val tlmAuditor = hl7QueueMapping.map { case (queue, hl7) => queue -> (tlmAckMsg(hl7, applicationSending, WSMQ, HDFS)(_: MSGMeta)) }
   private val rawOverSized = OverSizeHandler(rawStage, lookUpProp("hl7.direct.raw"))
   private val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
   initialise()
@@ -76,15 +76,15 @@ object HL7Receiver extends Logg with App {
   private val sparkConf = sparkUtil.getConf(lookUpProp("hl7.app"), defaultPar, kafkaConsumer = false)
   if (walEnabled) {
     sparkConf.set("spark.streaming.receiver.writeAheadLog.enable", "true")
-    sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "100")
-    // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "20000")
-    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "600")
+    sparkConf.set("spark.streaming.receiver.writeAheadLog.maxFailures", "20000")
+    sparkConf.set("spark.streaming.receiver.blockStoreTimeout", "120000")
   }
   if (checkpointEnable) {
-    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures", "100")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "600")
+    // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures","20000")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "120000")
+
   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
@@ -94,7 +94,7 @@ object HL7Receiver extends Logg with App {
     override def apply(): StreamingContext = {
       val ctx = sparkUtil createStreamingContext(sparkConf, batchDuration)
       info(s"New Checkpoint Created for $app $ctx")
-      ctx.remember(batchDuration * 2)
+      ctx.remember(batchDuration * 20)
       runJob(ctx)
       ctx
     }
@@ -108,7 +108,7 @@ object HL7Receiver extends Logg with App {
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
     hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
-    LoginRenewer.scheduleRenewal(master = true,namesNodes = EMPTYSTR,conf = Some(hdpConf))
+    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     if (!checkpointEnable) runJob(sparkStrCtx)
     sparkStrCtx
   }

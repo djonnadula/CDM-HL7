@@ -16,6 +16,7 @@ import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit._
 import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.mq.publisher.MQAcker
+import com.ibm.jms.JMSBytesMessage
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
 import scala.concurrent.duration.Duration
@@ -78,21 +79,22 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
         tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
         info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }
-      sources.foreach(queue => {
+      sources foreach { queue =>
         val consumer = con createConsumer queue
         if (ackQueue isDefined) {
           consumers += consumer -> EventListener(queue, tlmAckIO)
         } else consumers += consumer -> EventListener(queue, null)
-      })
+      }
       con addErrorListener new ExceptionReporter
       consumers foreach {
-        consumer => consumerPool submit new DataConsumer(consumer._1, consumer._2)
+        case (consumer, handle) => consumerPool submit new DataConsumer(consumer, handle)
       }
       con resume()
     }
   }
 
   override def close(): Unit = {
+    pauseConsuming = true
     info(s"Stopping $this ${self.id}")
     consumers foreach {
       con => closeResource(con._1)
@@ -138,31 +140,33 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
 
   private case class EventListener(source: String, tlmAcknowledge: (String) => Unit) extends SourceListener {
 
+    @throws[Exception]
     override def handleMessage(message: Message): Boolean = {
-      val msg = message.asInstanceOf[TextMessage]
-      val data = msg.getText.replaceAll("[\r\n]+", "\r\n")
+      val msg = message match {
+        case txtMsg: TextMessage => txtMsg.getText
+        case byteMsg: JMSBytesMessage =>
+          val msgBuffer = new Array[Byte](byteMsg.getBodyLength.toInt)
+          byteMsg readBytes msgBuffer
+          new String(msgBuffer)
+      }
+      val data = msg.replaceAll("[\r\n]+", "\r\n")
       val meta = metaFromRaw(data)
       var persisted = false
-      var th: Throwable = null
       try {
-        result(async {
-          self.store(MqData(source, data, meta))
-          persisted = true
-        }(executionContext), Duration(3, MINUTES))
-        // if (self.pauseConsuming) self.pauseConsuming = false
+        self.store(MqData(source, data, meta))
+        persisted = true
       } catch {
         case t: Throwable =>
-          error(s"Cannot Store message to Spark Storage ${msg.getJMSMessageID}", t)
-          th = t
+          error(s"Cannot Store message to Spark Storage ${message.getJMSMessageID}", t)
           self.pauseConsuming = true
+          self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${message.getJMSMessageID}, Stopping Receiver ${self.id}", t)
+          self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${message.getJMSMessageID}, Stopping Receiver ${self.id}", t)
+          throw t
       }
-      if (!persisted) {
-        self.reportError(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
-        self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${msg.getJMSMessageID}, Stopping Receiver ${self.id}", th)
-      } else {
+      if (persisted) {
         tryAndLogThr(result(async {
           handleAcks(message, source, meta, tlmAcknowledge)
-        }(executionContext), Duration(45, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
+        }(executionContext), Duration(60, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
       }
       persisted
     }
@@ -221,6 +225,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     var timeOut: Long = currMillis
 
     override def run(): Unit = {
+      debug(s"${sourceListener.getSource} Receiver Stopped :: ${self.isStopped()} :: Requested Pause consuming ?? :: ${self.pauseConsuming} :: Store Received message :: $storeReceived")
       while (!self.isStopped()) {
         if (storeReceived && !self.pauseConsuming) {
           val msg = consumer.receiveNoWait
@@ -229,7 +234,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
           }
         } else {
           if (currMillis - timeOut >= 50000) {
-            error("Consuming Data Stopped from WSMQ due to Data cannot be stored into Spark Storage")
+            error(s"Consuming Data Stopped from WSMQ & source ${sourceListener.getSource} due to Data cannot be stored into Spark Storage")
             timeOut = currMillis
           }
         }
