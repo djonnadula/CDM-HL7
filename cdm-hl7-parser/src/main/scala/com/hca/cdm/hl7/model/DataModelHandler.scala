@@ -45,17 +45,17 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
   private val dataModeler = DataModeler(hl7Segments.msgType)
   private val segRef = {
     val temp = new mutable.ArrayBuffer[Segment]
-    hl7Segments.models.foreach({ case (seg, models) =>
-      models.foreach(model => {
+    hl7Segments.models.foreach { case (seg, models) =>
+      models.foreach { model =>
         temp += Segment(seg, dataModeler.applyModel(seg, model)(_: mapType, _: String), model.adhoc.isDefined, if (model.adhoc.isDefined) Some(model.adhoc.get.destination) else None,
           if (model.adhoc.isDefined) seg substring ((seg indexOf COLON) + 1) else EMPTYSTR,
           if (model.adhoc.isDefined) seg.replaceAll(COLON, "-") else EMPTYSTR,
           if (model.adhoc.isDefined) model.adhoc.get.ackApplication else EMPTYSTR)
-        SegmentsState.values.foreach(state => {
+        SegmentsState.values.foreach { state =>
           metrics += s"$hl7$COLON$seg$COLON$state" -> 0L
-        })
-      })
-    })
+        }
+      }
+    }
     temp
   }
   private lazy val nonAdhocSegments = segRef map (seg => if (!seg.adhoc) seg.seg else EMPTYSTR) filter (_ != EMPTYSTR)
