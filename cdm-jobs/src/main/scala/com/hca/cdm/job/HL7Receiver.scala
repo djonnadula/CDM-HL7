@@ -27,7 +27,9 @@ import scala.language.postfixOps
 import AuditConstants._
 import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.auth.LoginRenewer.loginFromKeyTab
+import com.hca.cdm.exception.CdmException
 import com.hca.cdm.utils.RetryHandler
+import org.apache.spark.streaming.scheduler._
 
 
 /**
@@ -81,10 +83,9 @@ object HL7Receiver extends Logg with App {
   }
   if (checkpointEnable) {
     // sparkConf.set("spark.streaming.receiver.writeAheadLog.rollingIntervalSecs","3600")
-    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures","20000")
+    sparkConf.set("spark.streaming.driver.writeAheadLog.maxFailures", "20000")
     sparkConf.set("spark.streaming.driver.writeAheadLog.allowBatching", "true")
     sparkConf.set("spark.streaming.driver.writeAheadLog.batchingTimeout", "120000")
-
   }
   if (lookUpProp("hl7.batch.time.unit") == "ms") {
     sparkConf.set("spark.streaming.blockInterval", (batchCycle / 2).toString)
@@ -99,6 +100,7 @@ object HL7Receiver extends Logg with App {
       ctx
     }
   }
+
   private val hdpConf = hadoop.hadoopConf
   private var sparkStrCtx: StreamingContext = initContext
   startStreams()
@@ -106,6 +108,7 @@ object HL7Receiver extends Logg with App {
   private def initContext: StreamingContext = {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+    sparkStrCtx.addStreamingListener(new ReceiverListener(sparkStrCtx))
     hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
     LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
@@ -122,14 +125,16 @@ object HL7Receiver extends Logg with App {
     val stream = if (numberOfReceivers.size == 1) sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), 0,
       app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
     else {
-      sparkStrCtx.union(numberOfReceivers.map(id => {
-        val stream = sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), id,
-          app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
-        info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
-        stream
-      }))
+      sparkStrCtx.union {
+        numberOfReceivers map { id =>
+          val stream = sparkStrCtx.receiverStream(new receiver(sparkStrCtx.sparkContext.getConf.get("spark.yarn.access.namenodes"), id,
+            app, jobDesc, batchDuration.milliseconds.toInt, batchRate, hl7Queues)(tlmAuditor, metaFromRaw(_: String), rawStage))
+          info(s"WSMQ Stream Was Opened Successfully with ID :: ${stream.id} for Receiver $id")
+          stream
+        }
+      }
     }
-    stream foreachRDD (rdd => {
+    stream foreachRDD { rdd =>
       info(s"Got RDD ${rdd.id} with Partitions :: ${rdd.partitions.length} Executing Asynchronously Each of Them.")
       val rejectOut = self.rejectedTopic
       val auditOut = self.auditTopic
@@ -141,7 +146,7 @@ object HL7Receiver extends Logg with App {
       val rawOverSized = self.rawOverSized
       val rejectOverSized = self.rejectOverSized
       val tracker = new ListBuffer[FutureAction[Unit]]
-      tracker += rdd foreachPartitionAsync (dataItr => {
+      tracker += rdd foreachPartitionAsync { dataItr =>
         if (dataItr nonEmpty) {
           propFile = confFile
           val kafkaOut = KProducer()(prodConf)
@@ -168,10 +173,10 @@ object HL7Receiver extends Logg with App {
         } else {
           info(s"Partition was Empty For RDD So skipping $dataItr for RDD ${rdd.id}")
         }
-      })
+      }
       tracker.foreach(_.get())
       info(s"Processing Completed for RDD :: ${rdd.id}")
-    })
+    }
   }
 
   /**
@@ -226,6 +231,30 @@ object HL7Receiver extends Logg with App {
     info("*****************************************END***********************************************************")
   }
 
+  private class ReceiverListener(sparkStrCtx: StreamingContext) extends StreamingListener with Logg {
+    self =>
+    override def onReceiverStarted(receiverStarted: StreamingListenerReceiverStarted): Unit = {
+      super.onReceiverStarted(receiverStarted)
+      info(s"$self receiverStarted $receiverStarted")
+    }
+
+    override def onReceiverError(receiverError: StreamingListenerReceiverError): Unit = {
+      super.onReceiverError(receiverError)
+      error(s"$self receiverError $receiverError")
+      error(s"Killing executor ${receiverError.receiverInfo.executorId} for Stream  ${receiverError.receiverInfo.streamId}")
+      if (!sparkStrCtx.sparkContext.killExecutor(receiverError.receiverInfo.executorId)) {
+        val retry = RetryHandler()
+
+        def retryKill(): Unit = {
+          if (!sparkStrCtx.sparkContext.killExecutor(receiverError.receiverInfo.executorId)) throw new CdmException(s"Cannot Stop Stream with Id ${receiverError.receiverInfo.streamId} due to error $receiverError")
+        }
+
+        if (!tryAndLogErrorMes(retry.retryOperation(retryKill), error(_: Throwable), Some(s"Cannot Stop Stream with Id ${receiverError.receiverInfo.streamId} due to error" +
+          s" $receiverError After Retries ${retry.triesMadeSoFar()}"))) close()
+      }
+    }
+
+  }
 
 }
 

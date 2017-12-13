@@ -12,7 +12,8 @@ import scala.collection.mutable.ListBuffer
 class AdvancedVentEnRicher(config: Array[String]) extends Logg with EnrichData {
 
   private val repeatableFields = readFile(config(0)).getLines().map(x => x -> EMPTYSTR).toMap
-
+  private val obsv_id = "obsv_id"
+  private val units = "units"
 
   override def close(): Unit = {}
 
@@ -24,6 +25,12 @@ class AdvancedVentEnRicher(config: Array[String]) extends Logg with EnrichData {
       repeatableFields foreach { case (field, _) =>
         if (outTemp isDefinedAt field) {
           outTemp update(field, transformedData(field).getOrElse(index, EMPTYSTR))
+          if (field == obsv_id || field == units) {
+            def check = transformedData(field).getOrElse(index, EMPTYSTR).toInt
+
+            tryAndThrow(check, error(_: Throwable),
+              Some(s"Invalid Data for $field :: ${transformedData(field).getOrElse(index, EMPTYSTR)}"))
+          }
         }
       }
       temp += outTemp
