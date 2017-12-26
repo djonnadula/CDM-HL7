@@ -142,7 +142,7 @@ object HL7Job extends Logg with App {
   private val hdpConf = hadoop.hadoopConf
   private val hTables = new mutable.HashSet[String]
   private var offSetManager: OffsetManager = _
-  private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled
+  private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled && tryAndReturnDefaultValue0(lookUpProp("hl7.checkpoint.external.enable").toBoolean,true)
   private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
 
   private def newCtxIfNotExist = new (() => StreamingContext) {

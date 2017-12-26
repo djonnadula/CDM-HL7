@@ -6,17 +6,14 @@ import com.hca.cdm.hadoop.HadoopConfig
 import com.hca.cdm.log.Logg
 import com.hca.cdm.{propFile, reload}
 import org.apache.log4j.PropertyConfigurator.configure
-import java.lang.{ProcessBuilder => runScript}
 import java.sql.Connection
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.concurrent.TimeUnit
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.jdbc.JdbcSources.TERADATA
 import com.hca.cdm.jdbc.JdbcConnector
 import com.hca.cdm.utils.RetryHandler
-import scala.util.{Failure, Success, Try}
 import collection.JavaConverters._
 import scala.language.postfixOps
 import com.hca.cdm.utils.DateConstants._
@@ -68,9 +65,10 @@ object AvisEdhJob extends Logg with App {
 
   private def doJob(): Unit = {
     info(s"Last Batch Offset found $batchOffset")
-    loadHadoopStaging()
-    truncateEdwStaging()
-    loadEdwStaging()
+    if (loadHadoopStaging()) {
+      truncateEdwStaging()
+      loadEdwStaging()
+    }
     edwLoadComplete()
   }
 
@@ -82,7 +80,7 @@ object AvisEdhJob extends Logg with App {
     if (executeScript(commands.asJava)) info(s"loadEdwStaging completed for $commands")
   }
 
-  private def loadHadoopStaging(): Unit = {
+  private def loadHadoopStaging(): Boolean = {
     kInit()
     var transactionDate = LocalDate.parse(outDateFormat.format(inDateFormat.parse(batchOffset))).minusDays(1).format(transactionDateFormat)
     if (transactionDate == EMPTYSTR) transactionDate = self.transDate
@@ -90,7 +88,12 @@ object AvisEdhJob extends Logg with App {
     commands += lookUpProp("beeline.script")
     commands += transactionDate
     commands += batchOffset
-    if (executeScript(commands.asJava)) info(s"loadHadoopStaging completed for $commands ")
+    if (executeScript(commands.asJava)) {
+      info(s"loadHadoopStaging completed for $commands ")
+      return true
+    }
+    false
+
   }
 
   private def isEtlCompleted: Boolean = {
@@ -145,19 +148,6 @@ object AvisEdhJob extends Logg with App {
     closeResource(connection)
     closeResource(jdbcConnector)
     info("Teradata Connection shutdown completed")
-  }
-
-  private def executeScript(commands: java.util.List[String], expectedTime: Int = 60): Boolean = {
-    info(s"Executing Commands $commands")
-    val process = new runScript(commands).inheritIO()
-    Try(process start) match {
-      case Success(x) =>
-        tryAndLogErrorMes(x.waitFor(expectedTime, TimeUnit.MINUTES), info(_: Throwable))
-      case Failure(t) =>
-        error(s"Executing Commands Failed $commands", t)
-        return false
-    }
-    true
   }
 
   private def kInit(): Unit = {

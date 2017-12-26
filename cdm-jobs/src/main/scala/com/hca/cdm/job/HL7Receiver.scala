@@ -3,6 +3,7 @@ package com.hca.cdm.job
 
 import java.lang.System.{getenv => fromEnv}
 import java.util.Date
+import java.util.concurrent.TimeUnit
 import com.hca.cdm.Models.MSGMeta
 import scala.Int.MaxValue
 import com.hca.cdm._
@@ -69,6 +70,7 @@ object HL7Receiver extends Logg with App {
   private val tlmAuditor = hl7QueueMapping.map { case (queue, hl7) => queue -> (tlmAckMsg(hl7, applicationSending, WSMQ, HDFS)(_: MSGMeta)) }
   private val rawOverSized = OverSizeHandler(rawStage, lookUpProp("hl7.direct.raw"))
   private val rejectOverSized = OverSizeHandler(rejectStage, lookUpProp("hl7.direct.reject"))
+  @volatile private var tryRestart: Boolean = true
   initialise()
 
   // ****************** Spark Part ***********************************************
@@ -102,13 +104,14 @@ object HL7Receiver extends Logg with App {
   }
 
   private val hdpConf = hadoop.hadoopConf
+  cleanUp(checkPoint)
   private var sparkStrCtx: StreamingContext = initContext
   startStreams()
 
   private def initContext: StreamingContext = {
     sparkStrCtx = if (checkpointEnable) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
     sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
-    sparkStrCtx.addStreamingListener(new ReceiverListener(sparkStrCtx))
+    sparkStrCtx.addStreamingListener(new ReceiverListener(sparkStrCtx, numberOfReceivers.size))
     hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpUtil.conf))
     LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
@@ -199,11 +202,24 @@ object HL7Receiver extends Logg with App {
             sparkStrCtx awaitTermination()
           }
 
-          tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
+          if (tryRestart) tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
         }
     } finally {
       close()
     }
+  }
+
+  private def cleanUp(path: String): Boolean = {
+    tryAndLogErrorMes(asFunc({
+      val rmFiles = fileSystem.listFiles(new Path(path), true)
+      while (rmFiles.hasNext) {
+        val file = rmFiles.next()
+        if (file.isFile && file.getLen == 0) {
+          info(s"Deleting File $file")
+          fileSystem.delete(file.getPath, false)
+        }
+      }
+    }), error(_: Throwable))
   }
 
   private def initialise(): Unit = {
@@ -231,8 +247,20 @@ object HL7Receiver extends Logg with App {
     info("*****************************************END***********************************************************")
   }
 
-  private class ReceiverListener(sparkStrCtx: StreamingContext) extends StreamingListener with Logg {
+  private class ReceiverListener(sparkStrCtx: StreamingContext, maxContainers: Int) extends StreamingListener with Logg {
     self =>
+    private var activeContainers = maxContainers
+    @volatile private var shouldShutdown: Boolean = false
+    private val shutdownListener = newDaemonScheduler(app + "shutdownListener")
+    shutdownListener.scheduleAtFixedRate(runnable({
+      if (shouldShutdown) {
+        tryRestart = false
+        unregister(sHook)
+        sparkUtil shutdownContext sparkStrCtx.sparkContext
+        sparkUtil shutdownStreaming sparkStrCtx
+      }
+    }), 0, 1, TimeUnit.SECONDS)
+
     override def onReceiverStarted(receiverStarted: StreamingListenerReceiverStarted): Unit = {
       super.onReceiverStarted(receiverStarted)
       info(s"$self receiverStarted $receiverStarted")
@@ -243,17 +271,22 @@ object HL7Receiver extends Logg with App {
       error(s"$self receiverError $receiverError")
       error(s"Killing executor ${receiverError.receiverInfo.executorId} for Stream  ${receiverError.receiverInfo.streamId}")
       if (!sparkStrCtx.sparkContext.killExecutor(receiverError.receiverInfo.executorId)) {
-        val retry = RetryHandler()
+        val retry = RetryHandler(3, 100)
 
         def retryKill(): Unit = {
           if (!sparkStrCtx.sparkContext.killExecutor(receiverError.receiverInfo.executorId)) throw new CdmException(s"Cannot Stop Stream with Id ${receiverError.receiverInfo.streamId} due to error $receiverError")
+          else handleContainers()
         }
 
         if (!tryAndLogErrorMes(retry.retryOperation(retryKill), error(_: Throwable), Some(s"Cannot Stop Stream with Id ${receiverError.receiverInfo.streamId} due to error" +
-          s" $receiverError After Retries ${retry.triesMadeSoFar()}"))) close()
-      }
+          s" $receiverError After Retries ${retry.triesMadeSoFar()}"))) handleContainers(force = true)
+      } else handleContainers()
     }
 
+    private def handleContainers(force: Boolean = false): Unit = {
+      activeContainers -= activeContainers
+      shouldShutdown = activeContainers == 0 || force
+    }
   }
 
 }
