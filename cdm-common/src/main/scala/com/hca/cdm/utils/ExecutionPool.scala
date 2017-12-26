@@ -40,30 +40,6 @@ class ExecutionPool extends Logg with PoolExecutor {
     info("Total Tasks Scheduled for Execution :: " + pool.getTaskCount)
   }
 
-  private class PoolFullHandler extends RejectedExecutionHandler {
-
-    private val failureTracker = new TrieMap[Runnable, Int]()
-
-    override def rejectedExecution(r: Runnable, executor: ThreadPoolExecutor): Unit = {
-      debug(" Task Cannot Execute and Trying to Run again from Pool :: " + executor)
-      executor.purge()
-      if (!failureTracker.isDefinedAt(r)) failureTracker += r -> 1
-      else failureTracker(r) match {
-        case x => if (x < 10) {
-          failureTracker update(r, x + 1)
-          sleep(500)
-          executor submit r
-        }
-        else if (x > 20) failureTracker remove r
-        else {
-          sleep(1500)
-          executor submit r
-          failureTracker update(r, x + 1)
-        }
-      }
-
-    }
-  }
 
   override def tasksPending: Boolean = pool.synchronized {
     pool.getActiveCount == 0 & pool.getTaskCount == 0
@@ -80,4 +56,29 @@ class ExecutionPool extends Logg with PoolExecutor {
   }
 
 
+}
+
+private[cdm] class PoolFullHandler extends RejectedExecutionHandler with Logg {
+
+  private val failureTracker = new TrieMap[Runnable, Int]()
+
+  override def rejectedExecution(r: Runnable, executor: ThreadPoolExecutor): Unit = {
+    info(" Task Cannot Execute and Trying to Run again from Pool :: " + executor)
+    executor.purge()
+    if (!failureTracker.isDefinedAt(r)) failureTracker += r -> 1
+    else failureTracker(r) match {
+      case x => if (x < 10) {
+        failureTracker update(r, x + 1)
+        sleep(500)
+        executor submit r
+      }
+      else if (x > 20) failureTracker remove r
+      else {
+        sleep(1500)
+        executor submit r
+        failureTracker update(r, x + 1)
+      }
+    }
+
+  }
 }

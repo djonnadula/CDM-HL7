@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets
 import java.time.{LocalDate, Period, ZoneId}
 import java.util.{Properties, TimeZone}
 import java.util.concurrent.atomic.AtomicInteger
-import java.util.concurrent.{ScheduledExecutorService, ThreadFactory, ThreadPoolExecutor}
+import java.util.concurrent._
 import java.util.concurrent.Executors._
 import Thread._
 import System._
@@ -25,7 +25,8 @@ import scala.collection.JavaConverters._
 import scala.io.{BufferedSource, Source}
 import scala.io.Source.fromFile
 import scala.language.{implicitConversions, postfixOps}
-import scala.util.{Random, Try}
+import scala.util.{Failure, Random, Success, Try}
+import java.lang.{ProcessBuilder => runScript}
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -210,6 +211,10 @@ package object cdm extends Logg {
     newCachedThreadPool(new Factory(id)).asInstanceOf[ThreadPoolExecutor]
   }
 
+  def newDaemonCachedThreadPool(id: String, poolSize: Int, IdleTimeHours: Long = Long.MaxValue): ThreadPoolExecutor = {
+    new ThreadPoolExecutor(poolSize, Integer.MAX_VALUE, IdleTimeHours, TimeUnit.HOURS, new LinkedBlockingQueue[Runnable], new Factory(id))
+  }
+
   def newDaemonScheduler(id: String): ScheduledExecutorService = {
     newSingleThreadScheduledExecutor(new Factory(id))
   }
@@ -316,11 +321,30 @@ package object cdm extends Logg {
 
   def trimStr(in: String): String = if (valid(in)) in.trim else EMPTYSTR
 
-  private[cdm] class Factory(id: String) extends ThreadFactory {
+  def executeScript(commands: java.util.List[String], expectedTime: Int = 60): Boolean = {
+    info(s"Executing Commands $commands")
+    val process = new runScript(commands)
+    process inheritIO()
+    Try(process start) match {
+      case Success(x) =>
+        if (tryAndLogErrorMes(x.waitFor(expectedTime, TimeUnit.MINUTES), error(_: Throwable))) {
+          info(s"Status for $commands ${Source.fromInputStream(x.getInputStream).getLines().mkString(",")}")
+          info(s"Error Status for $commands ${Source.fromInputStream(x.getErrorStream).getLines().mkString(",")}")
+          if (x.exitValue() != 0) return false
+        }
+      case Failure(t) =>
+        error(s"Executing Commands Failed $commands", t)
+        return false
+    }
+    true
+  }
+
+
+  private[cdm] class Factory(id: String, assignName: () => String = () => EMPTYSTR) extends ThreadFactory {
     private val cnt = new AtomicInteger(0)
 
     override def newThread(r: Runnable): Thread = {
-      val t = new Thread(r, id + "-" + host + "-" + cnt.incrementAndGet())
+      val t = new Thread(r, id + "-" + host + "-" + assignName() + "-" + cnt.incrementAndGet())
       t.setDaemon(true)
       t
     }

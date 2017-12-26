@@ -64,5 +64,6 @@ object RetryHandler {
 
   def apply(): RetryHandler = new RetryHandler()
 
+  def apply(op: () => Unit): Boolean = apply().retryOperation(op)
 
 }
