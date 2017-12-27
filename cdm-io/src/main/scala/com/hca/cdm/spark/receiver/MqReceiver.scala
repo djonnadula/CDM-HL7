@@ -7,7 +7,7 @@ import com.hca.cdm.io.IOConstants._
 import com.hca.cdm.log.Logg
 import org.apache.spark.streaming.receiver.Receiver
 import org.apache.spark.storage.StorageLevel
-import com.hca.cdm.utils.RetryHandler
+import com.hca.cdm.utils.{PoolFullHandler, RetryHandler}
 import com.hca.cdm._
 import com.hca.cdm.exception.MqException
 import com.hca.cdm.mq.{MqConnector, SourceListener}
@@ -30,7 +30,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   */
 class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
                 (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta, tlmAckStage: String)
-  extends Receiver[MqData](storageLevel = StorageLevel.DISK_ONLY) with Logg with MqConnector {
+  extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY) with Logg with MqConnector {
 
   self =>
   private val mqHosts = lookUpProp("mq.hosts")
@@ -43,7 +43,6 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
   @volatile private var hookInit = false
   @volatile private var pauseConsuming = false
-
 
   def getCurrentConnection: ConnectionMeta = activeConnection.get()
 
@@ -72,7 +71,9 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     }
     val con = activeConnection.get()
     if (con != null) {
-      consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}")
+      consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}", sources.size * 3)
+      consumerPool allowCoreThreadTimeOut false
+      consumerPool setRejectedExecutionHandler new PoolFullHandler
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
         MQAcker(app, "appTLMRESPONSE")(mqHosts, mqManager, mqChannel, ackQueue.get)
@@ -163,11 +164,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
           self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${message.getJMSMessageID}, Stopping Receiver ${self.id}", t)
           throw t
       }
-      if (persisted) {
-        tryAndLogThr(result(async {
-          handleAcks(message, source, meta, tlmAcknowledge)
-        }(executionContext), Duration(60, SECONDS)), s"Acknowledger for Source $source", warn(_: Throwable))
-      }
+      if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
       persisted
     }
 
@@ -178,34 +175,16 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     override def getSource: String = source
   }
 
-  private def handleAcks(msg: Message, source: String, meta: MSGMeta, tlmAcknowledge: (String) => Unit): Unit = {
+  private def handleAcks(msg: Message): Unit = {
     try {
       tryAndThrow(msg.acknowledge(), error(_: Throwable))
-      if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
     }
     catch {
       case t: Throwable =>
-        self.reportError(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} will try with Retry Policy ", t)
-        var tryCount: Int = 1
-        val retry = RetryHandler()
-        while (retry.tryAgain()) {
-          try {
-            msg.acknowledge()
-            info(s"Ack message with Id :: ${msg.getJMSMessageID} succeeded after tryCount $tryCount")
-            if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
-            return
-          } catch {
-            case e: Exception => error(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} for Attempt Made So far " + tryCount, e)
-              tryCount += 1
-              if (tryCount == defaultRetries) {
-                self.reportError(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} After Retries $tryCount", e)
-
-              }
-          }
-        }
+        error(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} will try with Retry Policy ", t)
+        if (RetryHandler(msg.acknowledge)) info(s"Ack message with Id :: ${msg.getJMSMessageID} succeeded ")
+        else error(s"Cannot Ack message with Id ::  ${msg.getJMSMessageID} After Retries")
     }
-
-
   }
 
   private def currentConnection: Option[ConnectionMeta] = if (valid(activeConnection.get())) Some(activeConnection.get()) else None
@@ -221,16 +200,40 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   }
 
   private class DataConsumer(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
-    var storeReceived = true
-    var timeOut: Long = currMillis
+    private val noMessage: Message = null
+    private var lastCommit: Long = currMillis
+    private var fetCount: Long = 0
+    private var storeReceived = true
+    private var timeOut: Long = currMillis
+    private var noMsgPoll: Long = 0
 
     override def run(): Unit = {
       debug(s"${sourceListener.getSource} Receiver Stopped :: ${self.isStopped()} :: Requested Pause consuming ?? :: ${self.pauseConsuming} :: Store Received message :: $storeReceived")
       while (!self.isStopped()) {
         if (storeReceived && !self.pauseConsuming) {
-          val msg = consumer.receiveNoWait
+          val msg = tryAndReturnDefaultValue(consumer.receiveNoWait, noMessage) match {
+            case `noMessage` =>
+              noMsgPoll = inc(noMsgPoll)
+              if (noMsgPoll >= 100000) {
+                warn(s"No Message Received or Polling is down for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll")
+                noMsgPoll = 0
+                consumer receive()
+              } else noMessage
+            case message: Message => message
+          }
           if (valid(msg)) {
             storeReceived = sourceListener handleMessage msg
+            if (storeReceived) {
+              fetCount = inc(fetCount)
+              if (currMillis - lastCommit >= 10000 || fetCount >= 1000) {
+                info(s"${sourceListener.getSource} Ack-ing for messages consumed so far count $fetCount at $lastCommit")
+                lastCommit = currMillis
+                fetCount = 0
+                tryAndLogThr(result(async {
+                  handleAcks(msg)
+                }(executionContext), Duration(60, SECONDS)), s"Acknowledger for Source ${sourceListener.getSource}", warn(_: Throwable), notify = false)
+              }
+            }
           }
         } else {
           if (currMillis - timeOut >= 50000) {

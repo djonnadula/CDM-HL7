@@ -9,6 +9,7 @@ import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.hadoop.security.{UserGroupInformation => UGI, _}
 import org.apache.spark.deploy.yarn.YarnSparkHadoopUtil.{get => yrnUtil}
 import java.lang.System.{getenv => fromEnv}
+import collection.JavaConverters._
 import scala.language.postfixOps
 import java.security.PrivilegedExceptionAction
 import com.hca.cdm.exception.CdmException
@@ -16,6 +17,7 @@ import org.apache.hadoop.mapred.Master
 import org.apache.spark.SparkConf
 import org.apache.hadoop.hbase.security.token.TokenUtil._
 import org.apache.hadoop.security.token.{Token, TokenIdentifier}
+import scala.collection.mutable.ListBuffer
 
 /**
   * Created by Devaraj Jonnadula on 2/15/2017.
@@ -76,7 +78,7 @@ private[cdm] object LoginRenewer extends Logg {
   private def setCredentials(user: UGI): Unit = {
     UGI.setLoginUser(user)
     UGI.getCurrentUser.addCredentials(user.getCredentials)
-
+    UGI.getLoginUser.addCredentials(user.getCredentials)
   }
 
   private def scheduleGenCredentials(startFrom: Long = 1, credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
@@ -92,7 +94,10 @@ private[cdm] object LoginRenewer extends Logg {
   }
 
   private def haNameNodes(conf: SparkConf): Set[Path] = {
-    yrnUtil.getNameNodesToAccess(conf)
+    val nds = conf.get("spark.yarn.access.namenodes", EMPTYSTR).split(",")
+      .map(_.trim).filter(!_.isEmpty).map(new Path(_)).toSet
+    info(s"haNameNodes $nds")
+    nds
   }
 
   def stop(): Unit = {
@@ -121,8 +126,8 @@ private[cdm] object LoginRenewer extends Logg {
   private def refreshFsTokens(nameNodes: Set[Path], credentials: Credentials): Unit = {
     val renewer = yrnUtil.getTokenRenewer(hdfsConf)
     // Master.getMasterPrincipal(hdfsConf)
-    info("Renewer for Credentials " + renewer)
-    nameNodes.foreach(node => {
+    info(s"Renewer for Credentials $renewer for $nameNodes")
+    nameNodes foreach { node =>
       val dfs = node.getFileSystem(hdfsConf)
       try {
         val token = dfs.addDelegationTokens(renewer, credentials)
@@ -135,7 +140,7 @@ private[cdm] object LoginRenewer extends Logg {
       catch {
         case t: Throwable => debug(s"cannot Refresh Tokens for $node & FileSystem $dfs", t)
       }
-    })
+    }
   }
 
   private def accessCredentials(credentialFile: String): Unit = {
@@ -153,32 +158,41 @@ private[cdm] object LoginRenewer extends Logg {
         info(s"After Credentials Update ${UGI.getCurrentUser.getCredentials.getAllTokens}")
       } else {
         info(s"Credential File $credentialFile not updated will try in next cycle")
-        closeResource(stream)
       }
+      closeResource(stream)
     }))
   }
 
   private def genCredentials(credentialsFile: Path, principal: String, keytab: String, nns: Set[Path]): Unit = {
-    UGI.setConfiguration(hdfsConf)
+    info("isSecurityEnabled " + UGI.isSecurityEnabled)
     val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keytab)
     val cred = loggedUser.getCredentials
+    info(s"loggedUser tokens ${loggedUser.getCredentials.getAllTokens}")
     // noinspection ScalaDeprecation
-    loggedUser.doAs(new PrivilegedExceptionAction[Void] {
-      override def run(): Void = {
-        info("generating Token for user=" + loggedUser.getUserName + ", authMethod=" + loggedUser.getAuthenticationMethod)
-        refreshFsTokens(nns + credentialsFile.getParent, cred)
-        if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {
-          if (hbaseRenewal) {
-            val hBaseToken = obtainToken(hdfsConf)
-            if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
-          }
+    performAction(asFunc({
+      info("generating Token for user=" + loggedUser.getUserName + ", authMethod=" + loggedUser.getAuthenticationMethod)
+      refreshFsTokens(nns + credentialsFile.getParent, cred)
+      if (sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = true)) {
+        if (hbaseRenewal) {
+          val hBaseToken = obtainToken(hdfsConf)
+          if (valid(hBaseToken)) cred.addToken(hBaseToken.getService, hBaseToken)
         }
-        null
       }
-    })
+    }))
     loggedUser.addCredentials(cred)
     setCredentials(loggedUser)
     cred.writeTokenStorageFile(credentialsFile, hdfsConf)
+  }
+
+  def kInit(keyTab: String, principal: String): Unit = {
+    val commands = new ListBuffer[String]
+    commands += "/usr/bin/kinit"
+    commands += "-k"
+    commands += "-t"
+    commands += keyTab
+    commands += principal
+    if (executeScript(commands.asJava)) info(s"kInit completed for $commands")
+    else info(s"kInit failed for $commands")
   }
 
   private def sHook(): Unit = registerHook(newThread(s"$app-Login-Renewer-SHook", runnable(stop())))
