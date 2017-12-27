@@ -226,8 +226,8 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
             if (storeReceived) {
               fetCount = inc(fetCount)
               if (currMillis - lastCommit >= 10000 || fetCount >= 1000) {
-                info(s"${sourceListener.getSource} Ack-ing for messages consumed so far count $fetCount at $lastCommit")
                 lastCommit = currMillis
+                info(s"${sourceListener.getSource} Ack-ing for messages consumed so far count $fetCount at $lastCommit")
                 fetCount = 0
                 tryAndLogThr(result(async {
                   handleAcks(msg)
