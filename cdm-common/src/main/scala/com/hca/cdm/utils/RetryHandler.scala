@@ -3,6 +3,7 @@ package com.hca.cdm.utils
 import java.lang.Thread.{currentThread => ct, sleep => sleepFor}
 import com.hca.cdm.exception.OperationFailedAfterMaxTriesException
 import com.hca.cdm.log.Logg
+import com.hca.cdm._
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -65,5 +66,11 @@ object RetryHandler {
   def apply(): RetryHandler = new RetryHandler()
 
   def apply(op: () => Unit): Boolean = apply().retryOperation(op)
+
+  def apply(defaultRetries: Int, waitBetweenTries: Long, op: () => Unit, opFailedAction: () => Unit = () => Unit): Boolean = {
+    val succeeded = tryAndReturnDefaultValue0(apply(defaultRetries, waitBetweenTries).retryOperation(op), false)
+    if (!succeeded) opFailedAction()
+    succeeded
+  }
 
 }
