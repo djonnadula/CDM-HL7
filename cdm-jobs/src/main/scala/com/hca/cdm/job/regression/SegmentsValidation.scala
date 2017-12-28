@@ -1,6 +1,7 @@
 package com.hca.cdm.job.regression
 
 import java.util.Date
+import java.util.concurrent.TimeUnit
 import com.hca.cdm.log.Logg
 import com.hca.cdm._
 import com.hca.cdm.auth.LoginRenewer._
@@ -25,6 +26,7 @@ import scala.util.{Failure, Success, Try}
   */
 object SegmentsValidation extends Logg with App {
 
+  private val validationStart = currMillis
   configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
   reload(args(0))
   private val config = HadoopConfig.loadConfig(lookUpProp("hl7.config.files"))
@@ -35,7 +37,7 @@ object SegmentsValidation extends Logg with App {
   private val noDataInQA = "No Data in QA"
   private val noDataInReg = "No Data in Reg"
   private val noTableInReg = "No Table Exist for Segment in Regression Database"
-  private val rowsmatchingForId = "Rows Matching for Id's"
+  private val rowsMatchingForId = "Rows Matching for Id's"
   private val ETL_TIME = "etl_firstinsert_datetime"
   private val MSG_TYPE = "message_type"
   private val builder = new StringBuilder
@@ -56,10 +58,10 @@ object SegmentsValidation extends Logg with App {
       sourceToCompare.addPartitionsIfNotExist()
       val segmentsFromQA = sourceToCompare.segmentsInTables
       generateReport(
-        segmentsFromQA.flatMap({ case (qaSeg, qaRow) =>
+        segmentsFromQA.flatMap { case (qaSeg, qaRow) =>
           if (segmentsFromReg isDefinedAt qaSeg) {
             val regDataForTable = segmentsFromReg(qaSeg)
-            qaRow.flatMap({ case (qaControlId, qaColumns) =>
+            qaRow flatMap { case (qaControlId, qaColumns) =>
               if (regDataForTable isDefinedAt qaControlId) {
                 val columnsMisMatching = new mutable.ListBuffer[Column]()
                 val columnsDontExist = new mutable.ListBuffer[Column]()
@@ -75,16 +77,18 @@ object SegmentsValidation extends Logg with App {
                 if (columnsMisMatching.isEmpty && columnsDontExist.isEmpty) {
                   List(ComparedData(qaSeg, qaControlId, EMPTYSTR,
                     if (valid(columnsMisMatching)) Some(columnsMisMatching.toList) else None,
-                    if (valid(columnsDontExist)) Some(columnsDontExist.toList) else None)) ::: List(ComparedData(qaSeg, qaControlId, rowsmatchingForId, None, None, msgType))
+                    if (valid(columnsDontExist)) Some(columnsDontExist.toList) else None, EMPTYSTR)) ::: List(ComparedData(qaSeg, qaControlId, rowsMatchingForId, None, None, msgType))
                 } else {
                   List(ComparedData(qaSeg, qaControlId, EMPTYSTR,
                     if (valid(columnsMisMatching)) Some(columnsMisMatching.toList) else None,
-                    if (valid(columnsDontExist)) Some(columnsDontExist.toList) else None))
+                    if (valid(columnsDontExist)) Some(columnsDontExist.toList) else None, EMPTYSTR))
                 }
-              } else List(ComparedData(qaSeg, qaControlId, noDataInReg))
-            })
-          } else List(ComparedData(qaSeg, EMPTYSTR, noTableInReg))
-        }).groupBy(_.segment).map(seg => seg._1 -> seg._2.toList.sortBy(_.segment)))
+              } else {
+                List(ComparedData(qaSeg, qaControlId, noDataInReg, None, None, EMPTYSTR))
+              }
+            }
+          } else List(ComparedData(qaSeg, EMPTYSTR, noTableInReg, None, None, EMPTYSTR))
+        }.groupBy(_.segment).map(seg => seg._1 -> seg._2.toList.sortBy(_.segment)))
     } catch {
       case t: Throwable =>
         error(s"Cannot Run Job for $this", t)
@@ -94,8 +98,11 @@ object SegmentsValidation extends Logg with App {
       closeResource(client)
       info(s"Shutdown Completed for $this")
     }
+  }
 
+  private def measureTime(segment: String, controlId: String, start: Long = currMillis, endTime: Long): Unit = {
 
+    println(s"For $segment segment & control-Id $controlId validation took ${endTime - start} ms ${TimeUnit.MILLISECONDS.toSeconds(endTime-start)} seconds"  )
   }
 
   private def tryForTaskExe[T](action: async[T]): Try[T] = Try(Await result(action, waitTillTaskCompletes))
@@ -141,21 +148,22 @@ object SegmentsValidation extends Logg with App {
 
 
   private[this] def generateReport(data: Map[String, List[ComparedData]]) {
-    ListMap(data.toSeq.sortBy(_._1): _*).foreach({ case (segment, results) =>
+    ListMap(data.toSeq.sortBy(_._1): _*).foreach { case (segment, results) =>
       if (valid(results)) {
-        results.groupBy(_.message).foreach({ case (message, result) =>
+        results.groupBy(_.message).foreach { case (message, result) =>
+          result.foreach { row => measureTime(row.segment, row.controlId, validationStart, currMillis) }
           message match {
-            case `rowsmatchingForId` =>
+            case `rowsMatchingForId` =>
               append(s"<div style=color:#00b258><h4>QA Segments for ${segment.toUpperCase()} Which Match with Regression Source as Follows  </h4>")
               append("<table cellspacing=0 cellpadding=10 border=1 style=font-size:1em; line-height:1.2em; font-family:Courier;><tr>")
               append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Message Type</th>")
               append(s"<th width=30 style=font-weight:bold; font-size:1em; line-height:1.2em; font-family:Courier;>Control Id</th>")
               append("</tr>")
-              result.foreach({ column =>
+              result.foreach { column =>
                 append("<tr>" + tdData + column.messageType + tdDataEnd +
                   tdData + column.controlId + tdDataEnd +
                   "</tr>")
-              })
+              }
               append("</table>")
               append("</div>")
             case `noTableInReg` =>
@@ -193,12 +201,12 @@ object SegmentsValidation extends Logg with App {
                 }
               }
           }
-        })
+        }
       } else {
         append(s"<div style=color:#0000FF><h3>${segment.toUpperCase} has no Data to Compare </h3></div>")
       }
-    })
-    mail("{encrypt} Regression Test Results for HL7 Segments Ran on " + dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP), builder.result(), NORMAL, statsReport = true)
+    }
+    mail("{encrypt} Regression Test Results for CDM HL7 Process Ran on " + dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime, DATE_WITH_TIMESTAMP), builder.result(), NORMAL, statsReport = true)
   }
 
   private def handleColumnReport(columns: List[Column], controlId: String): Unit = {
