@@ -344,9 +344,7 @@ package object cdm extends Logg {
     private val cnt = new AtomicInteger(0)
 
     override def newThread(r: Runnable): Thread = {
-      val t = new Thread(r, id + "-" + host + "-" + assignName() + "-" + cnt.incrementAndGet())
-      t.setDaemon(true)
-      t
+      cdm.newThread(id + "-" + host + "-" + assignName() + "-" + cnt.incrementAndGet(), r, daemon = true)
     }
   }
 
