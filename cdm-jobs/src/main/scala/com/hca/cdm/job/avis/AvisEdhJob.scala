@@ -1,6 +1,7 @@
 package com.hca.cdm.job.avis
 
 import com.hca.cdm._
+import com.hca.cdm.notification.{sendMail => mail, _}
 import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.hadoop.HadoopConfig
 import com.hca.cdm.log.Logg
@@ -54,13 +55,10 @@ object AvisEdhJob extends Logg with App {
     doJob()
   } else {
     info(s"ETL Job has not completed so far $EVENT_TIME will try with Retry Policy")
-
-    def retryOp() = {
+    RetryHandler(4, 60000, asFunc({
       if (!isEtlCompleted) throw new CdmException(s"ETL Job has not completed so far $EVENT_TIME")
       else doJob()
-    }
-
-    tryAndLogErrorMes(new RetryHandler(4, 60000).retryOperation(retryOp), info(_: Throwable), Some(s"ETL Job has not completed so far exiting $EVENT_TIME"))
+    }), asFunc(error(s"ETL Job has not completed so far exiting $EVENT_TIME")))
   }
 
   private def doJob(): Unit = {
@@ -68,8 +66,11 @@ object AvisEdhJob extends Logg with App {
     if (loadHadoopStaging()) {
       truncateEdwStaging()
       loadEdwStaging()
+      edwLoadComplete()
+    } else {
+      mail(s"Avis Hadoop Staging Failed",
+        s"Loading Staging area in Hadoop Failed and no data not has been loaded to Teradata staging for ETL to Load Fact Tables $EVENT_TIME. ", TaskState.CRITICAL)
     }
-    edwLoadComplete()
   }
 
   private def loadEdwStaging(): Unit = {
@@ -116,6 +117,10 @@ object AvisEdhJob extends Logg with App {
     statement.setString(1, currentLoadOffset)
     val status = statement.executeUpdate()
     if (status >= 0) info(s"Batch completed with status $status and Batch Offset $currentLoadOffset")
+    if (currentLoadOffset == batchOffset) {
+      mail("Avis Teradata Staging Load Delayed",
+        s"No Data has landed on Hadoop to load staging area in Teradata for ETL to Load Fact Tables. Data loaded so far to Teradata till  $currentLoadOffset $EVENT_TIME. ", TaskState.CRITICAL)
+    }
     commit(connection)
     closeResource(statement)
     closeResource(connection)
