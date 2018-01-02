@@ -17,7 +17,7 @@ class AdvancedVentEnRicher(config: Array[String]) extends Logg with EnrichData {
 
   override def close(): Unit = {}
 
-  override def apply(layout: mutable.LinkedHashMap[String, String]): Traversable[mutable.LinkedHashMap[String, String]] = {
+  override def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     val temp = new ListBuffer[mutable.LinkedHashMap[String, String]]
     val transformedData = fieldsAtIndex(layout)
     for (index <- 0 until maxMessages(layout)) {
@@ -35,7 +35,7 @@ class AdvancedVentEnRicher(config: Array[String]) extends Logg with EnrichData {
       }
       temp += outTemp
     }
-    temp
+    EnrichedData(temp, hl7)
   }
 
   private def maxMessages(layout: mutable.LinkedHashMap[String, String]): Int = {

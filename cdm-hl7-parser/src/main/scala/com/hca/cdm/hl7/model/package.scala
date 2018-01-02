@@ -11,7 +11,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types
 import com.hca.cdm.hl7.constants.HL7Types.{withName => whichHl7}
 import com.hca.cdm.hl7.constants.HL7Types.{HL7, UNKNOWN}
-import com.hca.cdm.hl7.enrichment.{EnrichData, EnrichDataFromOffHeap, NoEnRicher}
+import com.hca.cdm.hl7.enrichment.{EnrichData, EnrichDataFromOffHeap, EnrichedData, NoEnRicher}
 import com.hca.cdm.hl7.model.SegmentsState.SegState
 import com.hca.cdm.hl7.model.Destinations.Destination
 import com.hca.cdm.log.Logg
@@ -369,13 +369,13 @@ package object model extends Logg {
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
                                dataEnRicher: EnrichData, offHeapDataEnRicher: EnrichDataFromOffHeap) {
 
-    def applyTransformations(data: mutable.LinkedHashMap[String, String]): Any = {
+    def applyTransformations(data: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
       selector apply data
       aggregator apply data
       staticOperator apply data
       validator apply data
-      offHeapDataEnRicher apply data
-      dataEnRicher apply data
+      offHeapDataEnRicher apply(data, hl7)
+      dataEnRicher apply(data, hl7)
       // tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
     }
   }

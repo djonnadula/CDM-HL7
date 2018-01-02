@@ -11,11 +11,13 @@ import scala.language.postfixOps
 /**
   * Created by Devaraj Jonnadula on 7/24/2017.
   */
+case class EnrichedData(enrichedLayout: Any, enrichedHL7: String = EMPTYSTR)
+
 trait EnrichData extends Serializable {
 
   def close(): Unit
 
-  def apply(layout: mutable.LinkedHashMap[String, String]): Any
+  def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData
 
 }
 
@@ -23,7 +25,7 @@ trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
   protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
 
-  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String]): Any
+  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData
 
   def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
     enrichDataPartFun = offHeapHandler
@@ -31,12 +33,12 @@ trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
 }
 
-case class NoEnRicher() extends EnrichData with EnrichDataFromOffHeap {
+case class NoEnRicher() extends EnrichDataFromOffHeap {
   override def close(): Unit = {}
 
-  override def apply(layout: mutable.LinkedHashMap[String, String]): Any = layout
+  override def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = EnrichedData(layout, hl7)
 
-  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): Any = layout
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = EnrichedData(layout, hl7)
 
 
 }
@@ -69,7 +71,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
 
   override def close(): Unit = {}
 
-  override def apply(layout: mutable.LinkedHashMap[String, String]): mutable.LinkedHashMap[String, String] = {
+  override def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     if ((layout isDefinedAt facilityKey) && (facilityRef isDefinedAt layout(facilityKey))) {
       if ((layout isDefinedAt patientLocation) && !isCrossRefFac(layout)) {
         if (facilityRef(layout(facilityKey)).get(layout(patientLocation)).isDefined) {
@@ -86,7 +88,7 @@ private[enrichment] class FacilityCoidHandler(files: Array[String]) extends Enri
         }
       }
     }
-    layout
+    EnrichedData(layout, hl7)
   }
 
   private def isCrossRefFac(layout: mutable.LinkedHashMap[String, String]): Boolean = {
@@ -118,7 +120,7 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
 
   override def close(): Unit = {}
 
-  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String]): mutable.LinkedHashMap[String, String] = {
+  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     if (fetchRequired(layout)) {
       val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, Array[Byte]]].map { case (k, v) => k -> new String(v, UTF8) }
       enrichSourceToTargetMapping.foreach {
@@ -128,7 +130,7 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
           }
       }
     }
-    layout
+    EnrichedData(layout, hl7)
 
   }
 
@@ -143,8 +145,8 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
   }
 
 
-  override def apply(layout: mutable.LinkedHashMap[String, String]): Unit = {
-    apply(self.enrichDataPartFun, layout)
+  override def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
+    apply(self.enrichDataPartFun, layout, hl7)
   }
 }
 

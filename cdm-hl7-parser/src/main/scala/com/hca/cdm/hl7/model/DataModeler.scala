@@ -11,7 +11,7 @@ import com.hca.cdm.hl7.filter.FilterUtility.{filterTransaction => filterRec}
 import com.hca.cdm.hl7.model.OutFormats._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
-import scala.collection.mutable.{LinkedHashMap,Set}
+import scala.collection.mutable.{LinkedHashMap, Set}
 import scala.language.postfixOps
 
 /**
@@ -29,7 +29,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
 
   def applyModel(whichSeg: String, model: Model)(data: mapType, rawHl7: String): Hl7SegmentTrans = {
     val modelFilter: Map[String, Set[String]] = model.modelFilter
-    if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && reqMsgType != VENTORU &&  !isRequiredType(data, reqMsgType)) return notValid
+    if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && reqMsgType != VENTORU && !isRequiredType(data, reqMsgType)) return notValid
     var layout = model.EMPTY
     val dataHandler = includeEle(layout, _: String, _: String, _: String)
     val temp = model.adhoc match {
@@ -40,17 +40,15 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
             case out =>
               if (out._1) {
                 // Case to Strip Out Fields which require Only One Occurrence
-                adhoc.reqNoAppends.foreach(field =>
-                  if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).substring(0, layout(field).indexOf(caret))))
+                adhoc.reqNoAppends.foreach { field =>
+                  if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).split(s"\\$caret", -1).find { data => valid(data) && data != EMPTYSTR }.getOrElse(EMPTYSTR))
+                }
+                handleCommonSegments(data, layout)
                 adhoc.outFormat match {
-                  case JSON =>
-                    handleCommonSegments(data, layout)
-                    handleEnrichData(JSON, model, adhoc, EnrichCacheManager().getEnRicher(adhoc transformer) applyTransformations layout)(out._2)
-                  case DELIMITED =>
-                    handleCommonSegments(data, layout)
-                    handleEnrichData(DELIMITED, model, adhoc, EnrichCacheManager().getEnRicher(adhoc transformer) applyTransformations layout)(out._2)
+                  case JSON | DELIMITED =>
+                    handleEnrichData(adhoc.outFormat, model, adhoc, EnrichCacheManager().getEnRicher(adhoc transformer).applyTransformations(layout, rawHl7).enrichedLayout)(out._2)
                   case RAWHL7 =>
-                    out._2 += (rawHl7 -> null)
+                    out._2 += (EnrichCacheManager().getEnRicher(adhoc transformer).applyTransformations(layout, rawHl7).enrichedHL7 -> null)
                 }
               }
               out._2

@@ -26,7 +26,7 @@ private[cdm] class OffsetManager(storeNameSpace: String, store: String, appAsRow
   private lazy val allAttributes = ListBuffer.empty[String]
 
   def batchCompleted[T](batch: RDD[T]): Unit = {
-    // require(!batch.isInstanceOf[HasOffsetRanges], "Currently Only Kafka Impl is supported")
+    require(batch.isInstanceOf[HasOffsetRanges], "Currently Only Kafka Impl is supported")
     val table = storeHandler.getTable(store)
     val req = new Put(toBytes(appAsRow))
     val familyBytes = toBytes(offsetFamily)
