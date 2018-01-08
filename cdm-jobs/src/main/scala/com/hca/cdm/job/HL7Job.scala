@@ -18,7 +18,7 @@ import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.audit.AuditConstants._
 import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
-import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, allKnownHL7, withName => whichHL7}
+import com.hca.cdm.hl7.constants.HL7Types.{HL7, IPLORU, ORU, UNKNOWN, withName => whichHL7}
 import com.hca.cdm.hl7.exception.UnknownMessageTypeException
 import com.hca.cdm.hl7.model._
 import com.hca.cdm.hl7.parser.HL7Parser
@@ -142,7 +142,7 @@ object HL7Job extends Logg with App {
   private val hdpConf = hadoop.hadoopConf
   private val hTables = new mutable.HashSet[String]
   private var offSetManager: OffsetManager = _
-  private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled && tryAndReturnDefaultValue0(lookUpProp("hl7.checkpoint.external.enable").toBoolean,true)
+  private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled && tryAndReturnDefaultValue0(lookUpProp("hl7.checkpoint.external.enable").toBoolean, true)
   private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
@@ -161,8 +161,8 @@ object HL7Job extends Logg with App {
 
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
-    hdpConf.set("hadoop.security.authentication", "Kerberos")
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
+    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     if (hl7JsonTopic != EMPTYSTR) createTopic(hl7JsonTopic, segmentPartitions = false)
     if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
     if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
@@ -192,7 +192,7 @@ object HL7Job extends Logg with App {
     parserAccumulators = registerParserMetric(sparkStrCtx)
     parserDriverMetrics = driverParserMetric()
     restoreMetrics()
-    monitorHandler = newDaemonScheduler(app + "-Monitor-Pool")
+    monitorHandler = newDaemonCachedScheduler(s"$app-Monitor-Pool", 3)
     if (tryAndReturnDefaultValue0(lookUpProp("cdm.stats.generate").toBoolean, true)) {
       monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
     }
@@ -206,7 +206,6 @@ object HL7Job extends Logg with App {
       shutDown()
       info(s"${currThread.getName}  Shutdown HOOK Completed for " + app)
     }))
-    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     registerHook(sHook)
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
@@ -399,7 +398,7 @@ object HL7Job extends Logg with App {
   /**
     * Close All Resources
     */
-  private def close() = {
+  private def close(): Unit = {
     info(s"Shutdown Invoked for $app")
     monitorHandler shutdown()
     monitorHandler awaitTermination(1, TimeUnit.HOURS)
@@ -419,7 +418,7 @@ object HL7Job extends Logg with App {
   private def initDelay = now(sys_ZoneId) until(LocalDate.now(sys_ZoneId).plusDays(1).atStartOfDay(), ChronoUnit.SECONDS)
 
 
-  private def checkSize(threshold: Int)(data: AnyRef, parser: HL7Parser) = if (!IOCanHandle(data, threshold)) parser.overSizeMsgFound()
+  private def checkSize(threshold: Int)(data: AnyRef, parser: HL7Parser): Unit = if (!IOCanHandle(data, threshold)) parser.overSizeMsgFound()
 
 
   private def minToSec(min: Int): Long = {
@@ -508,7 +507,7 @@ object HL7Job extends Logg with App {
   /**
     * Collects Segments Metrics from Tasks Completed in Driver
     */
-  private def collectSegmentMetrics(taskMetrics: TrieMap[String, Long], taskUpdate: Boolean = true) = segmentsAccumulators.synchronized {
+  private def collectSegmentMetrics(taskMetrics: TrieMap[String, Long], taskUpdate: Boolean = true): Unit = segmentsAccumulators.synchronized {
     val NA = SegmentsState.NOTAPPLICABLE.toString
     taskMetrics.foreach({ case (k, metric) => if (metric > 0L) if (taskUpdate) {
       if (!(k contains NA)) this.segmentsAccumulators(k) += metric
@@ -521,7 +520,7 @@ object HL7Job extends Logg with App {
   /**
     * Collects Parser Metrics from Tasks Completed in Driver
     */
-  private def collectParserMetrics(taskMetrics: TrieMap[String, Long], taskUpdate: Boolean = true) = parserAccumulators.synchronized {
+  private def collectParserMetrics(taskMetrics: TrieMap[String, Long], taskUpdate: Boolean = true): Unit = parserAccumulators.synchronized {
     taskMetrics.foreach({ case (k, metric) => if (metric > 0L) if (taskUpdate) {
       this.parserAccumulators(k) += metric
     } else {
@@ -733,8 +732,8 @@ object HL7Job extends Logg with App {
 
   private[this] object InputSource extends Enumeration with Logg {
     type Source = Value
-    val KAFKA = Value("KAFKA")
-    val HDFS = Value("HDFS")
+    val KAFKA: InputSource.Value = Value("KAFKA")
+    val HDFS: InputSource.Value = Value("HDFS")
 
     def convert(source: Source, msgType: String, dataItr: Iterator[(Comparable[_ >: String with LongWritable], Comparable[_ >: String with BinaryComparable])]): Iterator[(String, String)] = {
       source match {

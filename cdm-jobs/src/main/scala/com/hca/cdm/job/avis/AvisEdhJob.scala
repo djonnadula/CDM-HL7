@@ -35,7 +35,7 @@ object AvisEdhJob extends Logg with App {
   private val config_file = args(0)
   propFile = config_file
   reload(config_file)
-  private val config = HadoopConfig.loadConfig(lookUpProp("hadoop.config.files"))
+  private val config = HadoopConfig.loadConfig( tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
   LoginRenewer.loginFromKeyTab(lookUpProp("keytab"), lookUpProp("principal"), Some(config))
   private val fs = LoginRenewer.performAction(asFunc(FileSystem get config))
   private val jdbcConnector = new JdbcConnector(TERADATA, loadConfig(config_file))

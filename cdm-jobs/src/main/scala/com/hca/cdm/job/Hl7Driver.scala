@@ -18,6 +18,7 @@ import scala.io.Source
 import java.io.InputStream
 import java.lang.{ProcessBuilder => runScript}
 import java.util.concurrent.TimeUnit
+import com.hca.cdm.auth.LoginRenewer
 import org.apache.log4j.PropertyConfigurator._
 
 /**
@@ -151,6 +152,10 @@ object Hl7Driver extends App with Logg {
   private val startTime = currMillis
   private var watchTime = currMillis
   private val maxWait = 300000
+ /* LoginRenewer.createTokensFromDriver(app, lookUpProp("hl7.spark.yarn.principal"), lookUpProp("hl7.spark.yarn.keytab"),
+    tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]())).foreach { file =>
+    sparkLauncher addFile file.getPath
+  }*/
   private val job = sparkLauncher startApplication()
   while (job.getAppId == null) {
     sleep(3000)
@@ -257,6 +262,7 @@ object Hl7Driver extends App with Logg {
   }
 
   private def startIfNeeded(selfStart: Boolean): Unit = {
+    LoginRenewer.kInit(lookUpProp("hl7.spark.yarn.keytab"), lookUpProp("hl7.spark.yarn.principal"))
     if (selfStart) {
       info(s"Self Start is Requested for $app")
       handleDriver("restart")
