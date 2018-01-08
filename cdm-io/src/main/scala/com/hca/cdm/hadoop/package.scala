@@ -20,6 +20,7 @@ package object hadoop extends Logg {
   def hadoopConf : Configuration = {
     val conf =  HBaseConfiguration.create(hdpUtil.conf)
     conf.addResource("hbase-site.xml")
+    conf.set("hadoop.security.authentication", "Kerberos")
     conf
   }
 

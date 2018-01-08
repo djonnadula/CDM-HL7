@@ -52,12 +52,14 @@ package object model extends Logg {
   lazy val notValidStr = "Not Valid Input"
   lazy val skippedStr = "SKIPPED"
   lazy val filteredStr = "FILTERED"
+  lazy val partialRejectStr = "PARTIAL_REJECT"
   lazy val timeStampKey = "etl_firstinsert_datetime"
   lazy val fieldSeqNum = "field_seq_num"
   lazy val NA = "Not Applicable"
   private lazy val toJson = jsonHandler()
   private lazy val NONE = MSGMeta("no message control ID", "no time from message", EMPTYSTR, EMPTYSTR, EMPTYSTR, "no Sending Facility")
   lazy val caret = "^"
+  lazy val Space = " "
   lazy val DOT = "."
   lazy val EQUAL = "="
   lazy val ESCAPE = "\\"
@@ -149,42 +151,44 @@ package object model extends Logg {
   object HL7State extends Enumeration {
 
     type hl7State = Value
-    val PROCESSED = Value("PROCESSED")
-    val FAILED = Value("FAILED")
-    val REJECTED = Value("REJECTED")
-    val OVERSIZED = Value("OVERSIZED")
-    val UNKNOWNMAPPING = Value("UNKNOWNMAPPING")
+    val PROCESSED: HL7State.Value = Value("PROCESSED")
+    val FAILED: HL7State.Value = Value("FAILED")
+    val REJECTED: HL7State.Value = Value("REJECTED")
+    val OVERSIZED: HL7State.Value = Value("OVERSIZED")
+    val UNKNOWNMAPPING: HL7State.Value = Value("UNKNOWNMAPPING")
   }
 
   object SegmentsState extends Enumeration {
 
     type SegState = Value
-    val SKIPPED = Value("SKIPPED")
-    val PROCESSED = Value("PROCESSED")
-    val FAILED = Value("FAILED")
-    val INVALID = Value("INVALID")
-    val NOTAPPLICABLE = Value("N/A")
-    val OVERSIZED = Value("OVERSIZED")
-    val FILTERED = Value("FILTERED")
+    val SKIPPED: SegmentsState.Value = Value("SKIPPED")
+    val PROCESSED: SegmentsState.Value = Value("PROCESSED")
+    val FAILED: SegmentsState.Value = Value("FAILED")
+    val INVALID: SegmentsState.Value = Value("INVALID")
+    val NOTAPPLICABLE: SegmentsState.Value = Value("N/A")
+    val OVERSIZED: SegmentsState.Value = Value("OVERSIZED")
+    val FILTERED: SegmentsState.Value = Value("FILTERED")
+    val PARTIAL_REJECT: SegmentsState.Value = Value("PARTIAL_REJECT")
+
 
   }
 
   object OutFormats extends Enumeration {
 
     type OutFormat = Value
-    val JSON = Value("JSON")
-    val DELIMITED = Value("DELIMITED")
-    val AVRO = Value("AVRO")
-    val RAWHL7 = Value("RAWHL7")
+    val JSON: OutFormats.Value = Value("JSON")
+    val DELIMITED: OutFormats.Value = Value("DELIMITED")
+    val AVRO: OutFormats.Value = Value("AVRO")
+    val RAWHL7: OutFormats.Value = Value("RAWHL7")
 
   }
 
   object Destinations extends Enumeration {
     type Destination = Value
-    val KAFKA = Value("KAFKA")
-    val WSMQ = Value("WSMQ")
-    val DEFAULT = Value("KAFKA")
-    val HBASE = Value("HBASE")
+    val KAFKA: Destinations.Value = Value("KAFKA")
+    val WSMQ: Destinations.Value = Value("WSMQ")
+    val DEFAULT: Destinations.Value = Value("KAFKA")
+    val HBASE: Destinations.Value = Value("HBASE")
   }
 
   def applyAvroData(container: Record, key: String, value: AnyRef): Unit = {
@@ -205,14 +209,14 @@ package object model extends Logg {
         rejectRecord update(mrn, meta.medical_record_num)
         rejectRecord update(urn, meta.medical_record_urn)
         rejectRecord update(accntNum, meta.account_num)
-        rejectRecord update(rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
+        rejectRecord update(rejectReason, if (t != null) reason + Space + t.getMessage + Space + (if (stack) t.getStackTrace mkString caret) else reason)
         rejectRecord update(rejectData, if (raw ne null) raw else if (data != null) data else EMPTYSTR)
         rejectRecord update(etlTime, timeStamp)
         toJson(rejectRecord)
       case DELIMITED =>
         s"$hl7$COLON$stage$PIPE_DELIMITED_STR${meta.controlId}$PIPE_DELIMITED_STR${meta.msgCreateTime}$PIPE_DELIMITED_STR${meta.medical_record_num}" +
           s"$PIPE_DELIMITED_STR${meta.medical_record_urn}$PIPE_DELIMITED_STR${meta.account_num}$PIPE_DELIMITED_STR" + timeStamp + PIPE_DELIMITED_STR +
-          (if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED_STR + (if (raw ne null) raw else toJson(data))
+          (if (t != null) reason + Space + t.getMessage + Space + (if (stack) t.getStackTrace mkString caret) else reason) + PIPE_DELIMITED_STR + (if (raw ne null) raw else toJson(data))
       case AVRO =>
         import rejectSchemaMapping._
         import RejectAvroSchema._
@@ -223,7 +227,7 @@ package object model extends Logg {
         applyAvroData(rejectRecord, mrn, meta.medical_record_num)
         applyAvroData(rejectRecord, urn, meta.medical_record_urn)
         applyAvroData(rejectRecord, accntNum, meta.account_num)
-        applyAvroData(rejectRecord, rejectReason, if (t != null) reason + (if (stack) t.getStackTrace mkString caret) else reason)
+        applyAvroData(rejectRecord, rejectReason, if (t != null) reason + Space + t.getMessage + Space + (if (stack) t.getStackTrace mkString caret) else reason)
         applyAvroData(rejectRecord, rejectData, if (raw ne null) raw else if (data != null) toJson(data) else EMPTYSTR)
         applyAvroData(rejectRecord, etlTime, timeStamp)
         val stream = new ByteArrayOutputStream(256)
@@ -705,7 +709,6 @@ object EnrichCacheManager extends Logg {
         })
       }
       }
-
     }
     instance
   }

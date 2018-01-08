@@ -219,6 +219,10 @@ package object cdm extends Logg {
     newSingleThreadScheduledExecutor(new Factory(id))
   }
 
+  def newDaemonCachedScheduler(id: String,poolSize: Int): ScheduledExecutorService = {
+    newScheduledThreadPool(poolSize,new Factory(id))
+  }
+
   def tryAndLogThr(fun: => Unit, whichAction: String, reporter: (Throwable) => Unit, notify: Boolean = notifyErrors, state: taskState = CRITICAL): Boolean = {
     try {
       fun
@@ -246,6 +250,17 @@ package object cdm extends Logg {
         else reporter(t)
     }
     false
+  }
+
+  def tryAndReturnThrow[T](fun: => T): Either[T, Throwable] = {
+    try {
+      val out = fun
+      Left(out)
+    }
+    catch {
+      case t: Throwable =>
+        Right(new CdmException(t))
+    }
   }
 
   def tryAndThrow[T](fun: => T, reporter: (Throwable) => Unit, message: Option[String] = None): T = {
