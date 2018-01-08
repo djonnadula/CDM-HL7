@@ -29,7 +29,7 @@ object SegmentsValidation extends Logg with App {
   private val validationStart = currMillis
   configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
   reload(args(0))
-  private val config = HadoopConfig.loadConfig(lookUpProp("hl7.config.files"))
+  private val config = HadoopConfig.loadConfig(tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
   private val hiveCfg = hiveConf(config)
   private val client = new dataFetcher
   loginFromKeyTab(lookUpProp("hl7.auth.keytab"), lookUpProp("hl7.auth.principal"), Some(config))
