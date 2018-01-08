@@ -12,15 +12,18 @@ import org.apache.hadoop.hive.conf.HiveConf
   */
 private[cdm] object HadoopConfig extends Logg {
 
-  def loadConfig(configDir: String): Configuration = {
+  def loadConfig(configDir: Seq[String]): Configuration = {
     val resources = getConfigFiles(configDir)
-    resources foreach(file => info(file.getAbsolutePath))
+    resources foreach (file => info(file.getAbsolutePath))
     val conf = new Configuration()
-    conf.set("hadoop.security.authentication", "Kerberos")
     if (valid(configDir)) resources.foreach(res => conf.addResource(new File(res.getAbsolutePath).toURI.toURL))
+    conf.set("hadoop.security.authentication", "Kerberos")
     conf
   }
 
+  private def getConfigFiles(configDirs: Seq[String]): List[File] = {
+    configDirs.foldLeft(List[File]())((a, b) => a ++ getConfigFiles(b))
+  }
 
   private def getConfigFiles(configDir: String): List[File] = {
     val dir = new File(configDir)
