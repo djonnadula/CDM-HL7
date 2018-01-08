@@ -11,7 +11,7 @@ import scala.language.postfixOps
 /**
   * Created by Devaraj Jonnadula on 7/24/2017.
   */
-case class EnrichedData(enrichedLayout: Any, enrichedHL7: String = EMPTYSTR)
+case class EnrichedData(enrichedLayout: Any, enrichedHL7: String = EMPTYSTR, rejects : Option[ListBuffer[Throwable]] = None)
 
 trait EnrichData extends Serializable {
 

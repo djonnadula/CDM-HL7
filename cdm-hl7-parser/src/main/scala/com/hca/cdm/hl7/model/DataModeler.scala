@@ -7,6 +7,7 @@ import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hl7.EnrichCacheManager
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.constants.HL7Types.{withName => hl7, _}
+import com.hca.cdm.hl7.enrichment.EnrichedData
 import com.hca.cdm.hl7.filter.FilterUtility.{filterTransaction => filterRec}
 import com.hca.cdm.hl7.model.OutFormats._
 import com.hca.cdm.log.Logg
@@ -44,11 +45,13 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                   if (layout.isDefinedAt(field) && layout(field).contains(caret)) layout update(field, layout(field).split(s"\\$caret", -1).find { data => valid(data) && data != EMPTYSTR }.getOrElse(EMPTYSTR))
                 }
                 handleCommonSegments(data, layout)
+                val enrichedData = EnrichCacheManager().getEnRicher(adhoc transformer).applyTransformations(layout, rawHl7)
+                if (enrichedData.rejects.nonEmpty) enrichedData.rejects.get foreach { rej => out._2 += partialRejectStr -> rej }
                 adhoc.outFormat match {
                   case JSON | DELIMITED =>
-                    handleEnrichData(adhoc.outFormat, model, adhoc, EnrichCacheManager().getEnRicher(adhoc transformer).applyTransformations(layout, rawHl7).enrichedLayout)(out._2)
+                    handleEnrichData(adhoc.outFormat, model, adhoc, enrichedData)(out._2)
                   case RAWHL7 =>
-                    out._2 += (EnrichCacheManager().getEnRicher(adhoc transformer).applyTransformations(layout, rawHl7).enrichedHL7 -> null)
+                    out._2 += enrichedData.enrichedHL7 -> null
                 }
               }
               out._2
@@ -97,7 +100,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
     }
   }
 
-  private def handleEnrichData(outFormat: OutFormat, model: Model, adhoc: ADHOC, layout: Any)(collector: LinkedHashMap[String, Throwable]): Unit = {
+  private def handleEnrichData(outFormat: OutFormat, model: Model, adhoc: ADHOC, enriched: EnrichedData)(collector: LinkedHashMap[String, Throwable]): Unit = {
     def formatData(data: LinkedHashMap[String, String]): String = {
       outFormat match {
         case JSON =>
@@ -111,14 +114,13 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
       }
     }
 
-    layout match {
+    enriched.enrichedLayout match {
       case oneUnit: LinkedHashMap[String, String] =>
         collector += formatData(oneUnit) -> null
       case multi: Traversable[LinkedHashMap[String, String]] =>
         multi foreach { d => collector += formatData(d) -> null }
       case notImpl => throw new CdmException(s"Not Yet Implemented for $notImpl")
     }
-
 
   }
 

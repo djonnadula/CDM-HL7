@@ -84,6 +84,11 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                  sizeCheck(msg, segment.seg)
                  tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-filteredSegment", error(_: Throwable))
                  debug(s"Segment Filtered :: $msg") */
+                case `partialRejectStr` =>
+                  updateMetrics(segment.seg, PARTIAL_REJECT)
+                  val msg = rejectMsg(hl7, segment.seg, meta, partialRejectStr, data, t)
+                  sizeCheck(msg, segment.seg)
+                  tryAndLogThr(rejectIO(msg, header(hl7, rejectStage, Left(meta))), s"$hl7$COLON${segment.seg}-rejectIO-partialRejectSegment", error(_: Throwable))
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
