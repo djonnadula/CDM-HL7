@@ -38,10 +38,17 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
       "Job config for more Details.</p>")
     case FILTERED => defNotes append ("<p>" + FILTERED + " : Special Requests like CDI, SCRI .. requires filtering and what ever criteria defined for them doesn't meet " +
       "for this HL7 and it was Filtered.</p>")
+    case PARTIAL_REJECT =>
+      defNotes append ("<p>" + PARTIAL_REJECT + " : Sub Set of data for HL7 does not meet requirement to process. So it was Rejected as per Criteria defined and this log can be found in Rejects Topic</p>")
+
   }
   defNotes append ("<p>" + HL7State.REJECTED + " : Hl7 Doesn't meet the Requirement to Process. So it was Rejected as per Criteria and this log can be found in Rejects Topic</p>")
   defNotes append ("<p>" + HL7State.UNKNOWNMAPPING + " : Templates Used for Parsing HL7 don't have mapping defined. HL7 was still processed by mapping to unknown. " +
     " To track these scenarios log was recorded in Rejects Topic detailing more on this and which mappings don't exist.</p>")
+
+  private def waitTill: Boolean = {
+    false
+  }
 
   override def run(): Unit = {
     val from = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(1), DATE_WITH_TIMESTAMP)
@@ -50,9 +57,10 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     val segmentMetrics = job.segmentMetrics
     job.resetMetrics()
     val parserGrp = parserMetrics groupBy (x => x._1.substring(0, x._1.indexOf(COLON)))
-    val processedHl7 = parserGrp.map { x => x._1 -> x._2.filter {
-      case (state, metric) => state.substring(state.indexOf(COLON) + 1) == PROCESSED.toString
-    }
+    val processedHl7 = parserGrp.map { x =>
+      x._1 -> x._2.filter {
+        case (state, metric) => state.substring(state.indexOf(COLON) + 1) == PROCESSED.toString
+      }
     }.map { x => x._1 -> x._2.head._2 }
     val segmentsGrp = segmentMetrics.groupBy(x => x._1.substring(0, x._1.indexOf(COLON))).map {
       case (hl7, segments) => hl7 -> segments.filterNot { case (segState, metric) => segState.substring(segState.lastIndexOf(COLON) + 1) == NOTAPPLICABLE.toString && metric <= processedHl7(hl7) - 100 }
@@ -100,22 +108,21 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
     this.builder.clear()
   }
 
-  private def tableData(store: Map[String, Map[String, Long]], segments: Boolean = false) = {
+  private def tableData(store: Map[String, Map[String, Long]], segments: Boolean = false): Unit = {
     store.toSeq.sortBy(_._1).foreach({ case (hl7, metricStore) =>
       metricStore.toSeq.sortBy(_._1).foreach({ case (state, metric) =>
         if (metric > 0L) {
-          append(segments match {
-            case true =>
-              "<tr>" + tdData + "<strong>" + hl7 + "</strong>" + tdDataEnd +
-                tdData + state.substring(state.indexOf(COLON) + 1, state.lastIndexOf(COLON)) + tdDataEnd +
-                tdData + state.substring(state.lastIndexOf(COLON) + 1) + tdDataEnd +
-                tdData + format.format(metric) + tdDataEnd +
-                "</tr>"
-            case _ =>
-              "<tr>" + tdData + "<strong>" + hl7 + "</strong>" + tdDataEnd +
-                tdData + state.substring(state.indexOf(COLON) + 1) + tdDataEnd +
-                tdData + format.format(metric) + tdDataEnd +
-                "</tr>"
+          append(if (segments) {
+            "<tr>" + tdData + "<strong>" + hl7 + "</strong>" + tdDataEnd +
+              tdData + state.substring(state.indexOf(COLON) + 1, state.lastIndexOf(COLON)) + tdDataEnd +
+              tdData + state.substring(state.lastIndexOf(COLON) + 1) + tdDataEnd +
+              tdData + format.format(metric) + tdDataEnd +
+              "</tr>"
+          } else {
+            "<tr>" + tdData + "<strong>" + hl7 + "</strong>" + tdDataEnd +
+              tdData + state.substring(state.indexOf(COLON) + 1) + tdDataEnd +
+              tdData + format.format(metric) + tdDataEnd +
+              "</tr>"
           })
         }
       })
