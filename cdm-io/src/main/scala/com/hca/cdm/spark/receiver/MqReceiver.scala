@@ -72,7 +72,6 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     val con = activeConnection.get()
     if (con != null) {
       consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}", sources.size * 3)
-      consumerPool allowCoreThreadTimeOut false
       consumerPool setRejectedExecutionHandler new PoolFullHandler
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
@@ -217,7 +216,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
               if (noMsgPoll >= 100000) {
                 warn(s"No Message Received or Polling is down for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll")
                 noMsgPoll = 0
-                consumer receive()
+                tryAndReturnDefaultValue(consumer.receive, noMessage)
               } else noMessage
             case message: Message => message
           }
