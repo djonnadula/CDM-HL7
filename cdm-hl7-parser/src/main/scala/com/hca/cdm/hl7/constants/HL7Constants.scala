@@ -10,6 +10,7 @@ import scala.util.matching.Regex
   */
 object HL7Constants {
 
+  lazy val COMN = "COMN"
   lazy val MERGE = "merge"
   lazy val MOVE = "move"
   lazy val MSH = "MSH"

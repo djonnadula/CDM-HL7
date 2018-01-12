@@ -54,6 +54,11 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
     }
   }
 
+  def write(data: Product, header: AnyRef, topics: Product)(sizeThreshold: Int = 4194304, overSizeHandler: OverSizeHandler = null): Unit = {
+    for (index <- 0 until data.productArity)
+      writeData(data.productElement(index).asInstanceOf[AnyRef], header, tryAndReturnDefaultValue0(topics.productElement(index).asInstanceOf[String], EMPTYSTR))(sizeThreshold, overSizeHandler)
+  }
+
   def writeData(data: AnyRef, header: AnyRef, topic: String = topicToProduce)(sizeThreshold: Int = 4194304,
                                                                               overSizeHandler: OverSizeHandler = null): Unit = {
     /* topicsToProduce get topic match {
@@ -197,7 +202,7 @@ class KafkaProducerHandler private(private val topicToProduce: String = "", priv
 
 }
 
-object KafkaProducerHandler extends AutoCloseable with Logg{
+object KafkaProducerHandler extends AutoCloseable with Logg {
 
   private var producer: KafkaProducerHandler = _
   private val lock = new Object()
@@ -206,6 +211,7 @@ object KafkaProducerHandler extends AutoCloseable with Logg{
     def createIfNotExist = new (() => KafkaProducerHandler) {
       override def apply(): KafkaProducerHandler = new KafkaProducerHandler(EMPTYSTR, true)(props)
     }
+
     createProducer(createIfNotExist)
   }
 
@@ -213,6 +219,7 @@ object KafkaProducerHandler extends AutoCloseable with Logg{
     def createIfNotExist = new (() => KafkaProducerHandler) {
       override def apply(): KafkaProducerHandler = new KafkaProducerHandler(topicToProduce, false)(props)
     }
+
     createProducer(createIfNotExist)
   }
 
@@ -220,6 +227,7 @@ object KafkaProducerHandler extends AutoCloseable with Logg{
     def createIfNotExist = new (() => KafkaProducerHandler) {
       override def apply(): KafkaProducerHandler = new KafkaProducerHandler("", true)(props)
     }
+
     createProducer(createIfNotExist)
   }
 
