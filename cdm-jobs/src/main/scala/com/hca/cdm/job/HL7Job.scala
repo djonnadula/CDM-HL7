@@ -87,7 +87,7 @@ object HL7Job extends Logg with App {
   private val rejectedTopic = lookUpProp("hl7.reject")
   private val hl7JsonTopic = {
     val temp = lookUpProp("hl7.json").split(COMMA)
-    (temp(0), tryAndReturnDefaultValue0(temp(1), EMPTYSTR))
+    (tryAndReturnDefaultValue0(temp(0), EMPTYSTR), tryAndReturnDefaultValue0(temp(1), EMPTYSTR))
   }
   private val segTopic = lookUpProp("hl7.segment")
   private val auditTopic = lookUpProp("hl7.audit")
