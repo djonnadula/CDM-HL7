@@ -97,7 +97,7 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
   }
 
   @throws[Exception]
-  private def Json(layout: mapType): String = {
+  private def Json(layout: mapType): (String, String) = {
     val copy = new mutable.LinkedHashMap[String, Any]
     layout foreach { case (k, v) =>
       val update = k.substring(k.indexOf(DOT) + 1)
@@ -113,7 +113,46 @@ class HL7Parser(val msgType: HL7, private val templateData: Map[String, Map[Stri
         copy update(update, fieldList)
       } else copy += update -> v
     }
+    val one = toJson(copy)
+    (one, edwJson(copy))
+  }
+
+  private def edwJson(copy: mapType): String = {
+    copy foreach { case (k, v) =>
+      v match {
+        case list: mutable.ListBuffer[Any] =>
+          list foreach {
+            case m: mapType =>
+              convertToCollection(m)
+          }
+        case m: mapType =>
+          k match {
+            case MSH | COMN =>
+            case _ =>
+              val temp = new mutable.ListBuffer[Any]
+              temp += m
+              copy update(k, temp)
+              copy(k).asInstanceOf[mutable.ListBuffer[Any]] foreach {
+                case m: mapType =>
+                  convertToCollection(m)
+              }
+          }
+      }
+    }
     toJson(copy)
+  }
+
+  private def convertToCollection(struct: mapType): Unit = {
+    struct.foreach { case (k, mv) =>
+      mv match {
+        case map: mapType =>
+          val temp = new mutable.ListBuffer[Any]
+          temp += map
+          struct update(k, temp)
+        case _: String | None =>
+        case list: listType => list.foreach(convertToCollection)
+      }
+    }
   }
 
   def metricsRegistry: TrieMap[String, Long] = metrics

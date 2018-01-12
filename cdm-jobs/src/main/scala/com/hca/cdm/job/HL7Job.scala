@@ -85,11 +85,14 @@ object HL7Job extends Logg with App {
   private val consumerGroup = lookUpProp("hl7.group")
   private val kafkaConsumerProp = (consumerConf(consumerGroup) asScala) toMap
   private val rejectedTopic = lookUpProp("hl7.reject")
-  private val hl7JsonTopic = lookUpProp("hl7.json")
+  private val hl7JsonTopic = {
+    val temp = lookUpProp("hl7.json").split(COMMA)
+    (temp(0), tryAndReturnDefaultValue0(temp(1), EMPTYSTR))
+  }
   private val segTopic = lookUpProp("hl7.segment")
   private val auditTopic = lookUpProp("hl7.audit")
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt
-  private val kafkaProducerConf = producerConf(hl7JsonTopic)
+  private val kafkaProducerConf = producerConf()
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
   private val hl7MsgMeta = messageTypes.map(mtyp => whichHL7(mtyp) -> getMsgTypeMeta(whichHL7(mtyp), lookUpProp(mtyp + ".kafka.source"))) toMap
   private val topicsToSubscribe = hl7MsgMeta.map(hl7Type => hl7Type._2.kafka) toSet
@@ -163,7 +166,7 @@ object HL7Job extends Logg with App {
     info("Job Initialisation Started on :: " + new Date())
     loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
     LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
-    if (hl7JsonTopic != EMPTYSTR) createTopic(hl7JsonTopic, segmentPartitions = false)
+    hl7JsonTopic.productIterator.foreach { tpc => if (tpc.asInstanceOf[String] != EMPTYSTR) createTopic(tpc.asInstanceOf[String], segmentPartitions = false) }
     if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
     if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
     if (rejectedTopic != EMPTYSTR) createTopic(rejectedTopic, segmentPartitions = false)
@@ -269,7 +272,7 @@ object HL7Job extends Logg with App {
             propFile = confFile
             LoginRenewer.scheduleRenewal()
             val kafkaOut = KProducer()(prodConf)
-            val hl7JsonIO = kafkaOut.writeData(_: String, _: String, jsonOut)(maxMessageSize, jsonOverSized)
+            val hl7JsonIO = kafkaOut.write(_: Product, _: String, jsonOut)(maxMessageSize, jsonOverSized)
             val hl7RejIO = kafkaOut.writeData(_: AnyRef, _: String, rejectOut)(maxMessageSize, rejectOverSized)
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)

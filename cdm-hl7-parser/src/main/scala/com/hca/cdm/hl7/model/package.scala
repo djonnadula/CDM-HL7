@@ -362,7 +362,7 @@ package object model extends Logg {
 
   case class Hl7Segments(msgType: HL7, models: Map[String, List[Model]])
 
-  case class HL7TransRec(rec: Either[(String, mutable.LinkedHashMap[String, Any], MSGMeta), Throwable])
+  case class HL7TransRec(rec: Either[((String,String), mutable.LinkedHashMap[String, Any], MSGMeta), Throwable])
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
