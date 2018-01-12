@@ -13,6 +13,7 @@ import scala.language.postfixOps
 import java.security.PrivilegedExceptionAction
 import com.hca.cdm.exception.CdmException
 import com.hca.cdm.hadoop.HadoopConfig
+import org.apache.hadoop.hbase.security.token.AuthenticationTokenIdentifier
 import org.apache.hadoop.mapred.Master
 import org.apache.spark.SparkConf
 import org.apache.hadoop.hbase.security.token.TokenUtil._
@@ -46,7 +47,7 @@ private[cdm] object LoginRenewer extends Logg {
       info(s"Credentials File set to $tempCrd and Staging Dir ${fromEnv("SPARK_YARN_STAGING_DIR")}")
       if (!master) sparkConf.set("spark.yarn.access.namenodes", if (namesNodes == EMPTYSTR) lookUpProp("secure.name.nodes") else namesNodes)
       if (master) scheduleGenCredentials(2, tempCrd, sparkConf.get("spark.yarn.principal"), sparkConf.get("spark.yarn.keytab"), haNameNodes(sparkConf))
-      scheduleLoginFromCredentials(2.1.toLong, tempCrd)
+      else scheduleLoginFromCredentials(2.1.toLong, tempCrd)
     }
     scheduled
   }
@@ -108,6 +109,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   @throws[CdmException]
   def performAction[T](fun: () => T, user: Option[UGI] = None): T = {
+    tryAndLogErrorMes(user.getOrElse(UGI.getLoginUser).checkTGTAndReloginFromKeytab(), warn(_: Throwable))
     tryAndThrow({
       user.getOrElse(UGI.getCurrentUser).doAs(new PrivilegedExceptionAction[T] {
         override def run(): T = fun()
@@ -122,23 +124,22 @@ private[cdm] object LoginRenewer extends Logg {
     tempConf
   }
 
-  private def refreshFsTokens(nameNodes: Set[Path], credentials: Credentials): Unit = {
+  private def refreshFsTokens(nameNodes: Set[Path]): ListBuffer[Token[TokenIdentifier]] = {
+    val tokens = new ListBuffer[Token[TokenIdentifier]]
     val renewer = Master.getMasterPrincipal(hdfsConf)
     info(s"Renewer for Credentials $renewer for $nameNodes")
     nameNodes foreach { node =>
       val dfs = node.getFileSystem(hdfsConf)
       try {
-        val token = dfs.addDelegationTokens(renewer, credentials)
-        info(s"Refreshed Tokens for File System $node ")
-        token.foreach { tkn =>
-          info(s"Refreshed Tokens ${tkn.getService} ${tkn.getKind} ${tkn.getIdentifier.mkString}")
-          credentials.addToken(tkn.getService, tkn.asInstanceOf[Token[TokenIdentifier]])
-        }
+        val token = dfs.getDelegationToken(renewer)
+        info(s"Refreshed Tokens for node $node $token")
+        tokens += token.asInstanceOf[Token[TokenIdentifier]]
       }
       catch {
         case t: Throwable => error(s"cannot Refresh Tokens for $node & FileSystem $dfs", t)
       }
     }
+    tokens
   }
 
   private def accessCredentials(credentialPath: Path): Unit = {
@@ -160,42 +161,39 @@ private[cdm] object LoginRenewer extends Logg {
   }
 
   private def genCredentials(credentialsFile: Either[Path, File], principal: String, keyTab: String, nns: Set[Path]): Unit = {
-    info("isSecurityEnabled " + UGI.isSecurityEnabled)
-    val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keyTab)
-    loggedUser.addCredentials(UGI.getCurrentUser.getCredentials)
+    UGI.loginUserFromKeytab(principal, keyTab)
+    val loggedUser = UGI.getLoginUser
     val cred = loggedUser.getCredentials
-    info(s"loggedUser tokens ${loggedUser.getCredentials.getAllTokens}")
-    performAction(asFunc({
+    val tokens = performAction(asFunc({
       info("generating Token for user=" + loggedUser.getUserName + ", authMethod=" + loggedUser.getAuthenticationMethod)
       credentialsFile match {
-        case Left(path) => refreshFsTokens(nns + path.getParent, cred)
-        case Right(_) => refreshFsTokens(nns, cred)
+        case Left(path) => refreshFsTokens(nns + path.getParent)
+        case Right(_) => refreshFsTokens(nns)
       }
     }), Some(loggedUser))
-    cred.addAll(renewHBaseToken(principal, keyTab))
+    renewHBaseToken(principal, keyTab, Some(loggedUser)).foreach { tkn => tokens += tkn.asInstanceOf[Token[TokenIdentifier]] }
+    tokens.foreach(tkn => cred.addToken(tkn.getService, tkn))
     loggedUser.addCredentials(cred)
     setCredentials(loggedUser)
     if (credentialsFile.isLeft) cred.writeTokenStorageFile(credentialsFile.left.get, hdfsConf)
     else if (credentialsFile.isRight) {
       val outStream = new DataOutputStream(new FileOutputStream(credentialsFile.right.get))
       cred writeTokenStorageToStream outStream
-      outStream close()
+      closeResource(outStream)
     }
   }
 
-  private def renewHBaseToken(principal: String, keyTab: String): Credentials = {
-    val loggedUser = UGI.loginUserFromKeytabAndReturnUGI(principal, keyTab)
+  private def renewHBaseToken(principal: String, keyTab: String, user: Option[UGI] = None): Option[Token[AuthenticationTokenIdentifier]] = {
     performAction(asFunc({
       // noinspection ScalaDeprecation
       if (tryAndReturnDefaultValue0(sparkConf.getBoolean("spark.yarn.security.tokens.hbase.enabled", defaultValue = hBaseRenewal), hBaseRenewal)) {
         val hBaseToken = obtainToken(hdfsConf)
         if (valid(hBaseToken)) {
           info(s"Refreshed HBase Token $hBaseToken")
-          loggedUser.getCredentials.addToken(hBaseToken.getService, hBaseToken)
-        }
-      }
-    }), Some(loggedUser))
-    loggedUser.getCredentials
+          Some(hBaseToken)
+        } else None
+      } else None
+    }), Some(user.getOrElse(UGI.loginUserFromKeytabAndReturnUGI(principal, keyTab))))
   }
 
   def createTokensFromDriver(app: String, principal: String, keyTab: String, configDir: Seq[String]): Option[File] = {
