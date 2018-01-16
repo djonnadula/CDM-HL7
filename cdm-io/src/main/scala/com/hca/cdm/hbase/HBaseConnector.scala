@@ -7,7 +7,7 @@ import com.hca.cdm.log.Logg
 import com.hca.cdm._
 import com.hca.cdm.utils.RetryHandler
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.hbase.{HBaseConfiguration, HColumnDescriptor, HTableDescriptor, TableName}
+import org.apache.hadoop.hbase.{HColumnDescriptor, HTableDescriptor, TableName}
 import org.apache.hadoop.hbase.client._
 import scala.collection.concurrent.TrieMap
 import scala.language.postfixOps

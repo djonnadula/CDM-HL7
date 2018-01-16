@@ -320,7 +320,8 @@ object HL7Job extends Logg with App {
                     case Left(out) =>
                       ackTlm(out._3, hl7Str)
                       segHandlerIO(out._2, hl7, out._3)
-                      sizeCheck(out._1, parserS(msgType))
+                      sizeCheck(out._1._1, parserS(msgType))
+                      sizeCheck(out._1._2, parserS(msgType))
                       if (tryAndLogThr(hl7JsonIO(out._1, header(hl7Str, jsonStage, Left(out._3))), s"$hl7Str$COLON$hl7JsonIOFun", error(_: Throwable))) {
                         tryAndLogThr(auditIO(jsonAudits(msgType)(out._3), header(hl7Str, auditHeader, Left(out._3))), s"$hl7Str$COLON$hl7JsonAuditIOFun", error(_: Throwable))
                       }
