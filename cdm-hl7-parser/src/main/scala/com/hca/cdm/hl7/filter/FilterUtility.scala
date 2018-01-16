@@ -6,8 +6,8 @@ import com.hca.cdm.utils.Filters.Conditions._
 import com.hca.cdm.utils.Filters.Expressions._
 import com.hca.cdm.utils.Filters.MultiValues._
 import com.hca.cdm.utils.Filters.FILTER
+import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
-import scala.util.control.Breaks.{break, breakable}
 import scala.util.{Success, Try}
 
 /**
@@ -34,14 +34,8 @@ object FilterUtility {
           }
           if (leftFilter != NOFILTER) {
             if (rightFilter != NOFILTER) {
-              val leftExp = findReqSegment(data, leftFilter.segment) match {
-                case EMPTYSTR => false
-                case seg => matchCriteria(data(seg), leftFilter.filter._1, getFilterValues(leftFilter), leftFilter.matchPath)
-              }
-              val rightExp = findReqSegment(data, rightFilter.segment) match {
-                case EMPTYSTR => false
-                case seg => matchCriteria(data(seg), rightFilter.filter._1, getFilterValues(rightFilter), rightFilter.matchPath)
-              }
+              val leftExp = multiLocations(findReqSegment(data, leftFilter.segment), data, leftFilter.filter._1, getFilterValues(leftFilter), leftFilter.matchPath)
+              val rightExp = multiLocations(findReqSegment(data, rightFilter.segment), data, rightFilter.filter._1, getFilterValues(rightFilter), rightFilter.matchPath)
               leftFilter.filter._2 match {
                 case AND =>
                   if (index > 1) {
@@ -60,10 +54,7 @@ object FilterUtility {
                 case NONE => expression = rightExp
               }
             } else {
-              val leftCond = findReqSegment(data, leftFilter.segment) match {
-                case EMPTYSTR => false
-                case seg => matchCriteria(data(seg), leftFilter.filter._1, getFilterValues(leftFilter), leftFilter.matchPath)
-              }
+              val leftCond = multiLocations(findReqSegment(data, leftFilter.segment), data, leftFilter.filter._1, getFilterValues(leftFilter), leftFilter.matchPath)
               val temp = expression
               filters(index - 1).filter._2 match {
                 case AND => expression = temp && leftCond
@@ -75,32 +66,31 @@ object FilterUtility {
         }
       case 1 =>
         val fil = filters(0)
-        findReqSegment(data, fil.segment) match {
-          case EMPTYSTR =>
-          case x => expression = matchCriteria(data(x), fil.filter._1, getFilterValues(fil), fil.matchPath)
-        }
+        expression = multiLocations(findReqSegment(data, fil.segment), data, fil.filter._1, getFilterValues(fil), fil.matchPath)
 
     }
     expression
   }
 
-  private def findReqSegment(data: mapType, reqSeg: String): String = {
-    var segment = EMPTYSTR
-    breakable {
-      data.foreach(node => {
-        if (node._1.substring(node._1.indexOf(".") + 1) == reqSeg) {
-          segment = node._1
-          break
-        }
-      })
-    }
-    segment
+  private def multiLocations(segs: ListBuffer[String], data: mapType, condition: Condition, toMatch: Either[String, (MultiValueRange, AnyRef)], path: Array[String]): Boolean = {
+    segs foreach { seg => if (matchCriteria(data(seg), condition, toMatch, path)) return true }
+    false
+  }
+
+  private def findReqSegment(data: mapType, reqSeg: String): ListBuffer[String] = {
+    data.foldLeft(new ListBuffer[String])((req, node) =>
+      if (node._1.substring(node._1.indexOf(".") + 1) == reqSeg) {
+        req += node._1
+        req
+      } else req
+    )
   }
 
   private def getFilterValues(filter: FILTER): Either[String, (MultiValueRange, AnyRef)] = {
     if (filter.multiValues.isDefined) Right(filter.multiValues.get, filter.multipleValues)
     else Left(filter.path._2)
   }
+
 
   private def matchCriteria(data: Any, condition: Condition, toMatch: Either[String, (MultiValueRange, AnyRef)], path: Array[String]): Boolean = {
     data match {
