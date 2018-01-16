@@ -8,7 +8,6 @@ import com.hca.cdm.utils.Filters.MultiValues._
 import com.hca.cdm.utils.Filters.FILTER
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
-import scala.util.{Success, Try}
 
 /**
   * Created by Devaraj Jonnadula on 9/28/2016.
