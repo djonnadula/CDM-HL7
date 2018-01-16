@@ -198,7 +198,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     registerHook(newThread(s"$id-$app-SHook", runnable(close())))
   }
 
-  private class DataConsumer(consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
+  private class DataConsumer(private var consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
     private val noMessage: Message = null
     private var lastCommit: Long = currMillis
     private var fetCount: Long = 0
@@ -214,9 +214,9 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
             case `noMessage` =>
               noMsgPoll = inc(noMsgPoll)
               if (noMsgPoll >= 100000) {
-                warn(s"No Message Received or Polling is down for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll")
+                warn(s"No Message Received when polling for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll")
                 noMsgPoll = 0
-                tryAndReturnDefaultValue(consumer.receive, noMessage)
+                mkNewConnectIfReq(tryAndReturnDefaultValue(consumer.receive, noMessage))
               } else noMessage
             case message: Message => message
           }
@@ -242,6 +242,17 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
         }
       }
     }
+
+    private def mkNewConnectIfReq(msg: Message): Message = {
+      if (msg == noMessage && currMillis - lastCommit >= 600000) {
+        tryAndLogErrorMes(
+          asFunc(consumer = currentConnection.get.createConsumer(sourceListener.getSource, forceNew = true)),
+          error(_: Throwable), Some("Cannot create new Connection"))
+        tryAndReturnDefaultValue0(consumer.receive(), msg)
+      }
+      else msg
+    }
+
   }
 
 }

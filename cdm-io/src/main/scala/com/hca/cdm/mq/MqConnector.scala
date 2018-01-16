@@ -78,8 +78,8 @@ trait MqConnector extends Logg with AutoCloseable {
     }
 
     @throws[CdmException]
-    def createConsumer(source: String): MessageConsumer = {
-      val consumer = tryAndThrow[MessageConsumer](createSession(source).createConsumer(new MQDestination(source)), error(_: Throwable))
+    def createConsumer(source: String, forceNew: Boolean = false): MessageConsumer = {
+      val consumer = tryAndThrow[MessageConsumer](createSession(source, forceNew).createConsumer(new MQDestination(source)), error(_: Throwable))
       if (consumers isDefinedAt source) closeResource(consumers(source))
       consumers += source -> consumer
       info(s"Consumer Created to consume from Queue $source $consumer")
@@ -158,9 +158,11 @@ trait MqConnector extends Logg with AutoCloseable {
       closeResource(prod)
     }
 
-     def createSession(source: String): MQSession = {
-      if (sessions isDefinedAt source) sessions(source)
+    def createSession(source: String, forceNew: Boolean = false): MQSession = {
+      if ((sessions isDefinedAt source) && !forceNew) sessions(source)
       else {
+        randomSessions.find(ses => sessions.getOrElse(source,null) ne ses).foreach(closeResource(_))
+        closeResource(sessions.getOrElse(source, null))
         val session = connection.createSession(false, CLIENT_ACKNOWLEDGE).asInstanceOf[MQSession]
         info(s"Session Created for Source $source $session")
         sessions += source -> session
