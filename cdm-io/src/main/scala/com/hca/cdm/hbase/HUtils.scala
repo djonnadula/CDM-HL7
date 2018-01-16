@@ -44,22 +44,28 @@ object HUtils extends Logg {
       .setEvictBlocksOnClose(true)
       .setVersions(1, 10)
       .setTimeToLive(DEFAULT_TTL)
-    props.foreach { case (k, v) => fam.setValue(k, v) }
+    props foreach { case (k, v) => fam.setValue(k, v) }
     fam
   }
 
   def addRowRequest(key: String, family: String, attributes: mutable.Map[String, String]): Put = {
     val row = new Put(toBytes(key))
     val familyBytes = toBytes(family)
-    attributes.foreach { case (k, v) => row.addImmutable(familyBytes, toBytes(k), toBytes(v)) }
+    attributes foreach { case (k, v) => row.addImmutable(familyBytes, toBytes(k), toBytes(v)) }
     row
   }
 
-  def sendRequestFromJson(operator: BatchOperator)(family: String, keys: ListBuffer[String], jsonData: String): Unit = {
+  def sendRequestFromJson(operator: BatchOperator)(family: String, keys: ListBuffer[String], jsonData: String, filter: Boolean = true): Unit = {
     val jsonKV = mapper(jsonData)
     val key = keys.foldLeft(EMPTYSTR)((a, b) => a + jsonKV.getOrElse(b, EMPTYSTR))
-    keys.foreach(jsonKV.remove)
-    operator.mutate(addRowRequest(key, family, jsonKV))
+    keys foreach jsonKV.remove
+    if (filter) filterData(jsonKV)
+    operator mutate addRowRequest(key, family, jsonKV)
+  }
+
+  private def filterData(data: mutable.Map[String, String]): mutable.Map[String, String] = {
+    data foreach { case (k, v) => if (v == EMPTYSTR) data -= k }
+    data
   }
 
   def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String] = ListBuffer.empty[String])(operator: HBaseConnector): mutable.Map[String, Array[Byte]] = {
