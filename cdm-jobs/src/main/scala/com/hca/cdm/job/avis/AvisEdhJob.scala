@@ -35,7 +35,7 @@ object AvisEdhJob extends Logg with App {
   private val config_file = args(0)
   propFile = config_file
   reload(config_file)
-  private val config = HadoopConfig.loadConfig( tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
+  private val config = HadoopConfig.loadConfig(tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
   LoginRenewer.loginFromKeyTab(lookUpProp("keytab"), lookUpProp("principal"), Some(config))
   private val fs = LoginRenewer.performAction(asFunc(FileSystem get config))
   private val jdbcConnector = new JdbcConnector(TERADATA, loadConfig(config_file))
@@ -74,7 +74,7 @@ object AvisEdhJob extends Logg with App {
   }
 
   private def loadEdwStaging(): Unit = {
-    kInit()
+    LoginRenewer.kInit(lookUpProp("keytab"), lookUpProp("principal"))
     val commands = new ListBuffer[String]
     commands += lookUpProp("sqoop.script")
     commands += batchOffset
@@ -82,7 +82,7 @@ object AvisEdhJob extends Logg with App {
   }
 
   private def loadHadoopStaging(): Boolean = {
-    kInit()
+    LoginRenewer.kInit(lookUpProp("keytab"), lookUpProp("principal"))
     var transactionDate = LocalDate.parse(outDateFormat.format(inDateFormat.parse(batchOffset))).minusDays(1).format(transactionDateFormat)
     if (transactionDate == EMPTYSTR) transactionDate = self.transDate
     val commands = new ListBuffer[String]
@@ -118,7 +118,7 @@ object AvisEdhJob extends Logg with App {
     val status = statement.executeUpdate()
     if (status >= 0) info(s"Batch completed with status $status and Batch Offset $currentLoadOffset")
     if (currentLoadOffset == batchOffset) {
-      mail("Avis Teradata Staging Load Delayed",
+      mail("Avis Loading Teradata Staging Delayed",
         s"No Data has landed on Hadoop to load staging area in Teradata for ETL to Load Fact Tables. Data loaded so far to Teradata till  $currentLoadOffset $EVENT_TIME. ", TaskState.CRITICAL)
     }
     commit(connection)
@@ -155,15 +155,6 @@ object AvisEdhJob extends Logg with App {
     info("Teradata Connection shutdown completed")
   }
 
-  private def kInit(): Unit = {
-    val commands = new ListBuffer[String]
-    commands += "kinit"
-    commands += "-k"
-    commands += "-t"
-    commands += lookUpProp("keytab")
-    commands += lookUpProp("principal")
-    if (executeScript(commands.asJava)) info(s"kInit completed for $commands")
-  }
 
   private def loadCommand(commandFile: String): String = {
     if (lookUpProp("hl7.env") == "PROD") {
