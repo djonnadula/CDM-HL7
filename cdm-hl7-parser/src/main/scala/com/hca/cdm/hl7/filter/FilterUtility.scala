@@ -1,6 +1,6 @@
 package com.hca.cdm.hl7.filter
 
-import com.hca.cdm.EMPTYSTR
+import com.hca.cdm._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.utils.Filters.Conditions._
 import com.hca.cdm.utils.Filters.Expressions._
@@ -24,14 +24,8 @@ object FilterUtility {
     filters length match {
       case x if x >= 2 =>
         for (index <- filters.indices by 2) {
-          val leftFilter = Try(filters(index)) match {
-            case Success(filter) => filter
-            case _ => NOFILTER
-          }
-          val rightFilter = Try(filters(index + 1)) match {
-            case Success(filter) => filter
-            case _ => NOFILTER
-          }
+          val leftFilter = tryAndReturnDefaultValue0(filters(index), NOFILTER)
+          val rightFilter = tryAndReturnDefaultValue0(filters(index + 1), NOFILTER)
           if (leftFilter != NOFILTER) {
             if (rightFilter != NOFILTER) {
               val leftExp = multiLocations(findReqSegment(data, leftFilter.segment), data, leftFilter.filter._1, getFilterValues(leftFilter), leftFilter.matchPath)
