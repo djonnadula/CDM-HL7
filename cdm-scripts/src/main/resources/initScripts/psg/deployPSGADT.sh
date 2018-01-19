@@ -18,4 +18,4 @@ echo 'Done with filesystem operations'
 echo "Starting job..."
 
 cd /hadoop/cdm/bin/
-./PSG_ACO_ADT_Job.sh start
+PSG_ACO_ADT_Job.sh start

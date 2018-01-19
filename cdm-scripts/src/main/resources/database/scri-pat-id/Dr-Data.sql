@@ -48,7 +48,10 @@ CREATE EXTERNAL TABLE cdm_synthesys_patientid_results (
    attending_physician STRING,
    meditech_network_id STRING,
    user_action_criticality STRING,
-   message_text STRING
+   message_text STRING,
+   Model_predicted_sarcoma STRING,
+   suggested_sarcoma STRING,
+   submitted_sarcoma STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
