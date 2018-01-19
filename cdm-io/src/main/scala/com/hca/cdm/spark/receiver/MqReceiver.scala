@@ -199,6 +199,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   }
 
   private class DataConsumer(private var consumer: MessageConsumer, sourceListener: SourceListener) extends Runnable {
+    info(s"DataConsumer $this created for ${sourceListener.getSource} and consumer $consumer")
     private val noMessage: Message = null
     private var lastCommit: Long = currMillis
     private var fetCount: Long = 0
@@ -244,10 +245,12 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     }
 
     private def mkNewConnectIfReq(msg: Message): Message = {
-      if (msg == noMessage && currMillis - lastCommit >= 600000) {
+      if (msg == noMessage && currMillis - lastCommit >= 3000000) {
         tryAndLogErrorMes(
-          asFunc(consumer = currentConnection.get.createConsumer(sourceListener.getSource, forceNew = true)),
+          asFunc(consumer = currentConnection.get.createConsumer(sourceListener.getSource, createNew = true)),
           error(_: Throwable), Some("Cannot create new Connection"))
+        info(s"New Consumer $consumer Created for Source ${sourceListener.getSource} ")
+        lastCommit = currMillis
         tryAndReturnDefaultValue0(consumer.receive(), msg)
       }
       else msg
