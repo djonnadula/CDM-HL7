@@ -25,6 +25,8 @@ find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.txt" -exe
 find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.properties" -exec cp -t "$CFG" {}  + \)
 find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.csv" -exec cp -t "$CFG" {}  + \)
 
+sed -i 's/\r$//g' $CFG/*
+
 mkdir -p $RECEIVER
 
 mkdir -p $RECEIVER/cfg
