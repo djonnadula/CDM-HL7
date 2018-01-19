@@ -9,10 +9,21 @@ APP=cdm-hl7-receiver
 VERSION=$1
 RECEIVER=/hadoop/cdm/$APP/$VERSION
 RECEIVERLINK=/hadoop/cdm/$APP/latest
+CFG=$DEPLOYDIR/cfg
+WORKDIR=$DEPLOYDIR/temp
 
+mkdir -p $WORKDIR
+mkdir -p $CFG
 
+unzip  -o $DEPLOYDIR/hl7process.jar  **/*.sh -d  $WORKDIR
+unzip  -o $DEPLOYDIR/hl7process.jar  **/*.txt -d  $WORKDIR
+unzip  -o $DEPLOYDIR/hl7process.jar  **/*.properties -d  $WORKDIR
+unzip  -o $DEPLOYDIR/hl7process.jar  **/*.csv -d  $WORKDIR
 
-
+find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.sh" -exec cp -t "$CFG" {}  + \)
+find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.txt" -exec cp -t "$CFG" {}  + \)
+find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.properties" -exec cp -t "$CFG" {}  + \)
+find $WORKDIR \( -type d -name "$CFG" -prune \) -o \( -type f -name "*.csv" -exec cp -t "$CFG" {}  + \)
 
 mkdir -p $RECEIVER
 
@@ -43,4 +54,7 @@ ln -fsv $RECEIVER $RECEIVERLINK
 chmod -R +x /hadoop/cdm/$RECEIVER/latest
 chown -R corpsrvcdmbtch:entrappedhhl7_rw $RECEIVER
 chown -R corpsrvcdmbtch:entrappedhhl7_rw $RECEIVERLINK
+
+rm -rf $WORKDIR
+rm -rf $CFG
 
