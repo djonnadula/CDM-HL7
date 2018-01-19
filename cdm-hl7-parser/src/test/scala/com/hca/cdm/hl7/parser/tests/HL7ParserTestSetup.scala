@@ -29,7 +29,7 @@ class HL7ParserTestSetup(msgType: HL7) extends Logg {
       case Success(map) =>
         map match {
           case Left(out) =>
-            out._1
+            out._1._1
           case Right(t) =>
             error(t.toString)
             ""
