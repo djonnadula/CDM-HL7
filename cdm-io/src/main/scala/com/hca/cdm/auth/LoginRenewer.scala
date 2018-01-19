@@ -57,7 +57,7 @@ private[cdm] object LoginRenewer extends Logg {
   private def scheduleLoginFromCredentials(startFrom: Long = 6, credentialsFile: Path): Unit = lock.synchronized {
     if (!scheduled) {
       loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(accessCredentials(credentialsFile), error(_: Throwable))),
-        MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
+        0, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
       sHook()
       scheduled = true
     }
@@ -82,7 +82,7 @@ private[cdm] object LoginRenewer extends Logg {
 
   private def scheduleGenCredentials(startFrom: Long = 1, credentialsFile: Path, principal: String, keyTab: String, nns: Set[Path]): Unit = {
     loginRenewer scheduleAtFixedRate(runnable(tryAndLogErrorMes(genCredentials(Left(credentialsFile), principal, keyTab, nns), error(_: Throwable)))
-      , MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
+      , 0, MILLISECONDS.convert(startFrom, HOURS), MILLISECONDS)
     sHook()
   }
 
