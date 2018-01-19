@@ -15,6 +15,7 @@ import scala.util.{Failure, Success, Try}
 import AuditConstants._
 import com.hca.cdm.Models.MSGMeta
 import scala.collection.mutable.ListBuffer
+import scala.language.postfixOps
 
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
@@ -92,30 +93,42 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                 case _ =>
                   sizeCheck(rec, segment.seg)
                   if (segment.adhoc) {
-                    if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) {
-                      tlmAckMessages += Pair(tlmAuditor(segment.tlmAckApplication, meta), segment.tlmAckApplication)
-                    }
-                    if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
-                      tlmAckMessages += Pair(rec, segment.headerKey)
-                      updateMetrics(segment.seg, PROCESSED)
-                    } else if (segment.dest.get.system == Destinations.HBASE) {
-                      if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, segment.dest.get.offHeapConfig.get.key, rec),
-                        s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
-                        updateMetrics(segment.seg, PROCESSED)
-                      }
-                    } else if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route),
-                      s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
-                      if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
-                        s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
-                        updateMetrics(segment.seg, PROCESSED)
-                      }
-                    } else {
+                    def adhocFailed(): Unit = {
                       tryAndLogThr(rejectIO(rejectMsg(hl7, segment.seg, meta, " Writing Adhoc request Data to OUT Failed ", data),
                         header(hl7, rejectStage, Left(meta)))
                         , s"$hl7$COLON${segment.seg}-adhocIO-rejectIO", error(_: Throwable))
                       updateMetrics(segment.seg, FAILED)
                     }
-                  } else {
+
+                    if (segment.tlmAckApplication != EMPTYSTR && (tlmAckIO isDefined)) {
+                      tlmAckMessages += Pair(tlmAuditor(segment.tlmAckApplication, meta), segment.tlmAckApplication)
+                    }
+                    if (segment.dest.get.system == Destinations.WSMQ && (tlmAckIO isDefined)) {
+                      tlmAckMessages += Pair(rec, segment.headerKey)
+                      if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
+                        s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
+                        updateMetrics(segment.seg, PROCESSED)
+                      } else adhocFailed
+                    }
+                    else if (segment.dest.get.system == Destinations.HBASE) {
+                      if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, segment.dest.get.offHeapConfig.get.key, rec),
+                        s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
+                        if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
+                          s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
+                          updateMetrics(segment.seg, PROCESSED)
+                        } else adhocFailed
+                      } else adhocFailed
+                    } else {
+                      if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route),
+                        s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
+                        if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
+                          s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
+                          updateMetrics(segment.seg, PROCESSED)
+                        } else adhocFailed
+                      } else adhocFailed
+                    }
+                  }
+                  else {
                     if (tryAndLogThr(io(rec, header(hl7, s"$segmentsInHL7&${segment.seg}", Left(meta))), s"$hl7$COLON${segment.seg}-segmentsIO", error(_: Throwable))) {
                       if (tryAndLogThr(auditIO(segmentsAuditor(segment.seg, meta), header(hl7, auditHeader, Left(meta))),
                         s"$hl7$COLON${segment.seg}-auditIO-segmentsAuditor", error(_: Throwable))) {
@@ -173,7 +186,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   private def tryForTaskExe[T](action: async[T]): Try[T] = Try(Await result(action, waitTillTaskCompletes))
 
-  private def updateMetrics(seg: String, state: SegState) = {
+  private def updateMetrics(seg: String, state: SegState): Unit = {
     val key = s"$hl7$COLON$seg$COLON$state"
     metrics get key match {
       case Some(stat) => metrics update(key, inc(stat))
@@ -193,7 +206,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   override def resetMetrics: Boolean = {
     metrics.synchronized {
-      metrics.transform({ case (seg, met) => if (met != 0L) 0L else met })
+      metrics.transform({ case (_, met) => if (met != 0L) 0L else met })
     }
     true
   }
@@ -203,6 +216,6 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   private def overSizeMsgFound(seg: String): Unit = updateMetrics(seg, OVERSIZED)
 
-  private def checkSize(threshold: Int)(data: AnyRef, seg: String) = if (!IOCanHandle(data, threshold)) overSizeMsgFound(seg)
+  private def checkSize(threshold: Int)(data: AnyRef, seg: String): Unit = if (!IOCanHandle(data, threshold)) overSizeMsgFound(seg)
 
 }
