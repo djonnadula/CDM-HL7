@@ -71,8 +71,7 @@ trait MqConnector extends Logg with AutoCloseable {
   case class ConnectionMeta(private val factory: MQConnectionFactory, private val connection: Connection) extends AutoCloseable {
     @throws[CdmException]
     def addEventListener(listener: SourceListener): Unit = {
-      val consumer = tryAndThrow[MessageConsumer](createSession(listener.getSource).createConsumer(new MQDestination(listener.getSource)), error(_: Throwable))
-      createConsumer(listener.getSource)
+      val consumer = createConsumer(listener.getSource)
       consumer setMessageListener listener
       info(s"Listener Added for Queue ${listener.getSource} with Consumer $consumer")
     }
@@ -164,7 +163,6 @@ trait MqConnector extends Logg with AutoCloseable {
     def createSession(source: String, createNew: Boolean = false): MQSession = {
       if ((sessions isDefinedAt source) && !createNew) sessions(source)
       else {
-        randomSessions.find(ses => sessions.getOrElse(source,null) ne ses).foreach(closeResource(_))
         closeResource(sessions.getOrElse(source, null))
         val session = connection.createSession(false, CLIENT_ACKNOWLEDGE).asInstanceOf[MQSession]
         info(s"Session Created for Source $source $session")

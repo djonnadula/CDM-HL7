@@ -12,7 +12,7 @@ import com.hca.cdm._
 import com.hca.cdm.exception.MqException
 import com.hca.cdm.mq.{MqConnector, SourceListener}
 import scala.language.postfixOps
-import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.{ScheduledExecutorService, TimeUnit}
 import java.util.concurrent.TimeUnit._
 import com.hca.cdm.auth.LoginRenewer
 import com.hca.cdm.mq.publisher.MQAcker
@@ -39,7 +39,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
-  private var consumerPool: ThreadPoolExecutor = _
+  private var consumerPool: ScheduledExecutorService = _
   private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
   @volatile private var hookInit = false
   @volatile private var pauseConsuming = false
@@ -65,21 +65,21 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
 
 
   private def init(): Unit = {
+    sleep(batchInterval * 2)
     if (!hookInit) {
       sHook()
       hookInit = true
     }
     val con = activeConnection.get()
     if (con != null) {
-      consumerPool = newDaemonCachedThreadPool(s"WSMQ-Data-Fetcher-${self.id}", sources.size * 3)
-      consumerPool setRejectedExecutionHandler new PoolFullHandler
+      consumerPool = newDaemonCachedScheduler(s"WSMQ-Data-Fetcher-${self.id}", sources.size * 3)
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
         MQAcker(app, "appTLMRESPONSE")(mqHosts, mqManager, mqChannel, ackQueue.get)
         tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
         info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }
-      sources foreach { queue =>
+      sources.map(x => x.trim).toList foreach { queue =>
         val consumer = con createConsumer queue
         if (ackQueue isDefined) {
           consumers += consumer -> EventListener(queue, tlmAckIO)
@@ -87,7 +87,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
       }
       con addErrorListener new ExceptionReporter
       consumers foreach {
-        case (consumer, handle) => consumerPool submit new DataConsumer(consumer, handle)
+        case (consumer, handle) => consumerPool schedule(new DataConsumer(consumer, handle), batchInterval, TimeUnit.MILLISECONDS)
       }
       con resume()
     }
@@ -217,7 +217,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
               if (noMsgPoll >= 100000) {
                 warn(s"No Message Received when polling for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll")
                 noMsgPoll = 0
-                mkNewConnectIfReq(tryAndReturnDefaultValue(consumer.receive, noMessage))
+                tryAndReturnDefaultValue(consumer.receive, noMessage)
               } else noMessage
             case message: Message => message
           }
