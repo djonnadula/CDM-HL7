@@ -53,10 +53,6 @@ cp $DEPLOYDIR/log4j.properties $RECEIVER/cfg
 
 ln -fsv $RECEIVER $RECEIVERLINK
 
-chmod -R +x /hadoop/cdm/$RECEIVER/latest
-chown -R corpsrvcdmbtch:entrappedhhl7_rw $RECEIVER
-chown -R corpsrvcdmbtch:entrappedhhl7_rw $RECEIVERLINK
-
 rm -rf $WORKDIR
 rm -rf $CFG
 
