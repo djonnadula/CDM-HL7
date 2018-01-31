@@ -31,6 +31,11 @@
             <version>${cdm.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.hca</groupId>
+            <artifactId>cdm-scripts</artifactId>
+            <version>${cdm.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -64,12 +69,7 @@
                                 <exclude>META-INF/*.SF</exclude>
                                 <exclude>META-INF/*.DSA</exclude>
                                 <exclude>META-INF/*.RSA</exclude>
-                                <exclude>*.sh</exclude>
-                                <exclude>*.txt</exclude>
-                                <exclude>*.csv</exclude>
-                                <exclude>*.conf</exclude>
                                 <exclude>*.iml</exclude>
-                                <exclude>log4j.properties</exclude>
                             </excludes>
                         </filter>
                     </filters>
