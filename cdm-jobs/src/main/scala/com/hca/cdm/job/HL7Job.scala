@@ -146,6 +146,8 @@ object HL7Job extends Logg with App {
   private var offSetManager: OffsetManager = _
   private val appManagesOffset: Boolean = isKafkaSource && !checkpointEnabled && tryAndReturnDefaultValue0(lookUpProp("hl7.checkpoint.external.enable").toBoolean, true)
   private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
+  loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
+  LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
@@ -163,8 +165,6 @@ object HL7Job extends Logg with App {
 
   private def initialise(sparkStrCtx: StreamingContext): Unit = {
     info("Job Initialisation Started on :: " + new Date())
-    loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
-    LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
     hl7JsonTopic.productIterator.foreach { tpc => if (tpc.asInstanceOf[String] != EMPTYSTR) createTopic(tpc.asInstanceOf[String], segmentPartitions = false) }
     if (segTopic != EMPTYSTR) createTopic(segTopic, segmentPartitions = false)
     if (auditTopic != EMPTYSTR) createTopic(auditTopic, segmentPartitions = false)
@@ -762,7 +762,7 @@ object HL7Job extends Logg with App {
       self =>
       info(s"FileBase Rdd initiated for $dir with Max Partitions $maxPartitions & $sparkCtx")
       self.setName(dir)
-      private val data: RDD[(Writable, Text)] = sparkCtx.sequenceFile[Writable, Text](dir, maxPartitions)
+      private lazy val data: RDD[(Writable, Text)] = sparkCtx.sequenceFile[Writable, Text](dir, maxPartitions)
 
       override def compute(split: Partition, context: TaskContext): Iterator[(Writable, Text)] = {
         data.iterator(split, context)

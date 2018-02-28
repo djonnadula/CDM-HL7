@@ -24898,7 +24898,7 @@ MRG,prior_internal_pat_id|id_check_digit,Anonymize
 MRG,prior_internal_pat_id|check_digit_scheme,Anonymize
 MRG,prior_internal_pat_id|assigning_authority,Anonymize
 MRG,prior_internal_pat_id|id_type_code,Anonymize
-MSA,_message_control_id,Anonymize
+MSA,_message_control_id,DE_ID
 MSA,text_message,Anonymize
 MSA,expected_sequence_num,Anonymize
 MSA,delayed_acknowledgement_type,Anonymize
@@ -24927,6 +24927,7 @@ MSA,error_condition|second_alternate_value_set_oid,Anonymize
 MSA,error_condition|second_alternate_value_set_version_id,Anonymize
 MSA,message_waiting_num,Anonymize
 MSA,message_waiting_priority,Anonymize
+MSH,message_control_id,DE_ID
 MSH,sending_application,NONE
 MSH,sending_application|namespace_id,NONE
 MSH,sending_application|universal_id,NONE
