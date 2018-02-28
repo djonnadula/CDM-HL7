@@ -63,6 +63,7 @@ trait MqConnector extends Logg with AutoCloseable {
     temp.setPollingInterval(batchInterval / 9)
     temp.setRescanInterval(batchInterval / 9)
     temp.setMaxBufferSize(120 * 1024 * 1024)
+    temp.setSyncpointAllGets(true)
     info(s"Connection Factory Created to Hosts  :: ${temp.getConnectionNameList} with App Name $id")
     temp
   }
@@ -80,7 +81,7 @@ trait MqConnector extends Logg with AutoCloseable {
     def createConsumer(source: String, createNew: Boolean = false): MessageConsumer = {
       if ((consumers isDefinedAt source) && !createNew) consumers(source)
       else {
-        closeResource(consumers.getOrElse(source,null))
+        closeResource(consumers.getOrElse(source, null))
         val consumer = tryAndThrow[MessageConsumer](createSession(source, createNew).createConsumer(new MQDestination(source)), error(_: Throwable))
         consumers += source -> consumer
         info(s"Consumer Created to consume from Queue $source $consumer")
@@ -139,12 +140,13 @@ trait MqConnector extends Logg with AutoCloseable {
     }
 
     @throws[MqException]
-    def sendMessage(msg: Message, producer: MessageProducer): Unit = {
+    def sendMessage(msg: Message, producer: MessageProducer, retry: Boolean = true): Unit = {
       if (producer == null) {
         throw new MqException(s"Cannot Send message $msg to Queue ${producer.getDestination} . Register Destination first before performing this operation by calling createProducer()")
       } else {
         debug(s"Sending Message with Id ${msg.getJMSMessageID} to Queue ${producer.getDestination}")
-        producer send(msg, new MQProducerRetryCallBack(producer))
+        if (retry) producer send(msg, new MQProducerRetryCallBack(producer))
+        else producer send msg
       }
     }
 

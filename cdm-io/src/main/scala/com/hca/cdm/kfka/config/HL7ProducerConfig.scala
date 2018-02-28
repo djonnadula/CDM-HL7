@@ -36,10 +36,20 @@ object HL7ProducerConfig {
       lookUpProp("kafka.security.protocol") match {
         case "SSL" =>
           prop.put(SECURITY_PROTOCOL_CONFIG, lookUpProp("kafka.security.protocol"))
-          prop.put("ssl.truststore.location",lookUpProp("ssl.truststore.location"))
-          prop.put("ssl.truststore.password",lookUpProp("ssl.truststore.password"))
-        case _ => throw  new CDMKafkaException("Not yet available kafka.security.protocol")
+          prop.put("ssl.truststore.location", lookUpProp("ssl.truststore.location"))
+          prop.put("ssl.truststore.password", lookUpProp("ssl.truststore.password"))
+        case _ => throw new CDMKafkaException("Not yet available kafka.security.protocol")
       }
+    }
+    tryAndReturnDefaultValue0(lookUpProp("hl7.kafka.prod.cfg"), EMPTYSTR) match {
+      case `EMPTYSTR` =>
+      case cfg: String =>
+        cfg.split(";", -1).foreach { conf =>
+          if (valid(conf)) {
+            val actConf = conf.split(":")
+            if (valid(actConf, 2)) prop.put(actConf(0), actConf(1))
+          }
+        }
     }
     prop
   }

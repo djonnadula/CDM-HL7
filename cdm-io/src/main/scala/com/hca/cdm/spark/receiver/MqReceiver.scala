@@ -7,7 +7,7 @@ import com.hca.cdm.io.IOConstants._
 import com.hca.cdm.log.Logg
 import org.apache.spark.streaming.receiver.Receiver
 import org.apache.spark.storage.StorageLevel
-import com.hca.cdm.utils.{PoolFullHandler, RetryHandler}
+import com.hca.cdm.utils.RetryHandler
 import com.hca.cdm._
 import com.hca.cdm.exception.MqException
 import com.hca.cdm.mq.{MqConnector, SourceListener}
@@ -37,6 +37,9 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   private val mqManager = lookUpProp("mq.manager")
   private val mqChannel = lookUpProp("mq.channel")
   private val ackQueue = enabled(lookUpProp("mq.destination.queues"))
+  private val mqHostsTlm = lookUpProp("mq.hosts.tlm")
+  private val mqManagerTlm = lookUpProp("mq.manager.tlm")
+  private val mqChannelTlm = lookUpProp("mq.channel.tlm")
   private val activeConnection = new AtomicReference[ConnectionMeta]
   private val restartTimeInterval = 30000
   private var consumerPool: ScheduledExecutorService = _
@@ -75,7 +78,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
       consumerPool = newDaemonCachedScheduler(s"WSMQ-Data-Fetcher-${self.id}", sources.size * 3)
       var tlmAckIO: (String) => Unit = null
       if (ackQueue.isDefined) {
-        MQAcker(app, "appTLMRESPONSE")(mqHosts, mqManager, mqChannel, ackQueue.get)
+        MQAcker(app, "appTLMRESPONSE")(mqHostsTlm, mqManagerTlm, mqChannelTlm, ackQueue.get)
         tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
         info(s"TLM IO Created $MQAcker for Queue $ackQueue")
       }
@@ -163,7 +166,11 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
           self.stop(s"Cannot Write Message into Spark Memory, will replay Message with ID ${message.getJMSMessageID}, Stopping Receiver ${self.id}", t)
           throw t
       }
-      if (ackQueue.isDefined) tryAndLogThr(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source", error(_: Throwable))
+      if (ackQueue.isDefined) tryAndReturnThrow(tlmAcknowledge(tlmAuditorMapping(source)(meta)), s"TLM-Acknowledge for Source $source") match {
+        case Right(t) =>
+          self.reportError(s"TLM-Acknowledge for Source $source due to ${t.getMessage}", t)
+        case _ =>
+      }
       persisted
     }
 
@@ -206,6 +213,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     private var storeReceived = true
     private var timeOut: Long = currMillis
     private var noMsgPoll: Long = 0
+    private val batching: Boolean = false
 
     override def run(): Unit = {
       debug(s"${sourceListener.getSource} Receiver Stopped :: ${self.isStopped()} :: Requested Pause consuming ?? :: ${self.pauseConsuming} :: Store Received message :: $storeReceived")
@@ -214,28 +222,37 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
           val msg = tryAndReturnDefaultValue(consumer.receiveNoWait, noMessage) match {
             case `noMessage` =>
               noMsgPoll = inc(noMsgPoll)
-              if (noMsgPoll >= 100000) {
-                warn(s"No Message Received when polling for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll")
-                noMsgPoll = 0
-                tryAndReturnDefaultValue(consumer.receive, noMessage)
+              if (noMsgPoll >= 500000) {
+                tryAndReturnThrow(consumer.receive) match {
+                  case Left(m) => m
+                  case Right(t) =>
+                    warn(s"No Message Received when polling for source ${sourceListener.getSource} since last commit $lastCommit ,total request made so far $noMsgPoll", t)
+                    noMsgPoll = 0
+                    noMessage
+                }
               } else noMessage
             case message: Message => message
           }
           if (valid(msg)) {
             storeReceived = sourceListener handleMessage msg
             if (storeReceived) {
-              fetCount = inc(fetCount)
-              if (currMillis - lastCommit >= 30000 || fetCount >= 2000) {
-                lastCommit = currMillis
-                info(s"${sourceListener.getSource} Ack-ing for messages consumed so far count $fetCount at $lastCommit")
-                fetCount = 0
-                tryAndLogThr(result(async {
-                  handleAcks(msg)
-                }(executionContext), Duration(60, SECONDS)), s"Acknowledger for Source ${sourceListener.getSource}", warn(_: Throwable), notify = false)
-              }
+              if (batching) {
+                fetCount = inc(fetCount)
+                if (currMillis - lastCommit >= 30000 || fetCount >= 2000) {
+                  lastCommit = currMillis
+                  info(s"${sourceListener.getSource} Ack-ing for messages consumed so far count $fetCount at $lastCommit")
+                  fetCount = 0
+                  tryAndLogThr(result(async {
+                    handleAcks(msg)
+                  }(executionContext), Duration(60, SECONDS)), s"Acknowledger for Source ${sourceListener.getSource}", warn(_: Throwable), notify = false)
+                }
+              } else tryAndLogThr(result(async {
+                handleAcks(msg)
+              }(executionContext), Duration(60, SECONDS)), s"Acknowledger for Source ${sourceListener.getSource}", warn(_: Throwable), notify = false)
             }
           }
-        } else {
+        }
+        else {
           if (currMillis - timeOut >= 50000) {
             error(s"Consuming Data Stopped from WSMQ & source ${sourceListener.getSource} due to Data cannot be stored into Spark Storage")
             timeOut = currMillis

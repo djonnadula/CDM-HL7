@@ -90,8 +90,10 @@ package object audit {
 
   def header(hl7Str: String, stage: String, meta: Either[MSGMeta, String]): String = {
     meta match {
-      case Left(x) => s"$hl7Str$COLON$stage$COLON${x.msgCreateTime}"
-      case Right(y) => s"$hl7Str$COLON$stage$COLON${metaFromRaw(y).msgCreateTime}"
+      case Left(x) => s"$hl7Str$COLON$stage$COLON${x.msgCreateTime}$COLON${x.facility}"
+      case Right(y) =>
+        val meta = metaFromRaw(y)
+        s"$hl7Str$COLON$stage$COLON${meta.msgCreateTime}$COLON${meta.facility}"
     }
 
   }

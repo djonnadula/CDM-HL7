@@ -333,13 +333,13 @@ package object model extends Logg {
             val hBaseConfig = if (destSys == Destinations.HBASE) {
               val keys = new ListBuffer[String]
               dest(3).split(SEMICOLUMN, -1).foreach(keys += _)
-              Some(HBaseConfig(dest(2), keys))
+              Some(HBaseConfig(dest(2), keys.toSet))
             } else None
             val outFormSplit = outFormat split AMPERSAND
             if (outFormat contains RAWHL7.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(RAWHL7,
-                DestinationSystem(destSys, dest(0), hBaseConfig), empty, fieldWithNoAppends,
-                tlmAckApplication, loadEtlConfig(etlTransformations, s"${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")), loadFilters(filterFile))
+                DestinationSystem(destSys, dest(0), hBaseConfig), empty,
+                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$RAWHL7$etlTransMultiReq")), loadFilters(filterFile))
             }
             else if (outFormat contains JSON.toString) {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(JSON,
@@ -347,10 +347,8 @@ package object model extends Logg {
                 fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$JSON$etlTransMultiReq")), loadFilters(filterFile))
             } else {
               (s"$segStruct$COLON${outFormSplit(0)}", ADHOC(DELIMITED,
-                DestinationSystem(destSys, dest(0), hBaseConfig),
-                tryAndReturnDefaultValue(asFunc(loadFileAsList(outFormSplit(1))), empty), fieldWithNoAppends,
-                tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")),
-                loadFilters(tryAndReturnDefaultValue(asFunc(filterFile), EMPTYSTR)))
+                DestinationSystem(destSys, dest(0), hBaseConfig), loadFileAsList(outFormSplit(1)),
+                fieldWithNoAppends, tlmAckApplication, loadEtlConfig(etlTransformations, s"${msgType.toString}$DOT${adhoc(0)}$DOT${adhoc(1)}$DOT$DELIMITED$etlTransMultiReq")), loadFilters(filterFile))
             }
           }).map(ad => Model(ad._1, seg._2, delimitedBy, modelFieldDelim, Some(ad._2), Some(ad._3))).toList
         } else throw new DataModelException("ADHOC Meta cannot be accepted. Please Check it " + seg._1)
@@ -362,13 +360,13 @@ package object model extends Logg {
 
   case class Hl7Segments(msgType: HL7, models: Map[String, List[Model]])
 
-  case class HL7TransRec(rec: Either[((String,String), mutable.LinkedHashMap[String, Any], MSGMeta), Throwable])
+  case class HL7TransRec(rec: Either[((String, String), mutable.LinkedHashMap[String, Any], MSGMeta), Throwable])
 
   case class Hl7SegmentTrans(trans: Either[Traversable[(String, Throwable)], String])
 
   case class DestinationSystem(system: Destination = Destinations.KAFKA, route: String, offHeapConfig: Option[HBaseConfig] = None)
 
-  case class HBaseConfig(family: String, key: ListBuffer[String])
+  case class HBaseConfig(family: String, key: Set[String])
 
   case class FieldsTransformer(selector: FieldSelector, aggregator: FieldsCombiner, validator: FieldsValidator, staticOperator: FieldsStaticOperator,
                                dataEnRicher: EnrichData, offHeapDataEnRicher: EnrichDataFromOffHeap) {
@@ -378,8 +376,8 @@ package object model extends Logg {
       aggregator apply data
       staticOperator apply data
       validator apply data
-      offHeapDataEnRicher apply(data, hl7)
-      dataEnRicher apply(data, hl7)
+     val out= dataEnRicher apply(data,hl7)
+      offHeapDataEnRicher apply(data,out.enrichedHL7)
       // tryAndFallbackTo(asFunc(offHeapDataEnricher apply data), offHeapDataEnricher apply(null, data))
     }
   }
@@ -486,15 +484,17 @@ package object model extends Logg {
 
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
 
-    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if ((k ne commonSegkey) & (v ne EMPTYSTR)) EMPTYSTR else v)
+    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if ((v ne EMPTYSTR)) EMPTYSTR else v)
 
     def adhocLayout(layout: mutable.LinkedHashMap[String, String], keyNames: mutable.LinkedHashSet[(String, String)],
                     multiColumnLookUp: Map[String, Map[String, String]]): mutable.LinkedHashMap[String, String] = {
       val store = new mutable.LinkedHashMap[String, String]
       keyNames.foreach { case (k, v) =>
-        if (exists(multiColumnLookUp, v) && !(store isDefinedAt v)) store += v -> getDataFromMultiLocations(multiColumnLookUp(v), layout)
-        else if (!(store isDefinedAt v)) store += v -> layout(k)
-        else store update(v, store(v) + layout(k))
+        if (layout isDefinedAt k) {
+          if (exists(multiColumnLookUp, v) && !(store isDefinedAt v)) store += v -> getDataFromMultiLocations(multiColumnLookUp(v), layout)
+          else if (!(store isDefinedAt v)) store += v -> layout(k)
+          else store update(v, store(v) + layout(k))
+        } else store += v -> layout.getOrElse(k, EMPTYSTR)
       }
       store
     }
@@ -597,7 +597,7 @@ package object model extends Logg {
     val store = new mutable.LinkedHashSet[(String, String)]()
     readFile(file).getLines().filter(valid(_)).filter(_ != EMPTYSTR).foreach(temp => {
       val splitD = temp split delimitedBy
-      if (splitD.nonEmpty) store += ((splitD(keyIndex), splitD(keyIndex + 1)))
+      if (splitD.nonEmpty) store += ((splitD(keyIndex), tryAndReturnDefaultValue0(splitD(keyIndex + 1), EMPTYSTR)))
     })
     store
   }
@@ -696,7 +696,9 @@ object EnrichCacheManager extends Logg {
     instance
   }
 
-  def apply(adhocConfig: String, hl7Types: Array[String], offHeapHandler: ((Any, Any, Any, Any)) => Any): EnrichCacheManager = lock.synchronized {
+
+  def apply(adhocConfig: String, hl7Types: Array[String], handlers: ((String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
+    (String, String, Set[String], Int, String, String) => Map[Int, mutable.Map[String, Array[Byte]]], (Map[String, (String, String, mutable.Map[String, String], Boolean) => Unit]))): EnrichCacheManager = lock.synchronized {
     if (instance == null) {
       instance = new EnrichCacheManager()
       val adhocSeg = model.applySegmentsToAll(model.loadSegments(adhocConfig), hl7Types)
@@ -704,7 +706,7 @@ object EnrichCacheManager extends Logg {
         model.segmentsForHl7Type(HL7Types.withName(hl7), adhocSeg(hl7))
           .models.foreach(_._2.foreach { model =>
           if (model.adhoc.isDefined) {
-            instance.getEnRicher(model.adhoc.get.transformer).offHeapDataEnRicher.init(offHeapHandler)
+            instance.getEnRicher(model.adhoc.get.transformer).offHeapDataEnRicher.init(handlers)
           }
         })
       }

@@ -2,11 +2,17 @@ package com.hca.cdm
 
 import java.io._
 import java.net.URI
+
+import org.apache.hadoop.io._
 import org.apache.spark.deploy.SparkHadoopUtil.{get => hdpUtil}
 import com.hca.cdm.log.Logg
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.hadoop.hbase.HBaseConfiguration
+import org.apache.hadoop.io.{LongWritable, Text}
+import org.apache.hadoop.mapred.{FileInputFormat, SequenceFileInputFormat}
+import parquet.hadoop.mapred.DeprecatedParquetInputFormat
+
 import scala.util.{Failure, Success, Try}
 import scala.util.control.Breaks._
 
@@ -125,4 +131,24 @@ package object hadoop extends Logg {
   private def deleteFiles(fs: FileSystem, path: Path): Unit = {
     if (fs isDirectory path) fs delete(path, true)
   }
+
 }
+
+object Format extends  Enumeration{
+  type FileFormat = Value
+  val parquet = Value("parquet")
+  val sequence = Value("sequence")
+  val default = sequence
+
+/*  def getFormat(fileFormat: FileFormat) : (Class[Writable],Class[Writable],Class[FileInputFormat[Writable,Writable]]) ={
+    fileFormat match {
+     case  Format.sequence =>
+       (classOf[LongWritable],classOf[Text],(SequenceFileInputFormat[LongWritable,Text]).getClass)
+     case Format.parquet =>
+     case _ => throw  new UnsupportedOperationException(s"Format $fileFormat not yet impl")
+   }
+  }*/
+}
+
+class ParqF[K,V] extends DeprecatedParquetInputFormat[V]
+

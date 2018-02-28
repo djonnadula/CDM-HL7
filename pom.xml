@@ -16,6 +16,7 @@
         <module>cdm-scripts</module>
         <module>cdm-jobs</module>
         <module>cdm-models</module>
+        <module>cdm-deid-anonymization</module>
     </modules>
 
 
@@ -42,6 +43,22 @@
             <id>hca.repo.cdh</id>
             <url>http://10.28.98.216:8081/nexus/content/repositories/ClouderaArtifactory/</url>
         </repository>
+
+        <repository>
+            <id>hca.repo.nexus</id>
+            <url>https://xrdcldbdanex01.unix.medcity.net/repository/cloudera</url>
+        </repository>
+
+        <repository>
+            <id>hca.repo.nexus1</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
+        </repository>
+
+        <repository>
+            <id>hca.repo.nexus1.ext</id>
+            <url>https://xrdcldbdanex01.unix.medcity.net/repository/external-dependencies</url>
+        </repository>
+
     </repositories>
 
 
@@ -53,8 +70,8 @@
         <scala.version>2.10.5</scala.version>
         <scala.binary.version>2.10</scala.binary.version>
         <spark.version>1.6.0</spark.version>
-        <cdh.version>cdh5.10.1</cdh.version>
-        <kafka.version>0.9.0-kafka-2.0.2</kafka.version>
+        <cdh.version>cdh5.13.1</cdh.version>
+        <kafka.version>0.10.2-kafka-2.2.0</kafka.version>
         <flume.version>1.6.0</flume.version>
         <hive.version>1.1.0</hive.version>
         <hbase.version>1.2.0</hbase.version>
@@ -206,12 +223,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.sqoop</groupId>
-            <artifactId>sqoop</artifactId>
-            <version>1.4.6-${cdh.version}</version>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>${kafka.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <!--   <dependency>
                <groupId>org.apache.spark</groupId>
                <artifactId>spark-streaming_2.11</artifactId>

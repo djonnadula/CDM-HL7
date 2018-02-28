@@ -1,5 +1,6 @@
 package com.hca.cdm.mq.publisher
 
+import java.util.concurrent.TimeUnit.SECONDS
 import javax.jms.{ExceptionListener, JMSException, MessageProducer}
 import com.hca.cdm._
 import com.hca.cdm.exception.MqException
@@ -8,7 +9,10 @@ import com.hca.cdm.mq.MqConnector
 import com.hca.cdm.utils.RetryHandler
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
-
+import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Future => async}
+import scala.concurrent.Await._
 
 case class TLMResponse(stage: String, active: Boolean, dest: String)
 
@@ -111,7 +115,7 @@ class MQAcker(app: String, jobDesc: String)(mqHosts: String, mqManager: String, 
   }
 
 
-  override def toString : String= s"MQAcker(mqHosts=$mqHosts, mqManager=$mqManager, mqChannel=$mqChannel, ackQueue=$initialQueues)"
+  override def toString: String = s"MQAcker(mqHosts=$mqHosts, mqManager=$mqManager, mqChannel=$mqChannel, ackQueue=$initialQueues)"
 
 
 }
@@ -124,7 +128,7 @@ object MQAcker extends Logg {
   private var connections = new ArrayBuffer[MQAcker]
 
   @throws(classOf[MqException])
-  def apply(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, queueMappingForResponse: String, numberOfIns: Int = 1): Unit = {
+  def apply(app: String, jobDesc: String)(mqHosts: String, mqManager: String, mqChannel: String, queueMappingForResponse: String, numberOfIns: Int = 2): Unit = {
     maxCon = numberOfIns
 
     def createIfNotExist = new (() => MQAcker) {
@@ -143,8 +147,11 @@ object MQAcker extends Logg {
   }
 
   def ackMessage(msg: String, stage: String): Unit = {
-    if (maxCon == 1) connections.head.sendMessage(msg, stage)
-    else connections(randomConn.nextInt(connections.size)).sendMessage(msg, stage)
+    tryAndLogThr(result(async {
+      if (maxCon == 1) connections.head.sendMessage(msg, stage)
+      else connections(randomConn.nextInt(connections.size)).sendMessage(msg, stage)
+    }(executionContext), Duration(60, SECONDS)), EMPTYSTR, warn(_: Throwable), notify = false)
+
   }
 
   def ackMessages(msgs: Traversable[String], stage: String): Unit = {

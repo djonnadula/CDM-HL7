@@ -23,7 +23,7 @@ private[cdm] class OffsetManager(storeNameSpace: String, store: String, appAsRow
   private lazy val storeHandler = HBaseConnector(conf, storeNameSpace)
   private lazy val offsetFamily: String = "kfk_off"
   private lazy val topicOffsetSplit = "-"
-  private lazy val allAttributes = ListBuffer.empty[String]
+  private lazy val allAttributes = Set.empty[String]
 
   def batchCompleted[T](batch: RDD[T]): Unit = {
     require(batch.isInstanceOf[HasOffsetRanges], "Currently Only Kafka Impl is supported")
@@ -42,7 +42,7 @@ private[cdm] class OffsetManager(storeNameSpace: String, store: String, appAsRow
   def appStarted(topics: Set[String], kafkaParams: Map[String, String]): Map[TopicAndPartition, Long] = {
     val storeProps = Map(MIN_VERSIONS -> "0", VERSIONS -> "100")
     storeHandler.createTable(store, Some(storeProps), List(HUtils.createFamily(offsetFamily)))
-    val response = HUtils.transformRow(store, offsetFamily, appAsRow, allAttributes)(storeHandler)
+    val response = HUtils.getRow(store, offsetFamily, appAsRow, allAttributes)(storeHandler)
     var out: Map[TopicAndPartition, Long] = null
     if (valid(response) && response.nonEmpty) {
       out = response.map { case (k, v) => topicPartitionFromStore(k) -> toLong(v) }.toMap

@@ -6,12 +6,12 @@ import com.hca.cdm._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.RetryHandler
 import org.apache.hadoop.hbase.client._
+import org.apache.hadoop.hbase.filter.{PageFilter, RandomRowFilter}
 import org.apache.hadoop.hbase.{HColumnDescriptor, KeepDeletedCells}
 import org.apache.hadoop.hbase.io.compress.Compression
 import org.apache.hadoop.hbase.regionserver.BloomType
 import org.apache.hadoop.hbase.util.Bytes._
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 import collection.JavaConverters._
 
 /**
@@ -55,12 +55,18 @@ object HUtils extends Logg {
     row
   }
 
-  def sendRequestFromJson(operator: BatchOperator)(family: String, keys: ListBuffer[String], jsonData: String, filter: Boolean = true): Unit = {
+  def sendRequestFromJson(operator: BatchOperator)(family: String, key: String, jsonData: String, filter: Boolean = true): Unit = {
     val jsonKV = mapper(jsonData)
-    val key = keys.foldLeft(EMPTYSTR)((a, b) => a + jsonKV.getOrElse(b, EMPTYSTR))
-    keys foreach jsonKV.remove
+    // val key = keys.foldLeft(EMPTYSTR)((a, b) => a + jsonKV.getOrElse(b, EMPTYSTR))
+    // keys foreach jsonKV.remove
     if (filter) filterData(jsonKV)
     operator mutate addRowRequest(key, family, jsonKV)
+  }
+
+  def sendRequest(operator: BatchOperator)(family: String, key: String, kv: mutable.Map[String, String], filter: Boolean = true): Unit = {
+    // val key = keys.foldLeft(EMPTYSTR)((a, b) => a + kv.getOrElse(b, EMPTYSTR))
+    if (filter) filterData(kv)
+    operator mutate addRowRequest(key, family, kv)
   }
 
   private def filterData(data: mutable.Map[String, String]): mutable.Map[String, String] = {
@@ -68,7 +74,7 @@ object HUtils extends Logg {
     data
   }
 
-  def transformRow(table: String, family: String, fetchId: String, fetchAttributes: ListBuffer[String] = ListBuffer.empty[String])(operator: HBaseConnector): mutable.Map[String, Array[Byte]] = {
+  def getRow(table: String, family: String, fetchId: String, fetchAttributes: Set[String] = Set.empty[String])(operator: HBaseConnector): mutable.Map[String, Array[Byte]] = {
     val response = sendGetRequest(getRowRequest(fetchId, family, fetchAttributes), operator.getTable(table))
     if (valid(response) && !response.isEmpty) {
       response.getFamilyMap(toBytes(family)).asScala.map({
@@ -78,9 +84,30 @@ object HUtils extends Logg {
 
   }
 
-  def transformRow(table: Any, family: Any, fetchId: Any, fetchAttributes: Any)(operator: HBaseConnector): Any = {
-    transformRow(table.asInstanceOf[String], family.asInstanceOf[String],
-      fetchId.asInstanceOf[String], fetchAttributes.asInstanceOf[ListBuffer[String]])(operator)
+  def getRandom(table: String, family: String, fetchAttributes: Set[String] = Set.empty[String],
+                maxMessages: Int = 10, keyFrom: String, keyTo: String)(operator: HBaseConnector): Map[Int, mutable.Map[String, Array[Byte]]] = {
+    val familyBytes = toBytes(family)
+    val scan = new Scan(toBytes(keyFrom), toBytes(keyTo))
+    scan.setCacheBlocks(false)
+    scan.setCaching(0)
+    scan.setMaxVersions(1)
+    scan.setScanMetricsEnabled(false)
+    scan.addFamily(familyBytes)
+      .setId(s"$table-$family")
+    scan.setFilter(new PageFilter(maxMessages))
+    fetchAttributes.foreach { case (qualifier) => scan.addColumn(familyBytes, toBytes(qualifier)) }
+    val Tab = operator.getTable(table)
+    val res = Tab.getScanner(scan)
+    var msgs = res.next(maxMessages)
+    if (msgs.isEmpty) {
+      val s = new Scan
+      s.addFamily(familyBytes)
+      s.setFilter(new PageFilter(maxMessages))
+      msgs = Tab.getScanner(s).next(maxMessages)
+    }
+    val out = tryAndGoNextAction0(msgs.zipWithIndex.map { case (r, index) => index -> r.getFamilyMap(familyBytes).asScala.map { case (k, v) => toStringBinary(k) -> v } }, closeResource(res)).toMap
+    closeResource(Tab)
+    out
   }
 
   def sendGetRequest(request: Get, table: Table, retry: Boolean = true): Result = {
@@ -96,7 +123,7 @@ object HUtils extends Logg {
 
   }
 
-  def getRowRequest(key: String, family: String, attributes: ListBuffer[String]): Get = {
+  def getRowRequest(key: String, family: String, attributes: Set[String]): Get = {
     val get = new Get(toBytes(key))
     get.setIsolationLevel(IsolationLevel.READ_UNCOMMITTED)
     get.setId(key)

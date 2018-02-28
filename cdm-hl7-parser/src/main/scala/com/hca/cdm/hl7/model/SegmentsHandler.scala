@@ -13,7 +13,7 @@ trait SegmentsHandler extends Serializable {
 
   def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                      adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
-                     hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])
+                     hBaseIO: Map[String, (String, String, mutable.Map[String,String],Boolean) => Unit])
                      (data: mutable.LinkedHashMap[String, Any], rawHl7: String, meta: MSGMeta): Unit
 
 

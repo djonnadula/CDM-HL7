@@ -6,6 +6,7 @@ import com.hca.cdm.hl7.audit._
 import com.hca.cdm.hl7.constants.HL7Constants._
 import com.hca.cdm.hl7.model.SegmentsState._
 import com.hca.cdm.log.Logg
+
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
@@ -13,7 +14,10 @@ import scala.concurrent.duration.Duration.{Inf => waitTillTaskCompletes}
 import scala.concurrent.{Await, Future => async}
 import scala.util.{Failure, Success, Try}
 import AuditConstants._
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm.Models.MSGMeta
+
 import scala.collection.mutable.ListBuffer
 import scala.language.postfixOps
 
@@ -39,6 +43,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
       " Segments Registered with Handler :: """ + hl7Segments.models.keys.mkString(caret))
   logIdent = s"$hl7-Model Handler  "
   private lazy val sizeCheck = checkSize(lookUpProp("hl7.message.max").toInt)(_, _)
+  private lazy val fromJson = new ObjectMapper().registerModule(DefaultScalaModule).readValue(_: String, classOf[mutable.Map[String, String]])
 
   private case class Segment(seg: String, apply: (mapType, String) => Hl7SegmentTrans, adhoc: Boolean, dest: Option[DestinationSystem], auditKey: String, headerKey: String, tlmAckApplication: String = EMPTYSTR)
 
@@ -63,7 +68,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   private def runModel(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                        adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
-                       hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])
+                       hBaseIO: Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit])
                       (data: mapType, rawHl7: String, meta: MSGMeta): Unit = {
     val tlmAckMessages = if (tlmAckIO isDefined) new ListBuffer[(String, String)] else null
     segRef map (seg => seg -> run(seg, data, rawHl7)) foreach { case (segment, transaction) => tryForTaskExe(transaction) match {
@@ -108,24 +113,26 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
                       if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                         s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
                         updateMetrics(segment.seg, PROCESSED)
-                      } else adhocFailed
+                      } else adhocFailed()
                     }
                     else if (segment.dest.get.system == Destinations.HBASE) {
-                      if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, segment.dest.get.offHeapConfig.get.key, rec),
+                      val jsonKV = fromJson(rec)
+                      val key = segment.dest.get.offHeapConfig.get.key.foldLeft(EMPTYSTR)((a, b) => a + jsonKV.getOrElse(b, EMPTYSTR))
+                      if (tryAndLogThr(hBaseIO(segment.dest.get.route).apply(segment.dest.get.offHeapConfig.get.family, key, jsonKV,true),
                         s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                         if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                           s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
                           updateMetrics(segment.seg, PROCESSED)
-                        } else adhocFailed
-                      } else adhocFailed
+                        } else adhocFailed()
+                      } else adhocFailed()
                     } else {
                       if (tryAndLogThr(adhocIO(rec, header(hl7, segment.headerKey, Left(meta)), segment.dest.get.route),
                         s"$hl7$COLON${segment.seg}-adhocIO", error(_: Throwable))) {
                         if (tryAndLogThr(auditIO(adhocAuditor(segment.auditKey, meta), header(hl7, auditHeader, Left(meta))),
                           s"$hl7$COLON${segment.seg}-auditIO-adhocAuditor", error(_: Throwable))) {
                           updateMetrics(segment.seg, PROCESSED)
-                        } else adhocFailed
-                      } else adhocFailed
+                        } else adhocFailed()
+                      } else adhocFailed()
                     }
                   }
                   else {
@@ -197,7 +204,7 @@ class DataModelHandler(hl7Segments: Hl7Segments, allSegmentsForHl7: Set[String],
 
   override def handleSegments(io: (String, String) => Unit, rejectIO: (AnyRef, String) => Unit, auditIO: (String, String) => Unit,
                               adhocIO: (String, String, String) => Unit, tlmAckIO: Option[(String, String) => Unit] = None,
-                              hBaseIO: Map[String, (String, ListBuffer[String], String) => Unit])(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
+                              hBaseIO: Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit])(data: mapType, rawHl7: String, meta: MSGMeta): Unit =
     runModel(io, rejectIO, auditIO, adhocIO, tlmAckIO, hBaseIO)(data, rawHl7, meta): Unit
 
 

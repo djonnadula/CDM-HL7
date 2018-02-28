@@ -11,7 +11,7 @@ import scala.language.postfixOps
 /**
   * Created by Devaraj Jonnadula on 7/24/2017.
   */
-case class EnrichedData(enrichedLayout: Any, enrichedHL7: String = EMPTYSTR, rejects : Option[ListBuffer[Throwable]] = None)
+case class EnrichedData(enrichedLayout: Any, enrichedHL7: String = EMPTYSTR, rejects: Option[ListBuffer[Throwable]] = None)
 
 trait EnrichData extends Serializable {
 
@@ -23,13 +23,21 @@ trait EnrichData extends Serializable {
 
 trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
-  protected var enrichDataPartFun: ((Any, Any, Any, Any)) => Any = _
+  protected var enrichDataPartFun: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]] = _
+  protected var partSelectorFun: (String, String, Set[String],Int, String,String) => Map[Int, mutable.Map[String, Array[Byte]]] = _
+  protected var partWriterFun: (Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]) = _
 
-  def apply(enrichData: ((Any, Any, Any, Any)) => Any, layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData
+  def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData
 
-  def init(offHeapHandler: ((Any, Any, Any, Any)) => Any): Unit = {
-    enrichDataPartFun = offHeapHandler
+
+  def init(handlers: ((String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
+    (String, String, Set[String],Int, String,String) => Map[Int, mutable.Map[String, Array[Byte]]], (Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]))): Unit = {
+    enrichDataPartFun = handlers._1
+    partSelectorFun = handlers._2
+    partWriterFun = handlers._3
   }
+
+  def repos: Set[String]
 
 }
 
@@ -38,9 +46,10 @@ case class NoEnRicher() extends EnrichDataFromOffHeap {
 
   override def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = EnrichedData(layout, hl7)
 
-  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = EnrichedData(layout, hl7)
+  override def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
+                     layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = EnrichedData(layout, hl7)
 
-
+  def repos: Set[String] = Set.empty
 }
 
 private[enrichment] class FacilityCoidHandler(files: Array[String]) extends EnrichData {
@@ -112,7 +121,7 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
 
   private lazy val fieldsToSkip = "patient_address|other_designation"
   private val enrichSourceToTargetMapping = com.hca.cdm.hl7.model.loadFileAsList(config(1))
-  private val enrichAttributes = enrichSourceToTargetMapping.map(_._2).to[ListBuffer]
+  private val enrichAttributes = enrichSourceToTargetMapping.map(_._2).toSet
   private val cfg: OffHeapConfig = {
     val dest = config(0) split "\\&"
     OffHeapConfig(dest(0), dest(2), dest(3).split("\\;", -1).toSet)
@@ -120,9 +129,10 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
 
   override def close(): Unit = {}
 
-  override def apply(enrichData: (((Any, Any, Any, Any))) => Any, layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
+
+  override def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     if (fetchRequired(layout)) {
-      val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).asInstanceOf[mutable.Map[String, Array[Byte]]].map { case (k, v) => k -> new String(v, UTF8) }
+      val res = enrichData(cfg.repo, cfg.identifier, cfg.fetchKey(layout), enrichAttributes).map { case (k, v) => k -> new String(v, UTF8) }
       enrichSourceToTargetMapping.foreach {
         case (enrichField, reqEnrichField) =>
           if ((layout isDefinedAt enrichField) && layout(enrichField) == EMPTYSTR && (res isDefinedAt reqEnrichField) && res(reqEnrichField) != EMPTYSTR) {
@@ -148,10 +158,13 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
   override def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     apply(self.enrichDataPartFun, layout, hl7)
   }
+
+  def repos: Set[String] = Set(cfg.repo)
 }
 
-private case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) {
+private[cdm] case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) extends Logg {
 
   def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
+
 
 }

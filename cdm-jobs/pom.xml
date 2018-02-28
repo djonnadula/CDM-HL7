@@ -37,6 +37,12 @@
             <version>${cdm.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.hca</groupId>
+            <artifactId>cdm-de-id-anonymization</artifactId>
+            <version>${cdm.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

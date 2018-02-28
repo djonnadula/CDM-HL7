@@ -106,7 +106,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
   def submitBatch(withRetry: Boolean = false): Unit = {
     if (batched >= batchSize) {
       if (withRetry) {
-        if (new RetryHandler().retryOperation(asFunc(tryAndThrow(mutator flush(), error(_: Throwable))))) reset()
+        if (RetryHandler(asFunc(tryAndThrow(mutator flush(), error(_: Throwable))))) reset()
       }
       else {
         tryAndThrow(mutator flush(), error(_: Throwable))

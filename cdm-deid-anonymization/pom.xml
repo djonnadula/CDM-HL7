@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cdm-hl7</artifactId>
+        <groupId>com.hca</groupId>
+        <version>1.0.8-Snapshot</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>cdm-de-id-anonymization</artifactId>
+    <name>PHI-PII De-Identification/Anonymization</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hca</groupId>
+            <artifactId>cdm-hl7-parser</artifactId>
+            <version>${cdm.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.opennlp</groupId>
+            <artifactId>opennlp-tools</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+
+    </dependencies>
+</project>

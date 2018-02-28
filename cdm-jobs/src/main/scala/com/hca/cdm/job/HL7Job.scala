@@ -49,9 +49,8 @@ import scala.collection.mutable
 import TimeUnit._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.kfka.util.OffsetManager
-import org.apache.hadoop.io.{BinaryComparable, LongWritable, Text}
+import org.apache.hadoop.io.{Writable, Text}
 import org.apache.spark.rdd.RDD
-
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -174,6 +173,7 @@ object HL7Job extends Logg with App {
       segment.models.values.foreach { models =>
         models.foreach { model =>
           if (model.adhoc isDefined) {
+            EnrichCacheManager().getEnRicher(model.adhoc.get.transformer).offHeapDataEnRicher.repos.foreach(hTables += _)
             model.adhoc.get.destination.system match {
               case Destinations.KAFKA =>
                 createTopic(model.adhoc.get.destination.route)
@@ -196,7 +196,7 @@ object HL7Job extends Logg with App {
     parserDriverMetrics = driverParserMetric()
     restoreMetrics()
     monitorHandler = newDaemonCachedScheduler(s"$app-Monitor-Pool", 3)
-    if (tryAndReturnDefaultValue0(lookUpProp("cdm.stats.generate").toBoolean, true)) {
+    if (tryAndReturnDefaultValue0(lookUpProp("cdm.stats.generate").toBoolean, false)) {
       monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
     }
     if (monitorInterval > 0) {
@@ -225,8 +225,8 @@ object HL7Job extends Logg with App {
     } else if (sparkManagesOffsets) {
       sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     } else {
-      val rdds = new mutable.Queue[RDD[(LongWritable, Text)]]
-      dataDirectories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[LongWritable, Text](dir, maxPartitions))
+      val rdds = new mutable.Queue[RDD[(Writable, Text)]]
+      dataDirectories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[Writable, Text](dir, maxPartitions))
       sparkStrCtx queueStream rdds
     }
     info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.id}")
@@ -278,11 +278,11 @@ object HL7Job extends Logg with App {
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
             val hBaseWriter = HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"), hTables, lookUpProp("cdm.hl7.hbase.batch.write.size").toInt).
-              map { case (dest, operator) => dest -> (HUtils.sendRequestFromJson(operator)(_: String, _: ListBuffer[String], _: String)) }
-            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s, offHeapHandlers(HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"))))
+              map { case (dest, operator) => dest -> (HUtils.sendRequest(operator)(_: String, _: String, _: mutable.Map[String, String],_:Boolean)) }
+            EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s, offHeapHandlers(HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace")), hBaseWriter))
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
-              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"))
+              TLMAcknowledger(appName, appName)(lookUpProp("mq.hosts"), lookUpProp("mq.manager"), lookUpProp("mq.channel"), lookUpProp("mq.destination.queues"), 3)
               tlmAckIO = TLMAcknowledger.ackMessage(_: String, _: String)
             }
             val ackTlm = (meta: MSGMeta, hl7Str: String) => if (tlmAckQueue isDefined) tlmAckIO(tlmAckMsg(hl7Str, applicationReceiving, HDFS, jsonStage)(meta), jsonStage)
@@ -587,7 +587,13 @@ object HL7Job extends Logg with App {
         val from = LocalDate.parse(dates substring(0, dates.indexOf("between")))
         val to = LocalDate.parse(dates substring (dates.indexOf("between") + "between".length))
         Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
-      } else dataDirs += s"$dirs$dates"
+      } else if (dates == "*") {
+        fileSystem.listStatus(new Path(dirs)).foreach { fs =>
+          info(s"$dirs - ${fs.getPath}")
+          dataDirs += s"${fs.getPath}"
+        }
+      }
+      else dataDirs += s"$dirs$dates"
     }
     if (dateRanges isEmpty) dataDirs += dirs
     dataDirs
@@ -607,8 +613,11 @@ object HL7Job extends Logg with App {
   }
 
 
-  private def offHeapHandlers(hBaseConnector: HBaseConnector): ((Any, Any, Any, Any)) => Any = synchronized {
-    (HUtils.transformRow(_: Any, _: Any, _: Any, _: Any)(hBaseConnector)).tupled
+  private def offHeapHandlers(hBaseConnector: HBaseConnector, hBaseWriter: Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]): ((String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
+    (String, String, Set[String],Int, String,String) => Map[Int, mutable.Map[String, Array[Byte]]],
+    Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]) = synchronized {
+    (HUtils.getRow(_: String, _: String, _: String, _: Set[String])(hBaseConnector),
+      HUtils.getRandom(_: String, _: String, _: Set[String],_:Int,_:String,_:String)(operator = hBaseConnector), hBaseWriter)
   }
 
   /**
@@ -739,23 +748,23 @@ object HL7Job extends Logg with App {
     val KAFKA: InputSource.Value = Value("KAFKA")
     val HDFS: InputSource.Value = Value("HDFS")
 
-    def convert(source: Source, msgType: String, dataItr: Iterator[(Comparable[_ >: String with LongWritable], Comparable[_ >: String with BinaryComparable])]): Iterator[(String, String)] = {
+    def convert(source: Source, msgType: String, dataItr: Iterator[(Object, Object)]): Iterator[(String, String)] = {
       source match {
         case InputSource.KAFKA => dataItr.asInstanceOf[Iterator[(String, String)]]
         case InputSource.HDFS =>
           val msgHeader = s"$msgType$COLON"
-          dataItr map { case (_, hl7) => (msgHeader, hl7.toString) }
+          dataItr map { case (_, hl7) => (msgHeader, hl7.toString.replaceAll("[\r\n]+", "\r\n")) }
       }
     }
 
 
-    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(LongWritable, Text)](sparkCtx, Nil) {
+    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(Writable, Text)](sparkCtx, Nil) {
       self =>
       info(s"FileBase Rdd initiated for $dir with Max Partitions $maxPartitions & $sparkCtx")
       self.setName(dir)
-      private val data: RDD[(LongWritable, Text)] = sparkCtx.sequenceFile[LongWritable, Text](dir, maxPartitions)
+      private val data: RDD[(Writable, Text)] = sparkCtx.sequenceFile[Writable, Text](dir, maxPartitions)
 
-      override def compute(split: Partition, context: TaskContext): Iterator[(LongWritable, Text)] = {
+      override def compute(split: Partition, context: TaskContext): Iterator[(Writable, Text)] = {
         data.iterator(split, context)
       }
 

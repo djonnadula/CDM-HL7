@@ -83,7 +83,7 @@ object AvisEdhJob extends Logg with App {
 
   private def loadHadoopStaging(): Boolean = {
     LoginRenewer.kInit(lookUpProp("keytab"), lookUpProp("principal"))
-    var transactionDate = LocalDate.parse(outDateFormat.format(inDateFormat.parse(batchOffset))).minusDays(1).format(transactionDateFormat)
+    var transactionDate = LocalDate.parse(outDateFormat.format(inDateFormat.parse(batchOffset))).minusDays(3).format(transactionDateFormat)
     if (transactionDate == EMPTYSTR) transactionDate = self.transDate
     val commands = new ListBuffer[String]
     commands += lookUpProp("beeline.script")
