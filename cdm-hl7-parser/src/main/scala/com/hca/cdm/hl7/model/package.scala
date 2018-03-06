@@ -484,7 +484,7 @@ package object model extends Logg {
 
     override def getLayout: mutable.LinkedHashMap[String, String] = modelLayout(segStr, delimitedBy, modelFieldDelim, adhoc.isDefined)
 
-    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if ((v ne EMPTYSTR)) EMPTYSTR else v)
+    def layoutCopy: mutable.LinkedHashMap[String, String] = cachedLayout.clone.transform((k, v) => if (v ne EMPTYSTR) EMPTYSTR else v)
 
     def adhocLayout(layout: mutable.LinkedHashMap[String, String], keyNames: mutable.LinkedHashSet[(String, String)],
                     multiColumnLookUp: Map[String, Map[String, String]]): mutable.LinkedHashMap[String, String] = {
@@ -592,6 +592,7 @@ package object model extends Logg {
       case x@ele if ele.nonEmpty => ele(keyIndex) -> x(keyIndex + 1)
     } toMap
   }
+
 
   def loadFileAsList(file: String, delimitedBy: String = COMMA, keyIndex: Int = 0): mutable.LinkedHashSet[(String, String)] = {
     val store = new mutable.LinkedHashSet[(String, String)]()

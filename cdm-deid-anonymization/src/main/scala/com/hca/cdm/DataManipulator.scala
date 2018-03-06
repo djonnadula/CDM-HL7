@@ -1,14 +1,16 @@
 package com.hca.cdm
 
 import java.text.SimpleDateFormat
+import java.util
 import com.hca.cdm.hl7.enrichment.{EnrichDataFromOffHeap, EnrichedData, OffHeapConfig}
 import com.hca.cdm.log.Logg
 import com.hca.cdm.hl7.constants.HL7Constants._
 import scala.collection.mutable
 import com.hca.cdm.hl7.model._
-import java.util.{Date, UUID => uidGenarator}
+import java.util.{Collections, Date, UUID => uidGenarator}
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.atomic.AtomicBoolean
+import collection.JavaConverters._
 import com.hca.cdm.utils.DateConstants._
 import org.apache.commons.lang3.StringUtils
 import org.joda.time.DateTime
@@ -40,19 +42,21 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   private val random = ThreadLocalRandom.current()
   private val maxRandomSelects = 100000
-  private val randomCfg = Config(config(0))
-  private val deIdCfg = Config(config(1))
-  private val orgCfg = Config(config(2))
+  private val randomCfg = Config(config(0)).getCfg
+  private val deIdCfg = Config(config(1)).getCfg
+  private val orgCfg = Config(config(2)).getCfg
   private val dataOperators = loadFileAsList(config(3), COMMA, 1).map { case (field, op) => field -> tryAndReturnDefaultValue0(withName(op), DEFAULT) }.toMap
   private val deIdFields = dataOperators.filter(_._2 == DE_ID).keySet
   private val deIdFieldsRdm = deIdFields.map(_.replaceAll("\\|", "_"))
   private val fetchReq = new AtomicBoolean(deIdFields.nonEmpty)
-  private val facilityRef = loadFileAsList(config(4)).map(_._1.trim).filter(_.startsWith("COC")).toArray
-  private val facilityNames = loadFileAsList(config(4), COMMA, 3).map(_._2.trim).map(x => x -> x.split(" ", -1).map(_.trim).filter(_.length > 1))
+  private val facilityRef = loadFileAsList(config(4)).map(_._1.trim).filter(_.startsWith("C")).toArray
+  private var facilities = loadFileAsList(config(4)).map(_._1.trim).map(x => x -> generateRandomFacility(x)).toMap
+  private val facilityNames = loadFileAsList(config(4), COMMA, 3).map(_._2.trim).map(x => x -> x.split(" ", -1).map(_.trim).filter(_.length > 3))
   private val hl7_mappings = loadFileAsList(config(5)).map { case (k, v) => v -> k }.toMap
   private val obsv_value = "obsv_value"
   private val ssn = "ssn_num_patient"
   private val identifiers = Set("medical_record_num", "medical_record_urn", "patient_account_num").map(x => x -> x).toMap
+  private val patientState = "patient_address|state_or_province"
   private lazy val fac = getFac
   private val lock = new Object
   private val dummyFac = "NOFAC"
@@ -76,33 +80,23 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     var obs_note = layout.getOrElse(obsv_value, EMPTYSTR)
     val facility = layout.getOrElse("sending_facility", EMPTYSTR)
     val messageControlId = layout.getOrElse("message_control_id", EMPTYSTR)
+    if (!facilities.isDefinedAt(facility)) facilities = facilities + Pair(facility, generateRandomFacility(facility))
     val sourceSystem = tryAndReturnDefaultValue0(messageControlId.substring(0, messageControlId.indexOf(underScore)), EMPTYSTR)
     hl7Mod = handleId(messageControlId, facility, hl7Mod, layout, deIdentified)
-    obs_note =  if(facility == DOT) obs_note.replaceAll(s"\\$facility", dummyFac) else obs_note.replaceAll(facility, dummyFac)
+   obs_note = obs_note.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
     dataOperators.foreach {
       case (enrichField, op) =>
-        if ((layout isDefinedAt enrichField) && layout(enrichField) != EMPTYSTR) {
+        if ((layout isDefinedAt enrichField) && layout(enrichField) != EMPTYSTR && enrichField != patientState) {
           op match {
             case DE_ID =>
               if ((deIdentified isDefinedAt enrichField) && deIdentified(enrichField) != EMPTYSTR) {
-                handleCases(enrichField, org(enrichField), deIdentified(enrichField), layout)
-                hl7Mod = handleText(hl7Mod, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
-                obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
-              } else if ((deIdentified isDefinedAt enrichField) && deIdentified(enrichField) == EMPTYSTR) {
-                val randomSelect = getRandomFromStore(enrichField, layout(enrichField))
-                handleCases(enrichField, org(enrichField), randomSelect, layout)
-                hl7Mod = handleText(hl7Mod, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
-                obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
-              } else if (!(deIdentified isDefinedAt enrichField)) {
-                val randomSelect = getRandomFromStore(enrichField, layout(enrichField))
-                handleCases(enrichField, org(enrichField), randomSelect, layout)
-                hl7Mod = handleText(hl7Mod, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
-                obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
+                val out = common(enrichField, org(enrichField), layout, deIdentified(enrichField), facility, sourceSystem, hl7Mod, obs_note)
+                hl7Mod = out.hl7
+                obs_note = out.notes
               } else {
-                val randomSelect = getRandomFromStore(enrichField, layout(enrichField))
-                handleCases(enrichField, org(enrichField), randomSelect, layout)
-                hl7Mod = handleText(hl7Mod, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
-                obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
+                val out = common(enrichField, org(enrichField), layout, getRandomFromStore(enrichField, layout(enrichField)), facility, sourceSystem, hl7Mod, obs_note)
+                hl7Mod = out.hl7
+                obs_note = out.notes
               }
             case ANONYMIZE | DEFAULT =>
               layout update(enrichField, EMPTYSTR)
@@ -120,8 +114,18 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
           }
         }
     }
-    hl7Mod = alterDOB(hl7Mod)
-    obs_note = alterDOB(obs_note)
+
+    if ((deIdentified isDefinedAt patientState) && deIdentified(patientState) != EMPTYSTR && org.isDefinedAt(patientState) && deIdentified(patientState) != org(patientState)) {
+      val out = common(patientState, org(patientState), layout, deIdentified(patientState), facility, sourceSystem, hl7Mod, obs_note, length = 1)
+      hl7Mod = out.hl7
+      obs_note = out.notes
+    } else {
+      val out = common(patientState, org(patientState), layout, getRandomFromStore(patientState, layout(patientState)), facility, sourceSystem, hl7Mod, obs_note, length = 1)
+      hl7Mod = out.hl7
+      obs_note = out.notes
+    }
+    hl7Mod = alterKeywords(hl7Mod)
+    obs_note = alterKeywords(obs_note)
     val facilityMod = handleFacilityNames(hl7Mod, obs_note, facility, sourceSystem)
     hl7Mod = facilityMod._1
     obs_note = facilityMod._2
@@ -131,27 +135,49 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     EnrichedData(layout, hl7Mod)
   }
 
+  private case class Text(hl7: String, notes: String)
+
+  private def common(enrichField: String, org: String, layout: mutable.LinkedHashMap[String, String], modifyWith: String,
+                     facility: String, sourceSystem: String, hl7Mod: String, obs_note: String, length: Int = 2): Text = {
+
+    handleCases(enrichField, org, modifyWith, layout)
+    Text(handleText(hl7Mod, enrichField, org, layout(enrichField))(facility, sourceSystem, length)
+      , handleText(obs_note, enrichField, org, layout(enrichField))(facility, sourceSystem, length))
+  }
+
   private def handleId(id: String, facility: String, hl7: String, layout: mutable.LinkedHashMap[String, String], deIdentified: mutable.Map[String, String]): String = {
-    val random = uidGenarator.randomUUID().toString
-    if(!deIdentified.isDefinedAt("message_control_id") ) deIdentified += "message_control_id" -> random
+    val random = if (facility == DOT) id.replaceFirst(s"\\$DOT", dummyFac)
+    else id.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
+    if (!deIdentified.isDefinedAt("message_control_id")) deIdentified += "message_control_id" -> random
     var tempHl7 = hl7
     layout update("message_control_id", deIdentified("message_control_id"))
-    layout update("sending_facility", dummyFac)
+    layout update("sending_facility", facilities.getOrElse(facility, dummyFac))
     tempHl7 = tryAndReturnDefaultValue0(tempHl7 replaceAll(id, layout("message_control_id")), tempHl7)
-    tempHl7 = if(facility == DOT) tempHl7.replaceAll(s"\\$facility", dummyFac) else tempHl7.replaceAll(facility, dummyFac)
+    tempHl7 = tempHl7.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
     tempHl7
+  }
+
+  private def generateRandomFacility(fac: String): String = {
+    if (fac == DOT) return dummyFac
+    val list = new util.ArrayList[Char]()
+    fac.toCharArray.foreach(x => list.add(x))
+    Collections.rotate(list, 2)
+    Collections.rotate(list, 3)
+    Collections.rotate(list, 4)
+    list.asScala.mkString
   }
 
   private def handleFacilityNames(hl7: String, notes: String, facility: String, sourceSystem: String): (String, String) = {
     var tempHl7 = hl7
     var tempNotes = notes
     facilityNames.foreach {
-      fac =>
-        tempHl7 = tryAndReturnDefaultValue0(tempHl7.replaceAll(fac._1, EMPTYSTR), tempHl7)
-        tempNotes = tryAndReturnDefaultValue0(tempNotes.replaceAll(fac._1, EMPTYSTR), tempNotes)
-        fac._2.foreach { splits =>
-          if (splits != EMPTYSTR && splits.length > 2 && splits != "MSH" && splits != "Final" && splits != "LAB" && !splits.equalsIgnoreCase("lab") && splits != "Lab" && splits != "PAT" && splits != "PATH" && splits != "Path" && splits != "SOUT" && splits != "FOUT"
-            && splits != facility && splits != sourceSystem && splits != "The") {
+      case (fac, split) =>
+        if (skipData(fac, facility, sourceSystem)) {
+          tempHl7 = tryAndReturnDefaultValue0(tempHl7.replaceAll(fac, EMPTYSTR), tempHl7)
+          tempNotes = tryAndReturnDefaultValue0(tempNotes.replaceAll(fac, EMPTYSTR), tempNotes)
+        }
+        split.foreach { splits =>
+          if (skipData(fac, facility, sourceSystem)) {
             tempHl7 = tryAndReturnDefaultValue0(tempHl7.replaceAll(splits, EMPTYSTR), tempHl7)
             tempNotes = tryAndReturnDefaultValue0(tempNotes.replaceAll(splits, EMPTYSTR), tempNotes)
           }
@@ -163,10 +189,11 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   private def handleCases(field: String, org: String, data: String, layout: mutable.LinkedHashMap[String, String]): Unit = {
     if (field == ssn) layout update(field, handleSsn(data))
     if (identifiers.isDefinedAt(field)) {
-      layout update(field, handleIdentifiers(data))
-     /* if (org != EMPTYSTR) layout update(field, handleIdentifiers(org))
-      else layout update(field, handleIdentifiers(data))*/
+      if(org == EMPTYSTR) layout update(field, org)
+      else layout update(field, handleIdentifiers(data))
     }
+    /* if (org != EMPTYSTR) layout update(field, handleIdentifiers(org))
+     else layout update(field, handleIdentifiers(data))*/
     else layout update(field, data)
   }
 
@@ -178,10 +205,13 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     })
   }
 
+  private def skipData(fac: String, facility: String, sourceSystem: String): Boolean = {
+    (fac != EMPTYSTR && fac.length > 2 && fac != "MSH" && fac != "Final" && fac != "LAB" && fac != "lab" && !fac.equalsIgnoreCase("lab") && fac != "Lab" && fac != "PAT" && fac != "PATH" && fac != "Path" && fac != "SOUT" && fac != "FOUT"
+      && fac != facility && fac != sourceSystem && fac != "The")
+  }
+
   private def handleIdentifiers(num: String): String = {
-    num.toCharArray.foldLeft(EMPTYSTR)((a, b) => {
-      a + tryAndReturnDefaultValue0(Integer.parseInt(b + EMPTYSTR), EMPTYSTR)
-    })
+    num.toCharArray.foldLeft(EMPTYSTR)((a, b) => a + tryAndReturnDefaultValue0(Integer.parseInt(b + EMPTYSTR), EMPTYSTR))
   }
 
   private def cache(): Unit = self.synchronized {
@@ -227,31 +257,31 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       && field != "servicing_facility" && !field.contains("enterer_location"))*/
   }
 
-  private def handleText(text: String, field: String, data: String, modifyWith: String = EMPTYSTR)(facility: String, sourceSystem: String): String = {
+  private def handleText(text: String, field: String, data: String, modifyWith: String = EMPTYSTR)(facility: String, sourceSystem: String, length: Int = 2): String = {
     var out = text
     if (excludeField(field)) {
       if (valid(text) && valid(data) && data != EMPTYSTR && data.length > 1) {
-        out = handleTxtInt(out, field, data, modifyWith, s"\\$caret")(facility, sourceSystem)
-        out = handleTxtInt(out, field, data, modifyWith, s"\\&")(facility, sourceSystem)
+        out = handleTxtInt(out, field, data, modifyWith, s"\\$caret")(facility, sourceSystem, length)
+        out = handleTxtInt(out, field, data, modifyWith, s"\\&")(facility, sourceSystem, length)
       }
     }
     out
   }
 
-  private def handleTxtInt(text: String, field: String, data: String, modifyWith: String = EMPTYSTR, delimitedBy: String)(facility: String, sourceSystem: String): String = {
+  private def handleTxtInt(text: String, field: String, data: String, modifyWith: String = EMPTYSTR, delimitedBy: String)(facility: String, sourceSystem: String, length: Int = 2): String = {
     var out = text
     data.split(delimitedBy, -1).foreach { dt =>
-      if (dt != EMPTYSTR && dt.length > 2 && dt != "MSH" && dt != "Final" && dt != "LAB" && dt != "PAT" && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The") {
+      if (dt != EMPTYSTR && dt.length > length && dt != "MSH" && dt != "Final" && dt != "LAB" && dt != "lab" && dt != "PAT" && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The") {
         // && dt != facility && dt != sourceSystem) {
-        out = if (dt.contains("(") || dt.contains(")")) {
-          tryAndReturnDefaultValue0(StringUtils.replace(out, dt, modifyWith), out)
-        } else tryAndReturnDefaultValue0(out replaceAll(dt, modifyWith), out)
+        out = if (dt.contains("(") || dt.contains(")")) tryAndReturnDefaultValue0(StringUtils.replace(out, dt, modifyWith), out)
+        else if (length == 1) tryAndReturnDefaultValue0(out replaceFirst(dt, modifyWith), out)
+        else tryAndReturnDefaultValue0(out replaceAll(dt, modifyWith), out)
       }
     }
     out
   }
 
-  private def handleDates(date: String): (String, Date) = {
+  protected def handleDates(date: String): (String, Date) = {
     if (valid(date) && date != EMPTYSTR) {
       var formatter = getFormatter(date)
       Try(formatter.parse(date).getTime) match {
@@ -275,11 +305,19 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     tryAndReturnDefaultValue0(new SimpleDateFormat(format4).format(date), EMPTYSTR)
   }
 
-  private def alterDOB(text: String): String = {
+  private def alterKeywords(text: String): String = {
+    var out = alterTxt(text, "DOB", 20)
+    for (_ <- 0 until 3) {
+      out = alterTxt(out, "Signed", 80)
+    }
+    out
+  }
+
+  private def alterTxt(text: String, keyword: String, numOfChars: Int): String = {
     tryAndReturnDefaultValue0({
-      val dob = text.indexOf("DOB")
-      val dobPart = text.substring(dob, dob + 20)
-      text.replaceAll(dobPart, EMPTYSTR)
+      val idx = text.indexOf(keyword)
+      val part = text.substring(idx, idx + numOfChars)
+      StringUtils.replace(text,part, EMPTYSTR)
     }, text)
   }
 
@@ -295,10 +333,6 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     else new SimpleDateFormat(format2)
   }
 
-  private def Config(cfg: String): OffHeapConfig = {
-    val dest = cfg split "\\&"
-    OffHeapConfig(dest(0), dest(2), dest(3).split("\\;", -1).toSet)
-  }
 
   def close(): Unit = {}
 
@@ -320,4 +354,10 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   }
 
+}
+
+private[cdm] case class Config(private val cfg: String) {
+  private val dest = cfg split "\\&"
+
+  def getCfg: OffHeapConfig = OffHeapConfig(dest(0), dest(2), dest(3).split("\\;", -1).toSet)
 }

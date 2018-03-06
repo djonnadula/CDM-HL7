@@ -51,6 +51,7 @@ class StatsReporter(private val app: String) extends Logg with Runnable {
   }
 
   override def run(): Unit = {
+    val currentTime = new Date()
     val from = dateToString(new Date().toInstant.atZone(sys_ZoneId).toLocalDateTime.minusDays(1), DATE_WITH_TIMESTAMP)
     job.checkForStageToComplete()
     val parserMetrics = job.parserMetrics

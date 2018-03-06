@@ -31,8 +31,12 @@ class HiveConnector extends Logg with AutoCloseable {
 
 
   @throws[CdmException]
-  def sql(query: String, primaryKey: String): Map[String, Map[String, String]] = {
-    tryAndThrow(resultSetMapping(client.createStatement().executeQuery(query), primaryKey), error(_: Throwable))
+  def sql(query: String, primaryKey: String, skipFields: Set[String] = Set.empty): Map[String, Map[String, String]] = {
+    tryAndThrow(resultSetMapping(client.createStatement().executeQuery(query), primaryKey), error(_: Throwable)).map {
+      case (tab, mapping) =>
+        skipFields.foreach(field => mapping.filterKeys(_ != field))
+        tab -> mapping
+    }
   }
 
   @throws[CdmException]

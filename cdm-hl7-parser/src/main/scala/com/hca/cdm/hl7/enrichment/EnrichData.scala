@@ -164,7 +164,11 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
 
 private[cdm] case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) extends Logg {
 
-  def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
+  def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = {
+    val out =fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
+   // println(out + " " + fetchKeyAttributes + " " + layout)
+    out
+  }
 
 
 }

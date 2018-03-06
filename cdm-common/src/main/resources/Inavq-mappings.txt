@@ -1,0 +1,16 @@
+A_COID,A_COID,NONE
+B_FACILITY_MNEMONIC_CS,B_FACILITY_MNEMONIC_CS,NONE
+A_FACILITY,sending_facility,DE_ID
+A_MRN,medical_record_num,DE_ID
+B_MRN_CONFIRMED,medical_record_num,DE_ID
+B_URN_CONFIRMED,medical_record_urn,DE_ID
+a_primary_Site,a_primary_Site,NONE
+a_primary_site_desc,a_primary_site_desc,NONE
+a_histo_behavior_icd_o_3,a_histo_behavior_icd_o_3,NONE
+a_histo_behavior_icd_o_3_desc,a_histo_behavior_icd_o_3_desc,NONE
+A_LAST_NAME,patient_name|family_name,DE_ID
+A_FIRST_NAME,patient_name|given_name,DE_ID
+A_DATE_OF_BIRTH,date_time_of_birth,DE_ID
+a_date_of_initial_diagnosis,a_date_of_initial_diagnosis,DATE
+a_date_of_initial_diagnosis_fix,a_date_of_initial_diagnosis,DATE
+b_gender,administrative_sex,DE_ID
