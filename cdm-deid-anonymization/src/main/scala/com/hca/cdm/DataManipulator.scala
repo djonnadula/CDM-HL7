@@ -67,6 +67,9 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
 
   def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
+    identifiers.foreach(x => println(x._1 + "  " + dataOperators.get(x._1) + layout.get(x._1)))
+    val ids = identifiers.map(x => x._1 -> layout.getOrElse(x._1, EMPTYSTR))
+    println(ids)
     if (fetchReq.get()) {
       val fetchedResults = partSelectorFun(randomCfg.repo, randomCfg.identifier, deIdFieldsRdm, maxRandomSelects / 30, fac._1, fac._2
       ).map { case (ind, store) => ind -> store.map { case (k, v) => hl7_mappings.getOrElse(k, k) -> new String(v, UTF8) } }
@@ -82,11 +85,16 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     val messageControlId = layout.getOrElse("message_control_id", EMPTYSTR)
     if (!facilities.isDefinedAt(facility)) facilities = facilities + Pair(facility, generateRandomFacility(facility))
     val sourceSystem = tryAndReturnDefaultValue0(messageControlId.substring(0, messageControlId.indexOf(underScore)), EMPTYSTR)
+    ids.foreach { case (k, v) =>
+      val out = common(k, org.getOrElse(k, EMPTYSTR), layout, v, facility, sourceSystem, hl7Mod, obs_note)
+      hl7Mod = out.hl7
+      obs_note = out.notes
+    }
     hl7Mod = handleId(messageControlId, facility, hl7Mod, layout, deIdentified)
-   obs_note = obs_note.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
+    obs_note = obs_note.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
     dataOperators.foreach {
       case (enrichField, op) =>
-        if ((layout isDefinedAt enrichField) && layout(enrichField) != EMPTYSTR && enrichField != patientState) {
+        if ((layout isDefinedAt enrichField) && layout(enrichField) != EMPTYSTR && enrichField != patientState && !identifiers.isDefinedAt(enrichField)) {
           op match {
             case DE_ID =>
               if ((deIdentified isDefinedAt enrichField) && deIdentified(enrichField) != EMPTYSTR) {
@@ -116,11 +124,11 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     }
 
     if ((deIdentified isDefinedAt patientState) && deIdentified(patientState) != EMPTYSTR && org.isDefinedAt(patientState) && deIdentified(patientState) != org(patientState)) {
-      val out = common(patientState, org(patientState), layout, deIdentified(patientState), facility, sourceSystem, hl7Mod, obs_note, length = 1)
+      val out = common(patientState, org(patientState), layout, deIdentified(patientState), facility, sourceSystem, hl7Mod, obs_note, 1)
       hl7Mod = out.hl7
       obs_note = out.notes
     } else {
-      val out = common(patientState, org(patientState), layout, getRandomFromStore(patientState, layout(patientState)), facility, sourceSystem, hl7Mod, obs_note, length = 1)
+      val out = common(patientState, org(patientState), layout, getRandomFromStore(patientState, layout(patientState)), facility, sourceSystem, hl7Mod, obs_note, 1)
       hl7Mod = out.hl7
       obs_note = out.notes
     }
@@ -186,15 +194,19 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     (tempHl7, tempNotes)
   }
 
-  private def handleCases(field: String, org: String, data: String, layout: mutable.LinkedHashMap[String, String]): Unit = {
-    if (field == ssn) layout update(field, handleSsn(data))
+  private def handleCases(field: String, org: String, modifyWith: String, layout: mutable.LinkedHashMap[String, String], queryAgain: Boolean = false): Unit = {
+    if (field == ssn) layout update(field, handleSsn(modifyWith))
     if (identifiers.isDefinedAt(field)) {
-      if(org == EMPTYSTR) layout update(field, org)
-      else layout update(field, handleIdentifiers(data))
-    }
-    /* if (org != EMPTYSTR) layout update(field, handleIdentifiers(org))
-     else layout update(field, handleIdentifiers(data))*/
-    else layout update(field, data)
+      println(field + " org " + org + " " + modifyWith)
+      if (org == EMPTYSTR) layout update(field, org)
+      else {
+        val temp = handleIdentifiers(org)
+        if (temp == EMPTYSTR) layout update(field, random.nextLong().toString)
+        else layout update(field, temp)
+      }
+      /* if (org != EMPTYSTR) layout update(field, handleIdentifiers(org))
+       else layout update(field, handleIdentifiers(data))*/
+    } else layout update(field, modifyWith)
   }
 
   private def handleSsn(num: String): String = {
@@ -211,7 +223,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
   private def handleIdentifiers(num: String): String = {
-    num.toCharArray.foldLeft(EMPTYSTR)((a, b) => a + tryAndReturnDefaultValue0(Integer.parseInt(b + EMPTYSTR), EMPTYSTR))
+    num.toCharArray.foldLeft(EMPTYSTR)((a, b) => a + tryAndReturnDefaultValue0(Integer.parseInt(b + EMPTYSTR)+random.nextInt(8), random.nextInt(9)))
   }
 
   private def cache(): Unit = self.synchronized {
@@ -317,7 +329,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     tryAndReturnDefaultValue0({
       val idx = text.indexOf(keyword)
       val part = text.substring(idx, idx + numOfChars)
-      StringUtils.replace(text,part, EMPTYSTR)
+      StringUtils.replace(text, part, EMPTYSTR)
     }, text)
   }
 

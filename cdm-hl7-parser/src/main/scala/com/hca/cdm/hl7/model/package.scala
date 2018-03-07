@@ -180,6 +180,7 @@ package object model extends Logg {
     val DELIMITED: OutFormats.Value = Value("DELIMITED")
     val AVRO: OutFormats.Value = Value("AVRO")
     val RAWHL7: OutFormats.Value = Value("RAWHL7")
+    val RAWHL7_JSON: OutFormats.Value = Value("RAWHL7_JSON")
 
   }
 
@@ -394,7 +395,7 @@ package object model extends Logg {
       selectFieldsCriteria.split(COMMA).toList.map {
         x =>
           val temp = x.split(COLON)
-          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "DELETE"))
+          (temp(0).split(AMPERSAND)(0), temp(0).split(AMPERSAND)(1), temp(1), temp(2), tryAndReturnDefaultValue(asFunc(temp(3)), "KEEP"))
       }
     else Nil
 
@@ -424,7 +425,7 @@ package object model extends Logg {
           val split = x.split(COLON)
           val temp = split.splitAt(split.length - 3)
           (temp._1(0).split(AMPERSAND), temp._2(0), temp._2(1),
-            tryAndReturnDefaultValue(asFunc(temp._2(2)), "DELETE"))
+            tryAndReturnDefaultValue(asFunc(temp._2(2)), "KEEP"))
       }
     else Nil
 
