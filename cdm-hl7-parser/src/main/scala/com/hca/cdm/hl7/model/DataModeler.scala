@@ -46,13 +46,14 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 }
                 handleCommonSegments(data, layout)
                 val enrichedData = EnrichCacheManager().getEnRicher(adhoc transformer).applyTransformations(layout, rawHl7)
-               // if(adhoc.outFormat == RAWHL7) {println(EnrichCacheManager().getEnRicher(adhoc transformer))}
                 if (enrichedData.rejects.nonEmpty) enrichedData.rejects.get foreach { rej => out._2 += partialRejectStr -> rej }
                 adhoc.outFormat match {
                   case JSON | DELIMITED =>
                     handleEnrichData(adhoc.outFormat, model, adhoc, enrichedData)(out._2)
                   case RAWHL7 =>
-                  //  if(enrichedData.enrichedHL7.contains("Epic_DBM_STMH_ORU_510586")) println("final out   case RAWHL7 => "+ enrichedData.enrichedHL7)
+                    out._2 += enrichedData.enrichedHL7+ "\r\n" -> null
+                  case RAWHL7_JSON =>
+                    handleEnrichData(adhoc.outFormat, model, adhoc, enrichedData)(out._2)
                     out._2 += enrichedData.enrichedHL7+ "\r\n" -> null
                 }
               }

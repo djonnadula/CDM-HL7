@@ -139,8 +139,8 @@ object Hl7Driver extends App with Logg {
     }
   })
   if (ENV != "PROD") {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
-      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/jvm-dump -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true ")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/jvm-dump -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
   } else {
     sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
       .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")

@@ -24,14 +24,14 @@ trait EnrichData extends Serializable {
 trait EnrichDataFromOffHeap extends EnrichData with Serializable {
 
   protected var enrichDataPartFun: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]] = _
-  protected var partSelectorFun: (String, String, Set[String],Int, String,String) => Map[Int, mutable.Map[String, Array[Byte]]] = _
-  protected var partWriterFun: (Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]) = _
+  protected var partSelectorFun: (String, String, Set[String], Int, String, String) => Map[Int, mutable.Map[String, Array[Byte]]] = _
+  protected var partWriterFun: (Map[String, (String, String, mutable.Map[String, String], Boolean) => Unit]) = _
 
   def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData
 
 
   def init(handlers: ((String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
-    (String, String, Set[String],Int, String,String) => Map[Int, mutable.Map[String, Array[Byte]]], (Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]))): Unit = {
+    (String, String, Set[String], Int, String, String) => Map[Int, mutable.Map[String, Array[Byte]]], (Map[String, (String, String, mutable.Map[String, String], Boolean) => Unit]))): Unit = {
     enrichDataPartFun = handlers._1
     partSelectorFun = handlers._2
     partWriterFun = handlers._3
@@ -164,11 +164,7 @@ private[enrichment] class PatientEnRicher(config: Array[String]) extends EnrichD
 
 private[cdm] case class OffHeapConfig(repo: String, identifier: String, fetchKeyAttributes: Set[String]) extends Logg {
 
-  def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = {
-    val out =fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
-   // println(out + " " + fetchKeyAttributes + " " + layout)
-    out
-  }
+  def fetchKey(layout: mutable.LinkedHashMap[String, String]): String = fetchKeyAttributes.foldLeft(EMPTYSTR)((a, b) => a + layout.getOrElse(b, EMPTYSTR))
 
 
 }
