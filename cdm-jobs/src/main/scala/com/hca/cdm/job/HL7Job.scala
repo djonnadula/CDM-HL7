@@ -587,6 +587,7 @@ object HL7Job extends Logg with App {
         val from = LocalDate.parse(dates substring(0, dates.indexOf("between")))
         val to = LocalDate.parse(dates substring (dates.indexOf("between") + "between".length))
         Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
+        dataDirs.filter(path => !fileSystem.exists(new Path(path)))
       } else if (dates == "*") {
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           info(s"$dirs - ${fs.getPath}")

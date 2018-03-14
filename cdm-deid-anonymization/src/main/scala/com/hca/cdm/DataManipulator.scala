@@ -17,7 +17,7 @@ import org.apache.commons.lang3.text.WordUtils
 import org.joda.time.DateTime
 import scala.collection.concurrent.TrieMap
 import scala.util.{Failure, Success, Try}
-
+import Constants._
 
 /**
   * Created by Devaraj Jonnadula on 1/22/2018.
@@ -54,14 +54,9 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   private var facilities = loadFileAsList(config(4)).map(_._1.trim).map(x => x -> generateRandomFacility(x)).toMap
   private val facilityNames = loadFileAsList(config(4), COMMA, 3).map(_._2.trim).map(x => x -> x.split(" ", -1).map(_.trim).filter(_.length > 3))
   private val hl7_mappings = loadFileAsList(config(5)).map { case (k, v) => v -> k }.toMap
-  private val obsv_value = "obsv_value"
-  private val ssn = "ssn_num_patient"
-  private val identifiers = Set("medical_record_num", "medical_record_urn", "patient_account_num").map(x => x -> x).toMap
-  private val patientState = "patient_address|state_or_province"
-  private val phoneNums = Map("phone_num_home|area_city_code" -> EMPTYSTR, "phone_num_home|local_num" -> EMPTYSTR, "phone_num|area_city_code" -> EMPTYSTR, "phone_num|local_num" -> EMPTYSTR)
+  private val phoneNums = dataOperators.filter(x => x._1.contains(cityCode)).map(x => x._1 -> x._2)
   private lazy val fac = getFac
   private val lock = new Object
-  private val dummyFac = "NOFAC"
   private lazy val randomIdentifiers = lock.synchronized {
     partSelectorFun(randomCfg.repo, randomCfg.identifier, identifiers.keySet, 15000, fac._1, fac._2).map { case (ind, store) => ind -> store.map { case (k, v) => hl7_mappings.getOrElse(k, k) -> new String(v, UTF8) } }
   }
@@ -80,8 +75,8 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     val deIdentified = enrichData(deIdCfg.repo, deIdCfg.identifier, deIdCfg.fetchKey(org), deIdFields).map { case (k, v) => k -> new String(v, UTF8) }
     var hl7Mod = hl7
     var obs_note = layout.getOrElse(obsv_value, EMPTYSTR)
-    val facility = layout.getOrElse("sending_facility", EMPTYSTR)
-    val messageControlId = layout.getOrElse("message_control_id", EMPTYSTR)
+    val facility = layout.getOrElse(sendingFac, EMPTYSTR)
+    val messageControlId = layout.getOrElse(controlId, EMPTYSTR)
     if (!facilities.isDefinedAt(facility)) facilities = facilities + Pair(facility, generateRandomFacility(facility))
     val sourceSystem = tryAndReturnDefaultValue0(messageControlId.substring(0, messageControlId.indexOf(underScore)), EMPTYSTR)
     identifiers.foreach { case (k, _) =>
@@ -90,6 +85,12 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       hl7Mod = out.hl7
       obs_note = out.notes
     }
+    dataOperators.get(communicationAddress).foreach(op => if (op == ANONYMIZE) {
+      layout update(communicationAddress, EMPTYSTR)
+      val out = common(communicationAddress, org.getOrElse(communicationAddress, EMPTYSTR), layout, EMPTYSTR, facility, sourceSystem, hl7Mod, obs_note)
+      hl7Mod = out.hl7
+      obs_note = out.notes
+    })
     hl7Mod = handleId(messageControlId, facility, hl7Mod, layout, deIdentified)
     if (facility != DOT) obs_note = obs_note.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
     dataOperators.foreach {
@@ -112,11 +113,16 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
               hl7Mod = handleText(hl7Mod, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
               obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
             case DATE =>
-              val modDate = if (enrichField == "date_time_of_birth") {
-                if (deIdentified.isDefinedAt("date_time_of_birth") && deIdentified("date_time_of_birth") != EMPTYSTR) deIdentified("date_time_of_birth")
-                else handleAge(layout(enrichField))
-              } else handleDates(layout(enrichField))
-              layout update(enrichField, modDate)
+              if (enrichField == dob) {
+                if (deIdentified.isDefinedAt(dob) && deIdentified(dob) != EMPTYSTR) layout update(enrichField, deIdentified(dob))
+                else layout update(enrichField, handleAge(layout(enrichField)))
+              } else {
+                val dt = handleDates(layout(enrichField))
+                layout update(enrichField, dt._1)
+                val formattedDt = getAlternateDateFrmt(dt._2)
+                hl7Mod = tryAndReturnDefaultValue0(hl7Mod.replaceAll(formattedDt, EMPTYSTR), hl7Mod)
+                obs_note = tryAndReturnDefaultValue0(obs_note.replaceAll(formattedDt, EMPTYSTR), obs_note)
+              }
               hl7Mod = handleText(hl7Mod, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
               obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
             case NONE =>
@@ -133,7 +139,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       hl7Mod = out.hl7
       obs_note = out.notes
     }
-    phoneNums.foreach { case (num, _) =>
+    phoneNums foreach { case (num, _) =>
       layout update(num, EMPTYSTR)
       hl7Mod = handleText(hl7Mod, num, org.getOrElse(num, EMPTYSTR), layout.getOrElse(num, EMPTYSTR))(facility, sourceSystem)
       obs_note = handleText(obs_note, num, org.getOrElse(num, EMPTYSTR), layout.getOrElse(num, EMPTYSTR))(facility, sourceSystem)
@@ -162,12 +168,12 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   private def handleId(id: String, facility: String, hl7: String, layout: mutable.LinkedHashMap[String, String], deIdentified: mutable.Map[String, String]): String = {
     val random = if (facility == DOT) id.replaceFirst(s"\\$DOT", dummyFac) else id.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
-    if (!deIdentified.isDefinedAt("message_control_id")) deIdentified += "message_control_id" -> random
+    if (!deIdentified.isDefinedAt(controlId)) deIdentified += controlId -> random
     var tempHl7 = hl7
-    layout update("message_control_id", deIdentified("message_control_id"))
-    if (facility == DOT) layout update("sending_facility", dummyFac)
-    else layout update("sending_facility", facilities.getOrElse(facility, dummyFac))
-    tempHl7 = tryAndReturnDefaultValue0(tempHl7 replaceAll(id, layout("message_control_id")), tempHl7)
+    layout update(controlId, deIdentified(controlId))
+    if (facility == DOT) layout update(sendingFac, dummyFac)
+    else layout update(sendingFac, facilities.getOrElse(facility, dummyFac))
+    tempHl7 = tryAndReturnDefaultValue0(tempHl7 replaceAll(id, layout(controlId)), tempHl7)
     if (facility != DOT) tempHl7 = tempHl7.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
     tempHl7
   }
@@ -175,7 +181,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   private def generateRandomFacility(fac: String): String = {
     if (fac == DOT) return dummyFac
     val list = new util.ArrayList[Char]()
-    fac.toCharArray.foreach(x => list.add(x))
+    fac.toCharArray.sorted.reverse.foreach(x => list.add(x))
     Collections.rotate(list, 2)
     Collections.rotate(list, 3)
     Collections.rotate(list, 4)
@@ -288,7 +294,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   private def handleTxtInt(text: String, field: String, data: String, modifyWith: String = EMPTYSTR, delimitedBy: String)(facility: String, sourceSystem: String, length: Int = 2): String = {
     var out = text
-    data.split(delimitedBy, -1).foreach { dt =>
+    data.split(delimitedBy, -1) foreach { dt =>
       if (dt != EMPTYSTR && dt.length > length && dt != "MSH" && dt != "Final" && dt != "LAB" && dt != "lab" && dt != "PAT"
         && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem) {
         out = if (dt.contains("(") || dt.contains(")")) tryAndReturnDefaultValue0(StringUtils.replace(out, dt, modifyWith), out)
@@ -300,7 +306,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
   private def alternateForms(field: String, data: String, modifyWith: String, text: String): String = {
-    if (field.startsWith("patient_name")) {
+    if (field.startsWith(patientName)) {
       var out = text
       out = tryAndReturnDefaultValue0(out.replaceAll(WordUtils.swapCase(data), modifyWith), out)
       out = tryAndReturnDefaultValue0(out.replaceAll(WordUtils.uncapitalize(data), modifyWith), out)
@@ -310,7 +316,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     } else text
   }
 
-  private def handleAge(date: String): String = {
+  private def handleAge(date: String): String = synchronized {
     if (valid(date) && date != EMPTYSTR && StringUtils.isNumeric(date)) {
       val formatter = getFormatter(date)
       val dtm = new org.joda.time.DateTime(formatter.parse(date).getTime)
@@ -323,37 +329,38 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     date
   }
 
-  protected def handleDates(date: String): String = {
+  private def handleDates(date: String): (String, Long) = synchronized {
     if (valid(date) && date != EMPTYSTR) {
       var formatter = getFormatter(date)
       Try(formatter.parse(date).getTime) match {
         case Success(x) =>
-          return formatter.format(alterDate(new org.joda.time.DateTime(x)))
+          return (getFormatter(date).format(alterDate(new org.joda.time.DateTime(x))), x)
         case Failure(_) =>
           def tryAgain = {
-            val dt = tryAndReturnDefaultValue0(date.substring(0, 8), date)
+            val dt = date.substring(0, 8)
             formatter = getFormatter(dt)
             val dat = formatter.parse(dt)
-            tryAndReturnDefaultValue0((formatter.format(new org.joda.time.DateTime(dat.getTime)), dat), date)
+            (getFormatter(dt).format(new org.joda.time.DateTime(dat.getTime)), dat.getTime)
           }
 
-          tryAndReturnDefaultValue0(tryAgain, date)
+          return tryAndReturnDefaultValue0(tryAgain, default = (date, currMillis))
+
       }
     }
-    date
+    (date, currMillis)
   }
 
-  private def getAlternateDateFrmt(date: Date): String = {
-    tryAndReturnDefaultValue0(new SimpleDateFormat(format4).format(date), EMPTYSTR)
+  private def getAlternateDateFrmt(time: Long): String = {
+    tryAndReturnDefaultValue0(new SimpleDateFormat(format4).format(new Date(time)), EMPTYSTR)
   }
 
   private def alterKeywords(text: String): String = {
     var out = alterTxt(text, "DOB", 20)
     out = alterTxt(out, "D.O.B.", 20)
     out = alterTxt(out, "AGE/SX", 18)
-    out = alterTxt(out, "AGE", 6)
-    out = alterTxt(out, "SEX", 6)
-    out = alterTxt(out, "SX", 6)
+    out = alterTxt(out, "AGE", 10)
+    out = alterTxt(out, "SEX", 10)
+    out = alterTxt(out, "SX", 10)
     for (_ <- 0 until 3) {
       out = alterTxt(out, "Signed", 80)
     }
@@ -392,18 +399,33 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   def repos: Set[String] = Set(deIdCfg.repo, randomCfg.repo, orgCfg.repo)
 
-  private[cdm] object Patterns {
-    val onlyNumbersPattern: String => Boolean = "\\d+".r.pattern.matcher(_: String).matches()
-    val format1 = HL7_ORG
-    val format2 = "yyyyMMdd"
-    val format3 = "yyyyMMddHHmmss"
-    val format4 = "MM/dd/yyyy"
-    val format5 = "MM/dd/yy"
-    val format6 = "dd/MM/yyyy"
-    val format7 = "MM/dd/yyyy"
 
-  }
+}
 
+private[cdm] object Patterns {
+  val onlyNumbersPattern: String => Boolean = "\\d+".r.pattern.matcher(_: String).matches()
+  val format1 = HL7_ORG
+  val format2 = "yyyyMMdd"
+  val format3 = "yyyyMMddHHmmss"
+  val format4 = "MM/dd/yyyy"
+  val format5 = "MM/dd/yy"
+  val format6 = "dd/MM/yyyy"
+  val format7 = "MM/dd/yyyy"
+
+}
+
+private[cdm] object Constants {
+  val obsv_value: String = "obsv_value"
+  val ssn: String = "ssn_num_patient"
+  val identifiers: Map[String, String] = Set("medical_record_num", "medical_record_urn", "patient_account_num").map(x => x -> x).toMap
+  val patientState: String = "patient_address|state_or_province"
+  val communicationAddress: String = "phone_num_home|communication_address"
+  val patientName: String = "patient_name"
+  val sendingFac: String = "sending_facility"
+  val controlId: String = "message_control_id"
+  val dob: String = "date_time_of_birth"
+  val dummyFac: String = "NOFAC"
+  val cityCode: String = "area_city_code"
 }
 
 private[cdm] case class Config(private val cfg: String) {
