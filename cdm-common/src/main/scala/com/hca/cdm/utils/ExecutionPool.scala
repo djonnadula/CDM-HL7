@@ -55,7 +55,7 @@ class ExecutionPool extends Logg with PoolExecutor {
     tasksPending
   }
 
-
+  def execute(command: Runnable): Unit = poolContext execute command
 }
 
 private[cdm] class PoolFullHandler extends RejectedExecutionHandler with Logg {
