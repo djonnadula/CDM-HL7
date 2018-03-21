@@ -72,7 +72,7 @@ private[cdm] object LoginRenewer extends Logg {
       info(s"Login successful for ${currUser.getUserName} and credentials ${currUser.getCredentials}")
       setCredentials(currUser)
       return true
-    } else info(s"Login failed for $principal")
+    } else error(s"Login failed for $principal")
     false
   }
 
