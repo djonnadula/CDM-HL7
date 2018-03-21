@@ -57,12 +57,12 @@ package object audit {
     EMPTYSTR
   }
 
-  def segmentsInMsg(segments: Set[String], data: mutable.LinkedHashMap[String, Any]): String = {
+  def segmentsInMsg(segments: Set[String], data: mutable.LinkedHashMap[String, Any], onlyKnownSeg : Boolean = false): String = {
     data.map({ case (k, v) =>
       val seg = k.substring(k.indexOf(DOT) + 1)
-      if (segments contains seg) seg
-      else EMPTYSTR
-    }).filter(_ != EMPTYSTR).toSet mkString caret
+      if (onlyKnownSeg && segments.contains(seg)) seg
+      else seg
+    }).filter(_ != EMPTYSTR) mkString caret
   }
 
 
