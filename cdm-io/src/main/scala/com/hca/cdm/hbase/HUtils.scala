@@ -1,5 +1,6 @@
 package com.hca.cdm.hbase
 
+import java.util.function.Consumer
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.hca.cdm._
@@ -13,6 +14,7 @@ import org.apache.hadoop.hbase.regionserver.BloomType
 import org.apache.hadoop.hbase.util.Bytes._
 import scala.collection.mutable
 import collection.JavaConverters._
+import scala.collection.mutable.ListBuffer
 
 /**
   * Created by Devaraj Jonnadula on 8/23/2017.
@@ -84,6 +86,16 @@ object HUtils extends Logg {
 
   }
 
+  def getRows(table: String, family: String, fetchId: List[String], fetchAttributes: Set[String] = Set.empty[String])(operator: HBaseConnector): Map[String, mutable.Map[String, Array[Byte]]] = {
+    val response = sendGetRequests(fetchId.map(x => getRowRequest(x, family, fetchAttributes)).asJava, operator.getTable(table))
+
+    response.map { case (k, v) =>
+      k -> (if (valid(v) && !v.isEmpty) {
+        v.getFamilyMap(toBytes(family)).asScala.map { case (key, value) => (new String(key, UTF8), value) }
+      } else NO_DATA)
+    }
+  }
+
   def getRandom(table: String, family: String, fetchAttributes: Set[String] = Set.empty[String],
                 maxMessages: Int = 10, keyFrom: String, keyTo: String)(operator: HBaseConnector): Map[Int, mutable.Map[String, Array[Byte]]] = {
     val familyBytes = toBytes(family)
@@ -110,6 +122,27 @@ object HUtils extends Logg {
     out
   }
 
+  def fetchFamilyQualifiers(table: String, familyQualifiers: Map[String, Set[String]])(operator: HBaseConnector): ListBuffer[(Map[String, mutable.Map[String, String]])] = {
+    val families = familyQualifiers.keySet.map(fam => fam -> toBytes(fam)).toMap
+    val scan = new Scan
+    scan.setCacheBlocks(false)
+    scan.setCaching(0)
+    scan.setMaxVersions(1)
+    scan.setScanMetricsEnabled(false)
+      .setId(s"$table-$families")
+    familyQualifiers.foreach { case (fam, qualifiers) => qualifiers.foreach { qualifier => scan.addColumn(families(fam), toBytes(qualifier)) } }
+    val Tab = operator.getTable(table)
+    val res = Tab.getScanner(scan)
+    val out = new ListBuffer[(Map[String, mutable.Map[String, String]])]
+    res.forEach(new Consumer[Result] {
+      def accept(rs: Result): Unit = out += families.map { case (fam, famBy) => fam -> rs.getFamilyMap(famBy).asScala.map { case (k, v) => toStringBinary(k) -> toStringBinary(v) } }
+    })
+    closeResource(res)
+    closeResource(Tab)
+    out
+  }
+
+
   def sendGetRequest(request: Get, table: Table, retry: Boolean = true): Result = {
     var res: Result = null
 
@@ -123,10 +156,15 @@ object HUtils extends Logg {
 
   }
 
+  def sendGetRequests(requests: java.util.List[Get], table: Table): Map[String, Result] = {
+    tryAndGoNextAction0(table.get(requests).map(res => tryAndReturnDefaultValue0(new String(res.getRow, UTF8),EMPTYSTR) -> res).toMap, closeResource(table))
+  }
+
   def getRowRequest(key: String, family: String, attributes: Set[String]): Get = {
     val get = new Get(toBytes(key))
     get.setIsolationLevel(IsolationLevel.READ_UNCOMMITTED)
     get.setId(key)
+    get.setMaxVersions(1)
     val familyBytes = toBytes(family)
     attributes.foreach { case (qualifier) => get.addColumn(familyBytes, toBytes(qualifier)) }
     get

@@ -1,9 +1,11 @@
 package com.hca.cdm.utils
 
+import java.util.concurrent.Executor
+
 /**
   * Created by Devaraj Jonnadula on 9/23/2016.
   */
-trait PoolExecutor {
+trait PoolExecutor extends Executor{
 
   def shutDown(): Unit
 

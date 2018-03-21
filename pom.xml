@@ -71,6 +71,7 @@
         <scala.binary.version>2.10</scala.binary.version>
         <spark.version>1.6.0</spark.version>
         <cdh.version>cdh5.13.1</cdh.version>
+        <cdh.binary.version>5.13.1</cdh.binary.version>
         <kafka.version>0.10.2-kafka-2.2.0</kafka.version>
         <flume.version>1.6.0</flume.version>
         <hive.version>1.1.0</hive.version>
@@ -228,6 +229,13 @@
             <version>${kafka.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.cloudera.api</groupId>
+            <artifactId>cloudera-manager-api</artifactId>
+            <version>${cdh.binary.version}</version>
+        </dependency>
+
         <!--   <dependency>
                <groupId>org.apache.spark</groupId>
                <artifactId>spark-streaming_2.11</artifactId>
