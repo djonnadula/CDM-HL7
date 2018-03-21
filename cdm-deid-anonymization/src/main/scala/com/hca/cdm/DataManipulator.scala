@@ -52,7 +52,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   private val fetchReq = new AtomicBoolean(deIdFields.nonEmpty)
   private val facilityRef = loadFileAsList(config(4)).map(_._1.trim).filter(_.startsWith("C")).toArray
   private var facilities = loadFileAsList(config(4)).map(_._1.trim).map(x => x -> generateRandomFacility(x)).toMap
-  private val facilityNames = loadFileAsList(config(4), COMMA, 3).map(_._2.trim).map(x => x -> x.split(" ", -1).map(_.trim).filter(_.length > 3))
+  private val facilityNames = loadFileAsList(config(4)).map(_._1.trim).map(x => x -> x.split(" ", -1).map(_.trim).filter(_.length > 3).map(x => s" $x "))
   private val hl7_mappings = loadFileAsList(config(5)).map { case (k, v) => v -> k }.toMap
   private val phoneNums = dataOperators.filter(x => x._1.contains(cityCode)).map(x => x._1 -> x._2)
   private lazy val fac = getFac
@@ -91,7 +91,8 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       hl7Mod = out.hl7
       obs_note = out.notes
     })
-    hl7Mod = handleId(messageControlId, facility, hl7Mod, layout, deIdentified)
+    val temp = handleId(messageControlId, facility, hl7Mod, layout, deIdentified)
+    hl7Mod = temp._1
     if (facility != DOT) obs_note = obs_note.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
     dataOperators.foreach {
       case (enrichField, op) =>
@@ -151,6 +152,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     hl7Mod = facilityMod._1
     obs_note = facilityMod._2
     if (layout isDefinedAt obsv_value) layout update(obsv_value, obs_note)
+    layout += controlId -> temp._2
     self.partWriterFun(orgCfg.repo).apply(orgCfg.identifier, orgCfg.fetchKey(org), org, true)
     self.partWriterFun(deIdCfg.repo).apply(deIdCfg.identifier, deIdCfg.fetchKey(org), layout, true)
     EnrichedData(layout, hl7Mod)
@@ -166,16 +168,16 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       , handleText(obs_note, enrichField, org, layout(enrichField))(facility, sourceSystem, length))
   }
 
-  private def handleId(id: String, facility: String, hl7: String, layout: mutable.LinkedHashMap[String, String], deIdentified: mutable.Map[String, String]): String = {
+  private def handleId(id: String, facility: String, hl7: String, layout: mutable.LinkedHashMap[String, String], deIdentified: mutable.Map[String, String]): (String,String) = {
     val random = if (facility == DOT) id.replaceFirst(s"\\$DOT", dummyFac) else id.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
-    if (!deIdentified.isDefinedAt(controlId)) deIdentified += controlId -> random
+    if(deIdentified.isDefinedAt(controlId) && deIdentified(controlId)!= EMPTYSTR)  layout += controlId -> deIdentified(controlId)
+    else  layout += controlId -> random
     var tempHl7 = hl7
-    layout update(controlId, deIdentified(controlId))
     if (facility == DOT) layout update(sendingFac, dummyFac)
     else layout update(sendingFac, facilities.getOrElse(facility, dummyFac))
     tempHl7 = tryAndReturnDefaultValue0(tempHl7 replaceAll(id, layout(controlId)), tempHl7)
     if (facility != DOT) tempHl7 = tempHl7.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
-    tempHl7
+    (tempHl7,layout(controlId))
   }
 
   private def generateRandomFacility(fac: String): String = {
@@ -331,6 +333,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   private def handleDates(date: String): (String, Long) = synchronized {
     if (valid(date) && date != EMPTYSTR) {
+
       var formatter = getFormatter(date)
       Try(formatter.parse(date).getTime) match {
         case Success(x) =>
