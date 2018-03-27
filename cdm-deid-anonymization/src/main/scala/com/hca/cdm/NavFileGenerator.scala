@@ -20,8 +20,6 @@ import com.hca.cdm.utils.ExecutionPool
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
-import scala.concurrent.duration.Duration.{Inf => waitTillTaskCompletes}
-import scala.concurrent.{Await, Future => async}
 
 /**
   * Created by Devaraj Jonnadula on 3/1/2018.
@@ -32,7 +30,6 @@ object NavFileGenerator extends Logg with App {
   configure(currThread.getContextClassLoader.getResource("cdm-log4j.properties"))
   reload(args(0))
   private val deIdCfg = Config(lookUpProp("hl7.did.repo")).getCfg
-  private val orgCfg = Config(lookUpProp("hl7.org.repo")).getCfg
   private val navHeader = new ListBuffer[String]
   private val hl7Mappings = {
     val temp = new mutable.LinkedHashMap[String, DataManipulations.Value]
@@ -66,7 +63,9 @@ object NavFileGenerator extends Logg with App {
     familyQualifiers += deIdCfg.identifier -> deIdCfg.fetchKeyAttributes
     familyQualifiers += orgCfg.identifier -> orgCfg.fetchKeyAttributes
     HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap)(connector).foreach {
-      x =>writeMsg(s"${x(orgCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}$PIPE_DELIMITED_STR${x(deIdCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}", transIdsWriter)
+      x =>
+        if (x(orgCfg.identifier).forall(b => b._2 != EMPTYSTR) && x(deIdCfg.identifier).forall(b => b._2 != EMPTYSTR))
+          writeMsg(s"${x(orgCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}$PIPE_DELIMITED_STR${x(deIdCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}", transIdsWriter)
     }
   }
 
@@ -74,29 +73,22 @@ object NavFileGenerator extends Logg with App {
     writeMsg(navHeader.mkString(PIPE_DELIMITED_STR), navqWriter)
     val in = readFile(lookUpProp("navq.file.in")).getLines().map(readMsg).map(struct => deIdCfg.fetchKey(struct) -> struct).toMap
     val deIdentified = getDeIdData(deIdCfg, in.keys.toList)
-   // println(deIdentified)
     in foreach { case (key, layout) =>
-      //  println(layout)
-    /*  tryAndLogErrorMes({
-        Await result(async {*/
-          if (deIdentified.isDefinedAt(key) && deIdentified(key).nonEmpty) {
-            hl7Mappings.foreach {
-              case (enrichField, op) =>
-                op match {
-                  case DE_ID =>
-                    layout update(enrichField, deIdentified(key).getOrElse(enrichField, EMPTYSTR))
-                  case ANONYMIZE | DEFAULT =>
-                    layout update(enrichField, EMPTYSTR)
-                  case DATE =>
-                    layout update(enrichField, handleDates(layout(enrichField)))
-                  case NONE =>
-                }
+      if (deIdentified.isDefinedAt(key) && deIdentified(key).nonEmpty) {
+        hl7Mappings.foreach {
+          case (enrichField, op) =>
+            op match {
+              case DE_ID =>
+                layout update(enrichField, deIdentified(key).getOrElse(enrichField, EMPTYSTR))
+              case ANONYMIZE | DEFAULT =>
+                layout update(enrichField, EMPTYSTR)
+              case DATE =>
+                layout update(enrichField, handleDates(layout(enrichField)))
+              case NONE =>
             }
-            writeMsg(layout.values.mkString(PIPE_DELIMITED_STR), navqWriter)
-          }
-
-       /* }(ctx.poolContext), waitTillTaskCompletes)*/
-      //}, error(_: Throwable))
+        }
+        writeMsg(layout.values.mkString(PIPE_DELIMITED_STR), navqWriter)
+      }
     }
   }
 
@@ -123,8 +115,8 @@ object NavFileGenerator extends Logg with App {
 
   private def getFormatter(date: String): SimpleDateFormat = {
     val length = date.length
-    if(date contains "/") {
-     return new SimpleDateFormat(format7)
+    if (date contains "/") {
+      return new SimpleDateFormat(format7)
     }
     if (length == 8) new SimpleDateFormat(format2)
     else if (length > 8 && length <= HL7_ORG.length) new SimpleDateFormat(format1)
@@ -138,7 +130,7 @@ object NavFileGenerator extends Logg with App {
 
   private def getDeIdData(cfg: OffHeapConfig, keys: List[String]): Map[String, mutable.Map[String, String]] = {
     HUtils.getRows(cfg.repo, cfg.identifier, keys, deIdFields)(connector).map {
-      case (k, v) => k -> v.map(x => x._1 -> new String(x._2, UTF8))
+      case (k, v) => k -> v.map(x => x._1 -> new String(x._2, UTF8)).filter(_._2 != EMPTYSTR)
     }
   }
 

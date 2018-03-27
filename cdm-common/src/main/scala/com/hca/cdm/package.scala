@@ -96,7 +96,7 @@ package object cdm extends Logg {
       case x: String => x != null
       case x: Traversable[Any] => x != null & x.nonEmpty
       case x: Any => x != null
-      case null => false
+      case null | None => false
     }
 
   }

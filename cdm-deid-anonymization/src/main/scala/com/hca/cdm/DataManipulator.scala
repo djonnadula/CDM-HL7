@@ -18,6 +18,7 @@ import org.joda.time.DateTime
 import scala.collection.concurrent.TrieMap
 import scala.util.{Failure, Success, Try}
 import Constants._
+import org.apache.commons.lang3.math.NumberUtils
 
 /**
   * Created by Devaraj Jonnadula on 1/22/2018.
@@ -332,7 +333,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
   private def handleDates(date: String): (String, Long) = synchronized {
-    if (valid(date) && date != EMPTYSTR) {
+    if (valid(date) && date != EMPTYSTR && NumberUtils.isDigits(date)) {
 
       var formatter = getFormatter(date)
       Try(formatter.parse(date).getTime) match {
@@ -342,8 +343,8 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
           def tryAgain = {
             val dt = date.substring(0, 8)
             formatter = getFormatter(dt)
-            val dat = formatter.parse(dt)
-            (getFormatter(dt).format(new org.joda.time.DateTime(dat.getTime)), dat.getTime)
+            val dat = alterDate(new org.joda.time.DateTime(formatter.parse(dt)))
+            (getFormatter(dt).format(dat), dat.getTime)
           }
 
           return tryAndReturnDefaultValue0(tryAgain, default = (date, currMillis))
