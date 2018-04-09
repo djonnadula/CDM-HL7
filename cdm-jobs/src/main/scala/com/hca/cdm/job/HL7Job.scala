@@ -47,6 +47,7 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.collection.mutable
 import TimeUnit._
+import collection.JavaConverters._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.kfka.util.OffsetManager
 import org.apache.hadoop.io.{Writable, Text}
@@ -594,11 +595,13 @@ object HL7Job extends Logg with App {
         Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
         dataDirs.filter(path => !fileSystem.exists(new Path(path)))
       } else if (dates == "*") {
-        fileSystem.listStatus(new Path(dirs)).foreach { fs =>
-          info(s"$dirs - ${fs.getPath}")
-          dataDirs += s"${fs.getPath}"
+        val list = fileSystem.listFiles(new Path(dirs),true)
+          while(list.hasNext){
+            val file = list.next()
+              info(s"$dirs - ${file.getPath}")
+              dataDirs += s"${file.getPath}"
+          }
         }
-      }
       else dataDirs += s"$dirs$dates"
     }
     if (dateRanges isEmpty) dataDirs += dirs

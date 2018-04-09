@@ -116,6 +116,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
               obs_note = handleText(obs_note, enrichField, org(enrichField), layout(enrichField))(facility, sourceSystem)
             case DATE =>
               if (enrichField == dob) {
+
                 if (deIdentified.isDefinedAt(dob) && deIdentified(dob) != EMPTYSTR) layout update(enrichField, deIdentified(dob))
                 else layout update(enrichField, handleAge(layout(enrichField)))
               } else {

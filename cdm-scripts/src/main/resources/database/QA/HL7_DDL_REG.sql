@@ -1,4 +1,7 @@
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_abs (
+USE hl7_reg;
+
+
+CREATE EXTERNAL TABLE if not exists  hl7_abs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -540,9 +543,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ABS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ABS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_acc (
+CREATE EXTERNAL TABLE if not exists  hl7_acc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -869,9 +872,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ACC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ACC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_add (
+CREATE EXTERNAL TABLE if not exists  hl7_add (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -890,9 +893,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ADD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_adj (
+CREATE EXTERNAL TABLE if not exists  hl7_adj (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -1099,9 +1102,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ADJ';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ADJ';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_aff (
+CREATE EXTERNAL TABLE if not exists  hl7_aff (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -1284,9 +1287,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AFF';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AFF';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_aig (
+CREATE EXTERNAL TABLE if not exists  hl7_aig (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -1494,9 +1497,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AIG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ail (
+CREATE EXTERNAL TABLE if not exists  hl7_ail (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -1694,9 +1697,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AIL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_aip (
+CREATE EXTERNAL TABLE if not exists  hl7_aip (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -1984,9 +1987,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AIP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ais (
+CREATE EXTERNAL TABLE if not exists  hl7_ais (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -2170,9 +2173,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AIS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AIS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_al1 (
+CREATE EXTERNAL TABLE if not exists  hl7_al1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -2288,9 +2291,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AL1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AL1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_apr (
+CREATE EXTERNAL TABLE if not exists  hl7_apr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -2409,9 +2412,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=APR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=APR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_arq (
+CREATE EXTERNAL TABLE if not exists  hl7_arq (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -3186,9 +3189,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARQ';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ARQ';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_arv (
+CREATE EXTERNAL TABLE if not exists  hl7_arv (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -3280,9 +3283,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ARV';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ARV';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_aut (
+CREATE EXTERNAL TABLE if not exists  hl7_aut (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -3895,9 +3898,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=AUT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=AUT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_bhs (
+CREATE EXTERNAL TABLE if not exists  hl7_bhs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -3947,9 +3950,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BHS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BHS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_blc (
+CREATE EXTERNAL TABLE if not exists  hl7_blc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -4015,9 +4018,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BLC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_blg (
+CREATE EXTERNAL TABLE if not exists  hl7_blg (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -4125,9 +4128,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BLG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BLG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_bpo (
+CREATE EXTERNAL TABLE if not exists  hl7_bpo (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -4559,9 +4562,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPO';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BPO';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_bpx (
+CREATE EXTERNAL TABLE if not exists  hl7_bpx (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -5212,9 +5215,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BPX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BPX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_bts (
+CREATE EXTERNAL TABLE if not exists  hl7_bts (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -5235,9 +5238,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BTS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_btx (
+CREATE EXTERNAL TABLE if not exists  hl7_btx (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -5731,9 +5734,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BTX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BTX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_bui (
+CREATE EXTERNAL TABLE if not exists  hl7_bui (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -5895,9 +5898,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=BUI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=BUI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cdm (
+CREATE EXTERNAL TABLE if not exists  hl7_cdm (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -6160,9 +6163,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDM';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CDM';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cdo (
+CREATE EXTERNAL TABLE if not exists  hl7_cdo (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -6232,9 +6235,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CDO';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CDO';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cer (
+CREATE EXTERNAL TABLE if not exists  hl7_cer (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -6746,9 +6749,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CER';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CER';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cm0 (
+CREATE EXTERNAL TABLE if not exists  hl7_cm0 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -7227,9 +7230,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM0';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CM0';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cm1 (
+CREATE EXTERNAL TABLE if not exists  hl7_cm1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -7272,9 +7275,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CM1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cm2 (
+CREATE EXTERNAL TABLE if not exists  hl7_cm2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -7340,9 +7343,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CM2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CM2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cns (
+CREATE EXTERNAL TABLE if not exists  hl7_cns (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -7410,9 +7413,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CNS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CNS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_con (
+CREATE EXTERNAL TABLE if not exists  hl7_con (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -7679,9 +7682,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CON';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CON';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_csp (
+CREATE EXTERNAL TABLE if not exists  hl7_csp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -7747,9 +7750,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CSP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_csr (
+CREATE EXTERNAL TABLE if not exists  hl7_csr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -8299,9 +8302,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CSR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_css (
+CREATE EXTERNAL TABLE if not exists  hl7_css (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -8366,9 +8369,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CSS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CSS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ctd (
+CREATE EXTERNAL TABLE if not exists  hl7_ctd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -8733,9 +8736,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CTD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_cti (
+CREATE EXTERNAL TABLE if not exists  hl7_cti (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -8804,9 +8807,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=CTI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=CTI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_db1 (
+CREATE EXTERNAL TABLE if not exists  hl7_db1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -8916,9 +8919,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DB1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DB1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_dg1 (
+CREATE EXTERNAL TABLE if not exists  hl7_dg1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -9348,9 +9351,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DG1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DG1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_dmi (
+CREATE EXTERNAL TABLE if not exists  hl7_dmi (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -9419,9 +9422,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DMI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DMI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_don (
+CREATE EXTERNAL TABLE if not exists  hl7_don (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -10210,9 +10213,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DON';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DON';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_dps (
+CREATE EXTERNAL TABLE if not exists  hl7_dps (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -10301,9 +10304,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DPS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DPS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_drg (
+CREATE EXTERNAL TABLE if not exists  hl7_drg (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -10842,9 +10845,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DRG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DRG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_dsc (
+CREATE EXTERNAL TABLE if not exists  hl7_dsc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -10864,9 +10867,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DSC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_dsp (
+CREATE EXTERNAL TABLE if not exists  hl7_dsp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -10891,9 +10894,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=DSP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=DSP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ecd (
+CREATE EXTERNAL TABLE if not exists  hl7_ecd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -10987,9 +10990,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ECD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ecr (
+CREATE EXTERNAL TABLE if not exists  hl7_ecr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -11033,9 +11036,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ECR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ECR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_edu (
+CREATE EXTERNAL TABLE if not exists  hl7_edu (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -11290,9 +11293,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EDU';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=EDU';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_eqp (
+CREATE EXTERNAL TABLE if not exists  hl7_eqp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -11337,9 +11340,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=EQP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_equ (
+CREATE EXTERNAL TABLE if not exists  hl7_equ (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -11432,9 +11435,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EQU';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=EQU';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_err (
+CREATE EXTERNAL TABLE if not exists  hl7_err (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -11678,9 +11681,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ERR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ERR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_evn (
+CREATE EXTERNAL TABLE if not exists  hl7_evn (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -11856,9 +11859,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=EVN';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=EVN';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_fac (
+CREATE EXTERNAL TABLE if not exists  hl7_fac (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -12714,9 +12717,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FAC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=FAC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_fhs (
+CREATE EXTERNAL TABLE if not exists  hl7_fhs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -12766,9 +12769,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FHS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=FHS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ft1 (
+CREATE EXTERNAL TABLE if not exists  hl7_ft1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -14029,9 +14032,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FT1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=FT1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_fts (
+CREATE EXTERNAL TABLE if not exists  hl7_fts (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -14051,9 +14054,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=FTS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=FTS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_gol (
+CREATE EXTERNAL TABLE if not exists  hl7_gol (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -14369,9 +14372,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GOL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=GOL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_gp1 (
+CREATE EXTERNAL TABLE if not exists  hl7_gp1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -14512,9 +14515,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=GP1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_gp2 (
+CREATE EXTERNAL TABLE if not exists  hl7_gp2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -14834,9 +14837,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GP2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=GP2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_gt1 (
+CREATE EXTERNAL TABLE if not exists  hl7_gt1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -16529,9 +16532,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=GT1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=GT1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_iam (
+CREATE EXTERNAL TABLE if not exists  hl7_iam (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -17503,9 +17506,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAM';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IAM';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_iar (
+CREATE EXTERNAL TABLE if not exists  hl7_iar (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -17593,9 +17596,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IAR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IAR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_iim (
+CREATE EXTERNAL TABLE if not exists  hl7_iim (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -17806,9 +17809,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IIM';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IIM';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ilt (
+CREATE EXTERNAL TABLE if not exists  hl7_ilt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -17882,9 +17885,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ILT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ILT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_in1 (
+CREATE EXTERNAL TABLE if not exists  hl7_in1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -19439,9 +19442,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IN1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_in2 (
+CREATE EXTERNAL TABLE if not exists  hl7_in2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -21389,9 +21392,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IN2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_in3 (
+CREATE EXTERNAL TABLE if not exists  hl7_in3 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -22348,9 +22351,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IN3';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IN3';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_inv (
+CREATE EXTERNAL TABLE if not exists  hl7_inv (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -22704,9 +22707,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=INV';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=INV';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ipc (
+CREATE EXTERNAL TABLE if not exists  hl7_ipc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -22819,9 +22822,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IPC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ipr (
+CREATE EXTERNAL TABLE if not exists  hl7_ipr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -22911,9 +22914,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IPR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IPR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_isd (
+CREATE EXTERNAL TABLE if not exists  hl7_isd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -22978,9 +22981,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ISD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ISD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_itm (
+CREATE EXTERNAL TABLE if not exists  hl7_itm (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -23601,9 +23604,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ITM';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ITM';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ivc (
+CREATE EXTERNAL TABLE if not exists  hl7_ivc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -24395,9 +24398,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IVC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ivt (
+CREATE EXTERNAL TABLE if not exists  hl7_ivt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -24767,9 +24770,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=IVT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=IVT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_lan (
+CREATE EXTERNAL TABLE if not exists  hl7_lan (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -24857,9 +24860,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LAN';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=LAN';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_lcc (
+CREATE EXTERNAL TABLE if not exists  hl7_lcc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -24983,9 +24986,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=LCC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_lch (
+CREATE EXTERNAL TABLE if not exists  hl7_lch (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -25092,9 +25095,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LCH';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=LCH';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ldp (
+CREATE EXTERNAL TABLE if not exists  hl7_ldp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -25344,9 +25347,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LDP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=LDP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_loc (
+CREATE EXTERNAL TABLE if not exists  hl7_loc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -25725,9 +25728,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LOC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=LOC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_lrl (
+CREATE EXTERNAL TABLE if not exists  hl7_lrl (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -25887,9 +25890,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=LRL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=LRL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_mcp (
+CREATE EXTERNAL TABLE if not exists  hl7_mcp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -25938,9 +25941,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MCP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MCP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_mfa (
+CREATE EXTERNAL TABLE if not exists  hl7_mfa (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -25986,9 +25989,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MFA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_mfe (
+CREATE EXTERNAL TABLE if not exists  hl7_mfe (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26139,9 +26142,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFE';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MFE';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_mfi (
+CREATE EXTERNAL TABLE if not exists  hl7_mfi (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26190,9 +26193,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MFI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MFI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_mrg (
+CREATE EXTERNAL TABLE if not exists  hl7_mrg (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26642,9 +26645,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MRG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MRG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_msa (
+CREATE EXTERNAL TABLE if not exists  hl7_msa (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26692,9 +26695,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MSA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_msh (
+CREATE EXTERNAL TABLE if not exists  hl7_msh (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26907,9 +26910,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=MSH';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=MSH';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_nck (
+CREATE EXTERNAL TABLE if not exists  hl7_nck (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26928,9 +26931,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NCK';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NCK';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_nds (
+CREATE EXTERNAL TABLE if not exists  hl7_nds (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -26996,9 +26999,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NDS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NDS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_nk1 (
+CREATE EXTERNAL TABLE if not exists  hl7_nk1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -28407,9 +28410,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NK1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NK1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_npu (
+CREATE EXTERNAL TABLE if not exists  hl7_npu (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -28487,9 +28490,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NPU';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NPU';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_nsc (
+CREATE EXTERNAL TABLE if not exists  hl7_nsc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -28550,9 +28553,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NSC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NSC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_nst (
+CREATE EXTERNAL TABLE if not exists  hl7_nst (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -28585,9 +28588,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NST';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NST';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_nte (
+CREATE EXTERNAL TABLE if not exists  hl7_nte (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -28770,9 +28773,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=NTE';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=NTE';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_obr (
+CREATE EXTERNAL TABLE if not exists  hl7_obr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -30153,9 +30156,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OBR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_obx (
+CREATE EXTERNAL TABLE if not exists  hl7_obx (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -30877,9 +30880,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OBX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OBX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ods (
+CREATE EXTERNAL TABLE if not exists  hl7_ods (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -30945,9 +30948,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ODS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_odt (
+CREATE EXTERNAL TABLE if not exists  hl7_odt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -31012,9 +31015,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ODT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ODT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om1 (
+CREATE EXTERNAL TABLE if not exists  hl7_om1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -31934,9 +31937,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om2 (
+CREATE EXTERNAL TABLE if not exists  hl7_om2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -32123,9 +32126,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om3 (
+CREATE EXTERNAL TABLE if not exists  hl7_om3 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -32260,9 +32263,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM3';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM3';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om4 (
+CREATE EXTERNAL TABLE if not exists  hl7_om4 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -32484,9 +32487,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM4';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM4';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om5 (
+CREATE EXTERNAL TABLE if not exists  hl7_om5 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -32529,9 +32532,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM5';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM5';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om6 (
+CREATE EXTERNAL TABLE if not exists  hl7_om6 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -32552,9 +32555,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM6';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM6';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_om7 (
+CREATE EXTERNAL TABLE if not exists  hl7_om7 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -32957,9 +32960,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OM7';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OM7';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_omc (
+CREATE EXTERNAL TABLE if not exists  hl7_omc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -33082,9 +33085,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OMC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OMC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_orc (
+CREATE EXTERNAL TABLE if not exists  hl7_orc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -34477,9 +34480,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ORC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_org (
+CREATE EXTERNAL TABLE if not exists  hl7_org (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -34728,9 +34731,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ORG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ORG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ovr (
+CREATE EXTERNAL TABLE if not exists  hl7_ovr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -35050,9 +35053,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=OVR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=OVR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pac (
+CREATE EXTERNAL TABLE if not exists  hl7_pac (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -35178,9 +35181,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PAC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PAC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pce (
+CREATE EXTERNAL TABLE if not exists  hl7_pce (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -35316,9 +35319,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCE';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PCE';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pcr (
+CREATE EXTERNAL TABLE if not exists  hl7_pcr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -35581,9 +35584,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PCR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PCR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pd1 (
+CREATE EXTERNAL TABLE if not exists  hl7_pd1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -36151,9 +36154,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PD1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PD1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pda (
+CREATE EXTERNAL TABLE if not exists  hl7_pda (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -36492,9 +36495,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PDA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pdc (
+CREATE EXTERNAL TABLE if not exists  hl7_pdc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -36679,9 +36682,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PDC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PDC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_peo (
+CREATE EXTERNAL TABLE if not exists  hl7_peo (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -37144,9 +37147,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PEO';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PEO';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pes (
+CREATE EXTERNAL TABLE if not exists  hl7_pes (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -37535,9 +37538,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PES';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PES';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pid (
+CREATE EXTERNAL TABLE if not exists  hl7_pid (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -38708,9 +38711,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PID';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PID';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pkg (
+CREATE EXTERNAL TABLE if not exists  hl7_pkg (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -38862,9 +38865,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PKG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PKG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pm1 (
+CREATE EXTERNAL TABLE if not exists  hl7_pm1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -39300,9 +39303,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PM1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PM1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pmt (
+CREATE EXTERNAL TABLE if not exists  hl7_pmt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -39530,9 +39533,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PMT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PMT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pr1 (
+CREATE EXTERNAL TABLE if not exists  hl7_pr1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -40217,9 +40220,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PR1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PR1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pra (
+CREATE EXTERNAL TABLE if not exists  hl7_pra (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -40442,9 +40445,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PRA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_prb (
+CREATE EXTERNAL TABLE if not exists  hl7_prb (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -40834,9 +40837,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRB';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PRB';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_prc (
+CREATE EXTERNAL TABLE if not exists  hl7_prc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -41062,9 +41065,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PRC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_prd (
+CREATE EXTERNAL TABLE if not exists  hl7_prd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -41722,9 +41725,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PRD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_prt (
+CREATE EXTERNAL TABLE if not exists  hl7_prt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -42302,9 +42305,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PRT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PRT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_psg (
+CREATE EXTERNAL TABLE if not exists  hl7_psg (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -42366,9 +42369,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PSG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_psh (
+CREATE EXTERNAL TABLE if not exists  hl7_psh (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -42472,9 +42475,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSH';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PSH';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_psl (
+CREATE EXTERNAL TABLE if not exists  hl7_psl (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -43368,9 +43371,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PSL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pss (
+CREATE EXTERNAL TABLE if not exists  hl7_pss (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -43431,9 +43434,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PSS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PSS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pth (
+CREATE EXTERNAL TABLE if not exists  hl7_pth (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -43528,9 +43531,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PTH';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PTH';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pv1 (
+CREATE EXTERNAL TABLE if not exists  hl7_pv1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -45261,9 +45264,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PV1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pv2 (
+CREATE EXTERNAL TABLE if not exists  hl7_pv2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -45993,9 +45996,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PV2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PV2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_pye (
+CREATE EXTERNAL TABLE if not exists  hl7_pye (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46288,9 +46291,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=PYE';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=PYE';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_qak (
+CREATE EXTERNAL TABLE if not exists  hl7_qak (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46336,9 +46339,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QAK';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=QAK';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_qid (
+CREATE EXTERNAL TABLE if not exists  hl7_qid (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46380,9 +46383,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QID';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=QID';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_qpd (
+CREATE EXTERNAL TABLE if not exists  hl7_qpd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46425,9 +46428,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QPD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=QPD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_qrd (
+CREATE EXTERNAL TABLE if not exists  hl7_qrd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46673,9 +46676,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=QRD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_qrf (
+CREATE EXTERNAL TABLE if not exists  hl7_qrf (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46751,9 +46754,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRF';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=QRF';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_qri (
+CREATE EXTERNAL TABLE if not exists  hl7_qri (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46818,9 +46821,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=QRI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=QRI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rcp (
+CREATE EXTERNAL TABLE if not exists  hl7_rcp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46893,9 +46896,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RCP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RCP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rdf (
+CREATE EXTERNAL TABLE if not exists  hl7_rdf (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46918,9 +46921,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDF';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RDF';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rdt (
+CREATE EXTERNAL TABLE if not exists  hl7_rdt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -46939,9 +46942,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RDT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RDT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rel (
+CREATE EXTERNAL TABLE if not exists  hl7_rel (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -47391,9 +47394,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=REL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=REL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rf1 (
+CREATE EXTERNAL TABLE if not exists  hl7_rf1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -47906,9 +47909,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RF1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RF1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rfi (
+CREATE EXTERNAL TABLE if not exists  hl7_rfi (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -47930,9 +47933,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RFI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RFI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rgs (
+CREATE EXTERNAL TABLE if not exists  hl7_rgs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -47975,9 +47978,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RGS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RGS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rmi (
+CREATE EXTERNAL TABLE if not exists  hl7_rmi (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -48042,9 +48045,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RMI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RMI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rol (
+CREATE EXTERNAL TABLE if not exists  hl7_rol (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -48580,9 +48583,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ROL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ROL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rq1 (
+CREATE EXTERNAL TABLE if not exists  hl7_rq1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -48651,9 +48654,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQ1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RQ1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rqd (
+CREATE EXTERNAL TABLE if not exists  hl7_rqd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -48875,9 +48878,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RQD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RQD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxa (
+CREATE EXTERNAL TABLE if not exists  hl7_rxa (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -49457,9 +49460,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxc (
+CREATE EXTERNAL TABLE if not exists  hl7_rxc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -49620,9 +49623,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxd (
+CREATE EXTERNAL TABLE if not exists  hl7_rxd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -50346,9 +50349,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxe (
+CREATE EXTERNAL TABLE if not exists  hl7_rxe (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -51453,9 +51456,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXE';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXE';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxg (
+CREATE EXTERNAL TABLE if not exists  hl7_rxg (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -52139,9 +52142,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXG';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXG';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxo (
+CREATE EXTERNAL TABLE if not exists  hl7_rxo (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -53153,9 +53156,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXO';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXO';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxr (
+CREATE EXTERNAL TABLE if not exists  hl7_rxr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -53311,9 +53314,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_rxv (
+CREATE EXTERNAL TABLE if not exists  hl7_rxv (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -53599,9 +53602,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=RXV';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=RXV';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sac (
+CREATE EXTERNAL TABLE if not exists  hl7_sac (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -54287,9 +54290,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SAC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SAC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_scd (
+CREATE EXTERNAL TABLE if not exists  hl7_scd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -55312,9 +55315,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SCD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sch (
+CREATE EXTERNAL TABLE if not exists  hl7_sch (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -56538,9 +56541,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCH';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SCH';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_scp (
+CREATE EXTERNAL TABLE if not exists  hl7_scp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -56658,9 +56661,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SCP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SCP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sdd (
+CREATE EXTERNAL TABLE if not exists  hl7_sdd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -56737,9 +56740,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SDD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SDD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sft (
+CREATE EXTERNAL TABLE if not exists  hl7_sft (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -56802,9 +56805,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SFT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SFT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sgh (
+CREATE EXTERNAL TABLE if not exists  hl7_sgh (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -56824,9 +56827,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGH';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SGH';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sgt (
+CREATE EXTERNAL TABLE if not exists  hl7_sgt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -56846,9 +56849,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SGT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SGT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_shp (
+CREATE EXTERNAL TABLE if not exists  hl7_shp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -57018,9 +57021,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SHP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SHP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_sid (
+CREATE EXTERNAL TABLE if not exists  hl7_sid (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -57086,9 +57089,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SID';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SID';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_slt (
+CREATE EXTERNAL TABLE if not exists  hl7_slt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -57123,9 +57126,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SLT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SLT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_spm (
+CREATE EXTERNAL TABLE if not exists  hl7_spm (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -57750,9 +57753,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=SPM';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=SPM';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_stf (
+CREATE EXTERNAL TABLE if not exists  hl7_stf (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -58613,9 +58616,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STF';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=STF';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_stz (
+CREATE EXTERNAL TABLE if not exists  hl7_stz (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -58725,9 +58728,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=STZ';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=STZ';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_tcc (
+CREATE EXTERNAL TABLE if not exists  hl7_tcc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -59012,9 +59015,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=TCC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_tcd (
+CREATE EXTERNAL TABLE if not exists  hl7_tcd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -59100,9 +59103,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TCD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=TCD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_tq1 (
+CREATE EXTERNAL TABLE if not exists  hl7_tq1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -59331,9 +59334,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=TQ1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_tq2 (
+CREATE EXTERNAL TABLE if not exists  hl7_tq2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -59397,9 +59400,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TQ2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=TQ2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_txa (
+CREATE EXTERNAL TABLE if not exists  hl7_txa (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -60260,9 +60263,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=TXA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=TXA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_uac (
+CREATE EXTERNAL TABLE if not exists  hl7_uac (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -60313,9 +60316,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UAC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=UAC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ub1 (
+CREATE EXTERNAL TABLE if not exists  hl7_ub1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -60496,9 +60499,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=UB1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ub2 (
+CREATE EXTERNAL TABLE if not exists  hl7_ub2 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -60654,9 +60657,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=UB2';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=UB2';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_urd (
+CREATE EXTERNAL TABLE if not exists  hl7_urd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -60851,9 +60854,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=URD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_urs (
+CREATE EXTERNAL TABLE if not exists  hl7_urs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -60928,9 +60931,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=URS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=URS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_var (
+CREATE EXTERNAL TABLE if not exists  hl7_var (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61106,9 +61109,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VAR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=VAR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_vnd (
+CREATE EXTERNAL TABLE if not exists  hl7_vnd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61161,9 +61164,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=VND';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=VND';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zai (
+CREATE EXTERNAL TABLE if not exists  hl7_zai (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61192,9 +61195,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZAI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zao (
+CREATE EXTERNAL TABLE if not exists  hl7_zao (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61229,9 +61232,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAO';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZAO';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zap (
+CREATE EXTERNAL TABLE if not exists  hl7_zap (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61259,9 +61262,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZAP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZAP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zbt (
+CREATE EXTERNAL TABLE if not exists  hl7_zbt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61282,9 +61285,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZBT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZBT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zcd (
+CREATE EXTERNAL TABLE if not exists  hl7_zcd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61307,9 +61310,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zcl (
+CREATE EXTERNAL TABLE if not exists  hl7_zcl (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61339,9 +61342,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCL';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCL';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zcn (
+CREATE EXTERNAL TABLE if not exists  hl7_zcn (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61363,9 +61366,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCN';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCN';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zcp (
+CREATE EXTERNAL TABLE if not exists  hl7_zcp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61393,9 +61396,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zcs (
+CREATE EXTERNAL TABLE if not exists  hl7_zcs (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61424,9 +61427,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zct (
+CREATE EXTERNAL TABLE if not exists  hl7_zct (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61464,9 +61467,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zcx (
+CREATE EXTERNAL TABLE if not exists  hl7_zcx (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61489,9 +61492,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZCX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZCX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zds (
+CREATE EXTERNAL TABLE if not exists  hl7_zds (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61514,9 +61517,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZDS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zdt (
+CREATE EXTERNAL TABLE if not exists  hl7_zdt (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61551,9 +61554,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZDT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zdu (
+CREATE EXTERNAL TABLE if not exists  hl7_zdu (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61579,9 +61582,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDU';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZDU';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zdv (
+CREATE EXTERNAL TABLE if not exists  hl7_zdv (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61606,9 +61609,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZDV';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZDV';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ze1 (
+CREATE EXTERNAL TABLE if not exists  hl7_ze1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61633,9 +61636,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZE1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZE1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zeq (
+CREATE EXTERNAL TABLE if not exists  hl7_zeq (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61657,9 +61660,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEQ';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZEQ';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zer (
+CREATE EXTERNAL TABLE if not exists  hl7_zer (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61728,9 +61731,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZER';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZER';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zex (
+CREATE EXTERNAL TABLE if not exists  hl7_zex (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61750,9 +61753,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZEX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZEX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zg1 (
+CREATE EXTERNAL TABLE if not exists  hl7_zg1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61774,9 +61777,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZG1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZG1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zid (
+CREATE EXTERNAL TABLE if not exists  hl7_zid (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61796,9 +61799,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZID';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZID';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zif (
+CREATE EXTERNAL TABLE if not exists  hl7_zif (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61824,9 +61827,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIF';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZIF';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zin (
+CREATE EXTERNAL TABLE if not exists  hl7_zin (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61884,9 +61887,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIN';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZIN';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zip (
+CREATE EXTERNAL TABLE if not exists  hl7_zip (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61923,9 +61926,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZIP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zit (
+CREATE EXTERNAL TABLE if not exists  hl7_zit (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61957,9 +61960,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIT';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZIT';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ziv (
+CREATE EXTERNAL TABLE if not exists  hl7_ziv (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -61995,9 +61998,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZIV';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZIV';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zm0 (
+CREATE EXTERNAL TABLE if not exists  hl7_zm0 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62029,9 +62032,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM0';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZM0';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zm1 (
+CREATE EXTERNAL TABLE if not exists  hl7_zm1 (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62085,9 +62088,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZM1';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZM1';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zmn (
+CREATE EXTERNAL TABLE if not exists  hl7_zmn (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62107,9 +62110,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMN';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZMN';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zmp (
+CREATE EXTERNAL TABLE if not exists  hl7_zmp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62224,9 +62227,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZMP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zmr (
+CREATE EXTERNAL TABLE if not exists  hl7_zmr (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62246,9 +62249,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZMR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZMR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zou (
+CREATE EXTERNAL TABLE if not exists  hl7_zou (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62278,9 +62281,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZOU';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZOU';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zpa (
+CREATE EXTERNAL TABLE if not exists  hl7_zpa (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62307,9 +62310,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPA';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPA';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zpd (
+CREATE EXTERNAL TABLE if not exists  hl7_zpd (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62336,9 +62339,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPD';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPD';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zpe (
+CREATE EXTERNAL TABLE if not exists  hl7_zpe (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62363,9 +62366,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPE';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPE';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zpo (
+CREATE EXTERNAL TABLE if not exists  hl7_zpo (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62392,9 +62395,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPO';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPO';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zpp (
+CREATE EXTERNAL TABLE if not exists  hl7_zpp (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62428,9 +62431,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPP';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPP';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zps (
+CREATE EXTERNAL TABLE if not exists  hl7_zps (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62452,9 +62455,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPS';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPS';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zpv (
+CREATE EXTERNAL TABLE if not exists  hl7_zpv (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62508,9 +62511,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZPV';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZPV';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zrq (
+CREATE EXTERNAL TABLE if not exists  hl7_zrq (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62533,9 +62536,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRQ';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZRQ';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zrx (
+CREATE EXTERNAL TABLE if not exists  hl7_zrx (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62577,9 +62580,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZRX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZRX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zsc (
+CREATE EXTERNAL TABLE if not exists  hl7_zsc (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62604,9 +62607,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSC';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZSC';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zsi (
+CREATE EXTERNAL TABLE if not exists  hl7_zsi (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62627,9 +62630,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSI';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZSI';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zst (
+CREATE EXTERNAL TABLE if not exists  hl7_zst (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62661,9 +62664,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZST';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZST';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zsu (
+CREATE EXTERNAL TABLE if not exists  hl7_zsu (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62683,9 +62686,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZSU';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZSU';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ztf (
+CREATE EXTERNAL TABLE if not exists  hl7_ztf (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62715,9 +62718,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTF';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZTF';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ztm (
+CREATE EXTERNAL TABLE if not exists  hl7_ztm (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62867,9 +62870,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTM';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZTM';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_ztx (
+CREATE EXTERNAL TABLE if not exists  hl7_ztx (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62890,9 +62893,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZTX';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZTX';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zur (
+CREATE EXTERNAL TABLE if not exists  hl7_zur (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62912,9 +62915,9 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZUR';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZUR';
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_zvn (
+CREATE EXTERNAL TABLE if not exists  hl7_zvn (
 	etl_firstinsert_datetime STRING,
 	field_sequence_num STRING,
 	sending_facility STRING,
@@ -62938,11 +62941,10 @@ COMMENT 'Update Time: 2017-07-19 14:18:19 | Reason: EBA-805: 2.8.2 template upda
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=SEGMENTS/hl7_segment=ZVN';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=SEGMENTS/hl7_segment=ZVN';
 
 
-
-CREATE EXTERNAL TABLE if not exists  cdm_scri.scri_patient_id_history(
+CREATE EXTERNAL TABLE if not exists  scri_patient_id_history(
   msh_msg_control_id STRING COMMENT 'Unique id for the message provided by the source clinical system and BizTalk.',
   msh_sending_facility STRING COMMENT 'Mnemonic that is associated to the sending facility of the message',
   pid_medical_record_num STRING COMMENT 'MRN associated to the message',
@@ -62994,11 +62996,11 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/cdm_scri/landing_zone=ADHOC-SCRIPATIDHIST-DELIMITED';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7_reg/landing_zone=ADHOC-SCRIPATIDHIST-DELIMITED';
 
 
 
-CREATE EXTERNAL TABLE if not exists  cdm_scri.cdm_synthesys_patientid_results (
+CREATE EXTERNAL TABLE if not exists  cdm_synthesys_patientid_results (
  unique_message_id STRING,
    facility_mnemonic STRING,
    patient_account_number STRING,
@@ -63052,20 +63054,20 @@ CREATE EXTERNAL TABLE if not exists  cdm_scri.cdm_synthesys_patientid_results (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/cdm_scri/cdm_synthesys_patientid_results/landing_zone=valid';
+LOCATION '/user/hive/warehouse/hl7_reg/cdm_synthesys_patientid_results/landing_zone=valid';
 
 
-CREATE EXTERNAL TABLE if not exists  cdm_scri.cdm_synthesys_patientid_results_rejected (
+CREATE EXTERNAL TABLE if not exists  cdm_synthesys_patientid_results_rejected (
  msg STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/cdm_scri/cdm_synthesys_patientid_results/landing_zone=rejected';
+LOCATION '/user/hive/warehouse/hl7_reg/cdm_synthesys_patientid_results/landing_zone=rejected';
 
 
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_audit_data (
+CREATE EXTERNAL TABLE if not exists  hl7_audit_data (
 	process_name STRING,
 	msg_control_id STRING,
 	msg_create_date_time STRING,
@@ -63081,11 +63083,11 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=AUDIT';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7_reg/landing_zone=AUDIT';
 
 
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_json_data(
+CREATE EXTERNAL TABLE if not exists  hl7_json_data(
 	json_data STRING
 )
 PARTITIONED BY (
@@ -63093,11 +63095,11 @@ PARTITIONED BY (
 	transaction_date String
 )
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7/landing_zone=JSON';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7_reg/landing_zone=JSON';
 
 
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_raw_data (
+CREATE EXTERNAL TABLE if not exists  hl7_raw_data (
 	msg_data STRING
 )
 PARTITIONED BY (
@@ -63105,10 +63107,10 @@ PARTITIONED BY (
 	transaction_date STRING
 )
 STORED AS SEQUENCEFILE
-LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7.db/dev/landing_zone=RAW';
+LOCATION 'hdfs://nameservice1/user/hive/warehouse/hl7_reg/landing_zone=RAW';
 
 
-CREATE EXTERNAL TABLE if not exists  if not exists hl7.hl7_avis(
+CREATE EXTERNAL TABLE if not exists  if not exists hl7_avis(
 sending_facility String,
 sending_application String,
 patient_mrn String,
@@ -63183,13 +63185,13 @@ PARTITIONED BY (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '|'
 STORED AS SEQUENCEFILE
-LOCATION '/user/hive/warehouse/hl7/landing_zone=ADHOC-AVIS-DELIMITED';
+LOCATION '/user/hive/warehouse/hl7_reg/landing_zone=ADHOC-AVIS-DELIMITED';
 
 
-Drop Table if exists hl7.hl7_avis_staging PURGE;
+Drop Table if exists hl7_avis_staging PURGE;
 
 
-CREATE EXTERNAL TABLE if not exists  hl7.hl7_avis_staging(
+CREATE EXTERNAL TABLE if not exists  hl7_avis_staging(
 sending_facility String,
 sending_application String,
 patient_mrn String,
