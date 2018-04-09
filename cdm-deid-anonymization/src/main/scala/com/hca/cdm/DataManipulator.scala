@@ -216,7 +216,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       if (org == EMPTYSTR) layout update(field, org)
       else {
         val temp = handleIdentifiers(modifyWith)
-        if (temp == EMPTYSTR) layout update(field, "123456789")
+        if (temp == EMPTYSTR && org != EMPTYSTR) layout update(field, "123456789")
         else layout update(field, temp)
       }
       /* if (org != EMPTYSTR) layout update(field, handleIdentifiers(org))
@@ -320,7 +320,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
   private def handleAge(date: String): String = synchronized {
-    if (valid(date) && date != EMPTYSTR && StringUtils.isNumeric(date)) {
+    if (valid(date) && date != EMPTYSTR ) {
       val formatter = getFormatter(date)
       val dtm = new org.joda.time.DateTime(formatter.parse(date).getTime)
       if (new DateTime().year().get() - dtm.year().get() > 89) {
@@ -333,7 +333,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
   private def handleDates(date: String): (String, Long) = synchronized {
-    if (valid(date) && date != EMPTYSTR && NumberUtils.isDigits(date)) {
+    if (valid(date) && date != EMPTYSTR ) {
 
       var formatter = getFormatter(date)
       Try(formatter.parse(date).getTime) match {

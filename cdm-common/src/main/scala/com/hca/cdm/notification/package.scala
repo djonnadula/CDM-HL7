@@ -10,7 +10,7 @@ import scala.language.postfixOps
   *
   * Sends Emails as per Config
   */
-package object notification extends  Logg{
+package object notification extends Logg {
 
 
   private lazy val SMTP_HOST = lookUpProp("smtp.host")
@@ -20,9 +20,9 @@ package object notification extends  Logg{
 
   object TaskState extends Enumeration {
     type taskState = Value
-    val CRITICAL = Value("CRITICAL")
-    val WARNING = Value("WARNING")
-    val NORMAL = Value("NORMAL")
+    val CRITICAL: Value = Value("CRITICAL")
+    val WARNING: Value = Value("WARNING")
+    val NORMAL: Value = Value("NORMAL")
 
   }
 

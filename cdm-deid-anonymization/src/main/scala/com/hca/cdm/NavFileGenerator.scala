@@ -41,7 +41,6 @@ object NavFileGenerator extends Logg with App {
   }
   private val outBound = hl7Mappings.zipWithIndex.map { case (k, idx) => idx -> (k._1, EMPTYSTR) }
   private val deIdFields = hl7Mappings.filter(_._2 == DE_ID).keySet.toSet
-  private val ctx = new ExecutionPool
   private val config = HadoopConfig.loadConfig(tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
   LoginRenewer.loginFromKeyTab(lookUpProp("keytab"), lookUpProp("principal"), Some(config))
   private val connector = HBaseConnector(config, lookUpProp("cdm.hl7.hbase.namespace"))

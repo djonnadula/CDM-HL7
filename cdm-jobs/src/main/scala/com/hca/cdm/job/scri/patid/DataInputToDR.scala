@@ -1,3 +1,4 @@
+
 package com.hca.cdm.job.scri.patid
 
 import com.hca.cdm._
@@ -12,16 +13,16 @@ object DataInputToDR extends App with Logg {
   self =>
 
   reload(args(0))
-  private val destTopic = lookUpProp("patid.dr.in")
+  private val destTopic = lookUpProp("patid.dr.in.topic")
   private val writer = KProducer()(producerConf())
   private var msgCntr = 0L
   registerHook(newThread(s"SHook-${self.getClass.getSimpleName}${lookUpProp("app")}", runnable({
     shutDown()
     info(s"$self shutdown hook completed")
   })))
-  readFile(lookUpProp("navq.file.in")).getLines().foreach { msg =>
+  readFile(lookUpProp("patid.dr.in")).getLines().foreach { msg =>
     msgCntr = inc(msgCntr)
-    writer.writeData(msg, None, destTopic)
+    writer.writeData(msg, null, destTopic)
   }
 
 
@@ -32,3 +33,4 @@ object DataInputToDR extends App with Logg {
   }
 
 }
+
