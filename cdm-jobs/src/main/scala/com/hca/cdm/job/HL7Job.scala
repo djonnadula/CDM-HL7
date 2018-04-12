@@ -47,7 +47,6 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.collection.mutable
 import TimeUnit._
-import collection.JavaConverters._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.kfka.util.OffsetManager
 import org.apache.hadoop.io.{Writable, Text}
@@ -587,25 +586,26 @@ object HL7Job extends Logg with App {
       if (dates contains "between") {
         val from = LocalDate.parse(dates substring(0, dates.indexOf("between")))
         val to = LocalDate.parse(dates substring (dates.indexOf("between") + "between".length))
-        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
-        dataDirs.filter(path => !fileSystem.exists(new Path(path)))
+        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach{Dt =>
+          info(s"$dirs$Dt")
+          dataDirs += s"$dirs$Dt"}
       }else if (dates contains "greaterThan") {
         val from = LocalDate.parse(dates substring(dates.indexOf("greaterThan")+ "greaterThan".length))
         val to = LocalDate.now()
-        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach(Dt => dataDirs += s"$dirs$Dt")
-        dataDirs.filter(path => !fileSystem.exists(new Path(path)))
+        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach{Dt =>
+          info(s"$dirs$Dt")
+          info(s"${fileSystem.exists(new Path(s"$dirs$Dt"))}")
+          dataDirs += s"$dirs$Dt"}
       } else if (dates == "*") {
-        val list = fileSystem.listFiles(new Path(dirs),true)
-          while(list.hasNext){
-            val file = list.next()
-              info(s"$dirs - ${file.getPath}")
-              dataDirs += s"${file.getPath}"
-          }
+        fileSystem.listStatus(new Path(dirs)).foreach { fs =>
+          info(s"$dirs - ${fs.getPath}")
+          dataDirs += s"${fs.getPath}"
         }
+      }
       else dataDirs += s"$dirs$dates"
     }
     if (dateRanges isEmpty) dataDirs += dirs
-    dataDirs
+    dataDirs.filter(path => fileSystem.exists(new Path(path)))
   }
 
   private def isCheckPointEnabled: Boolean = {
