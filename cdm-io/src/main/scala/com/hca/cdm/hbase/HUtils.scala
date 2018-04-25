@@ -7,7 +7,7 @@ import com.hca.cdm._
 import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.RetryHandler
 import org.apache.hadoop.hbase.client._
-import org.apache.hadoop.hbase.filter.{PageFilter, RandomRowFilter}
+import org.apache.hadoop.hbase.filter.{ColumnPaginationFilter, PageFilter}
 import org.apache.hadoop.hbase.{HColumnDescriptor, KeepDeletedCells}
 import org.apache.hadoop.hbase.io.compress.Compression
 import org.apache.hadoop.hbase.regionserver.BloomType
@@ -59,14 +59,11 @@ object HUtils extends Logg {
 
   def sendRequestFromJson(operator: BatchOperator)(family: String, key: String, jsonData: String, filter: Boolean = true): Unit = {
     val jsonKV = mapper(jsonData)
-    // val key = keys.foldLeft(EMPTYSTR)((a, b) => a + jsonKV.getOrElse(b, EMPTYSTR))
-    // keys foreach jsonKV.remove
     if (filter) filterData(jsonKV)
     operator mutate addRowRequest(key, family, jsonKV)
   }
 
   def sendRequest(operator: BatchOperator)(family: String, key: String, kv: mutable.Map[String, String], filter: Boolean = true): Unit = {
-    // val key = keys.foldLeft(EMPTYSTR)((a, b) => a + kv.getOrElse(b, EMPTYSTR))
     if (filter) filterData(kv)
     operator mutate addRowRequest(key, family, kv)
   }
@@ -122,7 +119,7 @@ object HUtils extends Logg {
     out
   }
 
-  def fetchFamilyQualifiers(table: String, familyQualifiers: Map[String, Set[String]])(operator: HBaseConnector): ListBuffer[(Map[String, mutable.Map[String, String]])] = {
+  def fetchFamilyQualifiers(table: String, familyQualifiers: Map[String, Set[String]], limit: Int = -1, offset: Int = -1)(operator: HBaseConnector): ListBuffer[(Map[String, mutable.Map[String, String]])] = {
     val families = familyQualifiers.keySet.map(fam => fam -> toBytes(fam)).toMap
     val scan = new Scan
     scan.setCacheBlocks(false)
@@ -130,6 +127,7 @@ object HUtils extends Logg {
     scan.setMaxVersions(1)
     scan.setScanMetricsEnabled(false)
       .setId(s"$table-$families")
+    if (limit > 0 && offset > 0) scan.setFilter(new ColumnPaginationFilter(limit, offset))
     familyQualifiers.foreach { case (fam, qualifiers) => qualifiers.foreach { qualifier => scan.addColumn(families(fam), toBytes(qualifier)) } }
     val Tab = operator.getTable(table)
     val res = Tab.getScanner(scan)
@@ -157,7 +155,7 @@ object HUtils extends Logg {
   }
 
   def sendGetRequests(requests: java.util.List[Get], table: Table): Map[String, Result] = {
-    tryAndGoNextAction0(table.get(requests).map(res => tryAndReturnDefaultValue0(new String(res.getRow, UTF8),EMPTYSTR) -> res).toMap, closeResource(table))
+    tryAndGoNextAction0(table.get(requests).map(res => tryAndReturnDefaultValue0(new String(res.getRow, UTF8), EMPTYSTR) -> res).toMap, closeResource(table))
   }
 
   def getRowRequest(key: String, family: String, attributes: Set[String]): Get = {

@@ -14,7 +14,8 @@ import com.hca.cdm.log.Logg
 import com.hca.cdm.utils.DateUtil.{currentTimeStamp => timeStamp}
 import scala.collection.mutable.{LinkedHashMap, Set}
 import scala.language.postfixOps
-
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
 /**
   * Created by Devaraj Jonnadula on 8/18/2016.
   *
@@ -27,7 +28,8 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
   private lazy val segmentDoesntExist = Hl7SegmentTrans(Right(NA))
   private lazy val filtered = new LinkedHashMap[String, Throwable] += (filteredStr -> null)
   private lazy val toJson = new ObjectMapper().registerModule(DefaultScalaModule).writer.writeValueAsString(_)
-
+  lazy val kafkaOut = KProducer()(producerConf())
+  lazy val hl7JsonIO = kafkaOut.writeData(_: String,"", lookUpProp("de-id.raw"))(4194304,null)
   def applyModel(whichSeg: String, model: Model)(data: mapType, rawHl7: String): Hl7SegmentTrans = {
     val modelFilter: Map[String, Set[String]] = model.modelFilter
     if (reqMsgType != IPLORU && reqMsgType != ORMORDERS && reqMsgType != IPLORDERS && reqMsgType != VENTORU && !isRequiredType(data, reqMsgType)) return notValid
@@ -50,6 +52,7 @@ private[model] class DataModeler(private val reqMsgType: HL7, private val timeSt
                 adhoc.outFormat match {
                   case JSON | DELIMITED =>
                     handleEnrichData(adhoc.outFormat, model, adhoc, enrichedData)(out._2)
+                    hl7JsonIO(enrichedData.enrichedHL7)
                   case RAWHL7 =>
                     out._2 += enrichedData.enrichedHL7+ "\r\n" -> null
                   case RAWHL7_JSON =>

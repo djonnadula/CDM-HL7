@@ -49,7 +49,7 @@ import scala.collection.mutable
 import TimeUnit._
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.kfka.util.OffsetManager
-import org.apache.hadoop.io.{Writable, Text}
+import org.apache.hadoop.io.{Text, Writable}
 import org.apache.spark.rdd.RDD
 
 /**
@@ -240,7 +240,8 @@ object HL7Job extends Logg with App {
           messagesInRDD = inc(messagesInRDD, range.count())
           self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
         })
-      } else messagesInRDD = rdd.count()
+      } else messagesInRDD = 1
+      //rdd.count()
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
         val hl7s = self.messageTypes
@@ -278,7 +279,7 @@ object HL7Job extends Logg with App {
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
             val hBaseWriter = HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"), hTables, lookUpProp("cdm.hl7.hbase.batch.write.size").toInt).
-              map { case (dest, operator) => dest -> (HUtils.sendRequest(operator)(_: String, _: String, _: mutable.Map[String, String],_:Boolean)) }
+              map { case (dest, operator) => dest -> (HUtils.sendRequest(operator)(_: String, _: String, _: mutable.Map[String, String], _: Boolean)) }
             EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s, offHeapHandlers(HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace")), hBaseWriter))
             var tlmAckIO: (String, String) => Unit = null
             if (tlmAckQueue.isDefined) {
@@ -586,17 +587,29 @@ object HL7Job extends Logg with App {
       if (dates contains "between") {
         val from = LocalDate.parse(dates substring(0, dates.indexOf("between")))
         val to = LocalDate.parse(dates substring (dates.indexOf("between") + "between".length))
-        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach{Dt =>
+        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach { Dt =>
           info(s"$dirs$Dt")
-          dataDirs += s"$dirs$Dt"}
-      }else if (dates contains "greaterThan") {
-        val from = LocalDate.parse(dates substring(dates.indexOf("greaterThan")+ "greaterThan".length))
+          dataDirs += s"$dirs$Dt"
+        }
+      } else if (dates contains "greaterThan") {
+        val from = LocalDate.parse(dates substring (dates.indexOf("greaterThan") + "greaterThan".length))
         val to = LocalDate.now()
-        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach{Dt =>
+        Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach { Dt =>
           info(s"$dirs$Dt")
           info(s"${fileSystem.exists(new Path(s"$dirs$Dt"))}")
-          dataDirs += s"$dirs$Dt"}
-      } else if (dates == "*") {
+          dataDirs += s"$dirs$Dt"
+        }
+      } else if (tryAndReturnDefaultValue0(dates.toLong, -1) >= 0) {
+        fileSystem.listStatus(new Path(dirs)).foreach { fs =>
+          val name = fs.getPath.getName
+          val temp = name substring (name.indexOf("transaction_date=") + "transaction_date=".length)
+          if (temp.toInt - dates.toInt >= 0) {
+            dataDirs += s"${fs.getPath}"
+            info(s"$dirs - ${fs.getPath}")
+          }
+        }
+      }
+      else if (dates == "*") {
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           info(s"$dirs - ${fs.getPath}")
           dataDirs += s"${fs.getPath}"
@@ -622,11 +635,11 @@ object HL7Job extends Logg with App {
   }
 
 
-  private def offHeapHandlers(hBaseConnector: HBaseConnector, hBaseWriter: Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]): ((String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
-    (String, String, Set[String],Int, String,String) => Map[Int, mutable.Map[String, Array[Byte]]],
-    Map[String, (String, String, mutable.Map[String, String],Boolean) => Unit]) = synchronized {
+  private def offHeapHandlers(hBaseConnector: HBaseConnector, hBaseWriter: Map[String, (String, String, mutable.Map[String, String], Boolean) => Unit]): ((String, String, String, Set[String]) => mutable.Map[String, Array[Byte]],
+    (String, String, Set[String], Int, String, String) => Map[Int, mutable.Map[String, Array[Byte]]],
+    Map[String, (String, String, mutable.Map[String, String], Boolean) => Unit]) = synchronized {
     (HUtils.getRow(_: String, _: String, _: String, _: Set[String])(hBaseConnector),
-      HUtils.getRandom(_: String, _: String, _: Set[String],_:Int,_:String,_:String)(operator = hBaseConnector), hBaseWriter)
+      HUtils.getRandom(_: String, _: String, _: Set[String], _: Int, _: String, _: String)(operator = hBaseConnector), hBaseWriter)
   }
 
   /**

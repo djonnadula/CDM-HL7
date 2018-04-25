@@ -17,7 +17,7 @@ class ExecutionPool extends Logg with PoolExecutor {
 
   private lazy val pool = {
     val t = newDaemonCachedThreadPool(logIdent)
-    t.setMaximumPoolSize(60)
+    t.setMaximumPoolSize(800)
     t.setRejectedExecutionHandler(new PoolFullHandler)
     t
   }

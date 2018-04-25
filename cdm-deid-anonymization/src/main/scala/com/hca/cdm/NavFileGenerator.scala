@@ -19,7 +19,11 @@ import com.hca.cdm.Patterns._
 import com.hca.cdm.utils.ExecutionPool
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import scala.concurrent.Await.result
 import scala.util.{Failure, Success, Try}
+import scala.concurrent.ExecutionContext.Implicits.{global => executionContext}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future => async}
 
 /**
   * Created by Devaraj Jonnadula on 3/1/2018.
@@ -42,15 +46,24 @@ object NavFileGenerator extends Logg with App {
   private val outBound = hl7Mappings.zipWithIndex.map { case (k, idx) => idx -> (k._1, EMPTYSTR) }
   private val deIdFields = hl7Mappings.filter(_._2 == DE_ID).keySet.toSet
   private val config = HadoopConfig.loadConfig(tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
+  config.set("hbase.client.scanner.timeout.period","50000000")
   LoginRenewer.loginFromKeyTab(lookUpProp("keytab"), lookUpProp("principal"), Some(config))
   private val connector = HBaseConnector(config, lookUpProp("cdm.hl7.hbase.namespace"))
   private val navqWriter = new BufferedWriter(new FileWriter(new File(lookUpProp("navq.file.in") + "-out")))
-  private val transIdsWriter = new BufferedWriter(new FileWriter(new File(lookUpProp("trans.ids.dir") + FS + "De-Identified-Control-Ids-Mappings.txt")))
+  private var transIdsWriter: BufferedWriter = _
+  private val pool = new ExecutionPool
   registerHook(newThread(s"SHook-${self.getClass.getSimpleName}${lookUpProp("app")}", runnable({
     shutDown()
+    if (valid(transIdsWriter)) transIdsWriter.flush()
+    navqWriter.flush()
+    closeResource(transIdsWriter)
+    closeResource(navqWriter)
     info(s"$self shutdown hook completed")
   })))
-  generateRefFile()
+  if (lookUpProp("ref").toBoolean) {
+    transIdsWriter = new BufferedWriter(new FileWriter(new File(lookUpProp("trans.ids.dir") + FS + "De-Identified-Control-Ids-Mappings.txt")))
+    generateRefFile()
+  }
   processNavFile()
 
 
@@ -61,11 +74,18 @@ object NavFileGenerator extends Logg with App {
     val familyQualifiers = new mutable.HashMap[String, Set[String]]()
     familyQualifiers += deIdCfg.identifier -> deIdCfg.fetchKeyAttributes
     familyQualifiers += orgCfg.identifier -> orgCfg.fetchKeyAttributes
-    HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap)(connector).foreach {
-      x =>
-        if (x(orgCfg.identifier).forall(b => b._2 != EMPTYSTR) && x(deIdCfg.identifier).forall(b => b._2 != EMPTYSTR))
-          writeMsg(s"${x(orgCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}$PIPE_DELIMITED_STR${x(deIdCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}", transIdsWriter)
+    val actions = new ListBuffer[async[Unit]]
+    for (range <- 0 until(Int.MaxValue, 10000)) {
+      actions += async {
+        HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap, 10000, range)(connector).foreach {
+          x =>
+            if (x(orgCfg.identifier).forall(b => b._2 != EMPTYSTR) && x(deIdCfg.identifier).forall(b => b._2 != EMPTYSTR))
+              writeMsg(s"${x(orgCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}$PIPE_DELIMITED_STR${x(deIdCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}", transIdsWriter)
+        }
+        transIdsWriter.flush()
+      }(executionContext)
     }
+    actions.foreach { a => tryAndLogThr(result(a, Duration.Inf), "", warn(_: Throwable), notify = false) }
   }
 
   private def processNavFile(): Unit = {
@@ -149,7 +169,7 @@ object NavFileGenerator extends Logg with App {
   }
 
 
-  private def writeMsg(msg: String, writer: BufferedWriter): Unit = {
+  private def writeMsg(msg: String, writer: BufferedWriter): Unit = synchronized {
     if (valid(msg) && valid(writer)) {
       writer.write(msg)
       writer.newLine()
