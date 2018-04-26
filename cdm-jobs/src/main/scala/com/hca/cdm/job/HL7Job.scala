@@ -599,7 +599,17 @@ object HL7Job extends Logg with App {
           info(s"${fileSystem.exists(new Path(s"$dirs$Dt"))}")
           dataDirs += s"$dirs$Dt"
         }
-      } else if (tryAndReturnDefaultValue0(dates.toLong, -1) >= 0) {
+      }else if (dates contains "greater") {
+        val from = dates substring (dates.indexOf("greater") + "greater".length)
+        fileSystem.listStatus(new Path(dirs)).foreach { fs =>
+          val name = fs.getPath.getName
+          if (name.compareTo(from) >= 0) {
+            dataDirs += s"${fs.getPath}"
+            info(s"$dirs - ${fs.getPath}")
+          }
+        }
+      }
+      else if (tryAndReturnDefaultValue0(dates.toLong, -1) >= 0) {
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           val name = fs.getPath.getName
           val temp = name substring (name.indexOf("transaction_date=") + "transaction_date=".length)
