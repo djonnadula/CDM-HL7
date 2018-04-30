@@ -16,7 +16,7 @@ import com.hca.cdm.hl7.enrichment.OffHeapConfig
 import com.hca.cdm.utils.DateConstants.HL7_ORG
 import org.joda.time.DateTime
 import com.hca.cdm.Patterns._
-import com.hca.cdm.utils.ExecutionPool
+import com.hca.cdm.utils.{ExecutionPool, RetryHandler}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.Await.result
@@ -75,17 +75,27 @@ object NavFileGenerator extends Logg with App {
     familyQualifiers += deIdCfg.identifier -> deIdCfg.fetchKeyAttributes
     familyQualifiers += orgCfg.identifier -> orgCfg.fetchKeyAttributes
     val actions = new ListBuffer[async[Unit]]
-    for (range <- 0 until(Int.MaxValue, 10000)) {
+    val size = lookUpProp("batchsize").toInt
+    for (range <- 0 until(Int.MaxValue, size)) {
       actions += async {
-        HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap, 10000, range)(connector).foreach {
+        HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap, size, range)(connector).foreach {
           x =>
             if (x(orgCfg.identifier).forall(b => b._2 != EMPTYSTR) && x(deIdCfg.identifier).forall(b => b._2 != EMPTYSTR))
               writeMsg(s"${x(orgCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}$PIPE_DELIMITED_STR${x(deIdCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}", transIdsWriter)
         }
         transIdsWriter.flush()
-      }(executionContext)
+      }(pool.poolContext)
     }
-    actions.foreach { a => tryAndLogThr(result(a, Duration.Inf), "", warn(_: Throwable), notify = false) }
+    actions.foreach { a => tryAndReturnThrow(result(a, Duration.Inf)) match {
+      case Left(_) =>
+        info(s"Succeeded for $a")
+      case Right(t) =>
+        error(t)
+        info(s"Failed for $a trying again")
+        RetryHandler(4, 1000, asFunc({result(a, Duration.Inf)
+        }), asFunc(error(s"Failed for $a after trying max")))
+    }
+    }
   }
 
   private def processNavFile(): Unit = {
