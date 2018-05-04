@@ -46,20 +46,13 @@ object NavFileGenerator extends Logg with App {
   private val outBound = hl7Mappings.zipWithIndex.map { case (k, idx) => idx -> (k._1, EMPTYSTR) }
   private val deIdFields = hl7Mappings.filter(_._2 == DE_ID).keySet.toSet
   private val config = HadoopConfig.loadConfig(tryAndReturnDefaultValue0(lookUpProp("hadoop.config.files").split("\\;", -1).toSeq, Seq[String]()))
-  config.set("hbase.client.scanner.timeout.period","50000000")
+  config.set("hbase.client.scanner.timeout.period", "50000000")
   LoginRenewer.loginFromKeyTab(lookUpProp("keytab"), lookUpProp("principal"), Some(config))
   private val connector = HBaseConnector(config, lookUpProp("cdm.hl7.hbase.namespace"))
   private val navqWriter = new BufferedWriter(new FileWriter(new File(lookUpProp("navq.file.in") + "-out")))
   private var transIdsWriter: BufferedWriter = _
   private val pool = new ExecutionPool
-  registerHook(newThread(s"SHook-${self.getClass.getSimpleName}${lookUpProp("app")}", runnable({
-    shutDown()
-    if (valid(transIdsWriter)) transIdsWriter.flush()
-    navqWriter.flush()
-    closeResource(transIdsWriter)
-    closeResource(navqWriter)
-    info(s"$self shutdown hook completed")
-  })))
+  registerHook(newThread(s"SHook-${self.getClass.getSimpleName}${lookUpProp("app")}", runnable({shutDown()})))
   if (lookUpProp("ref").toBoolean) {
     transIdsWriter = new BufferedWriter(new FileWriter(new File(lookUpProp("trans.ids.dir") + FS + "De-Identified-Control-Ids-Mappings.txt")))
     generateRefFile()
@@ -75,26 +68,29 @@ object NavFileGenerator extends Logg with App {
     familyQualifiers += deIdCfg.identifier -> deIdCfg.fetchKeyAttributes
     familyQualifiers += orgCfg.identifier -> orgCfg.fetchKeyAttributes
     val actions = new ListBuffer[async[Unit]]
-    val size = lookUpProp("batchsize").toInt
-    for (range <- 0 until(Int.MaxValue, size)) {
+    val size = tryAndReturnDefaultValue0(lookUpProp("batchsize").toInt,50000)
+    val max = tryAndReturnDefaultValue0(lookUpProp("tablesize").toInt,Int.MaxValue)
+    for (range <- 0 until(max, size)) {
       actions += async {
-        HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap, size, range)(connector).foreach {
+        HUtils.fetchFamilyQualifiers(deIdCfg.repo, familyQualifiers.toMap, size, range)(connector) foreach {
           x =>
-            if (x(orgCfg.identifier).forall(b => b._2 != EMPTYSTR) && x(deIdCfg.identifier).forall(b => b._2 != EMPTYSTR))
+            if (x(orgCfg.identifier).forall { case (_, v) => v != EMPTYSTR } && x(deIdCfg.identifier).forall { case (_, v) => v != EMPTYSTR })
               writeMsg(s"${x(orgCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}$PIPE_DELIMITED_STR${x(deIdCfg.identifier).values.mkString(PIPE_DELIMITED_STR)}", transIdsWriter)
         }
         transIdsWriter.flush()
-      }(pool.poolContext)
+      }(executionContext)
     }
-    actions.foreach { a => tryAndReturnThrow(result(a, Duration.Inf)) match {
-      case Left(_) =>
-        info(s"Succeeded for $a")
-      case Right(t) =>
-        error(t)
-        info(s"Failed for $a trying again")
-        RetryHandler(4, 1000, asFunc({result(a, Duration.Inf)
-        }), asFunc(error(s"Failed for $a after trying max")))
-    }
+    actions.foreach { a =>
+      tryAndReturnThrow(result(a, Duration.Inf)) match {
+        case Left(_) =>
+          info(s"Succeeded for $a")
+        case Right(t) =>
+          error(t)
+          info(s"Failed for $a trying again")
+          RetryHandler(4, 1000, asFunc({
+            result(a, Duration.Inf)
+          }), asFunc(error(s"Failed for $a after trying max")))
+      }
     }
   }
 

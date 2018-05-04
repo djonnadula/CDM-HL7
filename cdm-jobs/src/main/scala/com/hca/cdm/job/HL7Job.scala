@@ -267,8 +267,9 @@ object HL7Job extends Logg with App {
         val appName = self.app
         val inputSource = self.inputSource
         val hTables = self.hTables.toSet
+        val part = self.maxPartitions
         val tracker = new ListBuffer[FutureAction[Unit]]
-        tracker += rdd foreachPartitionAsync (dataItr => {
+        tracker += rdd.repartition(part) foreachPartitionAsync (dataItr => {
           if (dataItr nonEmpty) {
             propFile = confFile
             LoginRenewer.scheduleRenewal()
