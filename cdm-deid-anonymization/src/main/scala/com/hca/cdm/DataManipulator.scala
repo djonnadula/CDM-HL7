@@ -58,14 +58,15 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   private lazy val fac = getFac
   private val lock = new Object
   private lazy val randomIdentifiers = lock.synchronized {
-    partSelectorFun(randomCfg.repo, randomCfg.identifier, identifiers.keySet, 15000, fac._1, fac._2).map { case (ind, store) => ind -> store.map { case (k, v) => hl7_mappings.getOrElse(k, k) -> new String(v, UTF8) } }
+    partSelectorFun(randomCfg.repo, randomCfg.identifier, identifiers.keySet, 20000, fac._1, fac._2).map { case (ind, store) => ind -> store.map { case (k, v) => hl7_mappings.getOrElse(k, k) -> new String(v, UTF8) } }
   }
   private var randomCache = new TrieMap[Int, mutable.Map[String, String]]()
 
 
   def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     if (fetchReq.get()) {
-      val fetchedResults = partSelectorFun(randomCfg.repo, randomCfg.identifier, deIdFieldsRdm, maxRandomSelects / 30, fac._1, fac._2
+      val facility = getFac
+      val fetchedResults = partSelectorFun(randomCfg.repo, randomCfg.identifier, deIdFieldsRdm, maxRandomSelects / 30, facility._1, facility._2
       ).map { case (ind, store) => ind -> store.map { case (k, v) => hl7_mappings.getOrElse(k, k) -> new String(v, UTF8) } }
       val mx = randomCache.size
       fetchedResults.foreach { case (ind, store) => randomCache += mx + ind -> store }
@@ -299,8 +300,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     var out = text
     data.split(delimitedBy, -1) foreach { dt =>
       if (dt != EMPTYSTR && dt.length > length && dt != "MSH" && dt != "Final" && dt != "LAB" && dt != "lab" && dt != "PAT"
-        && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem &&
-        (text contains data)) {
+        && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem && (text contains dt)) {
         out = if (dt.contains("(") || dt.contains(")")) tryAndReturnDefaultValue0(StringUtils.replace(out, dt, modifyWith), out)
         else if (length == 1) tryAndReturnDefaultValue0(out replaceFirst(dt, modifyWith), out)
         else tryAndReturnDefaultValue0(out replaceAll(dt, modifyWith), out)
