@@ -8,7 +8,7 @@ import com.hca.cdm.hl7.constants.HL7Constants._
 import scala.collection.mutable
 import com.hca.cdm.hl7.model._
 import java.util.{Calendar, Collections, Date}
-import java.util.concurrent.ThreadLocalRandom
+import java.util.concurrent.{ThreadLocalRandom, TimeUnit}
 import java.util.concurrent.atomic.AtomicBoolean
 import collection.JavaConverters._
 import com.hca.cdm.utils.DateConstants._
@@ -18,6 +18,8 @@ import org.joda.time.DateTime
 import scala.collection.concurrent.TrieMap
 import scala.util.{Failure, Success, Try}
 import Constants._
+import com.hca.cdm.kfka.config.HL7ProducerConfig.{createConfig => producerConf}
+import com.hca.cdm.kfka.producer.{KafkaProducerHandler => KProducer}
 
 /**
   * Created by Devaraj Jonnadula on 1/22/2018.
@@ -61,7 +63,11 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     partSelectorFun(randomCfg.repo, randomCfg.identifier, identifiers.keySet, 20000, fac._1, fac._2).map { case (ind, store) => ind -> store.map { case (k, v) => hl7_mappings.getOrElse(k, k) -> new String(v, UTF8) } }
   }
   private var randomCache = new TrieMap[Int, mutable.Map[String, String]]()
-
+  private val deDup = new TrieMap[String, mutable.Map[String, String]]()
+  private val batchRunner = newDaemonScheduler(s"$self-DE-DUP")
+  batchRunner scheduleAtFixedRate(newThread(s"$self-DE-DUP", runnable(asFunc(deDup clear()))), TimeUnit.MINUTES.toMinutes(30), 30, TimeUnit.MINUTES)
+  lazy val kafkaOut = KProducer()(producerConf())
+  lazy val hl7JsonIO = kafkaOut.writeData(_: String,"", lookUpProp("de-id-map"))(4194304,null)
 
   def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     if (fetchReq.get()) {
@@ -73,7 +79,13 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       fetchReq.set(enoughCache)
     }
     val org = layout clone()
-    val deIdentified = enrichData(deIdCfg.repo, deIdCfg.identifier, deIdCfg.fetchKey(org), deIdFields).map { case (k, v) => k -> new String(v, UTF8) }
+    val deIdentified = deDup.synchronized {
+      if (deDup.isDefinedAt(layout.getOrElse(controlId, EMPTYSTR))) deDup(layout.getOrElse(controlId, EMPTYSTR)) else {
+        val temp = enrichData(deIdCfg.repo, deIdCfg.identifier, deIdCfg.fetchKey(org), deIdFields).map { case (k, v) => k -> new String(v, UTF8) }
+        deDup += layout.getOrElse(controlId, EMPTYSTR) -> temp
+        temp
+      }
+    }
     var hl7Mod = hl7
     var obs_note = layout.getOrElse(obsv_value, EMPTYSTR)
     val facility = layout.getOrElse(sendingFac, EMPTYSTR)
@@ -81,10 +93,18 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     if (!facilities.isDefinedAt(facility)) facilities = facilities + Pair(facility, generateRandomFacility(facility))
     val sourceSystem = tryAndReturnDefaultValue0(messageControlId.substring(0, messageControlId.indexOf(underScore)), EMPTYSTR)
     identifiers.foreach { case (k, _) =>
-      val out = common(k, org.getOrElse(k, EMPTYSTR), layout, deIdentified.getOrElse(k, getRandomFromStore(k, org.getOrElse(k, EMPTYSTR)))
-        , facility, sourceSystem, hl7Mod, obs_note)
-      hl7Mod = out.hl7
-      obs_note = out.notes
+      dataOperators get k foreach { op =>
+        if (op == DE_ID) {
+          val out = common(k, org.getOrElse(k, EMPTYSTR), layout, deIdentified.getOrElse(k, getRandomFromStore(k, org.getOrElse(k, EMPTYSTR)))
+            , facility, sourceSystem, hl7Mod, obs_note)
+          hl7Mod = out.hl7
+          obs_note = out.notes
+        } else if (op == ANONYMIZE) {
+          val out = common(k, org.getOrElse(k, EMPTYSTR), layout, EMPTYSTR, facility, sourceSystem, hl7Mod, obs_note)
+          hl7Mod = out.hl7
+          obs_note = out.notes
+        }
+      }
     }
     dataOperators.get(communicationAddress) foreach { op =>
       if (op == ANONYMIZE) {
@@ -159,6 +179,8 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     layout += controlId -> temp._2
     self.partWriterFun(orgCfg.repo).apply(orgCfg.identifier, orgCfg.fetchKey(org), org, true)
     self.partWriterFun(deIdCfg.repo).apply(deIdCfg.identifier, deIdCfg.fetchKey(org), layout, true)
+    val id = org.getOrElse(sendingFac, EMPTYSTR)+"|"+org.getOrElse(controlId, EMPTYSTR)+"|"+layout.getOrElse(sendingFac, EMPTYSTR)+"|"+layout.getOrElse(controlId, EMPTYSTR)
+    hl7JsonIO(id)
     EnrichedData(layout, hl7Mod)
   }
 
@@ -174,8 +196,8 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   private def handleId(id: String, facility: String, hl7: String, layout: mutable.LinkedHashMap[String, String], deIdentified: mutable.Map[String, String]): (String, String) = {
     val random = if (facility == DOT) id.replaceFirst(s"\\$DOT", dummyFac) else id.replaceAll(facility, facilities.getOrElse(facility, dummyFac))
-    if (deIdentified.isDefinedAt(controlId) && deIdentified(controlId) != EMPTYSTR) layout += controlId -> deIdentified(controlId)
-    else layout += controlId -> random
+    /*if (deIdentified.isDefinedAt(controlId) && deIdentified(controlId) != EMPTYSTR && tryAndReturnDefaultValue0(dataOperators(controlId) != DE_ID, false)) layout += controlId -> deIdentified(controlId)
+    else*/ layout += controlId -> random
     var tempHl7 = hl7
     if (facility == DOT) layout update(sendingFac, dummyFac)
     else layout update(sendingFac, facilities.getOrElse(facility, dummyFac))
@@ -219,7 +241,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
       if (org == EMPTYSTR) layout update(field, org)
       else {
         val temp = handleIdentifiers(modifyWith)
-        if (temp == EMPTYSTR && org != EMPTYSTR) layout update(field, random.nextLong(currMillis).toString)
+        if (temp == EMPTYSTR && org != EMPTYSTR) layout update(field, random.nextLong(currNanos / currMillis, Long.MaxValue).toString)
         else layout update(field, temp)
       }
     } else layout update(field, modifyWith)
@@ -239,7 +261,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
   private def handleIdentifiers(num: String): String = {
-    num.toCharArray.foldLeft(EMPTYSTR)((a, b) => a + tryAndReturnDefaultValue0(Integer.parseInt(b + EMPTYSTR), EMPTYSTR))
+    num.toCharArray.foldLeft(EMPTYSTR)((a, b) => a + tryAndReturnDefaultValue0(Integer.parseInt(b + EMPTYSTR), random.nextInt()))
   }
 
   private def cache(): Unit = self.synchronized {
@@ -300,7 +322,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     var out = text
     data.split(delimitedBy, -1) foreach { dt =>
       if (dt != EMPTYSTR && dt.length > length && dt != "MSH" && dt != "Final" && dt != "LAB" && dt != "lab" && dt != "PAT"
-        && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem && (text contains dt)) {
+        && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem && (text contains data)) {
         out = if (dt.contains("(") || dt.contains(")")) tryAndReturnDefaultValue0(StringUtils.replace(out, dt, modifyWith), out)
         else if (length == 1) tryAndReturnDefaultValue0(out replaceFirst(dt, modifyWith), out)
         else tryAndReturnDefaultValue0(out replaceAll(dt, modifyWith), out)
@@ -396,7 +418,10 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   }
 
 
-  def close(): Unit = {}
+  def close(): Unit = {
+    batchRunner.shutdownNow()
+    closeResource(kafkaOut)
+  }
 
   def apply(layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     apply(self.enrichDataPartFun, layout, hl7)

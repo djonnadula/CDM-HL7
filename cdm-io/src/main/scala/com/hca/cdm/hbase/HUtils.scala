@@ -124,7 +124,7 @@ object HUtils extends Logg {
     val scan = new Scan
     scan.setCacheBlocks(false)
     scan.setCaching(0)
-    scan.setMaxVersions(1)
+    scan.setMaxVersions(1000)
     scan.setScanMetricsEnabled(false)
       .setId(s"$table-$families")
     if (limit > 0 && offset > 0) scan.setFilter(new ColumnPaginationFilter(limit, offset))
