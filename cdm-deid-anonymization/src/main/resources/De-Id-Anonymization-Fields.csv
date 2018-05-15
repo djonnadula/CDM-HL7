@@ -57402,7 +57402,7 @@ ZDS,study_instance|application_id,Anonymize
 ZDS,study_instance|data_type,Anonymize
 ZDS,study_instance|subtype,Anonymize
 ZDT,event_type_code,Anonymize
-ZDT,patient_class,Anonymize
+ZDT,patient_class,NONE
 ZDT,assigned_patient_location,Anonymize
 ZDT,assigned_patient_location|point_of_care,Anonymize
 ZDT,assigned_patient_location|room,Anonymize

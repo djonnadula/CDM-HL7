@@ -232,7 +232,11 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
           }
         }
     }
-    (tryAndReturnDefaultValue0(tempHl7.replaceAll(email_R, EMPTYSTR), tempHl7), tryAndReturnDefaultValue0(tempNotes.replaceAll(email_R, EMPTYSTR), tempNotes))
+    commonExp foreach { exp =>
+      tempHl7 = tryAndReturnDefaultValue0(tempHl7.replaceAll(exp, EMPTYSTR), tempHl7)
+      tempNotes = tryAndReturnDefaultValue0(tempNotes.replaceAll(exp, EMPTYSTR), tempNotes)
+    }
+    (tempHl7, tempNotes)
   }
 
   private def handleCases(field: String, org: String, modifyWith: String, layout: mutable.LinkedHashMap[String, String], queryAgain: Boolean = false): Unit = {
@@ -446,6 +450,8 @@ private[cdm] object Patterns {
 
 private[cdm] object Constants {
   val email_R = "[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9.-]+"
+  val ssn_R = "^\\s[0-9]{3}[-][0-9]{2}[-][0-9]{4}\\s$"
+  val commonExp = Set(email_R, ssn_R)
   val obsv_value: String = "obsv_value"
   val ssn: String = "ssn_num_patient"
   val identifiers: Map[String, String] = Set("medical_record_num", "medical_record_urn", "patient_account_num").map(x => x -> x).toMap
