@@ -596,11 +596,10 @@ object HL7Job extends Logg with App {
         val from = LocalDate.parse(dates substring (dates.indexOf("greaterThan") + "greaterThan".length))
         val to = LocalDate.now()
         Iterator.iterate(from)(_.plusDays(1)).takeWhile(!_.isAfter(to)).foreach { Dt =>
-          info(s"$dirs$Dt")
-          info(s"${fileSystem.exists(new Path(s"$dirs$Dt"))}")
+          info(s"$dirs$Dt Exists ? ${fileSystem.exists(new Path(s"$dirs$Dt"))}")
           dataDirs += s"$dirs$Dt"
         }
-      }else if (dates contains "greater") {
+      } else if (dates contains "greater") {
         val from = dates substring (dates.indexOf("greater") + "greater".length)
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           val name = fs.getPath.getName
@@ -611,10 +610,11 @@ object HL7Job extends Logg with App {
         }
       }
       else if (tryAndReturnDefaultValue0(dates.toLong, -1) >= 0) {
+        val upto = tryAndReturnDefaultValue0(lookUpProp("hl7.data.dates.to").toInt, -1)
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           val name = fs.getPath.getName
           val temp = name substring (name.indexOf("transaction_date=") + "transaction_date=".length)
-          if (temp.toInt - dates.toInt >= 0) {
+          if (temp.toInt - dates.toInt >= 0 && (temp.toInt <= upto || upto != -1)) {
             dataDirs += s"${fs.getPath}"
             info(s"$dirs - ${fs.getPath}")
           }
@@ -791,13 +791,13 @@ object HL7Job extends Logg with App {
     }
 
 
-    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(Writable, Text)](sparkCtx, Nil) {
+    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(String, String)](sparkCtx, Nil) {
       self =>
       info(s"FileBase Rdd initiated for $dir with Max Partitions $maxPartitions & $sparkCtx")
       self.setName(dir)
-      private lazy val data: RDD[(Writable, Text)] = sparkCtx.sequenceFile[Writable, Text](dir, maxPartitions)
+      private lazy val data: RDD[(String, String)] = sparkCtx.sequenceFile[Writable, Text](dir, maxPartitions).map { case (k, v) => (k.toString, v.toString) }
 
-      override def compute(split: Partition, context: TaskContext): Iterator[(Writable, Text)] = {
+      override def compute(split: Partition, context: TaskContext): Iterator[(String, String)] = {
         data.iterator(split, context)
       }
 

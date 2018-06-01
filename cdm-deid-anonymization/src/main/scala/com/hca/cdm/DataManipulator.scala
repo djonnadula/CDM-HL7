@@ -67,7 +67,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
   private val batchRunner = newDaemonScheduler(s"$self-DE-DUP")
   batchRunner scheduleAtFixedRate(newThread(s"$self-DE-DUP", runnable(asFunc(deDup clear()))), TimeUnit.MINUTES.toMinutes(30), 30, TimeUnit.MINUTES)
   lazy val kafkaOut = KProducer()(producerConf())
-  lazy val hl7JsonIO = kafkaOut.writeData(_: String,"", lookUpProp("de-id-map"))(4194304,null)
+  lazy val hl7JsonIO = kafkaOut.writeData(_: String, "", lookUpProp("de-id-map"))(4194304, null)
 
   def apply(enrichData: (String, String, String, Set[String]) => mutable.Map[String, Array[Byte]], layout: mutable.LinkedHashMap[String, String], hl7: String): EnrichedData = {
     if (fetchReq.get()) {
@@ -241,11 +241,15 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
 
   private def handleCases(field: String, org: String, modifyWith: String, layout: mutable.LinkedHashMap[String, String], queryAgain: Boolean = false): Unit = {
     if (field == ssn) layout update(field, handleSsn(modifyWith))
-    if (identifiers.isDefinedAt(field)) {
+    else if (identifiers.isDefinedAt(field)) {
       if (org == EMPTYSTR) layout update(field, org)
       else {
         val temp = handleIdentifiers(modifyWith)
-        if (temp == EMPTYSTR && org != EMPTYSTR) layout update(field, random.nextLong(currNanos / currMillis, Long.MaxValue).toString)
+        if (temp == EMPTYSTR && org != EMPTYSTR) {
+          val rdm = currNanos / currMillis
+          if (rdm > 0) layout update(field, random.nextLong(rdm, Long.MaxValue).toString)
+          else layout update(field, random.nextLong(currNanos, Long.MaxValue).toString)
+        }
         else layout update(field, temp)
       }
     } else layout update(field, modifyWith)
@@ -326,7 +330,7 @@ private[cdm] class DataManipulator(config: Array[String]) extends EnrichDataFrom
     var out = text
     data.split(delimitedBy, -1) foreach { dt =>
       if (dt != EMPTYSTR && dt.length > length && dt != "MSH" && dt != "Final" && dt != "LAB" && dt != "lab" && dt != "PAT"
-        && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem && (text contains data)) {
+        && dt != "PATH" && dt != "Path" && dt != "SOUT" && dt != "FOUT" && dt != "The" && dt != facility && dt != sourceSystem) {
         out = if (dt.contains("(") || dt.contains(")")) tryAndReturnDefaultValue0(StringUtils.replace(out, dt, modifyWith), out)
         else if (length == 1) tryAndReturnDefaultValue0(out replaceFirst(dt, modifyWith), out)
         else tryAndReturnDefaultValue0(out replaceAll(dt, modifyWith), out)
@@ -450,7 +454,7 @@ private[cdm] object Patterns {
 
 private[cdm] object Constants {
   val email_R = "[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9.-]+"
-  val ssn_R = "^\\s[0-9]{3}[-][0-9]{2}[-][0-9]{4}\\s$"
+  val ssn_R = "\\s[0-9]{3}[-][0-9]{2}[-][0-9]{4}\\s"
   val commonExp = Set(email_R, ssn_R)
   val obsv_value: String = "obsv_value"
   val ssn: String = "ssn_num_patient"

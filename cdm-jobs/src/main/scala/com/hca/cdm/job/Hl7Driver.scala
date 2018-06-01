@@ -139,11 +139,11 @@ object Hl7Driver extends App with Logg {
     }
   })
   if (ENV != "PROD") {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/jvm-dump -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true ")
-      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/jvm-dump -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true")
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps  -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true -XX:NewRatio=3 -XX:SurvivorRatio=6 -XX:+PrintTenuringDistribution")
+      .setConf("spark.executor.extraJavaOptions", s"-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps  -Dapp.logging.name=$app -Dsun.security.krb5.debug=true -Dsun.security.spnego.debug=true -XX:NewRatio=3 -XX:SurvivorRatio=6 -XX:+PrintTenuringDistribution")
   } else {
-    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app")
-      .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app")
+    sparkLauncher.setConf("spark.driver.extraJavaOptions", s"-Dapp.logging.name=$app -Xmn2G -Xss512m" )
+      .setConf("spark.executor.extraJavaOptions", s"-Dapp.logging.name=$app -Xmn2G -Xss512m")
   }
   val configFile = new File(args(0))
   sparkLauncher addAppArgs configFile.getName
@@ -192,6 +192,7 @@ object Hl7Driver extends App with Logg {
   sHook = newThread(app + " Driver SHook", runnable({
     info(app + " Driver Shutdown Hook Called ")
     shutDown()
+    
     handleDriver("stop")
     info(s"$app Driver Shutdown Completed ")
   }))

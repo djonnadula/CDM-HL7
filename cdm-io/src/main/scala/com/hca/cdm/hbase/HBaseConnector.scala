@@ -86,7 +86,7 @@ private[cdm] class BatchOperator(nameSpace: String, table: String, connection: C
   require(valid(table) && !table.trim.isEmpty, s"Cannot Operate on Table $table")
   @volatile private var batched: Long = 0
   private val batchRunner = newDaemonScheduler(s"$table-BatchRunner-$connection")
-  batchRunner scheduleAtFixedRate(newThread(s"$table-BatchTask", runnable(asFunc(runBatch()))), 1, 1, TimeUnit.SECONDS)
+  batchRunner scheduleAtFixedRate(newThread(s"$table-BatchTask", runnable(asFunc(runBatch()))), 10, 10, TimeUnit.SECONDS)
   private val mutator = connection.getBufferedMutator(TableName.valueOf(nameSpace, table))
 
   @throws[IOException]
