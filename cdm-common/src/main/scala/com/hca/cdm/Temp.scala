@@ -1,38 +1,38 @@
+/*
 package com.hca.cdm
 
-import java.io.{BufferedWriter, File, FileWriter}
+import com.google.api.client.http.FileContent
+import com.google.api.services.drive.Drive
+import com.google.api.services.drive.model.File
+import java.io.IOException
 
-import scala.collection.mutable.ListBuffer
-import scala.io.BufferedSource
 
 /**
   * Created by Devaraj Jonnadula on 2/8/2018.
   */
 object Temp extends  App {
-  val reader =  new BufferedSource(currThread.getContextClassLoader.getResourceAsStream("De-Id-Anonymization-Fields.csv"))
-  val out =  new ListBuffer[(String,String)]
-  val notReqSeg = Set("ABS","ACC","ADD")
-  val r = reader.bufferedReader()
-  Stream.continually(r.readLine()).takeWhile(valid(_)).foreach{x =>
-    val split = x.split("\\,",-1)
-   // if(valid(split,2)) {
-      val seg = split(0)
+ /* val reader =  Source.fromFile(args(0))
 
-      //println(split(1))
-      out += Pair(seg,split(1))
-   // }
-
+  val writer = new BufferedWriter(new FileWriter(new File(args(1))))
+  val ssn_R = "[0-9]{3}[-][0-9]{2}[-][0-9]{4}"
+   // "\\s[0-9]{3}[-][0-9]{2}[-][0-9]{4}\\s"
+  reader.getLines().foreach{x =>
+    writer.write(x.replaceAll(ssn_R, ""))
+    writer.newLine()
   }
-  val writer = new BufferedWriter(new FileWriter(new File("C:\\Users\\pzi7542\\IdeaProjects\\Cdm-HL7\\cdm-common\\src\\main\\resources\\HL7-Fields.csv")))
- val o = out.foldLeft(EMPTYSTR)((a,b) =>   a+"^"+b._2 )
+//  scp /data/raid10/cdm/hl7/Dr/COSMOS/Final.json pzi7542@corpkvs3771k:/D:/Cosmos
 
-
-
-        writer.write(o)
-
-
-  writer.write("^message_flag_static^unknown^obsv_value")
   writer.flush()
   writer.close()
+*/
 
+  val fileMetadata = new Nothing
+  fileMetadata.setName("My Report")
+  fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet")
+
+  val filePath = new File("files/report.csv")
+  val mediaContent = new Nothing("text/csv", filePath)
+  val file = driveService.files.create(fileMetadata, mediaContent).setFields("id").execute
+  System.out.println("File ID: " + file.getId)
 }
+*/

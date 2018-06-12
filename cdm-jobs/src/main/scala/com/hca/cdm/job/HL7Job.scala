@@ -7,6 +7,10 @@ import java.util.concurrent.{ScheduledExecutorService, TimeUnit}
 import java.util.Date
 import java.util.concurrent.atomic.AtomicBoolean
 import LocalDateTime._
+
+import org.apache.hadoop.io.LongWritable
+import org.apache.hadoop.io.NullWritable
+import org.apache.hadoop.io.Text
 import com.hca.cdm.Models.MSGMeta
 import com.hca.cdm.io.IOConstants._
 import com.hca.cdm._
@@ -38,8 +42,9 @@ import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.AccumulatorParam.LongAccumulatorParam
 import org.apache.spark.scheduler._
 import org.apache.spark.streaming.kafka.HasOffsetRanges
-import org.apache.spark.streaming.StreamingContext
+import org.apache.spark.streaming.{StreamingContext, Time}
 import org.apache.spark._
+
 import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable.ListBuffer
@@ -47,10 +52,17 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
 import scala.collection.mutable
 import TimeUnit._
+
+import parquet.example.data.Group
 import com.hca.cdm.hbase.{HBaseConnector, HUtils}
 import com.hca.cdm.kfka.util.OffsetManager
+import org.apache.commons.lang3.reflect.{FieldUtils, MethodUtils}
 import org.apache.hadoop.io.{Text, Writable}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.streaming.dstream.InputDStream
+import org.apache.spark.streaming.scheduler.{JobScheduler, StreamInputInfo}
+import parquet.hadoop.ParquetInputFormat
 
 /**
   * Created by Devaraj Jonnadula on 8/19/2016.
@@ -148,6 +160,9 @@ object HL7Job extends Logg with App {
   private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
   loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
   LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
+  private val rddsBat = new mutable.Queue[String]
+  private val rddsBatProcessing = new mutable.Queue[String]
+  private val size = tryAndReturnDefaultValue0(lookUpProp("btc.size").toInt, 1000)
 
   private def newCtxIfNotExist = new (() => StreamingContext) {
     override def apply(): StreamingContext = {
@@ -160,6 +175,7 @@ object HL7Job extends Logg with App {
 
   private val sparkStrCtx: StreamingContext = if (checkpointEnabled) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
+  private val sql = new SQLContext(sparkStrCtx.sparkContext)
   initialise(sparkStrCtx)
   startStreams()
 
@@ -204,6 +220,25 @@ object HL7Job extends Logg with App {
     }
     sparkUtil addHook persistParserMetrics
     sparkUtil addHook persistSegmentMetrics
+    dataDirectories()
+    /*  monitorHandler scheduleAtFixedRate(new Runnable {
+        override def run(): Unit = {
+          if (rddsBatProcessing.isEmpty && rddsBat.nonEmpty) {
+            Range(0, size).foreach { x =>
+              val t = tryAndReturnDefaultValue0(rddsBat.dequeue(), EMPTYSTR)
+              if (t != EMPTYSTR) {
+                rddsBatProcessing.enqueue(t)
+                info("Adding new batch "+ t)
+              }
+            }
+            runJob(sparkStrCtx)
+          }else{
+            info("existing batch still running "+ rddsBatProcessing.mkString(";"))
+          }
+        }
+
+      }, 500, size, TimeUnit.SECONDS)
+  */
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
       close()
       shutDown()
@@ -213,6 +248,7 @@ object HL7Job extends Logg with App {
     info("Initialisation Done. Running Job")
     if (!restoreFromChk.get()) runJob(sparkStrCtx)
   }
+
 
   /**
     * Main Job Execution
@@ -225,9 +261,7 @@ object HL7Job extends Logg with App {
     } else if (sparkManagesOffsets) {
       sparkUtil stream(sparkStrCtx, kafkaConsumerProp, topicsToSubscribe)
     } else {
-      val rdds = new mutable.Queue[RDD[(Writable, Text)]]
-      dataDirectories.foreach(dir => rdds += sparkStrCtx.sparkContext.sequenceFile[Writable, Text](dir, maxPartitions))
-      sparkStrCtx queueStream rdds
+      new FileBasedStream(rddsBatProcessing, sparkStrCtx, maxPartitions)
     }
     info(s"$inputSource Stream Was Opened Successfully with ID :: ${streamLine.id}")
     streamLine foreachRDD (rdd => {
@@ -361,6 +395,18 @@ object HL7Job extends Logg with App {
           } else info(s"Partition was Empty For RDD ${rdd.id} So skipping :: $dataItr")
         })
         tryAndLogErrorMes(tracker.foreach(_.get()), error(_: Throwable))
+        self.rddsBatProcessing.synchronized {
+          val name = rdd.asInstanceOf[RDD[(Object, Object)]].name
+          tryAndReturnDefaultValue0(fileSystem.delete(new Path(name)), false)
+          /* if(rddsBatProcessing.contains(rdd.asInstanceOf[RDD[(Object, Object)]].name)) {
+             val t = tryAndReturnDefaultValue0(self.rddsBatProcessing.dequeue(), EMPTYSTR)
+             if(t!= EMPTYSTR) tryAndReturnDefaultValue0(fileSystem.delete(new Path(t)),false)
+           }
+           if (self.rddsBatProcessing.isEmpty) {
+             info("stopping stream " + streamLine)
+             tryAndLogErrorMes(asFunc(streamLine.asInstanceOf[InputDStream[_]].stop()), info(_: Throwable))
+           }*/
+        }
         info(s"Processing Completed for RDD :: ${rdd.id} Messages Count :: $messagesInRDD")
       } else info(s"Batch was Empty So Skipping RDD :: ${rdd.id}")
       if (self.appManagesOffset) self.offSetManager.batchCompleted(rdd)
@@ -580,7 +626,7 @@ object HL7Job extends Logg with App {
     persistSegmentMetrics()
   }
 
-  private def dataDirectories: ListBuffer[String] = {
+  private def dataDirectories(): Unit = {
     val dirs = lookUpProp("hl7.data.directories")
     val dateRanges = tryAndReturnDefaultValue(asFunc(lookUpProp("hl7.data.dates")), EMPTYSTR).split(COMMA, -1)
     val dataDirs = new ListBuffer[String]
@@ -614,10 +660,8 @@ object HL7Job extends Logg with App {
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           val name = fs.getPath.getName
           val temp = name substring (name.indexOf("transaction_date=") + "transaction_date=".length)
-          if (temp.toInt - dates.toInt >= 0 && (temp.toInt <= upto || upto != -1)) {
-            dataDirs += s"${fs.getPath}"
-            info(s"$dirs - ${fs.getPath}")
-          }
+          dataDirs += s"${fs.getPath}"
+          info(s"$dirs - ${fs.getPath}")
         }
       }
       else if (dates == "*") {
@@ -629,7 +673,11 @@ object HL7Job extends Logg with App {
       else dataDirs += s"$dirs$dates"
     }
     if (dateRanges isEmpty) dataDirs += dirs
-    dataDirs.filter(path => fileSystem.exists(new Path(path)))
+    dataDirs.filter(path => fileSystem.exists(new Path(path))).foreach(x => rddsBat.enqueue(x))
+    Range(0, size).foreach { x =>
+      val t = tryAndReturnDefaultValue0(rddsBat.dequeue(), EMPTYSTR)
+      if (t != EMPTYSTR) rddsBatProcessing.enqueue(t)
+    }
   }
 
   private def isCheckPointEnabled: Boolean = {
@@ -814,6 +862,53 @@ object HL7Job extends Logg with App {
       }
     }
 
+  }
+
+  private[cdm] class FileBasedStream(dirs: mutable.Queue[String], sparkCtx: StreamingContext, maxPartitions: Int)
+    extends InputDStream[(Object, Object)](sparkCtx) {
+    private val batches = new mutable.Queue[(RDD[(Object, Object)], Long)]()
+    private val reporter = FieldUtils.readDeclaredField(FieldUtils.readDeclaredField(sparkCtx, "scheduler", true), "inputInfoTracker", true)
+
+    override def start(): Unit = {}
+
+    override def stop(): Unit = {}
+
+
+    override def compute(validTime: Time): Option[RDD[(Object, Object)]] = {
+
+      val dir = if (batches.size <= 500) tryAndReturnDefaultValue0(dirs.dequeue(), EMPTYSTR) else EMPTYSTR
+      if (dir != EMPTYSTR) {
+        val messages = sql.read.parquet(dir)
+        val collector = new mutable.HashMap[String, ListBuffer[String]]()
+        messages collect() foreach {
+          x =>
+            val msg: String = x.get(0) match {
+              case s: String => s
+              case b: Array[Byte] => new String(b)
+              case any: Any => any.toString
+            }
+            val spl = msg split("\\|", 12)
+            val stamp = spl(6)
+            if (collector isDefinedAt stamp) collector update(stamp, collector(stamp) += msg)
+            else collector += stamp -> {
+              val temp = ListBuffer.empty[String]
+              temp += msg
+            }
+        }
+        collector foreach { case (_, v) =>
+          val batch = v.distinct.map(x => (EMPTYSTR, x))
+          batches += Pair(sparkCtx.sparkContext.makeRDD(batch).setName(dir).asInstanceOf[RDD[(Object, Object)]], batch.size.toLong)
+        }
+      }
+      if (batches.nonEmpty) {
+        val batch = batches.dequeue()
+        tryAndLogErrorMes({
+          MethodUtils.invokeMethod(reporter, "reportInfo", validTime, new StreamInputInfo(this.id, batch._2, Map("directory" -> batch._1.name)))
+        }, error(_: Throwable))
+        Some(batch._1)
+      }
+      else None
+    }
   }
 
 }

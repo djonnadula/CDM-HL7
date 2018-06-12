@@ -95,8 +95,9 @@ object HUtils extends Logg {
 
   def getRandom(table: String, family: String, fetchAttributes: Set[String] = Set.empty[String],
                 maxMessages: Int = 10, keyFrom: String, keyTo: String)(operator: HBaseConnector): Map[Int, mutable.Map[String, Array[Byte]]] = {
+    val start = currMillis
     val familyBytes = toBytes(family)
-    val scan = new Scan(toBytes(keyFrom), toBytes(keyTo))
+    val scan = new Scan()
     scan.setCacheBlocks(false)
     scan.setCaching(0)
     scan.setMaxVersions(1)
@@ -104,7 +105,7 @@ object HUtils extends Logg {
     scan.addFamily(familyBytes)
       .setId(s"$table-$family")
     scan.setFilter(new PageFilter(maxMessages))
-    fetchAttributes.foreach { case (qualifier) => scan.addColumn(familyBytes, toBytes(qualifier)) }
+    fetchAttributes.foreach { qualifier => scan.addColumn(familyBytes, toBytes(qualifier)) }
     val Tab = operator.getTable(table)
     val res = Tab.getScanner(scan)
     var msgs = res.next(maxMessages)
@@ -116,10 +117,11 @@ object HUtils extends Logg {
     }
     val out = tryAndGoNextAction0(msgs.zipWithIndex.map { case (r, index) => index -> r.getFamilyMap(familyBytes).asScala.map { case (k, v) => toStringBinary(k) -> v } }, closeResource(res)).toMap
     closeResource(Tab)
+    info(s"Total Time for Rdm ${currMillis-start} ms ${(currMillis-start)/1000} s")
     out
   }
 
-  def fetchFamilyQualifiers(table: String, familyQualifiers: Map[String, Set[String]], limit: Int = -1, offset: Int = -1)(operator: HBaseConnector): ListBuffer[(Map[String, mutable.Map[String, String]])] = {
+  def fetchFamilyQualifiers(table: String, familyQualifiers: Map[String, Set[String]], limit: Int = -1, offset: Int = -1)(operator: HBaseConnector): ListBuffer[Map[String, mutable.Map[String, String]]] = {
     val families = familyQualifiers.keySet.map(fam => fam -> toBytes(fam)).toMap
     val scan = new Scan
     scan.setCacheBlocks(false)
@@ -131,7 +133,7 @@ object HUtils extends Logg {
     familyQualifiers.foreach { case (fam, qualifiers) => qualifiers.foreach { qualifier => scan.addColumn(families(fam), toBytes(qualifier)) } }
     val Tab = operator.getTable(table)
     val res = Tab.getScanner(scan)
-    val out = new ListBuffer[(Map[String, mutable.Map[String, String]])]
+    val out = new ListBuffer[Map[String, mutable.Map[String, String]]]
     res.forEach(new Consumer[Result] {
       def accept(rs: Result): Unit = out += families.map { case (fam, famBy) => fam -> rs.getFamilyMap(famBy).asScala.map { case (k, v) => toStringBinary(k) -> toStringBinary(v) } }
     })
@@ -164,14 +166,14 @@ object HUtils extends Logg {
     get.setId(key)
     get.setMaxVersions(1)
     val familyBytes = toBytes(family)
-    attributes.foreach { case (qualifier) => get.addColumn(familyBytes, toBytes(qualifier)) }
+    attributes.foreach { qualifier  => get.addColumn(familyBytes, toBytes(qualifier)) }
     get
   }
 
   def deleteRowRequest(key: String, family: String, attributes: Set[String]): Delete = {
     val delete = new Delete(toBytes(key))
     val familyBytes = toBytes(family)
-    attributes.foreach { case (qualifier) => delete.addColumn(familyBytes, toBytes(qualifier)) }
+    attributes.foreach { qualifier => delete.addColumn(familyBytes, toBytes(qualifier)) }
     delete
   }
 

@@ -29,7 +29,7 @@ case class MqData(source: String, data: String, msgMeta: MSGMeta)
   * Created by Devaraj Jonnadula on 12/13/2016.
   */
 class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batchInterval: Int, batchSize: Int, sources: Set[String])
-                (tlmAuditorMapping: Map[String, (MSGMeta) => String], metaFromRaw: (String) => MSGMeta, tlmAckStage: String)
+                (tlmAuditorMapping: Map[String, MSGMeta => String], metaFromRaw: String => MSGMeta, tlmAckStage: String)
   extends Receiver[MqData](storageLevel = StorageLevel.MEMORY_ONLY) with Logg with MqConnector {
 
   self =>
@@ -44,6 +44,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
   private val restartTimeInterval = 30000
   private var consumerPool: ScheduledExecutorService = _
   private lazy val consumers = new mutable.HashMap[MessageConsumer, SourceListener]
+  private val noMeta = MSGMeta(EMPTYSTR,currMillis.toString,EMPTYSTR,EMPTYSTR,"NOFAC")
   @volatile private var hookInit = false
   @volatile private var pauseConsuming = false
 
@@ -76,7 +77,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     val con = activeConnection.get()
     if (con != null) {
       consumerPool = newDaemonCachedScheduler(s"WSMQ-Data-Fetcher-${self.id}", sources.size * 3)
-      var tlmAckIO: (String) => Unit = null
+      var tlmAckIO: String => Unit = null
       if (ackQueue.isDefined) {
         MQAcker(app, "appTLMRESPONSE")(mqHostsTlm, mqManagerTlm, mqChannelTlm, ackQueue.get)
         tlmAckIO = MQAcker.ackMessage(_: String, tlmAckStage)
@@ -141,7 +142,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
     con
   }
 
-  private case class EventListener(source: String, tlmAcknowledge: (String) => Unit) extends SourceListener {
+  private case class EventListener(source: String, tlmAcknowledge: String => Unit) extends SourceListener {
 
     @throws[Exception]
     override def handleMessage(message: Message): Boolean = {
@@ -153,7 +154,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
           new String(msgBuffer)
       }
       val data = msg.replaceAll("[\r\n]+", "\r\n")
-      val meta = metaFromRaw(data)
+      val meta = tryAndReturnDefaultValue0(metaFromRaw(data),noMeta)
       var persisted = false
       try {
         self.store(MqData(source, data, meta))
@@ -183,7 +184,7 @@ class MqReceiver(nameNodes: String, id: Int, app: String, jobDesc: String, batch
 
   private def handleAcks(msg: Message): Unit = {
     try {
-      tryAndThrow(msg.acknowledge(), error(_: Throwable))
+    //  tryAndThrow(msg.acknowledge(), error(_: Throwable))
     }
     catch {
       case t: Throwable =>

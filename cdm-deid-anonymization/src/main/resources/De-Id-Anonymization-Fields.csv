@@ -35890,7 +35890,7 @@ PID,patient_account_num|assigning_agency_or_department|second_alternate_value_se
 PID,patient_account_num|assigning_agency_or_department|second_alternate_value_set_version_id,DE_ID
 PID,patient_account_num|security_check,DE_ID
 PID,patient_account_num|security_check_scheme,DE_ID
-PID,_num_patient,Anonymize
+PID,ssn_num_patient,Anonymize
 PID,driver_license_num,DE_ID
 PID,driver_license_num|license_num,DE_ID
 PID,driver_license_num|issuing_state_province_country,DE_ID
