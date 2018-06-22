@@ -95,13 +95,13 @@ object HL7Job extends Logg with App {
   private val app = lookUpProp("hl7.app")
   private val consumerGroup = lookUpProp("hl7.group")
   private val kafkaConsumerProp = (consumerConf(consumerGroup) asScala) toMap
-  private val rejectedTopic = lookUpProp("hl7.reject")
+  private val rejectedTopic = tryAndReturnDefaultValue0(lookUpProp("hl7.reject"),EMPTYSTR)
   private val hl7JsonTopic = {
-    val temp = lookUpProp("hl7.json").split(COMMA)
+    val temp = tryAndReturnDefaultValue0(lookUpProp("hl7.json"),EMPTYSTR).split(COMMA)
     (tryAndReturnDefaultValue0(temp(0), EMPTYSTR), tryAndReturnDefaultValue0(temp(1), EMPTYSTR))
   }
-  private val segTopic = lookUpProp("hl7.segment")
-  private val auditTopic = lookUpProp("hl7.audit")
+  private val segTopic = tryAndReturnDefaultValue0(lookUpProp("hl7.segment"),EMPTYSTR)
+  private val auditTopic = tryAndReturnDefaultValue0(lookUpProp("hl7.audit"),EMPTYSTR)
   private val maxMessageSize = lookUpProp("hl7.message.max") toInt
   private val kafkaProducerConf = producerConf()
   private val messageTypes = lookUpProp("hl7.messages.type") split COMMA
@@ -109,7 +109,7 @@ object HL7Job extends Logg with App {
   private val topicsToSubscribe = hl7MsgMeta.map(hl7Type => hl7Type._2.kafka) toSet
   private val hl7TypesMapping = hl7MsgMeta.map(hl7Type => hl7Type._1.toString -> hl7Type._1)
   private val templatesMapping = loadTemplate(lookUpProp("hl7.template"))
-  private val segmentsMapping = applySegmentsToAll(loadSegments(lookUpProp("hl7.segments")) ++ loadSegments(lookUpProp("hl7.adhoc-segments")), messageTypes)
+  private val segmentsMapping = applySegmentsToAll(loadSegments(tryAndReturnDefaultValue0(lookUpProp("hl7.segments"),EMPTYSTR)) ++ loadSegments(tryAndReturnDefaultValue0(lookUpProp("hl7.adhoc-segments"),EMPTYSTR)), messageTypes)
   private val modelsForHl7 = hl7MsgMeta.map(msgType => msgType._1 -> segmentsForHl7Type(msgType._1, segmentsMapping(msgType._1.toString)))
   private val registeredSegmentsForHl7 = modelsForHl7.mapValues(_.models.keySet)
   private val hl7Parsers = hl7MsgMeta map (hl7 => hl7._1 -> new HL7Parser(hl7._1, templatesMapping))
@@ -160,6 +160,8 @@ object HL7Job extends Logg with App {
   private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
   loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
   LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
+  private val isBatchJob: Boolean = tryAndReturnDefaultValue0(lookUpProp("isBatchJob").toBoolean, false)
+  @volatile private var tryRestart: Boolean = true
   private val rddsBat = new mutable.Queue[String]
   private val rddsBatProcessing = new mutable.Queue[String]
   private val size = tryAndReturnDefaultValue0(lookUpProp("btc.size").toInt, 1000)
