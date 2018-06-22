@@ -147,6 +147,8 @@ object HL7Job extends Logg with App {
   private val inputSource: InputSource.Source = tryAndReturnDefaultValue(asFunc(InputSource.withName(lookUpProp("hl7.data.source"))), InputSource.KAFKA)
   if (inputSource == InputSource.HDFS) require(messageTypes.size == 1, "When Source is Configured as HDFS only one Message type should be active")
   private val isKafkaSource: Boolean = inputSource == InputSource.KAFKA
+  @volatile private var tryRestart: Boolean = true
+
 
   // ******************************************************** Spark Part ***********************************************
   private val checkpointEnabled = isCheckPointEnabled
@@ -160,6 +162,7 @@ object HL7Job extends Logg with App {
   private val sparkManagesOffsets: Boolean = checkpointEnabled && isKafkaSource
   loginFromKeyTab(sparkConf.get("spark.yarn.keytab"), sparkConf.get("spark.yarn.principal"), Some(hdpConf))
   LoginRenewer.scheduleRenewal(master = true, namesNodes = EMPTYSTR, conf = Some(hdpConf))
+  private val format: InputSource.Format = tryAndReturnDefaultValue(asFunc(InputSource.withName(lookUpProp("hl7.data.source.format"))), InputSource.sequence)
   private val isBatchJob: Boolean = tryAndReturnDefaultValue0(lookUpProp("isBatchJob").toBoolean, false)
   @volatile private var tryRestart: Boolean = true
   private val rddsBat = new mutable.Queue[String]
@@ -177,7 +180,7 @@ object HL7Job extends Logg with App {
 
   private val sparkStrCtx: StreamingContext = if (checkpointEnabled) sparkUtil streamingContext(checkPoint, newCtxIfNotExist) else sparkUtil createStreamingContext(sparkConf, batchDuration)
   sparkStrCtx.sparkContext setJobDescription lookUpProp("job.desc")
-  private val sql = new SQLContext(sparkStrCtx.sparkContext)
+  private var sqlCtx: SQLContext = _
   initialise(sparkStrCtx)
   startStreams()
 
@@ -208,39 +211,24 @@ object HL7Job extends Logg with App {
     HBaseConnector stop()
     if (appManagesOffset) offSetManager = new OffsetManager(lookUpProp("cdm.hl7.hbase.namespace"), lookUpProp("cdm.hl7.hbase.app.state.store"), app, hdpConf)
     sparkStrCtx.sparkContext addSparkListener new MetricsListener(sparkStrCtx)
+    if(isBatchJob) sparkStrCtx addStreamingListener new BatchJobListener
     segmentsAccumulators = registerSegmentsMetric(sparkStrCtx)
     segmentsDriverMetrics = driverSegmentsMetric()
     parserAccumulators = registerParserMetric(sparkStrCtx)
     parserDriverMetrics = driverParserMetric()
-    restoreMetrics()
-    monitorHandler = newDaemonCachedScheduler(s"$app-Monitor-Pool", 3)
+    monitorHandler = newDaemonScheduler(s"$app-Monitor-Pool")
     if (tryAndReturnDefaultValue0(lookUpProp("cdm.stats.generate").toBoolean, false)) {
       monitorHandler scheduleAtFixedRate(new StatsReporter(app), initDelay + 2, 86400, TimeUnit.SECONDS)
     }
     if (monitorInterval > 0) {
       monitorHandler scheduleAtFixedRate(new DataFlowMonitor(sparkStrCtx, monitorInterval), minToSec(monitorInterval) + 2, minToSec(monitorInterval), TimeUnit.SECONDS)
     }
-    sparkUtil addHook persistParserMetrics
-    sparkUtil addHook persistSegmentMetrics
-    dataDirectories()
-    /*  monitorHandler scheduleAtFixedRate(new Runnable {
-        override def run(): Unit = {
-          if (rddsBatProcessing.isEmpty && rddsBat.nonEmpty) {
-            Range(0, size).foreach { x =>
-              val t = tryAndReturnDefaultValue0(rddsBat.dequeue(), EMPTYSTR)
-              if (t != EMPTYSTR) {
-                rddsBatProcessing.enqueue(t)
-                info("Adding new batch "+ t)
-              }
-            }
-            runJob(sparkStrCtx)
-          }else{
-            info("existing batch still running "+ rddsBatProcessing.mkString(";"))
-          }
-        }
-
-      }, 500, size, TimeUnit.SECONDS)
-  */
+    if(!isBatchJob) {
+      restoreMetrics()
+      sparkUtil addHook persistParserMetrics
+      sparkUtil addHook persistSegmentMetrics
+    }
+    if (inputSource == InputSource.HDFS && format == InputSource.parquet) sqlCtx = new SQLContext(sparkStrCtx.sparkContext)
     sHook = newThread(s"$app-SparkCtx SHook", runnable({
       close()
       shutDown()
@@ -276,8 +264,7 @@ object HL7Job extends Logg with App {
           messagesInRDD = inc(messagesInRDD, range.count())
           self.msgTypeFreq update(range.topic, (sourceHl7Mapping(range.topic), inc(self.msgTypeFreq(range.topic)._2, range.count())))
         })
-      } else messagesInRDD = 1
-      //rdd.count()
+      } else messagesInRDD = rdd.asInstanceOf[RDD[_]] count()
       if (messagesInRDD > 0L) {
         info(s"Got RDD ${rdd.id} with Partitions :: " + rdd.partitions.length + " and Messages Cnt:: " + messagesInRDD + " Executing Asynchronously Each of Them.")
         val hl7s = self.messageTypes
@@ -305,7 +292,7 @@ object HL7Job extends Logg with App {
         val hTables = self.hTables.toSet
         val part = self.maxPartitions
         val tracker = new ListBuffer[FutureAction[Unit]]
-        tracker += rdd.repartition(part) foreachPartitionAsync (dataItr => {
+        tracker += rdd foreachPartitionAsync (dataItr => {
           if (dataItr nonEmpty) {
             propFile = confFile
             LoginRenewer.scheduleRenewal()
@@ -315,7 +302,7 @@ object HL7Job extends Logg with App {
             val hl7SegIO = kafkaOut.writeData(_: String, _: String, segOut)(maxMessageSize, segOverSized)
             val auditIO = kafkaOut.writeData(_: String, _: String, auditOut)(maxMessageSize)
             val adhocIO = kafkaOut.writeData(_: String, _: String, _: String)(maxMessageSize, adhocOverSized)
-            val hBaseWriter = HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"), hTables, lookUpProp("cdm.hl7.hbase.batch.write.size").toInt).
+            val hBaseWriter = HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace"), hTables, lookUpProp("cdm.hl7.hbase.batch.write.batchSize").toInt).
               map { case (dest, operator) => dest -> (HUtils.sendRequest(operator)(_: String, _: String, _: mutable.Map[String, String], _: Boolean)) }
             EnrichCacheManager(lookUpProp("hl7.adhoc-segments"), hl7s, offHeapHandlers(HBaseConnector(lookUpProp("cdm.hl7.hbase.namespace")), hBaseWriter))
             var tlmAckIO: (String, String) => Unit = null
@@ -436,7 +423,7 @@ object HL7Job extends Logg with App {
             sparkStrCtx awaitTermination()
           }
 
-          tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
+          if (tryRestart)  tryAndLogErrorMes(retry.retryOperation(retryStart), error(_: Throwable), Some(s"Cannot Start sparkStrCtx for $app After Retries ${retry.triesMadeSoFar()}"))
         }
     } finally {
       shutDown()
@@ -628,7 +615,8 @@ object HL7Job extends Logg with App {
     persistSegmentMetrics()
   }
 
-  private def dataDirectories(): Unit = {
+  private def dataDirectories(): mutable.Queue[String] = {
+    val batches = new mutable.Queue[String]()
     val dirs = lookUpProp("hl7.data.directories")
     val dateRanges = tryAndReturnDefaultValue(asFunc(lookUpProp("hl7.data.dates")), EMPTYSTR).split(COMMA, -1)
     val dataDirs = new ListBuffer[String]
@@ -662,8 +650,9 @@ object HL7Job extends Logg with App {
         fileSystem.listStatus(new Path(dirs)).foreach { fs =>
           val name = fs.getPath.getName
           val temp = name substring (name.indexOf("transaction_date=") + "transaction_date=".length)
-          dataDirs += s"${fs.getPath}"
-          info(s"$dirs - ${fs.getPath}")
+          if (temp.toInt - dates.toInt >= 0 && (temp.toInt <= upto || upto == -1)) {
+            dataDirs += s"${fs.getPath}"
+          }
         }
       }
       else if (dates == "*") {
@@ -675,11 +664,7 @@ object HL7Job extends Logg with App {
       else dataDirs += s"$dirs$dates"
     }
     if (dateRanges isEmpty) dataDirs += dirs
-    dataDirs.filter(path => fileSystem.exists(new Path(path))).foreach(x => rddsBat.enqueue(x))
-    Range(0, size).foreach { x =>
-      val t = tryAndReturnDefaultValue0(rddsBat.dequeue(), EMPTYSTR)
-      if (t != EMPTYSTR) rddsBatProcessing.enqueue(t)
-    }
+    batches ++= dataDirs
   }
 
   private def isCheckPointEnabled: Boolean = {
@@ -743,6 +728,31 @@ object HL7Job extends Logg with App {
           })
       }
     }
+  }
+
+  private class BatchJobListener extends StreamingListener {
+
+    private var noData = 0L
+    @volatile private var shouldShutdown: Boolean = false
+    private val maxBatchSize = tryAndReturnDefaultValue0(lookUpProp("batchJobSize").toInt,100)
+    private val shutdownListener = newDaemonScheduler(app + "shutdownListener")
+    shutdownListener.scheduleAtFixedRate(runnable({
+      if (shouldShutdown) {
+        tryRestart = false
+        unregister(sHook)
+        shutDown()
+        close()
+      }
+    }), 0, 1, TimeUnit.SECONDS)
+
+    override def onBatchCompleted(batchCompleted: StreamingListenerBatchCompleted): Unit = {
+      super.onBatchCompleted(batchCompleted)
+      if (batchCompleted.batchInfo.numRecords <= 0L) {
+        noData = inc(noData)
+        shouldShutdown = batchCompleted.batchInfo.outputOperationInfos.values.count(_.failureReason.isEmpty) == 1 && noData >= maxBatchSize
+      }
+    }
+
   }
 
   private class DataFlowMonitor(sparkStrCtx: StreamingContext, timeInterval: Int) extends Runnable {
@@ -830,8 +840,11 @@ object HL7Job extends Logg with App {
     type Source = Value
     val KAFKA: InputSource.Value = Value("KAFKA")
     val HDFS: InputSource.Value = Value("HDFS")
+    type Format = Value
+    val sequence: InputSource.Value = Value("SEQUENCE")
+    val parquet: InputSource.Value = Value("PARQUET")
 
-    def convert(source: Source, msgType: String, dataItr: Iterator[(Object, Object)]): Iterator[(String, String)] = {
+    def convert(source: Source, msgType: String, dataItr: Iterator[(Object, Object)], name: String = EMPTYSTR): Iterator[(String, String)] = {
       source match {
         case InputSource.KAFKA => dataItr.asInstanceOf[Iterator[(String, String)]]
         case InputSource.HDFS =>
@@ -841,7 +854,7 @@ object HL7Job extends Logg with App {
     }
 
 
-    private case class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(String, String)](sparkCtx, Nil) {
+    private[cdm] class FileBasedRdd(dir: String, sparkCtx: SparkContext, maxPartitions: Int) extends RDD[(String, String)](sparkCtx, Nil) {
       self =>
       info(s"FileBase Rdd initiated for $dir with Max Partitions $maxPartitions & $sparkCtx")
       self.setName(dir)
