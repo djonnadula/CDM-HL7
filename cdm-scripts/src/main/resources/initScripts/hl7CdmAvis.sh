@@ -3,7 +3,7 @@
 # version 1.0.0 2016-08-22 (YYYY-MM-DD)
 #
 # chkconfig: - 86 06
-# description:  Starts and stops HCA CDM HL7 AVIS Processing  service
+# description:  Starts and stops  CDM HL7 AVIS Processing  service
 #
 ### BEGIN INIT INFO
 # Provides:          hl7CdmAvis
@@ -34,7 +34,7 @@ MAXHEAP=512
 JMXPORT=50000
 CONFIG='/hadoop/cdm/avis/process/latest/AdvancedVent.properties'
 INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
--cp  ${SERVICE}:/opt/cloudera/parcels/CDH/jars/*  com.hca.cdm.job.Hl7Driver ${CONFIG} \
+-cp  ${SERVICE}:/opt/cloudera/parcels/CDH/jars/*  com..cdm.job.Hl7Driver ${CONFIG} \
 "
 
 # pid file for the daemon

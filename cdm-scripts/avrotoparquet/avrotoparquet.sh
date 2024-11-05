@@ -1,9 +1,9 @@
 #!/bin/bashd
 
 kerberosReAuth() {
-    kinitcmd="kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@HCA.CORPAD.NET"
+    kinitcmd="kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@.NET"
     echo "Checking for Kerberos ticket..."
-    klist | grep HCA.CORPAD.NET
+    klist | grep .NET
     ticketExists=$?
     if [[ "$ticketExists" -eq 0 ]];then
     	echo "You got a ticket, So no kinit stuff...";

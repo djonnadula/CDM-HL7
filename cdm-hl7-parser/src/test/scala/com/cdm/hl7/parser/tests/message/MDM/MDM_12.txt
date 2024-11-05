@@ -1,0 +1,66 @@
+MSH|^~\&||COCPN|||201609081021||MDM^T02|MT_COCPN_MDM_PNDPTO.1.12019823|P|2.1|||||
+PID|1||E012310231|E0980983|GERRARD^STEVEN^R|NMN|19800907|F|CULP^STEVEN^^^^^M~GERRARD^STEVEN^^^^^A|W|1 RD^^BLUEBURG^TN^73644|005|999-999-9999|999-999-9999||M|NON|E5813752091485|999-99-9999
+PV1|1|I|E.ICUM^E.2068^A|EM|||FARDA^GAry^Philipe^C^^^MD^^^^^^XX|.SELF^Referred^Self^^^^^^^^^^XX|.NO PCP^Physician^No^Primary or Family^^^^^^^^^XX|P||||PR|||FARDA^GAry^Philipe^C^^^MD^^^^^^XX|IN||99|||||||||||||||||||COCPN||ADM|||201609251056
+TXA||EKG^EKG REPORT FOR MUSE|201609081021|201609250919||201609250919|||BUFGA^Buffon^Geonvanie^^^^MD||EVEN.MUSE^VENDOR^MUSE|E.EKG20160908-0009^MUSE460478|||E.EKG|EKG|Signed|||||BUFGA^Buffon^Geonvanie^^^^MD^^^^^^^^201609250919
+OBX|1|TX||H|                               OU MEDICAL CENTER
+OBX|2|TX||H|                              1200 Everett Drive
+OBX|3|TX||H|                           Oklahoma City, OK  73104
+OBX|4|TX||H| 
+OBX|5|TX||H|            Name: GERRARD,STEVEN R             
+OBX|6|TX||H|  Account Number: E5813752091485
+OBX|7|TX||H|     Unit Number: E012310231
+OBX|8|TX||H|            Room: E.2068    
+OBX|9|TX||H|   Date Of Birth: 09/07/75
+OBX|10|TX||H|Attending Doctor: GAry MD,Philipe C              
+OBX|11|TX||H|            Date: 09/25/16
+OBX|12|TX||X|Test Performed on 09/25/2016  09:19:26 AM
+OBX|13|TX||X|Test Reason : Chest Pain
+OBX|14|TX|||Blood Pressure : ***/*** mmHG
+OBX|15|TX|||Vent. Rate : 101 BPM     Atrial Rate : 101 BPM
+OBX|16|TX|||   P-R Int : 166 ms          QRS Dur : 082 ms
+OBX|17|TX|||    QT Int : 344 ms       P-R-T Axes : 037 059 016 degrees
+OBX|18|TX|||   QTc Int : 446 ms
+OBX|19|TX||| 
+OBX|20|TX|||Sinus tachycardia
+OBX|21|TX|||Nonspecific T wave abnormality
+OBX|22|TX|||Abnormal ECG
+OBX|23|TX||| 
+OBX|24|TX|||Confirmed by Buffon MD, Geonvanie (28) on 9/26/2016 10:21:16 AM
+OBX|25|TX||| 
+OBX|26|TX|||Referred By: Philipe GAry           Electronically signed by:Geonvanie Buffon MD
+OBX|27|TX||X| 
+OBX|28|TX||X| 
+OBX|29|TX||X| 
+OBX|30|TX||X|Electronically Signed by Geonvanie Buffon, MD for Geonvanie Buffon, MD on 09/26/16 at 
+OBX|31|TX||X| 
+OBX|32|TX||X| 
+OBX|33|TX||X| 
+OBX|34|TX||X| 
+OBX|35|TX||X| 
+OBX|36|TX||X| 
+OBX|37|TX||X| 
+OBX|38|TX||X| 
+OBX|39|TX||X| 
+OBX|40|TX||X| 
+OBX|41|TX||X| 
+OBX|42|TX||X| 
+OBX|43|TX||X| 
+OBX|44|TX||X| 
+OBX|45|TX||X| 
+OBX|46|TX||X| 
+OBX|47|TX||X| 
+OBX|48|TX||X| 
+OBX|49|TX||X| 
+OBX|50|TX||X| 
+OBX|51|TX||X| 
+OBX|52|TX||X| 
+OBX|53|TX||X| 
+OBX|54|TX||X| 
+OBX|55|TX||X| 
+OBX|56|TX||X| 
+OBX|57|TX||T| 
+OBX|58|TX||T|PATIENT NAME:  GERRARD,STEVEN R             ACCOUNT #:  E5813752091485
+ZUR|1|E0980983
+ZUR|2|Sun Sep 25+09:19:26 2016
+ZUR|3|OUMCWPAPPMSE02
+ZUR|4|Server1

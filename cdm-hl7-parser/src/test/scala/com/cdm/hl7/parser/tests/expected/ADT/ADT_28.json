@@ -1,0 +1,213 @@
+{
+  "0000.COMN": {
+    "sending_facility": "STMH",
+    "message_control_id": "EPIC_STMH_ADT_39588064",
+    "medical_record_num": "1000619675",
+    "medical_record_urn": "W000201984",
+    "patient_account_num": ""
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": null,
+    "sending_facility": "STMH",
+    "receiving_application": null,
+    "receiving_facility": null,
+    "date_time_of_message": "20170516144416",
+    "security": "LTO7796",
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A40"
+    },
+    "message_control_id": "EPIC_STMH_ADT_39588064",
+    "processing_id": "P",
+    "version_id": "2.3",
+    "sequence_num": null,
+    "continuation_pointer": "Epic_Mountain_PRD"
+  },
+  "0002.EVN": {
+    "event_type_code": "A40",
+    "recorded_date_time": "20170516144416",
+    "date_time_planned_event": null,
+    "event_reason_code": "EPT_MERGE",
+    "operator_id": {
+      "person_id": "LTO7796",
+      "family_name": "PEA",
+      "given_name": "TRESA",
+      "second_and_further_given_names_or_initials_thereof": "P",
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": "MTNUT",
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": null,
+      "assigning_facility": "STMH"
+    }
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id": {
+      "id_num": "W109878",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": "SLCURN",
+      "id_type_code": "SLCURN"
+    },
+    "patient_id_list": {
+      "id_num": "1000619675",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": "EPIC",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": {
+      "id_num": "W000201984",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": "SMHP",
+      "id_type_code": "SMHP"
+    },
+    "patient_name": {
+      "family_name": "BLACK",
+      "given_name": "CHARBOIL",
+      "second_and_further_given_names_or_initials_thereof": "RECKTOPOID"
+    },
+    "mother_maiden_name": null,
+    "date_time_of_birth": "19600416",
+    "administrative_sex": "M",
+    "patient_alias": [
+      {
+        "family_name": "BLACK",
+        "given_name": "PHIL",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null
+      },
+      {
+        "family_name": "BLACK",
+        "given_name": "PHIL",
+        "second_and_further_given_names_or_initials_thereof": "E",
+        "suffix": null
+      },
+      {
+        "family_name": "BLACK",
+        "given_name": "CHARBOIL",
+        "second_and_further_given_names_or_initials_thereof": "RECKTOPOID",
+        "suffix": null
+      }
+    ],
+    "race": "W",
+    "patient_address": {
+      "street_address": "4 East Ave",
+      "other_designation": null,
+      "city": "SMORKSVILLE",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "79878",
+      "country": null,
+      "address_type": "P"
+    },
+    "county_code": null,
+    "phone_num_home": {
+      "telephone_num": "(999)999-9999",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H",
+      "communication_address": null,
+      "country_code": null,
+      "area_city_code": "801",
+      "local_num": "5293401"
+    },
+    "phone_num_business": null,
+    "primary_language": "ENGLISH",
+    "marital_status": null,
+    "religion": "NON",
+    "patient_account_num": null,
+    "ssn_num_patient": "999-99-9999",
+    "driver_license_num": null,
+    "mother_name": null,
+    "ethnic_group": null,
+    "birth_place": null,
+    "multiple_birth_indicator": null,
+    "birth_order": null,
+    "citizenship": null,
+    "veterans_military_status": null,
+    "nationality": null,
+    "patient_death_date_and_time": null,
+    "patient_death_indicator": "N"
+  },
+  "0004.ZPD": {
+    "patient_ancestry": null,
+    "preferred_communication_method": null,
+    "multiple_birth_total": null,
+    "my_chart_status": null,
+    "research_study_id": null,
+    "authorized_service_area": null,
+    "pregnancy_flag": "N"
+  },
+  "0005.PD1": {},
+  "0006.MRG": {
+    "prior_patient_id_list": [
+      {
+        "id_num": "1001197412",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "EPIC",
+        "assigning_authority": "MRN"
+      },
+      {
+        "id_num": "Q347918",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "SLCURN",
+        "assigning_authority": "SLCURN"
+      },
+      {
+        "id_num": "M000063413",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "LVH",
+        "assigning_authority": "LVH"
+      },
+      {
+        "id_num": "Q000472666",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "ORMC",
+        "assigning_authority": "ORMC"
+      }
+    ],
+    "prior_alternate_patient_id": "1",
+    "prior_patient_account_num": "2",
+    "prior_patient_id": [
+      {
+        "id_num": "1001197412",
+        "identifier_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "EPIC",
+        "assigning_authority": "MRN"
+      },
+      {
+        "id_num": "Q347918",
+        "identifier_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "SLCURN",
+        "assigning_authority": "SLCURN"
+      },
+      {
+        "id_num": "M000063413",
+        "identifier_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "LVH",
+        "assigning_authority": "LVH"
+      },
+      {
+        "id_num": "Q000472666",
+        "identifier_check_digit": null,
+        "check_digit_scheme": null,
+        "sa": "ORMC",
+        "assigning_authority": "ORMC"
+      }
+    ]
+  }
+}

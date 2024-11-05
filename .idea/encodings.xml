@@ -3,11 +3,27 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-deid-anonymization" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-deid-anonymization/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-deid-anonymization/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-hl7-parser" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-hl7-parser/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-hl7-parser/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-io" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-io/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-io/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-jobs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-jobs/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-jobs/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-models" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-models/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-models/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cdm-scripts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-scripts/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cdm-scripts/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
 </project>

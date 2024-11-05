@@ -15,14 +15,14 @@ AVRO_HISTORY_DIR="hl7_avro_data_history"
 
 for DATE in "${DATE_ARR[@]}"
 do
-    timeout -s9 300s kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@HCA.CORPAD.NET
+    timeout -s9 300s kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@.NET
     echo "Current directory date: $DATE"
     echo "hdfs dfs -mv $HDFS_DIR_ROOT/$AVRO_DATA_DIR/$DATE $HDFS_DIR_ROOT/$AVRO_TODAY_DIR/"
     hdfs dfs -mv $HDFS_DIR_ROOT/$AVRO_DATA_DIR/$DATE $HDFS_DIR_ROOT/$AVRO_TODAY_DIR/
 
     hive -f HL7AvroToParquet_history.hql
 
-    timeout -s9 300s kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@HCA.CORPAD.NET
+    timeout -s9 300s kinit -k -t /home/corpsrvcdmbtch_qa/corpsrvcdmbtch_qa.keytab CorpSRVCDMBtch_QA@.NET
     #hdfs dfs -find /user/hive/warehouse/hl7.db/hl7_avro_data/ -type d -ctime +5 -exec mv '{}' /user/hive/warehouse/hl7.db/hl7_avro_data_history/ \;
 
     if [ $? -eq 0 ]; then	

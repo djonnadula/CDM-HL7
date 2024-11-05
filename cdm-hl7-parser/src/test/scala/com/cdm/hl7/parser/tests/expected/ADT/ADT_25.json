@@ -1,0 +1,894 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "MT6_FRNK_ADT_1124574.",
+    "medical_record_num": "K000002505",
+    "medical_record_urn": "A1-B20151218101601316",
+    "patient_account_num": "FR0000000220"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT6_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "receiving_facility": null,
+    "date_time_of_message": "20151218115500-0600",
+    "security": null,
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A41"
+    },
+    "message_control_id": "MT6_FRNK_ADT_1124574.",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "sequence_num": null,
+    "continuation_pointer": "KYB"
+  },
+  "0002.EVN": {
+    "event_type_code": "A41",
+    "recorded_date_time": "201512181155",
+    "date_time_planned_event": null,
+    "event_reason_code": null,
+    "operator_id": {
+      "person_id": "QBE8554",
+      "family_name": "Hammock",
+      "given_name": "Brittany"
+    },
+    "event_occured": "20151218"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id": null,
+    "patient_id_list": [
+      {
+        "id_num": "K000002505",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A00002475",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
+      }
+    ],
+    "alternate_patient_id": {
+      "id_num": "A1-B20151218101601316",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": null,
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
+    },
+    "patient_name": {
+      "family_name": "OSBORN",
+      "given_name": "NORMAN",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "name_type_code": "L"
+    },
+    "mother_maiden_name": null,
+    "date_time_of_birth": "19840220",
+    "administrative_sex": "M",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": {
+      "street_address": null,
+      "other_designation": null,
+      "city": null,
+      "state_or_province": null,
+      "zip_or_postal_code": null,
+      "country": null,
+      "address_type": "P"
+    },
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
+    "patient_account_num": "FR0000000220"
+  },
+  "0004.MRG": {
+    "prior_patient_id_list": null,
+    "prior_alternate_patient_id": null,
+    "prior_patient_account_num": "FR0000121525"
+  },
+  "0005.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "FR.4W",
+      "room": "FR.430",
+      "bed": "A"
+    },
+    "admission_type": "EL",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
+    "attending_doctor": {
+      "person_id": "DR.ATND01",
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    },
+    "referring_doctor": {
+      "person_id": "DR.FAM01",
+      "family_name": "Family01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    },
+    "consulting_doctor": null,
+    "hospital_service": "OP",
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": "CR",
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": {
+      "person_id": "DR.ADM01",
+      "family_name": "Admitting01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    },
+    "patient_type": "INO",
+    "visit_num": null,
+    "financial_class": "U",
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": "FRNK",
+    "bed_status": null,
+    "account_status": "ADM",
+    "pending_location": null,
+    "prior_temporary_location": null,
+    "admit_date_time": "201512181113"
+  },
+  "0006.PV2": {
+    "prior_pending_location": null,
+    "accommodation_code": {
+      "id": "SP",
+      "text": "Semi Private Room"
+    },
+    "admit_reason": "OVERDOSE",
+    "transfer_reason": null,
+    "patient_valuables": null,
+    "patient_valuables_location": null,
+    "visit_user_code": null,
+    "expected_admit_date_time": null,
+    "expected_discharge_date_time": null,
+    "estimated_length_of_inpatient_stay": null,
+    "actual_length_of_inpatient_stay": "1",
+    "visit_description": null,
+    "referral_source_code": null,
+    "previous_service_date": null,
+    "employment_illness_related_indicator": null,
+    "purge_status_code": null,
+    "purge_status_date": null,
+    "special_program_code": null,
+    "retention_indicator": null,
+    "expected_num_of_insurance_plans": null,
+    "visit_publicity_code": null,
+    "visit_protection_indicator": null,
+    "clinic_organization_name": null,
+    "patient_status_code": null,
+    "visit_priority_code": "EL",
+    "previous_treatment_date": null,
+    "expected_discharge_disposition": null,
+    "signature_on_file_date": null,
+    "first_similar_illness_date": null,
+    "patient_charge_adjustment_code": null,
+    "recurring_service_code": null,
+    "billing_media_code": null,
+    "expected_surgery_date_and_time": null,
+    "military_partnership_code": null,
+    "military_non_availability_code": null,
+    "newborn_baby_indicator": "N"
+  },
+  "0007.ROL": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
+      "person_id": "DR.ATND01",
+      "family_name": "Attending01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0008.ROL": {
+    "role_instance_id": "2",
+    "action_code": "AD",
+    "role_rol": "RP",
+    "role_person": {
+      "person_id": "DR.FAM01",
+      "family_name": "Family01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0009.ROL": {
+    "role_instance_id": "3",
+    "action_code": "AD",
+    "role_rol": "AD",
+    "role_person": {
+      "person_id": "DR.ADM01",
+      "family_name": "Admitting01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0010.ROL": {
+    "role_instance_id": "4",
+    "action_code": "AD",
+    "role_rol": "PP",
+    "role_person": {
+      "person_id": "DR.PCP01",
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0011.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F010A",
+      "text": "Deposit Req?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0012.OBX": {
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F011A",
+      "text": "Est Amt Due",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0013.OBX": {
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F012A",
+      "text": "Amt Rec",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0014.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F014A",
+      "text": "Collected by",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0015.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F016A",
+      "text": "Pt Advised of Financial Responsibility   Resources, Refer to",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0016.OBX": {
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F017A",
+      "text": "Discharge Financial Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0017.OBX": {
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F027A",
+      "text": "Hold Release Reason",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0018.OBX": {
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F028A",
+      "text": "Hold User ID:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0019.OBX": {
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F031A",
+      "text": "Amt Req",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0020.OBX": {
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P010A",
+      "text": "Does the Patient Have Temporary Address?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0021.OBX": {
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P011A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0022.OBX": {
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P012A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0023.OBX": {
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P013A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0024.OBX": {
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P014A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0025.OBX": {
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P015A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0026.OBX": {
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P016A",
+      "text": "Home PH",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0027.OBX": {
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P017A",
+      "text": "County",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0028.OBX": {
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P018A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0029.OBX": {
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P019A",
+      "text": "Temporary Address Until?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0030.OBX": {
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P020A",
+      "text": "Comment",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0031.OBX": {
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P050A",
+      "text": "Does Patient Have Additional Employment?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0032.OBX": {
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P051A",
+      "text": "Name:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0033.OBX": {
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P052A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0034.OBX": {
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P053A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0035.OBX": {
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P054A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0036.OBX": {
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P055A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0037.OBX": {
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P056A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0038.OBX": {
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P057A",
+      "text": "Work Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0039.OBX": {
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P058A",
+      "text": "Occupation",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0040.OBX": {
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P059A",
+      "text": "Emp Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0041.OBX": {
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P062A",
+      "text": "Description",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0042.OBX": {
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R032A",
+      "text": "If Yes, Which Facility?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0043.OBX": {
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R033A",
+      "text": "If Other, Which Facility?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0044.DG1": {
+    "set_id": "1",
+    "diagnosis_coding_method": null,
+    "diagnosis_code": {
+      "id": "F14.150",
+      "text": "COCAINE ABUSE W COCAINE-INDUC PSYCHOTIC DISORDER W DELUSIONS",
+      "name_of_coding_system": "I10"
+    },
+    "diagnosis_description": null,
+    "diagnosis_date_time": null,
+    "diagnosis_type": "Other"
+  },
+  "0045.DRG": {
+    "diagnostic_related_group": "33"
+  }
+}

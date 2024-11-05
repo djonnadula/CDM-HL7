@@ -18,10 +18,10 @@
 KeyTab_Check()
 {
 # Generate Ticket
-TICKET="timeout 60 kinit -k -t /home/corpsrvcdmbtch/corpsrvcdmbtch.keytab corpsrvcdmbtch@HCA.CORPAD.NET"
+TICKET="timeout 60 kinit -k -t /home/corpsrvcdmbtch/corpsrvcdmbtch.keytab corpsrvcdmbtch@.CORPAD.NET"
 echo "Checking Valid Kerberos Key Ticket ..."
 
-timeout 60 klist | grep HCA.CORPAD.NET
+timeout 60 klist | grep .CORPAD.NET
 
 ticketExists=$?
 if [[ "$ticketExists" -eq 0 ]];then

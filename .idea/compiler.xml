@@ -6,14 +6,35 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cdm-common" />
-        <module name="cdm-de-id-anonymization" />
-        <module name="cdm-hl7-parser" />
         <module name="cdm-io" />
+        <module name="cdm-common" />
         <module name="cdm-jobs" />
-        <module name="cdm-models" />
+        <module name="cdm-hl7-parser" />
         <module name="cdm-scripts" />
+        <module name="cdm-models" />
+        <module name="cdm-de-id-anonymization" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cdm-common" target="1.5" />
+      <module name="cdm-de-id-anonymization" target="1.8" />
+      <module name="cdm-hl7" target="1.8" />
+      <module name="cdm-hl7-parser" target="1.8" />
+      <module name="cdm-io" target="1.8" />
+      <module name="cdm-jobs" target="1.8" />
+      <module name="cdm-models" target="1.8" />
+      <module name="cdm-scripts" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cdm-common" options="-Xlint:all,-serial,-path" />
+      <module name="cdm-de-id-anonymization" options="-Xlint:all,-serial,-path" />
+      <module name="cdm-hl7-parser" options="-Xlint:all,-serial,-path" />
+      <module name="cdm-io" options="-Xlint:all,-serial,-path" />
+      <module name="cdm-jobs" options="-Xlint:all,-serial,-path" />
+      <module name="cdm-models" options="-Xlint:all,-serial,-path" />
+      <module name="cdm-scripts" options="-Xlint:all,-serial,-path" />
+    </option>
   </component>
 </project>

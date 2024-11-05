@@ -34,7 +34,7 @@ MAXHEAP=512
 JMXPORT=50000
 CONFIG='/hadoop/cdm/patient-repository/latest/PatientCacheBuilder.properties'
 INVOCATION="java -Xms${MINHEAP}M -Xmx${MAXHEAP}M \
--cp  ${SERVICE}:/opt/cloudera/parcels/CDH/jars/*  com.hca.cdm.job.Hl7Driver ${CONFIG} \
+-cp  ${SERVICE}:/opt/cloudera/parcels/CDH/jars/*  com..cdm.job.Hl7Driver ${CONFIG} \
 "
 
 # pid file for the daemon

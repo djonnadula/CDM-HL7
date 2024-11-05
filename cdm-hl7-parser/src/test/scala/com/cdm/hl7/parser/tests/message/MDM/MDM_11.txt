@@ -1,0 +1,226 @@
+MSH|^~\&||COCOH|||201609261121||MDM^T02|MT_COCOH_MDM_OHDPTO.1.3798745|P|2.1|||||
+PID|1||K101241231|Y512542|ANNIE^HALL||19500101|F|^^^^^^M|W|1 RD^^KNOB TOWN^FL^11111|HERN|(999)999-9999|.||M|CHR|K01412321312|999-99-9999
+PV1|1|I|K.2N^K.268^A|EM|||NAVSAN^Clouderia^Sanjay^H^^^MD^^^^^^XX|.SELF^Referred^Self^^^^^^^^^^XX|HUBMA^Hubsher^Mason^I^^^MD^^^^^^XX|ICU||||PR|||NAVSAN^Clouderia^Sanjay^H^^^MD^^^^^^XX|IN||08PPO|||||||||||||||||||COCOH||ADM|||201609140926||||||||SHANAG^Sharma^Nagaraja^D^^^MD^^^^^^XX
+TXA||PDPNCTS^Thoracic Surgery Progress Note|201609261121|201609261114||201609261114|201609261114||ZZZKOEJE^Molars^Kerry^^^^PA~RATNA^Rattehalli^Narayana^Murthy S||YJKK^Molars^Kerry^K|K.PDOC20160926-0167|||K.PDOC|PDPNCTS|Signed|||||ZZZKOEJE^Molars^Kerry^^^^PA^^^^^^^^201609261114
+OBX|1|TX||| 
+OBX|2|TX|||OAK HILL HOSPITAL (COCOH)
+OBX|3|TX|||Thoracic Surgery Progress Note
+OBX|4|TX|||REPORT#:0926-0167  REPORT STATUS: Signed
+OBX|5|TX|||DATE:09/26/16 TIME: 1114
+OBX|6|TX|||  
+OBX|7|TX|||PATIENT: ANNIE,HALL                   UNIT #: K101241231
+OBX|8|TX|||ACCOUNT#: K01412321312                  ROOM/BED: K.268-A
+OBX|9|TX|||AGE: 63      SEX: F                     ATTEND: Clouderia,Sanjay H  MD
+OBX|10|TX|||ADM DT: 01/24/15                        AUTHOR: Molars,Kerry  PA
+OBX|11|TX|||REP SRV DT: 09/26/16                    REP SRV TM: 1114
+OBX|12|TX|||* ALL edits or amendments must be made on the electronic/computer document *
+OBX|13|TX||| 
+OBX|14|TX||| 
+OBX|15|TX|||General
+OBX|16|TX|||Post-op: day 5
+OBX|17|TX|||Status post:
+OBX|18|TX|||MVR
+OBX|19|TX||| 
+OBX|20|TX|||Objective
+OBX|21|TX||| 
+OBX|22|TX|||Physical Exam
+OBX|23|TX|||VS/I O
+OBX|24|TX|||Last Documented:
+OBX|25|TX|||                                  Result         Date Time
+OBX|26|TX|||                    B/P                  116/57  09/26 1045
+OBX|27|TX|||                    Pulse                    63  09/26 0756
+OBX|28|TX|||                    Resp                     29  09/26 0756
+OBX|29|TX|||                    Pulse Ox                 93  09/26 0544
+OBX|30|TX|||                    Temp                   36.9  09/26 0400
+OBX|31|TX|||                    O2 Delivery   NASAL CANNULA  09/24 2000
+OBX|32|TX|||                    O2 Flow Rate              2  09/24 2000
+OBX|33|TX|||                    FiO2                     50  09/21 1626
+OBX|34|TX||| 
+OBX|35|TX|||24 hour I O ending at 0700:
+OBX|36|TX|||                                    09/26 0700  09/25 1900
+OBX|37|TX|||                     Intake Total          444      1283.3
+OBX|38|TX|||                     Output Total         1150        2150
+OBX|39|TX|||                     Balance              -706      -866.7
+OBX|40|TX||| 
+OBX|41|TX|||                     Intake, IV            204       133.3
+OBX|42|TX|||                     Intake, Oral          240         850
+OBX|43|TX|||                     Intake, Oral                      300
+OBX|44|TX|||                     Supplement
+OBX|45|TX|||                     Output, Urine        1150        2150
+OBX|46|TX|||                     Patient          79.81 kg
+OBX|47|TX|||                     Weight
+OBX|48|TX||| 
+OBX|49|TX||| 
+OBX|50|TX|||General appearance: alert, awake, oriented, no acute distress
+OBX|51|TX|||Wound/incision:
+OBX|52|TX|||   Location:
+OBX|53|TX|||sternum
+OBX|54|TX|||   Site condition: dressing intact
+OBX|55|TX|||Cardiovascular: hemodynamically stable, normal heart sounds, sinus bradycardia 
+OBX|56|TX|||Respiratory: no distress
+OBX|57|TX|||Extremities: moves all
+OBX|58|TX|||Neuro/CNS: alert, oriented x 3
+OBX|59|TX|||Psychiatry: anxious
+OBX|60|TX||| 
+OBX|61|TX|||Current Medications
+OBX|62|TX|||Medications:
+OBX|63|TX|||Active Meds + DC'd Last 24 Hrs
+OBX|64|TX|||Potassium Chloride   20 MEQ   ONCE ONE   PO      
+OBX|65|TX|||Amiodarone HCl   200 MG   DAILY   PO      
+OBX|66|TX|||Warfarin Sodium   5 MG   DAILY 1800   PO      
+OBX|67|TX|||Amiodarone HCl   450 MG   ASDIR   IV   (CKD)   
+OBX|68|TX|||      Dextrose/Water   250 ML
+OBX|69|TX|||Nystatin   30 ML   PC HS   SWISH SWAL      
+OBX|70|TX|||      Al Hydrox/Mg Hydrox/Simethicone   30 ML
+OBX|71|TX|||Ferric Sodium Gluconate Complex   125 MG   Q12HR   IV   (CKD)   
+OBX|72|TX|||      Sodium Chloride   100 ML
+OBX|73|TX|||Aspirin   81 MG   DAILY   PO      
+OBX|74|TX|||Lactulose   20 GM   BIDP PRN   PO      
+OBX|75|TX|||Mineral Oil   133 ML   DAILY PRN PRN   RECTAL      
+OBX|76|TX|||Tramadol HCl   37.5 MG   Q6H PRN PRN   PO      
+OBX|77|TX|||Warfarin Sodium   3 MG   DAILY 1800   PO   (DC)   
+OBX|78|TX|||Ferrous Sulfate   325 MG   DAILY   PO      
+OBX|79|TX|||Pantoprazole Sodium Sesquihydrate   20 MG   DAILY@06   PO      
+OBX|80|TX|||Bisacodyl   10 MG   BEDTIME PRN PRN   RECTAL      
+OBX|81|TX|||Lisinopril   2.5 MG   DAILY   PO      
+OBX|82|TX|||Docusate Sodium   100 MG   BID   PO      
+OBX|83|TX|||Furosemide   40 MG   DAILY   IV   (DC)   
+OBX|84|TX|||Potassium Chloride   20 MEQ   DAILY   PO      
+OBX|85|TX|||Al Hydrox/Mg Hydrox/Simethicone   30 ML   QID PRN PRN   PO      
+OBX|86|TX|||Magnesium Hydroxide   30 ML   DAILY PRN PRN   PO      
+OBX|87|TX|||Albuterol/Ipratropium   3 ML   RTQ4H   INH      
+OBX|88|TX|||Acetaminophen   650 MG   Q4H PRN PRN   RECTAL      
+OBX|89|TX|||Acetaminophen   650 MG   Q4H PRN PRN   PO      
+OBX|90|TX|||Albumin Human   12.5 GM   PRN PRN   IV      
+OBX|91|TX|||Alprazolam   0.25 MG   Q6H PRN PRN   PO      
+OBX|92|TX|||Amiodarone HCl   150 MG   PRN PRN   IV      
+OBX|93|TX|||      Dextrose/Water   100 ML
+OBX|94|TX|||Dextrose/Water   25 G   PRN PRN   IV      
+OBX|95|TX|||Furosemide   20 MG   PRN PRN   IV      
+OBX|96|TX|||Insulin Human Regular   50 UNITS   TITRATE   IV   (CKD)   
+OBX|97|TX|||      Sodium Chloride   49.5 ML
+OBX|98|TX|||Magnesium Sulfate   100 ML   PRN PRN   IV      
+OBX|99|TX|||Magnesium Sulfate   50 ML   PRN PRN   IV      
+OBX|100|TX|||Metoprolol Tartrate   2.5 MG   Q4H PRN PRN   IV      
+OBX|101|TX|||Nicardipine HCl   25 MG   TITRATE   IV      
+OBX|102|TX|||      Sodium Chloride   240 ML
+OBX|103|TX|||Nitroglycerin/Dextrose   250 ML   ASDIR   IV      
+OBX|104|TX|||Ondansetron HCl   4 MG   Q4H PRN PRN   IV      
+OBX|105|TX|||Potassium Chloride/Water   100 ML   PRN PRN   IV      
+OBX|106|TX|||Temazepam   15 MG   BEDTIME PRN PRN   PO      
+OBX|107|TX|||Verapamil HCl   2.5 MG   Q2H PRN PRN   IV      
+OBX|108|TX||| 
+OBX|109|TX||| 
+OBX|110|TX||| 
+OBX|111|TX|||Results
+OBX|112|TX|||Findings/Data:
+OBX|113|TX|||Laboratory Tests
+OBX|114|TX|||                                                       09/26
+OBX|115|TX|||                                                        0610
+OBX|116|TX|||                   Chemistry
+OBX|117|TX|||                     Sodium (136 - 145 mmol/L)           142
+OBX|118|TX|||                     Potassium (3.5 - 5.1 mmol/L)        3.8
+OBX|119|TX|||                     Chloride (98 - 107 mmol/L)       109  H
+OBX|120|TX|||                     Carbon Dioxide (21 - 32 mmol/L)      25
+OBX|121|TX|||                     Anion Gap (7 - 16 mmol/L)             8
+OBX|122|TX|||                     BUN (7 - 18 mg/dL)                   12
+OBX|123|TX|||                     Creatinine (0.6 - 1.0 mg/dL)        0.6
+OBX|124|TX|||                     GFR Calculation (>60.0)          100.97
+OBX|125|TX|||                     BUN/Creatinine Ratio (4 - 33)        20
+OBX|126|TX|||                     Glucose (74 - 106 mg/dL)         109  H
+OBX|127|TX|||                     Calcium (8.5 - 10.1 mg/dL)       8.1  L
+OBX|128|TX||| 
+OBX|129|TX|||Laboratory Tests
+OBX|130|TX|||                                                            09/26
+OBX|131|TX|||                                                             0610
+OBX|132|TX|||               Hematology
+OBX|133|TX|||                 WBC (4.5 - 11.0 x10 3/uL)                11.7  H
+OBX|134|TX|||                 RBC (3.40 - 5.50 x10 6/uL)               2.91  L
+OBX|135|TX|||                 Hgb (11.0 - 16.0 g/dL)                    8.5  L
+OBX|136|TX|||                 Hct (35.0 - 47.0 %)                      25.5  L
+OBX|137|TX|||                 MCV (77.0 - 96.0 fl)                        87.6
+OBX|138|TX|||                 MCH (27.0 - 33.0 pg)                        29.2
+OBX|139|TX|||                 MCHC (30.0 - 35.0 g/dL)                     33.3
+OBX|140|TX|||                 RDW (35.0 - 55.0 fl)                        15.9
+OBX|141|TX|||                 Plt Count (125 - 400 x10 3/uL)               130
+OBX|142|TX|||                 Nucleated RBC % (0 - 0 %)                 0.8  H
+OBX|143|TX|||                 Nucleated RBCs # (0.03 - 0.11 x10 3/uL)     0.09
+OBX|144|TX|||                 Immature Plt Fraction (0 - 8.0 %)              0
+OBX|145|TX||| 
+OBX|146|TX||| 
+OBX|147|TX|||Radiology data:
+OBX|148|TX|||Recent Impressions:
+OBX|149|TX|||RADIOLOGY - CHEST PA   LATERAL 09/26 0555
+OBX|150|TX|||*** Report Impression - Status: SIGNED  Entered: 09/26/2016 0740
+OBX|151|TX||| 
+OBX|152|TX|||IMPRESSION:
+OBX|153|TX|||Atelectasis within the left mid lung field.
+OBX|154|TX||| 
+OBX|155|TX|||Bilateral small pleural effusions.
+OBX|156|TX||| 
+OBX|157|TX|||Prior mid sternotomy with cardiac surgery as described above.
+OBX|158|TX||| 
+OBX|159|TX|||Stable position of the right jugular central line.
+OBX|160|TX||| 
+OBX|161|TX|||Impression By: PHIVYCA - CATHLEEN IVY, M.D.
+OBX|162|TX||| 
+OBX|163|TX||| 
+OBX|164|TX||| 
+OBX|165|TX|||Treatment   Prophylaxis
+OBX|166|TX||| 
+OBX|167|TX|||Treatment   Prophylaxis
+OBX|168|TX|||VTE Prophylaxis
+OBX|169|TX|||   VTE Prophylaxis initiated: Yes
+OBX|170|TX|||   Rx Contraindication: Pt Scheduled for Surgery
+OBX|171|TX||| 
+OBX|172|TX|||Diagnosis, Assessment   Plan
+OBX|173|TX|||Problem List/A P:
+OBX|174|TX||| 1. Mitral regurgitation
+OBX|175|TX||| 
+OBX|176|TX|||Free Text A P:
+OBX|177|TX|||9/18/16
+OBX|178|TX|||stable clinically
+OBX|179|TX|||for MV repai/replacement next week
+OBX|180|TX||| 
+OBX|181|TX|||9/20/2016: Stable; for MVR in AM with Dr Rattehalli; preop orders placed
+OBX|182|TX||| 
+OBX|183|TX|||9/22/2016: POD#1 s/p MVR and Left atrial appendage clip; tolerating extubation 
+OBX|184|TX|||on 6L NC;
+OBX|185|TX|||Remains on 0.125 primacor and insulin- primacor now off- ok to d/c swan;
+OBX|186|TX|||CXR- left infiltrate; Chest tubes with 130 out/12hrs, no visible air leak- leave
+OBX|187|TX|||in place;
+OBX|188|TX|||H/H= 7.1/21.8- hold off on transfusion will diurese and check later today;
+OBX|189|TX|||start coreg and lisinopril today, OOB to chair, routine POD#1
+OBX|190|TX|||start low dose coumadin tonight
+OBX|191|TX||| 
+OBX|192|TX|||9/23/2016: Remains stable; sitting bedside; c/o pain (incisional);
+OBX|193|TX|||Went afib RVR last PM- bolus and drip of cordarone given;
+OBX|194|TX|||Remains afib- rate controlled; remains on coradrone drip;
+OBX|195|TX|||Chest tubes with 140 out/12hrs, no air leak- removed this AM;
+OBX|196|TX|||LFT's high will d/c statin and monitor;
+OBX|197|TX|||albumin/lasix ordered; 2mg coumadin stat and 3mg PO bedtime ordered;
+OBX|198|TX|||H/H- 6.8/21.4- start ferrlecit and continue to monitor;
+OBX|199|TX|||post op thrombocytopenia plt=78- ok to give ASA 81- continue to monitor;
+OBX|200|TX|||ambulate in halls with PT today, monitor fluid intake (strict fluid restriction)
+OBX|201|TX||| 
+OBX|202|TX|||9/24/2016:  Covering for Dr. Rattehalli:  The patient is sitting at the bedside 
+OBX|203|TX|||with her family....She appears to be in no distress...She had an episode of 
+OBX|204|TX|||asystole and is now being paced with the epicardial wires...The bedside nurse 
+OBX|205|TX|||reports that she is in sinus bradycardia underneath the pacemaker (All of her 
+OBX|206|TX|||beta-blockers and cordarone have been placed on hold), hopefully, she will not 
+OBX|207|TX|||require a ppm...coumadin has been previously ordered....her labs and cxr are 
+OBX|208|TX|||otherwise ok. 
+OBX|209|TX||| 
+OBX|210|TX|||9/25/2016:  Improving ...Now with sinus bradycardia and maintaining blood 
+OBX|211|TX|||pressure...maybe a bit volume depleted and lasix stopped...coumadin dose 
+OBX|212|TX|||increased...magic mouth wash ordered
+OBX|213|TX||| 
+OBX|214|TX|||9/26/2016: Remains stable; sitting bedside; NSR 60s presently;
+OBX|215|TX|||Remains on IV cordarone; PO cordarone has been started;
+OBX|216|TX|||c/o mouth pain from blisters/ulcers- magic mouth wash has been given;
+OBX|217|TX|||CXR- Bilateral small pleural effusions;
+OBX|218|TX|||ambulate in halls with PT, continue IS
+OBX|219|TX||| 
+OBX|220|TX|||Electronically Signed by Molars,Kerry  PA on 09/26/16 at 1121
+OBX|221|TX|||RPT#:0926-0167
+OBX|222|TX|||***END OF REPORT***

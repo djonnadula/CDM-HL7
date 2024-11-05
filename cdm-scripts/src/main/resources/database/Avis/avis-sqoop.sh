@@ -16,7 +16,7 @@
 
 
 sqoop-export  -Dmapreduce.job.queuename=CDM -D mapreduce.map.memory.mb=3072 -D mapreduce.map.java.opts=-Xmx3072m \
---connect "jdbc:teradata://edwprod.dw.medcity.net/DATABASE=EDWCDM_STAGING,CHARSET=UTF8" \
+--connect "jdbc:teradata://edwprod.dw..net/DATABASE=EDWCDM_STAGING,CHARSET=UTF8" \
 --table CDM_AVIS_STAGING \
 --mapreduce-job-name EDH_CDM_AVIS_STAGING \
 --username BD_CDMLoad \
@@ -28,7 +28,7 @@ sqoop-export  -Dmapreduce.job.queuename=CDM -D mapreduce.map.memory.mb=3072 -D m
 --input-null-non-string '\\\\N' \
 --verbose \
 --num-mappers 6 \
---package-name com.hca.cdm.model \
+--package-name com..cdm.model \
 --outdir /hadoop/cdm/avis/edw/model \
 --bindir /hadoop/cdm/avis/edw/compiled \
 

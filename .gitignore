@@ -1,21 +1,20 @@
 *.class
-             *.log
+*.log
+.cache
+.history
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
 
-             .cache
-             .history
-             .lib/
-             dist/*
-             target/
-             lib_managed/
-             src_managed/
-             project/boot/
-             project/plugins/project/
+# Package Files #
+*/target/*.jar
+hs_err_pid*
+.idea*
+*.iml
 
-             # Package Files #
-             */target/*.jar
-             hs_err_pid*
-             .idea*
-             *.iml
-
-             *.checkStyle-output.xml
-             *reduced*.xml
+*.checkStyle-output.xml
+*reduced*.xml

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>cdm-hl7</artifactId>
-        <groupId>com.hca</groupId>
+        <groupId>com</groupId>
         <version>1.0.8-Snapshot</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,17 +12,11 @@
     <version>${cdm.version}</version>
     <name>CDM I/O</name>
 
-    <scm>
-        <url>git@githubdev.medcity.net:ClinicalReporting/Cdm-HL7.git</url>
-        <connection>scm:git://git@githubdev.medcity.net:ClinicalReporting/Cdm-HL7.git</connection>
-        <developerConnection>git@githubdev.medcity.net:ClinicalReporting/Cdm-HL7.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
 
     <dependencies>
 
         <dependency>
-            <groupId>com.hca</groupId>
+            <groupId>com</groupId>
             <artifactId>cdm-common</artifactId>
             <version>${cdm.version}</version>
         </dependency>
@@ -73,7 +67,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.hive.hcatalog</groupId>
+            <groupId>org.apache.hivetalog</groupId>
             <artifactId>hive-hcatalog-core</artifactId>
             <version>${hive.version}-${cdh.version}</version>
             <scope>provided</scope>

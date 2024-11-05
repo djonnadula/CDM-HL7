@@ -2,7 +2,7 @@
 
 # version 1.0.0 2016-10-23 (YYYY-MM-DD)
 #
-# description:  Deployment Script for HCA CDM HL7 Processing  service
+# description:  Deployment Script for  CDM HL7 Processing  service
 #
 
 ### END INIT INFO
@@ -18,7 +18,7 @@ if (( "$#" != 2 )); then
 fi
 
 PROJECT='Cdm-HL7'
-SOURCE="git clone -b master ssh://"${USER}"@githubdev.medcity.net/ClinicalReporting/Cdm-HL7.git"
+SOURCE="git clone -b master ssh://"${USER}"@githubdev..net/ClinicalReporting/Cdm-HL7.git"
 BUILD='mvn -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=3128 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=3128 clean package'
 
 mkdir -p $WORKINGDIR

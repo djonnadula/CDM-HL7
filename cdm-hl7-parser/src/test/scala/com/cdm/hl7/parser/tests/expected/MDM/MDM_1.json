@@ -1,0 +1,244 @@
+{
+  "0000.COMN": {
+    "sending_facility": "HHAH",
+    "message_control_id": "EPIC_HHAH_MDM_123_51233_5_FAC1",
+    "medical_record_num": "2000116569",
+    "medical_record_urn": "Y000145173",
+    "patient_account_num": ""
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": null,
+    "sending_facility": "HHAH",
+    "receiving_application": null,
+    "receiving_facility": null,
+    "date_time_of_message": "20150807371105",
+    "security": "ARB1234",
+    "message_type": {
+      "message_code": "MDM",
+      "trigger_event": "T08"
+    },
+    "message_control_id": "EPIC_HHAH_MDM_123_51233_5_FAC1",
+    "processing_id": "P",
+    "version_id": "2.3",
+    "sequence_num": null,
+    "continuation_pointer": "Epic_CWDV"
+  },
+  "0002.EVN": {
+    "event_type_code": "T08",
+    "recorded_date_time": "20150807371059",
+    "date_time_planned_event": null,
+    "event_reason_code": "UPDATE_NOTE",
+    "operator_id": {
+      "person_id": "ARB1234",
+      "family_name": "DONALD",
+      "given_name": "ARBY",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": "AH",
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": null,
+      "assigning_facility": "HHAH"
+    }
+  },
+  "0003.PID": {
+    "set_id": null,
+    "patient_id": {
+      "id_num": "Q6487",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": "CWTTXIURN",
+      "id_type_code": "CWTTXIURN"
+    },
+    "patient_id_list": {
+      "id_num": "2000116569",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": "EPIC",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": [
+      {
+        "id_num": "Y000145173",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": "HHOA",
+        "id_type_code": "HHOA"
+      },
+      {
+        "id_num": "L001263882",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": "SDMC",
+        "id_type_code": "SDMC"
+      },
+      {
+        "id_num": "Q6487",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": "CWTTXIURN",
+        "id_type_code": "CWTTXIURN"
+      }
+    ],
+    "patient_name": {
+      "family_name": "MARRKEN",
+      "given_name": "LONNARD",
+      "second_and_further_given_names_or_initials_thereof": "L"
+    },
+    "mother_maiden_name": null,
+    "date_time_of_birth": "19311218",
+    "administrative_sex": "M",
+    "patient_alias": [
+      {
+        "family_name": "MARRKEN",
+        "given_name": "LONNARD",
+        "second_and_further_given_names_or_initials_thereof": "L",
+        "suffix": null
+      },
+      {
+        "family_name": "MARRKEN",
+        "given_name": "LONNARD",
+        "second_and_further_given_names_or_initials_thereof": "LEE",
+        "suffix": null
+      }
+    ],
+    "race": "W",
+    "patient_address": {
+      "street_address": "1 RD",
+      "other_designation": null,
+      "city": "BAYLOR",
+      "state_or_province": "TX",
+      "zip_or_postal_code": "78978",
+      "country": "USA",
+      "address_type": "P"
+    },
+    "county_code": null,
+    "phone_num_home": {
+      "telephone_num": "(999)999-9999",
+      "telecommunication_use_code": "P",
+      "telecommunication_equipment_type": "H"
+    },
+    "phone_num_business": null,
+    "primary_language": "ENGLISH",
+    "marital_status": "M",
+    "religion": null,
+    "patient_account_num": null,
+    "ssn_num_patient": "999-99-9999",
+    "driver_license_num": null,
+    "mother_name": null,
+    "ethnic_group": "NOT HISPANIC",
+    "birth_place": null,
+    "multiple_birth_indicator": null,
+    "birth_order": null,
+    "citizenship": null,
+    "veterans_military_status": null,
+    "nationality": null,
+    "patient_death_date_and_time": null,
+    "patient_death_indicator": "N"
+  },
+  "0004.PD1": {
+    "living_dependency": null,
+    "living_arrangement": null,
+    "patient_primary_facility": {
+      "organization_name": "AUSTIN HEART HHO",
+      "organization_name_type_code": null,
+      "id_num": "90000001"
+    }
+  },
+  "0005.PV1": {
+    "set_id": null,
+    "patient_class": "O",
+    "assigned_patient_location": {
+      "point_of_care": "AHHHMO",
+      "room": null,
+      "bed": null,
+      "facility": "HHAH",
+      "location_status": null,
+      "person_location_type": null,
+      "building": null,
+      "floor": null,
+      "location_description": null,
+      "comprehensive_location_id": null,
+      "assigning_authority_for_location": null
+    },
+    "admission_type": null,
+    "pre_admit_num": null,
+    "prior_patient_location": null,
+    "attending_doctor": [
+      {
+        "person_id": "MCMT",
+        "family_name": "DONALD",
+        "given_name": "ARBY",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "source_table": null,
+        "assigning_authority": "PROVID",
+        "name_type_code": null,
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "id_type_code": "PROVID"
+      },
+      {
+        "person_id": "ARB1234",
+        "family_name": "DONALD",
+        "given_name": "ARBY",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "source_table": null,
+        "assigning_authority": "THREEFOUR",
+        "name_type_code": null,
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "id_type_code": "THREEFOUR"
+      }
+    ],
+    "referring_doctor": null,
+    "consulting_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
+    "patient_type": null,
+    "visit_num": "23756799",
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "bed_status": null,
+    "account_status": null,
+    "pending_location": null,
+    "prior_temporary_location": null,
+    "admit_date_time": null,
+    "discharge_date_time": "20160928120300"
+  }
+}

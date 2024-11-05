@@ -1,0 +1,182 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCQA1A",
+    "message_control_id": "IP_COCQ1A_RAS_PHAQ1A.125124.24362345",
+    "medical_record_num": "A1352352",
+    "medical_record_urn": "AG125124",
+    "patient_account_num": "J15132542143"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "COCQA1A",
+    "sending_facility": "COCQA1A",
+    "receiving_application": "OV",
+    "receiving_facility": "OV",
+    "date_time_of_message": "201497870911",
+    "security": null,
+    "message_type": {
+      "message_code": "RAS",
+      "trigger_event": "O17"
+    },
+    "message_control_id": "IP_COCQ1A_RAS_PHAQ1A.125124.24362345",
+    "processing_id": "T",
+    "version_id": "2.5",
+    "sequence_num": null,
+    "continuation_pointer": {
+      "network_id": "KYA",
+      "unit_number": "04446"
+    },
+    "accept_acknowledgement_type": "ER",
+    "application_acknowledgement_type": "NE"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id": null,
+    "patient_id_list": {
+      "id_num": "A1352352",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": "COCQA1A",
+      "id_type_code": "MRN"
+    },
+    "alternate_patient_id": "AG125124",
+    "patient_name": {
+      "family_name": "LOWRIDER",
+      "given_name": "GARY"
+    },
+    "mother_maiden_name": null,
+    "date_time_of_birth": "19871651",
+    "administrative_sex": "F",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
+    "patient_account_num": "J15132542143"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "J.PSY",
+      "room": "J.104",
+      "bed": "A",
+      "facility": "COCQA1A"
+    },
+    "admission_type": "EM",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
+    "attending_doctor": {
+      "person_id": "ATQEFADS",
+      "family_name": "FREDERIC",
+      "given_name": "YARBOWLER"
+    },
+    "referring_doctor": null,
+    "consulting_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
+    "patient_type": "IN",
+    "visit_num": null,
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": null,
+    "bed_status": null,
+    "account_status": "ADM"
+  },
+  "0004.ORC": {
+    "order_control": "RE",
+    "placer_order_num": "128412",
+    "filler_order_num": "040241",
+    "placer_group_num": null,
+    "order_status": "AC",
+    "response_flag": null,
+    "quantity_timing": {
+      "quantity": "500",
+      "interval": "Q2H",
+      "duration": "Q2H"
+    },
+    "parent_order": null,
+    "date_time_of_transaction": "201497870911",
+    "entered_by": null,
+    "verified_by": null,
+    "ordering_provider": "ATQEFADS",
+    "enterer_location": null,
+    "call_back_phone_num": null,
+    "order_effective_date_time": "201497870845"
+  },
+  "0005.RXA": {
+    "give_sub_id_counter": "1",
+    "administration_sub_id_counter": "1",
+    "date_time_start_of_administration": "201497870911",
+    "date_time_end_of_administration": "201497870845",
+    "administered_code": {
+      "id": "APTI100S",
+      "text": "TIPRANAVIR/VITAMIN E TPGS 100 MG/ML ML",
+      "name_of_coding_system": "L",
+      "alternate_id": "00597000201",
+      "alternate_text": "APTIVUS 100 MG/ML SOLUTION",
+      "name_of_alternate_coding_system": "NDC"
+    },
+    "administered_amt": "5",
+    "administered_units": "MG",
+    "administered_dosage_form": {
+      "id": "500",
+      "text": "1"
+    },
+    "administration_notes": null,
+    "administering_provider": "1PDDJX7355",
+    "administered_at_location": null,
+    "administered_per_time_unit": null,
+    "administered_strength": null,
+    "administered_strength_units": null,
+    "substance_lot_num": null,
+    "substance_expiration_date": null,
+    "substance_manufacturer_name": null,
+    "substance_treatment_refusal_reason": null,
+    "indication": {
+      "id": "N",
+      "text": "N"
+    },
+    "completion_status": "CP",
+    "action_code": "D",
+    "system_entry_date_time": null,
+    "administered_drug_strength_volume": null,
+    "administered_drug_strength_volume_units": null,
+    "administered_barcode_id": null,
+    "pharmacy_order_type": "MED"
+  },
+  "0006.RXR": {
+    "route": {
+      "id": "PO",
+      "text": "ORAL"
+    }
+  }
+}

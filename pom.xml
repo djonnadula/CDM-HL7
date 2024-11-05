@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hca</groupId>
+    <groupId>com</groupId>
     <artifactId>cdm-hl7</artifactId>
     <packaging>pom</packaging>
     <version>1.0.8-Snapshot</version>
@@ -30,49 +30,19 @@
             </snapshots>
         </repository>
 
-        <repository>
-            <id>hca.repo</id>
-            <url>http://nadclqliccpp01.unix.medcity.net:8081/artifactory/repo</url>
-            <name>HCA Repositories</name>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>hca.repo.cdh</id>
-            <url>http://10.28.98.216:8081/nexus/content/repositories/ClouderaArtifactory/</url>
-        </repository>
-
-        <repository>
-            <id>hca.repo.nexus</id>
-            <url>https://xrdcldbdanex01.unix.medcity.net/repository/cloudera</url>
-        </repository>
-
-        <repository>
-            <id>hca.repo.nexus1</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
-        </repository>
-
-        <repository>
-            <id>hca.repo.nexus1.ext</id>
-            <url>https://xrdcldbdanex01.unix.medcity.net/repository/external-dependencies</url>
-        </repository>
-
     </repositories>
 
 
     <properties>
-        <cdm.version>1.0.8-Snapshot</cdm.version>
+        <cdm.version>2.0.0</cdm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <scala.version>2.10.5</scala.version>
         <scala.binary.version>2.10</scala.binary.version>
         <spark.version>1.6.0</spark.version>
-        <cdh.version>cdh5.13.1</cdh.version>
-        <cdh.binary.version>5.13.1</cdh.binary.version>
-        <kafka.version>0.10.2-kafka-2.2.0</kafka.version>
+        <cdh.version>cdh5.10.1</cdh.version>
+        <kafka.version>0.9.0-kafka-2.0.2</kafka.version>
         <flume.version>1.6.0</flume.version>
         <hive.version>1.1.0</hive.version>
         <hbase.version>1.2.0</hbase.version>
@@ -224,31 +194,44 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-streams</artifactId>
-            <version>${kafka.version}</version>
+            <groupId>org.apache.sqoop</groupId>
+            <artifactId>sqoop</artifactId>
+            <version>1.4.6-${cdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb -->
         <dependency>
-            <groupId>com.cloudera.api</groupId>
-            <artifactId>cloudera-manager-api</artifactId>
-            <version>${cdh.binary.version}</version>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-documentdb</artifactId>
+            <version>1.16.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-cosmosdb-spark_2.1.0_2.11</artifactId>
+            <version>1.1.2</version>
+            <scope>provided</scope>
         </dependency>
 
-           <dependency>
+        <!--   <dependency>
                <groupId>org.apache.spark</groupId>
                <artifactId>spark-streaming_2.11</artifactId>
                <version>2.1.0.cloudera1</version>
                <scope>provided</scope>
            </dependency>
 
-         <!--  <dependency>
+           <dependency>
                <groupId>org.apache.spark</groupId>
                <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
                <version>2.1.0.cloudera1</version>
            </dependency>-->
-        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor_2.10 -->
+        <!-- https://mvnrepository.com/artifact/com.enragedginger/akka-quartz-scheduler_2.11 -->
+        <dependency>
+            <groupId>com.enragedginger</groupId>
+            <artifactId>akka-quartz-scheduler_2.10</artifactId>
+            <version>1.4.0-akka-2.3.x</version>
+        </dependency>
     </dependencies>
 
 
@@ -324,6 +307,30 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.scalastyle</groupId>
+                <artifactId>scalastyle-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <failOnViolation>true</failOnViolation>
+                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                    <failOnWarning>false</failOnWarning>
+                    <sourceDirectory>${basedir}/src/main/scala</sourceDirectory>
+                    <testSourceDirectory>${basedir}/src/test/scala</testSourceDirectory>
+                    <configLocation>CDMCheckStyle.xml</configLocation>
+                    <outputFile>${basedir}/target/checkStyle-output.xml</outputFile>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

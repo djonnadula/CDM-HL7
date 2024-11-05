@@ -1,0 +1,253 @@
+{
+  "0000.COMN": {
+    "sending_facility": "COCAR",
+    "message_control_id": "MT6_COCAR_ORU_ARGTPACS.1.9879817",
+    "medical_record_num": "I5012456699",
+    "medical_record_urn": "I875617",
+    "patient_account_num": "I12541241232"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": null,
+    "sending_facility": "COCAR",
+    "receiving_application": null,
+    "receiving_facility": null,
+    "date_time_of_message": "201402210201",
+    "security": null,
+    "message_type": {
+      "message_code": "ORU",
+      "trigger_event": "R01"
+    },
+    "message_control_id": "MT6_COCAR_ORU_ARGTPACS.1.9879817",
+    "processing_id": "P",
+    "version_id": "2.4"
+  },
+  "0002.PID": {
+    "set_id": "1",
+    "patient_id": null,
+    "patient_id_list": "I5012456699",
+    "alternate_patient_id": "I875617",
+    "patient_name": {
+      "family_name": "LIPSITCKET ORION",
+      "given_name": "RACKETBACK",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null
+    },
+    "mother_maiden_name": null,
+    "date_time_of_birth": "19540931",
+    "administrative_sex": "F",
+    "patient_alias": null,
+    "race": null,
+    "patient_address": null,
+    "county_code": null,
+    "phone_num_home": null,
+    "phone_num_business": null,
+    "primary_language": null,
+    "marital_status": null,
+    "religion": null,
+    "patient_account_num": "I12541241232",
+    "ssn_num_patient": "999-99-9999"
+  },
+  "0003.PV1": {
+    "set_id": "1",
+    "patient_class": "I",
+    "assigned_patient_location": {
+      "point_of_care": "DIS",
+      "room": "I.400",
+      "bed": "A"
+    },
+    "admission_type": null,
+    "pre_admit_num": null,
+    "prior_patient_location": null,
+    "attending_doctor": {
+      "person_id": "STANT",
+      "family_name": "Laribou",
+      "given_name": "Caribou",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": "MD",
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "999-999-9999"
+    },
+    "referring_doctor": {
+      "person_id": ".SELF",
+      "family_name": "REFERRED",
+      "given_name": "SELF",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null
+    },
+    "consulting_doctor": {
+      "person_id": "FLOPB",
+      "family_name": "Flopper",
+      "given_name": "Betty",
+      "second_and_further_given_names_or_initials_thereof": "R",
+      "suffix": "DO"
+    },
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "ambulatory_status": null,
+    "vip_indicator": null,
+    "admitting_doctor": {
+      "person_id": "STANT",
+      "family_name": "Laribou",
+      "given_name": "Caribou",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": "MD",
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": "999-999-9999"
+    },
+    "patient_type": "IN",
+    "visit_num": null,
+    "financial_class": null,
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": "COCAR",
+    "bed_status": null,
+    "account_status": "DIS",
+    "pending_location": null,
+    "prior_temporary_location": null,
+    "admit_date_time": null,
+    "discharge_date_time": null,
+    "current_patient_balance": null,
+    "total_charges": null,
+    "total_adjustments": null,
+    "total_payments": null,
+    "alternate_visit_id": null,
+    "visit_indicator": null,
+    "primary_care_doctor": [
+      {
+        "person_id": "QESDF",
+        "last_name": "Filly",
+        "first_name": "Merlio",
+        "middle_name": "Gary",
+        "suffix": "MD"
+      },
+      {
+        "person_id": "ARRFG",
+        "last_name": "Racecar",
+        "first_name": "Portnow",
+        "middle_name": "A",
+        "suffix": "MD"
+      }
+    ]
+  },
+  "0004.ORC": {
+    "order_control": "RE",
+    "placer_order_num": null,
+    "filler_order_num": null,
+    "placer_group_num": null,
+    "order_status": "S",
+    "response_flag": "N",
+    "quantity_timing": null,
+    "parent_order": null,
+    "date_time_of_transaction": null,
+    "entered_by": null,
+    "verified_by": null,
+    "ordering_provider": null,
+    "enterer_location": {
+      "point_of_care": "COCAR",
+      "room": "ARL"
+    }
+  },
+  "0005.OBR": {
+    "set_id": "1",
+    "placer_order_num": "001922764&N&N",
+    "filler_order_num": " - CHEST 1 VIEW PORTABLE",
+    "universal_service_id": {
+      "id": "CHEP",
+      "text": " - CHEST 1 VIEW PORTABLE",
+      "name_of_coding_system": "RAD"
+    },
+    "priority": "R",
+    "requested_date_time": "201701030000",
+    "obsv_date_time_num": "201701030747",
+    "obsv_end_date_time_num": "201701030750",
+    "collection_volume": null,
+    "collector_id": null,
+    "specimen_action_code": null,
+    "danger_code": null,
+    "relevant_clinical_information": null,
+    "specimen_received_date_time": null,
+    "specimen_source": null,
+    "ordering_provider": "QESDF",
+    "order_callback_phone_num": "817-465-5881",
+    "placer_field_1": ".SELF~QESDF~YANWE01",
+    "placer_field_2": null,
+    "filler_field_1": null,
+    "lab_site": null,
+    "results_rpt_status_chng_date_time": null,
+    "charge_to_practice": null,
+    "diagnostic_service_section_id": null,
+    "result_status": "F",
+    "parent_result": null,
+    "quantity_timing": null,
+    "result_copies_to": null,
+    "parent_results_obsv_id": null,
+    "transportation_mode": null,
+    "reason_for_study": "copd",
+    "principal_result_interpreter": {
+      "name": {
+        "id_num": "L.PHY.MAS",
+        "family_name": null,
+        "given_name": null,
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "source_table": "201701030750"
+      }
+    },
+    "assistant_result_interpreter": null,
+    "technician": null,
+    "transcriptionist": null,
+    "scheduled_date_time": "201701030400"
+  },
+  "0006.ZUR": {
+    "set_id": "1",
+    "information": "I772951"
+  },
+  "0007.ZUR": {
+    "set_id": "2",
+    "information": "I001922764"
+  },
+  "0008.ZUR": {
+    "set_id": "3",
+    "information": "FWDCGEWEB02..CORPAD.NET"
+  },
+  "0009.ZUR": {
+    "set_id": "4",
+    "information": "COCAR"
+  }
+}

@@ -1,0 +1,1485 @@
+{
+  "0000.COMN": {
+    "sending_facility": "FRNK",
+    "message_control_id": "MT_FRNK_ADT_1118007.",
+    "medical_record_num": "K000002378",
+    "medical_record_urn": "A0-B20151103134433868",
+    "patient_account_num": "FR0000121418"
+  },
+  "0001.MSH": {
+    "field_separator": "|",
+    "encoding_characters": "^~\\&",
+    "sending_application": "MT_FRNK",
+    "sending_facility": "FRNK",
+    "receiving_application": "DBM",
+    "receiving_facility": null,
+    "date_time_of_message": "20151214090800-0600",
+    "security": null,
+    "message_type": {
+      "message_code": "ADT",
+      "trigger_event": "A04"
+    },
+    "message_control_id": "MT_FRNK_ADT_1118007.",
+    "processing_id": "D",
+    "version_id": "2.5",
+    "sequence_num": null,
+    "continuation_pointer": "KYB"
+  },
+  "0002.EVN": {
+    "event_type_code": "A04",
+    "recorded_date_time": "201512140908",
+    "date_time_planned_event": null,
+    "event_reason_code": null,
+    "operator_id": {
+      "person_id": "QBE8554",
+      "family_name": "Hammock",
+      "given_name": "Brittany"
+    },
+    "event_occured": "201512140859"
+  },
+  "0003.PID": {
+    "set_id": "1",
+    "patient_id": null,
+    "patient_id_list": [
+      {
+        "id_num": "K000002378",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
+        "id_type_code": "MR",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "206-11-2015",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
+        "id_type_code": "SS",
+        "assigning_facility": "FRNK"
+      },
+      {
+        "id_num": "A00002349",
+        "id_check_digit": null,
+        "check_digit_scheme": null,
+        "assigning_authority": null,
+        "id_type_code": "HUB",
+        "assigning_facility": "FRNK"
+      }
+    ],
+    "alternate_patient_id": {
+      "id_num": "A0-B20151103134433868",
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "assigning_authority": null,
+      "id_type_code": "URN",
+      "assigning_facility": "FRNK"
+    },
+    "patient_name": [
+      {
+        "family_name": "Osborn",
+        "given_name": "Harry",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "name_type_code": "L"
+      },
+      {
+        "family_name": "Osborn",
+        "given_name": "Harold",
+        "second_and_further_given_names_or_initials_thereof": null,
+        "suffix": null,
+        "prefix": null,
+        "degree": null,
+        "name_type_code": "M"
+      }
+    ],
+    "mother_maiden_name": "Osborn,Emily",
+    "date_time_of_birth": "19411029",
+    "administrative_sex": "M",
+    "patient_alias": null,
+    "race": "W",
+    "patient_address": {
+      "street_address": "234 MARVEL",
+      "other_designation": null,
+      "city": "FRANKLIN",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064",
+      "country": null,
+      "address_type": "P",
+      "other_geographic_designation": null,
+      "county_parish_code": "TN187"
+    },
+    "county_code": null,
+    "phone_num_home": "(615)555-6309",
+    "phone_num_business": "(502)695-0070",
+    "primary_language": null,
+    "marital_status": "S",
+    "religion": "NON",
+    "patient_account_num": "FR0000121418",
+    "ssn_num_patient": "206-11-2015"
+  },
+  "0004.NK1": {
+    "set_id": "1",
+    "name": {
+      "family_name": "OSBORN",
+      "given_name": "NORMAN"
+    },
+    "relationship": {
+      "id": "PA",
+      "text": "Parent"
+    },
+    "address": {
+      "street_address": "234 MARVEL",
+      "other_designation": null,
+      "city": "FRANKLIN",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064",
+      "country": null,
+      "address_type": null,
+      "other_geographic_designation": null,
+      "county_parish_code": "TN187"
+    },
+    "phone_num": "(615)555-6309",
+    "business_phone_num": null,
+    "contact_role": "NOK"
+  },
+  "0005.NK1": {
+    "set_id": "2",
+    "name": {
+      "family_name": "OSBORN",
+      "given_name": "HARRY"
+    },
+    "relationship": {
+      "id": "PA",
+      "text": "Parent"
+    },
+    "address": {
+      "street_address": "234 MARVEL",
+      "other_designation": null,
+      "city": "FRANKLIN",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064",
+      "country": null,
+      "address_type": null,
+      "other_geographic_designation": null,
+      "county_parish_code": "TN187"
+    },
+    "phone_num": "(615)555-6309",
+    "business_phone_num": null,
+    "contact_role": "NOT"
+  },
+  "0006.NK1": {
+    "set_id": "3",
+    "name": "AMERWIRE",
+    "relationship": null,
+    "address": {
+      "street_address": "616 INDUSTRIAL PARK",
+      "other_designation": null,
+      "city": "FRANKFORT",
+      "state_or_province": "KY",
+      "zip_or_postal_code": "40601"
+    },
+    "phone_num": null,
+    "business_phone_num": "(502)695-0070",
+    "contact_role": "EMP",
+    "start_date": null,
+    "end_date": null,
+    "next_of_kin_associated_parties_job_title": null,
+    "next_of_kin_associated_parties_job_code_class": null,
+    "next_of_kin_associated_parties_employee_num": null,
+    "organization_name": "AMERICAN WIRE COMPANY FRANKFT",
+    "marital_status": null,
+    "administrative_sex": null,
+    "date_time_of_birth": null,
+    "living_dependency": null,
+    "ambulatory_status": null,
+    "citizenship": null,
+    "primary_language": null,
+    "living_arrangement": null,
+    "publicity_code": null,
+    "protection_indicator": null,
+    "student_indicator": null,
+    "religion": null,
+    "mother_maiden_name": null,
+    "nationality": null,
+    "ethnic_group": null,
+    "contact_reason": null,
+    "contact_person_name": null,
+    "contact_person_telephone_num": null,
+    "contact_person_address": null,
+    "next_of_kin_associated_party_ids": null,
+    "job_status": "F"
+  },
+  "0007.PV1": {
+    "set_id": "1",
+    "patient_class": "E",
+    "assigned_patient_location": "FR.ER",
+    "admission_type": "EL",
+    "pre_admit_num": null,
+    "prior_patient_location": null,
+    "attending_doctor": {
+      "person_id": "DR.PCP01",
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    },
+    "referring_doctor": null,
+    "primary_care_doctor": null,
+    "hospital_service": null,
+    "temporary_location": null,
+    "pre_admit_test_indicator": null,
+    "readmission_indicator": null,
+    "admit_source": null,
+    "mode_of_arrival": null,
+    "vip_indicator": null,
+    "admitting_doctor": null,
+    "patient_type": "ER",
+    "visit_num": null,
+    "financial_class": "05",
+    "charge_price_indicator": null,
+    "courtesy_code": null,
+    "credit_rating": null,
+    "contract_code": null,
+    "contract_effective_date": null,
+    "contract_amt": null,
+    "contract_period": null,
+    "interest_code": null,
+    "transfer_to_bad_debt_code": null,
+    "transfer_to_bad_debt_date": null,
+    "bad_debt_agency_code": null,
+    "bad_debt_transfer_amt": null,
+    "bad_debt_recovery_amt": null,
+    "delete_account_indicator": null,
+    "delete_account_date": null,
+    "discharge_disposition": null,
+    "discharged_to_location": null,
+    "diet_type": null,
+    "servicing_facility": "FRNK",
+    "reason_for_visit": null,
+    "account_status": "REG",
+    "pending_location": null,
+    "prior_temporary_location": null,
+    "admit_date_time": "201512140859"
+  },
+  "0008.PV2": {
+    "prior_pending_location": null,
+    "accommodation_code": null,
+    "admit_reason": "KNEE INJURY",
+    "transfer_reason": null,
+    "patient_valuables": null,
+    "patient_valuables_location": null,
+    "visit_user_code": null,
+    "expected_admit_date_time": null,
+    "expected_discharge_date_time": null,
+    "estimated_length_of_inpatient_stay": null,
+    "actual_length_of_inpatient_stay": "1",
+    "visit_description": null,
+    "referral_source_code": null,
+    "previous_service_date": null,
+    "employment_illness_related_indicator": null,
+    "purge_status_code": null,
+    "purge_status_date": null,
+    "special_program_code": null,
+    "retention_indicator": null,
+    "expected_num_of_insurance_plans": null,
+    "visit_publicity_code": null,
+    "visit_protection_indicator": null,
+    "clinic_organization_name": null,
+    "patient_status_code": null,
+    "visit_priority_code": "EL",
+    "previous_treatment_date": null,
+    "expected_discharge_disposition": null,
+    "signature_on_file_date": null,
+    "first_similar_illness_date": null,
+    "patient_charge_adjustment_code": null,
+    "recurring_service_code": null,
+    "billing_media_code": null,
+    "expected_surgery_date_and_time": null,
+    "military_partnership_code": null,
+    "military_non_availability_code": null,
+    "newborn_baby_indicator": "N",
+    "baby_detained_indicator": null,
+    "mode_of_arrival_code": {
+      "id": "AMB",
+      "text": "Ambulance"
+    }
+  },
+  "0009.ROL": {
+    "role_instance_id": "1",
+    "action_code": "AD",
+    "role_rol": "AT",
+    "role_person": {
+      "person_id": "DR.PCP01",
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0010.ROL": {
+    "role_instance_id": "2",
+    "action_code": "AD",
+    "role_rol": "PP",
+    "role_person": {
+      "person_id": "DR.PCP01",
+      "family_name": "PrimaryCare01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0011.ROL": {
+    "role_instance_id": "3",
+    "action_code": "AD",
+    "role_rol": "OP",
+    "role_person": {
+      "person_id": "DR.OTH01",
+      "family_name": "Other01",
+      "given_name": "Provider",
+      "second_and_further_given_names_or_initials_thereof": null,
+      "suffix": null,
+      "prefix": null,
+      "degree": null,
+      "source_table": null,
+      "assigning_authority": null,
+      "name_type_code": null,
+      "id_check_digit": null,
+      "check_digit_scheme": null,
+      "id_type_code": "XX"
+    }
+  },
+  "0012.OBX": {
+    "set_id": "1",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F010A",
+      "text": "Deposit Req?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0013.OBX": {
+    "set_id": "2",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F011A",
+      "text": "Est Amt Due",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0014.OBX": {
+    "set_id": "3",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F012A",
+      "text": "Amt Rec",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0015.OBX": {
+    "set_id": "4",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F014A",
+      "text": "Collected by",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0016.OBX": {
+    "set_id": "5",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F016A",
+      "text": "Pt Advised of Financial Responsibility   Resources, Refer to",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0017.OBX": {
+    "set_id": "6",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F017A",
+      "text": "Discharge Financial Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0018.OBX": {
+    "set_id": "7",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F027A",
+      "text": "Hold Release Reason",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0019.OBX": {
+    "set_id": "8",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F028A",
+      "text": "Hold User ID:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0020.OBX": {
+    "set_id": "9",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0F031A",
+      "text": "Amt Req",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0021.OBX": {
+    "set_id": "10",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G021A",
+      "text": "Preferred Language",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "ENG",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0022.OBX": {
+    "set_id": "11",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0G022A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "US",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0023.OBX": {
+    "set_id": "12",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P010A",
+      "text": "Does the Patient Have Temporary Address?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0024.OBX": {
+    "set_id": "13",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P011A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0025.OBX": {
+    "set_id": "14",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P012A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0026.OBX": {
+    "set_id": "15",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P013A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0027.OBX": {
+    "set_id": "16",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P014A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0028.OBX": {
+    "set_id": "17",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P015A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0029.OBX": {
+    "set_id": "18",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P016A",
+      "text": "Home PH",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0030.OBX": {
+    "set_id": "19",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P017A",
+      "text": "County",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0031.OBX": {
+    "set_id": "20",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P018A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0032.OBX": {
+    "set_id": "21",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P019A",
+      "text": "Temporary Address Until?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0033.OBX": {
+    "set_id": "22",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P020A",
+      "text": "Comment",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0034.OBX": {
+    "set_id": "23",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P050A",
+      "text": "Does Patient Have Additional Employment?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0035.OBX": {
+    "set_id": "24",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P051A",
+      "text": "Name:",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0036.OBX": {
+    "set_id": "25",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P052A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0037.OBX": {
+    "set_id": "26",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P053A",
+      "text": "Address",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0038.OBX": {
+    "set_id": "27",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P054A",
+      "text": "City",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0039.OBX": {
+    "set_id": "28",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P055A",
+      "text": "State",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0040.OBX": {
+    "set_id": "29",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P056A",
+      "text": "Zip",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0041.OBX": {
+    "set_id": "30",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P057A",
+      "text": "Work Phone",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0042.OBX": {
+    "set_id": "31",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P058A",
+      "text": "Occupation",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0043.OBX": {
+    "set_id": "32",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P059A",
+      "text": "Emp Status",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0044.OBX": {
+    "set_id": "33",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P060A",
+      "text": "Preferred Language",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "ENG",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0045.OBX": {
+    "set_id": "34",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P061A",
+      "text": "Country",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "US",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0046.OBX": {
+    "set_id": "35",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1PAO0P062A",
+      "text": "Description",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0047.OBX": {
+    "set_id": "36",
+    "value_type": "CE",
+    "obsv_id": {
+      "id": "1REG0M229A",
+      "text": "Ethnicity",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": {
+      "id": "NOTHISPLAT",
+      "text": "Not Hispanic or Latino"
+    },
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0048.OBX": {
+    "set_id": "37",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R027A",
+      "text": "Are you currently participating in a research study",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0049.OBX": {
+    "set_id": "38",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R032A",
+      "text": "If Yes, Which Facility?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0050.OBX": {
+    "set_id": "39",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "1REG0R033A",
+      "text": "If Other, Which Facility?",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": null,
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0051.OBX": {
+    "set_id": "40",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "E13010001A",
+      "text": "Preferred name",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "Harry",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0052.OBX": {
+    "set_id": "41",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "E13010038A",
+      "text": "Immediate religious, spiritual, or cultural considerations",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "NONE",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0053.OBX": {
+    "set_id": "42",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "E13010042A",
+      "text": "Hearing impaired",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0054.OBX": {
+    "set_id": "43",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020118A",
+      "text": "Heart disease",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0055.OBX": {
+    "set_id": "44",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020120A",
+      "text": "Stroke",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0056.OBX": {
+    "set_id": "45",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020122A",
+      "text": "Colon cancer",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0057.OBX": {
+    "set_id": "46",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020124A",
+      "text": "Breast cancer",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0058.OBX": {
+    "set_id": "47",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "K31020126A",
+      "text": "Diabetes",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "Y",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0059.OBX": {
+    "set_id": "48",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N40010012A",
+      "text": "Smokeless tobacco used",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "N",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0060.OBX": {
+    "set_id": "49",
+    "value_type": "TX",
+    "obsv_id": {
+      "id": "N40010043A",
+      "text": "Tobacco cessation aids in current use",
+      "name_of_coding_system": "ADM"
+    },
+    "obsv_sub_id": null,
+    "obsv_value": "NONE",
+    "units": null,
+    "references_range": null,
+    "interpretation_codes": null,
+    "probability": null,
+    "nature_of_abnormal_test": null,
+    "obsv_result_status": "F"
+  },
+  "0061.AL1": {
+    "set_id": "1",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F001900526",
+      "text": "Latex, Natural Rubber",
+      "name_of_coding_system": null,
+      "alternate_id": "Latex, Natural Rubber",
+      "alternate_text": null,
+      "name_of_alternate_coding_system": "allergy.id"
+    },
+    "allergy_severity_code": "MI",
+    "allergy_reaction_code": "Rash-Hives",
+    "identification_date": "20151211"
+  },
+  "0062.AL1": {
+    "set_id": "2",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F006002380",
+      "text": "naproxen",
+      "name_of_coding_system": null,
+      "alternate_id": "naproxen",
+      "alternate_text": null,
+      "name_of_alternate_coding_system": "allergy.id"
+    },
+    "allergy_severity_code": "MO",
+    "allergy_reaction_code": "Rash-Hives",
+    "identification_date": "20151110"
+  },
+  "0063.AL1": {
+    "set_id": "3",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F006002502",
+      "text": "honey",
+      "name_of_coding_system": null,
+      "alternate_id": "honey",
+      "alternate_text": null,
+      "name_of_alternate_coding_system": "allergy.id"
+    },
+    "allergy_severity_code": "MI",
+    "allergy_reaction_code": "Swelling",
+    "identification_date": "20151110"
+  },
+  "0064.AL1": {
+    "set_id": "4",
+    "allergen_type_code": "DA",
+    "allergen_code_mnemonic_description": {
+      "id": "F006006698",
+      "text": "bee venom (honey bee)",
+      "name_of_coding_system": null,
+      "alternate_id": "bee venom (honey bee)",
+      "alternate_text": null,
+      "name_of_alternate_coding_system": "allergy.id"
+    },
+    "allergy_severity_code": "SV",
+    "allergy_reaction_code": "Anaphylaxis",
+    "identification_date": "20151110"
+  },
+  "0065.AL1": {
+    "set_id": "5",
+    "allergen_type_code": null,
+    "allergen_code_mnemonic_description": "grass",
+    "allergy_severity_code": "MI",
+    "allergy_reaction_code": "Cough",
+    "identification_date": "20151110"
+  },
+  "0066.DG1": {
+    "set_id": "1",
+    "diagnosis_coding_method": null,
+    "diagnosis_code": {
+      "id": "S00.00XA",
+      "text": "UNSPECIFIED SUPERFICIAL INJURY OF SCALP, INITIAL ENCOUNTER",
+      "name_of_coding_system": "I10"
+    },
+    "diagnosis_description": null,
+    "diagnosis_date_time": null,
+    "diagnosis_type": "Other"
+  },
+  "0067.DG1": {
+    "set_id": "2",
+    "diagnosis_coding_method": null,
+    "diagnosis_code": {
+      "id": "S83.241A",
+      "text": "OTH TEAR OF MEDIAL MENISCUS, CURRENT INJURY, R KNEE, INIT",
+      "name_of_coding_system": "I10"
+    },
+    "diagnosis_description": null,
+    "diagnosis_date_time": null,
+    "diagnosis_type": "Other"
+  },
+  "0068.DRG": {
+    "diagnostic_related_group": "33"
+  },
+  "0069.GT1": {
+    "set_id": "1",
+    "guarantor_num": null,
+    "guarantor_name": {
+      "family_name": "OSBORN",
+      "given_name": "HARRY"
+    },
+    "guarantor_spouse_name": null,
+    "guarantor_address": {
+      "street_address": "234 MARVEL",
+      "other_designation": null,
+      "city": "FRANKLIN",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064"
+    },
+    "guarantor_phone_num_home": {
+      "telephone_num": "(615)555-6309",
+      "telecommunication_use_code": null,
+      "telecommunication_equipment_type": null,
+      "communication_address": "emailline@test.com"
+    },
+    "guarantor_phone_num_business": null,
+    "guarantor_date_time_of_birth": null,
+    "guarantor_administrative_sex": null,
+    "guarantor_type": null,
+    "guarantor_relationship": "SA",
+    "guarantor_ssn": "206-11-2015",
+    "guarantor_date_begin": null,
+    "guarantor_date_end": null,
+    "guarantor_priority": null,
+    "guarantor_employer_name": "AMERWIRE",
+    "guarantor_employer_address": {
+      "street_address": "616 INDUSTRIAL PARK",
+      "other_designation": null,
+      "city": "FRANKFORT",
+      "state_or_province": "KY",
+      "zip_or_postal_code": "40601"
+    },
+    "guarantor_employer_phone_num": "(502)695-0070",
+    "guarantor_employee_id_num": null,
+    "guarantor_employment_status": "F"
+  },
+  "0070.IN1": {
+    "set_id": "1",
+    "health_plan_id": "AFLAC",
+    "insurance_company_id": null,
+    "insurance_company_name": "AMERICAN FAMILY LIFE AFLAC",
+    "insurance_company_address": {
+      "street_address": "1932 WYNTON RD",
+      "other_designation": null,
+      "city": "COLUMBUS",
+      "state_or_province": "GA",
+      "zip_or_postal_code": "31999"
+    },
+    "insurance_company_contact_person": null,
+    "insurance_company_phone_num": "(800)992-3522",
+    "group_num": "A123456789",
+    "group_name": "BLUEGRASS COMMUNITY ACTION",
+    "insured_group_emp_id": null,
+    "insured_group_emp_name": "AMERWIRE",
+    "plan_effective_date": "20151211",
+    "plan_expiration_date": "20161212",
+    "authorization_information": null,
+    "plan_type": null,
+    "name_of_insured": {
+      "family_name": "SELCHOW",
+      "given_name": "NEW"
+    },
+    "insured_relationship_to_patient": "FR",
+    "insured_date_of_birth": "19411211",
+    "insured_address": {
+      "street_address": "234 MARVEL",
+      "other_designation": null,
+      "city": "FRANKLIN",
+      "state_or_province": "TN",
+      "zip_or_postal_code": "37064",
+      "country": null,
+      "address_type": "P"
+    },
+    "assignment_of_benefits": null,
+    "coordination_of_benefits": null,
+    "coordination_of_benefits_priority": null,
+    "notice_of_admission_flag": null,
+    "notice_of_admission_date": null,
+    "report_of_eligibility_flag": null,
+    "report_of_eligibility_date": null,
+    "release_information_code": null,
+    "pre_admit_cert_pac": null,
+    "verification_date_time": null,
+    "verification_by": null,
+    "type_of_agreement_code": null,
+    "billing_status": null,
+    "lifetime_reserve_days": null,
+    "delay_before_lifetime_reserve_days": null,
+    "company_plan_code": null,
+    "policy_num": "18798709",
+    "policy_deductible": null,
+    "policy_limit_amt": null,
+    "policy_limit_days": null,
+    "room_rate_semi_private": null,
+    "room_rate_private": null,
+    "insured_employment_status": {
+      "id": "F",
+      "text": "Full Time"
+    },
+    "insured_administrative_sex": "F",
+    "insured_employer_address": {
+      "street_address": null,
+      "other_designation": null,
+      "city": "FRANKFORT"
+    }
+  },
+  "0071.IN2": {
+    "insured_employee_id": "1",
+    "insured_social_security_num": "098-78-7890",
+    "insured_employer_name_and_id": null,
+    "employer_information_data": null,
+    "mail_claim_party": null,
+    "medicare_health_ins_card_num": null,
+    "medicaid_case_name": null,
+    "medicaid_case_num": null,
+    "military_sponsor_name": null,
+    "military_id_num": null,
+    "dependent_of_military_recipient": null,
+    "military_organization": null,
+    "military_station": null,
+    "military_service": null,
+    "military_rank_grade": null,
+    "military_status": null,
+    "military_retire_date": null,
+    "military_non_avail_cert_on_file": null,
+    "baby_coverage": null,
+    "combine_baby_bill": null,
+    "blood_deductible": null,
+    "special_coverage_approval_name": null,
+    "special_coverage_approval_title": null,
+    "non_covered_insurance_code": null,
+    "payor_id": null,
+    "payor_subscriber_id": null,
+    "eligibility_source": null,
+    "room_coverage_type_amt": null,
+    "policy_type_amt": null,
+    "daily_deductible": null,
+    "living_dependency": null,
+    "ambulatory_status": null,
+    "citizenship": "Y",
+    "primary_language": null,
+    "living_arrangement": null,
+    "publicity_code": null,
+    "protection_indicator": null,
+    "student_indicator": null,
+    "religion": null,
+    "mother_maiden_name": null,
+    "nationality": null,
+    "ethnic_group": "AI",
+    "marital_status": "D",
+    "insured_employment_start_date": null,
+    "employment_stop_date": null,
+    "job_title": null,
+    "job_code_class": null,
+    "job_status": null,
+    "employer_contact_person_name": null,
+    "employer_contact_person_phone_num": null,
+    "employer_contact_reason": null,
+    "insured_contact_person_name": null,
+    "insured_contact_person_phone_num": null,
+    "insured_contact_person_reason": null,
+    "relationship_to_the_patient_start_date": null,
+    "relationship_to_the_patient_stop_date": null,
+    "insurance_company_contact_reason": null,
+    "insurance_company_contact_phone_num": null,
+    "policy_scope": null,
+    "policy_source": null,
+    "patient_member_num": null,
+    "guarantor_relationship_to_insured": null,
+    "insured_phone_num_home": "(615)555-6309"
+  }
+}
